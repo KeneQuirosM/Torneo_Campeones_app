@@ -1,5 +1,20 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-15 — Fase 1 (requisitos y MVP ampliado)
+
+- **Autorización recibida:** mensaje «AUTORIZACIÓN FORMAL DE FASE 1» del 2026-11-15: iniciar exclusivamente la Fase 1; la Fase 0 aprobada es base vinculante; entregables en `docs/torneo-campeones/`; marcar la Fase 1 PENDIENTE DE APROBACIÓN y detenerse.
+- **Alcance permitido:** análisis y documentación. Sin código, esquemas, migraciones, dependencias, cambios a la skill, Fase 2, commit, push, merge ni despliegues.
+- **Trabajos realizados:** redacción de `01-requisitos.md` v1.0 (borrador): resumen, base vinculante, MVP vs posterior, 42 historias (5 perfiles), requisitos generales (acceso, torneos, equipos, público, panel, auditoría, PWA), matriz de permisos v2 (34 acciones, 10 restricciones, 10 actores de prueba), 66 reglas deportivas (calendario, reglamento, tabla y desempates, W.O., jugadores, estados, eventos), 22 requisitos de captura sin conexión con política de conflictos y matriz de publicación, 16 de privacidad, 17 no funcionales, 34 casos límite, 28 decisiones abiertas con opciones y recomendación (Q-02a/b/c, Q-08…Q-16, Q-20…Q-25, nuevas Q-26…Q-35), trazabilidad (decisiones, N-01…N-13, H/C, RF y RP provisionales), estimación (107–163 días-persona; probable ≈ 134), riesgos RK-01…RK-14. Actualizados `aprobaciones.md` y esta bitácora.
+- **Archivos inspeccionados:** `00-descubrimiento.md`, `aprobaciones.md`, `bitacora.md`; `references/puertas-de-aprobacion.md`, `qa.md`, `seguridad.md`, `puntos-a-validar.md`, `mapa-informe.md`; `templates/brief-proyecto.md`; informe PDF pp. 13–15 y 22–23 (texto extraído con `pdftotext`).
+- **Archivos creados/modificados:** creado `01-requisitos.md`; modificados `aprobaciones.md` y `bitacora.md`. Sin commit.
+- **Comandos ejecutados y resultados:** lectura de archivos; `pdftotext` sobre pp. 13–15 y 22–24 (salida a pantalla); `git status`/`git log`/`git branch` de lectura; verificación mecánica de que todos los identificadores citados en `01-requisitos.md` están definidos (0 faltantes) y conteo de requisitos por prefijo. No se ejecutó ninguna prueba del producto (no hay código).
+- **Lo que NO se hizo:** Fase 2; código; esquema; migraciones; dependencias; cambios a la skill; commit, push o merge; verificación de fuentes externas, costos, límites de proveedores o legislación; ninguna decisión de las 28 abiertas se tomó por el usuario; no se leyeron `arquitectura.md`, `ui-ux.md` ni `direccion-visual-profesional.md`.
+- **Riesgos o bloqueos:** 14 decisiones bloquean la Fase 2 (§13); 36 requisitos/celdas dependen de decisiones `COND`; revisión jurídica y verificación de proveedores pendientes; estimación inicial de confianza baja a media; complejidad del modo sin conexión (RK-02) y comportamiento de iOS (RK-11).
+- **Estado de la fase:** PENDIENTE DE APROBACIÓN.
+- **Pregunta para siguiente aprobación:** ¿Apruebas los entregables de la Fase 1 y autorizas iniciar la Fase 2: arquitectura y amenazas? (Antes: decidir las preguntas bloqueantes de §13.)
+
+---
+
 ## 2026-11-15 — Fase 0 (cierre definitivo, Q-19)
 
 - **Autorización recibida:** mensaje «CIERRE DEFINITIVO DE FASE 0» del 2026-11-15: Q-19 aprobada; actualizar exclusivamente `00-descubrimiento.md`, `aprobaciones.md` y `bitacora.md`; commit y push solo de esos tres archivos a `claude/gracious-hawking-8knsb7`, con mensaje `docs: finalize phase 0 decisions and approval`; sin Pull Request, sin tocar `main`, sin Fase 1.
