@@ -1,5 +1,20 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-15 — Fase 2 (apertura: arquitectura y amenazas)
+
+- **Autorización recibida:** mensaje «AUTORIZACIÓN FORMAL DE APERTURA DE FASE 2»: «AUTORIZO EXPRESAMENTE EL INICIO DE LA FASE 2 — ARQUITECTURA Y AMENAZAS, exclusivamente bajo las condiciones siguientes.» Complementada por el mensaje «PREPARACIÓN DOCUMENTAL DE FASE 2» (rama, tercera alternativa C1, edición de `aprobaciones.md` y `bitacora.md`). **Autorizada, no aprobada.**
+- **Alcance:** arquitectura lógica, componentes y límites de confianza; multi-torneo; flujos críticos y estrategia conceptual offline-first; modelo de amenazas y seguridad; ADR; estrategia conceptual de caché, publicación y tiempo real; evaluación de proveedores, infraestructura y costos mediante fuentes oficiales. **Fuera de alcance:** diseño técnico detallado (Fase 4), implementación, prototipos ejecutables, migraciones y provisión de servicios.
+- **Restricciones:** sin gastos ni creación de cuentas; sin dependencias, código ni prototipos; sin `02-arquitectura-adr.md` ni contenidos de R1 todavía; sin commit, push, PR ni merge; ningún proveedor ni stack seleccionado.
+- **Condiciones vinculantes:** R1–R4 con aprobación expresa antes de avanzar; ≥ 3 arquitecturas en el ADR principal y ≥ 2 alternativas en los demás ADR, salvo justificación; candidatos preferentes no vinculantes Vercel + Supabase y Vercel + Neon, más C1 (hosting alternativo con PostgreSQL gestionado); prioridad: costos bajos, seguridad, offline y mantenimiento; titularidad y administración principal de cuentas de la organización (responsable por designar); trazabilidad de 18 preguntas, 23 `COND` y 14 ambigüedades; auditoría final de solo lectura por un revisor separado del autor y con contexto nuevo, sin afirmar independencia organizativa o externa inexistente; Android e iPhone previstos para pruebas posteriores.
+- **Dependencias y estado real del proyecto:** Fase 0 APROBADA; Fase 1 APROBADA CON CONDICIONES (v1.3.1), integrada en `main` por el PR #3 (merge commit `a05543417236e8fa3a5959979c5672c282385350`); Fases 3–8 y módulos 5A–5G NO INICIADOS. Siguen abiertos: 18 preguntas (Q-10, 13, 14, 20, 21, 22, 23, 26, 27, 28, 29, 30, 31, 33, 40, 41, 42, 43), 23 requisitos `COND` y 14 ambigüedades; hallazgos diferidos H-07, H-08, H-09; Q-14 y Q-40 (d) antes de la Fase 3; evaluación jurídica y verificación de proveedores pendientes; responsable administrativo de cuentas por designar.
+- **Operaciones realizadas:** verificación de árbol limpio; `git fetch origin main` (actualiza solo la referencia remota; `main` en `a055434`, merge del PR #3); creación y cambio a la rama local `claude/fase-2-arquitectura-amenazas` desde `a055434` (la rama de la Fase 1 no se reutilizó ni modificó); edición de `aprobaciones.md` (incluida la corrección de la nota Git de la Fase 1) y de esta bitácora. Sin commit ni push.
+- **Archivos modificados:** `aprobaciones.md`, `bitacora.md`. No se tocaron `01-requisitos.md`, `00-descubrimiento.md`, la skill ni el README.
+- **Lo que NO se hizo:** `02-arquitectura-adr.md`; contenido de R1; R2, R3, R4; investigación de proveedores; código; prototipos; migraciones; servicios; cuentas; gastos; commit, push, PR, merge.
+- **Estado de la fase:** Fase 2 AUTORIZADA (no aprobada). **R1 pendiente de autorización independiente.**
+- **Pregunta para el siguiente paso:** ¿Autoriza el bloque R1 (línea base y arquitectura lógica) y, por separado, el versionado de esta apertura?
+
+---
+
 ## 2026-11-15 — Fase 1 (aprobación formal con condiciones, v1.3.1)
 
 - **Autorización recibida:** mensaje «AUTORIZACIÓN FORMAL DE CIERRE DE FASE 1» del 2026-11-15: «AUTORIZO FORMALMENTE LA APROBACIÓN CON CONDICIONES DE LA FASE 1 — REQUISITOS Y MVP, VERSIÓN DOCUMENTAL v1.3.1.» Autoriza actualizar exclusivamente el estado documental en `aprobaciones.md`, `bitacora.md` y, solo en referencias de estado, cierre y trazabilidad, `01-requisitos.md`. Antecedente: el borrador del acta (marcado «NO EJECUTAR») no se ejecutó.
