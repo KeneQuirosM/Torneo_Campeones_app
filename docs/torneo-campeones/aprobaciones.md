@@ -66,7 +66,7 @@ Los módulos 5A–5G pueden reordenarse solo tras la Fase 4 y con aprobación. C
 | 2026-11-15 | Borrador del acta «ACTA DE APROBACIÓN FORMAL CON CONDICIONES — FASE 1 v1.3.1» (marcado «NO EJECUTAR»; no autorizaba modificaciones ni Git) | Mensaje del acta | **No** (estados sin cambio) |
 | 2026-11-15 | **Aprobación formal con condiciones de la Fase 1 (v1.3.1)** y autorización de actualizar exclusivamente el estado documental de los tres archivos; sin Fase 2 ni operaciones de Git | Mensaje «AUTORIZACIÓN FORMAL DE CIERRE DE FASE 1» | **Sí: Fase 1 APROBADA CON CONDICIONES. Fase 2 NO autorizada.** |
 
-**Git (Fase 1):** el borrador v1.0 se versionó en el commit `2f1658d` (rama `claude/dreamy-pasteur-rid0gm`, autorizado el 2026-11-15). Los cambios de las v1.1, v1.2, v1.3 y v1.3.1 y de este registro de aprobación están **sin commit**; no hay autorización de commit, push, pull request ni merge para ellos.
+**Git (Fase 1):** el borrador v1.0 se versionó en el commit `2f1658d` (rama `claude/dreamy-pasteur-rid0gm`, autorizado el 2026-11-15). Las v1.1, v1.2, v1.3 y v1.3.1 y el registro de aprobación de la Fase 1 se consolidaron en el commit `efa9c0b` (`efa9c0bc8271e1f2612f26a6ef3c436f624f4b5a`), autorizado el 2026-11-15, y el push a `claude/dreamy-pasteur-rid0gm` está **completado**. La creación del pull request y el merge hacia `main` **siguen pendientes de autorización expresa**. La Fase 2 permanece **NO INICIADA**.
 
 **Git:** commit y push de estos tres archivos autorizados el 2026-11-15 («CIERRE DEFINITIVO DE FASE 0»), exclusivamente a `claude/gracious-hawking-8knsb7`, sin Pull Request ni cambios en `main`. El hash se registra en `bitacora.md`.
 
