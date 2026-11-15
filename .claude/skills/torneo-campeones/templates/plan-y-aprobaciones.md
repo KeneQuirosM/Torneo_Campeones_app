@@ -14,14 +14,23 @@
 
 | Fase | Descripción resumida | Estado | Fecha de autorización | Evidencia textual de autorización | Entregables | Riesgos |
 |---|---|---|---|---|---|---|
-| 1 | Descubrimiento | NO INICIADA | — | — | — | — |
-| 2 | Requisitos y alcance | NO INICIADA | — | — | — | — |
-| 3 | Arquitectura | NO INICIADA | — | — | — | — |
-| 4 | UI/UX | NO INICIADA | — | — | — | — |
-| 5 | Diseño técnico | NO INICIADA | — | — | — | — |
-| 6A | Implementación [módulo] | NO INICIADA | — | — | — | — |
-| 7 | QA y seguridad | NO INICIADA | — | — | — | — |
-| 8 | Entrega/publicación opcional | NO INICIADA | — | — | — | — |
+| 0 | Descubrimiento y validación del informe | NO INICIADA | — | — | — | — |
+| 1 | Requisitos y MVP | NO INICIADA | — | — | — | — |
+| 2 | Arquitectura y amenazas | NO INICIADA | — | — | — | — |
+| 3 | UX/UI | NO INICIADA | — | — | — | — |
+| 4 | Diseño técnico | NO INICIADA | — | — | — | — |
+| 5A | Módulo: infraestructura local y autenticación privada | NO INICIADA | — | — | — | — |
+| 5B | Módulo: torneos, equipos e inscripciones | NO INICIADA | — | — | — | — |
+| 5C | Módulo: roles/RLS y administración de accesos | NO INICIADA | — | — | — | — |
+| 5D | Módulo: calendario de liga y jornadas | NO INICIADA | — | — | — | — |
+| 5E | Módulo: captura y corrección de resultados | NO INICIADA | — | — | — | — |
+| 5F | Módulo: tabla y calendario públicos | NO INICIADA | — | — | — | — |
+| 5G | Módulo: PWA, red débil, E2E y piloto | NO INICIADA | — | — | — | — |
+| 6 | Formatos y capacidades adicionales | NO INICIADA | — | — | — | — |
+| 7 | QA, endurecimiento y piloto | NO INICIADA | — | — | — | — |
+| 8 | Entrega y operación | NO INICIADA | — | — | — | — |
+
+Los módulos 5A–5G pueden reordenarse solo tras la Fase 4 y con aprobación. Cada módulo requiere su propia autorización.
 
 ## Última aprobación comprobable
 
@@ -33,4 +42,6 @@
 
 ## Próxima pregunta pendiente
 
-[¿Apruebas los resultados de la fase N y autorizas comenzar N+1?]
+[¿Apruebas los resultados de la fase N y autorizas comenzar la fase N+1 (o el módulo 5X)?]
+
+> `estado` y `continuar` no responden esta pregunta ni autorizan nada.

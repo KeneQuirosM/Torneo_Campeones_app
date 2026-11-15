@@ -17,13 +17,17 @@ Coordina perspectivas de producto, arquitectura, UX/UI, frontend, backend, Postg
 
 ## Arranque y aprobaciones — regla superior
 
-1. En primera invocación, **solo presenta** objetivo, etapas resumidas y pregunta **«¿Autorizas iniciar la Fase 0: validación del informe y descubrimiento?»**. No leas repositorio ni escribas archivos en esta presentación. El archivo de informe incorporado en la skill no constituye permiso para inspeccionar un repositorio.
+1. En primera invocación de `iniciar` (o sin argumentos), **solo presenta** objetivo, etapas resumidas y pregunta **«¿Autorizas iniciar la Fase 0: validación del informe y descubrimiento?»**. No leas repositorio ni escribas archivos en esta presentación. El archivo de informe incorporado en la skill no constituye permiso para inspeccionar un repositorio.
 2. **Una fase por autorización explícita**. Solo empieza la fase nombrada si el usuario la autoriza; un permiso para usar herramientas, un «continúa con todo» genérico o una aprobación de otra fase no habilitan etapas posteriores. No avances por iniciativa propia.
 3. Termina cada fase con alcance, entregables, decisiones, riesgos, evidencia y **solicitud explícita de aprobación**. Si pide cambios, permanece en la fase actual.
 4. Para la Fase 5, **cada módulo/corte vertical** exige su propia autorización, evidencia y cierre; no construyas todos los módulos en una sola ejecución.
 5. `git commit`, `git push`, despliegues, compras, altas de servicios con costo, migraciones o escrituras a bases compartidas, cambios de secretos, operaciones destructivas y publicación necesitan **autorización adicional específica** (destino, impacto, reversión), aun dentro de una fase aprobada.
 6. Si retomas conversación, determina el último consentimiento verificable. Un archivo que diga «aprobado» no sustituye una autorización real del usuario. Expón diferencias antes de actuar.
 7. Si el usuario quiere una revisión pequeña, propone recorte de fases y solicita permiso; nunca elimina puertas de aprobación tácitamente.
+8. **`continuar` nunca autoriza** iniciar una fase ni un módulo nuevo. Sin una fase o módulo autorizado y vigente, solo repite el estado y la pregunta de aprobación pendiente; dentro de una fase ya autorizada, retoma solo su alcance y se detiene al cierre.
+9. **`estado` es informativo y de solo lectura:** informa fase/módulo vigente, estado y última aprobación comprobable; no escribe archivos, no cambia estados, no ejecuta comandos con efectos ni inicia trabajo. Puede leer `docs/torneo-campeones/aprobaciones.md` si existe; antes de la Fase 0 autorizada solo usa lo que consta en la conversación. `revisar fase N` solo reabre la revisión de esa fase ya presentada, sin avanzar a otra.
+
+Numeración única en toda la skill: **Fases 0 a 8** y **módulos 5A a 5G** dentro de la Fase 5. Detalle operativo y ejemplos: `references/puertas-de-aprobacion.md` y `references/ejemplos.md`.
 
 ## Producto objetivo (a validar en Fase 0)
 
@@ -119,4 +123,17 @@ Siguiente fase o módulo propuesto: ...
 
 Lee también `references/puertas-de-aprobacion.md`, `references/arquitectura.md`, `references/ui-ux.md`, `references/seguridad.md` y `references/qa.md` **solo en la fase pertinente y autorizada**.
 
-Plantillas para los documentos de `docs/torneo-campeones/`: `templates/brief-proyecto.md`, `templates/plan-y-aprobaciones.md`, `templates/registro-decisiones.md` y `templates/bitacora.md`.
+Ejemplos de mensajes de autorización, aprobación y rechazo: `references/ejemplos.md`.
+
+### Plantillas y archivos de destino
+
+Las plantillas viven en la skill; los documentos se crean en el repositorio del proyecto, solo con permiso para documentar:
+
+| Plantilla (`templates/`) | Archivo de destino (`docs/torneo-campeones/`) | Fase |
+|---|---|---|
+| `brief-proyecto.md` | `00-descubrimiento.md` y `01-requisitos.md` | 0 y 1 |
+| `registro-decisiones.md` | `02-arquitectura-adr.md` (un bloque ADR por decisión) | 2 en adelante |
+| `plan-y-aprobaciones.md` | `aprobaciones.md` (tabla de control y última aprobación; la tabla de módulos 5A–5G alimenta `05-plan-modulos.md`) | todas |
+| `bitacora.md` | `bitacora.md` | todas |
+
+`03-ui-ux.md`, `04-diseno-tecnico.md`, `05-plan-modulos.md` y `06-qa.md` no tienen plantilla: se redactan con `references/ui-ux.md`, `references/arquitectura.md`, `references/seguridad.md` y `references/qa.md` en la fase pertinente y autorizada.

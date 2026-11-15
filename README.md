@@ -14,7 +14,7 @@ El archivo principal debe quedar en `...\torneo-campeones\SKILL.md` y el PDF en 
 
 `/torneo-campeones iniciar`
 
-Luego: `Autorizo iniciar la Fase 0`. No uses «haz toda la app» para eludir los controles. Puedes pedir `/torneo-campeones estado` o `/torneo-campeones continuar`.
+Luego: `Autorizo iniciar la Fase 0`. No uses «haz toda la app» para eludir los controles. Puedes pedir `/torneo-campeones estado` (solo lectura) o `/torneo-campeones continuar`; ninguno autoriza una fase o módulo nuevo.
 
 ## Cómo opera
 

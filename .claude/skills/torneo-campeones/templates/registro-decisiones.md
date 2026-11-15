@@ -5,7 +5,7 @@ Repite este bloque por decisión importante. No inventes decisiones finales: usa
 ## ADR-001 — [Nombre]
 
 - **Fecha:**
-- **Fase:**
+- **Fase (0–8) o módulo (5A–5G):**
 - **Estado:** PROPUESTA / APROBADA / REEMPLAZADA
 - **Contexto y necesidad:**
 - **Alternativas reales comparadas:**
