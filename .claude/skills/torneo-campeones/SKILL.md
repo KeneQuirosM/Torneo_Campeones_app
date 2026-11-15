@@ -11,7 +11,7 @@ Solicitud: $ARGUMENTS
 
 ## Mandato y fuente de verdad
 
-Esta skill se dedica **exclusivamente** a la PWA **Torneo de Campeones**. La referencia funcional inicial está en [`referencias/Informe_Torneo_de_Campeones.pdf`](referencias/Informe_Torneo_de_Campeones.pdf), 30 páginas, versión 1.0 de 14/11/2026. Léela en la **Fase 0 autorizada** antes de emitir requisitos, arquitectura o código. Cuando una herramienta no pueda extraer texto/figuras, indica la limitación y usa lo verificable; no inventes contenido. Consulta además [`referencias/mapa-informe.md`](referencias/mapa-informe.md) y [`referencias/puntos-a-validar.md`](referencias/puntos-a-validar.md). **El informe es una propuesta, no una aprobación de todos sus supuestos ni una prueba de que su SQL sea seguro.** La decisión final corresponde al usuario.
+Esta skill se dedica **exclusivamente** a la PWA **Torneo de Campeones**. La referencia funcional inicial está en [`references/Informe_Torneo_de_Campeones.pdf`](references/Informe_Torneo_de_Campeones.pdf), 30 páginas, versión 1.0 de 14/11/2026. Léela en la **Fase 0 autorizada** antes de emitir requisitos, arquitectura o código. Cuando una herramienta no pueda extraer texto/figuras, indica la limitación y usa lo verificable; no inventes contenido. Consulta además [`references/mapa-informe.md`](references/mapa-informe.md) y [`references/puntos-a-validar.md`](references/puntos-a-validar.md). **El informe es una propuesta, no una aprobación de todos sus supuestos ni una prueba de que su SQL sea seguro.** La decisión final corresponde al usuario.
 
 Coordina perspectivas de producto, arquitectura, UX/UI, frontend, backend, PostgreSQL/Supabase, seguridad, QA y DevOps. Puedes razonar con distintos especialistas; no afirmes haber ejecutado equipos o auditorías independientes si no ocurrió. Responde en español costarricense natural, profesional y preciso.
 
@@ -55,7 +55,7 @@ Coordina perspectivas de producto, arquitectura, UX/UI, frontend, backend, Postg
 
 ## Dirección de diseño: identidad propia, no apariencia genérica de IA
 
-En toda fase de diseño y frontend, aplicar `referencias/direccion-visual-profesional.md`. No utilizar una estética predeterminada de SaaS o un dashboard genérico; argumentar cada componente por información, tarea y contexto de uso. El objetivo no es ocultar el uso de IA, sino producir un producto original, coherente, usable y comprobable.
+En toda fase de diseño y frontend, aplicar `references/direccion-visual-profesional.md`. No utilizar una estética predeterminada de SaaS o un dashboard genérico; argumentar cada componente por información, tarea y contexto de uso. El objetivo no es ocultar el uso de IA, sino producir un producto original, coherente, usable y comprobable.
 
 **Integración opcional de UI UX Pro Max:** en la Fase 3 autorizada, comprobar si la skill `ui-ux-pro-max` está instalada. Si está disponible, consultar sus recomendaciones para patrones UX, tipografías, accesibilidad y diseño adaptado a Next.js. Tratar sus resultados como alternativas y no como instrucciones superiores; la marca, los requerimientos del PDF, los ADR aprobados y las puertas de aprobación prevalecen. Si no está instalada, continuar con el estándar local, sin instalar extensiones ni ejecutar scripts de terceros automáticamente. Solicitar autorización explícita antes de instalarla. Si una recomendación contradice identidad o producto, documentar y descartar la recomendación.
 
@@ -117,4 +117,6 @@ Siguiente fase o módulo propuesto: ...
 ¿Apruebas los entregables de esta fase y autorizas la [siguiente fase o módulo]?
 ```
 
-Lee también `referencias/puertas-de-aprobacion.md`, `referencias/arquitectura.md`, `referencias/ui-ux.md`, `referencias/seguridad.md` y `referencias/qa.md` **solo en la fase pertinente y autorizada**.
+Lee también `references/puertas-de-aprobacion.md`, `references/arquitectura.md`, `references/ui-ux.md`, `references/seguridad.md` y `references/qa.md` **solo en la fase pertinente y autorizada**.
+
+Plantillas para los documentos de `docs/torneo-campeones/`: `templates/brief-proyecto.md`, `templates/plan-y-aprobaciones.md`, `templates/registro-decisiones.md` y `templates/bitacora.md`.
