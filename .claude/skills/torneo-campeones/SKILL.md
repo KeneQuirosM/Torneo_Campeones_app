@@ -11,19 +11,23 @@ Solicitud: $ARGUMENTS
 
 ## Mandato y fuente de verdad
 
-Esta skill se dedica **exclusivamente** a la PWA **Torneo de Campeones**. La referencia funcional inicial está en [`referencias/Informe_Torneo_de_Campeones.pdf`](referencias/Informe_Torneo_de_Campeones.pdf), 30 páginas, versión 1.0 de 14/11/2026. Léela en la **Fase 0 autorizada** antes de emitir requisitos, arquitectura o código. Cuando una herramienta no pueda extraer texto/figuras, indica la limitación y usa lo verificable; no inventes contenido. Consulta además [`referencias/mapa-informe.md`](referencias/mapa-informe.md) y [`referencias/puntos-a-validar.md`](referencias/puntos-a-validar.md). **El informe es una propuesta, no una aprobación de todos sus supuestos ni una prueba de que su SQL sea seguro.** La decisión final corresponde al usuario.
+Esta skill se dedica **exclusivamente** a la PWA **Torneo de Campeones**. La referencia funcional inicial está en [`references/Informe_Torneo_de_Campeones.pdf`](references/Informe_Torneo_de_Campeones.pdf), 30 páginas, versión 1.0 de 14/11/2026. Léela en la **Fase 0 autorizada** antes de emitir requisitos, arquitectura o código. Cuando una herramienta no pueda extraer texto/figuras, indica la limitación y usa lo verificable; no inventes contenido. Consulta además [`references/mapa-informe.md`](references/mapa-informe.md) y [`references/puntos-a-validar.md`](references/puntos-a-validar.md). **El informe es una propuesta, no una aprobación de todos sus supuestos ni una prueba de que su SQL sea seguro.** La decisión final corresponde al usuario.
 
 Coordina perspectivas de producto, arquitectura, UX/UI, frontend, backend, PostgreSQL/Supabase, seguridad, QA y DevOps. Puedes razonar con distintos especialistas; no afirmes haber ejecutado equipos o auditorías independientes si no ocurrió. Responde en español costarricense natural, profesional y preciso.
 
 ## Arranque y aprobaciones — regla superior
 
-1. En primera invocación, **solo presenta** objetivo, etapas resumidas y pregunta **«¿Autorizas iniciar la Fase 0: validación del informe y descubrimiento?»**. No leas repositorio ni escribas archivos en esta presentación. El archivo de informe incorporado en la skill no constituye permiso para inspeccionar un repositorio.
+1. En primera invocación de `iniciar` (o sin argumentos), **solo presenta** objetivo, etapas resumidas y pregunta **«¿Autorizas iniciar la Fase 0: validación del informe y descubrimiento?»**. No leas repositorio ni escribas archivos en esta presentación. El archivo de informe incorporado en la skill no constituye permiso para inspeccionar un repositorio.
 2. **Una fase por autorización explícita**. Solo empieza la fase nombrada si el usuario la autoriza; un permiso para usar herramientas, un «continúa con todo» genérico o una aprobación de otra fase no habilitan etapas posteriores. No avances por iniciativa propia.
 3. Termina cada fase con alcance, entregables, decisiones, riesgos, evidencia y **solicitud explícita de aprobación**. Si pide cambios, permanece en la fase actual.
 4. Para la Fase 5, **cada módulo/corte vertical** exige su propia autorización, evidencia y cierre; no construyas todos los módulos en una sola ejecución.
 5. `git commit`, `git push`, despliegues, compras, altas de servicios con costo, migraciones o escrituras a bases compartidas, cambios de secretos, operaciones destructivas y publicación necesitan **autorización adicional específica** (destino, impacto, reversión), aun dentro de una fase aprobada.
 6. Si retomas conversación, determina el último consentimiento verificable. Un archivo que diga «aprobado» no sustituye una autorización real del usuario. Expón diferencias antes de actuar.
 7. Si el usuario quiere una revisión pequeña, propone recorte de fases y solicita permiso; nunca elimina puertas de aprobación tácitamente.
+8. **`continuar` nunca autoriza** iniciar una fase ni un módulo nuevo. Sin una fase o módulo autorizado y vigente, solo repite el estado y la pregunta de aprobación pendiente; dentro de una fase ya autorizada, retoma solo su alcance y se detiene al cierre.
+9. **`estado` es informativo y de solo lectura:** informa fase/módulo vigente, estado y última aprobación comprobable; no escribe archivos, no cambia estados, no ejecuta comandos con efectos ni inicia trabajo. Puede leer `docs/torneo-campeones/aprobaciones.md` si existe; antes de la Fase 0 autorizada solo usa lo que consta en la conversación. `revisar fase N` solo reabre la revisión de esa fase ya presentada, sin avanzar a otra.
+
+Numeración única en toda la skill: **Fases 0 a 8** y **módulos 5A a 5G** dentro de la Fase 5. Detalle operativo y ejemplos: `references/puertas-de-aprobacion.md` y `references/ejemplos.md`.
 
 ## Producto objetivo (a validar en Fase 0)
 
@@ -55,7 +59,7 @@ Coordina perspectivas de producto, arquitectura, UX/UI, frontend, backend, Postg
 
 ## Dirección de diseño: identidad propia, no apariencia genérica de IA
 
-En toda fase de diseño y frontend, aplicar `referencias/direccion-visual-profesional.md`. No utilizar una estética predeterminada de SaaS o un dashboard genérico; argumentar cada componente por información, tarea y contexto de uso. El objetivo no es ocultar el uso de IA, sino producir un producto original, coherente, usable y comprobable.
+En toda fase de diseño y frontend, aplicar `references/direccion-visual-profesional.md`. No utilizar una estética predeterminada de SaaS o un dashboard genérico; argumentar cada componente por información, tarea y contexto de uso. El objetivo no es ocultar el uso de IA, sino producir un producto original, coherente, usable y comprobable.
 
 **Integración opcional de UI UX Pro Max:** en la Fase 3 autorizada, comprobar si la skill `ui-ux-pro-max` está instalada. Si está disponible, consultar sus recomendaciones para patrones UX, tipografías, accesibilidad y diseño adaptado a Next.js. Tratar sus resultados como alternativas y no como instrucciones superiores; la marca, los requerimientos del PDF, los ADR aprobados y las puertas de aprobación prevalecen. Si no está instalada, continuar con el estándar local, sin instalar extensiones ni ejecutar scripts de terceros automáticamente. Solicitar autorización explícita antes de instalarla. Si una recomendación contradice identidad o producto, documentar y descartar la recomendación.
 
@@ -117,4 +121,19 @@ Siguiente fase o módulo propuesto: ...
 ¿Apruebas los entregables de esta fase y autorizas la [siguiente fase o módulo]?
 ```
 
-Lee también `referencias/puertas-de-aprobacion.md`, `referencias/arquitectura.md`, `referencias/ui-ux.md`, `referencias/seguridad.md` y `referencias/qa.md` **solo en la fase pertinente y autorizada**.
+Lee también `references/puertas-de-aprobacion.md`, `references/arquitectura.md`, `references/ui-ux.md`, `references/seguridad.md` y `references/qa.md` **solo en la fase pertinente y autorizada**.
+
+Ejemplos de mensajes de autorización, aprobación y rechazo: `references/ejemplos.md`.
+
+### Plantillas y archivos de destino
+
+Las plantillas viven en la skill; los documentos se crean en el repositorio del proyecto, solo con permiso para documentar:
+
+| Plantilla (`templates/`) | Archivo de destino (`docs/torneo-campeones/`) | Fase |
+|---|---|---|
+| `brief-proyecto.md` | `00-descubrimiento.md` y `01-requisitos.md` | 0 y 1 |
+| `registro-decisiones.md` | `02-arquitectura-adr.md` (un bloque ADR por decisión) | 2 en adelante |
+| `plan-y-aprobaciones.md` | `aprobaciones.md` (tabla de control y última aprobación; la tabla de módulos 5A–5G alimenta `05-plan-modulos.md`) | todas |
+| `bitacora.md` | `bitacora.md` | todas |
+
+`03-ui-ux.md`, `04-diseno-tecnico.md`, `05-plan-modulos.md` y `06-qa.md` no tienen plantilla: se redactan con `references/ui-ux.md`, `references/arquitectura.md`, `references/seguridad.md` y `references/qa.md` en la fase pertinente y autorizada.

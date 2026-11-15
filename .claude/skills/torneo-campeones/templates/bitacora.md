@@ -1,6 +1,6 @@
 # Bitácora del desarrollo — [proyecto]
 
-## [AAAA-MM-DD] — Fase [N]
+## [AAAA-MM-DD] — Fase [0–8] o módulo [5A–5G]
 
 - **Autorización recibida:** cita real o «por confirmar»
 - **Alcance permitido:**

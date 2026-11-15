@@ -1,6 +1,6 @@
-# Brief del proyecto (Fase 1 y 2)
+# Brief del proyecto (Fases 0 y 1)
 
-El descubrimiento identifica hechos y dudas; la Fase 2 define requisitos y criterios de aceptación. Marca toda hipótesis como pendiente y no declares el brief aprobado sin respuesta del usuario.
+Destino: `docs/torneo-campeones/00-descubrimiento.md` (Fase 0) y `01-requisitos.md` (Fase 1). La Fase 0 identifica hechos y dudas; la Fase 1 define requisitos y criterios de aceptación. Marca toda hipótesis como pendiente y no declares el brief aprobado sin respuesta del usuario.
 
 - **Nombre y objetivo de negocio:**
 - **Tipo de trabajo:** nueva app / ampliar repo / corregir / rediseñar

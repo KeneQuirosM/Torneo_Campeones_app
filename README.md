@@ -1,6 +1,6 @@
 # Skill Claude Code: Torneo de Campeones
 
-Skill específica para desarrollar la plataforma de torneos descrita en `referencias/Informe_Torneo_de_Campeones.pdf`, **por fases y siempre con aprobación**.
+Skill específica para desarrollar la plataforma de torneos descrita en `.claude/skills/torneo-campeones/references/Informe_Torneo_de_Campeones.pdf`, **por fases y siempre con aprobación**.
 
 ## Instalar en Windows
 
@@ -8,13 +8,13 @@ Descomprime el ZIP y copia la carpeta `torneo-campeones` completa en:
 
 `C:\Users\TU_USUARIO\.claude\skills\torneo-campeones\`
 
-El archivo principal debe quedar en `...\torneo-campeones\SKILL.md` y el PDF en `...\torneo-campeones\referencias\Informe_Torneo_de_Campeones.pdf`.
+El archivo principal debe quedar en `...\torneo-campeones\SKILL.md` y el PDF en `...\torneo-campeones\references\Informe_Torneo_de_Campeones.pdf`.
 
 ## Usar en Claude Code
 
 `/torneo-campeones iniciar`
 
-Luego: `Autorizo iniciar la Fase 0`. No uses «haz toda la app» para eludir los controles. Puedes pedir `/torneo-campeones estado` o `/torneo-campeones continuar`.
+Luego: `Autorizo iniciar la Fase 0`. No uses «haz toda la app» para eludir los controles. Puedes pedir `/torneo-campeones estado` (solo lectura) o `/torneo-campeones continuar`; ninguno autoriza una fase o módulo nuevo.
 
 ## Cómo opera
 
