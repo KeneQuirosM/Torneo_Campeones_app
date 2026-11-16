@@ -1,5 +1,55 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-16 — Fase 2, R1 (aprobación formal del bloque)
+
+- **Decisión recibida:** mensaje «APROBACIÓN FORMAL DE R1»: «APRUEBO FORMALMENTE EL BLOQUE R1 DE LA FASE 2 — ARQUITECTURA Y AMENAZAS.» La aprobación comprende exclusivamente el alcance documental de `02-arquitectura-adr.md` v0.5-R1 y se funda, según la decisión, en las revisiones técnicas realizadas, las correcciones documentadas y el tratamiento de AUD-20. Autoriza modificar exclusivamente `aprobaciones.md` y `bitacora.md`.
+- **Antecedentes inmediatos (2026-11-16):** registro documental de R1 para AUD-20 y sincronización editorial de `02-arquitectura-adr.md` (solo referencias a AUD-20; identificación v0.5-R1 conservada), ambos sin aprobar R1.
+- **Alcance aprobado:** el modelo arquitectónico conceptual de R1 como base para los bloques posteriores. Se acepta que las decisiones técnicas de R2, R3 y R4 sigan abiertas con sus dependencias y restricciones. Se conservan las 18 preguntas abiertas, los 23 requisitos `COND`, las 14 ambigüedades y los riesgos HR1-01 a HR1-14. La excepción limitada de OFF-17 sigue vigente sin eliminar la verificación funcional futura. Ningún proveedor, stack ni mecanismo técnico definitivo se selecciona.
+- **Lo que esta aprobación no es:** no valida una implementación (no existe código ni se ejecutó ninguna prueba); no autoriza implementar, desplegar servicios ni generar gastos; no aprueba la Fase 2 completa; no autoriza R2, R3 ni R4; no autoriza commit, push, PR ni merge. Las cuatro revisiones técnicas previas fueron recomendaciones de subagentes de contexto nuevo (sin independencia organizativa ni externa); la aprobación es del usuario.
+- **Trabajos realizados:** R1 pasa a APROBADO en `aprobaciones.md` (tabla de control, «Última aprobación comprobable», «Aprobación formal de R1», eventos y «Próximo paso») y se añade esta entrada. No se modificó el contenido técnico de `02-arquitectura-adr.md`; no se alteraron entradas históricas.
+- **Estado:** **R1 APROBADO** (2026-11-16). **Fase 2: AUTORIZADA, no aprobada.** **R2, R3 y R4: NO INICIADOS Y SIN AUTORIZACIÓN.** Fases 3–8 y módulos 5A–5G NO INICIADOS. `02-arquitectura-adr.md` (v0.5-R1) sigue **sin seguimiento: sin commit ni push**.
+- **Pendiente:** versionado del documento aprobado (con su autorización expresa); R2, R3 y R4; aprobación global de la Fase 2; las 18 preguntas, 23 `COND` y 14 ambigüedades; HR1-01 a HR1-14; garantía de coherencia pública exigida pero no demostrada.
+- **Archivos modificados:** `aprobaciones.md`, `bitacora.md`. Sin commit.
+- **Lo que NO se hizo:** modificar `02-arquitectura-adr.md`; commit, push, PR o merge; instalar dependencias o ejecutar prototipos; iniciar R2, R3 o R4; aprobar la Fase 2.
+- **Siguiente paso:** cualquier paso posterior (versionado, R2) requiere una autorización expresa e independiente.
+
+---
+
+## 2026-11-16 — Fase 2, R1 (registro documental para AUD-20)
+
+- **Autorización recibida:** mensaje «REGISTRO DOCUMENTAL DE R1 (AUD-20)»: «AUTORIZO EXCLUSIVAMENTE EL REGISTRO DOCUMENTAL DEL TRABAJO REALIZADO EN R1 PARA ATENDER AUD-20.» Archivos autorizados: `aprobaciones.md` y `bitacora.md`; `02-arquitectura-adr.md` no se modifica.
+- **Trabajos realizados:** registro de la autorización de R1 y de su alcance, de las cuatro rondas de correcciones (v0.2 a v0.5), de las cuatro revisiones técnicas de solo lectura, de las decisiones AUD-02 y AUD-14, del estado real y de las condiciones y riesgos pendientes en `aprobaciones.md` (tabla de control, «Última aprobación comprobable», eventos, nota Git y «Próximo paso»); estas entradas en `bitacora.md`. Se corrigió además la nota Git: la rama de la Fase 2 **sí está publicada** con el commit de apertura `f2230327770b91d2baa8b587d397042d19179401`, y el borrador no.
+- **Transparencia de la evidencia:** las citas literales proceden de los mensajes de la conversación de la sesión; **no constan como archivos del repositorio** y quedan identificadas como tales. La fecha exacta de cada revisión técnica y de cada ronda intermedia no está registrada en el repositorio; se usan las fechas del control del documento (`02-arquitectura-adr.md` §13). Las revisiones las hicieron subagentes de contexto nuevo y solo lectura del mismo tipo de modelo que redactó el borrador: **no son auditorías independientes de otra organización**.
+- **Estado:** R1 **desarrollado, PENDIENTE DE APROBACIÓN FORMAL**. Fase 2 **AUTORIZADA, no aprobada**. Fases 3–8 y módulos 5A–5G **NO INICIADOS**. AUD-20 atendido documentalmente por este registro. `02-arquitectura-adr.md` (v0.5-R1) sigue **sin seguimiento: sin commit ni push**.
+- **Pendiente:** 18 preguntas abiertas, 23 requisitos `COND` y 14 ambigüedades sin resolver; HR1-01 a HR1-14; garantía de coherencia pública exigida pero no demostrada; ningún proveedor ni stack aprobado; aprobación formal de R1; versionado del borrador; R2, R3 y R4.
+- **Archivos modificados:** `aprobaciones.md`, `bitacora.md`. Sin commit.
+- **Lo que NO se hizo:** modificar `02-arquitectura-adr.md`; commit, push, PR o merge; instalar dependencias o ejecutar prototipos; R2, R3 o R4; aprobar R1 o la Fase 2.
+- **Siguiente paso:** cualquier paso posterior (aprobación de R1, versionado del borrador, R2) requiere una autorización expresa e independiente.
+
+---
+
+## 2026-11-15 / 2026-11-16 — Fase 2, R1 (revisión focalizada, verificación final y versiones v0.3 a v0.5)
+
+- **Segunda ronda de correcciones (v0.3, 2026-11-15):** autorización «AUTORIZO EXCLUSIVAMENTE UNA SEGUNDA RONDA DE CORRECCIONES DOCUMENTALES DEL BLOQUE R1.» Atendió las condiciones C1–C8 de la segunda auditoría: matriz de dependencias ADR sin ciclos ni pares recíprocos (artefactos «.C» y «.I»), tres tipos de dependencia entre componentes, PA-13 conforme a `01 §13.7`, distinción entre residencia persistente y presentación transitoria, unidades indivisibles separadas de la señal de cambio, contrato de CMP-12 marcado [ABIERTO] ante Q-22 y Q-23, criterios CR1 verificables y formulaciones dependientes de ADR-06. Hallazgos menores: NUEVO-06, 10, 11, 12, 13 y 15.
+- **Revisión focalizada (tercer subagente):** «R1 APROBABLE CON CONDICIONES»; C1, C3, C4, C5 y C6 resueltas, C2, C7 y C8 parciales; nuevos NUEVO-16 (MEDIA) a NUEVO-20. La fecha exacta no consta.
+- **Corrección documental focalizada (v0.4, 2026-11-16):** autorización «AUTORIZO EXCLUSIVAMENTE UNA CORRECCIÓN DOCUMENTAL FOCALIZADA DEL BORRADOR R1.» NUEVO-16: la coherencia pública pasa a **garantía exigida**, condicionada a ADR-04 y ADR-06, sin afirmar que ya se cumple; NUEVO-17 a NUEVO-20 y residuos de NUEVO-10 y NUEVO-13 corregidos.
+- **Verificación final (cuarto subagente):** «R1 APROBABLE CON CONDICIONES»; condiciones NUEVO-21 y NUEVO-22 (MEDIA); opcionales NUEVO-23 a NUEVO-26.
+- **Última edición documental (v0.5, 2026-11-16):** autorización «AUTORIZO EXCLUSIVAMENTE UNA ÚLTIMA EDICIÓN DOCUMENTAL FOCALIZADA DEL BORRADOR R1.» NUEVO-21: grafo de control completo (35 aristas, sin ciclos) y un único responsable de habilitar y retirar la visibilidad (CMP-09); NUEVO-22: ADR-02.C fija la frontera atómica, ADR-04.C la garantía de coherencia, ADR-06 el mecanismo y ADR-08 consume ambas; NUEVO-23 a NUEVO-26 atendidos (HR1-14 nuevo).
+- **Principales hallazgos y tratamiento:** ALTA (AUD-01: ADR-02 reabría una sola capa frente a RT-02; AUD-02: dependencias entre ADR) corregidos; MEDIA y BAJA corregidos o diferidos con su puerta (R2, R3, R4, Fase 4).
+- **Estado:** R1 **pendiente de aprobación formal**; el documento permanece como BORRADOR sin seguimiento. Sin commit ni push del documento.
+
+---
+
+## 2026-11-15 — Fase 2, R1 (autorización, borrador v0.1 y primera ronda de correcciones, v0.2)
+
+- **Autorización recibida:** mensaje «AUTORIZACIÓN DEL BLOQUE R1»: «AUTORIZO EL INICIO Y DESARROLLO EXCLUSIVAMENTE DEL BLOQUE R1 DE LA FASE 2 — ARQUITECTURA Y AMENAZAS.» R2, R3 y R4 sin autorización. Archivo único: `02-arquitectura-adr.md`; borrador identificado como BORRADOR R1; sin commit, push, PR ni merge.
+- **Creación del borrador (v0.1-R1):** contexto y actores, línea base de 17 RNF y restricciones, 12 principios, 19 componentes, 5 zonas y 6 límites de confianza, aislamiento multi-torneo, cuatro flujos, 17 ADR previstos con Vercel + Supabase, Vercel + Neon y C1 como candidatos no vinculantes, trazabilidad de 18 preguntas, 23 `COND` y 14 ambigüedades, y 12 criterios de revisión. Sin seleccionar lenguajes, frameworks, proveedores, esquemas SQL ni servicios.
+- **Primera auditoría (subagente de contexto nuevo, solo lectura):** «R1 REQUIERE CORRECCIONES» con 21 hallazgos (2 ALTA, 13 MEDIA, 6 BAJA): ADR-02 reabría el reparto en una sola capa frente a RT-02, faltaba el mapa de dependencias entre ADR, PA-08 contradecía PRV-02, entre otros.
+- **Primera ronda de correcciones (v0.2):** autorización «AUTORIZO EXCLUSIVAMENTE UNA RONDA DE CORRECCIONES DOCUMENTALES DEL BORRADOR R1.» Decisiones del usuario: **AUD-02** (mantener R2 antes de R3; en R2 requisitos, restricciones e invariantes independientes del proveedor, con la implementación dependiente del stack condicionada a ADR-01) y **AUD-14** («AUTORIZO UNA EXCEPCIÓN LIMITADA respecto al calendario de verificación en dispositivo real previsto en OFF-17»: investigación documental en la Fase 2; pruebas reales en 5E y la Fase 7; sin eliminar el requisito ni modificar el comportamiento funcional).
+- **Estado:** AUD-20 quedó pendiente en ese momento (no se autorizó editar estos archivos); se atiende en la entrada del 2026-11-16.
+
+---
+
 ## 2026-11-15 — Fase 2 (apertura: arquitectura y amenazas)
 
 - **Autorización recibida:** mensaje «AUTORIZACIÓN FORMAL DE APERTURA DE FASE 2»: «AUTORIZO EXPRESAMENTE EL INICIO DE LA FASE 2 — ARQUITECTURA Y AMENAZAS, exclusivamente bajo las condiciones siguientes.» Complementada por el mensaje «PREPARACIÓN DOCUMENTAL DE FASE 2» (rama, tercera alternativa C1, edición de `aprobaciones.md` y `bitacora.md`). **Autorizada, no aprobada.**
