@@ -1949,3 +1949,637 @@ Verificables sobre este documento. **La aprobación de R2-A es un acto expreso d
 | W-04 §16.8.5 [REC] presentada como vigente | §16.6.8, H2A-08, la decisión 6, CR2A-11 y la fila R-12 de §16.14 dicen «si se adopta»; se aclara que las restricciones de §8.2 y RC-25 de R1 rigen en cualquier caso. §8.2 no cambia | §16.6.8, §16.10.2, §16.10.3, §16.11, §16.14 | Corregido | Decisión 6 pendiente |
 
 **¿Queda algún defecto material conocido que impida pasar al registro documental de R2-A?** **Ninguno que el autor conozca.** Solo una revisión independiente puede confirmarlo. Los asuntos pendientes (las decisiones de §16.10.3 distintas de la 11, que ya está atendida, y los RES-01…12) pertenecen a etapas posteriores o a decisiones del usuario.
+
+
+---
+
+# PARTE III — BLOQUE R2-B1 (v0.5-R2B1, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-18)
+
+> **Estado: R2-B1 v0.5-R2B1 — APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-18); el contenido técnico (ADR-02.C y sus formulaciones) sigue siendo PROPUESTA.** Todo lo que sigue a esta línea (§17 en adelante) es trabajo nuevo de R2-B1. **No forma parte del contenido aprobado de R1** (§0 a §15, v0.5-R1) **ni del de R2-A** (§16, v0.5-R2A, aprobado condicionalmente como entregable documental el 2026-11-17), que **no se modifican**. **ADR-02.C permanece como PROPUESTA:** ninguna formulación está elegida ni aprobada, no se fija ningún parámetro, no se acepta ningún riesgo y no se concede ninguna excepción. **Esta versión (v0.5) aplica dos ajustes (E-1 y E-2) a la v0.4 tras su verificación final de solo lectura (dictamen «aprobable como entregable documental condicionado») y NO ha sido revisada de nuevo por nadie distinto del autor; se aprobó sin una auditoría posterior a esos ajustes** (§17.0, §17.12, §17.14 a §17.17).
+
+## 17. R2-B1 — ADR-02.C (parte 1): modelo de autorización y permisos
+
+### 17.0 Alcance, autorizaciones y reglas de esta parte
+
+**Autorizaciones y trabajos de R2-B1** (los mensajes constan en la conversación de la sesión, no en archivos del repositorio):
+
+| Fecha | Acto | Mensaje | Resultado |
+|---|---|---|---|
+| 2026-11-17 | Inicio controlado de R2-B1, solo `02-arquitectura-adr.md` | «AUTORIZO EXCLUSIVAMENTE EL INICIO DE R2-B1 DE LA FASE 2.» y «NO AUTORIZO INICIAR R2-B2.» | Borrador v0.1-R2B1 |
+| 2026-11-17 | Auditoría técnica **de solo lectura** | «AUTORIZO EXCLUSIVAMENTE UNA AUDITORÍA TÉCNICA DE SOLO LECTURA DEL BORRADOR R2-B1.» | Dictamen **«R2-B1 REQUIERE CORRECCIONES»** de un subagente de contexto nuevo (**independencia de contexto, no organizativa ni externa**, mismo tipo de modelo que el autor): 14 hallazgos B-01…B-14 (§17.14). **Es una recomendación, no una aprobación** |
+| 2026-11-17 | Una ronda de correcciones documentales | «AUTORIZO EXCLUSIVAMENTE UNA RONDA DE CORRECCIONES DOCUMENTALES DEL BORRADOR R2-B1, para resolver los hallazgos B-01 a B-12 y los ajustes editoriales B-13 y B-14.» | Borrador v0.2-R2B1 (§17.14) |
+| 2026-11-18 | Validación focalizada **de solo lectura** de la v0.2 | «AUTORIZO EXCLUSIVAMENTE UNA REVISIÓN TÉCNICA DE SOLO LECTURA DEL BORRADOR R2-B1 v0.2.» | Dictamen **«R2-B1 APROBABLE CON CONDICIONES»** de un subagente de contexto nuevo (**independencia de contexto, no organizativa ni externa**): 8 hallazgos nuevos C-01…C-08, de los cuales C-01, C-02 y C-03 condicionaban (§17.15). **Es una recomendación, no una aprobación** |
+| 2026-11-18 | Una corrección documental focalizada de la v0.2 | «AUTORIZO EXCLUSIVAMENTE UNA CORRECCIÓN DOCUMENTAL FOCALIZADA DEL BORRADOR R2-B1 v0.2.» | Borrador v0.3-R2B1 (§17.15) |
+| 2026-11-18 | Validación focalizada **de solo lectura** de la v0.3 | «AUTORIZO EXCLUSIVAMENTE UNA REVISIÓN TÉCNICA DE SOLO LECTURA DEL BORRADOR R2-B1 v0.3.» | Dictamen **«R2-B1 APROBABLE CON CONDICIONES»** de un subagente de contexto nuevo (**independencia de contexto, no organizativa ni externa**): 9 hallazgos nuevos D-01…D-09, de los cuales D-01, D-02 y D-03 condicionaban (§17.16). **Es una recomendación, no una aprobación** |
+| 2026-11-18 | Una corrección documental focalizada de la v0.3 | «AUTORIZO EXCLUSIVAMENTE CORREGIR LOS HALLAZGOS D-01 A D-09 DEL BORRADOR R2-B1 v0.3.» | Borrador v0.4-R2B1 (§17.16) |
+| 2026-11-18 | Verificación final focalizada **de solo lectura** de la v0.4 | «AUTORIZO EXCLUSIVAMENTE UNA VERIFICACIÓN FINAL, FOCALIZADA Y DE SOLO LECTURA DE R2-B1 v0.4.» | Dictamen **«APROBABLE COMO ENTREGABLE DOCUMENTAL CONDICIONADO»** de un subagente de contexto nuevo (**independencia de contexto, no organizativa ni externa**): sin defectos materiales; dos ajustes menores (E-1 y E-2) y una observación (E-3) (§17.17). **Es una recomendación, no una aprobación** |
+| 2026-11-18 | Dos correcciones documentales focalizadas de la v0.4 | «AUTORIZO EXCLUSIVAMENTE DOS CORRECCIONES DOCUMENTALES FOCALIZADAS, E-1 Y E-2, DEL BORRADOR R2-B1 v0.4.» | **Esta versión, v0.5-R2B1** (§17.17) |
+| 2026-11-18 | Decisión de aprobación documental | «APRUEBO CONDICIONALMENTE R2-B1 v0.5 COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.» (mensaje «DECISIÓN DE APROBACIÓN DOCUMENTAL R2-B1») | **R2-B1 v0.5 aprobado condicionalmente como entregable documental** (SHA-256 del contenido aprobado: `0ea253e18824f4c95a2437997bb6c84da1363464f6c47b462d578784e0000fc7`) |
+| 2026-11-18 | Registro de la aprobación | «AUTORIZO EXCLUSIVAMENTE REGISTRAR LA APROBACIÓN CONDICIONAL DE R2-B1 v0.5 COMO ENTREGABLE DOCUMENTAL.» (mensaje «REGISTRO DE APROBACIÓN CONDICIONAL R2-B1 v0.5») | Esta actualización de los metadatos de estado de la Parte III |
+
+Archivo autorizado: solo este documento, editando únicamente la Parte III. **No se modificaron `aprobaciones.md`, `bitacora.md` ni `01-requisitos.md`.** La aprobación de R2-A no autoriza por sí misma R2-B1 ni R2-B2.
+
+**Qué comprende R2-B1** (y qué no):
+
+| Comprende (R2-B1) | No comprende (se reserva) |
+|---|---|
+| Invariantes IN-02 (§17.2) | Especificación detallada de UI-01…UI-13 y diseño de la frontera atómica → **R2-B2** |
+| Formulaciones de capacidad CAP-02-A, B, C y D y su conformidad (§17.3) | Modelo adicional de amenazas y casos de abuso de R2-B → **R2-B2** (las amenazas asignadas a R2-B siguen como están en §16.3 y §16.4) |
+| Modelo de capacidades por rol, a nivel arquitectónico (§17.4) | Matriz detallada de permisos y diseño de datos → **Fase 4** |
+| Aislamiento entre torneos, acumulación de roles y separación de facultades (§17.5) | Políticas de acceso concretas, esquemas, migraciones e interfaces de servicio → **Fase 4** y **ADR-02.I (R3)** |
+| Ambigüedades A-1, A-2, A-4, A-5, A-6, A-8, A-12, A-15 y A-16 con ambas lecturas; soporte de Q-40 y Q-42 y de las preguntas que condicionan celdas (§17.6) | Visibilidad y proyecciones públicas (A-8 como punto de guardia; Q-40 (d)) → **ADR-04.C (R2-C)** |
+| Dependencias de ADR-03.C y ADR-09.C como propuestas condicionadas y registro de la relación con ADR-05.C (§17.7) | Sincronización sin conexión (A-9…A-14, UI-06 aplicada) → **ADR-05.C (R2-C)**; reglamento y desempates (A-16, motor) → **ADR-08 (R3)** |
+| Condiciones abiertas, riesgos de diseño y criterios (§17.8 a §17.17) | Consolidación del modelo de amenazas → **R2-C**; selección de proveedor o mecanismo → **R3** |
+
+**Precedencia de estado.** Varias líneas de este documento dicen que R2-B «no está iniciado» o que R2, R3 y R4 están «no iniciados»: la **línea 5 del encabezado** (estado de la fase a la fecha de aprobación de R1), la **línea 6** (estado de R2-A), la **§12** (línea 783), la fila de R2-A de **§13** (línea 798), **§16.0** y la fila de **§16.5** que describe R2-B como «no iniciado». Todas describen el estado **a la fecha de aprobación de R1 o de R2-A**. Para R2-B1 y R2-B2 prevalece este apartado: **R2-B1 está APROBADO CONDICIONALMENTE como entregable documental y R2-B2, R2-C, R3 y R4 siguen NO INICIADOS Y SIN AUTORIZACIÓN.** El registro de esa aprobación figura en `aprobaciones.md` y `bitacora.md`. Este documento no incorporó una línea de estado de R2-B1 al encabezado ni una fila a §13 porque eso habría modificado contenido aprobado; esos ajustes requieren autorización separada.
+
+**Aprobación condicional de R2-B1 como entregable documental (2026-11-18).** Por acto expreso del usuario (mensajes «DECISIÓN DE APROBACIÓN DOCUMENTAL R2-B1» y «REGISTRO DE APROBACIÓN CONDICIONAL R2-B1 v0.5»), la v0.5-R2B1 quedó **APROBADA CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.** **Comprende:** los invariantes IN-02; el análisis de CAP-02-A, B, C y D; el modelo de capacidades por rol y ámbito; las combinaciones de roles; las ambigüedades documentadas; los riesgos de diseño; las dependencias arquitectónicas; y las correcciones hasta la v0.5-R2B1. **No implica:** (1) elegir una formulación; (2) declarar demostrada la independencia de CAP-02-D; (3) dar por cumplido R1 §8.1; (4) resolver DB1-1 a DB1-6; (5) aprobar definitivamente ADR-02.C; (6) aprobar o implementar K-2d; (7) fijar PAR-01 a PAR-06; (8) aceptar RES-01 a RES-12 ni los riesgos RB1; (9) conceder excepción a D-2; (10) aprobar globalmente R2 ni la Fase 2; (11) autorizar R2-B2, R2-C, R3 o R4. **Precisiones:** la frontera atómica de K-2d queda pendiente de R2-B2; R2-B2 debe aportar el análisis necesario para evaluar la independencia de CAP-02-D, sin que se presuma que vaya a demostrarla; DB1-1 y el déficit frente a R1 §8.1 permanecen abiertos, sin excepción; las decisiones que los requisitos asignan a la Fase 2 deben resolverse antes de su cierre global, salvo modificación o excepción formal aprobada. **Limitación de la revisión:** la v0.4 recibió un dictamen favorable de un subagente con independencia solo de contexto; la v0.5 incorpora los ajustes E-1 y E-2 y **no recibió una nueva auditoría posterior**; la aprobación documental **no demuestra seguridad implementada ni validada.**
+
+**Integridad.** SHA-256 del **contenido aprobado** (este archivo inmediatamente antes de añadir los metadatos de aprobación): `0ea253e18824f4c95a2437997bb6c84da1363464f6c47b462d578784e0000fc7`. El archivo con los metadatos de aprobación tiene **otro** SHA-256, que figura en `aprobaciones.md` y `bitacora.md` (un archivo no puede contener su propio hash). Las modificaciones de esta operación son exclusivamente de estado y de metadatos editoriales de la Parte III: no alteran invariantes, matriz de conformidad, formulaciones, condiciones K, modelo de permisos, riesgos ni decisiones pendientes, ni §0 a §16.
+
+**Relación con R1 y R2-A.** El contenido anterior a esta Parte (líneas 1 a 1951 del archivo de partida) es el versionado en el commit `e246508559d4b10cb2a0c9ef3a8b4fbcf46c3b9b` (SHA-256 del archivo en ese commit: `2a4eca42cb2110aefc5f8268f3f4a57b504f561de01cd56ae8490b719549955d`) y permanece **íntegro**: esta parte solo **añade** texto al final. **§8.1 y §8.2 no cambian:** ADR-02 sigue como PREVISTO y no se añade ninguna relación.
+
+**Lectura previa efectuada** (el autor la declara; no la verificó ningún tercero): de la skill, `SKILL.md` completo y `arquitectura.md`, `seguridad.md` y `puertas-de-aprobacion.md` completos; de `01-requisitos.md`, RF-ACC-01…17 (con sus criterios de aceptación), RF-TOR-02, RF-EQP-06, RF-AUD-01…06, PRV-09, PRV-11, OFF-22, §7 (matriz de 41 filas, RT-01…14 y roles combinados; los casos mínimos de §7.3 en lo citado), §9.6, §13.7 (A-1…A-16), las filas de Q-40 y Q-42 y los casos CL-19…22, 34…47 y 48…60; de `02-arquitectura-adr.md`, §3.1, §5.3 (tabla de componentes), §5.5 (tabla de UI), §7.0, §8.1 (fila de ADR-02), §8.2, §9.1 y §9.3, HR1-04…06, CR1-13, §16.0 a §16.2, §16.5, §16.6.1 a §16.6.3 y §16.6.6, §16.7.3 y §16.7.4 y §16.10.3. **En la v0.3 y la v0.4 se contrastaron además** R1 §5.3 (CMP-07 y CMP-08), CR1-13 y §5.8 (AC-1); en la v0.3, R1 §5.3 y §5.5 (la cláusula sobre proyecciones derivadas persistentes y la lista no exhaustiva), RF-ACC-12, RF-AUD-05 y los títulos de Q-21, Q-22, Q-23 y Q-29 en `02 §9.1`. **No se releyeron íntegros `01` ni `02`:** se contrastaron los textos citados con su fuente, y lo no leído no se afirma. Las fuentes literales de §17.2 se comprobaron por búsqueda del extracto en el texto de `01`, de R1 y R2-A o de la skill (§17.12).
+
+**Etiquetas de esta parte** (las de §0.1 y §16.0): [CONF] decisión confirmada por el usuario · [DER] consecuencia derivada de una decisión o requisito aprobado · [REC] propuesta que **no es una decisión** · [ABIERTO] abierto en `01` · [SUP] juicio del autor. **Cada invariante lleva una sola etiqueta** y, por cada una, un **respaldo literal** (§17.2). **Identificadores nuevos:** `IN-02-` invariantes · `CAP-02-` formulaciones · `K-` condiciones de conformidad · `CF-` familias de capacidades por rol · `H2B1-` condiciones y hallazgos · `DB1-` decisiones del usuario · `RB1-` riesgos de diseño · `CR2B1-` criterios · `B-01…B-14` hallazgos de la auditoría de R2-B1 (no confundir con otros identificadores). **Regla de nombres:** esta parte no selecciona proveedor, producto, mecanismo ni stack; usa categorías de capacidad («servidor» y «capa de datos» son las capas que ya nombran RT-02 y RC-04). Los ejemplos de mecanismo son **ilustrativos**.
+
+### 17.1 ADR-02.C (parte 1) — Identificación
+
+| Campo | Contenido |
+|---|---|
+| **ID y bloque** | ADR-02.C · R2-B1 (parte 1 de R2-B) · Fase 2 |
+| **Estado** | **PROPUESTA.** ADR-02.C no está aprobado (R2-B1 se aprobó solo como entregable documental, §17.0). §8.1 sigue mostrando ADR-02 como PREVISTO |
+| **Fecha** | 2026-11-17 (v0.1); corregida el 2026-11-17 (v0.2) y el 2026-11-18 (v0.3, v0.4 y v0.5) |
+| **Pregunta de decisión** (§8.1) | ¿Qué verifica además la aplicación y qué impone siempre la capa de datos (RT-05, RT-06, RT-08, RT-13, RT-14)? Toda autorización se comprueba en ambas capas; ninguna se verifica en una sola. **La parte de la pregunta sobre la frontera atómica (UI-01…13) es de R2-B2** |
+| **Qué es la parte «.C»** | Capacidades, restricciones e invariantes **independientes del proveedor** (RC-25). La parte dependiente del stack es **ADR-02.I** y se condiciona a ADR-01 (R3) |
+| **Formulaciones exigidas por §8.1** | «≥ 2 formas de reparto con **ambas capas siempre presentes**». **Esta exigencia NO está declarada cumplida: §17.3.3 y DB1-1** |
+| **Requiere** (§8.2) | ADR-03.C (nivel de autenticación) y ADR-09.C (persistencia del registro de rechazos). **Ambos son PROPUESTA (R2-A, aprobados solo como entregable documental)** |
+| **Lo requieren** (§8.2) | ADR-04.C, ADR-05.C, ADR-08, ADR-14 y, por la decisión conjunta ADR-01 / ADR-10, ambos |
+| **Parámetros que debe soportar** | A-1, A-2, A-4, A-5, A-6, A-8, A-12, A-15, A-16, Q-40 (a)–(c), Q-42 y las preguntas que condicionan celdas (§17.6) |
+| **Evidencia de aprobación humana** | **La aprobación condicional de R2-B1 como entregable documental (2026-11-18, §17.0) no aprueba ADR-02.C ni sus formulaciones:** nada de esto es decisión |
+
+**Contexto.** CMP-08 es el **único decisor** de permisos por usuario, rol, torneo, equipo, partido y efecto; **lee** roles e historial de CMP-07 y **no los almacena**; CMP-06 emite el nivel de autenticación (§5.3). `01 RT-02` y R1 `RC-04` exigen la comprobación en el servidor **y** en la capa de datos, y excluyen las alternativas de una sola capa. R1 PA-13 manda aplicar la lectura provisional por caso de `01 §13.7` mientras una decisión esté abierta, sin conceder un permiso por interpretación.
+
+### 17.2 Invariantes IN-02
+
+**Cómo se leen los tipos.** **[CONF]**: el texto citado es un requisito o restricción **confirmado** de `01` (o una restricción aprobada de R1) y el invariante lo recoge sin añadir nada. **[DER]**: el invariante **se deriva** de lo citado mediante un paso que el autor explica en la columna «Paso derivado»; **no está escrito literalmente** en `01` ni en R1. **[REC]**: propuesta. **Respaldo literal:** extracto textual (sin formato) de la fuente citada; §17.12 comprueba que cada extracto existe.
+
+**A. Invariantes obligatorios** (26: 16 [CONF] y 10 [DER]):
+
+| ID | Invariante | Tipo | Fuente | Respaldo literal | Paso derivado (solo [DER]) |
+|---|---|---|---|---|---|
+| IN-02-01 | **Toda autorización se comprueba en el servidor y en la capa de datos; ningún permiso se verifica en una sola capa.** Ocultar un control, o confiar en lo que declara el cliente o guarda el dispositivo, no es un control | [CONF] | RT-02, RC-04, RF-ACC-15, IN-03-11; CL-48 | «La autorización se comprueba en el servidor y en la base de datos» (RT-02); «un rol no se modifica por parámetros del cliente» (RF-ACC-15) | — |
+| IN-02-02 | **Un solo decisor y una sola definición de la decisión:** las dos capas aplican la **misma** definición de permiso (CMP-08); no existen dos definiciones que puedan discrepar | [DER] | CR1-13, §5.3 (CMP-08) | «toda decisión de permiso es de CMP-08» (CR1-13) | Si cada capa aplicara una definición propia habría **dos decisores**, contra CR1-13. Es la lectura más estricta de «único decisor»; la propiedad de implementación es la condición K-1 |
+| IN-02-03 | **La autorización vigente se evalúa en la misma unidad que aplica la operación:** ninguna operación se aplica con una autorización ya revocada y confirmada, y ninguna queda a medias (**qué operaciones forman cada unidad es de R2-B2**) | [DER] | RT-13 (estado DER en `01`), OFF-22; CL-45 | «la autorización de una operación se evalúa en la misma transacción que la aplica» (RT-13) | RT-13 está confirmado como derivado en `01`; aquí se aplica a las dos capas |
+| IN-02-04 | **Aislamiento entre torneos:** todo permiso, salvo el del dueño, se limita a un torneo; toda referencia entre entidades pertenece al **mismo** torneo, y la capa de datos lo impone aunque el cliente y el servidor se equivoquen | [CONF] | RT-01, RT-08, RF-ACC-08; CL-21, CL-40 | «debe pertenecer al mismo torneo» (RT-08); «rechazados por la base de datos» (RT-08, criterio de aceptación) | — |
+| IN-02-05 | **Sin transferencia:** ningún permiso pasa de un torneo a otro, ni a través de un vínculo de identidad de equipo, que **no es criterio de autorización** | [CONF] | RT-01, RT-12, RF-EQP-06 (diferido) | «los permisos no se transfieren entre torneos» (RT-01); «no es un criterio de autorización» (RT-12) | — |
+| IN-02-06 | Todo permiso se evalúa por **usuario, rol, torneo, equipo, partido y efecto**, según corresponda | [CONF] | RT-01 (las cinco primeras dimensiones), RT-14 (el efecto) | «usuario, rol, torneo, equipo y partido» (RT-01) | — |
+| IN-02-07 | **Acumulación de roles:** los permisos de una cuenta con varios roles son la **unión** de los de cada rol evaluados por separado en su propio ámbito; ninguna combinación concede más que esa unión ni evade RT-05 o RT-14; revocar un rol o una asignación adicional no elimina los permisos legítimos que procedan de otros roles vigentes | [CONF] | RT-11, RF-ACC-08, RF-ACC-15; CL-50, CL-53 | «ninguna combinación concede más que esa unión ni evade las restricciones de §7» (RT-11) | — |
+| IN-02-08 | **Separación de roles y facultades (anti-escalada):** un rol no confiere por sí mismo una facultad fuera de su ámbito; ningún rol concede uno igual o superior al propio, **salvo las excepciones de RT-03 y RT-06** (el dueño designa organizadores y un segundo dueño); nadie se concede roles ni asignaciones a sí mismo (única excepción: la asignación inicial del creador de un torneo, RF-ACC-12); el ámbito de una invitación nunca excede el de quien invita | [CONF] | RT-03, RT-04, RT-06, RT-07, RF-ACC-02, 03, 15; CL-19, CL-20 | «Ningún usuario —incluido el dueño— puede invitarse, asignarse ni concederse roles o asignaciones adicionales a sí mismo» (RT-04) | — |
+| IN-02-09 | **Facultades reservadas al dueño:** crear o invitar organizadores, otorgar el rol de dueño (solo a un segundo dueño), revocar organizadores y revocar o degradar a otro dueño; ningún organizador las ejerce. **La nueva autenticación con segundo factor y el motivo** de las operaciones sobre dueños se exigen en **IN-03-04 (ADR-03.C)**; ADR-02.C exige que el evaluador no autorice sin ese nivel (IN-02-15) | [CONF] | RF-ACC-03, RT-06, matriz `01 §7.1` filas 1, 4, 5 y 35; CL-38 | «ningún organizador concede ni revoca el rol de dueño» (RT-06) | — |
+| IN-02-10 | **Protección del último dueño activo:** no se revoca ni degrada, **de forma atómica incluso con operaciones simultáneas**; no hay jerarquía técnica entre dueños | [CONF] | RT-06, RF-ACC-09; CL-43 | «No se puede revocar ni degradar al último dueño activo, de forma atómica incluso con operaciones simultáneas» (RT-06) | — |
+| IN-02-11 | **RT-05:** un delegado no actúa como editor en partidos de su propio equipo; se verifica **al asignar**, **al otorgar el rol de delegado** (las asignaciones en conflicto se retiran con auditoría) y **al sincronizar**; no se asigna como editor a un delegado de un equipo del partido | [CONF] | RT-05, RF-ACC-06; CL-35, CL-49 | «un delegado no puede actuar como editor en partidos en que juega su propio equipo» (RT-05) | — |
+| IN-02-12 | **RT-14:** la restricción se evalúa **por efecto** (todo partido que la operación modificaría, incluidos efectos automáticos o en cascada; las operaciones automáticas heredan la situación del actor); si alcanza un equipo del que el actor es o fue delegado en ese torneo sin restricción levantada, la operación se **rechaza por completo**; consultar y previsualizar no se restringen; sin actor alterno la operación se **bloquea**, sin excepciones automáticas ni afectar la protección del último dueño activo (RT-06); **se aplica también al sincronizar** operaciones sin conexión. **La persistencia histórica no se extiende a editores**, que conservan RT-05. **El levantamiento** solo lo aprueba otro dueño activo y sin conflicto, con motivo, limitado a ese equipo y torneo, sin autoaprobación y sin permisos adicionales; **no cubre el conflicto vigente y pierde efecto si el rol de delegado de ese equipo se otorga de nuevo** | [CONF] | RT-14, RF-ACC-17; CL-48…CL-51, CL-56…CL-60 | «se rechaza por completo» (RT-14); «y al sincronizar operaciones sin conexión» (RT-14); «ni se afecta la protección del último dueño activo (RT-06)» (RT-14) | — |
+| IN-02-13 | **El historial de asignaciones es la fuente de RT-14:** CMP-07 es la fuente única y de solo anexado; el evaluador **lee** las asignaciones vigentes y las revocadas y no las almacena | [DER] | RF-ACC-11, IN-09-02, §5.3 (CMP-07, CMP-08) | «no elimina ni altera el historial necesario para evaluar RT-14» (RF-ACC-11) | RF-ACC-11 fija el historial; que el evaluador lo **lea** y no lo guarde es la división de CMP-07 y CMP-08 en R1 |
+| IN-02-14 | **Mínimo privilegio en el alcance:** cada rol recibe únicamente las facultades que la matriz de `01 §7.1` le concede, en su ámbito concreto; ninguna función concede a un rol un alcance mayor que el de la matriz; **ninguna formulación concede un permiso por interpretación** de lo ambiguo (rige PA-13: lectura provisional por caso; la denegación por defecto solo donde `01 §13.7` la indica) | [DER] | RT-01, introducción de `01 §7`, PA-13, `SKILL.md` (reglas críticas de dominio) | «ningún permiso se hereda entre torneos» (`01 §7`, introducción); «No aceptar una función que otorgue a todos los editores permiso sobre todo el torneo» (`SKILL.md`) | «Mínimo privilegio» es el nombre del principio que expresan ambos textos (alcance concreto de cada permiso y rechazo de una función más amplia que la matriz); **no es un requisito de `01` con ese nombre**. Se distingue de IN-02-18 (que ADR-02.C no concede ni retira facultades) en que IN-02-14 limita el **alcance de cada rol**. Las credenciales de servicio son [REC] (IN-02-29) |
+| IN-02-15 | **El nivel de autenticación se consume, no se emite:** el evaluador compara el nivel que emite CMP-06 con la política efectiva calculada con **todos** los roles vigentes (dueño u organizador exigen segundo factor) | [DER] | RC-11, RF-ACC-10, IN-03-01, IN-03-02, HR1-04; CL-55 | «La política efectiva se calcula por cuenta con todos los roles vigentes» (RF-ACC-10) | La política es de `01`; que CMP-08 la compare con un nivel emitido por CMP-06 es la división de R1 §5.3 |
+| IN-02-16 | **Toda concesión, modificación o revocación de permisos, y todo rechazo o bloqueo por RT-14, producen el evento que debe auditarse;** ADR-02.C **no define** dónde persiste ese evento (ADR-09.C: IN-09-04 e IN-09-05) | [DER] | RT-10, RF-ACC-11, RF-AUD-06; CL-48, CL-49 | «Toda asignación, modificación o revocación de permisos queda auditada» (RT-10) | `01` exige la auditoría; que la **decisión** produzca el evento y su persistencia sea de ADR-09.C es la partición de R2-A |
+| IN-02-17 | **Las ambigüedades abiertas de ADR-02 (A-1, A-2, A-4, A-5, A-6, A-8, A-12, A-15, A-16) y las preguntas Q-40 y Q-42 se soportan como parámetros del evaluador:** el modelo **no elige** una lectura | [DER] | R1 §9.3, PA-13, `01 §13.7` | «el diseño debe soportar ambas lecturas y no elegir» (R1 §9.3) | R1 §9.3 pide soportar ambas lecturas de las ambigüedades abiertas; aquí se aplica a las de ADR-02 y a Q-40 y Q-42 como parámetros del evaluador (PA-13) |
+| IN-02-18 | **Sin permisos nuevos y sin reducción de garantías:** ADR-02.C organiza y condiciona facultades ya confirmadas en `01 §7`; no concede ninguna ni retira ninguna | [DER] | CR1-13, PA-13, IN-03-17 | «Ningún componente ni flujo concede un permiso nuevo» (CR1-13) | CR1-13 dice que ningún componente ni flujo concede un permiso nuevo; aquí se aplica a ADR-02.C y se añade que tampoco retira garantías (IN-03-17 lo dice de ADR-03.C) |
+| IN-02-19 | **Sin proveedor, producto, mecanismo ni stack:** toda propiedad que dependa del proveedor queda condicionada a ADR-01 (ADR-02.I) | [CONF] | RC-22, RC-23, RC-25 | «Ningún proveedor ni stack está aprobado» (RC-23) | — |
+| IN-02-20 | **Los permisos dependen del estado del torneo y del partido** donde `01` lo establece: corregir un resultado con el torneo `archivado` solo lo hace el dueño; archivar, reabrir y cerrar desde `suspendido` quedan en sus filas; el evaluador recibe el estado como entrada y **las operaciones bloqueadas en `archivado` son el parámetro de Q-40 (c)** | [CONF] | RF-TOR-02, D-5, matriz `01 §7.1` filas 27, 37 y 41; CL-34, CL-44 | «desde ese estado únicamente el dueño corrige resultados» (RF-TOR-02) | — |
+| IN-02-21 | **Un delegado lo es de un solo equipo por torneo,** también con invitaciones o altas simultáneas; puede serlo de equipos de torneos distintos | [CONF] | RF-ACC-13, RF-ACC-02; CL-54 | «una persona solo puede ser delegada de un equipo por torneo» (RF-ACC-13) | — |
+| IN-02-22 | **Cada partido tiene un único editor vigente;** la reasignación desactiva la anterior y activa la nueva de forma atómica, sin ventana con dos editores vigentes, también ante reasignaciones simultáneas; el editor asignado tiene rol de editor vigente en ese torneo | [CONF] | RF-ACC-06; CL-41, CL-47 | «Cada partido tiene un único editor vigente.» (RF-ACC-06) | — |
+| IN-02-23 | **Restricciones del delegado y del editor:** el delegado solo administra la plantilla de su equipo, no edita la inscripción y no invita ni asigna roles; el editor solo actúa en los partidos que se le asignaron, no se autoasigna partidos y no invita ni asigna roles; ninguno de los dos actúa en otro torneo con ese rol | [CONF] | RF-ACC-05, RF-ACC-06, RF-ACC-13, matriz `01 §7.1` filas 7, 17, 19 y 24; CL-20 | «Editor y delegado no pueden invitar usuarios ni asignar roles.» (RF-ACC-05) | — |
+| IN-02-24 | **El alta de cuentas solo es posible con una invitación vigente y se impone en las dos capas** (sin auto-registro); la definición de la invitación y su ciclo de vida son de ADR-03.C (IN-03-05) | [DER] | RF-ACC-01 (requisito M de `01`, estado REC), RF-ACC-02, IN-03-05 | «El registro de cuentas es solo por invitación; no existe auto-registro.» (RF-ACC-01) | RF-ACC-01 exige que falle en la interfaz y en la capa de servicio y de datos; aquí se reduce a la parte de autorización de las dos capas |
+| IN-02-25 | **La capa de datos conoce la identidad del actor y su nivel de autenticación de forma verificable,** no declarada por el cliente ni guardada en el dispositivo; sin ello no hay segunda capa de autorización. **Qué mecanismo lo logra es de R3 (H2B1-02)** | [DER] | RT-02, RC-04, IN-03-11, PA-01 | «La autorización se comprueba en el servidor y en la base de datos» (RT-02); «ningún dato guardado en el dispositivo concede acceso ni permiso en el servidor» (IN-03-11) | Para que la base de datos «compruebe» una autorización necesita saber quién actúa; sin un actor verificable esa comprobación sería un trámite (RB1-02) |
+| IN-02-26 | **Creación de torneo:** el organizador autorizado que crea un torneo queda asignado como organizador de **ese torneo y de ninguno más**, una sola vez; esa asignación es una **operación del sistema autorizada previamente** y no una autoasignación discrecional (excepción de IN-02-08); no obtiene permisos sobre torneos ajenos ni puede crear o designar organizadores; si la asignación falla, el torneo no se crea (**qué unidad lo garantiza es de R2-B2**) | [CONF] | RF-ACC-12, RT-04; matriz `01 §7.1` fila 10 | «queda automáticamente asignado como organizador de ese torneo y de ninguno más» (RF-ACC-12); «es una operación del sistema autorizada previamente» (RF-ACC-12) | — |
+
+**B. Propuestas [REC]** (**no obligan** hasta su aprobación; no cuentan para la conformidad de §17.3):
+
+| ID | Propuesta | Tipo | Fuente | Respaldo literal |
+|---|---|---|---|---|
+| IN-02-27 | Las respuestas de denegación **no distinguen** entre «el recurso no existe» y «pertenece a otro torneo», para no permitir la enumeración de recursos ajenos | [REC] | CL-21; `seguridad.md` | «respuestas que no filtren datos internos» (`seguridad.md`) |
+| IN-02-28 | Los intentos denegados de escalada y de acceso cruzado generan el evento de la bitácora de seguridad del dueño (distinto de los rechazos por RT-14) | [REC] | RF-AUD-05 (prioridad S, estado REC) | «Los intentos denegados de escalada o acceso cruzado se registran en una bitácora de seguridad» (RF-AUD-05) |
+| IN-02-29 | Las credenciales de servicio con privilegios totales no llegan al cliente ni sustituyen la decisión de permiso de un usuario | [REC] | RT-09 (estado REC en `01`), `seguridad.md` | «nunca llegan al navegador ni a la cola local» (RT-09) |
+
+**Numeración.** Los invariantes IN-02-01…19 conservan su identificador de la v0.1; **IN-02-20…25 se añadieron en la v0.2** (hallazgo B-04) e **IN-02-26 en la v0.3** (hallazgo C-07, RF-ACC-12). Las propuestas [REC], que eran IN-02-20 e IN-02-21 en la v0.1 y IN-02-26, 27 y 28 en la v0.2, son ahora **IN-02-27, 28 y 29**. **Total: 26 obligatorios y 3 [REC] = 29.**
+
+### 17.3 Formulaciones de capacidad (alternativas) y su conformidad
+
+**Decisión D2-1 — Reparto de la autorización entre las dos capas.** Se evalúa **cada formulación contra los 26 invariantes obligatorios** de §17.2 (104 celdas = 26 × 4). **Ninguna se elige aquí.**
+
+**Criterio uniforme de los rótulos** (el mismo para todas las celdas):
+
+| Rótulo | Criterio |
+|---|---|
+| **Conforme** | Cumple la obligación **sin depender de una decisión pendiente ni de un supuesto no aprobado**. Una celda que escribe una condición **no** puede llamarse «Conforme». **El texto que sigue a «Conforme:» es una justificación, no una condición** |
+| **Condicionada (K-n)** | Puede cumplir, pero **depende de una condición explícita** K-n (más abajo) |
+| **No conforme** | **Omite** una verificación exigida o incumple una garantía obligatoria; **no cuenta como alternativa viable**. Una formulación en la que la capa de datos omita una verificación exigida es **siempre** «No conforme» |
+| **No aplica** | No se usa: ninguna celda lo justifica |
+
+**Convención sobre el stack.** Si un mecanismo concreto puede realizar una capacidad con el stack seleccionado se comprueba en **ADR-02.I** (R3, §16.8.5 [REC]); **ninguna celda presupone esa viabilidad ni la condiciona**. IN-02-25 es parte de la **definición** de las cuatro formulaciones; **su conformidad depende de la formulación de ADR-03.C que se adopte (K-5)**, que es una decisión pendiente y no una cuestión de stack.
+
+**Condiciones de conformidad:**
+
+| ID | Condición |
+|---|---|
+| **K-1** | Una **sola definición** de la decisión, ejecutada de forma idéntica en todas las capas que la ejecutan (propiedad exigida a ADR-02.I; su incumplimiento es la deriva de RB1-01) |
+| **K-2** | (solo CAP-02-D) Conjunción de cuatro componentes. **K-2a Completitud:** la proyección contiene los **hechos derivados** que necesita la parte de la decisión que depende de roles, asignaciones y restricciones (las entradas de IN-02-06, 12, 15, 23 y 26); **el estado del torneo y del partido, las reglas de integridad y la invitación vigente no forman parte de la proyección: se leen de sus fuentes** (§17.3.5). **K-2b Derivación:** deriva de la fuente única de CMP-07 y del historial de solo anexado, la calcula la **definición única de CMP-08** y no es un segundo decisor (§17.3.5); **debe poder reconstruirse desde las fuentes** (propiedad exigida; su demostración, R2-B2). **K-2c Actualización coherente:** se actualiza con **toda** operación que modifica permisos (lista en H2B1-10); las operaciones que modifican estados **no** la actualizan en esta formulación. **K-2d Garantías transaccionales:** la lectura de la proyección y la aplicación de la operación, y la actualización de la proyección con cada cambio de permisos, ocurren en la misma unidad, sin ventana con una proyección obsoleta (RT-13); **corresponde exclusivamente a R2-B2** |
+| **K-3** | La persistencia del rechazo **impuesto por la capa de datos** depende de la formulación de ADR-09.C que se adopte: **CAP-09-P-A o P-C**; CAP-09-P-B solo cubre los rechazos que decide el evaluador. **Decisión 10 de R2-A y D9-1: abiertas** |
+| **K-4** | *Retirada en la v0.4 (D-05).* B no incluye la invitación vigente entre sus reglas de integridad, de modo que la **omite**; B·IN-02-24 es «No conforme» y no «Condicionada». El identificador no se reutiliza |
+| **K-5** | La capacidad depende de la **formulación de ADR-03.C que se adopte** (PROPUESTA; decisiones 1, 5 y 12 de R2-A abiertas): CAP-03-N-B exige que la capa de datos reciba de forma verificable el instante de verificación del segundo factor; CAP-03-N-C, que consuma el comprobante en la misma unidad (§17.7) |
+
+**Formulaciones.** *Decisión completa:* alcance, rol, torneo, equipo, partido y efecto; reservas del dueño; último dueño; RT-05; RT-14; estado del torneo y del partido; política efectiva de segundo factor; **invitación vigente para el alta de cuentas (IN-02-24)**; **reglas de creación de torneo (IN-02-26)**. En las cuatro, **la capa de datos recibe identidad y nivel verificables** (IN-02-25).
+
+| ID | Formulación |
+|---|---|
+| **CAP-02-A** | **Decisión completa en ambas capas, con una sola definición.** CMP-08 define una vez la decisión completa. El **servidor** la ejecuta antes de aplicar (rechazo temprano) y la **capa de datos** la ejecuta **de nuevo con sus propios datos** en la unidad que aplica la operación. La capa de datos nunca toma la decisión del servidor como prueba |
+| **CAP-02-B** | **Reparto por naturaleza de la regla.** El **servidor** decide los permisos de negocio (alcance, reservas, RT-05, RT-14 por efecto, política de segundo factor, estado). La **capa de datos** impone solo las **reglas de integridad**: referencias del mismo torneo, unicidades (delegado por torneo, editor vigente por partido), último dueño activo y solo anexado. **La invitación vigente para el alta de cuentas no figura entre las reglas de integridad de B** |
+| **CAP-02-C** | **Decisión del servidor ligada a una versión, con un piso independiente parcial en la capa de datos.** El servidor decide con la definición completa y la asocia a la **versión** del estado de roles, asignaciones e historial. La capa de datos (1) rechaza si esa versión ya no es la vigente al confirmar y (2) impone un **piso**: torneo y rol vigente del actor, equipo y partido asignado, reservas del dueño, anti-escalada, último dueño, RT-05 también al sincronizar, estado, unicidades, **invitación vigente para el alta de cuentas y reglas de creación de torneo**. **El efecto de RT-14 y la política de segundo factor los decide solo el servidor.** Si el piso se completara con esas dos verificaciones, C pasaría a ser **A más la comprobación de versión** (§17.3.3) |
+| **CAP-02-D** | **Consulta de permisos efectivos derivados.** CMP-07 mantiene, junto con **cada** cambio de roles, asignaciones o historial, una **proyección de hechos derivados sobre permisos** (roles vigentes por cuenta, torneo, equipo y partido; equipos de los que la cuenta es delegada vigente; restricciones históricas de RT-14 no levantadas; asignaciones de editor vigentes; política efectiva de segundo factor por cuenta), calculada con la **definición única de CMP-08** y derivada del historial, que sigue siendo la fuente única (§17.3.5). El **servidor** y la **capa de datos** deciden **consultando esa proyección** para la parte de la decisión que depende de roles, asignaciones y restricciones, y **leyendo de sus fuentes** el estado del torneo y del partido, las reglas de integridad y la invitación vigente; el efecto de RT-14 se obtiene cruzando los partidos que la operación modifica con las restricciones de la proyección. **El estado no forma parte de la proyección:** incorporarlo sería una variante distinta, **no evaluada aquí** (H2B1-10) |
+
+**Matriz de conformidad** (26 invariantes × 4 formulaciones):
+
+| Invariante | CAP-02-A | CAP-02-B | CAP-02-C | CAP-02-D |
+|---|---|---|---|---|
+| IN-02-01 Ambas capas | **Conforme** | **No conforme:** los permisos que no son reglas de integridad (alcance, reservas, RT-14, segundo factor) solo se verificarían en el servidor; RF-ACC-03 (la rechazan el servicio y la base de datos), RF-ACC-05 («denegados en BD») y CL-48 («Denegado en servidor y BD») piden la denegación en la base de datos | **No conforme:** el efecto de RT-14 y la política de segundo factor solo se decidirían en el servidor (CL-48) | **Condicionada (K-2):** ambas capas consultan la proyección; depende de que contenga todo lo que la decisión necesita |
+| IN-02-02 Un solo decisor | **Condicionada (K-1)** | **Condicionada (K-1):** las reglas de integridad deben derivar de la misma definición | **Condicionada (K-1):** el piso debe derivar de la misma definición | **Condicionada (K-1, K-2):** la proyección es derivada y no debe ser un segundo decisor |
+| IN-02-03 Misma unidad | **Conforme** | **No conforme:** la decisión del servidor es previa y externa a la unidad que aplica (CL-45) | **No conforme:** el efecto de RT-14 y la política de segundo factor se decidirían antes y fuera de la unidad | **Condicionada (K-2):** la consulta y la actualización de la proyección deben ir en la unidad |
+| IN-02-04 Aislamiento entre torneos | **Conforme** | **No conforme (parcial):** conforme para la integridad referencial (RT-08); no conforme para el **alcance del actor** (una solicitud bien formada de un organizador del torneo A sobre B) | **Conforme:** el piso incluye el torneo del actor y la integridad referencial | **Condicionada (K-2)** |
+| IN-02-05 Sin transferencia | **Conforme** | **No conforme (parcial):** conforme respecto del vínculo de identidad (ninguna formulación lo usa); no conforme respecto de «los permisos no se transfieren entre torneos» (RT-01), porque el alcance del actor por torneo solo se verificaría en el servidor | **Conforme** | **Condicionada (K-2):** los permisos de cada torneo deben mantenerse separados en la proyección |
+| IN-02-06 Usuario, rol, torneo, equipo, partido, efecto | **Conforme** | **No conforme:** partido y efecto solo en el servidor | **No conforme:** el efecto solo en el servidor | **Condicionada (K-2)** |
+| IN-02-07 Acumulación de roles | **Conforme** | **No conforme:** la unión de permisos por rol solo en el servidor | **Conforme:** el piso evalúa cada rol en su ámbito | **Condicionada (K-2):** al revocar un rol, la proyección debe conservar los permisos de los otros roles |
+| IN-02-08 Anti-escalada | **Conforme** | **No conforme:** RF-ACC-05 («denegados en BD») y RF-ACC-15 (prueba de tipo «DB»: contra la base de datos real) no son reglas de integridad | **Conforme:** el piso incluye quién concede qué | **Condicionada (K-2)** |
+| IN-02-09 Reservas del dueño | **Condicionada (K-5):** las operaciones sobre dueños exigen un nivel de autenticación reciente (IN-02-15), que depende de la formulación de ADR-03.C | **No conforme (parcial):** RT-06 sí es regla de integridad; las demás reservas y el nivel de autenticación de las operaciones sobre dueños (IN-02-15) solo se verificarían en el servidor | **No conforme (parcial):** el piso cubre las reservas, pero el nivel de autenticación de las operaciones sobre dueños solo se evaluaría en el servidor (IN-02-15) | **Condicionada (K-2, K-5)** |
+| IN-02-10 Último dueño activo | **Conforme** | **Conforme:** regla de integridad atómica | **Conforme** | **Conforme:** regla de integridad independiente de la proyección |
+| IN-02-11 RT-05 | **Conforme** | **No conforme:** RT-05 no figura entre las reglas de integridad de B y no se verificaría en la capa de datos al asignar, al otorgar el rol ni al sincronizar | **Conforme:** el piso la incluye también al sincronizar | **Condicionada (K-2)** |
+| IN-02-12 RT-14 | **Conforme** | **No conforme:** el efecto sobre partidos e historial no es una regla de integridad; CL-48 pide «Denegado en servidor y BD» | **No conforme:** el efecto se evaluaría solo en el servidor | **Condicionada (K-2):** incluidas las restricciones históricas no levantadas |
+| IN-02-13 Historial como fuente | **Conforme** | **Conforme** | **Conforme** | **Condicionada (K-2):** la proyección no sustituye al historial de solo anexado |
+| IN-02-14 Mínimo privilegio en el alcance | **Conforme** | **No conforme (parcial):** el alcance de cada rol solo se limitaría en el servidor (IN-02-04, 06 y 23) | **Conforme** | **Condicionada (K-2):** el alcance por rol sale de la proyección |
+| IN-02-15 Nivel consumido | **Condicionada (K-5):** el nivel que llega a la capa de datos y su frescura dependen de la formulación de ADR-03.C | **No conforme:** el nivel solo se evalúa en el servidor; para las operaciones de IN-03-04 queda en una capa | **No conforme:** la política de segundo factor solo en el servidor | **Condicionada (K-2, K-5):** la política efectiva por cuenta forma parte de la proyección y el nivel depende de ADR-03.C |
+| IN-02-16 Evento auditable | **Condicionada (K-3)** | **Condicionada (K-3)** | **Condicionada (K-3)** | **Condicionada (K-3)** |
+| IN-02-17 Ambigüedades como parámetros | **Conforme:** parámetros de la definición única | **No conforme:** las lecturas alternativas solo se aplicarían en el servidor (hereda IN-02-01) | **No conforme:** las lecturas del efecto de RT-14 solo se aplicarían en el servidor | **Condicionada (K-2):** la proyección debe poder construirse con ambas lecturas |
+| IN-02-18 Sin permisos nuevos | **Conforme** | **Conforme** | **Conforme** | **Conforme** |
+| IN-02-19 Sin selección tecnológica | **Conforme** | **Conforme** | **Conforme** | **Conforme** |
+| IN-02-20 Estado del torneo y del partido | **Conforme** | **No conforme:** el estado solo se evaluaría en el servidor (CL-44; las pruebas de §7.3 se repiten por estado) | **Conforme:** el piso incluye el estado | **Condicionada (K-2):** el estado se lee de su fuente, pero que solo el dueño corrija con el torneo `archivado` depende del rol, que sale de la proyección |
+| IN-02-21 Un equipo por delegado y torneo | **Conforme** | **Conforme** | **Conforme** | **Conforme** |
+| IN-02-22 Un editor vigente por partido | **Conforme** | **Conforme** | **Conforme** | **Conforme** |
+| IN-02-23 Restricciones del delegado y del editor | **Conforme** | **No conforme:** el alcance por equipo y por partido es un permiso, no una regla de integridad (RF-ACC-05, CL-20) | **Conforme** | **Condicionada (K-2)** |
+| IN-02-24 Alta solo con invitación | **Conforme:** la decisión completa incluye la invitación vigente | **No conforme:** la invitación vigente no figura entre las reglas de integridad de B y la capa de datos no la verificaría (RF-ACC-01 pide el rechazo en las dos capas) | **Conforme:** el piso incluye la invitación vigente | **Conforme:** la invitación vigente se lee de su fuente, ajena a la proyección |
+| IN-02-25 Identidad y nivel verificables | **Condicionada (K-5):** forma parte de la definición, pero qué identidad, qué nivel y qué instante llegan a la capa de datos depende de la formulación de ADR-03.C | **Condicionada (K-5)** | **Condicionada (K-5)** | **Condicionada (K-5)** |
+| IN-02-26 Creación de torneo | **Conforme** | **No conforme (parcial):** «si falla la asignación, el torneo no se crea» sí es una regla de integridad; que el creador quede asignado solo a ese torneo y sin permisos sobre los ajenos es alcance del actor y solo se verificaría en el servidor | **Conforme:** el piso incluye el alcance del actor, la anti-escalada y las reglas de creación | **Condicionada (K-2):** la asignación inicial debe actualizar la proyección en la misma unidad (UI-01) |
+
+*Nota sobre IN-02-22.* La matriz evalúa de IN-02-22 la **unicidad del editor vigente y la atomicidad de la reasignación** (reglas de integridad). La exigencia de que el editor asignado tenga rol de editor vigente en el torneo (RF-ACC-06) se evalúa en IN-02-06 e IN-02-23.
+
+#### 17.3.1 Recuento y conclusión de D2-1
+
+| Formulación | Conforme | Condicionada | No conforme | Conclusión (ninguna se elige) |
+|---|---|---|---|---|
+| **CAP-02-A** | 21 | 5 (K-1, K-3 y K-5 tres veces) | 0 | **Sin celdas «No conforme»; conformidad condicionada a K-1, K-3 y K-5** (ADR-02.I, ADR-09.C y ADR-03.C). Es la única formulación sin celdas «No conforme» **y** sin la condición K-2 |
+| **CAP-02-B** | 6 | 3 (K-1, K-3, K-5) | 17 | **No conforme.** No cuenta como alternativa viable. Se conserva como referencia para mostrar por qué RT-02 excluye el reparto por naturaleza de la regla |
+| **CAP-02-C** | 16 | 3 (K-1, K-3, K-5) | 7 | **No conforme** tal como está definida (el efecto de RT-14, la política de segundo factor y el nivel de las operaciones sobre dueños solo en el servidor). **Completada, es A más la versión** (§17.3.3) |
+| **CAP-02-D** | 6 | 20 (18 con K-2, una de ellas además con K-1 y dos con K-5; 1 con K-3; 1 con K-5 sola) | 0 | **Condicionada.** Sin celdas «No conforme», pero 18 celdas dependen de K-2, de la que **solo una parte (K-2d y la demostración de K-2b) corresponde exclusivamente a R2-B2** (§17.3.3), y **su independencia respecto de A no está demostrada** (§17.3.3) |
+
+#### 17.3.2 Las propuestas [REC] no cuentan
+
+IN-02-27, 28 y 29 son propuestas: **no se evalúan para la conformidad** y ninguna formulación se declara conforme o no conforme por ellas.
+
+#### 17.3.3 Evaluación de la independencia de las alternativas (B-02, C-01)
+
+**CAP-02-C frente a CAP-02-A.** C solo cumple RT-02 (IN-02-01), RT-13 (IN-02-03) y CL-48 si su piso incluye **las mismas verificaciones completas** que A: el efecto de RT-14 y la política de segundo factor. Con esas dos verificaciones en la capa de datos, el piso **es** la segunda ejecución de A, y la comprobación de versión es **redundante** porque la capa de datos ya evalúa en la misma unidad que aplica (IN-02-03). **Se declara la equivalencia: C completa ≡ A + comprobación de versión; C no es un modelo de reparto independiente.** Tal como está definida (piso parcial), C es **No conforme** en 7 celdas.
+
+**CAP-02-B.** Es una referencia: RT-02 y RC-04 excluyen que un permiso se verifique en una sola capa, y B lo hace con todos los permisos que no son reglas de integridad.
+
+**CAP-02-D frente a CAP-02-A: dos interpretaciones.** R2-B1 **no decide cuál es la correcta**; **la independencia de D respecto de A no está demostrada.**
+
+| Interpretación | Argumento | Qué la sustenta |
+|---|---|---|
+| **I. D es una forma de reparto distinta** | A evalúa las reglas sobre las fuentes (roles, asignaciones, historial, estado) en cada operación; D **consulta una proyección derivada** mantenida con cada cambio. Difieren en dónde vive la complejidad (en las lecturas frente a las escrituras), en el riesgo que añaden (divergencia de la proyección, RB1-13), en lo que debe conservarse (D exige un estado derivado de permisos) y en la frontera atómica (D añade el mantenimiento de la proyección a las unidades que modifican permisos, K-2c) | Las diferencias de riesgo, de mantenimiento y de obligación transaccional son reales y no son cosméticas |
+| **II. D es una variante de A** | En ambas formulaciones **el servidor y la capa de datos toman la decisión completa, con las mismas comprobaciones**, y **la división entre las dos capas es la misma**. Lo único que cambia es la **representación de la entrada** (las fuentes o una proyección derivada de ellas). Las reglas que dependen de la operación (último dueño, unicidades, invitación vigente) D las evalúa sobre las fuentes (celdas D·IN-02-10, 21, 22 y 24); las demás dependen de que la proyección sea equivalente a las fuentes (K-2) | Si la proyección es equivalente a las fuentes (K-2b), D produce las mismas decisiones que A |
+
+**Qué demostraría la independencia** [SUP]: que D cambie **qué verifica cada capa** o la **composición de las unidades atómicas** de modo que no se reduzca a «A con una entrada derivada». Eso depende de la frontera atómica (R2-B2) y de la decisión del usuario sobre qué cuenta como «forma de reparto» (DB1-1).
+
+**Otras candidatas examinadas y descartadas** [SUP]:
+
+| Candidata | Por qué se descarta |
+|---|---|
+| Decisión solo en la capa de datos; el servidor solo transporta | Deja al servidor sin verificar: **No conforme** con IN-02-01 (RT-02 exige ambas capas) |
+| Mandato firmado por operación: el servidor decide y la capa de datos solo verifica el mandato | La capa de datos debe seguir evaluando el **efecto real** de la operación (RT-14, CL-48); con esa evaluación es A más una firma (un mecanismo, no un modelo); sin ella es C parcial |
+| Permisos fijados al iniciar la sesión y consultados sin revalidar | **No conforme** con IN-02-03 y con RT-13: no habría revocación inmediata ni serialización con cambios de rol (D-2, D-11) |
+
+**Qué puede establecer R2-B1 de K-2** (C-02) y qué queda para R2-B2:
+
+| Componente | Qué puede hacer R2-B1 | Qué corresponde a R2-B2 |
+|---|---|---|
+| **K-2a Completitud** | **Enunciar** los hechos que la proyección debe contener (las entradas de IN-02-06, 12, 15, 23 y 26) y los que **no** contiene (estado, reglas de integridad, invitación vigente) | Comprobar la completitud sobre las unidades concretas |
+| **K-2b Derivación** | Declarar la **lectura** que exige D (§17.3.5: CMP-08 define, CMP-07 mantiene los hechos derivados sin dejar de ser fuente única, CMP-08 los lee sin ser su origen) y someterla al usuario (H2B1-10); fijar la **propiedad exigida** de que la proyección se pueda reconstruir desde las fuentes. **No se presupone que modificar R1 sea obligatorio** | **Demostrar** esa reconstrucción (con K-2d) |
+| **K-2c Actualización coherente** | **Listar** las operaciones que modifican **permisos** (H2B1-10); las que modifican estados no actualizan la proyección en esta formulación. **La enumeración definitiva por operación corresponde a la Fase 4** (R1 §5.5: «La lista no es exhaustiva… La enumeración definitiva por operación corresponde a la Fase 4») | Incorporar la actualización a las unidades que correspondan |
+| **K-2d Garantías transaccionales** | Nada más que **enunciar** las propiedades exigidas (misma unidad, sin ventana con proyección obsoleta, RT-13) | **Exclusivamente R2-B2:** composición de las unidades, serialización de revocaciones (UI-11, CL-45), protección del último dueño (UI-04, RT-06) y reconstrucción desde el historial |
+
+**Resultado.** Hay **una** formulación evaluada sin celdas «No conforme» y sin K-2 (A). D es una **candidata**: su independencia respecto de A tiene dos interpretaciones y su conformidad depende de K-2. **La exigencia de R1 §8.1 («≥ 2 formas de reparto con ambas capas siempre presentes») NO está declarada cumplida.** El déficit se mantiene **abierto** como **dependencia documentada de R2-B2** y como decisión del usuario (DB1-1): **no se concede excepción, no se modifica R1 §8.1 y no se da por demostrada la independencia.**
+
+#### 17.3.4 Comparación cualitativa
+
+Criterios de §2.4; juicio del autor [SUP], sin datos de costo; se omiten las formulaciones «No conforme» (B y C):
+
+| Formulación | Costos bajos | Seguridad | Funcionamiento sin conexión | Mantenimiento |
+|---|---|---|---|---|
+| CAP-02-A | Desfavorable (ejecución doble de la decisión) | Favorable (dos ejecuciones independientes de una misma definición) | Neutral (la sincronización usa el mismo flujo, OFF-22) | Neutral (una definición, K-1) |
+| CAP-02-D | Neutral (consultas simples; el costo está en mantener la proyección) | Neutral (depende de K-2; una divergencia equivale a un permiso erróneo en ambas capas) | Neutral | Desfavorable (la proyección debe mantenerse en cada cambio y reconstruirse desde el historial) |
+
+**Lo que D2-1 no decide.** No decide dónde se ejecuta cada capa, con qué mecanismo ni la forma de una proyección o de una versión; eso es de ADR-02.I (R3). No decide la frontera atómica (R2-B2). **No orienta la selección:** A y D se presentan con sus condiciones, y la elección es del usuario (DB1-2).
+
+#### 17.3.5 Responsabilidades de CMP-07 y CMP-08 en CAP-02-D (D-03)
+
+**Lo que dice R1** (extractos literales): CMP-08 es «Único decisor de permisos por usuario, rol, torneo, equipo, partido y efecto» y «Lee roles e historial de CMP-07; no los almacena» (§5.3); CMP-07 es «fuente única de las asignaciones y de su historial de solo anexado» (§5.3); CR1-13 dice que «toda decisión de permiso es de CMP-08»; AC-1 (§5.8) dice que «CMP-07 invoca a CMP-08 para autorizar un cambio de roles (UI-04, UI-08) y CMP-08 lee los datos de CMP-07» y que «CMP-08 no invoca a CMP-07».
+
+| Pregunta | Respuesta documentada | Dependencia pendiente |
+|---|---|---|
+| **¿Quién calcula la proyección?** | Interpretaciones **compatibles** con R1: **P-1:** CMP-07 la mantiene **ejecutando la definición única de CMP-08** (CMP-07 invoca a CMP-08, como ya hace en AC-1); CMP-08 sigue siendo el único que define qué es un permiso y CMP-07 solo conserva el resultado derivado. **P-2:** CMP-08 la calcula y la conserva, lo que exige leer «no los almacena» como referido a roles e historial y no a datos derivados. **P-3, incompatible:** CMP-07 la calcula con reglas propias; sería un segundo decisor contra CR1-13 y **no cuenta como lectura admisible** | P-1 y P-2 requieren que el usuario **confirme la lectura de R1** (DB1-6). **No se demuestra que R1 deba modificarse:** R1 no dice que una proyección derivada sea una segunda fuente ni que CMP-08 no pueda conservar datos derivados, pero tampoco lo permite expresamente |
+| **¿Quién conserva la responsabilidad de decidir permisos?** | **CMP-08 en todo caso** (CR1-13). La proyección es un **dato** que CMP-08 consulta; cada operación se decide por CMP-08 con la definición única, en las dos capas | K-1 |
+| **¿Qué datos pueden mantenerse como proyección derivada?** | **Hechos derivados** del historial y de las asignaciones: roles vigentes por ámbito (cuenta, torneo, equipo, partido), equipos de los que la cuenta es delegada vigente, restricciones históricas de RT-14 no levantadas, asignaciones de editor vigentes y política efectiva de segundo factor por cuenta (derivada de los roles). **No forman parte:** el estado del torneo y del partido, las reglas de integridad, la invitación vigente, el nivel de la sesión (CMP-06) ni el historial mismo, que sigue siendo la fuente única | K-2a |
+| **¿Puede guardar decisiones por clase de operación («permitido» o «denegado»)?** | **No en esta formulación:** una decisión materializada sería un segundo momento de decisión. Una variante que lo hiciera solo sería admisible si fuera la salida **conservada y versionada de CMP-08**, recalculada por CMP-08 ante cualquier cambio de sus entradas, incluido el estado; **no se evalúa aquí** | Variante no evaluada |
+| **¿Qué garantías impiden que sea un segundo decisor no autorizado?** | (g1) contiene **datos, no reglas**; (g2) toda decisión sobre una operación la toma CMP-08 con la definición única, en las dos capas (K-1); (g3) deriva del historial de solo anexado y debe poder reconstruirse desde él (K-2b); (g4) **ante una discrepancia entre la proyección y las fuentes prevalecen las fuentes** [REC]: garantía que este documento exige a la formulación y que no fija `01` ni R1; (g5) se actualiza en la misma unidad que cada cambio de permisos (K-2d) | g4 y K-2d: R2-B2 |
+
+**Conclusión.** Con esas garantías, P-1 y P-2 son **técnicamente compatibles con R1 tal como está redactado**, a condición de que el usuario confirme la lectura (DB1-6 a). **No se demuestra que R1 deba modificarse.** R1 **no menciona** estas proyecciones: si el usuario no confirmara la lectura, CAP-02-D sería No conforme con IN-02-02 e IN-02-13 o requeriría una precisión editorial de R1 (que este documento no propone).
+
+### 17.4 Modelo de capacidades por rol
+
+**Alcance de esta sección.** Describe **qué familias de capacidades tiene cada rol y con qué límites**, tal como `01 §7.1` ya las confirma o las deja abiertas. **No es la matriz detallada de la Fase 4** y **no concede ni retira nada** (IN-02-18). **Regla de las celdas:** una fila de `01` con origen `COND` o `PEND` figura **[ABIERTO]** y **no se convierte en permiso provisional**: se cita lo que dice la fila y se soporta como parámetro. Las referencias «fila N» son a la matriz de `01 §7.1`; «Sí\*» = con la restricción indicada.
+
+**Alcance base de cada rol** (qué dimensiones de IN-02-06 lo limitan):
+
+| Rol | Alcance base | Fuente |
+|---|---|---|
+| **Dueño** | Global (todos los torneos y usuarios), **sujeto a RT-14 por equipo**; el segundo dueño tiene los mismos privilegios | RT-01, RF-ACC-09 |
+| **Organizador** | Los torneos que **crea** o se le **asignan**; sin acceso automático a otros | RF-ACC-03, RF-ACC-12 |
+| **Editor** | **Partidos concretos asignados** (un editor vigente por partido), en torneos donde tiene el rol | RF-ACC-06, RF-ADM-02 |
+| **Delegado** | **Un equipo inscrito por torneo** y la plantilla de ese equipo | RF-ACC-13 |
+| **Público** | Solo lo **publicado y confirmado**; el usuario autenticado sin rol equivale al público | RF-ACC-14, §9.6 |
+
+**Familias de capacidades** (11 familias × 5 roles; las 41 filas de `01 §7.1` están asignadas a una familia en la tabla de cobertura siguiente):
+
+| ID | Familia (filas) | Dueño | Organizador | Editor | Delegado | Público |
+|---|---|---|---|---|---|---|
+| CF-01 | **Cuentas y roles** (1 a 6, 35, 40) | Invita o designa a todos los roles (1 a 3); otorga el rol de dueño **solo** a un segundo dueño, con autenticación reforzada y auditoría (4); revoca organizadores y a cualquier usuario (5, 6); revoca o degrada a otro dueño (35) con **nueva autenticación con segundo factor y motivo (IN-03-04, ADR-03.C)** y la protección de IN-02-10; levanta la restricción histórica de otro dueño u organizador, siendo otro dueño activo y sin conflicto (40; IN-02-12) | Invita editores y delegados **solo** de **sus** torneos (2, 3); revoca editores y delegados de sus torneos y, de otro organizador, **solo el rol adicional** de editor o delegado en torneos comunes (6); **no** organizadores (1, 5), **no** el rol de dueño (4), **no** revoca ni degrada a un dueño (35), **no** levanta restricciones (40) | No (RF-ACC-05) | No (RF-ACC-05) | No (cuentas solo por invitación, RF-ACC-01) |
+| CF-02 | **Asignación de editores a partidos** (7) | Sí\*: **no** asigna editores a partidos de un equipo del que es delegado (RT-14; A-2 **[ABIERTO]**) ni a un delegado de un equipo del partido (RT-05); el editor asignado debe tener rol de editor vigente en ese torneo | Sí\* solo partidos de **sus** torneos, con las mismas restricciones (RT-14; A-2 **[ABIERTO]**; RT-05) | **No** (ni a sí mismo) | No | No |
+| CF-03 | **Administración del torneo** (10 a 15, 37) | Crea (10); edita y fija el reglamento antes de iniciar (11); publica y despublica (13); finaliza (14); elimina un `borrador` sin partidos (15). Cambiar el reglamento del torneo iniciado (12): la fila dice «Sí (con confirmación)» con origen `COND` Q-23 → **[ABIERTO]**. Archivar (37): la fila dice «Sí» con origen `COND` Q-40 → **[ABIERTO]** | Crea y queda asignado **solo** a ese torneo (10); edita antes de iniciar (11), publica y despublica (13) y finaliza (14) **los suyos**; **no** elimina (15). Reglamento iniciado (12): **PEND Q-23 [ABIERTO]**. Archivar (37): **PEND Q-40 (a) [ABIERTO]** | No | No | No |
+| CF-04 | **Inscripciones y equipos** (16, 17) | Fila 16 (inscribir o retirar un equipo): Sí\* sujeta a RT-14 (A-4 **[ABIERTO]**). Fila 17 (editar nombre y colores): Sí; la lectura provisional de A-4 **no** la sujeta a RT-14 (la alternativa sí; **[ABIERTO]**) | Igual que el dueño, **solo en sus torneos** | No (filas 16 y 17) | **No** (filas 16 y 17) | No |
+| CF-05 | **Jugadores y datos internos** (18 a 21, 34) | Sí (18, 19, 20, 21, 34); fila 21 con origen `COND` Q-42 → **[ABIERTO]** | Sí\* sus torneos: ver plantilla con datos internos (18), alta, baja y edición (19), consentimiento (20). Anonimizar o eliminar (21): **PEND Q-42 (b) [ABIERTO]**. **Exportar datos personales (34): No**, según la fila; Q-42 (b) **[ABIERTO]** sobre una facultad del organizador que `01` no concede | **Parcial** (18): solo nombre público o etiqueta y dorsal de los equipos de sus partidos asignados (PRV-11); **No** (19, 20, 21, 34) | Sí\* **su** equipo: ver plantilla con datos internos (18), alta, baja y edición (19), registrar autorización o consentimiento y su revocación (20); **No** (21, 34) | No (solo proyecciones públicas) |
+| CF-06 | **Calendario** (22, 23) | Sí\* sujeto a RT-14 por efecto (A-3 está resuelta en `01`) | Sí\* **solo sus torneos**, sujeto a RT-14 por efecto | No | No | No |
+| CF-07 | **Resultados y estados de partido** (24 a 29, 39, 41) | Registrar (24), cambiar estado (25), anular un evento (28), reanudar (39): Sí\* sujeto a RT-14; **corregir o reabrir** un finalizado, **también con el torneo `archivado`** (27). W.O. (26) y resolución manual de desempates (29): la fila tiene origen `COND` (Q-21, Q-22) → **[ABIERTO]** (el origen `COND` concierne a la regla deportiva (Q-21) y, en Q-22, también a quién resuelve: la fila queda abierta entera y su «Sí» no se toma como permiso ni como denegación). Cerrar desde `suspendido` (41): **no habilitada** (Q-29 **[ABIERTO]**) | Registrar (24) y cambiar estado (25): la fila dice «Sí\* suyos (COND Q-42)» → **[ABIERTO] Q-42 (a)**. W.O. (26): la fila dice «Sí\* suyos (REC)» con origen `COND` Q-21 → **[ABIERTO]**. Desempate manual (29): «Sí\* suyos (REC)» con origen `COND` Q-22 → **[ABIERTO]**. Corregir (27): Sí\* suyos **mientras el torneo no esté `archivado`**; con `archivado`: **No**. Anular (28): Sí\* suyos. Reanudar (39): Sí\* suyos (Q-46; la facultad de suspender y registrar del organizador depende de Q-42 (a)). Cerrar desde `suspendido` (41): **no habilitada** (Q-29) | Sí\* **solo partidos asignados**: registrar (24), cambiar estado (25), anular un evento **antes de finalizar** (28), reanudar, también sin conexión (39); **No** declara W.O. (26), **No** corrige (27), **No** resuelve desempates (29); cerrar desde `suspendido` (41): no habilitada; rige RT-05 | No | No |
+| CF-08 | **Verificación de duplicados** (38) | Sí\* sujeto a RT-14 (A-5 **[ABIERTO]**) | Sí\* sus torneos, sujeto a RT-14 (A-5 **[ABIERTO]**) | No | No | No |
+| CF-09 | **Lectura interna** (8, 9, 31, 32, 33) | Todo: usuarios y roles (8), historial (9), torneo o jornada no publicados (31), editor asignado de un partido (32), cola y conflictos (33) | Lo de **sus** torneos (8, 9, 31, 32, 33) | Fila 31: solo sus partidos asignados; fila 32: solo el propio; fila 33: solo la propia cola; filas 8 y 9: **No** (solo su cola) | Fila 31: solo su equipo y sus partidos; filas 8, 9, 32 y 33: **No** | No (filas 8, 9, 31, 32, 33) |
+| CF-10 | **Lectura pública** (30) | Sí | Sí | Sí | Sí | **Sí** (torneos publicados, tablas, calendarios publicados, resultados confirmados, goleadores y tarjetas) |
+| CF-11 | **Vínculo de identidad entre inscripciones** (36) | **No existe en el MVP** (RF-EQP-06 diferido); regla futura: solo el dueño | No | No | No | No |
+
+**Tabla de cobertura: cada fila de `01 §7.1` y su familia.** «Abierta» marca las filas cuyo origen en `01` es `COND` o `PEND` (al menos para un rol):
+
+| Fila | Acción | Familia | Abierta en `01` |
+|---|---|---|---|
+| 1 | Invitar o designar organizador | CF-01 | No |
+| 2 | Invitar editor | CF-01 | No |
+| 3 | Invitar delegado | CF-01 | No |
+| 4 | Otorgar rol de dueño | CF-01 | No |
+| 5 | Revocar organizador | CF-01 | No |
+| 6 | Revocar editor o delegado | CF-01 | No |
+| 7 | Asignar, desasignar y reasignar editor | CF-02 | No |
+| 8 | Ver usuarios y roles | CF-09 | No |
+| 9 | Ver historial de cambios | CF-09 | No |
+| 10 | Crear torneo | CF-03 | No |
+| 11 | Editar torneo y reglamento antes de iniciar | CF-03 | No |
+| 12 | Cambiar reglamento de torneo iniciado | CF-03 | Sí (Q-23) |
+| 13 | Publicar o despublicar | CF-03 | No |
+| 14 | Finalizar torneo | CF-03 | No |
+| 15 | Eliminar torneo en `borrador` | CF-03 | No |
+| 16 | Inscribir o retirar equipo | CF-04 | No |
+| 17 | Editar datos de la inscripción | CF-04 | No |
+| 18 | Ver plantilla con datos internos | CF-05 | No |
+| 19 | Alta, baja y edición de jugadores | CF-05 | No |
+| 20 | Autorización o consentimiento | CF-05 | No |
+| 21 | Anonimizar o eliminar un jugador | CF-05 | Sí (Q-42) |
+| 22 | Generar o regenerar calendario | CF-06 | No |
+| 23 | Ajustar fecha, hora, sede, localía o jornada | CF-06 | No |
+| 24 | Registrar marcador y eventos | CF-07 | Sí (Q-42) |
+| 25 | Cambiar estado del partido | CF-07 | Sí (Q-42) |
+| 26 | Declarar o revertir W.O. | CF-07 | Sí (Q-21) |
+| 27 | Corregir o reabrir un partido finalizado | CF-07 | No |
+| 28 | Anular un evento confirmado | CF-07 | No |
+| 29 | Resolución manual de un desempate | CF-07 | Sí (Q-22) |
+| 30 | Ver lo publicado | CF-10 | No |
+| 31 | Ver torneo o jornada no publicados | CF-09 | No |
+| 32 | Ver quién es el editor asignado | CF-09 | No |
+| 33 | Ver cola de operaciones y conflictos | CF-09 | No |
+| 34 | Exportar datos personales de un jugador | CF-05 | Sí (Q-42) |
+| 35 | Revocar o degradar a un dueño | CF-01 | No |
+| 36 | Vincular o desvincular inscripciones | CF-11 | No (diferido) |
+| 37 | Archivar un torneo | CF-03 | Sí (Q-40) |
+| 38 | Resolver verificación de duplicados | CF-08 | No |
+| 39 | Reanudar un partido `suspendido` | CF-07 | No |
+| 40 | Levantar la restricción histórica (RT-14) | CF-01 | No |
+| 41 | Cerrar un partido desde `suspendido` | CF-07 | Sí (Q-29) |
+
+**Observaciones.**
+
+- **La lectura de datos internos (CF-09, CF-05) y la revocación.** `01` dice que la revocación se aplica «de inmediato en el servidor: toda nueva operación sin autorización vigente se rechaza» y no distingue las lecturas de datos internos (PRV-09). R2-A propone leerlo como incluidas las lecturas [REC] (H2A-09, decisión 5 de R2-A, **abierta**). R2-B1 **soporta ambas lecturas** (H2B1-05).
+- **Una pregunta abierta no es un permiso provisional.** Las celdas **[ABIERTO]** se soportan como parámetros; ninguna formulación puede tomar la columna «provisional» de una fila `COND` como un permiso concedido.
+- **Nada en esta sección es una matriz de la Fase 4.**
+- **La bitácora de seguridad no es una fila de `01 §7.1`** (C-05). RF-AUD-05 (prioridad S, estado REC) la sitúa «para el dueño» y no visible a organizadores, e IN-09-08 de R2-A (PROPUESTA) la recoge; R2-B1 **no la incorpora a ninguna familia ni concede su lectura**: sigue siendo una propuesta [REC] fuera de las 41 filas.
+
+**Roles acumulados.** Las **ocho filas de `01 §7.4`** (en su orden) y **dos casos adicionales** que `01` exige probar (no son filas de §7.4); todas se evalúan con IN-02-07:
+
+| Combinación (`01 §7.4`) | Qué evalúa el modelo | Invariantes | Casos |
+|---|---|---|---|
+| 1. Organizador + Editor (mismo torneo) | Unión de permisos; el rol adicional lo concede otro actor (RT-04); la asignación a partidos sigue RF-ACC-06 y RT-05 | IN-02-07, IN-02-08, IN-02-22 | CL-50 |
+| 2. Editor + Delegado (mismo torneo) | Como delegado no actúa de editor en partidos de **su** equipo (al asignar, al otorgar el rol y al sincronizar) | IN-02-11 | CL-35, CL-49 |
+| 3. Organizador + Delegado (mismo torneo) | No ejecuta acciones de RT-14 sobre su equipo; la restricción **persiste** tras perder el rol salvo levantamiento | IN-02-12, IN-02-13 | CL-48, CL-59, CL-60 |
+| 4. Dueño + Delegado o Editor | El dueño es global **pero no está exento** de RT-14 como delegado; como editor, solo RT-05 | IN-02-12, IN-02-11 | CL-44, CL-51 |
+| 5. Delegado de dos equipos del mismo torneo | **No permitido;** sí de equipos de torneos distintos | IN-02-21 | CL-54 |
+| 6. Editor que fue delegado del equipo | **Sin persistencia histórica:** solo RT-05 (la persistencia de RT-14 no se extiende a editores) | IN-02-11, IN-02-12 | — (la regla es RT-14 y `01 §7.4`; CL-35 solo cubre RT-05) |
+| 7. Roles en torneos distintos | Los permisos no se transfieren | IN-02-04, IN-02-05 | CL-21, CL-40 |
+| 8. Dueño + segundo dueño | Mismos privilegios; protección del último dueño; sin jerarquía | IN-02-10 | CL-43 |
+
+| Caso adicional | Qué evalúa el modelo | Invariantes | Casos |
+|---|---|---|---|
+| A1. Organizador + Editor + Delegado (`01 §7.3`, actor 12) | Ningún rol evade RT-14 ni RT-05: el rol de editor asignado no habilita sobre el propio equipo lo que RT-14 niega al organizador | IN-02-07, IN-02-11, IN-02-12 | CL-50 |
+| A2. Revocación parcial entre organizadores (RF-ACC-07, Q-38 d) | Solo roles adicionales de editor o delegado y solo en torneos comunes; conserva los permisos de otros roles vigentes | IN-02-07, IN-02-09 | CL-52, CL-53 |
+
+### 17.5 Aislamiento entre torneos, acumulación de roles y separación de facultades
+
+Las reglas siguientes **no añaden permisos**: concretan, como capacidades exigidas, lo que `01` ya impone. **«Ambas capas»** significa que se verifican en el servidor y en la capa de datos (IN-02-01).
+
+| Situación | Requisito de capacidad | Invariantes | Casos de prueba de `01` |
+|---|---|---|---|
+| Una solicitud bien formada de un organizador del torneo A contra un recurso del torneo B | Denegada en ambas capas; la respuesta no revela la existencia del recurso [REC] | IN-02-04, IN-02-27 | CL-21, CL-40 |
+| Un partido de A con un equipo de B; un evento con un jugador de B; una asignación de editor de B | Rechazados por la capa de datos aunque el servidor los admitiera | IN-02-04 | CL-21 |
+| Un editor asignado al partido P intenta capturar en un partido no asignado; un editor de otro torneo escribe | Denegado | IN-02-06, IN-02-23 | CL-20 |
+| Un organizador intenta invitar a otro organizador, otorgar el rol de dueño o ampliar el ámbito de una invitación | Denegado en ambas capas; evento de seguridad [REC] | IN-02-08, IN-02-09, IN-02-28 | CL-19, CL-38 |
+| Un usuario se invita o se asigna a sí mismo; el dueño se concede un rol | Denegado, salvo la asignación inicial del creador de un torneo | IN-02-08 | CL-20 |
+| Un usuario con dos roles intenta, con uno, lo que el otro le deniega | Denegado: la unión no concede más | IN-02-07 | CL-50, CL-53 |
+| Dos invitaciones simultáneas harían delegado de dos equipos del mismo torneo a la misma persona | Una prospera y la otra se rechaza | IN-02-21 | CL-54 |
+| Dos reasignaciones simultáneas del mismo partido | Una prevalece; nunca hay dos editores vigentes | IN-02-22 | CL-41 |
+| Consultas con el vínculo de identidad de equipo (diferido) | 0 filas de otros torneos; el vínculo no es criterio de autorización | IN-02-05 | CL-40, CL-42 (diferido) |
+| Lectura de datos internos de otro torneo por un organizador (historial, plantillas, usuarios) | Denegada; el organizador solo ve sus torneos | IN-02-04 | CL-40; RF-ADM-03 |
+
+### 17.6 Ambigüedades y condiciones abiertas
+
+**Naturaleza de esta tabla.** Para cada ambigüedad se documentan **ambas lecturas** y cómo las soporta el modelo. **«Lectura provisional»** es la que fija `01 §13.7` (**no es una decisión del usuario**); **«Lectura alternativa»** es la que el autor considera para completar el par, con la formulación que usa R1 §9.3 [SUP]. **Ninguna se elige y todas siguen [ABIERTO].** `01` asigna su decisión a la Fase 4 (A-15, «revisable en el modelo de amenazas de F2»).
+
+| # | Ambigüedad | Lectura provisional (`01 §13.7`) | Lectura alternativa | Cómo la soporta el modelo | Reservado a |
+|---|---|---|---|---|---|
+| A-1 | Alcance de «resultados» en RT-14 | Toda operación que cree o modifique datos de resultado de partidos del propio equipo, con denegación por defecto | Solo el registro y la confirmación del marcador y del estado final del partido propio; el resto (eventos, correcciones, W.O.) se rige por sus propias cláusulas de RT-14 | **Clases de operación como parámetro del evaluador** (§9.3) | Usuario (Fase 4); efecto en el motor: ADR-08 |
+| A-2 | «Asignaciones que generen conflictos» | Solo la asignación de editores a partidos del propio equipo | Toda asignación (editor, delegado u otra) cuyo efecto alcance al propio equipo | **Alcance de la asignación como parámetro** | Usuario (Fase 4) |
+| A-4 | «Inscripción o retiro» | Solo las decisiones de inscripción o retiro, no la edición de nombre y colores | También la edición de nombre y colores de la inscripción del propio equipo | **Distinguir decisión y edición** como dos clases de operación con regla propia (CF-04) | Usuario (Fase 4) |
+| A-5 | Verificación de duplicados: ¿a qué lado del par? | Cualquiera de los dos registros del par (denegación por defecto) | Solo el registro nuevo que se verifica | **Aplicar a uno o a ambos registros** como parámetro | Usuario (Fase 4) |
+| A-6 | «Propio equipo» sin vínculo de identidad | Rige **dentro del mismo torneo**; sin identidad común no cruza torneos | Extensible a las inscripciones vinculadas en otros torneos si se construyera el vínculo. **En conflicto con reglas confirmadas:** RT-12 («no es un criterio de autorización: ninguna política de acceso, vista ni consulta lo utiliza ni concede acceso a otro torneo») y RF-EQP-06 («el vínculo no se usará en ninguna política de acceso, vista, plantilla, estadística ni permiso»). Una restricción es una política de acceso: **la lectura solo podría activarse si el usuario modificara formalmente esas reglas**, y R2-B1 no lo propone | **Alcance dentro del torneo; extensible** sin cambiar el evaluador (R1 §9.3 pide que el diseño no lo impida). **R2-B1 no usa el vínculo como criterio** | Usuario; solo si se construyera RF-EQP-06 y se modificaran RT-12 y RF-EQP-06 |
+| A-8 | Publicación y despublicación de jornadas | **No restringida** por RT-14 | Con un **punto opcional de guardia** al habilitar la visibilidad de jornadas del propio equipo | **Punto opcional de guardia** parametrizable; la visibilidad misma es de ADR-04.C | Usuario (Fase 4); **ADR-04.C (R2-C)** |
+| A-12 | «Sin conflicto» del aprobador del levantamiento | Sin conflicto respecto del equipo y torneo del levantamiento; no cubre el conflicto vigente; se anula si se otorga de nuevo el rol | Condiciones adicionales del aprobador (por ejemplo, sin rol de delegado en ningún equipo del torneo, o reautenticación reciente) | **Condiciones del aprobador como parámetro**; IN-02-12 fija el mínimo de `01` | Usuario (Fase 4) |
+| A-15 | RT-14 frente a revocaciones de seguridad, desasignación y efectos indirectos | **Sin resolver.** Provisional: no se altera el permiso de revocar; asignar y reasignar sobre partidos propios siguen denegados; los efectos indirectos se auditan | (i) La revocación inmediata se ejecuta **siempre**, aunque su efecto alcance partidos propios; (ii) la revocación o desasignación **queda sujeta a RT-14** y se bloquea si alcanza partidos propios | **Que la revocación inmediata se pueda ejecutar siempre, o quedar sujeta a RT-14**, y auditoría de efectos indirectos (IN-09-13 [REC]). Riesgo de (ii): RB1-12 | Usuario (Fase 4, revisable en la Fase 2); **R2-B2** (frontera) y **ADR-05.C** (R1 §9.3 lista ADR-02 y ADR-05) |
+| A-16 | Reglamento y desempates bajo RT-14 | **Sin resolver.** Provisional: no se añade ni se retira restricción; los cambios de reglamento se auditan; la resolución manual de desempates sí es de RT-14 | Guardia en la edición del reglamento y de los criterios cuando el cambio afecte al propio equipo | **Guardia opcional** parametrizable | Usuario; **ADR-08 (R3)** |
+
+**Preguntas abiertas que condicionan capacidades** (C-06). Se separan **dos clases**; en ambas las opciones son las de `01`, **no se adopta ninguna**, las recomendaciones de `01` no son decisiones y **ninguna se convierte en permiso provisional**.
+
+*Clase 1: preguntas sobre facultades (quién puede hacer algo que `01` ya define).*
+
+| Pregunta | Qué soporta el modelo | Celdas afectadas |
+|---|---|---|
+| **Q-40 (a)** ¿Quién archiva? (A: solo dueño; B: dueño y organizador) | La facultad de archivar como parámetro de rol | CF-03 (fila 37) |
+| **Q-40 (b)** Reabrir `finalizado`; desarchivar `archivado` (A: solo dueño con motivo y auditoría; B: dueño y organizador; C: no se permite; desarchivar: A no se permite, B solo dueño) | Reapertura como parámetro: ninguna, solo dueño, o dueño y organizador, siempre con motivo y auditoría | CF-03, CF-07 |
+| **Q-42 (a)** Facultades de captura y de cambio de estado del organizador (A: sí; B: no) | La facultad del organizador sobre CF-07 como parámetro | CF-07 (filas 24, 25) |
+| **Q-42 (b)** Anonimizar y exportar datos de jugadores (A: solo el dueño; B: también el organizador de su torneo) | La facultad del organizador sobre CF-05 como parámetro | CF-05 (filas 21, 34) |
+
+*Clase 2: preguntas sobre reglas deportivas o estados (qué operación existe o cómo funciona).* Mientras estén abiertas, **la fila queda `COND` en `01`** y R2-B1 **no decide quién la ejecuta**: su respuesta puede crear, modificar o eliminar la operación misma. **Q-22 y Q-23, además, preguntan expresamente por «quién»** (Q-22: «¿quién, con qué justificación y cómo se publica?»; Q-23: «¿cuáles, quién aprueba y se recalcula el histórico?»), de modo que en ellas la regla **y** la facultad están abiertas. El modelo **solo reserva la fila**; no adopta ni un «Sí» ni un «No».
+
+| Pregunta | Qué está abierto | Efecto sobre el modelo | Filas afectadas |
+|---|---|---|---|
+| **Q-40 (c)** | Qué operaciones se bloquean en `archivado` (A: solo lectura para todos salvo las correcciones del dueño; B: solo se restringen las correcciones del organizador) | El conjunto de operaciones bloqueadas por estado como parámetro (IN-02-20) | CF-03 a CF-08 |
+| **Q-21** W.O. doble, sanciones y GF/GC | Las reglas del W.O. | La fila 26 queda abierta entera | CF-07 (fila 26) |
+| **Q-22** Resolución manual de desempates | La regla (cómo se publica) **y la facultad** (¿quién y con qué justificación?) | La fila 29 queda abierta entera, en la regla y en la facultad; ni «Sí» ni «No» | CF-07 (fila 29) |
+| **Q-23** Cambios de reglamento con torneo iniciado | La regla (¿cuáles?, ¿se recalcula el histórico?) **y la facultad** (¿quién aprueba?) | La fila 12 queda abierta entera, en la regla y en la facultad (también el «Sí con confirmación» del dueño); ni «Sí» ni «No» | CF-03 (fila 12) |
+| **Q-29** Estados `aplazado`, `cancelado`, `suspendido` y su efecto en la tabla | Los estados y el cierre desde `suspendido` | La fila 41 sigue «no habilitada»; R2-B1 no la habilita | CF-07 (fila 41) |
+
+**Q-40 (d)** (visibilidad de `archivado`) **no pertenece a R2-B1**: es de ADR-04.C y debe resolverse antes de la Fase 3 (`01 §13.5`).
+
+### 17.7 Dependencias y límites de responsabilidad
+
+**Relaciones de §8.2 que usa ADR-02.C** (no se añade ninguna): requiere **ADR-03.C** y **ADR-09.C**; **no requiere** ni espera a ninguna parte `.I`, ni a ADR-01, ADR-04.C o ADR-05.C.
+
+| Artefacto | Qué consume o qué le deja ADR-02.C (parte 1) | Qué **no** hace R2-B1 |
+|---|---|---|
+| **ADR-03.C** (PROPUESTA) | Consume el nivel de autenticación (IN-02-15, IN-02-25); IN-03-17 impide que ADR-03.C conceda facultades. IN-03-04 (nueva autenticación y motivo en operaciones sobre dueños) y IN-03-05 (invitación) son de ADR-03.C. Depende de las decisiones de R2-A **1, 5 y 12** | No elige entre CAP-03-N-A, N-B, N-C ni entre S-A y S-B; no fija PAR-01…06; no resuelve D-2 |
+| **ADR-09.C** (PROPUESTA) | Consume IN-09-04, IN-09-05 e IN-09-06 (evento y su contenido) y la disciplina de CAP-09-P-A. Depende de la decisión **10** de R2-A | No elige entre CAP-09-P-A, P-B y P-C; no define el fallo del registro ni su relación con OFF-06 |
+| **ADR-05.C** (R2-C) | **Solo se registra la relación:** ADR-05.C requiere ADR-02.C y aplica la misma decisión a la ruta sincronizada (OFF-22, IN-02-03, IN-02-11, IN-02-12); A-15 figura también en ADR-05 | No desarrolla la sincronización sin conexión, A-9…A-14 ni la frontera de UI-06 |
+| **ADR-04.C** (R2-C) | Le deja A-8 como punto de guardia y las lecturas internas de CF-05 y CF-09 | No decide visibilidad, proyecciones ni Q-40 (d) |
+| **ADR-08** (R3) | Le deja A-16 como guardia opcional | No define el motor de reglas |
+| **R2-B2** | Recibe UI-01…13, la frontera atómica (IN-02-03, IN-02-10, IN-02-22), la auditoría de rechazos en la frontera, K-2d de CAP-02-D (y la lista de operaciones de H2B1-10) y las amenazas asignadas a R2-B | — |
+| **R2-C, R3, R4, Fase 4** | La consolidación del modelo de amenazas (R2-C); ADR-02.I y los mecanismos (R3); la identidad de ejecución de las tareas automáticas (ADR-14, R4); la matriz detallada y las políticas de acceso (Fase 4) | — |
+
+**Compatibilidad condicionada con las formulaciones de ADR-03.C y ADR-09.C.** Ninguna formulación pendiente se convierte en decisión; estas son las **condiciones que CAP-02-A y CAP-02-D** (las dos no descartadas por la matriz) imponen a las de R2-A si esas fueran las elegidas:
+
+| Si el usuario elige… | Condición para ADR-02.C | Efecto |
+|---|---|---|
+| **CAP-03-N-B** (nivel con frescura) | La capa de datos debe recibir de forma verificable el instante de verificación del segundo factor para las operaciones de IN-03-04 (IN-02-25) | Condiciona K-5 y H2B1-02 |
+| **CAP-03-N-C** (comprobante de un solo uso) | El comprobante se consume **en la misma unidad** que aplica la operación (IN-02-03) | Condiciona K-5 y R2-B2 |
+| **CAP-03-N-A** | Ya es no conforme por sí sola en R2-A; **no se evalúa aquí como viable** | — |
+| **CAP-03-S-A o S-B** (sincronizar) | La decisión completa se evalúa **al sincronizar** con el estado vigente (OFF-22); S-B añade la reverificación previa | Sin conflicto con IN-02-11 e IN-02-12 |
+| **CAP-09-P-A** | La capa de datos debe poder **responder un rechazo solo después** de que otra unidad lo haya registrado | Disciplina sobre la frontera: R2-B2 |
+| **CAP-09-P-B** | Cubre solo los rechazos que decide el evaluador; **no cubre** los impuestos por la capa de datos (RC-04), que existen en A, C y D | **K-3** de §17.3 |
+| **CAP-09-P-C** | Conforme solo si la intención de registro es **durable antes de responder** | Condiciona R2-B2 y K-3 |
+
+### 17.8 Condiciones abiertas, hallazgos y decisiones de R2-B1
+
+**Condiciones y hallazgos** (ninguno se resuelve en R2-B1):
+
+| ID | Condición o hallazgo | Estado |
+|---|---|---|
+| H2B1-01 | **Selección de formulación de D2-1:** CAP-02-A conforme con K-1, K-3 y K-5; CAP-02-D condicionada a K-2 y con su independencia respecto de A **no demostrada**; CAP-02-B y CAP-02-C no conformes (§17.3.1) | **[ABIERTO]**, decisión del usuario (se relaciona con la decisión 6 de R2-A) |
+| H2B1-02 | **Viabilidad de IN-02-25 con el stack:** que la capa de datos reciba identidad y nivel de forma verificable y lea roles e historial sin una credencial que evada la decisión (IN-02-29). Qué mecanismo lo logra no se decide aquí. **Aparte, la conformidad de IN-02-15 e IN-02-25 depende de la formulación de ADR-03.C que se adopte (K-5)** | **[ABIERTO]** condicionado a ADR-03.I, ADR-02.I y ADR-01 (R3), y a las decisiones 1, 5 y 12 de R2-A |
+| H2B1-03 | **K-1: una sola definición ejecutada en dos capas:** riesgo de deriva si la lógica se escribe dos veces (IN-02-02) | **[ABIERTO]**; propiedad exigida a ADR-02.I |
+| H2B1-04 | **RT-14 y RT-02.** `01 RT-14` dice «Se aplica en el servidor, en la misma transacción (RT-13) y al sincronizar»; **no dice «solo» en el servidor**, y esa transacción es la que aplica la operación. RT-02 y RC-04 exigen servidor **y** capa de datos, y CL-48 pide «Denegado en servidor y BD». **R2-B1 no interpreta RT-14 como «solo servidor»:** una formulación que lo hiciera elimina una protección aprobada y es **No conforme** (CAP-02-B y CAP-02-C lo son por esa causa). **No hay una tensión que el usuario deba resolver;** sustituir RT-02 o RC-04 exigiría modificarlos formalmente, y R2-B1 no lo propone | **Sin decisión pendiente** (registrado como observación) |
+| H2B1-05 | **Alcance de las lecturas de datos internos tras revocar** (decisión 5 de R2-A, H2A-09): determina si CF-05 y CF-09 se revocan con la sesión | **[ABIERTO]**; el modelo soporta ambas lecturas |
+| H2B1-06 | **A-6 frente a RT-12 y RF-EQP-06:** la lectura alternativa usaría el vínculo de identidad, que ambas reglas (confirmadas) excluyen de toda política de acceso (§17.6). No se modifica ninguna de las dos | **[ABIERTO]**; irrelevante en el MVP (vínculo diferido) |
+| H2B1-07 | **Operaciones automáticas:** heredan la situación del actor que las dispara (RT-14); la identidad de ejecución de las tareas programadas es de ADR-14 (R4, IN-09-09 [REC]) | **[ABIERTO]** (R4) |
+| H2B1-08 | **Facultades:** Q-40 (a) y (b) y Q-42; **reglas deportivas o estados:** Q-40 (c), Q-21, Q-22, Q-23 y Q-29 (Q-22 y Q-23, además, preguntan por quién). Todas siguen abiertas en `01`; `01` las asigna a la Fase 4 (Q-40 (d) antes de la Fase 3). Condicionan la matriz de la Fase 4 (§17.6) | **[ABIERTO]** |
+| H2B1-09 | **Propuestas [REC] IN-02-27, 28 y 29** no tienen aprobación | **[ABIERTO]** |
+| H2B1-10 | **CAP-02-D: responsabilidades de CMP-07 y CMP-08 (§17.3.5).** R1 asigna toda decisión de permiso a CMP-08 (§5.3, CR1-13), hace de CMP-07 la fuente única de las asignaciones y su historial y dice que CMP-08 los lee y no los almacena; **no menciona proyecciones derivadas de permisos.** R1 §5.5 dice que lo transaccional incluye «si existieran, sus proyecciones derivadas persistentes (que existan o no lo decide ADR-04)» y que «la lista no es exhaustiva», pero **ninguno de los dos pasajes trata de proyecciones de permisos**. Dos interpretaciones son compatibles con R1 (P-1: CMP-07 mantiene la proyección con la definición única de CMP-08; P-2: CMP-08 la conserva) y una no (P-3: reglas propias de CMP-07, segundo decisor); **no se presupone que modificar R1 sea obligatorio.** **Operaciones que actualizarían la proyección (K-2c):** las que modifican **permisos**: UI-01, 02, 03, 04, 08, 11 y 12 de §5.5 y las que §5.5 no enumera (aceptar invitaciones de editor u organizador, designar organizadores, desactivar cuentas y asignar torneos existentes a un organizador). **Las que modifican estados no actualizan la proyección,** porque el estado se lee de su fuente; incorporar el estado a la proyección sería una **variante no evaluada** que sumaría el ciclo de vida del torneo (RF-TOR-02), los estados del partido (RD-RES) y las unidades UI-05, UI-06 (también por la ruta sincronizada) y UI-10. Si el usuario no confirmara la lectura, D sería No conforme con IN-02-02 e IN-02-13 | **[ABIERTO]**, decisión del usuario |
+| H2B1-11 | **Déficit frente a R1 §8.1** («≥ 2 formas de reparto con ambas capas siempre presentes»): hoy solo CAP-02-A está evaluada sin celdas «No conforme» y sin K-2; la independencia de D respecto de A tiene dos interpretaciones y **no está demostrada** (§17.3.3). **Dependencia documentada de R2-B2 y decisión del usuario; sin excepción concedida** | **[ABIERTO]** |
+
+**Decisiones que corresponden al usuario en R2-B1** (**no alteran ni resuelven las decisiones de R2-A: de las 13 originales, la 11 está atendida y las otras 12 siguen abiertas**):
+
+| # | Decisión | Opciones | Dónde |
+|---|---|---|---|
+| DB1-1 | **Déficit frente a R1 §8.1** (H2B1-11) | (a) **mantenerlo abierto como dependencia documentada de R2-B2:** CAP-02-D se conserva como candidata condicionada a K-2 y **no se cuenta como segunda forma** hasta que se demuestren su independencia respecto de A y K-2; (b) decidir que D **cuenta** como segunda forma (interpretación I de §17.3.3) y condicionar ADR-02.C a K-2; (c) una **decisión formal del usuario** sobre el déficit (excepción o modificación de R1): es una vía que le corresponde a él; **este documento no la propone, no está aprobada y no se ha tomado ninguna decisión en ese sentido**; (d) pedir una formulación adicional | §17.3.3 |
+| DB1-2 | **Formulación de D2-1** (H2B1-01) | CAP-02-A; CAP-02-D (con K-2 y H2B1-10); CAP-02-B y CAP-02-C no son viables. Se relaciona con la decisión 6 de R2-A | §17.3 |
+| DB1-3 | **Lecturas de A-1, A-2, A-4, A-5, A-6, A-8, A-12, A-15 y A-16** | Provisional de `01` o alternativa de §17.6 (`01` las decide en la Fase 4; A-15, revisable en la Fase 2) | §17.6 |
+| DB1-4 | **Preguntas de `01`:** facultades (Q-40 (a) y (b), Q-42) y reglas deportivas o estados (Q-40 (c), Q-21, Q-22, Q-23 y Q-29; Q-22 y Q-23, además, preguntan por quién) | Las opciones de `01 §13` | §17.6 |
+| DB1-5 | **Adoptar o descartar IN-02-27, 28 y 29** [REC] | Adoptar, adoptar parcialmente o descartar | §17.2 |
+| DB1-6 | **Confirmación de la lectura de R1 §5.3 para CAP-02-D** (H2B1-10, §17.3.5), solo si se elige D | (a) confirmar que P-1 o P-2 son lecturas admisibles de R1 (**sin modificar R1**); (b) autorizar una precisión editorial de R1; (c) no admitir D | §17.8 |
+
+### 17.9 Riesgos de diseño identificados
+
+**R2-B1 no puntúa riesgos ni modifica §16.3.** Los riesgos de **diseño** siguientes se detectaron al elaborar la parte 1 [SUP]; **ninguno se puntúa ni se acepta**; **R2-B2** los evaluará con la convención de §16.1:
+
+| ID | Riesgo | Relación | Tratamiento |
+|---|---|---|---|
+| RB1-01 | **Deriva entre las dos ejecuciones de la decisión** (A, B, C, D): una capa permite lo que la otra niega | IN-02-02; AM-01, AM-15 | K-1; H2B1-03 |
+| RB1-02 | **La capa de datos no puede confiar en la identidad que recibe** y la decisión se vuelve un trámite | IN-02-25, IN-03-11; AM-09 (de ADR-03.C: el contexto local no autentica) | H2B1-02 |
+| RB1-03 | **Una credencial de servicio con privilegios totales hace de la capa de datos una capa sin control** | IN-02-29 [REC]; AM-23 | R3 (mecanismo); R4 (operación) |
+| RB1-04 | **Un piso incompleto en CAP-02-C** deja un permiso en una sola capa sin que nadie lo note | IN-02-01 | La matriz lo declara «No conforme» |
+| RB1-05 | **Bloqueo operativo por RT-14 sin actor alterno** (dueño único con rol de delegado; torneo `archivado`) deja operaciones sin ejecutar | CL-51, RT-06; AM-32 | `01` lo define como bloqueo sin excepciones; R4 para la sucesión; no se acepta |
+| RB1-06 | **Lecturas de datos internos tras la revocación** si IN-03-06 se limita a escrituras: un delegado revocado vería datos de menores hasta que expire su sesión | H2A-09, decisión 5 de R2-A | H2B1-05 |
+| RB1-07 | **Sobrecarga de parámetros:** soportar todas las lecturas y preguntas abiertas aumenta la complejidad y la superficie de pruebas | IN-02-17 | La Fase 4 debe acotar los parámetros que queden abiertos |
+| RB1-08 | **Operaciones automáticas que heredan al actor** pueden ejecutar un cambio que el actor no podría hacer a mano si la herencia se pierde | RT-14, H2B1-07 | R4 (identidad de ejecución) |
+| RB1-09 | **Colusión o segunda cuenta de dueño:** el levantamiento de RT-14 solo exige «otro dueño activo… distinto del interesado» y sin conflicto; dos cuentas de dueño controladas por la misma persona, o la colusión entre dos dueños, anularían la restricción | IN-02-12; RF-ACC-17, A-12 | A-12 como parámetro (condiciones adicionales del aprobador) |
+| RB1-10 | **Elusión de RT-14:** por otro rol (CL-50), por otra cuenta, por fragmentar una operación para que cada parte no alcance partidos propios, o por una operación automática que pierde la herencia del actor | IN-02-07, IN-02-12; CL-50, CL-57 | IN-02-12 evalúa **el efecto de la operación completa**; R2-B2 (frontera) |
+| RB1-11 | **Anonimización o conservación del historial:** la anonimización o la desactivación de cuentas puede romper la persistencia de RT-14 y permitir su evasión (la validación jurídica de la conservación del historial sigue pendiente) | IN-02-13; RF-ACC-11 (PEND-JUR) | `01` conserva el vínculo técnico «mientras exista el torneo»; PEND-JUR |
+| RB1-12 | **Bloqueo de revocaciones de seguridad:** con la lectura (ii) de A-15, una revocación de seguridad bloqueada por RT-14 retrasa la contención de una cuenta comprometida | A-15; IN-02-12 | A-15 como parámetro; decisión del usuario (DB1-3) |
+| RB1-13 | **Divergencia de la proyección** de CAP-02-D respecto del historial: un permiso erróneo se aplicaría igual en ambas capas | IN-02-02, IN-02-13; K-2 | H2B1-10; R2-B2 |
+
+### 17.10 Trazabilidad
+
+**Amenazas asignadas a R2-B en §16.5: cuáles trata realmente ADR-02.C y cuáles son contexto.**
+
+| Amenaza | Tipo de relación | Por qué |
+|---|---|---|
+| AM-01 (manipular rol, torneo o usuario en la solicitud: intento) | **Tratada por IN-02** (01, 04, 06, 08) | El control es la autorización en ambas capas |
+| AM-15 (acceso a datos de otro torneo: resultado) | **Tratada por IN-02** (01, 04, 05, 06) | El control es el aislamiento en la capa de datos |
+| AM-18 (carrera entre revocación u operación) | **Tratada por IN-02 en lo conceptual** (03, 10, 22); la frontera es de **R2-B2** | El control es la autorización en la misma unidad |
+| AM-19 (inyección en la capa de datos) | **Contexto:** la asigna §16.5 a R2-B, pero su control (validación de entradas) no es un permiso; R2-B1 no le atribuye invariante | R2-B2 y R2-C decidirán su tratamiento |
+| AM-34 (inyección de contenido en vistas públicas) | **Contexto:** ídem; su control es la codificación de salidas | Comparte responsable con R3 y la Fase 4 |
+| OM-01 (abuso con privilegios legítimos por un dueño: anonimización o exportación masivas, revocaciones) | **Contexto:** el actor **tiene** el permiso; la autorización no lo impide [SUP] | R2-B2 y R4; auditoría (ADR-09.C) |
+| OM-07 (captura falsa o en colusión por un editor u organizador legítimo) | **Contexto:** ídem; RT-05 y RT-14 limitan **dónde** actúa, no si actúa con mala fe [SUP] | R2-B2 y R4 |
+
+**Invariantes → fuente → casos de prueba de `01`:**
+
+| Invariante | Fuente principal | Casos de prueba de `01` |
+|---|---|---|
+| IN-02-01, 02, 25 | RT-02, RC-04, CR1-13 | CL-48 |
+| IN-02-03 | RT-13 | CL-41, CL-45, CL-47 |
+| IN-02-04, 05 | RT-01, RT-08, RT-12 | CL-21, CL-40, CL-42 (diferido) |
+| IN-02-06, 07 | RT-01, RT-11 | CL-50, CL-53 |
+| IN-02-08, 09 | RT-03, 04, 06, 07; RF-ACC-03, 15 | CL-19, CL-20, CL-38 |
+| IN-02-10 | RT-06, RF-ACC-09 | CL-43 |
+| IN-02-11 | RT-05 | CL-35, CL-49 |
+| IN-02-12, 13 | RT-14, RF-ACC-11, RF-ACC-17 | CL-48…51, CL-56…60 |
+| IN-02-14 | RT-01, PA-13 | CL-20, CL-21 |
+| IN-02-15 | RC-11, RF-ACC-10 | CL-38, CL-55 |
+| IN-02-16 | RT-10, RF-ACC-11, RF-AUD-06 | CL-48, CL-49, CL-51, CL-59, CL-60 |
+| IN-02-17, 18, 19 | R1 §9.3, PA-13, CR1-13, RC-23 | — |
+| IN-02-20 | RF-TOR-02, D-5 | CL-34, CL-44 |
+| IN-02-21 | RF-ACC-13 | CL-54 |
+| IN-02-22 | RF-ACC-06 | CL-41, CL-47 |
+| IN-02-23 | RF-ACC-05, 06, 13 | CL-20 |
+| IN-02-24 | RF-ACC-01 | — (la aceptación de RF-ACC-01 es «DB, E2E») |
+| IN-02-26 | RF-ACC-12 | — (aceptación de RF-ACC-12: «DB, I»; fila 10 de `01 §7.1`) |
+
+### 17.11 Criterios de aceptación de R2-B1
+
+Verificables sobre este documento. **La aprobación de R2-B1 es un acto expreso del usuario y no aprueba R2-B en su conjunto, R2 ni la Fase 2. R2-B1 fue aprobado condicionalmente como entregable documental el 2026-11-18 (§17.0).** Las comprobaciones de §17.12 son **del autor** y no sustituyen una revisión independiente.
+
+| ID | Criterio | Cómo se verifica |
+|---|---|---|
+| CR2B1-01 | **La matriz de §17.3 está completa y es uniforme:** 26 invariantes × 4 formulaciones = 104 celdas, cada una con uno de los tres rótulos; **ninguna celda con condición escrita se rotula «Conforme»**; los recuentos de §17.3.1 coinciden con las celdas | §17.12: recuento recalculado de las celdas frente a §17.3.1 |
+| CR2B1-02 | **Cobertura de la matriz de permisos:** las 41 filas de `01 §7.1` están asignadas a exactamente una familia, y toda fila con origen `COND` o `PEND` figura [ABIERTO] en su familia | §17.12: coincidencia exacta de la tabla de cobertura con las 41 filas y comprobación de las filas abiertas |
+| CR2B1-03 | **Doble capa:** toda formulación en la que la capa de datos omita una verificación exigida figura como «No conforme» y no como condicionada o viable | §17.3: B y C |
+| CR2B1-04 | **Ningún permiso nuevo:** cada celda de §17.4 coincide con la fila de `01 §7.1` que cita | **Comparación manual del autor, no mecánica** (§17.12); requiere revisión independiente |
+| CR2B1-05 | **Independencia de las alternativas:** la equivalencia C ≡ A + versión, las dos interpretaciones sobre D y el déficit frente a R1 §8.1 figuran, **sin declarar cumplida la exigencia ni conceder excepción** | §17.3.3 y DB1-1 |
+| CR2B1-06 | **Ambigüedades y preguntas:** las nueve ambigüedades figuran con lectura provisional literal de `01 §13.7` y lectura alternativa y siguen abiertas; A-6 cita RT-12 y RF-EQP-06; Q-40, Q-42, Q-21, Q-22, Q-23 y Q-29 siguen abiertas sin permiso provisional | §17.6 |
+| CR2B1-07 | **Etiquetas y respaldo:** cada invariante lleva **una sola** etiqueta; todo extracto de «Respaldo literal» existe en la fuente citada; los [DER] declaran su paso derivado | §17.12 (búsqueda mecánica de los extractos) |
+| CR2B1-08 | **Límites respetados:** no hay especificación de unidades UI-01…13 ni frontera atómica; no se desarrollan visibilidad, sincronización ni motor de reglas | §17.0 y §17.7 |
+| CR2B1-09 | **Sin selección tecnológica:** búsqueda de nombres de tecnología en la Parte III sin apariciones | §17.12 |
+| CR2B1-10 | **R1 y R2-A íntegros:** las líneas 1 a 1951 del archivo de partida no cambian | §17.12 (comparación con el commit `e246508`) |
+| CR2B1-11 | **Estado intacto:** no se fija ningún parámetro, no se acepta ningún riesgo, no se concede ninguna excepción ni se resuelve ninguna de las 12 decisiones de R2-A que siguen abiertas (la 11, de las 13 originales, está atendida); los riesgos de §17.9 no están puntuados | §17.8, §17.9 y §17.13 |
+| CR2B1-12 | **Trazabilidad consistente:** las amenazas se distinguen entre «tratadas» y «contexto»; los identificadores citados existen | §17.10 y §17.12 |
+
+### 17.12 Verificación del autor
+
+**Son comprobaciones del autor, no una auditoría ni una revisión independiente.** Resultados de la ejecución mecánica sobre esta versión (v0.5):
+
+| Comprobación | Resultado |
+|---|---|
+| **R1 y R2-A íntegros:** las líneas 1 a 1951 del archivo de partida son idénticas al archivo versionado en el commit `e246508` | **Sí.** El SHA-256 de ese prefijo es `2a4eca42cb2110aefc5f8268f3f4a57b504f561de01cd56ae8490b719549955d`, igual al del commit |
+| **Identificadores definidos y sin referencias huérfanas** | IN-02-01…29 (29 = 26 obligatorios + 3 [REC]), H2B1-01…11, CF-01…11, RB1-01…13, CR2B1-01…12, DB1-1…6, B-01…14 y D-01…09: **todos definidos; 0 referencias sin definición**. K-1…5 definidas (K-4 retirada) |
+| **Matriz de §17.3** | 26 invariantes × 4 formulaciones = **104 celdas**. Recuento recalculado de las celdas: **A** 21 conforme, 5 condicionada, 0 no conforme; **B** 6, 3 y **17**; **C** 16, 3 y **7**; **D** 6, **20** y 0. **Coincide con §17.3.1.** Condiciones por formulación: A (K-1: 1, K-3: 1, K-5: 3); B (K-1, K-3 y K-5: 1 cada una); C (K-1, K-3 y K-5: 1 cada una); D (**K-2: 18**, K-1: 1, K-3: 1, K-5: 3; las celdas con más de una condición se cuentan en cada una). 0 celdas «Conforme» con una condición escrita; 0 celdas «Condicionada» sin condición K-n. Celda revisada en esta versión: D·IN-02-20 (E-2); el texto de §17.3.3 sobre C se corrigió a 7 celdas (E-1) |
+| **Etiquetas de §17.2** | 16 [CONF], 10 [DER] y 3 [REC]; **0 invariantes con doble etiqueta**; los 10 [DER] declaran su paso derivado |
+| **Respaldo literal** | **37 extractos** entre comillas en la columna «Respaldo literal» de §17.2 (29 invariantes): **todos existen** en el texto de `01`, de R1 y R2-A o de la skill (búsqueda mecánica, sin formato). Los extractos de §17.3.5 y de H2B1-10 (CMP-07, CMP-08, CR1-13, AC-1, R1 §5.5, Q-22 y Q-23) también existen |
+| **Cobertura de `01 §7.1`** | Las **41 filas** están asignadas a exactamente una de las 11 familias (8, 1, 7, 2, 5, 2, 8, 1, 5, 1 y 1 filas). Las **9 filas con origen `COND` o `PEND`** en `01` (12, 21, 24, 25, 26, 29, 34, 37 y 41) coinciden con las marcadas «Abierta» y su familia lleva [ABIERTO] |
+| **Modelo de capacidades de §17.4** | 11 familias × 5 roles (todas las celdas escritas); **ocho** combinaciones de `01 §7.4` más **dos** casos adicionales rotulados |
+| **Comparación de §17.4 con `01 §7.1`** | **Comparación manual del autor, fila por fila, no mecánica:** 0 discrepancias detectadas en la v0.2; repetida en la v0.3 para CF-07 y CF-09 y en la v0.4 para CF-01 y CF-07, que son las familias modificadas. Requiere revisión independiente (CR2B1-04) |
+| **Ambigüedades de §17.6** | 9 filas (A-1, A-2, A-4, A-5, A-6, A-8, A-12, A-15 y A-16), cada una con lectura provisional y alternativa; todas **[ABIERTO]**. La fila de A-6 cita RT-12 y RF-EQP-06. Las preguntas se separan en facultades (4) y reglas deportivas o estados (5; Q-22 y Q-23, además, preguntan por quién) |
+| **Nombres de tecnología** | **0 apariciones** en la Parte III de una lista amplia de nombres de proveedores, productos, frameworks, lenguajes, estándares, protocolos y siglas (la lista no se reproduce en el repositorio; el recuento no es reproducible con otra lista) |
+| **Referencias a `01` y a R1/R2-A** | 73 identificadores de `01` (familias RF-ACC, RF-AUD, RF-ADM, RF-EQP, RF-TOR, RT, CL, OFF, PRV, RD-* y Q) y 38 de R1 y R2-A (familias RC, PA, HR1, CR1, IN-03, IN-09, H2A, AM, CAB, OM y CMP) citados en esta parte: **todos existen**; con otras familias de identificadores la cifra sería distinta. Las formulaciones CAP-03 y CAP-09 citadas existen en §16.6 y §16.7 |
+| **Alcance de Git** | Solo `02-arquitectura-adr.md` figura modificado y el diff respecto del commit **solo añade líneas** (0 eliminadas); `aprobaciones.md`, `bitacora.md` y `01-requisitos.md` no cambian |
+| **Límite de estas comprobaciones** | Son mecánicas y del mismo autor: detectan desajustes de forma, **no validan** que las evaluaciones de conformidad, los alcances de rol, las lecturas alternativas ni los pasos derivados estén bien razonados. La v0.2, la v0.3 y la v0.4 fueron validadas o verificadas por revisores de contexto nuevo (§17.15, §17.16 y §17.17); **la v0.5 no ha sido revisada por nadie distinto del autor** |
+
+### 17.13 Estado de esta parte y lo que no se hizo
+
+**Estado:** **R2-B1 (v0.5-R2B1) — APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-18); ADR-02.C sigue como PROPUESTA** (aprobado sin una auditoría posterior a los ajustes E-1 y E-2). La aprobación **no es automática** para R2-B, R2 ni la Fase 2. **R2-B2, R2-C, R3 y R4: NO INICIADOS Y SIN AUTORIZACIÓN.** Fase 2: **AUTORIZADA, NO APROBADA globalmente.**
+
+**No se realizó:** la especificación de UI-01…UI-13 ni la frontera atómica (R2-B2); el modelo adicional de amenazas de R2-B; ADR-04.C, ADR-05.C ni ADR-16.C; diseño de datos, políticas de acceso concretas, migraciones ni interfaces de servicio; selección de proveedores, productos o mecanismos; código; ninguna prueba, prototipo ni medición; ninguna modificación de `01-requisitos.md`, de `aprobaciones.md`, de `bitacora.md`, de R1 ni de R2-A; commit, push, PR ni merge; **ninguna aceptación de riesgos, fijación de parámetros ni concesión de excepciones**; ninguna decisión sobre las 12 decisiones de R2-A que siguen abiertas (la 11, de las 13 originales, está atendida) ni sobre las de §17.8; ninguna puntuación de los riesgos de §17.9.
+
+**Siguiente paso:** cualquiera que se tome (revisión o auditoría de la v0.5, correcciones, decisiones, R2-B2, registro documental, versionado) requiere una autorización expresa e independiente.
+
+### 17.14 Hallazgos de la auditoría de R2-B1 (B-01…B-14) y correcciones de la v0.2
+
+**Origen:** dictamen «R2-B1 REQUIERE CORRECCIONES» de un subagente de contexto nuevo (2026-11-17), con **independencia solo de contexto** (mismo tipo de modelo que el autor; sin independencia organizativa ni externa); es una recomendación, no una aprobación. **«Corregido» significa que el autor aplicó la corrección en la v0.2.** La validación posterior (§17.15) confirmó la mayoría y señaló reservas, que la v0.3 corrige; esta tabla no es una verificación independiente.
+
+| ID | Hallazgo | Corrección aplicada | Dónde | Estado |
+|---|---|---|---|---|
+| B-01 | La matriz no seguía sus reglas de rotulado; los recuentos no servían | Criterio uniforme de rótulos y condiciones K-1 a K-4; matriz rehecha (25 × 4 = 100 celdas en la v0.2; 26 × 4 = 104 en la v0.3, C-03 y C-07); recuentos recalculados | §17.3, §17.3.1, §17.12 | Corregido |
+| B-02 | CAP-02-C no era independiente de CAP-02-A y el borrador no declaraba el déficit frente a R1 §8.1 | Equivalencia C completa ≡ A + versión declarada; **CAP-02-D** formulada y evaluada como candidata a alternativa independiente, condicionada (la validación posterior precisó que su independencia no está demostrada: C-01); candidatas descartadas; déficit registrado como DB1-1, sin excepción; comparación reescrita y frase orientadora retirada | §17.3.3, §17.3.4, §17.8 | Corregido |
+| B-03 | H2B1-04 y DB1-2 ofrecían «solo servidor» como opción para RT-14 | H2B1-04 reformulada (RT-14 no dice «solo»; compatible con RT-02 y CL-48; una formulación que lo hiciera es No conforme); la opción se retiró de las decisiones | §17.8 | Corregido |
+| B-04 | Faltaban invariantes respaldados por `01` | IN-02-20 a IN-02-25 (estado, unicidad del delegado y del editor, restricciones de delegado y editor, RF-ACC-01, identidad verificable); IN-02-12 completado; garantías de IN-03-04 separadas de IN-02-10 | §17.2, §17.4 (CF-01) | Corregido |
+| B-05 | CF-02 concedía más que `01 §7.1`; CF-04 sujetaba a RT-14 la fila 17 | CF-02 con RT-14, RT-05 y A-2; CF-04 separa las filas 16 y 17 según A-4 | §17.4 | Corregido |
+| B-06 | Trazabilidad con amenazas mal asignada; OM-01 omitida | Distinción «tratada» y «contexto»; AM-19, AM-34, OM-01 y OM-07 como contexto; AM-34 y AM-19 retiradas de RB1-03 y RB1-06 | §17.9, §17.10 | Corregido |
+| B-07 | Tipado de IN-02-02 y etiquetas dobles | Una sola etiqueta por invariante; IN-02-02 justificado con CR1-13 y su paso derivado; «Respaldo literal» y «Paso derivado» añadidos; IN-02-14 y las credenciales de servicio separadas (IN-02-29 [REC]) | §17.2 | Corregido |
+| B-08 | La lectura alternativa de A-6 contradecía RF-EQP-06 y RT-12 | Se citan literalmente ambas reglas; la lectura se declara en conflicto; H2B1-06 reformulada | §17.6, §17.8 | Corregido |
+| B-09 | Criterios CR2B1 débiles o circulares | CR2B1 rehechos con comprobaciones mecánicas y una comparación manual declarada como tal; tabla de cobertura de las 41 filas | §17.4, §17.11, §17.12 | Corregido |
+| B-10 | Faltaban riesgos de diseño | RB1-09 a RB1-13 (colusión, elusión de RT-14, anonimización histórica, bloqueo de revocaciones de seguridad, divergencia de la proyección); sin puntuar ni aceptar | §17.9 | Corregido |
+| B-11 | Los roles acumulados no calcaban `01 §7.4` | Las ocho filas de §7.4 en su orden y dos casos adicionales rotulados (combinación triple y revocación parcial) | §17.4 | Corregido |
+| B-12 | Celdas más laxas que `01` | CF-09 desglosado por fila; W.O. y desempate como [ABIERTO] con el texto de la fila; exportación del organizador «No»; Q-21, Q-22, Q-23 y Q-29 incorporadas | §17.4, §17.6 | Corregido |
+| B-13 | La precedencia de estado omitía líneas | §17.0 enumera la línea 5, la línea 6, §12, §16.0 y §16.5 y el «Próximo paso» de `aprobaciones.md` | §17.0 | Corregido |
+| B-14 | Imprecisiones menores | IN-02-17 limitado a las ambigüedades de ADR-02; A-15 con ADR-05; IN-02-08 con las excepciones de RT-03 y RT-06; CL-55 ligado a IN-02-15, CL-41 y CL-49 añadidos; RF-ACC-15 se cita por su tipo de prueba «DB» (definido en `01 §0.2`) y no como «denegación en la base de datos» | §17.2, §17.6, §17.10 | Corregido |
+
+
+### 17.15 Validación de la v0.2 y correcciones de la v0.3
+
+**Origen:** dictamen «R2-B1 APROBABLE CON CONDICIONES» de un subagente de contexto nuevo (2026-11-18), con **independencia solo de contexto** (mismo tipo de modelo que el autor; sin independencia organizativa ni externa); es una recomendación, no una aprobación. Clasificó 9 de los 12 primeros hallazgos como resueltos y 3 como parcialmente resueltos, y formuló 8 hallazgos nuevos. **«Corregido» significa que el autor aplicó la corrección en la v0.3.** La validación posterior (§17.16) confirmó cinco como resueltos y tres como parcialmente resueltos; los estados de la última columna reflejan esa validación y la v0.4 corrige los residuos. Esta tabla no es una verificación independiente.
+
+| ID | Hallazgo | Corrección aplicada | Dónde | Estado |
+|---|---|---|---|---|
+| C-01 | La independencia de D respecto de A se afirmaba sin exponer la lectura contraria; DB1-1 (a) podía leerse como cumplimiento condicional de «≥ 2» | §17.3.3 presenta **dos interpretaciones** (D distinta; D variante de A), declara que la independencia **no está demostrada** y qué la demostraría; D no se cuenta como segunda forma; DB1-1 y H2B1-11 reformuladas como dependencia documentada de R2-B2, sin excepción; la fila B-02 de §17.14 deja de llamar «independiente» a D | §17.3.1, §17.3.3, §17.8, §17.14 | Corregido |
+| C-02 | La lista de unidades de D omitía las operaciones que cambian el estado; H2B1-10 no citaba que §5.5 no es exhaustiva ni su cláusula sobre proyecciones derivadas; K-2 era demasiado categórica | K-2 separada en K-2a a K-2d; H2B1-10 enumera las operaciones que modifican permisos y estados (con la condición de que el estado esté o no en la proyección); cita R1 §5.3 y §5.5 y precisa que ninguno trata de proyecciones de permisos y que **no se presupone modificar R1**; cuadro de lo que puede establecer R2-B1 y lo que es exclusivo de R2-B2; DB1-6 ofrece confirmar la lectura sin modificar R1 | §17.3 (K-2), §17.3.3, §17.8 | Corregido (con un residuo: D-01, corregido en la v0.4) |
+| C-03 | Rotulado incoherente con la regla de §17.3 en B·IN-02-05, IN-02-24 (A, C, D) e IN-02-15 e IN-02-25 (las cuatro) | B·IN-02-05 pasa a «No conforme (parcial)» y D·IN-02-05 a «Condicionada (K-2)»; la «decisión completa», el piso de C y D incluyen la invitación vigente y las reglas de creación de torneo (IN-02-24 y IN-02-26); IN-02-15 e IN-02-25 pasan a «Condicionada (K-5)», nueva condición por la dependencia de ADR-03.C; recuentos recalculados | §17.3, §17.3.1 | Corregido en parte (D-02 y D-05, corregidos en la v0.4) |
+| C-04 | Recuentos inexactos: celdas de D con K-2, extractos literales, términos de la lista de tecnologías | Recuentos recalculados por script y reescritos en §17.3.1 y §17.12; el número de extractos se cuenta solo en la columna «Respaldo literal»; la lista de términos se describe sin atribuirla a R2-A | §17.3.1, §17.12 | Corregido en parte (la cifra de extractos era inexacta, D-06; corregida en la v0.4) |
+| C-05 | CF-09 atribuía al dueño «en exclusiva» la bitácora de seguridad, que no figura en las 41 filas | La bitácora se retiró de CF-09 y se registra como propuesta [REC] fuera de las 41 filas (RF-AUD-05, IN-09-08), sin conceder su lectura | §17.4 | Corregido |
+| C-06 | Q-21 y Q-29 se presentaban como parámetros de «quién»; no es lo que preguntan | §17.6 separa **preguntas sobre facultades** y **preguntas sobre reglas deportivas o estados**; la segunda clase solo reserva la fila, sin «Sí» ni «No»; CF-07 explica por qué el «Sí» del dueño queda [ABIERTO] | §17.4, §17.6, §17.8 | Corregido en parte (Q-22 y Q-23, D-04; corregidos en la v0.4) |
+| C-07 | Respaldos débiles en IN-02-14, IN-02-05 e IN-02-12; faltaba el invariante de RF-ACC-12 | IN-02-14 se respalda en la introducción de `01 §7.1` y en `SKILL.md` y declara que «mínimo privilegio» no es un requisito literal de `01`; IN-02-05 cita RT-01 y RT-12; IN-02-12 incorpora «al sincronizar» y la protección del último dueño; **IN-02-26** recoge RF-ACC-12 (obligatorios: 26); las propuestas [REC] pasan a IN-02-27, 28 y 29 | §17.2 | Corregido |
+| C-08 | RB1-02 se mapeaba a AM-02 (toma de cuenta), un mapeo débil | RB1-02 se relaciona con IN-02-25, IN-03-11 y AM-09 (el contexto local no autentica; es de ADR-03.C) | §17.9 | Corregido |
+
+
+### 17.16 Validación de la v0.3 y correcciones de la v0.4
+
+**Origen:** dictamen «R2-B1 APROBABLE CON CONDICIONES» de un subagente de contexto nuevo (2026-11-18), con **independencia solo de contexto** (mismo tipo de modelo que el autor; sin independencia organizativa ni externa); es una recomendación, no una aprobación. Declaró resueltos C-01, C-02, C-05, C-07 y C-08 y parcialmente resueltos C-03, C-04 y C-06, y formuló 9 hallazgos nuevos; D-01, D-02 y D-03 condicionaban la aprobación. **«Corregido» significa que el autor aplicó la corrección en la v0.4; la v0.4 no ha sido revisada de nuevo** y esta tabla no es una verificación independiente.
+
+| ID | Hallazgo | Corrección aplicada | Dónde | Estado |
+|---|---|---|---|---|
+| D-01 | La definición de CAP-02-D era contradictoria sobre el estado: lo incluía entre los cambios que actualizan la proyección y a la vez lo excluía de ella | Una sola formulación: **el estado se lee de su fuente y no forma parte de la proyección**; las operaciones que modifican estados no actualizan la proyección; K-2a y K-2c, H2B1-10 y la definición coinciden; el estado incorporado a la proyección queda como variante no evaluada. D·IN-02-20 pasa a «Conforme» (como en A); **rotulado revisado en la v0.5 por E-2 (§17.17)** | §17.3 (K-2, CAP-02-D, matriz), §17.3.3, §17.8 | Corregido |
+| D-02 | IN-02-09 incorpora IN-02-15 y sus rótulos no eran coherentes con él | Se refleja la dependencia: A·IN-02-09 «Condicionada (K-5)»; B y C «No conforme (parcial)» por el nivel de autenticación solo en el servidor; D «Condicionada (K-2, K-5)»; recuentos recalculados | §17.3, §17.3.1 | Corregido |
+| D-03 | H2B1-10 omitía que R1 asigna toda decisión de permiso a CMP-08 y no decía quién calcula la proyección | Nueva §17.3.5: textos de R1 (§5.3, CR1-13, AC-1); quién calcula la proyección (P-1, P-2 compatibles; P-3 incompatible); quién decide (CMP-08); qué datos admite; garantías contra un segundo decisor; sin presuponer que R1 deba modificarse; DB1-6 reformulada | §17.3.5, §17.8 | Corregido |
+| D-04 | Q-22 y Q-23 se describían como si no preguntaran por «quién» | Se citan sus preguntas literales y se declara que la regla y la facultad están abiertas; CF-07, H2B1-08 y DB1-4 coherentes | §17.4, §17.6, §17.8 | Corregido |
+| D-05 | Rótulos de B·IN-02-14, D·IN-02-14 y B·IN-02-24 | B·IN-02-14 «No conforme (parcial)»; D·IN-02-14 «Condicionada (K-2)»; B·IN-02-24 «No conforme» (B omite la verificación); K-4 retirada; recuentos recalculados | §17.3, §17.3.1 | Corregido |
+| D-06 | «37 extractos» inexacto; «Corregido» de C-04 inexacto; cifras no reproducibles | Los extractos se cuentan en la columna «Respaldo literal» y se verifican con el script del autor; el estado de C-04 en §17.15 pasa a «Corregido en parte»; la cifra de términos de tecnología se retira y la de identificadores se define con las familias usadas | §17.12, §17.15 | Corregido |
+| D-07 | «Las doce decisiones abiertas de R2-A»: la 11 figura como atendida | Se distingue: 13 decisiones originales, de las que la 11 está atendida y 12 siguen abiertas | §17.8, §17.11, §17.13 | Corregido |
+| D-08 | DB1-1 (c) listaba «excepción o modificación de R1» y decía a la vez que no se proponía | DB1-1 (c) aclara que es una vía que corresponde al usuario, que no está aprobada ni propuesta y que no se ha tomado ninguna decisión | §17.8 | Corregido |
+| D-09 | Ajustes editoriales menores | Conclusión de A («sin celdas No conforme; conformidad condicionada»); CF-01 con «autenticación reforzada y auditoría» (fila 4); combinación 6 sin CL-35 como prueba de la ausencia de persistencia; K-2b y K-2d coherentes sobre la reconstrucción; respaldos añadidos a IN-02-01 (RF-ACC-15), IN-02-04 (RT-08) e IN-02-25 (RT-02); IN-02-14 cita la introducción de `01 §7` | §17.2, §17.3.1, §17.4 | Corregido |
+
+### 17.17 Verificación de la v0.4 y ajustes de la v0.5
+
+**Origen:** dictamen «APROBABLE COMO ENTREGABLE DOCUMENTAL CONDICIONADO» de un subagente de contexto nuevo (2026-11-18), con **independencia solo de contexto** (mismo tipo de modelo que el autor; sin independencia organizativa ni externa); es una recomendación, no una aprobación. Declaró resueltos D-01 a D-09, sin defectos materiales, y señaló dos ajustes menores y una observación. **«Corregido» significa que el autor aplicó el ajuste en la v0.5; la v0.5 no ha sido revisada de nuevo** y esta tabla no es una verificación independiente.
+
+| ID | Hallazgo | Ajuste aplicado | Dónde | Estado |
+|---|---|---|---|---|
+| E-1 | §17.3.3 decía que CAP-02-C es «No conforme» en 6 celdas; la matriz y §17.3.1 dan 7 (IN-02-01, 03, 06, 09, 12, 15 y 17) | El texto de §17.3.3 dice 7; los demás recuentos de C (16, 3 y 7) ya eran coherentes | §17.3.3 | Corregido |
+| E-2 | D·IN-02-20 figuraba «Conforme», pero IN-02-20 incluye que solo el dueño corrige con el torneo `archivado` y el rol de dueño sale de la proyección (K-2). **Dependencia confirmada** por el texto literal de IN-02-20 («solo lo hace el dueño») y por la definición de CAP-02-D (roles vigentes en la proyección) | D·IN-02-20 pasa a «Condicionada (K-2)», con la explicación mínima; CAP-02-D pasa a 6 conformes, 20 condicionadas (18 con K-2) y 0 no conformes; la lista de celdas que D evalúa sobre las fuentes pasa a D·IN-02-10, 21, 22 y 24 | §17.3, §17.3.1, §17.3.3, §17.12 | Corregido |
+| E-3 | IN-02-24 figura «Conforme» en A, C y D aunque la definición de la invitación es de ADR-03.C (IN-03-05) | Sin cambio: el revisor no lo calificó de defecto y coincide con el alcance declarado de IN-02-24 | — | Observación sin ajuste |
