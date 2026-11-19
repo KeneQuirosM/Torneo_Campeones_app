@@ -1991,7 +1991,7 @@ Archivo autorizado: solo este documento, editando únicamente la Parte III. **No
 | Dependencias de ADR-03.C y ADR-09.C como propuestas condicionadas y registro de la relación con ADR-05.C (§17.7) | Sincronización sin conexión (A-9…A-14, UI-06 aplicada) → **ADR-05.C (R2-C)**; reglamento y desempates (A-16, motor) → **ADR-08 (R3)** |
 | Condiciones abiertas, riesgos de diseño y criterios (§17.8 a §17.17) | Consolidación del modelo de amenazas → **R2-C**; selección de proveedor o mecanismo → **R3** |
 
-**Precedencia de estado.** Varias líneas de este documento dicen que R2-B «no está iniciado» o que R2, R3 y R4 están «no iniciados»: la **línea 5 del encabezado** (estado de la fase a la fecha de aprobación de R1), la **línea 6** (estado de R2-A), la **§12** (línea 783), la fila de R2-A de **§13** (línea 798), **§16.0** y la fila de **§16.5** que describe R2-B como «no iniciado». Todas describen el estado **a la fecha de aprobación de R1 o de R2-A**. Para R2-B1 y R2-B2 prevalece este apartado: **R2-B1 está APROBADO CONDICIONALMENTE como entregable documental y R2-B2, R2-C, R3 y R4 siguen NO INICIADOS Y SIN AUTORIZACIÓN.** El registro de esa aprobación figura en `aprobaciones.md` y `bitacora.md`. Este documento no incorporó una línea de estado de R2-B1 al encabezado ni una fila a §13 porque eso habría modificado contenido aprobado; esos ajustes requieren autorización separada.
+**Precedencia de estado.** Varias líneas de este documento dicen que R2-B «no está iniciado» o que R2, R3 y R4 están «no iniciados»: la **línea 5 del encabezado** (estado de la fase a la fecha de aprobación de R1), la **línea 6** (estado de R2-A), la **§12** (línea 783), la fila de R2-A de **§13** (línea 798), **§16.0** y la fila de **§16.5** que describe R2-B como «no iniciado». Todas describen el estado **a la fecha de aprobación de R1 o de R2-A**. Para R2-B1 y R2-B2 prevalece este apartado: **R2-B1 está APROBADO CONDICIONALMENTE como entregable documental; R2-B2-a está APROBADO CONDICIONALMENTE como entregable documental (2026-11-19, v0.3-R2B2a, Parte IV, §18); R2-B2-b está NO INICIADO; R2-B2 completo no tiene aprobación global; R2-C, R3 y R4 siguen NO INICIADOS Y SIN AUTORIZACIÓN.** El registro de esas aprobaciones figura en `aprobaciones.md` y `bitacora.md`. Este documento no incorporó una línea de estado de R2-B1 al encabezado ni una fila a §13 porque eso habría modificado contenido aprobado; esos ajustes requieren autorización separada.
 
 **Aprobación condicional de R2-B1 como entregable documental (2026-11-18).** Por acto expreso del usuario (mensajes «DECISIÓN DE APROBACIÓN DOCUMENTAL R2-B1» y «REGISTRO DE APROBACIÓN CONDICIONAL R2-B1 v0.5»), la v0.5-R2B1 quedó **APROBADA CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.** **Comprende:** los invariantes IN-02; el análisis de CAP-02-A, B, C y D; el modelo de capacidades por rol y ámbito; las combinaciones de roles; las ambigüedades documentadas; los riesgos de diseño; las dependencias arquitectónicas; y las correcciones hasta la v0.5-R2B1. **No implica:** (1) elegir una formulación; (2) declarar demostrada la independencia de CAP-02-D; (3) dar por cumplido R1 §8.1; (4) resolver DB1-1 a DB1-6; (5) aprobar definitivamente ADR-02.C; (6) aprobar o implementar K-2d; (7) fijar PAR-01 a PAR-06; (8) aceptar RES-01 a RES-12 ni los riesgos RB1; (9) conceder excepción a D-2; (10) aprobar globalmente R2 ni la Fase 2; (11) autorizar R2-B2, R2-C, R3 o R4. **Precisiones:** la frontera atómica de K-2d queda pendiente de R2-B2; R2-B2 debe aportar el análisis necesario para evaluar la independencia de CAP-02-D, sin que se presuma que vaya a demostrarla; DB1-1 y el déficit frente a R1 §8.1 permanecen abiertos, sin excepción; las decisiones que los requisitos asignan a la Fase 2 deben resolverse antes de su cierre global, salvo modificación o excepción formal aprobada. **Limitación de la revisión:** la v0.4 recibió un dictamen favorable de un subagente con independencia solo de contexto; la v0.5 incorpora los ajustes E-1 y E-2 y **no recibió una nueva auditoría posterior**; la aprobación documental **no demuestra seguridad implementada ni validada.**
 
@@ -2583,3 +2583,589 @@ Verificables sobre este documento. **La aprobación de R2-B1 es un acto expreso 
 | E-1 | §17.3.3 decía que CAP-02-C es «No conforme» en 6 celdas; la matriz y §17.3.1 dan 7 (IN-02-01, 03, 06, 09, 12, 15 y 17) | El texto de §17.3.3 dice 7; los demás recuentos de C (16, 3 y 7) ya eran coherentes | §17.3.3 | Corregido |
 | E-2 | D·IN-02-20 figuraba «Conforme», pero IN-02-20 incluye que solo el dueño corrige con el torneo `archivado` y el rol de dueño sale de la proyección (K-2). **Dependencia confirmada** por el texto literal de IN-02-20 («solo lo hace el dueño») y por la definición de CAP-02-D (roles vigentes en la proyección) | D·IN-02-20 pasa a «Condicionada (K-2)», con la explicación mínima; CAP-02-D pasa a 6 conformes, 20 condicionadas (18 con K-2) y 0 no conformes; la lista de celdas que D evalúa sobre las fuentes pasa a D·IN-02-10, 21, 22 y 24 | §17.3, §17.3.1, §17.3.3, §17.12 | Corregido |
 | E-3 | IN-02-24 figura «Conforme» en A, C y D aunque la definición de la invitación es de ADR-03.C (IN-03-05) | Sin cambio: el revisor no lo calificó de defecto y coincide con el alcance declarado de IN-02-24 | — | Observación sin ajuste |
+
+---
+
+# PARTE IV — BLOQUE R2-B2-a (v0.3-R2B2a, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-19)
+
+## 18. R2-B2-a — ADR-02.C (parte 2a): frontera atómica de las operaciones que modifican permisos
+
+### 18.0 Alcance, autorización y reglas de esta parte
+
+**Estado: v0.3-R2B2a — APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-19), por acto expreso del usuario (ver «Aprobación condicional» más abajo).** La v0.3 corrigió la v0.2 tras la revisión focalizada de contexto nuevo (§18.16) y la v0.2 corrigió la v0.1 (§18.15). Esta parte no altera ninguna línea de R1 (§0–§15), R2-A (§16) ni R2-B1 (§17); solo se **añade** al final del archivo.
+
+**Autorización recibida.** Mensaje «TORNEO DE CAMPEONES — INICIO CONTROLADO DE R2-B2-a» (2026-11-18): «AUTORIZO EXCLUSIVAMENTE EL INICIO DE R2-B2-a DE LA FASE 2. APRUEBO EL PLAN DE TRABAJO DE R2-B2 COMO GUÍA DOCUMENTAL, PERO NO AUTORIZO TODAVÍA R2-B2-b.»
+
+**Autorización de la corrección (v0.2).** Mensaje «CORRECCIÓN INTEGRAL DE R2-B2-a v0.1»: autoriza «EXCLUSIVAMENTE UNA RONDA DE CORRECCIONES DOCUMENTALES DE LOS HALLAZGOS A-01 A A-18» limitada a la Parte IV (§18); R2-B2-a continúa como **borrador pendiente de aprobación**.
+
+**Autorización de la corrección focalizada (v0.3).** Mensaje «CORRECCIÓN FOCALIZADA B-01 Y E-01…E-07» (2026-11-19): autoriza «EXCLUSIVAMENTE CORREGIR EL DEFECTO MATERIAL B-01 Y LAS OBSERVACIONES E-01 A E-07 DEL BORRADOR R2-B2-a v0.2», limitada a la Parte IV (§18).
+
+**Aprobación condicional de R2-B2-a como entregable documental (2026-11-19).** Por acto expreso del usuario (mensajes «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R2-B2-a» y «TORNEO DE CAMPEONES — REGISTRO FORMAL DE APROBACIÓN CONDICIONAL R2-B2-a»), la v0.3-R2B2a quedó **APROBADA CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL**: «APRUEBO CONDICIONALMENTE R2-B2-a v0.3 COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.»; registro autorizado con «AUTORIZO EXCLUSIVAMENTE REGISTRAR LA APROBACIÓN CONDICIONAL DE R2-B2-a COMO ENTREGABLE DOCUMENTAL.»
+
+- **Comprende:** las siete fichas UI-01, 02, 03, 04, 08, 11 y 12; los invariantes de frontera IF; los estados intermedios prohibidos ES; las garantías transaccionales GT; la protección global del último dueño; la matriz de escenarios de concurrencia y revocaciones; el análisis documental de K-2; las evidencias de CAP-02-A frente a CAP-02-D; el inventario de operaciones candidatas; los riesgos, condiciones y decisiones documentados; y las correcciones hasta la v0.3-R2B2a.
+- **Exclusiones (la aprobación NO implica):** (1) elegir CAP-02-A ni CAP-02-D; (2) declarar demostrada la independencia de CAP-02-D; (3) dar por cumplido R1 §8.1; (4) resolver DB1-1 a DB1-6; (5) resolver DB2a-1 a DB2a-10; (6) resolver OC-01 a OC-17; (7) resolver las doce decisiones abiertas de R2-A; (8) aprobar definitivamente ADR-02.C; (9) considerar K-2d implementada o validada; (10) fijar PAR ni aceptar RES o riesgos RB; (11) conceder excepción a D-2; (12) aprobar globalmente R2 ni la Fase 2; (13) autorizar R2-B2-b, R2-C, R3 o R4.
+- **Limitación de la revisión.** La verificación favorable la hizo un subagente del mismo tipo de modelo que redactó el borrador: su independencia fue **solo de contexto, no organizativa ni externa**. El dictamen se limita a documentación y **no acredita seguridad implementada, pruebas de concurrencia ni validación empírica**.
+- **Ocho observaciones editoriales no bloqueantes** (identificadas para una eventual conciliación documental; no son condiciones técnicas): (1) GT-09 y GT-10 listan «Las siete» unidades aunque ES-13 alcanza más operaciones (§18.7 y §18.7.1 declaran el límite); (2) en UI-02, «el estado resultante se verifica sobre las fuentes» podría leerse como que ES-04 es una regla de integridad (es [DER]); (3) UI-08, campo 4, dice «a partir del historial» sin cualificar el caso D; (4) EV-04 omite UI-01 entre las unidades con integridad atómica (EV-01 la incluye); (5) IF-07 es [CONF] pero contiene una cláusula [DER] que remite a IF-02; (6) IF-15 dice «todas las fichas» y su lista excluye UI-01; (7) en UI-12 la invitación aparece en dos columnas; (8) la afirmación de UI-01, campo 8, sobre dos creaciones concurrentes no está rotulada [DER].
+- **Integridad.** SHA-256 del **contenido aprobado** (el archivo inmediatamente antes de añadir estos metadatos): `f07b4d9ffc363035bb8fc9284f8efd28b6c2c6f398eaaedaffa50abaa4cbf644`. El hash del **archivo con los metadatos de aprobación** se registra en `aprobaciones.md` y `bitacora.md`; **no se inserta en este archivo**. Los metadatos de aprobación son solo editoriales: título y estado de la Parte IV, §18.0, la fila de estado de §18.1, referencias de §18.13 y §18.14, notas de cierre de §18.15 y §18.16 y la frase de estado de §17.0.
+- **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
+- **Condición de cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada.
+
+**Precedencia de estado.** Otras líneas de este documento, `aprobaciones.md` y `bitacora.md` (en sus entradas históricas) dicen que R2-B2 **no está iniciado** porque describen una fecha anterior. **Vigente (2026-11-19): R2-B2-a APROBADO CONDICIONALMENTE como entregable documental (esta Parte IV); R2-B2-b NO INICIADO; R2-B2 completo, sin aprobación global; R2-C, R3 y R4 NO INICIADOS Y SIN AUTORIZACIÓN.** El registro figura en `aprobaciones.md` y `bitacora.md`.
+
+**Qué contiene.** La frontera atómica de las operaciones que **modifican permisos**: invariantes de frontera (§18.2), las siete fichas UI-01, UI-02, UI-03, UI-04, UI-08, UI-11 y UI-12 (§18.4), las operaciones que modifican permisos y **no** están en UI-01…13 como candidatas a la enumeración de la Fase 4, y las que pueden alterar el conjunto de dueños (§18.5), la matriz de concurrencia y revocaciones (§18.6), el análisis de K-2d (§18.7), la evaluación de CAP-02-A frente a CAP-02-D (§18.8), dependencias y decisiones abiertas (§18.9), riesgos nuevos sin aceptar (§18.10), las secciones reservadas a R2-B2-b (§18.11), trazabilidad y criterios (§18.12), verificaciones del autor (§18.13), estado de Git (§18.14) los hallazgos de la auditoría con sus correcciones (§18.15) y los de la revisión focalizada (§18.16).
+
+**Qué NO contiene ni hace.**
+
+| # | Exclusión |
+|---|---|
+| X-1 | No redacta R2-B2-b (UI-05, UI-06, UI-07, UI-09, UI-10, UI-13), ni R2-C, R3 ni R4 |
+| X-2 | No aprueba R2-B2-b, R2-B2 completo, R2 ni la Fase 2 (la aprobación condicional de R2-B2-a como entregable documental figura en este apartado y no amplía su alcance) |
+| X-3 | No resuelve DB1-1…DB1-6 ni ninguna decisión abierta de R2-A (de las **13 decisiones originales**, la 11 está atendida y **12 siguen abiertas**) |
+| X-4 | **No elige** CAP-02-A ni CAP-02-D; **no declara demostrada la independencia de CAP-02-D**; **no declara cumplido R1 §8.1**; no concede excepción |
+| X-5 | No fija PAR, no acepta RES ni RB1; no concede excepción a D-2 |
+| X-6 | No elige tecnología, proveedor, producto, mecanismo de bloqueo, de serialización ni de consistencia; no escribe SQL, políticas, rutas ni contratos de interfaz |
+| X-7 | No modifica `00`, `01`, `aprobaciones.md`, `bitacora.md`, ni R1, R2-A o R2-B1; no crea ramas, commits, pushes, PR ni merges |
+| X-8 | No implementa ni da por aprobada K-2d: **la describe como garantía arquitectónica exigida** |
+
+**Lectura previa directa.** El autor leyó directamente (no solo por resúmenes) el skill y sus referencias pertinentes; en `01`: RF-ACC-02, 06, 07, 09, 12, 13, 17, RF-AUD-02 y los casos CL-35, 38, 41, 43, 45, 47, 53, 54, 60 y 61; en R1: §5.3, §5.5, §7.0 y §8.1; en R2-A: IN-03-04 a IN-03-08 e IN-03-11 (ADR-03.C) e IN-09-01 a IN-09-06 y CAP-09-P-A/B/C (ADR-09.C); en R2-B1: IN-02, K-1…K-3, §17.3.3, §17.3.5, DB1-1…6 y RB1.
+
+**Convención de estados de una afirmación.** [CONF]: texto confirmado de `01` o R1. [DER]: derivada por el autor (se explica el paso). [ABIERTO]: sin resolver; ninguna se elige. Las citas literales se comprueban en §18.13.
+
+### 18.1 ADR-02.C (parte 2a) — Identificación
+
+| Campo | Valor |
+|---|---|
+| ADR | ADR-02.C (continuación de §17.1): frontera atómica de las operaciones que modifican permisos |
+| Entradas | R1 §5.3, §5.5, §7.0, §8.1; R2-A (ADR-03.C, ADR-09.C); R2-B1 (IN-02, CAP-02-A…D, K-1…K-3, DB1-1…6) |
+| Salida de esta parte | Frontera por unidad, estados intermedios prohibidos, resultado ante concurrencia, garantías exigidas (K-2d) y evidencia para DB1-1 |
+| Estado | v0.3-R2B2a: APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL (2026-11-19); ADR-02.C **no** queda aprobada definitivamente |
+| Reservado a R2-B2-b | §18.11 |
+
+### 18.2 Invariantes de frontera (IF-)
+
+Son propiedades que **toda** unidad de §18.4 debe cumplir. **Transversales:** IF-04 (sin estados intermedios observables), IF-08 (permisos remanentes) e IF-15 (el historial no se altera) se aplican a **todas** las fichas y escenarios; no se citan una por una. IF-15 se verifica en toda unidad que revoca, retira, desactiva o levanta (UI-02, 03, 04, 08, 11, 12 y CAND-10). Las etiquetas se contrastan con la fuente **primaria** (`01`, R1); cuando un invariante de R2-A o R2-B1 es [DER] se cita solo como respaldo. No introducen permisos ni retiran garantías (IN-02-18). Las que se derivan se marcan [DER] con el paso.
+
+| ID | Invariante de frontera | Tipo | Fuente | Paso derivado (solo [DER]) |
+|---|---|---|---|---|
+| IF-01 | **Una unidad indivisible por operación:** la reunión de entradas, el cálculo del efecto, la política de segundo factor, la decisión y la aplicación (incluido el evento de auditoría de lo aplicado) forman **una sola unidad**; o se aplica todo o no se aplica nada | [CONF] (de R1) | R1 §7.0 («los pasos 2 a 5 y la aplicación del paso 6 forman UNA sola unidad indivisible») y PA-07 (R1). RT-13 es [DER] en `01` y IN-02-03 [DER] en R2-B1: se citan solo como respaldo | — |
+| IF-02 | **Lo decidido es lo aplicado:** las entradas con las que se decide (roles, asignaciones, historial, restricciones, estado de invitación) son las vigentes en el momento de aplicar; no se aplica una decisión tomada sobre entradas que otra operación confirmada ya cambió | [DER] | RT-13, IN-02-03, CL-45 | RT-13 exige evaluar la autorización «en la misma transacción que la aplica»; si entre la lectura y la aplicación otra operación confirmara un cambio de esas entradas, la autorización evaluada no sería la de la aplicación |
+| IF-03 | **Las dos capas verifican:** el servidor y la capa de datos comprueban la autorización de cada unidad | [CONF] | RT-02, RC-04 (IN-02-01 lo recoge) | — |
+| IF-04 | **Sin estados intermedios observables:** ninguna lectura ni decisión de otra operación observa un estado a medias de una unidad (catálogo de estados prohibidos: §18.3) | [DER] | RT-13, §5.5 («unidades indivisibles»), CL-45 | Una unidad «indivisible» solo lo es si no admite observadores del interior |
+| IF-05 | **Equivalencia secuencial:** el resultado de dos o más unidades concurrentes sobre los mismos hechos equivale a **alguna** ordenación secuencial de ellas, con el resultado «aplicada antes y válida» o «rechazada» para cada una, nunca «a medias» | [CONF] en lo que dice RF-ACC-07 y CL-45; [DER] en la generalización a **cualquier** par de unidades | RF-ACC-07 (criterio: «aplicada antes y válida» o «rechazada», «nunca a medias»), CL-45, CL-61; RT-13 ([DER] en `01`) como respaldo | Los textos citados lo dicen de una revocación frente a una operación; el autor lo extiende a las unidades de §18.4 que compiten por un mismo hecho, porque RT-13 pide serializar «revocaciones, reasignaciones y cambios de rol» |
+| IF-06 | **Revocación efectiva:** desde que una revocación se confirma, toda **nueva** operación sin autorización vigente se rechaza; una operación en curso se resuelve como aplicada antes (válida y auditada) o rechazada | [CONF] | RF-ACC-07, IN-03-06, CL-45 | — |
+| IF-07 | **Último dueño activo:** no se revoca ni se degrada al último dueño activo, de forma atómica incluso con operaciones simultáneas; no hay jerarquía técnica entre dueños. La protección se evalúa sobre el conjunto vigente en el momento de aplicar (IF-02). *El alcance global y el significado de «activo» están en IF-19 y OC-15* | [CONF] | RT-06 («No se puede revocar ni degradar al último dueño activo, de forma atómica incluso con operaciones simultáneas»), RF-ACC-09, IN-02-10, CL-43 | — |
+| IF-08 | **Permisos remanentes:** revocar un rol o una asignación no elimina los permisos legítimos de los demás roles vigentes; la operación pendiente se evalúa por los roles restantes | [CONF] | RT-11, IN-02-07, CL-53 | — |
+| IF-09 | **El rechazo queda fuera de la unidad:** el registro de un rechazo o bloqueo no forma parte de ella y persiste aunque la operación no se aplique; **cómo** persiste es la decisión 10 de R2-A (CAP-09-P) y la condición K-3 | [DER] | R1 §7.0 paso 6 («[DER de RF-AUD-06: `01` exige auditar los rechazos, no formula la persistencia tras una reversión]»), IN-09-05, K-3 | `01` (RF-AUD-06) exige auditar los rechazos; que el registro sea independiente de la unidad y persista tras una reversión es la derivación de R1 §7.0 |
+| IF-10 | **Lo aplicado se audita dentro de la unidad:** si el evento de una concesión, modificación o revocación de permisos no puede registrarse, la operación no se aplica | [DER] | RT-10, IN-09-04, IN-02-16, RF-AUD-02 | IN-09-04 lo establece para toda operación aplicada; RT-10 exige la auditoría de las operaciones sobre permisos |
+| IF-11 | **RT-14 y RT-05 se evalúan por efecto dentro de la unidad:** también sobre las asignaciones que la unidad retira o crea | [CONF] | RT-05, RT-14, R1 §7.0 paso 5 | — |
+| IF-12 | **Nivel de autenticación consumido, no emitido:** CMP-08 compara el nivel emitido por CMP-06 con la política efectiva de **todos** los roles vigentes **antes** de decidir; designar o revocar un dueño exige nueva autenticación con segundo factor (lectura de «nueva» abierta: decisión 12 de R2-A) | [CONF] | RF-ACC-10, RC-11, RF-ACC-09, R1 §7.0 paso 4 (IN-02-15 e IN-03-04 los recogen; IN-02-15 es [DER]) | — |
+| IF-13 | **Aislamiento dentro de la unidad:** toda referencia entre entidades que la unidad crea o modifica pertenece al **mismo torneo** | [CONF] | RT-08, IN-02-04 | — |
+| IF-14 | **Efectos compuestos completos:** toda consecuencia que la regla exige para dejar el estado coherente (retirar asignaciones en conflicto, desactivar asignaciones de un rol revocado, anular un levantamiento) pertenece a la **misma** unidad que su causa | [DER] | RT-05, CL-35, RF-ACC-17, IN-02-22 | Si esas consecuencias se aplicaran en una unidad posterior, existiría una ventana en la que la causa está confirmada y la consecuencia no (estado prohibido de §18.3) |
+| IF-15 | **El historial no se altera:** una revocación o retirada cambia el estado y la fecha y añade historial; no elimina | [CONF] | RF-ACC-11, IN-09-02 | — |
+| IF-16 | **Una sola definición de la decisión en ambas capas:** las dos capas aplican la **misma** definición de CMP-08 (K-1) | [DER] | CR1-13, IN-02-02 | Es la lectura más estricta de «único decisor»; su propiedad de implementación es la condición K-1 |
+| IF-17 | **Las lecturas ambiguas (A-2, A-12, A-15, Q-40, Q-42) son parámetros del evaluador, no elecciones;** ninguna unidad fija una lectura | [DER] | R1 §9.3, PA-13, IN-02-17 | R1 §9.3 pide soportar ambas lecturas de las ambigüedades abiertas |
+| IF-18 | **La capa de datos verifica además el estado resultante de cada unidad** (los estados prohibidos de §18.3 no deben poder producirse aunque el servidor y el cliente se equivoquen) | [DER] | RF-ACC-13 (criterio: «BD, incluso con altas concurrentes»), RT-08, IN-02-04, IN-02-21, IN-02-22 | `01` marca la verificación en la capa de datos para varias reglas concretas (RF-ACC-13, RT-08); el autor lo generaliza al estado resultante de las unidades de §18.4, que `01` no formula así |
+| IF-19 | **Alcance global de la protección del último dueño:** ninguna operación —las de §18.4, las candidatas de §18.5.1 ni ninguna aún no enumerada— ni ningún conjunto de operaciones concurrentes deja al sistema sin un dueño activo autorizado. *«Activo» y «autorizado» no se definen aquí (OC-15); el máximo de dueños tampoco (OC-16)* | [DER] | RT-06 y RF-ACC-09 («contra eliminación o degradación, incluso ante operaciones simultáneas»), IF-07, CL-43 | RT-06 y RF-ACC-09 protegen al último dueño sin limitar la protección a una operación concreta; el autor la aplica a toda operación que pueda producir el efecto, incluidas las candidatas y las no enumeradas. La extensión a CAND-08 y CAND-09 depende de OC-15 |
+
+### 18.3 Convenciones de las fichas y catálogo de estados intermedios prohibidos
+
+**Contenido de cada ficha.** (1) Disparador; (2) componentes según R1 §5.5; (3) requisitos aplicables; (4) autorización en el servidor y en la capa de datos; (5) secuencia lógica (pasos de R1 §7.0, sin mecanismo); (6) cambios indivisibles; (7) estados intermedios prohibidos; (8) resultado ante concurrencia; (9) relación con la auditoría; (10) decisiones y condiciones abiertas. **La lista de §5.5 no es exhaustiva y su enumeración definitiva por operación es de la Fase 4** (R1 §5.5).
+
+**Catálogo de estados prohibidos (ES-).** Estados que **ningún observador** debe ver y que **ninguna ordenación de operaciones concurrentes** debe producir. La columna **Tipo** indica si el estado está respaldado literalmente en `01` o R1 ([CONF]) o lo deriva el autor ([DER]); los que dependen de una decisión abierta se rotulan **provisionales**:
+
+| ID | Estado prohibido | Tipo | Fuente |
+|---|---|---|---|
+| ES-01 | Dos editores vigentes en el mismo partido | [CONF] | RF-ACC-06, IN-02-22 |
+| ES-02 | Ningún dueño activo | [CONF] | RT-06, IN-02-10 |
+| ES-03 | La misma persona delegada de dos equipos del mismo torneo | [CONF] | RF-ACC-13, IN-02-21 |
+| ES-04 | Un delegado de un equipo con una asignación de editor vigente en un partido de ese equipo. **Es una garantía derivada, no una regla literal:** RT-05 prohíbe «actuar como editor» y exige retirar las asignaciones en conflicto al otorgar el rol; ES-04 expresa el estado que esa retirada debe producir. Otras operaciones podrían producirlo (cambios de los equipos de un partido con editor ya asignado: UI-09, reservada a R2-B2-b, §18.11) | [DER] | RT-05, CL-35 |
+| ES-05 | Cuando el creador es **organizador** (RF-ACC-12): torneo creado sin la asignación de su creador, asignación sin torneo, o asignación del creador a otro torneo. **El caso en que crea el dueño no está definido en `01` y no se amplía aquí (OC-17)** | [CONF] (creador organizador) | RF-ACC-12, IN-02-26 |
+| ES-06 | Invitación consumida sin rol otorgado, rol otorgado sin invitación consumida, o invitación aceptada dos veces | [CONF] en el uso único; [DER] en el resto | RF-ACC-02, IN-03-05 |
+| ES-07 | Levantamiento registrado sin motivo, aprobado por quien tiene conflicto o por el propio afectado, o con ámbito mayor que el equipo y el torneo | [CONF] | RF-ACC-17 |
+| ES-08 | Restricción levantada y vigente a la vez que el rol de delegado se otorga de nuevo | [CONF] (RF-ACC-17; lectura de A-12 abierta) | RF-ACC-17 |
+| ES-09 | Cambio de permisos aplicado sin su evento de auditoría | [DER] | RT-10, IN-09-04 |
+| ES-10 | Operación aplicada y confirmada con una autorización ya revocada y confirmada | [CONF] | RT-13, CL-45 |
+| ES-11 | Revocación a medias: rol revocado y asignaciones que dependen de él aún vigentes | [DER] | IN-02-22, IF-14 |
+| ES-12 | **Provisional (OC-09, DB2a-4):** partido sin editor vigente **por una ventana** entre la desactivación y la activación de una reasignación | [DER], **provisional** (OC-09, DB2a-4) | R1 §5.5 (UI-03: «desactivar la asignación anterior y activar la nueva»); ver OC-09 |
+| ES-13 | (**solo CAP-02-D**) Una decisión que lee una proyección derivada que no refleja un cambio de permisos ya confirmado | [DER] (solo CAP-02-D) | K-2d (§17.3), RB1 |
+
+### 18.4 Fichas de las siete unidades
+
+**Provisionalidad.** Todo lo que en una ficha depende de condiciones o decisiones abiertas es **provisional** hasta que el usuario decida: la composición de UI-02 con UI-12 y la anulación del levantamiento (OC-01, OC-02, OC-10; DB2a-2, DB2a-3), el estado ES-12 y la semántica de CL-41 (OC-08, OC-09; DB2a-4), la delimitación de UI-04 con UI-11 (OC-03; DB2a-1), la asignación al crear cuando el creador es dueño (OC-17) y el significado y el máximo de dueños (OC-15, OC-16). **Ninguna interpretación del autor se convierte en decisión aprobada.** ESC-18 y ESC-20 se aplican a **toda** ficha bajo CAP-02-D.
+
+**Cómo leer "bajo D".** Cada ficha indica solo qué **añadiría** CAP-02-D (§17.3) a la unidad: un paso de mantenimiento de la proyección derivada dentro de la misma unidad (K-2c, K-2d). No se elige ninguna formulación. Las **dos capas** verifican en todas las fichas (IF-03).
+
+#### 18.4.1 Ficha UI-01 — Crear torneo y asignar al creador como organizador de ese torneo
+
+| Campo | Contenido |
+|---|---|
+| 1. Disparador | Un actor autorizado por la matriz de `01 §7.1` (fila 10) crea un torneo. Cuando el creador es **organizador**, su asignación es una operación **del sistema autorizada previamente**, no una autoasignación discrecional (RF-ACC-12; excepción de IN-02-08). **Qué asignación corresponde cuando crea el dueño no lo dice `01` y no se amplía aquí (OC-17)** |
+| 2. Componentes (R1 §5.5) | CMP-09 + CMP-07 + CMP-08 + CMP-16 |
+| 3. Requisitos | RF-ACC-12, Q-02a, RT-04; IN-02-08, IN-02-26; RF-AUD-02 (asignación de organizador al crear el torneo) |
+| 4. Autorización | **Servidor:** CMP-08 decide que el actor puede crear el torneo y, **cuando el creador es organizador**, que la asignación resultante es **solo** la de organizador de **ese** torneo para el creador. **Capa de datos:** verifica el mismo permiso y, para el creador organizador, que el estado resultante contiene una única asignación de organizador del creador, limitada a ese torneo, sin permisos sobre torneos ajenos ni capacidad de crear o designar organizadores (IN-02-26). **Cuando crea el dueño, no se presupone ninguna asignación (OC-17)** |
+| 5. Secuencia lógica | (1) identificar al actor; (2) reunir sus roles vigentes y la política de segundo factor; (3) calcular el efecto: nuevo torneo y, **si el creador es organizador**, una asignación (el caso del dueño: OC-17); (4) política efectiva de 2FA; (5) decidir; (6) aplicar torneo, asignación, historial y evento de auditoría |
+| 6. Cambios indivisibles | Registro del torneo + **(si el creador es organizador)** asignación del creador (con su entrada de historial en CMP-07) + evento de auditoría de la asignación. «si la asignación falla, el torneo no se crea» (IN-02-26). **Bajo D:** + actualización de la proyección (la asignación de organizador, cuando existe). **Regla de integridad:** la creación indivisible del torneo y de su asignación (verificada sobre las fuentes). **Hecho derivado:** la asignación vigente del creador, que la proyección contendría (IN-02-26 en K-2a) |
+| 7. Estados prohibidos | ES-05 (para el creador organizador), ES-09, ES-10 (creación con el rol del actor ya revocado) y, bajo D, ES-13 |
+| 8. Concurrencia | **ESC-16:** una revocación del rol del actor que coincide con la creación se resuelve como creación aplicada antes (el torneo y, para el creador organizador, su asignación, válidos y auditados) o creación rechazada (IF-05, IF-06); **si la creación se aplica primero, una revocación posterior alcanza también la asignación del creador creada por esta unidad, cuando existe** (ES-11). Dos creaciones concurrentes del mismo actor producen dos torneos con sus propias asignaciones, cuando proceden; **no hay conflicto de permisos entre ellas** |
+| 9. Auditoría | Se audita la asignación de organizador al crear el torneo (RF-AUD-02) dentro de la unidad (IF-10). Un rechazo se registra fuera de ella (IF-09; K-3) |
+| 10. Abiertas | **OC-12:** duplicación de una misma solicitud de creación (reintento): su tratamiento corresponde a la idempotencia de la frontera de sincronización (R2-B2-b / Fase 4) y no se decide aquí. **OC-17:** asignación al crear cuando el creador es dueño (RF-ACC-12 define solo la del organizador; no se amplía). **OC-14:** cómo se identifica la asignación del sistema frente a una autoasignación (IN-02-08) es un asunto de verificación en la capa de datos; el mecanismo es de R3 |
+
+#### 18.4.2 Ficha UI-02 — Otorgar el rol de delegado y retirar las asignaciones de editor en conflicto
+
+| Campo | Contenido |
+|---|---|
+| 1. Disparador | Un dueño u organizador del torneo T otorga a la cuenta U el rol de delegado del equipo X (por ejemplo, a un editor con partidos asignados de X: CL-35). **La relación con UI-12** (aceptación de invitación) **está abierta (OC-01)** |
+| 2. Componentes (R1 §5.5) | CMP-07 + CMP-08 + CMP-16 |
+| 3. Requisitos | RT-05, CL-35, OFF-22; RF-ACC-13, RF-ACC-17 (anulación), RT-04, RT-14; IN-02-11, IN-02-21 |
+| 4. Autorización | **Servidor:** CMP-08 decide que el actor puede otorgar ese rol en T (sin autoasignación: RT-04), que U no es ya delegado de otro equipo de T (RF-ACC-13) y calcula el efecto, incluidas las asignaciones de U como editor en partidos de X. **Capa de datos:** verifica el mismo permiso y que **el estado resultante** no contiene a U como delegado de dos equipos de T (ES-03) ni a U con una asignación de editor vigente en un partido de X (ES-04); referencias del mismo torneo (IF-13) |
+| 5. Secuencia lógica | (2) reunir roles, asignaciones de U en T, historial y restricciones; (3) efecto: concesión + retiradas + posible anulación de un levantamiento; (4) política de 2FA; (5) decidir con RT-05 y RT-14 por efecto; (6) aplicar y auditar |
+| 6. Cambios indivisibles (**composición provisional hasta DB2a-2 y DB2a-3**) | Concesión del rol + **todas** las retiradas de asignaciones de editor en conflicto + anulación de un levantamiento de RT-14 de X en T, si existía (RF-ACC-17: se anula «si el rol de delegado de X se otorga de nuevo»; ver OC-10) + eventos de auditoría de la concesión y de **cada** retirada (CL-35). **Bajo D:** + actualización de la proyección (delegado vigente, asignaciones retiradas, restricción) |
+| 7. Estados prohibidos | ES-03, ES-04, ES-08, ES-09, ES-10, ES-11 y, bajo D, ES-13. **Parcial:** concesión sin retiradas; retiradas sin concesión |
+| 8. Concurrencia | **ESC-06:** asignación concurrente de U como editor en un partido de X: o la asignación se aplica primero y UI-02 la retira, o la concesión se aplica primero y la asignación se rechaza por RT-05; nunca ambas vigentes. **ESC-11** (aplica también a la concesión directa): concesión a U de dos equipos del mismo torneo: una prospera, la otra se rechaza. **ESC-10:** concesión y levantamiento concurrentes (ver UI-08). **ESC-07:** las operaciones sin conexión de U como editor en los partidos retirados se rechazan al sincronizar (CL-35): la sincronización pertenece a R2-B2-b, aquí solo se exige que la unidad deje el estado que esa verificación necesita |
+| 9. Auditoría | Concesión y cada retirada auditadas dentro de la unidad (IF-10); rechazo fuera (IF-09) |
+| 10. Abiertas | **OC-01** (composición con UI-12; DB2a-2); **OC-06** (A-2: alcance de las «asignaciones que generen conflictos»); **OC-10** (si la anulación del levantamiento pertenece a esta unidad: se documenta como [DER] por IF-14); **OC-05** (A-15 si el actor tiene conflicto propio). DB1-1 intacta |
+
+#### 18.4.3 Ficha UI-03 — Reasignar un editor
+
+| Campo | Contenido |
+|---|---|
+| 1. Disparador | Un dueño u organizador (del torneo del partido M) reasigna M del editor E1 al editor E2; puede coincidir con otra reasignación de M (CL-41) |
+| 2. Componentes (R1 §5.5) | CMP-07 + CMP-08 + CMP-16 |
+| 3. Requisitos | RF-ACC-06, RT-13, CL-41, CL-47; RT-05, RT-04, RT-14; IN-02-11, IN-02-22, IN-02-23 |
+| 4. Autorización | **Servidor:** CMP-08 decide que el actor puede asignar en el torneo, que E2 tiene rol de editor vigente en T (IN-02-22), que E2 no es delegado de un equipo de M (RT-05), que el actor no asigna a sí mismo ni asigna editores en partidos de su propio equipo (RF-ACC-06, RT-14). **Capa de datos:** verifica lo mismo y que el estado resultante tiene **a lo sumo un** editor vigente en M («Cada partido tiene un único editor vigente.»: RF-ACC-06), de un rol de editor vigente del mismo torneo |
+| 5. Secuencia lógica | (2) reunir la asignación vigente de M, los roles de E2, las asignaciones de delegado y el historial; (3) efecto: desactivar la de E1 y activar la de E2; (4) 2FA; (5) decidir; (6) aplicar y auditar |
+| 6. Cambios indivisibles | Desactivación de la asignación de E1 + activación de la de E2 + evento(s) de auditoría. **Bajo D:** + proyección (asignaciones de editor vigentes de E1 y E2) |
+| 7. Estados prohibidos | ES-01, ES-12 (**provisional**: ventana sin editor entre ambos cambios; OC-09), ES-04, ES-09, ES-10 y, bajo D, ES-13. **Parcial:** desactivar sin activar; activar sin desactivar |
+| 8. Concurrencia | **ESC-04 (CL-41):** dos reasignaciones del mismo partido a la vez: **una prevalece; nunca dos editores vigentes; ambas intenciones quedan auditadas**. **ESC-05:** revocación del rol de editor de E2 concurrente: o E2 queda asignado antes de revocarse (y la revocación desactiva su asignación: UI-11) o la reasignación se rechaza. **ESC-06:** concesión del rol de delegado a E2 concurrente (RT-05). **ESC-07:** E1 sincroniza capturas hechas cuando aún estaba asignado: se rechazan (CL-47; frontera de R2-B2-b) |
+| 9. Auditoría | Reasignación con valores antes y después dentro de la unidad (IF-10); «ambas intenciones quedan auditadas» (CL-41): la que no prevalece se audita como rechazo, fuera de la unidad (IF-09) |
+| 10. Abiertas | **OC-08:** CL-41 dice que una prevalece y que ambas se auditan; este documento **no decide** si la segunda se rechaza por haber leído una asignación ya cambiada o se aplica en orden secuencial; ambas lecturas respetan IF-05 y el resultado final tiene un único editor. **OC-09:** si «único editor vigente» admite partidos sin editor (CL-35 lo produce); **OC-06** (A-2) |
+
+#### 18.4.4 Ficha UI-04 — Designar o revocar un dueño con protección del último dueño activo
+
+| Campo | Contenido |
+|---|---|
+| 1. Disparador | Un dueño designa a un segundo dueño o revoca a otro dueño. Las operaciones de dos dueños pueden coincidir (CL-43) |
+| 2. Componentes (R1 §5.5) | CMP-07 + CMP-08 + CMP-16 |
+| 3. Requisitos | RF-ACC-09, RT-06, CL-43, CL-38; IN-02-09, IN-02-10; IN-03-04 (nueva autenticación con 2FA; motivo en la revocación); decisión 12 de R2-A |
+| 4. Autorización | **Servidor:** CMP-08 decide que el actor es dueño vigente (nunca un organizador), que el nivel de autenticación consumido satisface la nueva autenticación exigida (IF-12), que la revocación lleva motivo y que el resultado conserva al menos un dueño activo. **Capa de datos:** verifica el rol vigente del actor, el nivel de autenticación verificable (IN-02-25), el motivo y que **el estado resultante contiene al menos un dueño activo** |
+| 5. Secuencia lógica | (2) reunir el conjunto de dueños activos, el rol del actor y su nivel de autenticación; (3) efecto sobre el conjunto de dueños; (4) política de 2FA; (5) decidir con RT-06 y RT-11; (6) aplicar cambio de rol, historial y auditoría con motivo |
+| 6. Cambios indivisibles | Cambio del rol de dueño (alta o baja) + entrada de historial + evento de auditoría con motivo + **la comprobación del conjunto de dueños activos sobre el mismo conjunto en que se aplica** (IF-02, IF-07). **Bajo D:** + proyección (roles vigentes de la cuenta afectada, política de 2FA derivada) |
+| 7. Estados prohibidos | ES-02, ES-09, ES-10 (un dueño ya revocado aplica una operación) y, bajo D, ES-13. **Parcial:** rol retirado sin historial o sin motivo; alta sin nueva autenticación |
+| 8. Concurrencia | **ESC-01 (CL-43):** dos dueños se revocan mutuamente a la vez: **como máximo una revocación prospera y queda al menos un dueño activo**; el resultado equivale a una ordenación secuencial (la segunda, hecha por quien ya no es dueño, se rechaza). **ESC-02:** con tres o más dueños en revocaciones cruzadas, el resultado equivale a alguna ordenación secuencial y deja al menos un dueño; **no basta una comprobación por pares** (RB2a-10); **condicionado a OC-16** (si puede haber más de dos dueños). **ESC-03:** una designación hecha por un dueño al que otra revocación concurrente le quita el rol: aplicada antes y válida, o rechazada |
+| 9. Auditoría | Designación y revocación auditadas con motivo en la revocación, dentro de la unidad (RF-AUD-02, IF-10); rechazo fuera (IF-09). La **invalidación de las sesiones** del dueño revocado (IN-03-08) es consecuencia posterior de CMP-06 y **no forma parte** de la unidad: el rechazo de sus nuevas operaciones **no depende** de ella (IN-03-06) |
+| 10. Abiertas | **OC-03:** delimitación con UI-11 (**provisional**: revocar el rol de dueño es UI-04; la «degradación» de RT-06 y la **autorrevocación** de un dueño no están descritas en `01` como operaciones separadas: candidatas de §18.5). **OC-15** (qué es «dueño activo»); **OC-16** (máximo de dueños; ESC-02); **Decisión 12 de R2-A** (lectura de «nueva autenticación»). **K-3** |
+
+#### 18.4.5 Ficha UI-08 — Levantar la restricción histórica de conflicto
+
+| Campo | Contenido |
+|---|---|
+| 1. Disparador | Un dueño activo distinto del afectado aprueba el levantamiento de la restricción de RT-14 que alcanza a un dueño u organizador S respecto de un equipo X del torneo T |
+| 2. Componentes (R1 §5.5) | CMP-07 + CMP-08 + CMP-16 |
+| 3. Requisitos | RF-ACC-17 (prioridad S), RT-14, CL-60, CL-61; A-12; IN-02-12; RF-AUD-02 |
+| 4. Autorización | **Servidor:** CMP-08 decide que el aprobador es **otro dueño activo y sin conflicto** respecto de X y T, que no hay autoaprobación, que hay motivo y que el alcance se limita a X y T «sin permisos adicionales». **Capa de datos:** verifica el rol y la ausencia de conflicto del aprobador **a partir del historial**, que el aprobador no es el afectado, el motivo y que el efecto registrado no excede a X y T. Sin dueño alterno la restricción permanece (CL-60) |
+| 5. Secuencia lógica | (2) reunir roles, historial de delegaciones y levantamientos vigentes de S y del aprobador; (3) efecto: registrar el levantamiento; (4) 2FA del aprobador; (5) decidir (RT-14 por efecto sobre el propio aprobador); (6) aplicar y auditar con motivo |
+| 6. Cambios indivisibles | Levantamiento (entrada en CMP-07, de solo anexado) + evento de auditoría con motivo y aprobador. **Bajo D:** + proyección (la restricción deja de estar vigente) |
+| 7. Estados prohibidos | ES-07, ES-08, ES-09, ES-10 y, bajo D, ES-13. **Parcial:** levantamiento sin motivo o sin auditoría; levantamiento que afecta a otro equipo o torneo |
+| 8. Concurrencia | **ESC-09 (CL-61):** levantamiento, revocación y acción del afectado simultáneos: resultado **serializado**; **nunca se aplica una acción con la restricción vigente y confirmada**. **ESC-10:** el rol de delegado de X se otorga de nuevo (UI-02/UI-12) a la vez que se levanta: el estado resultante equivale a una ordenación secuencial y nunca deja el levantamiento vigente tras la nueva concesión (ES-08). **ESC-17:** revocación concurrente del rol de dueño del aprobador (UI-04): el levantamiento aplicado antes es válido; si se aplica después, se rechaza |
+| 9. Auditoría | Levantamiento con motivo y aprobador dentro de la unidad (IF-10). La autoaprobación y el intento sin dueño alterno son rechazos o bloqueos registrados **fuera** (IF-09) |
+| 10. Abiertas | **Prioridad:** RF-ACC-17 es de prioridad **S** en `01`; si se difiriera, la restricción permanecería y OC-07, OC-10, ESC-10 y ESC-17 quedarían sin objeto (no se decide). **OC-07** (A-12: qué significa «sin conflicto» del aprobador y que el levantamiento no cubre el conflicto vigente); **OC-15** (el aprobador debe ser un «dueño activo»); **OC-10** (anulación al reotorgar el rol); **OC-05** (A-15); H2B1-04 (RT-14 en las dos capas). DB1-1 intacta |
+
+#### 18.4.6 Ficha UI-11 — Revocar un rol o desasignar a un editor, serializado
+
+| Campo | Contenido |
+|---|---|
+| 1. Disparador | Un dueño revoca a cualquier usuario; un organizador revoca editores y delegados exclusivamente de sus torneos, o las **asignaciones adicionales** que otro organizador posea en torneos comunes (revocación parcial, Q-38 d); desasignación de un editor de un partido. Coincide con operaciones en línea o sincronizadas del afectado |
+| 2. Componentes (R1 §5.5) | CMP-07 + CMP-08 + CMP-13 + CMP-16 |
+| 3. Requisitos | RF-ACC-07, RT-13, CL-45, CL-61, CL-53, OFF-22, D-2; RT-11; IN-02-07, IN-02-22; IN-03-06, IN-03-07 |
+| 4. Autorización | **Servidor:** CMP-08 decide la facultad de revocar según la matriz (el organizador no revoca al dueño ni a otros organizadores salvo la revocación parcial de asignaciones adicionales) y calcula el efecto, incluidos los permisos que **permanecen** por otros roles (RT-11). **Capa de datos:** verifica la facultad del actor y el estado resultante: rol o asignación con estado y fecha de revocación, **sin asignaciones dependientes vigentes** (ES-11) y sin eliminar historial |
+| 5. Secuencia lógica | (2) reunir roles del actor y del afectado, asignaciones, historial; (3) efecto: revocación + desactivación de las asignaciones que dependen del rol revocado; (4) 2FA; (5) decidir (A-15 como parámetro); (6) aplicar y auditar |
+| 6. Cambios indivisibles | Revocación del rol o asignación + desactivación de las asignaciones dependientes (IF-14) + evento(s) de auditoría. **Y la propiedad de serialización:** toda operación del afectado que coincida con la revocación (en línea o sincronizada) se resuelve como aplicada antes o rechazada. **Bajo D:** + proyección (roles vigentes y asignaciones del afectado) |
+| 7. Estados prohibidos | ES-10, ES-11, ES-09, ES-02 (si el rol es de dueño y OC-03 lo asigna a UI-04, la unidad es UI-04: **provisional**) y, bajo D, ES-13. **Parcial:** revocada pero la proyección aún concede (ES-13); revocada con editor aún asignado |
+| 8. Concurrencia | **ESC-08 (CL-45):** revocación o desasignación al mismo tiempo que una operación en línea o una sincronización: **aplicada antes (válida y auditada) o rechazada; nunca a medias ni aplicada con la autorización ya revocada**. **ESC-14:** el revocador pierde su propia facultad a la vez que revoca: aplicada antes o rechazada. **ESC-15 (CL-53):** el afectado conserva los permisos de otros roles; una operación pendiente autorizada por otro rol se evalúa por el rol restante y, si ninguno la autoriza, se rechaza. **ESC-09 (CL-61)** como en UI-08 |
+| 9. Auditoría | Revocación (y cada desactivación) auditada dentro de la unidad (IF-10); el rechazo de la operación del afectado se registra fuera (IF-09). Sesión conectada: reflejo en ≤ 60 s como **objetivo** sin garantía fuera de línea (IN-03-07); la verificación inmediata en el servidor no depende de él (IN-03-06) |
+| 10. Abiertas | **OC-03** (delimitación con UI-04); **OC-15** (si el rol revocado es el de dueño, qué es «dueño activo»); **OC-04** («antes/después» de una operación sincronizada: OFF-22, D-2; se fija en R2-B2-b); **OC-05** (A-15: si un actor en conflicto puede revocar o desasignar cuando el efecto alcanza partidos de su equipo; **no se elige**); decisión 1 de R2-A (D-2); K-3 |
+
+#### 18.4.7 Ficha UI-12 — Aceptar una invitación de delegado respetando un solo equipo por torneo
+
+| Campo | Contenido |
+|---|---|
+| 1. Disparador | La persona invitada acepta una invitación de delegado del equipo X del torneo T; puede coincidir con otras invitaciones suyas del mismo torneo (CL-54) o con la misma invitación aceptada dos veces |
+| 2. Componentes (R1 §5.5) | CMP-07 + CMP-10 + CMP-08 + CMP-16 |
+| 3. Requisitos | RF-ACC-13, RF-ACC-02, CL-54, RF-ACC-01; IN-02-21, IN-02-24, IN-03-05 (invitación de un solo uso, vence y se acepta con el correo invitado; su rol y ámbito no cambian); RT-05 |
+| 4. Autorización | **Servidor:** CMP-08 decide que la invitación está vigente, no usada, no vencida y es la del correo de quien acepta, que el ámbito aceptado es el emitido (sin ampliación) y que la persona no es ya delegada de otro equipo de T. **Capa de datos:** verifica el estado de la invitación (de su fuente, no de una proyección), la unicidad resultante (ES-03) y las referencias del mismo torneo |
+| 5. Secuencia lógica | (2) reunir la invitación, las asignaciones de la persona en T, sus roles y el historial; (3) efecto: consumir la invitación, otorgar el rol, retirar asignaciones en conflicto; (4) 2FA si procede; (5) decidir; (6) aplicar y auditar |
+| 6. Cambios indivisibles (**composición provisional hasta DB2a-2 y DB2a-3**) | Consumo de la invitación + concesión del rol de delegado + (si la persona tenía asignaciones de editor en partidos de X) las retiradas de UI-02 + anulación de un levantamiento de RT-14 si existía (OC-01, OC-10) + eventos de auditoría. **Bajo D:** + proyección (delegado vigente) |
+| 7. Estados prohibidos | ES-06, ES-03, ES-04, ES-08, ES-09, ES-10 y, bajo D, ES-13 |
+| 8. Concurrencia | **ESC-11 (CL-54):** dos invitaciones simultáneas harían a la misma persona delegada de dos equipos del mismo torneo: **una prospera y la otra se rechaza**; en torneos distintos ambas son válidas. **ESC-12:** la misma invitación aceptada dos veces a la vez: una sola aplicación (un solo uso). **ESC-13:** aceptación concurrente con el vencimiento, la revocación de la invitación o la revocación de quien invitó: aplicada antes o rechazada (efecto sobre la validez de una invitación emitida por quien después pierde la facultad: **no decidido**, OC-11) |
+| 9. Auditoría | Aceptación y concesión auditadas dentro de la unidad (IF-10); rechazo (segundo equipo, invitación consumida) fuera (IF-09) |
+| 10. Abiertas | **OC-01** (composición con UI-02); **OC-02** (creación de la cuenta, CMP-06, no figura entre los componentes de UI-12 y RF-ACC-01 exige invitación: si la aceptación crea la cuenta, esa creación pertenece a la unidad o a otra anterior); **OC-11** (invitación y revocación de quien invitó); DB2a-3 |
+
+### 18.5 Operaciones que modifican permisos y no están en UI-01…13 (candidatas a la Fase 4)
+
+R1 §5.5 declara la lista **no exhaustiva** y deja la enumeración definitiva por operación a la Fase 4. Las siguientes operaciones **modifican permisos o condicionan su concesión** y **no tienen unidad propia en UI-01…13**. El inventario se **concilia con H2B1-10 (R2-B1)**, que lista las que actualizarían la proyección de CAP-02-D: UI-01, 02, 03, 04, 08, 11 y 12 y, fuera de §5.5, «aceptar invitaciones de editor u organizador, designar organizadores, desactivar cuentas y asignar torneos existentes a un organizador» (CAND-02, CAND-04, CAND-10 y CAND-11). Se presentan **solo como candidatas**: **sin ficha**, sin añadir alcance y sin decidir si exigen una unidad. Su inclusión es una decisión del usuario (DB2a-7).
+
+| ID | Operación candidata | Fuente | Relación con las unidades de §18.4 |
+|---|---|---|---|
+| CAND-01 | Emitir una invitación (fija ámbito y rol que luego se aceptan) | RF-ACC-02, RF-ACC-03; IN-03-05 | Condiciona UI-12; la emisión no concede el rol |
+| CAND-02 | Aceptar una invitación de **organizador o de editor** (UI-12 solo cubre la de delegado) | RF-ACC-01, RF-ACC-02, RF-ACC-03; H2B1-10 | Mismos riesgos de un solo uso y de ámbito que UI-12 |
+| CAND-03 | Revocar una invitación o su vencimiento | RF-ACC-02 | ESC-13 |
+| CAND-04 | Designar o revocar organizadores (reservado al dueño) | RF-ACC-03, IN-02-09; H2B1-10 | Revocación: ¿UI-11 o unidad propia? (OC-03) |
+| CAND-05 | Otorgar el rol de editor y la **primera** asignación de un editor a un partido (UI-03 cubre la reasignación) | RF-ACC-06 | ESC-19; mismo riesgo de ES-01 y ES-11 |
+| CAND-06 | Degradar a un dueño y que un dueño se revoque a sí mismo | RT-06, RF-ACC-09 | OC-03; IF-07; GT-05 |
+| CAND-07 | Revocación parcial entre organizadores, si no se considera cubierta por UI-11 | RF-ACC-07 (Q-38 d) | OC-03 |
+| CAND-08 | Enrolamiento del segundo factor tras otorgar dueño u organizador a una cuenta sin él | RF-ACC-10, IN-03-03 | Condición de uso del rol, no concesión; relación con OC-15 |
+| CAND-09 | Recuperación de cuenta y de la pérdida del segundo factor | RF-ACC-09 (procedimientos), IN-03-08 | Procedimientos; interactúa con IF-06 y OC-15 |
+| CAND-10 | **Desactivar o eliminar una cuenta** con roles vigentes | H2B1-10 («desactivar cuentas»); RF-ACC-09 («eliminación») | Puede dejar sin dueño activo (ES-02) o dejar permisos vigentes de una cuenta inactiva (IF-06); IF-07 y GT-05 |
+| CAND-11 | **Asignar torneos existentes a un organizador** | RF-ACC-03 («el dueño puede asignarle además torneos existentes»); H2B1-10 | Amplía el ámbito de un organizador: mismas exigencias de autorización en las dos capas, auditoría y aislamiento entre torneos (IF-03, IF-10, IF-13) |
+
+**No son candidatas** las operaciones que modifican **estados** del torneo o del partido: cambian las entradas de la decisión, no los permisos, y bajo CAP-02-D no actualizan la proyección (§17.3).
+
+#### 18.5.1 Operaciones conocidas que pueden alterar el conjunto de dueños activos
+
+**Garantía de alcance global (GT-05, IF-07, IF-19).** Toda operación de la lista siguiente —y **toda otra que la Fase 4 enumere**— debe cumplir que **ninguna ejecución, aislada o concurrente con otras, deja al sistema sin un dueño activo autorizado.** Esta exigencia **no es exclusiva de UI-04**. El significado de «activo» (OC-15) y si existe un máximo de dueños (OC-16) están **abiertos**.
+
+| Operación | Cómo puede alterar el conjunto de dueños | Estado |
+|---|---|---|
+| UI-04 (designar o revocar un dueño) | Alta o baja del rol de dueño | Ficha §18.4.4 |
+| UI-11 (revocar un rol) | Si OC-03/DB2a-1 la usa para el rol de dueño | Ficha §18.4.6; delimitación abierta |
+| CAND-06 (degradación, autorrevocación) | Baja o reducción del rol del propio actor | Candidata; ESC-22 |
+| CAND-10 (desactivar o eliminar una cuenta) | Una cuenta de dueño deja de estar activa | Candidata; ESC-21 |
+| CAND-09 y CAND-08 (recuperación; enrolamiento del segundo factor) | Una cuenta con rol de dueño puede no poder usarlo: depende de qué signifique «activo» | Candidatas; OC-15; ESC-23 |
+| Operaciones aún no enumeradas | Cualquier otra que modifique o desactive el rol o la cuenta de un dueño | Fase 4 |
+
+### 18.6 Matriz de concurrencia y revocaciones
+
+#### 18.6.1 Escenarios de concurrencia (ESC-)
+
+"Admisible" significa que **equivale a alguna ordenación secuencial** (IF-05). Las garantías GT- se definen en §18.7. **Ningún escenario se resuelve aquí por un mecanismo.** **Origen:** son **literales** en `01` ESC-01 (CL-43), ESC-04 (CL-41), ESC-07 (CL-35, CL-47), ESC-08 (CL-45), ESC-09 (CL-61), ESC-11 (CL-54, RF-ACC-02) y ESC-15 (CL-53); son **[DER]** (el texto de `01` no menciona esa simultaneidad) ESC-02, 03, 05, 06, 10, 12, 13, 14, 16, 17, 19, 21, 22 y 23; ESC-18 y ESC-20 son **propios de CAP-02-D**. ESC-02 depende de OC-16; ESC-21 de OC-15 y OC-16; ESC-22 de OC-03 y OC-15; ESC-23 de OC-15. **Ninguno define «dueño activo» ni el máximo de dueños.**
+
+| ID | Escenario | Unidades | Origen | Resultados admisibles | Resultados prohibidos | Garantías |
+|---|---|---|---|---|---|---|
+| ESC-01 | Dos dueños se revocan mutuamente a la vez | UI-04 × UI-04 | CL-43, RT-06 | Una revocación prospera y la otra se rechaza (el revocador ya no es dueño); queda un dueño | Ambas aplicadas (ES-02); ambas rechazadas por error de ventana sin explicación auditable | GT-02, GT-03, GT-05 |
+| ESC-02 | **Condicionado a OC-16 (máximo de dueños):** tres o más dueños con revocaciones cruzadas simultáneas | UI-04 × n | Derivado de CL-43 [DER] | El conjunto resultante equivale a una ordenación secuencial y tiene al menos un dueño | Un conjunto vacío porque cada comprobación miró solo a su pareja | GT-02, GT-03, GT-05 |
+| ESC-03 | Un dueño designa a otro mientras una revocación concurrente le quita el rol | UI-04 × UI-04 | CL-38, RT-13 [DER] | Designación aplicada antes y válida, o rechazada | Designación aplicada por quien ya no era dueño (ES-10) | GT-02, GT-04 |
+| ESC-04 | Dos reasignaciones del mismo partido | UI-03 × UI-03 | CL-41 | Una prevalece; ambas intenciones auditadas | Dos editores vigentes (ES-01); partido sin editor por ventana (ES-12, **provisional**: OC-09) | GT-02, GT-03 |
+| ESC-05 | Reasignación al editor E2 mientras se revoca su rol de editor | UI-03 × UI-11 | RF-ACC-06, RF-ACC-07, IN-02-22 [DER] | Asignación aplicada antes y luego desactivada por la revocación, o reasignación rechazada | E2 asignado con rol de editor ya revocado (ES-10, ES-11) | GT-02, GT-04, GT-06 |
+| ESC-06 | Asignación o reasignación de U como editor mientras se le otorga el rol de delegado del equipo del partido | UI-03 × UI-02 / UI-12 | RT-05, CL-35 | Asignación primero y retirada por UI-02, o concesión primero y asignación rechazada | U delegado y editor vigente en un partido de su equipo (ES-04) | GT-02, GT-03, GT-06 |
+| ESC-07 | Sincronización de las operaciones de un editor tras retirarse su asignación por UI-02 o desactivarse por UI-03 (el editor anterior sincroniza capturas hechas cuando aún estaba asignado) | UI-02 / UI-03 × sincronización | CL-35, CL-47, OFF-22 | Rechazadas al sincronizar | Aplicadas con la asignación ya retirada (ES-10) | GT-04 (fronteras en R2-B2-b) |
+| ESC-08 | Revocación o desasignación al mismo tiempo que una operación en línea o una sincronización | UI-11 × cualquier operación del afectado | CL-45, RF-ACC-07, RT-13 | Operación aplicada antes (válida y auditada) o rechazada | A medias; aplicada con la autorización ya revocada y confirmada (ES-10) | GT-02, GT-04 |
+| ESC-09 | Levantamiento, revocación y acción del afectado simultáneos | UI-08 × UI-11 × acción | CL-61, RT-13, RT-14 | Resultado serializado | Acción aplicada con la restricción vigente y confirmada | GT-02, GT-03, GT-04 |
+| ESC-10 | Levantamiento y reotorgamiento del rol de delegado de X simultáneos | UI-08 × UI-02 / UI-12 | RF-ACC-17, A-12 | Levantamiento primero y anulado por la concesión, o concesión primero y levantamiento rechazado o sin efecto sobre el conflicto vigente (A-12, abierta) | Levantamiento vigente tras la nueva concesión (ES-08) | GT-03, GT-06 |
+| ESC-11 | Dos invitaciones simultáneas hacen a la misma persona delegada de dos equipos del mismo torneo | UI-12 × UI-12 (y UI-02 × UI-12) | CL-54, RF-ACC-13, RF-ACC-02 | Una prospera y la otra se rechaza; en torneos distintos, ambas | Dos equipos del mismo torneo (ES-03) | GT-02, GT-03 |
+| ESC-12 | La misma invitación aceptada dos veces a la vez | UI-12 × UI-12 | RF-ACC-02, IN-03-05 | Una sola aplicación | Dos usos (ES-06) | GT-02, GT-03 |
+| ESC-13 | Aceptación a la vez que el vencimiento o revocación de la invitación, o la revocación de quien invitó | UI-12 × CAND-03 / UI-11 | RF-ACC-02; OC-11 | Aceptada antes y válida, o rechazada | Rol otorgado con invitación ya vencida o revocada (ES-06) | GT-02, GT-04 |
+| ESC-14 | El revocador pierde su propia facultad mientras revoca | UI-11 × UI-04 / UI-11 | RT-13 [DER] | Revocación aplicada antes y válida, o rechazada | Revocación aplicada con la facultad ya revocada (ES-10) | GT-02, GT-04 |
+| ESC-15 | Revocación parcial: el afectado conserva permisos de otros roles; una operación pendiente depende de otro rol | UI-11 × operación | CL-53, RT-11 | Se evalúa por el rol restante; sin ninguno que la autorice, se rechaza | Rechazar lo que otro rol vigente autoriza, o autorizar lo que ninguno autoriza | GT-04 |
+| ESC-16 | Se revoca el rol del **creador organizador** mientras crea el torneo (el caso del dueño: OC-17) | UI-01 × UI-11 / UI-04 | RF-ACC-12, RT-13 [DER] | Creación aplicada antes (el torneo y la asignación del creador organizador) o rechazada; si se aplicó antes, una revocación posterior alcanza también la asignación creada por la unidad | Torneo sin la asignación del creador organizador, o asignación sin torneo (ES-05); una revocación que deja vigente la asignación recién creada (ES-11) | GT-01, GT-02, GT-06 |
+| ESC-17 | El aprobador de un levantamiento pierde el rol de dueño mientras aprueba | UI-08 × UI-04 | RF-ACC-17, RT-13 [DER] | Levantamiento aplicado antes y válido, o rechazado | Levantamiento aprobado por quien ya no es dueño (ES-07) | GT-02, GT-04 |
+| ESC-18 | (**solo CAP-02-D**) Una decisión coincide con el mantenimiento de la proyección de un cambio de permisos | cualquier operación × unidad de §18.4 | K-2d, IN-02-02 | La decisión ve el estado anterior completo o el posterior completo | Ver un estado que ya no refleja un cambio confirmado (ES-13) | GT-09, GT-10 |
+| ESC-19 | **Primera asignación de editor** a un partido concurrente con otra asignación inicial del mismo partido, con la revocación del rol de editor de E o con la concesión del rol de delegado del equipo del partido a E | CAND-05 × CAND-05 / UI-11 / UI-02 / UI-12 | RF-ACC-06, RT-05 [DER] | La asignación se aplica antes y la otra operación la alcanza (desactivación o retirada), o se rechaza | Dos editores vigentes (ES-01); asignación vigente de un rol revocado (ES-10, ES-11); delegado y editor en un partido de su equipo (ES-04) | GT-02, GT-03, GT-06 |
+| ESC-20 | (**solo CAP-02-D**) Una decisión coincide con la **reconstrucción** de la proyección desde las fuentes | cualquier operación × reconstrucción | K-2b, K-2d, IN-02-02 [DER] | La decisión ve la proyección anterior completa o la reconstruida completa, o se resuelve sobre las fuentes (g4, [REC], no adoptada) | Decidir sobre una proyección parcial o discrepante con las fuentes (ES-13) | GT-09, GT-10 |
+| ESC-21 | Desactivación de la cuenta de un dueño concurrente con la revocación de otro dueño, o con otras desactivaciones (**depende de OC-15 y, con tres o más dueños, de OC-16**) | CAND-10 × UI-04 / CAND-10 | RT-06, RF-ACC-09 («eliminación o degradación»), CL-43 [DER] | El resultado equivale a una ordenación secuencial y deja **al menos un** dueño activo autorizado: **pueden prosperar varias** desactivaciones o revocaciones mientras quede otro dueño; las que dejarían al sistema sin dueño se rechazan | Sin dueño activo autorizado (ES-02); rechazar sin necesidad una operación que deja al menos un dueño | GT-02, GT-03, GT-05 |
+| ESC-22 | Dos dueños se autorrevocan o se degradan a la vez, o uno de ellos se degrada mientras el otro lo revoca (CAND-06) (**depende de OC-03 y OC-15**) | CAND-06 × CAND-06 / UI-04 | RT-06, RF-ACC-09 («eliminación o degradación»), CL-43 [DER] | Equivale a una ordenación secuencial; queda al menos un dueño activo autorizado | Sin dueño activo autorizado (ES-02) | GT-02, GT-03, GT-05 |
+| ESC-23 | Un enrolamiento del segundo factor o una recuperación de cuenta (CAND-08, CAND-09) pendiente de un dueño coincide con la revocación o desactivación de otro dueño (**depende de OC-15**: si «activo» exige segundo factor enrolado u otra condición) | CAND-08 / CAND-09 × UI-04 / CAND-10 | RF-ACC-10, IN-03-03, IN-03-08, RT-06 [DER] | Equivale a una ordenación secuencial; el resultado deja al menos un dueño activo **en el sentido que OC-15 fije**, que este documento no fija | Sin dueño activo autorizado (ES-02) bajo cualquier lectura de OC-15 que el usuario admita | GT-02, GT-03, GT-05 |
+
+#### 18.6.2 Revocaciones y operaciones con permisos obsoletos
+
+Por cada clase de revocación se declara qué debe dejar de ser posible **desde la confirmación**, qué permanece y qué queda fuera. El tiempo de reflejo en sesiones conectadas (≤ 60 s) es un **objetivo** sin garantía para dispositivos desconectados y **no puede medirse en la Fase 2** (IN-03-07).
+
+| Revocación | Unidad | Desde la confirmación deja de ser posible | Permanece | Fuera de esta parte |
+|---|---|---|---|---|
+| Rol de dueño | UI-04 (**provisional**: OC-03) | Toda operación nueva del revocado que exija ese rol; sus designaciones y revocaciones pendientes se aplican antes o se rechazan | Sus permisos por otros roles vigentes (RT-11); al menos un dueño (RT-06) | Invalidación de sesiones (CMP-06); sincronización de sus dispositivos |
+| Rol de organizador | CAND-04 / UI-11 (OC-03) | Operaciones sobre sus torneos | Permisos por otros roles | Sincronización |
+| Rol de editor y sus asignaciones | UI-11 | Capturas y operaciones nuevas del editor en los partidos desasignados; las desasignaciones están en la misma unidad (ES-11) | Permisos por otros roles (CL-53) | Qué ocurre con lo capturado sin conexión: CL-47, OFF-10, OFF-11 (R2-B2-b) |
+| Rol de delegado | UI-11 | Administración de la plantilla del equipo | Permisos por otros roles | Restricción histórica de RT-14: **persiste** como historial (RT-14) |
+| Asignación adicional de otro organizador (revocación parcial) | UI-11 | Esa asignación adicional | Su rol de organizador y los permisos de sus otros roles (RF-ACC-07) | A-15 |
+| Levantamiento de la restricción | (anulación) UI-02 / UI-12 | Operaciones permitidas solo por el levantamiento | El historial | OC-10 |
+| Invitación | CAND-03 | Aceptar esa invitación | Cuentas ya creadas | OC-11 |
+| Desactivación o eliminación de una cuenta | CAND-10 (sin ficha) | Toda operación nueva de esa cuenta; si es de un dueño, solo es posible si queda otro dueño activo (GT-05) | El historial (IN-09-02) | Sesiones (CMP-06); OC-15; enumeración de la Fase 4 |
+
+**Regla común.** Una operación sin conexión o en tránsito se evalúa con la autorización vigente **cuando se aplica**, y lo que no se aplica se rechaza (IF-06). La definición precisa de «antes» y «después» para operaciones capturadas sin conexión (OFF-22, D-2) **no se fija aquí** (OC-04, R2-B2-b).
+
+### 18.7 Análisis de K-2d: garantías transaccionales exigidas
+
+K-2d (§17.3, R2-B1) **solo** enuncia propiedades y corresponde a R2-B2. Esta sección las desarrolla **a nivel de capacidad** para las siete unidades de permisos. **K-2d se describe como garantía arquitectónica exigida: no se implementa, no se aprueba y no se declara cumplida.** Las garantías GT-09 y GT-10 solo aplican a CAP-02-D. **GT-07 y GT-08 son transversales:** se aplican a **todas** las filas de §18.6.1 y no se ligan a un escenario concreto.
+
+| ID | Garantía exigida | Unidades | Fuente | Aplica a |
+|---|---|---|---|---|
+| GT-01 | **Misma unidad:** el cambio en la fuente única (CMP-07), los efectos compuestos, el evento de auditoría de lo aplicado y, bajo D, la actualización de la proyección se confirman juntos o ninguno | Las siete | IF-01, IF-10, IF-14, K-2c | A y D (la proyección, solo D) |
+| GT-02 | **Lo decidido es lo aplicado:** la decisión y la aplicación de una unidad no admiten un cambio confirmado de los hechos que la decisión usó (bajo D, incluida la lectura de la proyección: primera cláusula de K-2d) | Las siete | IF-02, RT-13 | A y D |
+| GT-03 | **Serialización de las unidades que compiten por un mismo hecho o conjunto:** dueños activos, editor de un partido, delegado de un torneo, invitación, restricción | UI-02, 03, 04, 08, 12 | IF-05, IF-07, CL-41, CL-43, CL-54 | A y D |
+| GT-04 | **Revocación efectiva frente a operaciones en línea y sincronizadas:** aplicada antes y válida, o rechazada | UI-11 y toda unidad cuyo actor puede perder su facultad | IF-06, CL-45, CL-61, OFF-22 | A y D |
+| GT-05 | **Garantía de alcance global sobre el último dueño:** **ninguna operación, aislada o concurrente con otras, deja al sistema sin un dueño activo autorizado;** el conjunto de dueños se comprueba sobre el conjunto en que se aplica, no sobre una copia anterior ni por pares. Aplica a **toda** operación de §18.5.1 y a toda otra que altere ese conjunto; **no es exclusiva de UI-04** | UI-04; UI-11 (si OC-03 la incluye); CAND-06, 08, 09, 10; las no enumeradas | IF-07, IF-19, RT-06, RF-ACC-09, CL-43 | A y D |
+| GT-06 | **Efectos compuestos completos:** retiradas, desactivaciones de asignaciones dependientes y anulaciones de levantamientos se confirman con su causa | UI-02, 11, 12 (y UI-08 como contraparte) | IF-14, CL-35, RF-ACC-17 | A y D |
+| GT-07 | **Todo o nada con la auditoría:** si el evento de lo aplicado no puede registrarse, no se aplica; el registro de un rechazo es independiente y persiste (K-3) | Las siete | IF-09, IF-10, IN-09-04, IN-09-05 | A y D |
+| GT-08 | **Las dos capas deciden sobre el mismo estado confirmado:** no existe un momento en que el servidor y la capa de datos vean estados distintos de los hechos de la decisión | Las siete | IF-03, K-1, RB1-01 | A y D |
+| GT-09 | **Sin ventana con proyección obsoleta:** la confirmación del cambio de permisos y la de la proyección derivada son un solo hecho; ninguna decisión lee un estado intermedio (ES-13) | Las siete | K-2d, ES-13 | **Solo D** |
+| GT-10 | **La proyección se reconstruye desde las fuentes** y, ante una discrepancia, **prevalecen las fuentes** (g4, [REC] de R2-B1: no fija `01` ni R1) | Las siete | K-2b, §17.3.5 (g3, g4); ESC-18, ESC-20 | **Solo D** |
+
+**Qué demuestra esta sección.** Que, para las siete unidades, K-2d puede **enunciarse** como un conjunto completo de propiedades verificables en los escenarios de §18.6.1. **Qué no demuestra:** que exista una forma de lograrlas, ni su suficiencia sobre las unidades de R2-B2-b (UI-06, UI-10) ni sobre las candidatas de §18.5. La demostración de K-2b y la composición con R2-B2-b siguen **abiertas**. La demostración definitiva de K-2d requiere R3 (mecanismo, condicionado a ADR-01) y la verificación de la Fase 4.
+
+#### 18.7.1 Trazabilidad K-2 → GT → ESC y lo no demostrado
+
+Solo **CAP-02-D** incluye K-2. **Nada de lo siguiente está implementado ni demostrado.**
+
+| Componente de K-2 | Qué exige | GT | ESC | Dónde se trata | Qué NO está demostrado |
+|---|---|---|---|---|---|
+| **K-2a** Completitud | La proyección contiene los hechos derivados de la decisión y **no** el estado, las reglas de integridad ni la invitación vigente | (no es una garantía transaccional: no tiene GT) | — | §18.8.1 (hechos por unidad) | La completitud **no está comprobada**: §18.8.1 inventaría los hechos de las siete unidades, pero no cubre las candidatas de §18.5 ni las operaciones aún no enumeradas |
+| **K-2b** Derivación | Deriva de CMP-07 con la definición única de CMP-08; se reconstruye desde las fuentes; no es un segundo decisor | GT-10, GT-08 | ESC-18, ESC-20 | §18.7, §18.8.2 | La **reconstruibilidad**, la adopción de g4 ([REC]) y la lectura de R1 §5.3 (P-1 o P-2, DB1-6) |
+| **K-2c** Actualización coherente | Se actualiza con **toda** operación que modifica permisos | GT-01, GT-06 | ESC-05, ESC-06, ESC-10, ESC-16, ESC-19 | §18.4, §18.5 | La **enumeración definitiva** de las operaciones (Fase 4); las candidatas no tienen ficha |
+| **K-2d** Garantías transaccionales | Lectura de la proyección y aplicación en la misma unidad, actualización con cada cambio de permisos y sin ventana con proyección obsoleta | GT-02, GT-01, GT-09 (con GT-03, GT-04, GT-05) | ESC-01…23 | §18.4, §18.6, §18.7 | Su suficiencia sobre UI-06 y UI-10 (R2-B2-b), el mecanismo (R3, condicionado a ADR-01) y la verificación (Fase 4) |
+
+### 18.8 Evaluación de CAP-02-A frente a CAP-02-D sobre las unidades de permisos
+
+**Alcance y reserva.** Esta evaluación (corregida en la v0.2, A-04 y A-05, y en la v0.3, B-01) aporta **evidencia** para DB1-1. **No elige** CAP-02-A ni CAP-02-D, **no declara demostrada la independencia de CAP-02-D** y **no declara cumplido R1 §8.1** («≥ 2 formas de reparto con ambas capas siempre presentes»). DB1-1 y DB1-6 siguen abiertas.
+
+#### 18.8.1 Reglas de integridad, hechos derivados y garantías que los vinculan
+
+**Tres categorías (K-2a, §17.3.5; no se modifican K-2a ni las matrices de R2-B1).**
+
+1. **Reglas de integridad verificadas sobre las fuentes**, tanto bajo A como bajo D: último dueño activo (IN-02-10), un equipo por delegado y torneo (IN-02-21), un editor vigente por partido (IN-02-22), la invitación vigente (IN-02-24) y la **indivisibilidad** de la creación del torneo y de su asignación («si la asignación falla, el torneo no se crea», IN-02-26). K-2a las excluye de la proyección.
+2. **Hechos derivados que CAP-02-D obtiene de su proyección:** los de las entradas de IN-02-06, 12, 15, 23 y 26 (K-2a): roles vigentes por ámbito (también **la facultad del actor**), delegado vigente, **asignaciones de editor vigentes**, restricciones de RT-14 no levantadas, política efectiva de segundo factor y **la asignación vigente del creador de un torneo** (IN-02-26, que la matriz de §17.3 marca «Condicionada (K-2)» en D).
+3. **Garantías de atomicidad que vinculan ambos elementos:** GT-01 (un solo cambio confirmado), GT-02 (lo decidido es lo aplicado), GT-03 (competencia por un mismo hecho), GT-05 (último dueño), GT-06 (efectos compuestos completos) y GT-09 (sin proyección obsoleta). **Una garantía puede apoyarse a la vez en una regla de integridad (sobre las fuentes) y en un hecho derivado (bajo D)**: por eso no se afirma que una unidad se compruebe "exclusivamente sobre las fuentes" cuando consulta además hechos derivados.
+
+| Unidad | Reglas de integridad e invitación (sobre las fuentes, A y D) | Hechos derivados (bajo D, de la proyección) | Otros leídos de su fuente | Garantías que vinculan ambos | ES-13 bajo D | Qué añade D |
+|---|---|---|---|---|---|---|
+| UI-01 | Creación indivisible del torneo y de la asignación (IN-02-26, parte de integridad) | Asignación vigente del creador organizador (IN-02-26); roles vigentes del actor; política de 2FA | Estado del torneo, si procede | GT-01 (torneo y asignación juntos) y GT-09 (la consulta de la asignación vigente refleja lo confirmado) | **Aplica** (facultad del actor; asignación vigente) | Una escritura de mantenimiento en la unidad |
+| UI-02 | Un equipo por delegado y torneo (IN-02-21) | Roles de U; **asignaciones de editor vigentes de U** (de ellas se calcula el conjunto a retirar y el estado de ES-04); restricciones de RT-14 no levantadas; delegado vigente; facultad del actor | Pertenencia de los partidos a los equipos; estado del partido | GT-03 (unicidad, **sobre las fuentes**); GT-06 (retiradas completas: **el conjunto a retirar se calcula desde un hecho derivado bajo D y el estado resultante se verifica sobre las fuentes**); GT-09 | **Aplica** (asignaciones vigentes; facultad del actor) | Mantenimiento de tres hechos derivados |
+| UI-03 | Un editor vigente por partido (IN-02-22) | Rol de editor vigente de E2; delegaciones vigentes de E2 (RT-05); restricciones del actor; facultad del actor | Equipos y estado del partido M | GT-03 (único editor, **sobre las fuentes**) y GT-09 | **Aplica** (rol de E2, delegaciones, facultad del actor) | Mantenimiento de las asignaciones de editor vigentes de E1 y E2 |
+| UI-04 | **Último dueño activo (IN-02-10)**, leído de la fuente (K-2a). Una variante que lo leyera de la proyección **contradiría K-2a** y no se evalúa | **Facultad del actor** (su rol de dueño vigente), roles vigentes de la cuenta afectada, política de 2FA | Nivel de autenticación (CMP-06); motivo | GT-05 (sobre la fuente) y GT-09 (la facultad del actor) | **Aplica** a la facultad del actor: un dueño ya revocado no debe operar con una proyección obsoleta | Mantenimiento de los roles vigentes |
+| UI-08 | Ninguna regla de integridad atómica propia | Restricciones de RT-14 no levantadas; roles vigentes del aprobador y del afectado | Historial (fuente única); motivo | GT-02 y GT-04 | **Aplica** (restricción y rol del aprobador) | Mantenimiento de la restricción levantada |
+| UI-11 | Ninguna propia (si el rol es de dueño y OC-03 lo asigna a UI-04: último dueño, §18.4.4) | Roles y asignaciones del afectado; facultad del actor | — | GT-04 y GT-06 (desactivaciones) | **Aplica de forma directa:** la revocación confirmada debe reflejarse en la proyección en la misma unidad | Mantenimiento de roles y asignaciones |
+| UI-12 | Un equipo por delegado y torneo (IN-02-21); **invitación vigente y de un solo uso** (IN-02-24) | Asignaciones de editor vigentes y restricciones de la persona (si compone UI-02); delegado vigente; facultad de quien acepta | La invitación (por definición de D) | GT-03 (sobre las fuentes), GT-06 (si compone UI-02) y GT-09 | **Aplica** (asignaciones vigentes; delegado vigente) | Mantenimiento del delegado vigente |
+
+#### 18.8.1.1 Alcance de ES-13
+
+ES-13 (decisión sobre una proyección que no refleja un cambio de permisos ya confirmado) **aplica bajo CAP-02-D a toda operación que consume hechos derivados**, no solo a las que modifican permisos:
+
+| Operaciones que consumen hechos derivados | Qué consumen | Estado |
+|---|---|---|
+| Las siete unidades de §18.4 | Facultad del actor y, según la unidad, asignaciones, restricciones o delegado vigentes (tabla de §18.8.1) | Analizadas |
+| Candidatas CAND-01…11 de §18.5 | La facultad del actor y, en las que modifican permisos, los roles y asignaciones que cambian | Sin ficha; ES-13 aplicaría |
+| Operaciones que modifican **estados** (no actualizan la proyección, K-2c) | La facultad del actor (rol vigente), que sí es un hecho derivado | Identificadas; **R2-B2-b** (UI-05, 06, 07, 09, 10, 13) |
+| Operaciones aún no enumeradas | Cualquier decisión de CMP-08 que lea roles, asignaciones o restricciones | Fase 4 |
+
+La **única** excepción son las lecturas que la proyección no contiene (estado del torneo y del partido, reglas de integridad, invitación vigente, nivel de la sesión), que se leen de su fuente. Este alcance es **compatible con las dos interpretaciones** de CAP-02-D: no prejuzga si D es una variante de A (II) o una forma distinta (I).
+
+#### 18.8.2 Responsabilidades de CMP-07 y CMP-08 en las unidades
+
+| Aspecto | Bajo A | Bajo D con P-1 | Bajo D con P-2 | Dependencia |
+|---|---|---|---|---|
+| Quién decide (en todas) | CMP-08 | CMP-08 | CMP-08 | CR1-13, K-1 |
+| Quién aplica el cambio en la fuente | CMP-07 | CMP-07 | CMP-07 | R1 §5.3 |
+| Quién calcula y conserva los hechos derivados | — | CMP-07, ejecutando la definición única de CMP-08 (AC-1 ya hace que CMP-07 invoque a CMP-08) | CMP-08 (exige leer «no los almacena» como referido a roles e historial) | **DB1-6** (confirmación de la lectura); **R1 no se modifica** |
+| Quién lee en la decisión | CMP-08 lee de CMP-07 | CMP-08 lee la proyección (y la fuente para estado, integridad e invitación) | Ídem | GT-08 |
+| Fallo propio | — | Proyección obsoleta (ES-13) | Ídem | GT-09, GT-10 |
+
+#### 18.8.3 Evidencia registrada (sin conclusión sobre la elección)
+
+| ID | Observación | Alcance | Naturaleza |
+|---|---|---|---|
+| EV-01 | Las garantías atómicas que protegen **reglas de integridad** —último dueño (UI-04), único editor (UI-03), un equipo por delegado y torneo (UI-02, UI-12), invitación de un solo uso (UI-12) y la indivisibilidad de torneo y asignación (UI-01)— **versan sobre las fuentes** y se exigen igual bajo A y D, porque K-2a las excluye de la proyección. **Pero en las siete unidades la decisión consume además al menos un hecho derivado** (como mínimo la facultad del actor; en varias, asignaciones o restricciones vigentes), de modo que **bajo D todas quedan expuestas a ES-13** (§18.8.1.1) | Las siete | Aplicación de K-2a a las unidades |
+| EV-02 | **Propiedad ya conocida, no evidencia nueva:** bajo D las siete unidades modifican permisos y exigen el paso de mantenimiento dentro de la unidad (K-2c, H2B1-10; interpretación I de §17.3.3) | Las siete | Ya conocida |
+| EV-03 | El modo de fallo propio de D (proyección obsoleta, ES-13) y sus obligaciones (GT-09, GT-10, K-2b) **ya estaban enunciados en K-2d**; lo que añade el análisis es su **alcance:** afecta a **toda operación que consume hechos derivados** (las siete unidades, las candidatas y las de R2-B2-b), con consecuencia más directa donde el hecho derivado condiciona una revocación o una restricción vigente (UI-11, UI-08), **sin limitarse a ellas** | Las siete; candidatas; R2-B2-b | Ya enunciada; alcance precisado |
+| EV-04 | Bajo D siguen leyéndose de la fuente las reglas de integridad atómicas (UI-02, 03, 04, 12), la invitación (UI-12) y el estado (p. ej. el del partido en UI-03): D no sustituye la lectura de las fuentes | UI-02, 03, 04, 12 | Aplicación de K-2a |
+| EV-05 | **Mixta.** (i) Si se adoptara g4 («prevalecen las fuentes», [REC], no adoptada), la decisión ante una discrepancia se tomaría **sobre las fuentes**, lo que **acerca** D a A con una copia derivada (**apoya la interpretación II**). (ii) Sin g4, D tiene un modo de fallo que A no tiene (**apoya la interpretación I**) | Las siete (más visible en UI-08 y UI-11) | Mixta |
+| EV-06 | Los resultados observables de A y D **coinciden** cuando la proyección está al día; **difieren** solo ante una proyección obsoleta o ante la necesidad de reconstruirla | Las siete | Análisis |
+| EV-07 | El análisis **no evalúa rendimiento ni lecturas masivas**, que son lo que motivaría una proyección; esa evaluación depende de decisiones fuera de esta parte | — | Límite |
+| EV-08 | **Contraste con el criterio de independencia de §17.3.3,** que exige «que D cambie qué verifica cada capa o la composición de las unidades atómicas» de modo que no se reduzca a "A con una entrada derivada". (a) *Qué verifica cada capa:* bajo A y D ambas capas verifican la misma decisión completa (IF-03, IF-16); cambia la representación de las entradas, **no lo que verifica cada capa**. (b) *Composición de las unidades:* las siete conservan sus cambios indivisibles y D les añade un paso de mantenimiento (EV-02). Si ese añadido cuenta como cambio de composición y si el resultado "se reduce a A con una entrada derivada" **lo decide el usuario en DB1-1**, como dice §17.3.3. **No se concluye** | Las siete | Contraste |
+
+**Lectura de la evidencia (sin elegir).** EV-01 (en lo que toca a las reglas de integridad), EV-04, EV-06 y EV-08 (a) son coherentes con la **interpretación II** de §17.3.3 («D es una variante de A»): misma decisión, mismas dos capas, mismas unidades; difiere la representación de las entradas. EV-03, EV-05 (ii) y EV-08 (b) muestran obligaciones y modos de fallo **propios** de D, coherentes con la **interpretación I**; EV-05 (i) apoya la II. **La evidencia no zanja la cuestión y no aporta evidencia nueva sobre el criterio de §17.3.3 más allá de EV-01, EV-03 y EV-08.** Se mantienen **las dos interpretaciones**. La independencia de D respecto de A **sigue sin estar demostrada**, D **no se cuenta como segunda forma**, **R1 §8.1 no se declara cumplido** y **DB1-1 sigue abierta** (con las vías de §17.8).
+
+### 18.9 Dependencias y decisiones abiertas
+
+#### 18.9.1 Condiciones abiertas de R2-B2-a (OC-)
+
+| ID | Condición abierta | Unidades | Relación |
+|---|---|---|---|
+| OC-01 | Relación entre UI-02 y UI-12: si la aceptación de la invitación de delegado incluye los efectos de UI-02 (retiradas, anulación) en **una** unidad, o si el rol de delegado puede otorgarse por otros medios | UI-02, UI-12 | IF-14, DB2a-2 |
+| OC-02 | La creación de la cuenta (CMP-06) no figura entre los componentes de UI-12 y RF-ACC-01 exige invitación | UI-12 | DB2a-2 |
+| OC-03 | Delimitación entre UI-04 y UI-11 para el rol de dueño; degradación y autorrevocación de RT-06; y si la **revocación de organizadores y la revocación parcial entre organizadores** (CAND-04, CAND-07) son UI-11 o unidades propias | UI-04, UI-11 | DB2a-1, CAND-04, CAND-06, CAND-07 |
+| OC-04 | «Antes» y «después» de una operación sincronizada (OFF-22, D-2) | UI-11 y R2-B2-b | Decisión 1 de R2-A; **reservado a R2-B2-b** |
+| OC-05 | A-15: si un actor en conflicto puede revocar o desasignar cuando el efecto alcanza partidos de su propio equipo | UI-02, 03, 08, 11 | IN-02-17; **no se elige** |
+| OC-06 | A-2: alcance de las «asignaciones que generen conflictos» | UI-02, 03 | IN-02-17 |
+| OC-07 | A-12: «sin conflicto» del aprobador; el levantamiento y el reotorgamiento | UI-08 | IN-02-17 |
+| OC-08 | CL-41: si la reasignación que no prevalece se rechaza por haber leído una asignación ya cambiada o se aplica en orden secuencial | UI-03 | DB2a-4 |
+| OC-09 | Si «único editor vigente» admite partidos sin editor (CL-35 lo produce) y si ES-12 es un estado prohibido | UI-02, 03, 11 | DB2a-4 |
+| OC-10 | Si la anulación del levantamiento al reotorgar el rol forma parte de las unidades UI-02 y UI-12 (IF-14 [DER]) | UI-02, 08, 12 | DB2a-3 |
+| OC-11 | Validez de una invitación tras revocarse a quien invitó, o tras revocarse la invitación | UI-12, CAND-03 | DB2a-5 |
+| OC-12 | Duplicación de una solicitud de creación de torneo (reintento) | UI-01 | Idempotencia: R2-B2-b / Fase 4 |
+| OC-13 | Persistencia del rechazo (K-3) en las unidades de permisos | Las siete | Decisión 10 de R2-A; CAP-09-P |
+| OC-14 | Cómo se distingue la asignación del sistema de una autoasignación | UI-01 | R3 |
+| OC-15 | **Significado de «dueño activo»** (RT-06, RF-ACC-09): rol vigente, cuenta activa, segundo factor enrolado u otra lectura; condiciona IF-07, GT-05, CAND-08, 09 y 10 | UI-04, UI-11 y candidatas de §18.5.1 | DB2a-9; **no se define aquí** |
+| OC-16 | **Si existe un máximo de dueños.** `01` habla de «un segundo dueño» y no declara un máximo; **no se supone que solo puedan existir dos** (ESC-02 y ESC-21 dependen de la respuesta) | UI-04 | DB2a-8 |
+| OC-17 | Asignación al crear un torneo cuando el creador es **dueño** (RF-ACC-12 define la asignación automática solo para el organizador; **no se amplía RF-ACC-12**) | UI-01 | DB2a-10 |
+
+#### 18.9.2 Decisiones propuestas al usuario (DB2a-)
+
+Ninguna se resuelve aquí. Las DB1-1…DB1-6 y las decisiones de R2-A (13 originales, la 11 atendida y 12 abiertas) permanecen **como estaban**.
+
+| ID | Decisión | Opciones | Efecto |
+|---|---|---|---|
+| DB2a-1 | Delimitación UI-04 / UI-11 (OC-03) | (a) UI-04 abarca toda alta o baja del rol de dueño, incluidas degradación y autorrevocación, y UI-11 el resto; (b) diferirlo a la enumeración de la Fase 4 conservando IF-07 | Fija la frontera de la protección del último dueño |
+| DB2a-2 | Composición UI-02 / UI-12 y creación de cuenta (OC-01, OC-02) | (a) **una** unidad compuesta con todos los efectos; (b) diferirlo a la Fase 4 con la condición IF-14 | Evita una ventana entre causa y consecuencia |
+| DB2a-3 | Anulación del levantamiento dentro de la unidad (OC-10) | (a) incluirla en UI-02 y UI-12; (b) diferir su ubicación a la enumeración de la Fase 4 **conservando ES-08 (RF-ACC-17)**. *Se retiró la opción de dejarla como operación separada con una ventana, porque contradice ES-08* | Define la unidad de la contraparte de UI-08 |
+| DB2a-4 | Semántica de la reasignación obsoleta y del partido sin editor (OC-08, OC-09) | Las lecturas de §18.4.3 | Fija el resultado de CL-41 |
+| DB2a-5 | Validez de una invitación tras revocar al invitador (OC-11) | Seguir vigente / dejar de serlo / decidir en la Fase 4; **toda opción debe respetar IN-02-08** (el ámbito de una invitación nunca excede el de quien invita) | Fija el ámbito de UI-12 |
+| DB2a-6 | Recibir §18.8.3 como **evidencia** para DB1-1 sin resolverla | Recibir / pedir más análisis | No modifica DB1-1 |
+| DB2a-7 | Candidatas de §18.5 para la enumeración de la Fase 4 | Aceptar la lista / ampliarla / reducirla | Alcance de la Fase 4 |
+| DB2a-8 | Máximo de dueños (OC-16) | No hay máximo / hay un máximo (a fijar por el usuario) / decidir en la Fase 4 | Acota ESC-02 y ESC-21 |
+| DB2a-9 | Significado de «dueño activo» (OC-15) | Las lecturas de OC-15 / decidir en la Fase 4 | Fija el alcance de GT-05 |
+| DB2a-10 | Asignación al crear un torneo cuando el creador es dueño (OC-17) | Sin asignación automática (la del dueño ya es global) / otra lectura de RF-ACC-12 (con Q-02a) / decidir en la Fase 4 | Delimita ES-05 y UI-01; **no modifica RF-ACC-12 por sí mismo** |
+
+#### 18.9.3 Dependencias
+
+| Depende de | Qué |
+|---|---|
+| R2-B2-b | UI-06 (sincronización) para ESC-07, ESC-08 y OC-04; UI-10 y UI-13; UI-09 y su relación con ES-04; **las amenazas AM-18 y CAB-05** y, junto con R2-C, **AM-19 y AM-34** (asignadas por R2-A a R2-B; §18.12.1; no se desarrollan aquí); validación conjunta de K-2d |
+| R2-A | Decisión 1 (D-2), decisión 10 (K-3), decisión 12 (nueva autenticación), CAP-09-P |
+| R2-B1 | DB1-1 (déficit frente a R1 §8.1), DB1-6 (lectura de R1 §5.3), H2B1-04 (RT-14 en las dos capas), K-1…K-3 |
+| R3 | Mecanismos de las garantías GT-01…GT-10 (condicionados a ADR-01) |
+| Fase 4 | Enumeración definitiva por operación; lecturas de A-2, A-12 y A-15 |
+
+### 18.10 Riesgos nuevos (sin aceptar)
+
+Los riesgos se **registran sin valorar ni aceptar**: la valoración y la aceptación son del usuario (convenciones de §16.1). Ninguno sustituye a RB1-01…13 ni a los riesgos de R2-A.
+
+| ID | Riesgo | Unidades | Relación |
+|---|---|---|---|
+| RB2a-01 | Una ventana entre la lectura y la aplicación hace que dos unidades decidan sobre el mismo estado previo (último dueño, único editor, delegado por torneo) | UI-02, 03, 04, 12 | GT-02, GT-03 |
+| RB2a-02 | Un estado sin editor, o con una asignación obsoleta, no queda definido y se acepta por omisión | UI-02, 03, 11 | OC-09 |
+| RB2a-03 | Una proyección obsoleta concede lo ya revocado (solo CAP-02-D) | UI-11, UI-04 | GT-09 |
+| RB2a-04 | Las dos capas ven versiones distintas del estado y discrepan (extensión de RB1-01) | Las siete | GT-08 |
+| RB2a-05 | Una consecuencia exigida por la regla queda fuera de la unidad por enumeración incompleta (lista no exhaustiva) | UI-02, 11, 12 | IF-14, §18.5 |
+| RB2a-06 | Una invitación sigue vigente tras perder la facultad quien invitó | UI-12 | OC-11 |
+| RB2a-07 | Una sesión conectada se confunde con una autorización vigente (reflejo ≤ 60 s frente a rechazo inmediato) | UI-11, UI-04 | IN-03-06, IN-03-07 |
+| RB2a-08 | El rechazo impuesto por la capa de datos aborta la unidad y no se registra (K-3) | Las siete | OC-13, CAP-09-P |
+| RB2a-09 | Bloqueo administrativo: sin actor alterno sin conflicto, RT-14 bloquea (CL-51) y la protección de RT-06 impide resolverlo | UI-04, UI-08 | RT-14, RT-06 |
+| RB2a-10 | Revocaciones cruzadas de tres o más dueños (si OC-16 lo admite): una comprobación por pares deja la cuenta sin dueño | UI-04 | ESC-02, GT-05 |
+| RB2a-11 | Una candidata o una operación no enumerada (desactivar o eliminar una cuenta, degradar, recuperar) altera el conjunto de dueños sin la garantía global | CAND-06, 08, 09, 10; Fase 4 | IF-07, IF-19, GT-05, ESC-21, ESC-22, ESC-23 |
+
+### 18.11 Secciones reservadas a R2-B2-b (no redactadas)
+
+| Reservado | Contenido | Dependencia con esta parte |
+|---|---|---|
+| UI-05, UI-10 | Corrección y confirmación de resultados con recálculo y señal de cambio | GT-01, GT-07 |
+| UI-06 | Aplicar una operación recibida (autorizar, idempotencia, aplicar, auditar) | ESC-07, ESC-08, OC-04, OC-12 |
+| UI-07 | Anonimización | — |
+| UI-09 | Calendario con RT-14 por efecto; **relación con ES-04** (cambios de los equipos de un partido con editor ya asignado) | IF-11, ES-04 |
+| UI-13 | Alta de jugador con duplicados concurrentes | GT-03 |
+| Frontera de sincronización | Definición de «antes» y «después» (OFF-22, D-2) | OC-04 |
+| Auditoría de rechazos en la frontera | Cierre de K-3 por unidad | OC-13 |
+| Amenazas AM-18 y CAB-05 | **Dependencias registradas;** tratamiento completo (no desarrollado en R2-B2-a) | ESC-08, ESC-09 |
+| Amenazas AM-01, AM-15, AM-19 y AM-34 | Relacionadas con R2-B (§16.5), ver §18.12.1: AM-01 y AM-15 las trata R2-B1 por IN-02 (no se desarrollan aquí); AM-19 y AM-34, contexto en R2-B1, **quedan para R2-B2-b y R2-C** | IF-03, IF-13 |
+| Conclusión final de K-2d y de DB1-1 | Evidencia de R2-B2-b sumada a §18.8 | §18.7, §18.8 |
+
+### 18.12 Trazabilidad y criterios de aceptación
+
+| Elemento | Origen |
+|---|---|
+| IF-01…IF-19 | R1 §7.0, RT-02, 05, 06, 10, 11, 13, 14; RF-ACC-07, 11; IN-02, IN-03, IN-09 |
+| ES-01…ES-13 | RF-ACC-06, 12, 13, 17; RT-05, 06, 10, 13; CL-35, 41, 43, 45, 54, 60, 61 |
+| Fichas §18.4.1…7 | R1 §5.5 (UI-01, 02, 03, 04, 08, 11, 12) |
+| ESC-01…23 | CL-35, 38, 41, 43, 45, 47, 53, 54, 61; RF-ACC-02, 06, 07, 17; derivados marcados [DER] (§18.6.1) |
+| GT-01…10 | K-2d (§17.3), K-1, K-3, IF-; trazabilidad K-2 → GT → ESC en §18.7.1 |
+| Amenazas AM-01, 15, 18, 19, 34 y CAB-05 | Ver §18.12.1: AM-18 y CAB-05 son **dependencias de R2-B2-b**; no se desarrollan |
+| CAND-01…11 | R1 §5.5 (lista no exhaustiva), H2B1-10, RF-ACC-02, 03, 06, 07, 09, 10 |
+| §18.8 | DB1-1, DB1-6, §17.3.3, §17.3.5 |
+
+| ID | Criterio de aceptación | Cumplimiento según el autor (a revisar por el usuario) |
+|---|---|---|
+| CR2B2a-01 | Las siete fichas coinciden con R1 §5.5 (disparador, componentes, requisitos) | Cumple: §18.4 y comprobación §18.13 |
+| CR2B2a-02 | Ambas capas verifican la autorización en cada ficha | Cumple: campo 4 de cada ficha y IF-03 |
+| CR2B2a-03 | Los estados intermedios prohibidos están definidos | Cumple: §18.3 y campo 7 |
+| CR2B2a-04 | Las revocaciones no permiten operar con permisos obsoletos | Cumple como **exigencia**: IF-06, §18.6.2, GT-04 |
+| CR2B2a-05 | K-2d se describe como garantía exigida, no implementada | Cumple: §18.7 |
+| CR2B2a-06 | Ninguna condición pendiente aparece resuelta | Cumple: §18.9, §18.8 (DB1-1…6 y decisiones de R2-A intactas) |
+| CR2B2a-07 | Sin tecnologías, proveedores ni mecanismos | Cumple según la exploración de §18.13 |
+| CR2B2a-08 | R1, R2-A y R2-B1 intactos; solo cambia el archivo autorizado | Cumple según §18.13 |
+| CR2B2a-09 | Las operaciones fuera de UI-01…13 solo como candidatas | Cumple: §18.5 |
+| CR2B2a-10 | R2-B2-b claramente reservado | Cumple: §18.11 (AM-18 y CAB-05 como dependencias) |
+| CR2B2a-11 | El último dueño se protege con una garantía de alcance global, no exclusiva de UI-04 | Cumple como **exigencia**: IF-07, GT-05, §18.5.1, ESC-21 |
+
+#### 18.12.1 Amenazas de R2-B relacionadas (registro; no se desarrolla el modelo adicional)
+
+R2-A (§16.5) asignó a R2-B las siguientes amenazas. **Aquí solo se registra su relación y qué queda para R2-B2-b**; no se amplía el modelo de amenazas.
+
+| Amenaza | Qué es | Relación con R2-B2-a | Queda para |
+|---|---|---|---|
+| AM-01 | Manipular rol, torneo, usuario o equipo en la solicitud (intento) | Controlada por la autorización en ambas capas: IF-03, IF-13; tratada por IN-02 en R2-B1 (§17.10) | Su aplicación a las unidades de R2-B2-b |
+| AM-15 | Acceso a datos de otro torneo (resultado de AM-01) | Controlada por el aislamiento en la capa de datos: IF-13; tratada por IN-02 | Su aplicación a las unidades de R2-B2-b |
+| AM-18 | Carrera entre una revocación o reasignación y una operación en curso | ESC-08, ESC-09, GT-04 | **R2-B2-b** (frontera de sincronización) |
+| CAB-05 | Sincronizar tras ser revocado, desasignado o reasignado, o durante la carrera con esa revocación | ESC-07, ESC-08 | **R2-B2-b** |
+| AM-19 | Inyección en la capa de datos | Contexto: su control (validación de entradas) no es un permiso (§17.10) | **R2-B2-b y R2-C** |
+| AM-34 | Inyección de contenido en vistas públicas, panel, correos y proyecciones | Contexto: su control es la codificación de salidas (§17.10) | **R2-B2-b y R2-C** (con R3 y la Fase 4) |
+
+### 18.13 Verificación del autor
+
+**Naturaleza.** Verificaciones **mecánicas de lectura** hechas por el autor con un guion de solo lectura. **No son una auditoría independiente:** el autor no puede verificar su propio trabajo con independencia. La auditoría de la v0.1 (§18.15) y la revisión focalizada de la v0.2 (§18.16) son independientes **solo de contexto**: mismo tipo de modelo, sin independencia organizativa ni externa. La v0.3 recibió una verificación final focalizada de contexto nuevo (nota de cierre de §18.16), también independiente **solo de contexto**. V-1…V-11 son las comprobaciones del autor sobre el **contenido aprobado** (SHA-256 `f07b4d9f…cbf644`); no se actualizaron tras añadir los metadatos de aprobación.
+
+| # | Verificación | Resultado |
+|---|---|---|
+| V-1 | Las líneas 1 a 2585 son **idénticas** a la versión confirmada `eb0255c` (R1, R2-A y R2-B1 intactos); el cambio de todo el archivo son solo líneas añadidas | Cumple: **572 líneas añadidas y 0 eliminadas** respecto de `eb0255c` (el archivo pasa de 2585 a 3157 líneas) |
+| V-2 | Solo cambió `02-arquitectura-adr.md`; `00`, `01`, `aprobaciones.md` y `bitacora.md` no cambiaron | Cumple (`git status` y sumas SHA-256) |
+| V-3 | Identificadores definidos y sin referencias sin definición: IF-01…19, ES-01…13, GT-01…10, ESC-01…23, OC-01…17, DB2a-1…10, RB2a-01…11, CAND-01…11, EV-01…08, CR2B2a-01…11 | Cumple (guion de lectura: sin huérfanos; IF-04, IF-08, IF-15, GT-07 y GT-08 declarados transversales) |
+| V-4 | Cada una de las siete fichas tiene los diez campos y sus componentes coinciden **literalmente** con R1 §5.5; las siete siguen siendo las únicas fichas | Cumple |
+| V-5 | Las citas literales entre «» se buscaron en `00`, `01` y las partes previas | Todas existen, **salvo** los mensajes del usuario y los dictámenes de las revisiones citados en §18.0, §18.15 y §18.16, que proceden de la conversación y no de un archivo |
+| V-6 | Exploración de términos tecnológicos (SQL, RLS, trigger, lock, índice, constraint, API, endpoint, nombres de productos o proveedores, token, caché y similares) | Fuera de esta propia fila, una sola aparición, en X-6, como **exclusión**; ninguna elección ni mecanismo |
+| V-7 | Ninguna decisión abierta aparece resuelta: no se elige A ni D; no se declara demostrada la independencia de D ni cumplido R1 §8.1; DB1-1…6 y las decisiones de R2-A (13 originales, la 11 atendida y 12 abiertas) intactas; OC-15, OC-16 y OC-17 siguen abiertas | Cumple (lectura del autor) |
+| V-8 | A-01…A-18 (§18.15) y B-01, E-01…E-07 (§18.16) están aplicadas en el lugar indicado | Cumple (lectura del autor; sin auditoría posterior) |
+| V-9 | **B-01:** §18.8.1 y EV-01/EV-03 no contradicen K-2a ni la matriz de §17.3 (IN-02-26 «Condicionada (K-2)» en D; reglas de integridad excluidas de la proyección); **ES-13 aplica bajo D a toda operación que consume hechos derivados** (§18.8.1.1) | Cumple (comparación del autor con K-2a, línea de K-2 y matriz de §17.3) |
+| V-10 | **Garantía global del último dueño intacta:** IF-07, IF-19 y GT-05 no se redujeron; ESC-21, 22 y 23 la ejercen sin definir «activo» ni el máximo | Cumple |
+| V-11 | Correspondencia GT ↔ ESC de §18.7.1 **calculada** a partir de la columna de garantías de §18.6.1 (no escrita a mano) | Cumple: K-2b → ESC-18, ESC-20; K-2c → ESC-05, 06, 10, 16, 19; K-2d → ESC-01…23 |
+
+**Límites.** Las **lecturas** de los casos CL y de los requisitos son del autor; los escenarios [DER] están rotulados en §18.6.1 y deben revisarse. R1 §8.1 **sigue sin cumplirse** (DB1-1 abierta).
+
+### 18.14 Estado de esta parte y lo que no se hizo
+
+**Estado: v0.3-R2B2a, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL (2026-11-19; §18.0).** Registrado en `aprobaciones.md` y `bitacora.md`; **no versionado**.
+
+**Qué se hizo en la v0.3.** Se corrigieron el defecto material B-01 (proyección e integridad en §18.8.1, EV-01, EV-03 y el alcance de ES-13) y las observaciones E-01…E-07 (§18.16): condiciones abiertas conciliadas, creación de torneos sin presuponer la asignación del dueño, escenarios del último dueño (ESC-21 reformulado, ESC-22 y ESC-23), trazabilidad K-2d completa, provisionalidad, etiquetas de IF-03 e IF-07 (con IF-18 e IF-19) y registro de amenazas (§18.12.1).
+
+**Qué no se hizo.** No se redactó R2-B2-b, R2-C, R3 ni R4; no se aprobó R2-B2-a, R2-B2, R2 ni la Fase 2; no se resolvió ninguna DB1 ni DB2a ni decisión de R2-A; no se eligió formulación; no se declaró demostrada la independencia de D ni cumplido R1 §8.1; no se fijó PAR ni se aceptó RES o RB; no se concedió excepción a D-2; no se modificaron otros archivos; no se crearon ramas, commits, pushes, PR ni merges; no se tocó `main`; no se actualizaron `aprobaciones.md` ni `bitacora.md`; no se desarrolló el modelo adicional de amenazas.
+
+**Git.** Rama `claude/fase-2-arquitectura-amenazas`; HEAD `eb0255c17d728d02003839338b4cefa18e55468d`; los cambios (esta Parte IV y los registros) están **sin confirmar**; el SHA-256 del contenido aprobado figura en §18.0. Cualquier commit, push o PR requiere autorización expresa y separada.
+
+### 18.15 Hallazgos de la auditoría de R2-B2-a v0.1 (A-01…A-18) y correcciones de la v0.2
+
+**Origen.** Auditoría de solo lectura de un subagente de contexto nuevo (independencia **solo de contexto**), dictamen «R2-B2-a REQUIERE CORRECCIONES». Clases: **DM** defecto material; **DAL** decisión abierta legítima; **DEP** dependencia posterior; **EDI** editorial.
+
+| ID | Sev. | Clase | Corrección aplicada en la v0.2 | Dónde |
+|---|---|---|---|---|
+| A-01 | Alta | DM | CAND-10 (desactivar o eliminar cuentas) y CAND-11 (asignar torneos existentes) añadidas y conciliadas con H2B1-10; fila en §18.6.2; ESC-21 | §18.5, §18.6 |
+| A-02 | Alta | DM + DAL | IF-07 y GT-05 de **alcance global**; §18.5.1 con las operaciones que pueden alterar el conjunto de dueños; OC-15 («activo»); RB2a-11 | §18.2, §18.5.1, §18.7, §18.9 |
+| A-03 | Media | DAL | OC-16 y DB2a-8 (máximo de dueños); ESC-02 condicionado | §18.6.1, §18.9 |
+| A-04 | Media | DM | §18.8.1 separa reglas de integridad (fuente) de hechos derivados; EV-01, EV-04 corregidas; UI-04 ya no depende de la proyección | §18.8.1, §18.8.3 |
+| A-05 | Media | DM leve | EV-08 contrasta con el criterio de §17.3.3; EV-02 "ya conocida"; EV-05 "mixta"; EV-03 localizada | §18.8.3 |
+| A-06 | Media | DM | IF-09 [DER]; fuentes primarias en IF-01, 03, 05, 11, 12; IF-16 e IF-17 separan lo derivado; columna Tipo en ES | §18.2, §18.3 |
+| A-07 | Media | DEP + DM | ES-04 como garantía derivada; vínculo con UI-09 en §18.11 y en ES-04 | §18.3, §18.11 |
+| A-08 | Media | DM leve | ESC-16 precisado; ESC-19 (primera asignación de editor) | §18.6.1 |
+| A-09 | Media | DAL | OC-17 y DB2a-10; ES-05 y UI-01 acotados al creador organizador; RF-ACC-12 no se amplía | §18.3, §18.4.1, §18.9 |
+| A-10 | Media | DM leve | Apartado "Provisionalidad"; ES-12 provisional; UI-02 y UI-12 "composición provisional"; DB2a-3 sin la opción que contradice ES-08 | §18.3, §18.4, §18.9.2 |
+| A-11 | Media | DM leve | §18.7.1 (K-2a…d → GT → ESC y lo no demostrado); ESC-20 (reconstrucción); GT-02 con la lectura de la proyección | §18.6.1, §18.7 |
+| A-12 | Baja | EDI | UI-03 cita ESC-07 (con CL-47); ESC-11 cubre UI-02; OC-03 abarca CAND-04 y CAND-07 | §18.4, §18.6, §18.9 |
+| A-13 | Baja | EDI | IF-04, IF-08, GT-07 y GT-08 declarados transversales; ESC-18 y ESC-20 aplican a toda ficha | §18.2, §18.4, §18.7 |
+| A-14 | Baja | EDI | Origen de cada ESC (literal, [DER] o propio de D) | §18.6.1 |
+| A-15 | Baja | EDI | "13 decisiones originales, la 11 atendida y 12 abiertas" | §18.0, §18.9.2, §18.13 |
+| A-16 | Baja | EDI/DEP | Nota de «Precedencia de estado» en §18.0; `aprobaciones.md` y `bitacora.md` sin tocar | §18.0 |
+| A-17 | Baja | EDI | Cita de la persistencia de RT-14 corregida; "reactiva" eliminado de IF-11; nota de la prioridad S de RF-ACC-17 en UI-08; DB2a-5 con IN-02-08 | §18.2, §18.4.5, §18.6.2, §18.9.2 |
+| A-18 | Baja | DEP | AM-18 y CAB-05 registradas como dependencias de R2-B2-b | §18.9.3, §18.11, §18.12 |
+
+**Nota de cierre (2026-11-19).** Esta matriz no se modifica. Las correcciones de la v0.2 fueron revisadas por la revisión focalizada de §18.16 (A-01…A-18 resueltos, con A-04 y A-09 parciales que la v0.3 completó). La aprobación condicional de R2-B2-a figura en §18.0.
+
+### 18.16 Revisión focalizada de la v0.2 (B-01, E-01…E-07) y correcciones de la v0.3
+
+**Origen.** Revisión focalizada de solo lectura de un subagente de contexto nuevo (independencia **solo de contexto**), dictamen «REQUIERE CORRECCIONES MATERIALES» por un único defecto material (B-01); A-01…A-18 quedaron resueltos salvo A-04 y A-09 (parciales), que esta ronda completa.
+
+| ID | Clase | Corrección aplicada en la v0.3 | Dónde |
+|---|---|---|---|
+| B-01 | Defecto material | §18.8.1 rehecha con tres categorías (reglas de integridad sobre las fuentes, hechos derivados de la proyección y garantías que los vinculan); IN-02-26 como hecho derivado (asignación vigente) y la indivisibilidad de torneo y asignación como integridad; UI-02 deja de decir "exclusivamente sobre las fuentes"; EV-01 y EV-03 ya no limitan ES-13 a UI-08 y UI-11; §18.8.1.1 fija el alcance de ES-13; K-2a y las matrices de R2-B1 no se modifican | §18.8.1, §18.8.1.1, §18.8.3 |
+| E-01 | Editorial | OC-15 y OC-16 conciliadas en UI-04, OC-15 en UI-08 y UI-11; ESC-02 condicionado también en UI-04 | §18.4 |
+| E-02 | Editorial | UI-01 (campos 4, 5, 6 y 8) y ESC-16 acotados al creador organizador; OC-17 y DB2a-10 siguen abiertas | §18.4.1, §18.6.1 |
+| E-03 | Editorial | ESC-21 admite que prosperen varias operaciones si queda un dueño; ESC-22 (CAND-06) y ESC-23 (CAND-08 y 09) añadidos sin fichas | §18.6.1, §18.5.1 |
+| E-04 | Editorial | K-2b, K-2c y K-2d calculadas desde la columna de garantías de §18.6.1 (K-2d: ESC-01…23) | §18.7.1 |
+| E-05 | Editorial | ES-12 provisional en ESC-04; UI-11 ↔ UI-04 condicionado a OC-03 en UI-11 §7 y §18.6.2 | §18.4.6, §18.6 |
+| E-06 | Editorial | IF-03 sin el estado resultante (ahora IF-18 [DER]); IF-07 [CONF] separado del alcance global (IF-19 [DER]); IF-15 transversal | §18.2 |
+| E-07 | Editorial | AM-01, 15, 19 y 34 registradas junto con AM-18 y CAB-05; cuáles quedan para R2-B2-b y R2-C | §18.9.3, §18.11, §18.12.1 |
+
+**Nota de cierre (2026-11-19).** Esta matriz no se modifica. La v0.3 recibió una verificación final focalizada de solo lectura de otro subagente de contexto nuevo (mensaje «TORNEO DE CAMPEONES — VERIFICACIÓN DE CIERRE R2-B2-a v0.3»): B-01 RESUELTO, E-01…E-07 resueltas, sin defectos materiales bloqueantes y ocho observaciones editoriales no bloqueantes (§18.0); dictamen «APROBABLE COMO ENTREGABLE DOCUMENTAL CONDICIONADO». Independencia **solo de contexto**. La aprobación condicional de R2-B2-a como entregable documental figura en §18.0.
