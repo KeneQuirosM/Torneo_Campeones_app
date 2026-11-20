@@ -1991,7 +1991,7 @@ Archivo autorizado: solo este documento, editando únicamente la Parte III. **No
 | Dependencias de ADR-03.C y ADR-09.C como propuestas condicionadas y registro de la relación con ADR-05.C (§17.7) | Sincronización sin conexión (A-9…A-14, UI-06 aplicada) → **ADR-05.C (R2-C)**; reglamento y desempates (A-16, motor) → **ADR-08 (R3)** |
 | Condiciones abiertas, riesgos de diseño y criterios (§17.8 a §17.17) | Consolidación del modelo de amenazas → **R2-C**; selección de proveedor o mecanismo → **R3** |
 
-**Precedencia de estado.** Varias líneas de este documento dicen que R2-B «no está iniciado» o que R2, R3 y R4 están «no iniciados»: la **línea 5 del encabezado** (estado de la fase a la fecha de aprobación de R1), la **línea 6** (estado de R2-A), la **§12** (línea 783), la fila de R2-A de **§13** (línea 798), **§16.0** y la fila de **§16.5** que describe R2-B como «no iniciado». Todas describen el estado **a la fecha de aprobación de R1 o de R2-A**. Para R2-B1 y R2-B2 prevalece este apartado: **R2-B1 está APROBADO CONDICIONALMENTE como entregable documental; R2-B2-a está APROBADO CONDICIONALMENTE como entregable documental (2026-11-19, v0.3-R2B2a, Parte IV, §18); R2-B2-b1 está APROBADO CONDICIONALMENTE como entregable documental (2026-11-19, v0.3-R2B2b1, Parte V, §19); R2-B2-b2 está NO INICIADO Y SIN AUTORIZACIÓN; R2-B2 completo no tiene aprobación global; R2-C, R3 y R4 siguen NO INICIADOS Y SIN AUTORIZACIÓN.** El registro de esas aprobaciones figura en `aprobaciones.md` y `bitacora.md`. Este documento no incorporó una línea de estado de R2-B1 al encabezado ni una fila a §13 porque eso habría modificado contenido aprobado; esos ajustes requieren autorización separada.
+**Precedencia de estado.** Varias líneas de este documento dicen que R2-B «no está iniciado» o que R2, R3 y R4 están «no iniciados»: la **línea 5 del encabezado** (estado de la fase a la fecha de aprobación de R1), la **línea 6** (estado de R2-A), la **§12** (línea 783), la fila de R2-A de **§13** (línea 798), **§16.0** y la fila de **§16.5** que describe R2-B como «no iniciado». Todas describen el estado **a la fecha de aprobación de R1 o de R2-A**. Para R2-B1 y R2-B2 prevalece este apartado: **R2-B1 está APROBADO CONDICIONALMENTE como entregable documental; R2-B2-a está APROBADO CONDICIONALMENTE como entregable documental (2026-11-19, v0.3-R2B2a, Parte IV, §18); R2-B2-b1 está APROBADO CONDICIONALMENTE como entregable documental (2026-11-19, v0.3-R2B2b1, Parte V, §19); R2-B2-b2 está APROBADO CONDICIONALMENTE como entregable documental (2026-11-20, v0.3-R2B2b2, Parte VI, §20); R2-B2 completo no tiene aprobación global; R2-C, R3 y R4 siguen NO INICIADOS Y SIN AUTORIZACIÓN.** El registro de esas aprobaciones figura en `aprobaciones.md` y `bitacora.md`. Este documento no incorporó una línea de estado de R2-B1 al encabezado ni una fila a §13 porque eso habría modificado contenido aprobado; esos ajustes requieren autorización separada.
 
 **Aprobación condicional de R2-B1 como entregable documental (2026-11-18).** Por acto expreso del usuario (mensajes «DECISIÓN DE APROBACIÓN DOCUMENTAL R2-B1» y «REGISTRO DE APROBACIÓN CONDICIONAL R2-B1 v0.5»), la v0.5-R2B1 quedó **APROBADA CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.** **Comprende:** los invariantes IN-02; el análisis de CAP-02-A, B, C y D; el modelo de capacidades por rol y ámbito; las combinaciones de roles; las ambigüedades documentadas; los riesgos de diseño; las dependencias arquitectónicas; y las correcciones hasta la v0.5-R2B1. **No implica:** (1) elegir una formulación; (2) declarar demostrada la independencia de CAP-02-D; (3) dar por cumplido R1 §8.1; (4) resolver DB1-1 a DB1-6; (5) aprobar definitivamente ADR-02.C; (6) aprobar o implementar K-2d; (7) fijar PAR-01 a PAR-06; (8) aceptar RES-01 a RES-12 ni los riesgos RB1; (9) conceder excepción a D-2; (10) aprobar globalmente R2 ni la Fase 2; (11) autorizar R2-B2, R2-C, R3 o R4. **Precisiones:** la frontera atómica de K-2d queda pendiente de R2-B2; R2-B2 debe aportar el análisis necesario para evaluar la independencia de CAP-02-D, sin que se presuma que vaya a demostrarla; DB1-1 y el déficit frente a R1 §8.1 permanecen abiertos, sin excepción; las decisiones que los requisitos asignan a la Fase 2 deben resolverse antes de su cierre global, salvo modificación o excepción formal aprobada. **Limitación de la revisión:** la v0.4 recibió un dictamen favorable de un subagente con independencia solo de contexto; la v0.5 incorpora los ajustes E-1 y E-2 y **no recibió una nueva auditoría posterior**; la aprobación documental **no demuestra seguridad implementada ni validada.**
 
@@ -2610,7 +2610,7 @@ Verificables sobre este documento. **La aprobación de R2-B1 es un acto expreso 
 - **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
 - **Condición de cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada.
 
-**Precedencia de estado.** Otras líneas de este documento, `aprobaciones.md` y `bitacora.md` (en sus entradas históricas) dicen que R2-B2 **no está iniciado** porque describen una fecha anterior. **Vigente (2026-11-19): R2-B2-a APROBADO CONDICIONALMENTE como entregable documental (esta Parte IV); R2-B2-b1 APROBADO CONDICIONALMENTE como entregable documental (Parte V, §19); R2-B2-b2 NO INICIADO Y SIN AUTORIZACIÓN; R2-B2 completo, sin aprobación global; R2-C, R3 y R4 NO INICIADOS Y SIN AUTORIZACIÓN.** El registro figura en `aprobaciones.md` y `bitacora.md`.
+**Precedencia de estado.** Otras líneas de este documento, `aprobaciones.md` y `bitacora.md` (en sus entradas históricas) dicen que R2-B2 **no está iniciado** porque describen una fecha anterior. **Vigente (2026-11-20): R2-B2-a APROBADO CONDICIONALMENTE como entregable documental (esta Parte IV); R2-B2-b1 APROBADO CONDICIONALMENTE como entregable documental (Parte V, §19); R2-B2-b2 APROBADO CONDICIONALMENTE como entregable documental (Parte VI, §20); R2-B2 completo, sin aprobación global; R2-C, R3 y R4 NO INICIADOS Y SIN AUTORIZACIÓN.** El registro figura en `aprobaciones.md` y `bitacora.md`.
 
 **Qué contiene.** La frontera atómica de las operaciones que **modifican permisos**: invariantes de frontera (§18.2), las siete fichas UI-01, UI-02, UI-03, UI-04, UI-08, UI-11 y UI-12 (§18.4), las operaciones que modifican permisos y **no** están en UI-01…13 como candidatas a la enumeración de la Fase 4, y las que pueden alterar el conjunto de dueños (§18.5), la matriz de concurrencia y revocaciones (§18.6), el análisis de K-2d (§18.7), la evaluación de CAP-02-A frente a CAP-02-D (§18.8), dependencias y decisiones abiertas (§18.9), riesgos nuevos sin aceptar (§18.10), las secciones reservadas a R2-B2-b (§18.11), trazabilidad y criterios (§18.12), verificaciones del autor (§18.13), estado de Git (§18.14) los hallazgos de la auditoría con sus correcciones (§18.15) y los de la revisión focalizada (§18.16).
 
@@ -3630,3 +3630,600 @@ Los riesgos se **registran sin valorar ni aceptar**: la valoración y la aceptac
 **Observaciones editoriales que permanecen** (no bloqueantes; no se abre una nueva ronda): ES-22 es [CONF] en bloque aunque "corrección encubierta" es una derivación; IF-24 [CONF] cita RD-CAL-07, que es [REC]; IF-24 remite a IF-17, que no lista A-1; CAND-24 cita RD-RES-10 en lugar de RD-RES-12 (Q-29); OC-33 solo trata asignaciones de editor y no la delegación del equipo retirado; el inventario no menciona eliminar un torneo en borrador; DB2b-4 dice "completar K-2c" aunque K-2a, H2B1-10 y las matrices no se modifican; RF-AUD-04 respalda IF-31 y no se cita.
 
 **Nota de cierre (2026-11-19).** Esta matriz no se modifica. La v0.3 recibió una verificación final focalizada de solo lectura de otro subagente de contexto nuevo (mensaje «TORNEO DE CAMPEONES — VERIFICACIÓN FINAL DE R2-B2-b1 v0.3»): D-01, D-02 y D-03 RESUELTOS, sin regresiones materiales nuevas y con observaciones editoriales no bloqueantes (§19.0); dictamen «APROBABLE COMO ENTREGABLE DOCUMENTAL CONDICIONADO». Independencia **solo de contexto**. La aprobación condicional de R2-B2-b1 como entregable documental figura en §19.0.
+
+---
+
+# PARTE VI — BLOQUE R2-B2-b2 (v0.3-R2B2b2, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-20)
+
+## 20. R2-B2-b2 — ADR-02.C (parte 2b-2): sincronización, auditoría de rechazos y consolidación de las fronteras atómicas
+
+### 20.0 Alcance, autorización y reglas de esta parte
+
+**Estado: v0.3-R2B2b2 — APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-20), por acto expreso del usuario (ver «Aprobación condicional» más abajo).** La v0.3 corrigió la v0.2 tras la revisión focalizada de contexto nuevo (M-1 y M-2, §20.15.2) y la v0.2 corrigió la v0.1 (E-01…E-14, §20.15.1). Esta parte no altera el contenido técnico de R1 (§0–§15), R2-A (§16), R2-B1 (§17), R2-B2-a (§18) ni R2-B2-b1 (§19); se **añade** al final del archivo. **Única excepción, de estado y no técnica:** las frases de estado de la precedencia de §17.0 y §18.0 (registro de esta aprobación).
+
+**Autorización recibida.** Mensaje «TORNEO DE CAMPEONES — INICIO CONTROLADO DE R2-B2-b2» (2026-11-19): «APRUEBO EL PLAN DE R2-B2-b2 COMO GUÍA DE TRABAJO, CON UNA MODIFICACIÓN:» «NO SUBDIVIDIR R2-B2-b2 EN DOS ENTREGABLES INDEPENDIENTES.» «AUTORIZO EXCLUSIVAMENTE EL INICIO Y LA REDACCIÓN DE UN ÚNICO BORRADOR R2-B2-b2 v0.1.» Archivo autorizado: solo `02-arquitectura-adr.md` (Parte VI, §20). La fecha es la del aviso de fecha de la sesión; no hay marca de tiempo individual del mensaje.
+
+**Autorización de la corrección (v0.2).** Mensaje «TORNEO DE CAMPEONES — CORRECCIÓN INTEGRAL R2-B2-b2 v0.1» (2026-11-19): «AUTORIZO EXCLUSIVAMENTE UNA RONDA INTEGRAL DE CORRECCIONES DOCUMENTALES DE LOS HALLAZGOS E-01 A E-14.» Limitada a la Parte VI (§20); sin aprobación, registro ni versionado; R2-B2-b2 continúa como **borrador pendiente de aprobación**.
+
+**Autorización de la corrección mínima (v0.3).** Mensaje «TORNEO DE CAMPEONES — CORRECCIÓN MÍNIMA M-1 Y M-2 DE R2-B2-b2» (2026-11-19): «AUTORIZO EXCLUSIVAMENTE UNA CORRECCIÓN DOCUMENTAL MÍNIMA DE LOS HALLAZGOS M-1 Y M-2.» Limitada a la Parte VI (§20); sin aprobación, registro ni versionado.
+
+**Aprobación condicional de R2-B2-b2 como entregable documental (2026-11-20).** Por acto expreso del usuario (mensajes «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R2-B2-b2» y «TORNEO DE CAMPEONES — REGISTRO FORMAL DE R2-B2-b2»), la v0.3-R2B2b2 quedó **APROBADA CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL**: «APRUEBO CONDICIONALMENTE R2-B2-b2 v0.3 COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.»; registro autorizado con «AUTORIZO EXCLUSIVAMENTE REGISTRAR LA APROBACIÓN CONDICIONAL DE R2-B2-b2 COMO ENTREGABLE DOCUMENTAL.» La fecha 2026-11-20 es la del aviso de fecha de la sesión; no hay marca de tiempo individual del mensaje.
+
+- **Comprende:** (1) la ficha UI-06 y sus diez campos; (2) la frontera lógica de autorización, aplicación y auditoría compartida con las operaciones en línea; (3) la composición de UI-10 dentro de UI-06, sin segunda unidad atómica; (4) los invariantes IF-32…41; (5) los estados prohibidos ES-25…32; (6) las garantías GT-19…24; (7) los escenarios de concurrencia ESC-43…56; (8) la clasificación de registros de rechazo R-1…R-7, respetando sus fuentes y su carácter confirmado, derivado, recomendado o abierto; (9) la síntesis documental de K-2a a K-2d y la matriz de las 13 unidades; (10) la evaluación comparativa de CAP-02-A y CAP-02-D; (11) las evidencias EV-13…17; (12) las amenazas y dependencias documentadas; (13) las condiciones OC-34…42, las decisiones DB2c-1…11 y los riesgos RB2c-01…11, abiertos o sin aceptar según corresponda; (14) la trazabilidad y los criterios de aceptación documental de §20.
+- **Exclusiones (la aprobación NO implica):** (1) elegir CAP-02-A ni CAP-02-D; (2) elegir CAP-09-P-A, B ni C, ni las alternativas F-1…F-3 ni O-1…O-3; (3) resolver K-3, OC-04, OC-08, OC-13, OC-24 ni OC-35; (4) resolver DB1-1 a DB1-6, DB2a-1 a DB2a-10, DB2b-1 a DB2b-9 ni DB2c-1 a DB2c-11; (5) resolver OC-01 a OC-42 ni las doce decisiones abiertas de R2-A; (6) declarar demostrada la independencia de CAP-02-D; (7) dar por cumplido R1 §8.1; (8) declarar K-2d implementada ni probada; (9) fijar parámetros; (10) aceptar riesgos; (11) conceder excepciones, en particular a D-2; (12) aprobar definitivamente ADR-02.C; (13) aprobar globalmente R2-B2, R2 ni la Fase 2; (14) autorizar R2-C, R3 ni R4. La aprobación **no acredita implementación, ejecución ni pruebas empíricas** y **no constituye una auditoría externa**; las garantías documentadas son **exigidas, no implementadas ni probadas**.
+- **Limitación de la revisión.** La auditoría de la v0.1, la revisión focalizada de la v0.2 y la verificación final de la v0.3 las hicieron subagentes del mismo tipo de modelo que redactó el borrador: su independencia fue **solo de contexto, no organizativa ni externa**. La verificación final de la v0.3 fue **favorable** («APROBABLE COMO ENTREGABLE DOCUMENTAL CONDICIONADO»).
+- **Observaciones editoriales no bloqueantes** (identificadas para una conciliación documental posterior, sin modificar el contenido técnico aprobado): las de §20.15.2 y las de la verificación final: redacción genérica de «registro del rechazo» (§20.3.1 fila h, UI-06 campos 5 (f) y 6); precisiones pendientes de ES-30 y ESC-55; tensión entre la ficha UI-03 de R2-B2-a («se audita como rechazo») y OC-08, que sigue abierta; y las demás de trazabilidad, componentes y clasificación documental. El usuario **no autoriza modificar el contenido técnico aprobado de R2-B2-a ni de R2-B2-b2** para atenderlas.
+- **Nota posterior sobre §20.13.** §20.13 se conserva **intacto** como descripción del estado al redactar el borrador. Su afirmación de que la v0.3 «no ha sido auditada ni revisada por nadie más» quedó superada: la v0.3 **sí recibió una verificación focalizada favorable** de un agente de contexto nuevo (independencia solo de contexto). Lo mismo vale para V-5, CR2B2b2-15 y §20.14 («Qué no se hizo»): describen el estado a la fecha del borrador, y prevalece este apartado. §19.0 se conserva intacto; el versionado de R2-B2-b1 se aclara en `aprobaciones.md`.
+- **Integridad.** SHA-256 del **contenido técnico aprobado** (el archivo inmediatamente antes de añadir estos metadatos): `f1e1fb34ed1bdbd68628d0ab83ebec8a5ee912f0e49625fce5b124f57fddf30c`. El hash del **archivo con los metadatos de aprobación** se registra en `aprobaciones.md` y `bitacora.md`; **no se inserta en este archivo**. Los metadatos de aprobación son solo editoriales: el título y el estado de la Parte VI, este apartado, la fila de estado de §20.1, el estado y el párrafo «Git» de §20.14 y las frases de estado de la precedencia de §17.0 y §18.0.
+- **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
+- **Condición de cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. La consolidación de las 13 unidades no equivale a aprobación global de R2-B2. Las obligaciones de R2-C, R3 y la Fase 4 conservan su alcance.
+
+**Un único entregable en dos etapas internas.** La **etapa 1** (§20.2 a §20.5) documenta UI-06, la frontera de sincronización y la auditoría de rechazos. La **etapa 2** (§20.6 a §20.11) consolida K-2, CAP-02-A frente a CAP-02-D, las amenazas, las condiciones y las operaciones candidatas sobre las **13 unidades UI-01…13**. Ambas forman **un solo borrador pendiente de revisión y aprobación**; no son dos entregables.
+
+**Qué NO contiene ni hace.**
+
+| # | Exclusión |
+|---|---|
+| X-1 | No redacta R2-C, R3 ni R4; las formulaciones de ADR-05.C, ADR-04.C y ADR-16.C son de R2-C y los mecanismos de R3 |
+| X-2 | No aprueba R2-B2-b2, R2-B2 completo, R2 ni la Fase 2; no registra aprobación alguna |
+| X-3 | No resuelve DB1-1…DB1-6, DB2a-1…DB2a-10, DB2b-1…DB2b-9, OC-01…OC-33 ni las 12 decisiones abiertas de R2-A (de las 13 originales, la 11 está atendida) |
+| X-4 | **No elige** CAP-02-A ni CAP-02-D; **no declara demostrada la independencia de CAP-02-D**; **no declara cumplido R1 §8.1**; no concede excepción |
+| X-5 | No fija PAR ni acepta RES o riesgos RB; **no concede excepción a D-2** ni resuelve OC-04 |
+| X-6 | No elige tecnología, proveedor, producto ni mecanismo (de cola, secuencia, idempotencia, serialización, almacenamiento ni registro); no escribe SQL, políticas, rutas ni contratos de interfaz |
+| X-7 | No modifica `00`, `01`, `aprobaciones.md`, `bitacora.md`, ni R1, R2-A, R2-B1, R2-B2-a ni R2-B2-b1; no crea ramas, commits, pushes, PR ni merges |
+| X-8 | **No presenta ninguna garantía como implementada ni validada,** incluida K-2d: todas son **exigidas**, a nivel de capacidad |
+| X-9 | **No decide** la partición ADR-05.C / ADR-09.C (decisión 3 de R2-A), K-3 ni la decisión 10 de R2-A: presenta alternativas y consecuencias |
+
+**Lectura previa directa.** El autor leyó directamente en esta sesión: el skill del proyecto y sus reglas de dominio; en `01` OFF-01…OFF-25 (incluidos OFF-02, 10, 11, 12, 13, 17, 20, 22 y 25 completos), la política de conflictos §9.4 con sus precisiones, los estados de una operación §9.2, RT-13, RT-14, RD-RES-01, 04, 05, 07, 10 y 13, RD-EVT-12, RF-AUD-01…06 y la matriz §7.1; en R1 §5.3 (CMP-13), §5.5 (UI-01…13 y notas), §7.0, §7.3 (FL-3) y §8.1 (ADR-05); en R2-A §16.7 (IN-09-01…13, CAP-09-P-A/B/C, §16.7.9) y §16.8.4 (H2A-06) y las filas de amenazas y casos de abuso asignadas a R2-B y R2-C; en R2-B1 K-1…K-3, CAP-02-A/D y §17.3.3; en R2-B2-a y R2-B2-b1 las fichas, IF, ES, GT, EV, OC y CAND; y `aprobaciones.md` y `bitacora.md`.
+
+**Convención.** [CONF]: texto confirmado de `01` o R1. [REC]: recomendación o propuesta de `01` (no confirmada). [DER]: derivada por el autor (se explica el paso). [ABIERTO]: sin resolver. Los identificadores continúan los de las partes previas: IF-32…, ES-25…, GT-19…, ESC-43…, OC-34…, EV-13….
+
+### 20.1 ADR-02.C (parte 2b-2) — Identificación
+
+| Campo | Valor |
+|---|---|
+| ADR | ADR-02.C (continuación de §17.1, §18.1 y §19.1): frontera atómica de la operación sincronizada y consolidación de R2-B2 |
+| Entradas | R1 §5.3, §5.5, §7.0, §7.3, §8.1; R2-A (ADR-09.C, §16.7.9, §16.8.4); R2-B1 (K-1…K-3, CAP-02-A…D, DB1-1…6); R2-B2-a (IF-01…19, ES-01…13, GT-01…10); R2-B2-b1 (IF-20…31, ES-14…24, GT-11…18) |
+| Salida de esta parte | Ficha UI-06; frontera de sincronización; requisitos de la auditoría de rechazos; síntesis de K-2 sobre las 13 unidades; evidencia consolidada sobre DB1-1; amenazas, condiciones y candidatas |
+| Estado | v0.3-R2B2b2: APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL (2026-11-20); ADR-02.C **no** queda aprobada definitivamente |
+
+### 20.2 Invariantes de frontera y estados prohibidos adicionales (etapa 1)
+
+Se **suman** a IF-01…31 y ES-01…24 (IF-03, IF-05, IF-06, IF-09, IF-10, IF-11, IF-12, IF-13, IF-17, IF-20, IF-23, IF-24 e IF-30 se aplican también a UI-06; GT-02, GT-04, GT-07, GT-08, GT-09 y GT-14 se aplican también a UI-06, §20.6.2). No introducen permisos ni retiran garantías (IN-02-18).
+
+**Invariantes (IF).**
+
+| ID | Invariante de frontera | Tipo | Fuente | Paso derivado (solo [DER]) |
+|---|---|---|---|---|
+| IF-32 | **Misma frontera lógica en línea y sincronizada.** CMP-13: «No contiene reglas de negocio ni decide permisos»: entrega cada operación a CMP-08 y CMP-11 «por el mismo camino que las operaciones en línea». **No existe una segunda ruta de negocio con reglas distintas** | [CONF] en lo que dicen CMP-13 y FL-3; [DER] en la consecuencia de que no hay otra ruta de negocio | R1 §5.3 (CMP-13), §7.3 (FL-3) | CMP-13 entrega por el mismo camino y no contiene reglas de negocio; de ahí se deduce que no existe una segunda ruta con reglas distintas |
+| IF-33 | **Autorización vigente al sincronizar:** «La autorización definitiva es siempre del servidor/BD y se verifica al sincronizar con el estado vigente»; evaluada de forma atómica con la aplicación (RT-13). «Se rechaza toda operación sin autorización vigente, aunque se capturara legítimamente antes»; una operación que sigue autorizada por otro rol vigente se evalúa por ese rol. «Ningún dato local concede permisos.» | [CONF] | OFF-22, OFF-11 (D-11), §9.4 filas 4 y 5 | — |
+| IF-34 | **Idempotencia:** «cada operación se aplica como máximo una vez»; reenviar el mismo identificador, también de forma concurrente, «devuelve el resultado original sin repetir efectos ni registros de auditoría». **Para una operación rechazada, `01` no fija cómo se aplica (OC-35)** | [CONF] en lo aplicado; [ABIERTO] en lo rechazado | OFF-06, RD-RES-05, §9.4 fila 9 | — |
+| IF-35 | **Orden y contigüidad por partido:** las operaciones se validan en orden de secuencia contra el estado resultante de las anteriores aceptadas, partiendo del estado oficial; la secuencia debe ser contigua; «Un hueco bloquea las operaciones posteriores de ese partido y se registra (OFF-20)». Que las siguientes queden «bloqueadas por operación anterior» y las de otros partidos continúen es **[REC]** | [CONF] en la validación en orden y en el hueco (OFF-25); [REC] en el bloqueo por operación anterior (OFF-07) | OFF-25, OFF-07, OFF-13 (el orden depende de la secuencia y no del reloj) | — |
+| IF-36 | **Dependencia de la reanudación:** si la reanudación se rechaza o queda en conflicto, «ningún evento posterior de la secuencia se aplica ni se publica»; un evento con el estado oficial `suspendido` y sin reanudación aceptada previa en su secuencia se rechaza | [CONF] | OFF-25, RD-EVT-12, RD-RES-13, Q-46 | — |
+| IF-37 | **Conflicto de versión sin sobrescritura:** una operación de marcador o estado con versión base desactualizada no se aplica y queda `en conflicto`; «lo confirmado por el servidor nunca se sobrescribe en silencio» y «ninguna captura local se pierde en silencio» | [CONF] | OFF-09, §9.4 filas 2, 3 y 10, RD-RES-04 | — |
+| IF-38 | **Atomicidad por operación sincronizada:** «cada operación se aplica completa o no se aplica»; «una interrupción de la red durante el envío no deja estados parciales» | [REC] en OFF-08; [DER] en su aplicación a la unidad | OFF-08, IF-01, IF-29 | La unidad indivisible de R1 §7.0 ya exige todo o nada; OFF-08 lo recomienda para la ruta sincronizada |
+| IF-39 | **Una sola operación prevalece ante carreras incompatibles:** ante una carrera entre una revocación y la sincronización, «una sola de las dos prevalece, sin estados intermedios» | [CONF] | OFF-22 (criterio de aceptación), RT-13, CL-45 | — |
+| IF-40 | **Lo rechazado o en conflicto no modifica lo oficial ni lo público:** no se publica ni se sobrescribe información oficial; no hay recuperación ni publicación automática de operaciones rechazadas; solo la operación `confirmada` de un partido visible puede ser pública | [CONF] | OFF-22, OFF-15, OFF-21, §9.2, RD-RES-07 | — |
+| IF-41 | **Las variantes de estado (iniciar, suspender, reanudar, finalizar) recorren la misma frontera que su equivalente en línea;** su enumeración definitiva como unidades corresponde a la Fase 4 | [DER] | R1 §5.5 (lista no exhaustiva), OFF-01, RD-RES-01, 10 y 13, OFF-21 | OFF-01 permite capturar esos cambios sin conexión y R1 §5.5 no los enumera como unidades; se tratan como variantes de UI-06 sin asumir unidad definitiva (OC-34) |
+
+**Estados prohibidos (ES).** Ningún observador debe verlos y ninguna ordenación de operaciones concurrentes debe producirlos.
+
+| ID | Estado prohibido | Tipo | Fuente |
+|---|---|---|---|
+| ES-25 | Una operación recibida **aplicada dos veces** (efectos o registros de auditoría duplicados) por reenvíos secuenciales o concurrentes | [CONF] | OFF-06, §9.4 fila 9 |
+| ES-26 | Una operación sincronizada **aplicada con una autorización ya revocada y confirmada**, o aplicada por una ruta con reglas de negocio distintas de las de su equivalente en línea | [CONF] en la autorización; [DER] en las reglas distintas | OFF-22, RT-13, IF-32 |
+| ES-27 | Un evento aplicado o publicado tras una reanudación rechazada o en conflicto, o una operación posterior aplicada saltando un hueco de la secuencia | [CONF] | OFF-25 |
+| ES-28 | Marcador o estado oficial **sobrescrito** por una operación con versión base desactualizada | [CONF] | OFF-09, RD-RES-04, §9.4 filas 2 y 3 |
+| ES-29 | Una operación rechazada o en conflicto **visible en lo público**, o aplicada a medias (resultado sin su recálculo, o recálculo sin resultado) | [CONF] | OFF-15, OFF-22, ES-14 |
+| ES-30 | Un registro de rechazo o bloqueo **exigido por RF-AUD-06 (R-2)** que no persiste porque la unidad se abortó, o una pérdida de auditoría provocada de forma inducida. **No cubre** la persistencia independiente de R-4, que está [ABIERTA] (ADR-05.C, ADR-09.C, decisión 3 de R2-A), ni la de R-6 [REC], salvo decisión formal | [DER] | IN-09-05, RF-AUD-06, CAB-14; R2-A §16.7.2 |
+| ES-31 | Un reenvío de una operación **ya aplicada** que devuelve un resultado distinto del original o genera un efecto o un registro nuevo. **Para una operación rechazada el alcance de OFF-06 está [ABIERTO] (OC-35) y este estado no lo cubre** | [CONF] en lo aplicado | OFF-06, §9.4 fila 9 |
+| ES-32 | Un resultado recibido por sincronización cuyo recálculo se confirma en una unidad distinta de la que confirma el resultado (**dos unidades atómicas**) | [DER] | R1 §5.5 (UI-10) |
+
+### 20.3 Frontera de sincronización (etapa 1)
+
+#### 20.3.1 Camino lógico de la operación recibida
+
+Es el camino de R1 §7.3 (FL-3) y de la columna de componentes de UI-06, **sin elegir mecanismo**:
+
+| Paso | Qué ocurre | Componente | Dentro de la unidad |
+|---|---|---|---|
+| a | Recepción: identificador, secuencia, versión base y datos de la operación (OFF-03) | CMP-13 | Sí, en lo que decide (idempotencia, orden, versión) |
+| b | Idempotencia: ¿ya se aplicó? Orden y contigüidad por partido; versión | CMP-13 | Sí |
+| c | **Revalidación completa con el flujo §7.0** (pasos 2 a 5): roles, asignaciones, estado, historial de delegaciones y restricciones; política de segundo factor; RT-05 y RT-14 por efecto | CMP-08 | **Sí** (unidad indivisible: R1 §7.0) |
+| d | Aplicación de la operación (la de UI-10 si es un resultado, con su recálculo; o la variante de estado de §20.3.5) | CMP-11 (CMP-12 y CMP-14 por la composición de UI-10) | **Sí** |
+| e | Registro de la idempotencia de lo aplicado y evento de auditoría de lo aplicado, con **origen sincronizado**, identificador de la operación y hora del cliente | CMP-13, CMP-16 | **Sí** (R1 §5.5 para la idempotencia; IN-09-04 e IN-09-06 para la auditoría) |
+| f | Señal de cambio, solo si ADR-06 la adopta | CMP-14 | Sí (IF-22) |
+| g | Respuesta al cliente y estado local de la operación (`confirmada`, `en conflicto`, `rechazada`: §9.2) | CMP-13, CMP-05 | **No** |
+| h | **Registro del rechazo** (si se rechazó) | CMP-16 | **No** (IF-09) |
+| i | Conservación local de lo rechazado o en conflicto (≤ 30 días), exportación limitada y constancia de eliminación | CMP-04, CMP-05 | **No** (cliente; OFF-10, OFF-24) |
+| j | Entrega pública y copias en Z0 | CMP-15 | **No** (§19.3) |
+
+**Reparto de responsabilidades (R1 §5.3).** **CMP-08** decide **permisos y conflictos de interés** (RT-05, RT-14 con historial) con la definición única. **CMP-13** detecta **idempotencia, orden por secuencia contigua y conflictos de versión** y **no decide permisos**. **CMP-11** aplica y **CMP-16** audita. OFF-22 incluye «integridad y versión» entre lo que se verifica al sincronizar: **quién lo ejecuta** lo reparte R1 §5.3 (versión, idempotencia y secuencia: CMP-13; permisos: CMP-08). Los componentes de la fila de UI-06 en R1 §5.5 son CMP-13 + CMP-08 + CMP-11 + CMP-16; **CMP-12 y CMP-14** intervienen por la composición de UI-10; la cola y el sincronizador del cliente (CMP-04, CMP-05) y la entrega (CMP-15) son **externos a la unidad**. Las **decisiones de protocolo** (cómo se estructuran la cola, la secuencia, la idempotencia, la revalidación y los conflictos) son de **ADR-05.C (R2-C)** y no se toman aquí.
+
+#### 20.3.2 Lo confirmado y lo pendiente sobre «antes» y «después»
+
+| CONFIRMADO en `01` o R1 | PENDIENTE (no se resuelve aquí) |
+|---|---|
+| La autorización se evalúa con el **estado vigente al sincronizar** (OFF-22; D-11; §9.4 filas 4 y 5) | **El instante que determina el resultado de una operación en tránsito:** si cuenta el de la recepción, el de la aplicación o el de la confirmación de la revocación cuando la sincronización y la revocación coinciden (**OC-04**) |
+| Se **rechaza** toda operación sin autorización vigente al sincronizar, **aunque se capturara legítimamente antes** (OFF-22, OFF-11) | Las **condiciones de D-2** y la **medición del objetivo de revocación ≤ 60 s** en sesiones conectadas (IN-03-07), no medible en la Fase 2: decisión 1 de R2-A (DB2c-10); **sin excepción concedida** |
+| Ante una carrera incompatible **una sola operación prevalece**, sin estados intermedios (OFF-22; RT-13; CL-45) | El **nivel de autenticación exigido al sincronizar** (CAP-03-S-A o S-B de ADR-03.C; OFF-23): OC-39 |
+| Con la sesión vencida, la captura continúa pero **sincronizar exige sesión válida y permisos vigentes** (OFF-23) | Las **decisiones de protocolo reservadas a R2-C:** cola, secuencia, idempotencia, revalidación y conflictos (ADR-05.C) y la partición ADR-05.C / ADR-09.C (decisión 3 de R2-A) |
+| Una operación que sigue autorizada por otro rol vigente se evalúa por ese rol (OFF-22; RT-11) | Si el **organizador** captura sin conexión (Q-42 (a)) y si organizador y dueño pueden **reanudar** sin conexión (A-10): OC-38 |
+
+**Lectura del autor [DER].** La partición entre CONFIRMADO y PENDIENTE es una **lectura del autor** de OFF-22, §9.4 e IN-03-07. Lo confirmado fija **cuándo** se evalúa la autorización (al sincronizar) y **qué** ocurre con lo no autorizado (se rechaza); lo pendiente fija **qué instante cuenta** para una operación en tránsito y **cómo se mide** el reflejo de una revocación en sesiones conectadas. **OC-04 permanece abierta y D-2 no recibe excepción.**
+
+#### 20.3.3 Mapa de los requisitos OFF a capacidades
+
+| Requisito | Capacidad que exige | Dónde se documenta | Estado en `01` | Decide |
+|---|---|---|---|---|
+| OFF-01 | Capturar sin conexión marcador, eventos, iniciar, suspender, reanudar y finalizar | Variantes de §20.3.5; IF-41 | CONF | Fase 4 (OC-34) |
+| OFF-03 | Identificador único, secuencia por partido, versión base, dispositivo, usuario y hora local en cada operación | Cliente (CMP-04); IF-34, IF-35 | CONF | ADR-05.C (R2-C) |
+| OFF-05 | Disparo de la sincronización con la app abierta; reintento con espera creciente | Cliente; reintentos y rechazos (§20.4) | DER | ADR-05.C |
+| OFF-06 | Idempotencia en el servidor | IF-34, ES-25, ES-31 | CONF | ADR-05.C |
+| OFF-07 | Orden y bloqueo por operación anterior | IF-35 | REC | ADR-05.C; OC-37 |
+| OFF-08 | Atomicidad por operación | IF-38 | REC | R3 |
+| OFF-09 | Política de conflictos | IF-37 | CONF + REC | ADR-05.C |
+| OFF-10 | No descartar en silencio; retención ≤ 30 días | Cliente (fuera de la unidad) | CONF | ADR-05.C, ADR-16.C |
+| OFF-11 | Revocación y desasignación al sincronizar | IF-33 | CONF | — |
+| OFF-13 | El orden depende de la secuencia y no del reloj | IF-35 | REC | — |
+| OFF-15 | Lo local jamás es público: solo la operación `confirmada` de un partido visible | IF-40; ES-29 | CONF | — |
+| OFF-20 | Metadatos de operaciones aplicadas, en conflicto y rechazadas | §20.5 (R-4) | CONF (D-9) | ADR-05.C (R2-C); ADR-09.C (R2-A); partición: decisión 3 de R2-A |
+| OFF-24 | Exportación limitada de lo rechazado o en conflicto | Cliente (fuera de la unidad; R-7) | CONF | ADR-05.C, ADR-16.C |
+| OFF-21 | Finalización pendiente hasta que el servidor la confirme | IF-40; variantes de estado (§20.3.5) | CONF | — |
+| OFF-22 | Autorización definitiva al sincronizar, atómica con la aplicación | IF-33, IF-39 | CONF | — |
+| OFF-23 | Sesión vencida: captura sí, sincronización exige sesión válida | §20.3.2; OC-39 | CONF | ADR-03.C (R2-A) |
+| OFF-25 | Secuencias con reanudación | IF-35, IF-36, ES-27 | CONF | ADR-05.C |
+
+#### 20.3.4 Composición de UI-10 dentro de UI-06 (OC-30)
+
+R1 §5.5 dice que, cuando el resultado llega por sincronización, UI-10 se ejecuta **dentro de** UI-06: «la aplicación de la operación recibida y su recálculo son una sola transacción de datos». **Regla fundamental: la operación recibida recorre la misma frontera lógica de autorización, aplicación y auditoría que su equivalente en línea; no se crea una segunda ruta ni una segunda unidad atómica de UI-10.**
+
+| Elemento | Pertenece a UI-06 (envoltura) | Pertenece a UI-10 (contenido) | Se evalúa una sola vez |
+|---|---|---|---|
+| Idempotencia, orden, contigüidad y versión | Sí | — | — |
+| Autorización vigente (§7.0, pasos 2 a 5) | Sí: **una sola evaluación** de CMP-08 | Las reglas que aplica son las de UI-10 (asignación vigente, RT-05, RT-14, estado del partido) | **Sí** |
+| Marcador, eventos, estado, clasificación derivada, señal de cambio | — | Sí (IF-20, IF-21, IF-22, GT-11) | — |
+| Registro de la idempotencia de lo aplicado (R1 §5.5) | Sí | — | — |
+| Evento de auditoría de lo aplicado (IN-09-04, IN-09-06) | **Uno solo**, con origen sincronizado | Su contenido es el de UI-10 | **Sí** |
+| Conflicto de versión (RD-RES-04) | Se detecta al recibir | Es el mismo que el de la ruta en línea (IF-30, IF-37) | **Sí** |
+
+**Componentes incorporados por composición.** CMP-12 y CMP-14 no figuran en la fila de UI-06 de R1 §5.5: intervienen porque UI-10 se ejecuta dentro de UI-06. La frontera lógica es **una sola** para UI-06 y UI-10.
+
+**Consecuencia documental.** Las garantías de UI-10 (GT-11, GT-12, GT-14) siguen siendo las de la ruta sincronizada; UI-06 **añade** las garantías de idempotencia, orden y persistencia del rechazo (GT-19…24) y **no sustituye ni duplica** las de UI-10. La **coherencia pública** sigue siendo garantía exigida a ADR-04.C (GT-13).
+
+#### 20.3.5 Iniciar, suspender, reanudar y finalizar como variantes de operaciones recibidas
+
+OFF-01 permite capturar sin conexión marcador, eventos, iniciar, suspender, reanudar y finalizar. R1 §5.5 enumera UI-10 para confirmar un resultado y **no enumera** unidades específicas para iniciar, suspender ni reanudar (CAND-17). Se tratan aquí **como variantes de UI-06**, sin asumir una unidad definitiva:
+
+| Variante | Requisitos | Facultad y restricciones | Frontera que necesita | Particularidad de la ruta sincronizada |
+|---|---|---|---|---|
+| **Iniciar** (`programado` → `en_juego`) | RD-RES-01 (transiciones válidas) [REC (H-08)] | Las de captura (matriz §7.1 filas 24 y 25) | Cambio de estado + auditoría, sin recálculo | Se rechaza si el estado oficial ya cambió (versión) |
+| **Suspender** (`en_juego` → `suspendido`) | RD-RES-10 [REC en la transición; controles CONF]; RD-EVT-12 | Editor asignado y dueño; organizador **COND Q-42 (a)**; RT-14, RT-05 | Cambio **solo de estado** (no modifica marcador ni eventos) + auditoría | Se sincroniza con OFF-22; sin asignación vigente → rechazada (CL-47) |
+| **Reanudar** (`suspendido` → `en_juego`) | RD-RES-13 [CONF, Q-46 B]; OFF-25 | Editor asignado (también sin conexión); organizador y dueño solo en línea hasta decidir (A-10) | Cambio de estado + auditoría; **condiciona los eventos posteriores de su secuencia** (IF-36) | Rechazada o en conflicto → ningún evento posterior se aplica ni se publica |
+| **Finalizar** (→ `finalizado`) | OFF-21 [CONF]; RD-RES-07 | Las de captura; **finalización pendiente** hasta confirmación del servidor | Se evalúa **como UI-10** (confirmar el resultado con recálculo), sin dar por definitiva su enumeración (OC-34) | El partido solo se considera finalizado y público cuando el servidor la confirma |
+
+**Condición abierta (OC-34):** su enumeración definitiva como unidades (una por transición, una única, o variantes de UI-10) corresponde a la **Fase 4**. Mientras tanto, cada variante cumple IF-32 a IF-41 y se evalúa como **parte de UI-06**.
+
+### 20.4 Ficha UI-06 — Aplicar una operación recibida por sincronización (etapa 1)
+
+| Campo | Contenido |
+|---|---|
+| 1. Disparador | Una operación capturada sin conexión llega al servidor al sincronizar (con la app abierta, al recuperar la conexión, por «Sincronizar ahora» o por reintento: OFF-05). El actor es el editor asignado, el dueño (matriz §7.1, fila 24) o el organizador si Q-42 (a) lo habilita (la reanudación sin conexión de organizador y dueño depende de A-10); **ninguno sobre los partidos de su propio equipo** si es delegado (RT-14). Requiere **sesión válida** (OFF-23) |
+| 2. Componentes (R1 §5.5) | CMP-13 + CMP-08 + CMP-11 + CMP-16 (CMP-12 y CMP-14 intervienen por la composición de UI-10; la cola y el sincronizador del cliente y la entrega son externos: §20.3.1) |
+| 3. Requisitos | «Aplicar una operación recibida: autorizar, registrar idempotencia, aplicar y auditar» (R1 §5.5); OFF-06, OFF-22, RT-13; OFF-03, 07, 08, 09, 10, 11, 13, 20, 21, 23, 25; §9.2 y §9.4; RD-RES-04, 05, 07, 10 y 13; RD-EVT-12; RT-05, RT-14; IF-32…IF-41 y los de §19 que correspondan |
+| 4. Autorización | **Servidor:** **CMP-08** decide **permisos y conflictos de interés** con la definición única, con el estado **vigente al sincronizar**: sesión válida, **autorización vigente por alguno de los roles de la cuenta** (rol vigente y asignación vigente al partido) y ausencia de conflicto de interés (RT-05 y RT-14, incluida la restricción histórica no levantada, Q-45). **CMP-13 no decide permisos:** detecta idempotencia, orden y contigüidad por partido y conflictos de versión (R1 §5.3; OFF-22 incluye «integridad y versión» en lo que se verifica al sincronizar). **Capa de datos:** verifica la misma decisión de permisos y el **estado resultante** (un único resultado oficial por partido, asignación vigente al partido). **Que la capa de datos impusiera también la secuencia contigua no tiene fuente en `01` ni en R1:** si se requiriera, sería una derivación [DER] a justificar en ADR-05.C (R2-C; OC-41). Ningún dato local concede permisos |
+| 5. Secuencia lógica | (a) recepción; (b) idempotencia, orden, contigüidad y versión; (c) **flujo §7.0:** (1) identificar al actor y la sesión, (2) reunir roles, asignaciones, estado y restricciones, (3) calcular el efecto, (4) política efectiva de segundo factor con todos los roles vigentes (IF-12), (5) decidir; (d) aplicar la operación (UI-10 si es un resultado; la variante de estado que corresponda); (e) registrar la idempotencia de lo aplicado y auditar; (f) señal de cambio si ADR-06 la adopta; o **rechazar** (el registro del rechazo queda fuera: IF-09) |
+| 6. Cambios indivisibles | Registro de la idempotencia de lo aplicado + **la aplicación de la operación recibida y, si es un resultado, su recálculo (una sola transacción de datos: UI-10 dentro de UI-06)** + señal de cambio (si ADR-06) + **un solo** evento de auditoría de lo aplicado con origen sincronizado, identificador de la operación y hora del cliente. **Todo o nada** (IF-38). **Fuera de la unidad:** respuesta y estado local de la operación, registro del rechazo, conservación local, exportación limitada, entrega pública y copias (§20.3.1) |
+| 7. Estados prohibidos | ES-25, ES-26, ES-27, ES-28, ES-29, ES-30, ES-31, ES-32; ES-10, ES-21, ES-22 y ES-24 (evento para un jugador en baja o pendiente); **bajo D:** ES-13 (decidir con una proyección que no refleja una revocación ya confirmada) |
+| 8. Concurrencia | **ESC-43** a **ESC-56** (§20.8): reenvíos, dos dispositivos, revocación o desasignación concurrentes, hueco o reanudación rechazada, corrección o finalización por otro actor, jugador dado de baja o anonimizado, W.O. o cancelación, regeneración del calendario, sesión vencida o cuenta desactivada, concesión de delegado o levantamiento, y fallo del registro del rechazo |
+| 9. Auditoría | **Dentro:** lo aplicado, con origen sincronizado, identificador de la operación, hora del cliente y hora del servidor (IN-09-06; el servidor registra su propia hora: OFF-13). **Fuera:** los registros de rechazo que una fuente exige (RF-AUD-06 para RT-14; OFF-20 para lo rechazado o en conflicto; R-3 en su persistencia, IN-09-05): tipos y alternativas en §20.5 |
+| 10. Abiertas | **OC-04** (instante que cuenta para una operación en tránsito); **D-2** (decisión 1 de R2-A; DB2c-10; sin excepción); **OC-30** (composición con UI-10: documentada en §20.3.4, sin resolver las dependencias de R2-C); **OC-13**, **OC-35** y **OC-36** (K-3, registro de idempotencia de rechazadas, fallo del registro); **OC-34** (variantes de estado); **OC-37** (OFF-07 [REC]); **OC-38** (Q-42 (a) y A-10); **OC-39** (nivel de autenticación al sincronizar); **OC-40**, **OC-41** y **OC-42** (reasignación de AM-19 y AM-34; secuencia entre dos dispositivos; estado local tras un aborto técnico); decisiones 1, 3 y 10 de R2-A; Q-29, Q-30, Q-42, Q-43; A-9…A-11, A-13…A-15. DB1-1 intacta |
+
+### 20.5 Auditoría de rechazos como capacidad (etapa 1)
+
+**Reserva.** Esta sección documenta **requisitos de capacidad** de la persistencia de los rechazos. **No elige** entre CAP-09-P-A, B ni C, ni entre las alternativas F-1…F-3 y O-1…O-3 de R2-A (§16.7.9); **no decide** la partición ADR-05.C / ADR-09.C (decisión 3 de R2-A); **no resuelve K-3 ni la decisión 10 de R2-A.**
+
+#### 20.5.1 Tipos de registro y su fuente
+
+| # | Registro | Qué es | Fuente | Tipo de la exigencia | Dentro de la unidad |
+|---|---|---|---|---|---|
+| R-1 | **Lo aplicado** | Evento de auditoría de lo que la unidad aplicó (actor, rol, hora del servidor, torneo, entidad, acción, valores antes y después minimizados, motivo y origen) | RF-AUD-01, RF-AUD-02, RT-10; IN-09-04, IN-09-06 | [CONF] el contenido; [DER] que forme parte de la misma unidad (IN-09-04) | **Sí** |
+| R-2 | **Rechazos y bloqueos por conflicto de interés (RT-14)** | Registro «con actor, acción, equipo, torneo, motivo y hora, sin datos personales de menores»; también el bloqueo por falta de autoridad habilitada y «los intentos de levantar la restricción sin autoridad» | RF-AUD-06 (obligatorio, Q-44, Q-45), CL-51 | [CONF] | **No** |
+| R-3 | **Persistencia independiente de un registro de rechazo cuando existe un registro exigido** | Que, **si** una fuente exige registrar un rechazo o bloqueo, ese registro persista aunque la operación no se aplique o se revierta. **R-3 no crea por sí misma una obligación de registrar.** Su alcance por registro: **R-2** (RF-AUD-06): persistencia independiente conforme a su fuente (R2-A §16.7.2: «Sí [DER]»); **R-4** (OFF-20): persistencia independiente **[ABIERTO]**, de ADR-05.C y ADR-09.C y de la decisión 3 de R2-A; **R-6** [REC]: solo generaría esa obligación si se adopta formalmente | IN-09-05; R1 §7.0 paso 6 («DER de RF-AUD-06»); R2-A §16.7.2 | [DER] como propiedad de persistencia para R-2; [ABIERTO] para R-4; [REC] para R-6; IN-09-05 no establece por sí solo qué rechazos se registran | **No** (IF-09) |
+| R-4 | **Metadatos de operaciones rechazadas o en conflicto** | «Metadatos mínimos de las rechazadas o en conflicto que efectivamente recibe»; solo del torneo del organizador; no autoriza publicar | OFF-20 (D-9), §9.4 precisión 2 | [CONF] | **No**; su persistencia independiente es **[ABIERTO]** (R2-A §16.7.2; ADR-05.C, ADR-09.C y decisión 3 de R2-A) |
+| R-5 | **Registro de idempotencia de una operación rechazada** | Conservar el resultado de una operación rechazada para devolver «el resultado original» ante un reenvío | OFF-06; R1 §5.5; §16.7.9 (O-1…O-3) | [ABIERTO]: `01` no fija cómo se aplica a lo rechazado | **No** (abierto) |
+| R-6 | **Bitácora de seguridad** | Intentos denegados de escalada o acceso cruzado; **distinta** de R-2 | RF-AUD-05; IN-02-28 | **[REC]** (prioridad S) | **No**; obligaciones solo condicionales si se adopta formalmente |
+| R-7 | **Estado local y conservación en el dispositivo** | Estado `en conflicto` o `rechazada` de la operación, conservación ≤ 30 días, exportación limitada y constancia de eliminación | §9.2, OFF-10, OFF-11, OFF-24 | [CONF] | **No** (cliente; §20.3.1 paso i) |
+
+**Obligación de registrar frente a obligación de persistir.** Son dos cosas distintas. (1) **Qué rechazos hay que registrar** lo fijan las fuentes: RF-AUD-06 (solo los rechazos y bloqueos de RT-14, incluido el bloqueo por falta de autoridad habilitada y los intentos de levantar la restricción sin autoridad), OFF-20 (metadatos de operaciones **sincronizadas** rechazadas o en conflicto) y, como [REC], RF-AUD-05. **Ninguna fuente exige registrar todo rechazo técnico** (por ejemplo, un rechazo en línea por falta de facultad que no sea de RT-14); IN-09-05 no es una obligación universal de registrar todos los rechazos. (2) **R-3** es una propiedad de persistencia: **cuando** existe un registro exigido, este debe persistir aunque la operación se aborte; **no crea por sí misma una obligación de registrar.** La **persistencia independiente** se conserva para **R-2** conforme a su fuente (R2-A §16.7.2); para **R-4** permanece **[ABIERTA]** (ADR-05.C, ADR-09.C y decisión 3 de R2-A); **R-6** continúa [REC] y solo generaría obligaciones si se adopta formalmente. **K-3**, CAP-09-P-A/B/C, F-1…F-3 y O-1…O-3 permanecen abiertas. Qué rechazos adicionales se registrarían, si alguno, **no está fijado** y se deja a ADR-09.C y a la decisión 10 de R2-A.
+
+**Cuatro situaciones que no deben confundirse.** (1) **Resultado aplicado:** cambio que la unidad confirma; su registro es R-1, dentro de la unidad. (2) **Operación que no prevalece:** una operación concurrente que no llega a ser la vigente (por ejemplo, la segunda reasignación de CL-41); `01` exige que su intención quede auditada, pero **no fija** si se trata como rechazo o como resultado aplicado en orden secuencial. (3) **Rechazo técnico formalmente definido:** la decisión de no aplicar por autorización, integridad, versión o secuencia, con los registros de R-2 y R-4 según su fuente. (4) **Decisión todavía abierta:** la clasificación de (2) es OC-08 (DB2a-4); **no se resuelve aquí.**
+
+**Distinción entre rechazo técnico y resultado aplicado.** Un **rechazo técnico** es la decisión de no aplicar una operación (autorización, integridad, versión, secuencia): su registro, **cuando una fuente lo exige**, se hace **fuera** de la unidad (R-2, R-4; R-3 en su persistencia). Un **resultado aplicado** es un cambio que la unidad sí confirma aunque "rechace" algo en el dominio (por ejemplo, la inscripción duplicada rechazada tras la resolución del organizador, CAND-12; la retirada de asignaciones de UI-02): su registro es R-1 y va **dentro** de la unidad.
+
+#### 20.5.2 Qué registro de rechazo corresponde a cada unidad UI-01…13
+
+La tabla indica **qué fuente exige cada registro**. **No elige mecanismo ni formulación.** **R-3 no obliga a registrar:** es la propiedad de persistencia de un registro exigido; se conserva para R-2, está [ABIERTA] para R-4 y solo sería condicional para R-6 [REC] (§20.5.1). Donde "ninguna fuente exige registrar el rechazo", la tabla lo dice y no lo convierte en obligación.
+
+| Unidad | Rechazos o bloqueos posibles | Registro que corresponde | Resultado aplicado (R-1, dentro) | Particularidad |
+|---|---|---|---|---|
+| UI-01 Crear torneo | Sin facultad; integridad de la asignación | Ninguna fuente exige registrar el rechazo; R-6 [REC]; R-3 si se registra | Torneo y asignación del creador organizador | "RT-14 no aplica a la creación" es lectura del autor [DER] |
+| UI-02 Delegado y retiradas | Autoasignación (RT-04); segundo equipo del mismo torneo; RT-05 | **R-2** si el efecto alcanza RT-14; R-6 [REC]; R-3 sobre lo que se registre | Concesión y **cada** retirada | CL-35 |
+| UI-03 Reasignar editor | RT-14 («asignaciones que generen conflicto», A-2); RT-05; versión; **la reasignación concurrente que no prevalece (CL-41; OC-08)** | **R-2** (RT-14); para la intención que no prevalece, el **tipo de registro está [ABIERTO]** (OC-08) | Reasignación con valores antes y después (R-1), la que se aplica | CL-41 dice «ambas intenciones quedan auditadas». **OC-08 abierta:** no se decide si la que no prevalece es un rechazo técnico (por leer una asignación ya cambiada) o un resultado aplicado en orden secuencial; este documento **no la clasifica** como rechazo. Ver la distinción de §20.5.1 |
+| UI-04 Dueños | Organizador intenta conceder o revocar dueño; sin segundo factor reciente; sin motivo; último dueño | R-6 [REC]; ninguna otra fuente exige registrar el rechazo; R-3 si se registra | Designación o revocación con motivo | RF-AUD-05 [REC] |
+| UI-05 Corregir | **RT-14**, bloqueo sin otro actor (CL-51); versión obsoleta (RD-RES-04); torneo `archivado` | **R-2** (RT-14 y bloqueo); R-3 sobre R-2 | Corrección con valores antes y después, **minimizados** (IF-31) | R-4 no aplica a la ruta en línea |
+| **UI-06 Operación recibida** | Sin asignación, rol o cuenta revocados (§9.4 filas 4 y 5); **RT-14**; versión (filas 2 y 3); hueco o reanudación rechazada (OFF-25); jugador no disponible (fila 6) | **R-2** (RT-14); **R-4** (OFF-20); R-5 (abierto); R-6 [REC] (acceso cruzado); R-7 (cliente); persistencia de R-2 conforme a su fuente (R-3); la de R-4 está [ABIERTA] | Lo aplicado, con origen sincronizado | Estado local `en conflicto` o `rechazada` (§9.4) |
+| UI-07 Anonimizar | Sin facultad (Q-42 (b)) | Ninguna fuente exige registrar el rechazo; R-3 si se registra | Anonimización sin datos personales (IF-27, IF-31) | R-1 solo con identificadores internos |
+| UI-08 Levantar restricción | **Autoaprobación**; sin dueño alterno (intentos sin autoridad); «sin motivo» | **R-2** solo para los intentos sin autoridad («los intentos de levantar la restricción sin autoridad»); R-3 sobre R-2 | Levantamiento con aprobador y motivo (RF-AUD-02) | RF-AUD-06 nombra los intentos sin autoridad; **«sin motivo» no es un caso nombrado en RF-AUD-06** (ninguna fuente exige registrarlo) |
+| UI-09 Calendario | **RT-14** sobre cualquier partido afectado; bloqueo sin actor alterno | **R-2**; R-3 sobre R-2 | Generación o regeneración y sus consecuencias | RF-AUD-06 incluye el bloqueo |
+| UI-10 Confirmar | **RT-14**; RT-05; sin asignación; versión | **R-2** (RT-14); R-4 si llegó por sincronización; persistencia de R-2 (R-3) conforme a su fuente y la de R-4 [ABIERTA] | Resultado confirmado | Dentro de UI-06 cuando llega por sincronización |
+| UI-11 Revocar | Organizador revoca dueño u otro organizador; efecto indirecto sobre partidos propios (A-15) | **R-2** si hay RT-14; R-6 [REC]; R-3 si se registra | Revocación y desactivaciones | A-15 sin resolver; IN-09-13 [REC] |
+| UI-12 Invitación | Invitación vencida, usada o revocada; segundo equipo | Ninguna fuente exige registrar el rechazo de la invitación; **R-2** solo si UI-12 compone UI-02 y el efecto alcanza RT-14 (composición provisional, OC-01); R-3 si se registra | Consumo de la invitación y concesión | CL-54 |
+| UI-13 Alta | Sin facultad; integridad; **la segunda inscripción de la misma persona tras la resolución es un resultado aplicado (CAND-12)** | Ninguna fuente exige registrar el rechazo técnico; R-1 para el resultado de la resolución | Alta y estado resultante | IF-31: solo identificadores internos |
+
+#### 20.5.3 Los rechazos de UI-06 y la política de conflictos (§9.4)
+
+| Escenario de §9.4 | Resultado | Estado local | Registro del servidor |
+|---|---|---|---|
+| Fila 2: marcador o estado con versión desactualizada | No se aplica | `en conflicto` | R-4 (OFF-20; persistencia independiente [ABIERTA]) |
+| Fila 3: el partido fue finalizado o corregido por otro actor | No se aplica nada | `en conflicto` | R-4 (OFF-20; persistencia independiente [ABIERTA]) |
+| Filas 4 y 5: editor desasignado; rol o cuenta revocados | Rechazada | `rechazada` | R-4 (OFF-20; persistencia independiente [ABIERTA]); R-2 si interviene RT-14 (R-3 en la persistencia de R-2) |
+| Fila 6: jugador dado de baja o anonimizado | No se aplica | `en conflicto` | R-4 (OFF-20; persistencia independiente [ABIERTA]) |
+| Fila 8: partido pasa a W.O. o cancelado (si se aprueba) | No se aplica | `en conflicto` o `rechazada` | R-4 (OFF-20; persistencia independiente [ABIERTA]) |
+| Fila 9: mismo identificador recibido otra vez | Idempotente: devuelve el primer resultado | — | **Sin registro nuevo de lo aplicado** (OFF-06); para lo rechazado: R-5 abierto |
+| Fila 11 (sustituta): reasignación; el editor anterior sincroniza | Rechazada; no se publica | `rechazada` | R-4 (OFF-20; persistencia independiente [ABIERTA]) |
+| OFF-25: hueco o reanudación rechazada | Bloqueo o no se aplican los eventos posteriores | `pendiente` (bloqueada) o `en conflicto` | R-4 («se registra», OFF-25) |
+| RT-14 sobre el propio equipo (vigente o histórico) | Rechazada al sincronizar | `rechazada` | **R-2** (R-3 en su persistencia); **R-4** relacionado (OFF-20: entre los motivos se registra RT-14), con persistencia independiente **no decidida** [ABIERTA] |
+
+#### 20.5.4 Alternativas y consecuencias, sin elegir
+
+**A. Persistencia independiente (D9-1; K-3).** CAP-09-P-A: unidad independiente posterior; CAP-09-P-B: el rechazo como resultado confirmado; CAP-09-P-C: canal separado con entrega al menos una vez. **K-3** de R2-B1 condiciona la persistencia del rechazo impuesto por la capa de datos a CAP-09-P-A o P-C; P-B solo cubre los que decide el evaluador.
+
+| Alternativa | Conformidad con IN-09-05 | Conformidad con la redacción de R1 («de forma independiente de la unidad») | Rechazos impuestos por la capa de datos (RC-04) | Conclusión de R2-A (§16.7.4) | Consecuencia sobre UI-06 [DER] |
+|---|---|---|---|---|---|
+| CAP-09-P-A | Conforme | Conforme | Conforme: cubre también la transacción abortada, porque el registro va en otra unidad | **Plenamente conforme** | El registro se confirma **antes** de devolver el rechazo; el estado local `rechazada` solo se devolvería después |
+| CAP-09-P-B | Conforme **solo** para los rechazos que decide el evaluador (CMP-08) | **No conforme con el texto literal**: adoptarla exigiría ajustar esa redacción (edición separada) | **No conforme**: un rechazo que aborta la transacción no puede registrarse en esa misma unidad | **No es una alternativa independiente**: variante parcial que no cubre los rechazos de la capa de datos y diverge de R1 | No cubre los rechazos de la capa de datos sincronizados |
+| CAP-09-P-C | **Condicionada**: conforme solo si la intención de registro es **durable antes de responder**; una ventana de pérdida no cumple IN-09-05 | Conforme | Conforme si la intención es durable antes de responder | **Viable con condición** (sin ventana de pérdida) | Con la condición de durabilidad, el estado local `rechazada` no depende de una ventana de pérdida |
+
+Se conservan **todas las condiciones de R2-A** (la condición de durabilidad de P-C, el ajuste editorial de R1 si se adoptara P-B y K-3). **Este documento no elige** entre P-A, P-B y P-C.
+
+**B. Fallo del registro del rechazo (§16.7.9).**
+
+| ID | Alternativa | Consecuencia sobre la ruta sincronizada | Conformidad con IN-09-05 |
+|---|---|---|---|
+| F-1 | Devolver el rechazo y continuar sin registro | **Pérdida de auditoría** de un rechazo (RT-14, intentos de escalada) | **No conforme** |
+| F-2 | Devolver un error recuperable y dejar la operación sin resolver hasta poder registrar | La operación sigue `pendiente` y se reintenta (OFF-05); **riesgo de denegación inducida** | Conforme |
+| F-3 | Persistir primero la intención en un medio durable distinto y conciliar después; si no está disponible, aplicar F-2 | Reduce la ventana de pérdida; añade complejidad y una ventana hasta la conciliación | Condicionada a que la intención sea durable antes de responder |
+
+**C. Idempotencia de una operación rechazada (OFF-06; R-5).**
+
+| ID | Alternativa | Consecuencia | Fuente |
+|---|---|---|---|
+| O-1 | Un único registro por identificador: el reenvío devuelve el rechazo original | Cumple OFF-06 al pie de la letra y **limita la inundación (CAB-14)**; **exige conservar el resultado de las rechazadas** (punto abierto de ADR-05.C); se pierde la visibilidad de reintentos abusivos | R2-A §16.7.9 |
+| O-2 | Un registro por cada intento | Conserva la visibilidad; repite registros (OFF-06 lo prohíbe para lo aplicado) y agrava la inundación (CAB-14) | R2-A §16.7.9 |
+| O-3 | Un registro por identificador más un contador de reenvíos | Conserva la visibilidad sin repetir registros; añade un campo a decidir | R2-A §16.7.9 |
+
+**Alcance de OFF-06 sobre lo rechazado: [ABIERTO] (OC-35).** `01` no fija cómo se aplica la idempotencia a una operación rechazada; **no se elige** entre O-1, O-2 y O-3.
+
+**Quién decide.** ADR-05.C (R2-C) y el usuario (decisión 10 de R2-A; DB2c-2); la partición ADR-05.C / ADR-09.C es la decisión 3. **K-3 queda abierta**: este documento no la cierra.
+
+### 20.6 Síntesis de K-2d sobre las 13 operaciones (etapa 2)
+
+**Reserva.** K-2d se describe como **garantía arquitectónica exigida**: **no se implementa, no se aprueba, no se valida y no se declara cumplida.** Esta síntesis solo reúne lo que las tres partes documentaron y señala lo que **no** está demostrado.
+
+#### 20.6.1 Matriz de las 13 unidades
+
+"Consume hechos derivados" se refiere a CAP-02-D: ES-13 aplica **bajo D** a toda operación que consume hechos derivados (§18.8.1.1); «Actualiza la proyección» se refiere a K-2c.
+
+| Unidad | Tipo | Cambio indivisible (resumen) | GT principales | Consume hechos derivados bajo D | Actualiza la proyección bajo D (K-2c) | Registro de rechazo (§20.5.2; R-3 es una propiedad de persistencia, no una obligación de registrar; la persistencia de R-4 está [ABIERTA] y R-6 es [REC]) | Ficha |
+|---|---|---|---|---|---|---|---|
+| UI-01 Crear torneo | Permisos | Torneo + asignación del creador organizador + auditoría | GT-01, 02, 09 | Sí (facultad del actor; asignación vigente) | **Sí** (H2B1-10) | Ninguna fuente exige registrar el rechazo; R-6 [REC] | §18.4.1 |
+| UI-02 Delegado | Permisos | Concesión + retiradas de editor + anulación de levantamiento + auditoría | GT-01, 03, 06 | Sí | **Sí** (H2B1-10) | R-2 si el efecto alcanza RT-14; R-6 [REC] | §18.4.2 |
+| UI-03 Reasignar | Permisos | Desactivar + activar la asignación | GT-02, 03 | Sí | **Sí** (H2B1-10) | R-2 (RT-14); intención que no prevalece: [ABIERTO] (OC-08) | §18.4.3 |
+| UI-04 Dueños | Permisos | Cambio del rol de dueño + historial + motivo, sobre el conjunto de dueños | GT-05, 02 | Sí (facultad del actor) | **Sí** (H2B1-10) | R-6 [REC]; ninguna otra fuente exige registrar el rechazo | §18.4.4 |
+| UI-05 Corregir | Datos | Marcador, eventos, historial, motivo y recálculo | GT-11, 12, 13, 14 | Sí | No | **R-2** (RT-14, bloqueo) | §19.4.2 |
+| **UI-06 Operación recibida** | Sincronización | Idempotencia + autorización + aplicación (UI-10) + auditoría de lo aplicado | **GT-19…24**, GT-11, 12 | Sí (facultad y asignación al partido) | No por sí misma (aplica resultados y estados) | **R-2**, **R-4**, R-5 abierto, R-6 [REC], R-7 | §20.4 |
+| UI-07 Anonimizar | Datos | Anonimización en la fuente y derivadas persistentes | GT-12, 17 | Sí | No | Ninguna fuente exige registrar el rechazo | §19.4.5 |
+| UI-08 Levantar | Permisos | Levantamiento con aprobador y motivo | GT-02, 04 | Sí | **Sí** (H2B1-10) | **R-2** (solo intentos sin autoridad) | §18.4.5 |
+| UI-09 Calendario | Datos | Partidos nuevos + archivo de los anteriores + asignaciones perdidas + auditoría | GT-12, 14, 15 | Sí | **ABIERTO (OC-24, DB2b-4)** | **R-2** | §19.4.4 |
+| UI-10 Confirmar | Datos | Resultado + recálculo + señal de cambio (si ADR-06) | GT-11, 12, 13, 14 | Sí | No | **R-2**; R-4 si llega por sincronización | §19.4.1 |
+| UI-11 Revocar | Permisos | Revocación + desactivación de las asignaciones dependientes | GT-04, 06 | Sí | **Sí** (H2B1-10) | R-2 si hay RT-14; R-6 [REC] | §18.4.6 |
+| UI-12 Invitación | Permisos | Consumo de la invitación + concesión + retiradas | GT-03, 06 | Sí | **Sí** (H2B1-10) | Ninguna fuente exige registrar el rechazo; R-2 solo si compone UI-02 y alcanza RT-14 (OC-01) | §18.4.7 |
+| UI-13 Alta | Datos | Alta + estado resultante (activa o pendiente) | GT-12, 16 | Sí | No | Ninguna fuente exige registrar el rechazo técnico | §19.4.3 |
+
+**Qué muestra la matriz.** Bajo D **las 13 unidades consumen hechos derivados** (ES-13 aplica a todas); **siete** las actualizan según H2B1-10 (UI-01, 02, 03, 04, 08, 11 y 12); **una** (UI-09) lo tiene **abierto**; **cinco** no (UI-05, 06, 07, 10 y 13). Bajo A no hay proyección. **No se declara que la lista de H2B1-10 esté completa:** el inventario conceptual de §19.6.2 y las candidatas de §20.11 señalan otras operaciones que retiran o alteran asignaciones o delegaciones.
+
+#### 20.6.2 Garantías GT-01…24 sobre las 13 unidades
+
+Todas son **exigidas, no implementadas**. GT-19…24 son nuevas y corresponden a UI-06.
+
+| ID | Garantía exigida (resumen) | Unidades | Aplica a |
+|---|---|---|---|
+| GT-01 | Misma unidad para la fuente, los efectos compuestos, la auditoría y, bajo D, la proyección | UI-01, 02, 03, 04, 08, 11, 12 | A y D |
+| GT-02 | Lo decidido es lo aplicado (bajo D, incluida la lectura de la proyección) | Las 13 | A y D |
+| GT-03 | Serialización de las unidades que compiten por un mismo hecho o conjunto | UI-02, 03, 04, 08, 12 | A y D |
+| GT-04 | Revocación efectiva frente a operaciones en línea y sincronizadas | UI-11 y toda unidad cuyo actor puede perder su facultad; **UI-06** | A y D |
+| GT-05 | Protección global del último dueño | UI-04 y toda operación que altere el conjunto de dueños | A y D |
+| GT-06 | Efectos compuestos completos | UI-02, 11, 12 (y UI-08) | A y D |
+| GT-07 | Todo o nada con la auditoría de lo aplicado | Las 13 (IF-10) | A y D |
+| GT-08 | Las dos capas deciden sobre el mismo estado confirmado | Las 13 | A y D |
+| GT-09 | Sin ventana con proyección obsoleta | Las siete de §18.7; por ES-13, toda operación que consume hechos derivados bajo D (§18.8.1.1) | **Solo D** |
+| GT-10 | La proyección se reconstruye desde las fuentes; prevalecen las fuentes (g4 [REC]) | Las siete de §18.7; por ES-13, toda operación que consume hechos derivados bajo D (§18.8.1.1) | **Solo D** |
+| GT-11 | Una sola unidad para el resultado | UI-05, 10 (y UI-06 por composición) | A y D |
+| GT-12 | Serialización por partido, clasificación o registro. El control de versión de RD-RES-04 está confirmado **solo en UI-05 y UI-10**; en la ruta sincronizada se aplica por GT-24, dentro de UI-06 y solo a marcador y estado, **sin extender RD-RES-04** a otras operaciones | UI-05, 07, 09, 10, 13 (y UI-06 por composición de UI-10) | A y D |
+| GT-13 | Coherencia pública (exigida a ADR-04.C; no demostrada) | UI-05, 07, 10 | A y D |
+| GT-14 | RT-14 sobre el conjunto completo antes de aplicar | UI-05, 09, 10 (y UI-06 por composición de UI-10) | A y D |
+| GT-15 | Todo o nada del calendario | UI-09 | A y D |
+| GT-16 | Unicidad de la alta activa bajo concurrencia, en la capa de datos | UI-13 | A y D |
+| GT-17 | Completitud de la anonimización en la fuente | UI-07 | A y D |
+| GT-18 | Efectos externos fuera de la unidad | Las cinco de §19 | A y D |
+| **GT-19** | **Misma unidad para la envoltura y el contenido:** la aplicación de la operación recibida, su recálculo, el registro de la idempotencia de lo aplicado y la auditoría se confirman juntos o ninguno; **sin segunda unidad de UI-10** | UI-06 | A y D |
+| **GT-20** | **Idempotencia bajo reenvío concurrente:** una sola aplicación y un solo registro de lo aplicado; para una operación **ya aplicada**, la misma respuesta (el alcance sobre lo rechazado es [ABIERTO]: OC-35) | UI-06 | A y D |
+| **GT-21** | **Orden y contigüidad por partido,** con la dependencia de la reanudación respetada y los huecos bloqueados | UI-06 | A y D |
+| **GT-22** | **Autorización vigente al aplicar frente a carreras con revocación o reasignación:** una sola operación prevalece, sin estados intermedios | UI-06 (con UI-11 y UI-03) | A y D |
+| **GT-23** | **El registro de rechazo o bloqueo exigido por RF-AUD-06 (R-2) persiste fuera de la unidad y no se pierde en silencio** (K-3 abierta; alternativas sin elegir). No obliga a registrar todo rechazo. **La persistencia de R-4 [ABIERTA] y la de R-6 [REC] no son garantía exigida** hasta decisión formal | UI-06 y las unidades con R-2 (§20.5.2) | A y D |
+| **GT-24** | **Conflicto de versión sin sobrescritura en la ruta sincronizada** (la misma garantía de RD-RES-04, sin extenderla a otras operaciones) | UI-06 (marcador y estado) | A y D |
+
+#### 20.6.3 Estado de K-2a, K-2b, K-2c y K-2d
+
+| Componente | Qué exige (R2-B1) | Qué documentan las tres partes | **Qué NO está demostrado** |
+|---|---|---|---|
+| **K-2a** Completitud | La proyección contiene los hechos derivados que necesita la decisión; no contiene el estado, las reglas de integridad ni la invitación vigente | Hechos por unidad (§18.8.1; las cinco de §19.6.2; UI-06 consume la facultad del actor y la asignación al partido) | La **completitud** sobre las operaciones candidatas y las no enumeradas |
+| **K-2b** Derivación | Deriva de la fuente única de CMP-07 con la definición única de CMP-08; se reconstruye desde las fuentes; no es un segundo decisor | GT-10, GT-08, ESC-18, ESC-20; responsabilidades P-1 y P-2 (§18.8.2) | La **reconstruibilidad**, la adopción de g4 ([REC]) y la lectura de R1 §5.3 (DB1-6) |
+| **K-2c** Actualización coherente | Se actualiza con toda operación que modifica permisos | Siete unidades de H2B1-10; **hallazgo condicional EV-10** (UI-09 y candidatas: OC-24) | La **enumeración definitiva** (Fase 4) y la decisión de DB2b-4 |
+| **K-2d** Garantías transaccionales | Lectura y aplicación en la misma unidad; actualización con cada cambio de permisos; sin ventana con proyección obsoleta | GT-01…24; ESC-01…56 | Que exista una forma de lograrlas; su **mecanismo (R3, condicionado a ADR-01)**; su **verificación (Fase 4)** y, para las revocaciones en sesiones conectadas, la **medición del ≤ 60 s** (D-2) |
+
+#### 20.6.4 Protección global frente a permisos obsoletos
+
+**Propiedad exigida [DER]** (derivada de IF-06, IF-33 e IF-39, que citan RF-ACC-07, OFF-22 y RT-13). Desde que una revocación se confirma, **ninguna operación nueva, por ninguna vía de entrada, se aplica con ella;** una operación en curso se resuelve como aplicada antes (válida y auditada) o rechazada, nunca a medias.
+
+| Vía de entrada | Garantía y estado prohibido que la protegen | Qué queda pendiente |
+|---|---|---|
+| En línea | IF-06, IF-33; GT-02, GT-04; ES-10, ES-21 | — |
+| **Sincronizada** | IF-32, IF-33, IF-39; **GT-22**; **ES-26** | **OC-04** (instante que cuenta para una operación en tránsito); **D-2** (DB2c-10) |
+| Automática | Hereda la situación del actor que la dispara (IF-24) | — |
+| Sesión conectada | IN-03-06 (rechazo inmediato en el servidor); el ≤ 60 s de IN-03-07 es un **objetivo sin garantía fuera de línea** | La **medición** (decisión 1 de R2-A) |
+| Bajo D, cualquier vía | GT-09, GT-10; **ES-13** | Elección de CAP-02-A o D; K-2c completa |
+
+### 20.7 Evidencia consolidada de CAP-02-A frente a CAP-02-D (etapa 2)
+
+**Reserva.** Esta sección **consolida la evidencia** de §18.8 y §19.6.2 para DB1-1. **No elige** CAP-02-A ni CAP-02-D, **no declara demostrada la independencia de D**, **no declara cumplido R1 §8.1** (el déficit frente a «≥ 2 formas de reparto con ambas capas siempre presentes» sigue abierto, sin excepción) y **no modifica K-2a, H2B1-10 ni las matrices de R2-B1.** DB1-1 y DB1-6 siguen abiertas.
+
+| ID | Observación | Alcance | Naturaleza |
+|---|---|---|---|
+| EV-13 | En las 13 unidades **ambas capas verifican la misma decisión completa** bajo A y bajo D (IF-03, IF-16): lo que cambia es la **representación de las entradas**, no **qué verifica cada capa**. Primer elemento del criterio de §17.3.3 | Las 13 | Contraste |
+| EV-14 | Bajo D, **las 13 unidades consumen hechos derivados** y quedan expuestas a ES-13; **siete** añaden un paso de mantenimiento de la proyección (K-2c); **una** (UI-09) lo tiene abierto; las cinco restantes no lo añaden. Es el **segundo elemento** del criterio de §17.3.3 (composición de las unidades): D la modifica solo en esas siete u ocho unidades | Las 13 | Contraste; sin conclusión |
+| EV-15 | **La ruta sincronizada recorre la misma frontera bajo A y bajo D** (IF-32). Bajo D, rechazar una operación capturada antes de una revocación **depende de que la revocación (UI-11) haya actualizado la proyección en la misma unidad** (GT-09; ES-13): es **un caso concreto** de un hecho derivado obsoleto que produciría una aplicación indebida; ESC-54 lo extiende a UI-03 y UI-09 (reasignación y regeneración), y el mismo caso, bajo A, se resuelve sobre las fuentes | UI-06 con UI-11 (caso concreto); UI-03 y UI-09 (ESC-54) | Aplicación de K-2d a la sincronización |
+| EV-16 | Las reglas de integridad **de las unidades que las tienen** se verifican sobre las fuentes **igual bajo A y bajo D** (K-2a); D **no sustituye** la lectura de las fuentes para el estado, la invitación ni esas reglas. UI-08 y UI-11 no tienen reglas de integridad propias en esta consolidación | Las unidades con reglas de integridad propias | Aplicación de K-2a |
+| EV-17 | **Estado de la evidencia [SUP: síntesis del autor].** Clasificación de EV-01…EV-16 según la interpretación de §17.3.3 con la que son coherentes: **II** («D es una variante de A»): EV-01, EV-04, EV-06, EV-08 (a), EV-11, EV-13 y EV-16; **I** (obligaciones y modos de fallo propios de D): EV-02, EV-03, EV-08 (b), EV-09, EV-10, EV-14 y EV-15; **mixta**: EV-05 ((i) apoya la II; (ii) apoya la I); **sin conclusión o de límite**: EV-07 (límite) y EV-12 (contraste). **La evidencia no zanja la cuestión.** Se mantienen **las dos interpretaciones** | EV-01…EV-16 | Síntesis; sin elegir |
+
+**Lo que resolvería DB1-1.** Según §17.3.3, el criterio de independencia («que D cambie qué verifica cada capa o la composición de las unidades atómicas», de modo que no se reduzca a "A con una entrada derivada") **depende de la decisión del usuario sobre qué cuenta como «forma de reparto»** (DB1-1) y, si se elige D, de la lectura de R1 §5.3 (DB1-6). La evidencia consolidada **no sustituye esa decisión.**
+
+### 20.8 Matriz de concurrencia de la ruta sincronizada (etapas 1 y 2)
+
+«Admisible» significa que **equivale a alguna ordenación secuencial** (IF-05). **Origen:** son **literales** en `01` ESC-43, 44, 46, 47, 49 y 52 (§9.4 filas 9, 10, 3 y 6 y OFF-25, OFF-06, OFF-11, OFF-23 respectivamente) y, en lo que dice OFF-22, ESC-45; son **[REC] o [DER]**: ESC-48 (OFF-07 es [REC]; OFF-25 [CONF] solo para el partido con hueco) y ESC-50, 51, 53 y 55 [DER] (el texto de `01` no menciona esa simultaneidad); ESC-56 es **[CONF] en lo aplicado y [ABIERTO] en el alcance sobre lo rechazado**; ESC-54 es **propio de CAP-02-D**. **Ningún escenario se resuelve aquí por un mecanismo.**
+
+| ID | Escenario | Unidades | Origen | Resultados admisibles | Resultados prohibidos | Garantías |
+|---|---|---|---|---|---|---|
+| ESC-43 | Reenvío del mismo identificador, secuencial y simultáneo | UI-06 × UI-06 | OFF-06, §9.4 fila 9 [CONF] | Un efecto, un registro de lo aplicado y la misma respuesta | Doble aplicación; registro duplicado; respuesta distinta (ES-25, ES-31) | GT-20 |
+| ESC-44 | Mismo editor en dos dispositivos | UI-06 × UI-06 | §9.4 fila 10 [CONF] | Se fusionan por identificador; marcador o estado con versión desactualizada: conflicto. **La secuencia contigua entre los dos dispositivos del mismo editor es [ABIERTO] (OC-41)** | Sobrescritura (ES-28) | GT-20, GT-24 |
+| ESC-45 | Revocación, desasignación o reasignación concurrente con la sincronización | UI-06 × UI-11 / UI-03 / UI-04 | OFF-22, §9.4 filas 4, 5 y 11 [CONF] | Aplicada antes y válida, o rechazada; **una sola prevalece** | Aplicada con la autorización ya revocada y confirmada (ES-26) | GT-22, GT-04 |
+| ESC-46 | Hueco en la secuencia o reanudación rechazada con eventos posteriores | UI-06 | OFF-25 [CONF] | Las operaciones posteriores de ese partido quedan bloqueadas o no se aplican ni se publican; las de otros partidos continúan [REC] | Un evento aplicado o publicado tras ellas (ES-27) | GT-21 |
+| ESC-47 | El partido fue finalizado o corregido por otro actor durante la sincronización | UI-06 × UI-05 / UI-10 | §9.4 fila 3 [CONF] | `en conflicto`; no se aplica nada | Sobrescritura (ES-28); dos resultados oficiales (ES-16) | GT-24, GT-12 |
+| ESC-48 | Operaciones de partidos distintos del mismo lote | UI-06 | OFF-07 [REC]; OFF-25 [CONF] (partido con hueco) | Las de otros partidos continúan | Bloquear todo el lote por un partido | GT-21 |
+| ESC-49 | Jugador del evento dado de baja o anonimizado mientras tanto | UI-06 × UI-07 / CAND-13 | §9.4 fila 6 [CONF] | `en conflicto`; «Jugador no disponible» | Evento aplicado a un jugador en baja o pendiente (ES-24); estadísticas alteradas (ES-20) | GT-12, GT-17 |
+| ESC-50 | El partido pasa a W.O. o cancelado (si se aprueba) durante la sincronización | UI-06 × CAND-15 / CAND-24 | §9.4 fila 8; Q-21 y Q-29 (COND) [DER] | `en conflicto` o `rechazada` | Resultado aplicado sobre un partido ya resuelto (ES-16) | GT-12 |
+| ESC-51 | Regeneración del calendario durante la sincronización | UI-06 × UI-09 | RD-CAL-07 (REC) [DER] | Una de las dos se rechaza; el partido archivado no recibe operaciones | Un resultado oficial sobre un partido archivado (ES-16); un editor vigente sobre un partido archivado (ES-23) | GT-12, GT-15 |
+| ESC-52 | Sesión vencida o cuenta desactivada durante la sincronización | UI-06 | OFF-23, OFF-11 [CONF] | La captura local continúa; no se sincroniza sin sesión válida; con cuenta desactivada nada se aplica ni se publica | Aplicación con sesión inválida o cuenta desactivada (ES-26) | GT-22 |
+| ESC-53 | Concesión del rol de delegado o levantamiento concurrentes con la sincronización de un dueño u organizador | UI-06 × UI-02 / UI-12 / UI-08 | RT-14 [DER] | Aplicada antes y válida, o rechazada por completo | Operación aplicada con la restricción vigente y confirmada (ES-10) | GT-22, GT-14 |
+| ESC-54 | (**solo CAP-02-D**) Una sincronización se decide con una proyección que aún no refleja una revocación o una retirada de asignación ya confirmadas | UI-06 × UI-11 / UI-09 / UI-03 | K-2d, EV-15 | La decisión ve el estado anterior completo o el posterior completo | Decidir sobre una proyección obsoleta (ES-13) | GT-09, GT-10, GT-22 |
+| ESC-55 | Un rechazo no puede registrarse (fallo del registro) mientras la operación se reenvía | UI-06 | IN-09-05, CAB-14 [DER] | **Sin elegir:** F-2 y F-3 conservan la auditoría; F-1 no es conforme con IN-09-05 (R2-A) | Pérdida de auditoría (ES-30); denegación inducida sin control (RB2c-06) | GT-23 |
+| ESC-56 | Reintento de una operación ya rechazada | UI-06 | OFF-06 [CONF en lo aplicado]; [ABIERTO] sobre lo rechazado | **Sin elegir:** O-1, O-2 u O-3 (alcance de OFF-06 sobre lo rechazado [ABIERTO]: OC-35) | **[ABIERTO: OC-35]**: lo prohibido sobre lo rechazado no está fijado por `01`; lo aplicado se rige por ES-31 | GT-20, GT-23 |
+
+### 20.9 Amenazas y casos de abuso de R2-B (etapa 2)
+
+**No se amplía el modelo de amenazas:** esta sección registra cómo las capacidades de R2-B2 tratan las amenazas asignadas a R2-B y su relación con las de R2-C. El modelo consolidado es de R2-C.
+
+| Amenaza o caso | Qué es | Cómo la tratan las fronteras documentadas | Queda para |
+|---|---|---|---|
+| **AM-18 / CAB-05** | Carrera entre una revocación o reasignación y una operación en curso; sincronizar tras ser revocado, desasignado o reasignado | IF-33, IF-39, GT-22, ES-26; ESC-45, 52 y 53; el resultado es "rechazada y conservada según OFF-10; nunca a medias" | **OC-04**, D-2 (medición) y la protección bajo D (ES-13) |
+| AM-04 / CAB-04 | Repetir o reordenar operaciones enviadas | IF-34, IF-35, ES-25, ES-27; GT-20, GT-21 | **R2-C** (ADR-05.C) |
+| AM-10 | Editar la cola local o el reloj del dispositivo para alterar el orden o la hora | IF-35 (el orden depende de la secuencia y no del reloj, OFF-13); IF-33 (nada local concede permisos) | **R2-C** (ADR-05.C) |
+| AM-33 | Sincronizar la cola de otra cuenta o atribuir las operaciones a la sesión de otra | IF-33 (autorización con el estado vigente; «Alterar la cola local para apuntar a otro partido/torneo → rechazado») | ADR-03.C (R2-A); **R2-C** |
+| CAB-06 | Capturar un partido del propio equipo (editor con rol de delegado) mediante la cola local | Rechazada al sincronizar (RT-05, OFF-22); ES-04 y ES-26 | — |
+| CAB-07 | Operar sobre su propio equipo por efecto indirecto o en cascada | IF-24, GT-14: RT-14 sobre el efecto completo; R-2 | A-15 (Fase 4); ADR-09.C (R2-A) |
+| CAB-14 | Provocar un rechazo que no deje rastro o inundar el registro | IF-09, GT-23, ES-30; alternativas F y O (§20.5.4) | Decisión 10 de R2-A; ADR-09.C (R2-A) |
+| AM-19 | Inyección en la capa de datos (R2-B; Fase 4) | **Contexto:** su control (validación de entradas) no es un permiso; no se trata aquí | **R2-C** y **Fase 4**; R2-A la asignó a R2-B: **reasignación propuesta, no aplicada** (OC-40, DB2c-11) |
+| AM-34 | Inyección de contenido en vistas públicas, panel, correos y proyecciones | **Contexto:** su control es la codificación de salidas; no se trata aquí | **R2-C**, **R3** (cabeceras) y **Fase 4**; R2-A la asignó a R2-B: **reasignación propuesta, no aplicada** (OC-40, DB2c-11) |
+
+### 20.10 Dependencias, condiciones, decisiones y riesgos
+
+#### 20.10.1 Dependencias
+
+| Elemento | Depende de lo aprobado | Queda para R2-C | R3 | Fase 4 | Decisiones del responsable |
+|---|---|---|---|---|---|
+| UI-06 y la frontera de sincronización | IF-05, 06, 09, 10, 11, 12, 20, 24, 30; GT-02, 04, 09; ES-13; UI-10 y UI-05 (§19) | **ADR-05.C** (cola, secuencia, protocolo, conflictos), que **recibe** la frontera de ADR-02.C (R1 §8.2) | ADR-05.I | Pruebas de §9.4 y de carrera | Decisión 1 (D-2: DB2c-10), decisión 3 |
+| Idempotencia y orden | RD-RES-04 y 05, OFF-06, OFF-25 | ADR-05.C | ADR-05.I | Pruebas con 1, 2 y 10 reenvíos | OC-35 |
+| Auditoría de rechazos | IN-09-04, IN-09-05, K-3; **ADR-09.C es de R2-A (§16.7)** | La partición con ADR-05.C (decisión 3 de R2-A) | ADR-09.I | Pruebas de cobertura | **Decisión 10**, decisión 3 |
+| Síntesis de K-2d | GT-01…24; K-2a a K-2d | — | Mecanismo | Verificación | — |
+| Evidencia sobre DB1-1 | EV-01…17, §17.3.3 | — | — | — | **DB1-1**, DB1-6 |
+| Amenazas | AM-18, CAB-05, CAB-07, CAB-14; ADR-03 (R2-A) para AM-33 | AM-04, AM-10, AM-33 | Cabeceras | Pruebas | DB2c-11 (reasignación propuesta de AM-19 y AM-34) |
+
+#### 20.10.2 Condiciones abiertas nuevas (OC-)
+
+| ID | Condición abierta | Unidades | Relación |
+|---|---|---|---|
+| OC-34 | Enumeración definitiva de iniciar, suspender y reanudar (y finalizar) como unidades: una por transición, una única o variantes de UI-10 | UI-06 y CAND-17 | DB2c-4; Fase 4 |
+| OC-35 | Registro de idempotencia de una operación **rechazada** (O-1…O-3) y conservación de su resultado: `01` no fija cómo se aplica OFF-06 a lo rechazado | UI-06 | DB2c-2; ADR-05.C |
+| OC-36 | Qué ocurre si el registro del rechazo no puede persistirse (F-1…F-3) | UI-06 y las 13 | DB2c-2; decisión 10 |
+| OC-37 | OFF-07 es [REC]: el bloqueo de las siguientes operaciones «por operación anterior» no está confirmado; OFF-25 confirma el bloqueo por hueco | UI-06 | DB2c-9 |
+| OC-38 | Pendiente solo de **Q-42 (a)** (si el organizador captura sin conexión) y de **A-10** (reanudación sin conexión de organizador y dueño, no confirmada); el dueño captura sin conexión según la matriz §7.1, fila 24 | UI-06 | DB2c-5 |
+| OC-39 | Nivel de autenticación exigido al sincronizar (CAP-03-S-A o S-B de ADR-03.C, R2-A; OFF-23) | UI-06 | DB2c-8; decisión 6 de R2-A |
+| OC-40 | Reasignación de AM-19 y AM-34: R2-A las asignó a R2-B, pero sus controles (validación de entradas, codificación de salidas) no son permisos; se **propone** dejarlas en R2-C y la Fase 4; **no se aplica** | UI-06 (contexto) | DB2c-11 |
+| OC-41 | Secuencia contigua **entre dos dispositivos del mismo editor** (ESC-44; OFF-25): quién la garantiza y cómo se reconcilia **no está fijado** | UI-06 | Dependencia abierta de ADR-05.C (R2-C) |
+| OC-42 | Estado local de una operación tras un **aborto técnico** distinto de un rechazo (ES-30; R-7): `01` solo define `en conflicto` y `rechazada` | UI-06 | Dependencia abierta de ADR-05.C (R2-C) |
+
+**Heredadas que esta parte documenta sin resolver:** OC-04 (§20.3.2), OC-12 (duplicación de una solicitud de creación de torneo reintentada: es de UI-01, en línea), OC-13 y K-3 (§20.5), OC-24 (§20.6) y OC-30 (§20.3.4).
+
+#### 20.10.3 Decisiones propuestas al usuario (DB2c-)
+
+Ninguna se resuelve aquí. DB1-1…DB1-6, DB2a-1…DB2a-10, DB2b-1…DB2b-9 y las decisiones de R2-A (13 originales, la 11 atendida y 12 abiertas) permanecen **como estaban**.
+
+| ID | Decisión | Opciones | Efecto |
+|---|---|---|---|
+| DB2c-1 | **Borde temporal de «antes y válida»** para operaciones en tránsito (OC-04): qué instante cuenta | Decidirlo en la Fase 4 / fijarlo antes | Fija el borde para operaciones en tránsito; **no trata D-2** (DB2c-10) |
+| DB2c-2 | Persistencia del rechazo (K-3, OC-13, OC-35, OC-36) | CAP-09-P-A, B o C; F-1…F-3; O-1…O-3, con las consecuencias de §20.5.4 | Decisión 10 de R2-A |
+| DB2c-3 | Partición ADR-05.C / ADR-09.C | Las de la decisión 3 de R2-A | Quién decide la persistencia de OFF-06 y OFF-20 |
+| DB2c-4 | Enumeración de iniciar, suspender y reanudar (OC-34) | Decidirla en la Fase 4 / fijarla antes | Delimita UI-06 y CAND-17 |
+| DB2c-5 | Captura sin conexión del organizador (Q-42 (a)) y reanudación sin conexión de organizador y dueño (A-10) (OC-38) | Las opciones de `01 §13` | Quién sincroniza |
+| DB2c-6 | Recibir §20.7 como **evidencia** para DB1-1 sin resolverla | Recibir / pedir más análisis | No modifica DB1-1 |
+| DB2c-7 | Inventario consolidado de candidatas (§20.11) para la enumeración de la Fase 4 | Aceptar / ampliar / reducir | Alcance de la Fase 4 |
+| DB2c-8 | Nivel de autenticación al sincronizar (OC-39) | CAP-03-S-A o S-B de ADR-03.C (R2-A; decisión 6) / decidirlo en R2-C | Condición de OFF-23 |
+| DB2c-10 | **Tratamiento formal de D-2** (decisión 1 de R2-A, asunto 1a; distinto del alcance de «sesión conectada», 1b) | Las de R2-A: (a) excepción formal para trasladar la medición a 5C o a la Fase 7; (b) validación documental reforzada y medición posterior (también requiere excepción formal); (c) reformular D-2 o RF-ACC-07 con modificación formal de `01`; (d) mantener D-2 abierto (bloquea el cierre de la Fase 2). **Ninguna cumple D-2 literalmente dentro de la Fase 2.** Toda excepción exige aprobación formal: **no se concede ninguna** | Fija cómo se trata el ≤ 60 s |
+| DB2c-11 | Reasignación propuesta de AM-19 y AM-34 (OC-40) | Aceptar la reasignación a R2-C y la Fase 4 / mantener la asignación de R2-A | Alcance de R2-B2 frente a R2-C; **no aplicada** |
+| DB2c-9 | Estado de OFF-07 [REC] (OC-37) | Adoptarlo / descartarlo / decidirlo en R2-C | Bloqueo por operación anterior |
+
+#### 20.10.4 Riesgos documentales (sin aceptar)
+
+Los riesgos se **registran sin valorar ni aceptar**. Ninguno sustituye a RB1, RB2a ni RB2b.
+
+| ID | Riesgo | Relación |
+|---|---|---|
+| RB2c-01 | Describir UI-10 dentro de UI-06 como una segunda unidad atómica, contra R1 §5.5 | ES-32, OC-30 |
+| RB2c-02 | Invadir ADR-05.C (R2-C) al detallar la cola, la secuencia o el protocolo | §20.3.3 |
+| RB2c-03 | Elegir de hecho entre CAP-09-P, F u O al describir la auditoría de rechazos | §20.5.4; decisión 10 |
+| RB2c-04 | Confundir lo confirmado de «vigente al sincronizar» con la medición de ≤ 60 s de D-2 | §20.3.2; OC-04 |
+| RB2c-05 | Iniciar, suspender y reanudar quedan sin frontera enumerada | IF-41, OC-34 |
+| RB2c-06 | Denegación inducida si el rechazo no puede registrarse y la operación queda sin resolver (F-2) | ESC-55 |
+| RB2c-07 | Inundación del registro por reintentos abusivos (CAB-14) | O-1…O-3 |
+| RB2c-08 | Bajo D, una proyección obsoleta aplica o rechaza mal una sincronización tras una revocación | ES-13, ESC-54 |
+| RB2c-09 | Presentar la consolidación como si cerrara DB1-1 o R1 §8.1 | §20.7 |
+| RB2c-10 | Resultado devuelto en un reenvío de una operación rechazada no definido | OC-35, ES-31 |
+| RB2c-11 | Incoherencia entre este borrador y las partes ya aprobadas (§17 a §19) | §20.12 |
+
+### 20.11 Inventario consolidado de candidatas y de condiciones (etapa 2)
+
+#### 20.11.1 Operaciones candidatas
+
+R1 §5.5 declara la lista **no exhaustiva** y deja la enumeración definitiva a la Fase 4. **Esta parte no añade candidatas operativas**: las variantes de estado (iniciar, suspender, reanudar y finalizar) se tratan como variantes de UI-06 (§20.3.5; CAND-17, OC-34). La inclusión de las candidatas es una decisión del usuario (DB2a-7, DB2b-5, DB2c-7).
+
+| Origen | Candidatas | Tema |
+|---|---|---|
+| R2-B2-a (§18.5) | CAND-01…11 | Invitaciones, designación y revocación de organizadores, primera asignación de editor, degradación y autorrevocación, enrolamiento y recuperación, desactivar cuentas, asignar torneos existentes |
+| R2-B2-b1 (§19.5) | CAND-12…24 | Resolver duplicados, baja de jugadores, anular eventos, W.O., resolución manual de desempates, estados de partido, ajustes de calendario, cambio de reglamento, ocultar nombres, estados del torneo, publicar jornadas, inscribir o retirar equipos, anular o aplazar partidos |
+| R2-B2-b2 | Ninguna nueva; **CAND-17** cubre iniciar, suspender y reanudar | §20.3.5 |
+
+**Operaciones que retiran o alteran asignaciones o delegaciones** (relevantes solo si se elige D; §19.6.2): UI-09 (regeneración), CAND-18, CAND-21, CAND-23 y CAND-24, además de las listadas en H2B1-10.
+
+#### 20.11.2 Condiciones abiertas heredadas y nuevas
+
+| Tema | Condiciones | Quién decide o depende |
+|---|---|---|
+| Lecturas de `01` (A-1, A-2, A-4, A-8, A-12, A-15, A-16) | OC-05, 06, 07, 18, 25, 31 | Usuario; Fase 4 |
+| Facultades del organizador y dueño (Q-42, A-10) | OC-19 | Usuario; Fase 4 |
+| Reglas deportivas y estados (Q-21, 22, 23, 29, 40, 41) | OC-20, 21, 32, 33 | Usuario; Fase 4 |
+| Delimitaciones de operaciones | OC-01, 02, 03, 09, 10, 34 | Usuario; Fase 4 |
+| Reasignación e invitaciones | OC-08 (CL-41), OC-11 (validez de la invitación) | Usuario; Fase 4 (DB2a-4, DB2a-5) |
+| Último dueño | OC-15, 16 | Usuario |
+| Creación y alta (OC-12: duplicación de una solicitud de creación de torneo, UI-01) | OC-12, 14, 17, 22, 23 | Usuario; Fase 4; R3 |
+| Proyección de CAP-02-D | OC-24 | Solo si se elige D |
+| Privacidad | OC-26, 27, 28 | Asesoría jurídica; R2-C |
+| Sincronización y auditoría de rechazos | OC-04, 13, 30, 35, 36, 37, 38, 39, 40, 41, 42 | **Usuario (decisiones 1, 3, 10); R2-C** |
+| Señal de cambio | OC-29 | R3 (ADR-06) |
+| Composición con UI-06 | OC-30 | Documentada en §20.3.4; sin resolver las dependencias de R2-C |
+
+**Totales de decisiones abiertas** (ninguna se resuelve aquí): DB1-1…6, DB2a-1…10, DB2b-1…9 y DB2c-1…11; OC-01…42; las 12 decisiones abiertas de R2-A.
+
+### 20.12 Trazabilidad y criterios de aceptación
+
+| Elemento | Origen |
+|---|---|
+| IF-32…41 | OFF-03 a OFF-25, §9.4, CMP-13, RT-13, RD-RES-04, 05, 13; R1 §5.3, §5.5, §7.3 |
+| ES-25…32 | OFF-06, OFF-09, OFF-15, OFF-22, OFF-25; IN-09-05; R1 §5.5 |
+| GT-19…24 | K-2d (§17.3), IF-32…41, K-3 |
+| ESC-43…56 | §9.4, OFF-06, OFF-11, OFF-22, OFF-23, OFF-25; derivados marcados [DER] |
+| EV-13…17 | §17.3.3, §18.8, §19.6.2 |
+| Ficha UI-06 | R1 §5.5 (UI-06) |
+| Amenazas | R2-A (AM-04, 10, 18, 19, 33, 34; CAB-04, 05, 06, 07, 14) |
+
+| ID | Criterio de aceptación | Cumplimiento según el autor (a revisar por el usuario) |
+|---|---|---|
+| CR2B2b2-01 | UI-06 documentada con los diez campos | Cumple: §20.4 |
+| CR2B2b2-02 | Las 13 unidades UI incluidas en la consolidación | Cumple: §20.6.1 |
+| CR2B2b2-03 | Misma frontera lógica en línea y sincronizada | Cumple: IF-32, §20.3.4, ES-26, ES-32 |
+| CR2B2b2-04 | Autorización vigente en ambas capas | Cumple: IF-33 y campo 4 de UI-06 |
+| CR2B2b2-05 | Idempotencia y orden definidos como capacidades | Cumple: IF-34, IF-35, GT-20, GT-21 |
+| CR2B2b2-06 | Estados intermedios prohibidos identificados | Cumple: ES-25…32 |
+| CR2B2b2-07 | Auditoría de rechazos diferenciada por tipo | Cumple: §20.5.1 y §20.5.2 |
+| CR2B2b2-08 | K-2d documentada sin afirmar implementación | Cumple: §20.6.3 |
+| CR2B2b2-09 | CAP-02-A y CAP-02-D sin elección | Cumple: §20.7 |
+| CR2B2b2-10 | R1 §8.1 sin declarar cumplido | Cumple: §20.7 |
+| CR2B2b2-11 | Amenazas y dependencias identificadas | Cumple: §20.9, §20.10.1 |
+| CR2B2b2-12 | Decisiones abiertas conservadas | Cumple: §20.10.2, §20.10.3 (incluye OC-40…42 y DB2c-10, DB2c-11) |
+| CR2B2b2-13 | R1, R2-A, R2-B1, R2-B2-a y R2-B2-b1 intactos | Cumple según §20.13 |
+| CR2B2b2-14 | Solo el archivo autorizado modificado | Cumple según §20.13 |
+| CR2B2b2-15 | Borrador pendiente de aprobación | Cumple: §20.0 y §20.14 |
+
+### 20.13 Verificación del autor
+
+**Naturaleza.** Verificaciones **mecánicas de lectura** hechas por el autor con un guion de solo lectura. **No son una auditoría independiente:** el autor no puede verificar su propio trabajo con independencia. **Esta v0.3 no ha sido auditada ni revisada por nadie más; la v0.1 y la v0.2 fueron revisadas por agentes de contexto nuevo (§20.15), lo que tampoco equivale a una auditoría independiente.**
+
+| # | Verificación | Resultado |
+|---|---|---|
+| V-1 | Las líneas 1 a 3632 son **idénticas** a la versión confirmada `c87f578` (R1, R2-A, R2-B1, R2-B2-a y R2-B2-b1 intactos); el cambio son solo líneas añadidas | Cumple: **586 líneas añadidas y 0 eliminadas** (`git diff --stat`) |
+| V-2 | Solo cambió `02-arquitectura-adr.md`; `00`, `01`, `aprobaciones.md` y `bitacora.md` no cambiaron | Cumple (`git status` y sumas SHA-256) |
+| V-3 | Identificadores definidos y sin referencias sin definición: IF-32…41, ES-25…32, GT-19…24, ESC-43…56, OC-34…42, DB2c-1…11, RB2c-01…11, EV-13…17, CR2B2b2-01…15 | Cumple (guion de lectura) |
+| V-4 | La ficha UI-06 tiene los diez campos y sus componentes (CMP-13 + CMP-08 + CMP-11 + CMP-16) coinciden **literalmente** con R1 §5.5 | Cumple |
+| V-5 | Las citas literales entre «» se buscaron en `00`, `01` y las partes previas | Todas existen, **salvo** los mensajes del usuario citados en §20.0, que proceden de la conversación y no de un archivo |
+| V-6 | Exploración de términos tecnológicos (SQL, RLS, trigger, lock, índice, constraint, API, endpoint, nombres de productos o proveedores, token, caché y similares) | Los términos solo aparecen en X-6 (como **exclusión**) y en esta fila (lista de términos explorados); ninguna elección ni mecanismo |
+| V-7 | Ninguna decisión abierta aparece resuelta: no se elige A ni D; no se declara demostrada la independencia de D ni cumplido R1 §8.1; no se resuelve OC-04, K-3 ni la decisión 10; DB1-1…6, DB2a-1…10, DB2b-1…9, OC-01…33 y las decisiones de R2-A intactas; OC-34…42 y DB2c-1…11 abiertas; ninguna excepción concedida a D-2 | Cumple (lectura del autor) |
+| V-8 | **Misma frontera:** UI-10 dentro de UI-06 se describe como una sola transacción de datos (§20.3.4) y no como segunda unidad; la ruta sincronizada no tiene reglas de negocio propias (IF-32) | Cumple (comparación con R1 §5.3 y §5.5) |
+| V-9 | **Auditoría de rechazos:** los siete registros R-1…R-7 se distinguen por su fuente y su tipo ([CONF], [DER], [REC], [ABIERTO]); la tabla cubre las 13 unidades; las alternativas CAP-09-P, F y O se exponen sin elegir | Cumple (comparación con RF-AUD-06, OFF-20, IN-09-04, IN-09-05 y §16.7.9) |
+| V-10 | **Las 13 unidades** figuran en §20.6.1 y GT-01…24 cubren la matriz; K-2d se presenta como exigida y no demostrada | Cumple (lectura del autor) |
+| V-11 | Ninguna garantía se presenta como implementada; los efectos externos quedan fuera de la unidad; no se define mecanismo, parámetro ni retención | Cumple (lectura del autor) |
+
+**Límites.** Las **lecturas** de los requisitos y de los casos son del autor; los escenarios [DER] están rotulados en §20.8 y deben revisarse. La regla de que **OC-04 está en parte confirmada** (autorización con el estado vigente al sincronizar) y en parte pendiente es una **lectura del autor** [DER] (§20.3.2) que debe revisarse. R1 §8.1 **sigue sin cumplirse** (DB1-1 abierta).
+
+### 20.14 Estado de esta parte y lo que no se hizo
+
+**Estado: v0.3-R2B2b2, APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-20).** Corrigió los hallazgos E-01…E-14 (§20.15.1) y M-1 y M-2 (§20.15.2). Aprobación registrada en §20.0, `aprobaciones.md` y `bitacora.md`; **no versionado**.
+
+**Qué se hizo.** Se redactó la Parte VI (§20) como **un único borrador en dos etapas internas**: la ficha UI-06, la frontera de sincronización y los requisitos de la auditoría de rechazos (etapa 1); y la síntesis de K-2 sobre las 13 unidades, la evidencia consolidada de CAP-02-A y CAP-02-D, la matriz de concurrencia, las amenazas, las dependencias, condiciones, decisiones y riesgos, y el inventario consolidado (etapa 2).
+
+**Qué no se hizo.** No se redactó R2-C, R3 ni R4; no se aprobó R2-B2-b2, R2-B2 completo, R2 ni la Fase 2; no se resolvió ninguna DB1, DB2a, DB2b ni DB2c ni OC ni decisión de R2-A; no se resolvió K-3 ni se eligió entre CAP-09-P, F u O; no se decidió la partición ADR-05.C / ADR-09.C; no se eligió formulación; no se declaró demostrada la independencia de D ni cumplido R1 §8.1; no se fijó PAR ni se aceptó RES o RB; no se concedió excepción a D-2 ni se resolvió OC-04; no se aplicó la reasignación propuesta de AM-19 y AM-34 (OC-40); no se resolvieron OC-41 ni OC-42; no se modificaron otros archivos; no se crearon ramas, commits, pushes, PR ni merges; no se tocó `main`; no se actualizaron `aprobaciones.md` ni `bitacora.md`.
+
+**Git.** Rama `claude/fase-2-arquitectura-amenazas`; HEAD `c87f57843bd5d497d820571937edc21c3f8c362a`; los cambios son `02-arquitectura-adr.md`, `aprobaciones.md` y `bitacora.md` **sin confirmar** (registro de la aprobación). Cualquier commit, push o PR requiere autorización expresa y separada.
+
+### 20.15 Hallazgos y correcciones
+
+#### 20.15.1 Auditoría de R2-B2-b2 v0.1 (E-01…E-14) y correcciones de la v0.2
+
+**Origen.** Revisión de contexto nuevo de la v0.1 (SHA-256 `358607b4504760d7d3c2a30be10b4825bd82bb26e6a5bbf07e95bf93791fef86`), con resultado "requiere correcciones materiales". Esa revisión tiene independencia solo de contexto. Las correcciones fueron autorizadas por el usuario en una ronda única (§20.0). **No equivalen a aprobación.**
+
+| ID | Hallazgo | Corrección en la v0.2 | Dónde |
+|---|---|---|---|
+| E-01 | La auditoría de rechazos trataba R-3 como obligación de registrar todo rechazo | Se separa registrar (fuentes: RF-AUD-06 solo RT-14, OFF-20, RF-AUD-05 [REC]) de persistir correctamente (R-3); las unidades sin fuente lo dicen; GT-23 y ES-30 acotados | §20.5.1, §20.5.2, §20.6.1, GT-23, ES-30 |
+| E-02 | ES-31 y ESC-56 cubrían lo rechazado | ES-31 solo para lo aplicado; ESC-56 y el alcance de OFF-06 sobre lo rechazado [ABIERTO: OC-35]; no se elige O-1, O-2 ni O-3 | ES-31, IF-34, GT-20, ESC-56, §20.5.4 |
+| E-03 | Conformidad de CAP-09-P-A/B/C reproducida sin fidelidad | Tabla con las conformidades de R2-A (P-A plenamente conforme; P-B no conforme con el texto literal; P-C viable con condición), condiciones conservadas, beneficio de O-1 frente a CAB-14, consecuencia sobre UI-06 en [DER]; sin elegir | §20.5.4 |
+| E-04 | Reparto CMP-08 / CMP-13 y garantía de secuencia en la capa de datos | CMP-08 decide permisos y conflictos de interés; CMP-13 versión, idempotencia y secuencia; la secuencia en la capa de datos sin fuente: [DER] a justificar en ADR-05.C (OC-41) | UI-06 campo 4, §20.3.1 |
+| E-05 | OC-04 y D-2 mezclados; "diferir a Fase 4" para D-2 | DB2c-1 solo trata el borde (OC-04); DB2c-10 solo las alternativas (a)–(d) de la decisión 1 de R2-A; sin excepción | §20.3.2, §20.10.3, UI-06 campo 10 |
+| E-06 | Partición confirmado / pendiente de «antes y después» | Confirmado: se rechaza lo no autorizado al sincronizar aunque se capturara antes; pendiente: instante en tránsito y medición de D-2; partición del autor [DER]; OC-04 abierta | §20.3.2 |
+| E-07 | Composición UI-06 / UI-10, paso d y citas | Paso d sin UI-05; componentes por composición (CMP-12, CMP-14) distinguidos; R1 §5.5 para idempotencia e IN-09-04/06 para auditoría | §20.3.1, §20.3.4, UI-06 |
+| E-08 | Matriz de dependencias y ubicación de ADR-09.C y ADR-03 | ADR-09.C y ADR-03 son de R2-A; ADR-05.C (R2-C) recibe la frontera; AM-19 y AM-34: reasignación propuesta, **no aplicada** (OC-40, DB2c-11) | §20.9, §20.10 |
+| E-09 | Tablas R-1…R-7 | R-4 en RT-14 propio equipo vía OFF-20; R-6 [REC] en UI-06; R-2 solo en intentos sin autoridad de UI-08; UI-01 [DER]; R-2 en UI-12 si compone UI-02 | §20.5, §20.6.1 |
+| E-10 | Inventario de OC | OC-08 y OC-11 incluidas; OC-12 uniforme (UI-01, en línea); OC-38 limitada a Q-42 (a) y A-10; OC-01…42 | §20.10.2, §20.11.2 |
+| E-11 | Clasificación y alcance de EV | EV-15 como caso concreto; EV-16 solo unidades con reglas; EV-17 clasifica EV-01…EV-16 [SUP] | §20.7 |
+| E-12 | GT-12, GT-24, GT-14, GT-09, GT-10 | RD-RES-04 solo UI-05 y UI-10; GT-24 en UI-06 sin extenderlo; GT-14 con UI-06 por composición; GT-09 y GT-10 acotadas | §20.2, §20.6.2 |
+| E-13 | Rótulos y referencias | IF-32, ES-26, ES-32, fila «Finalizar», origen de ESC-43…56, propiedad de §20.6.4 y filas OFF-01, 15, 24 corregidos | §20.2, §20.3.3, §20.3.5, §20.8 |
+| E-14 | Dependencias de ADR-05.C no registradas | OC-41 (secuencia entre dos dispositivos del mismo editor) y OC-42 (estado local tras aborto técnico) abiertas; sin elegir mecanismo | §20.10.2 |
+
+#### 20.15.2 Revisión focalizada de la v0.2 (M-1, M-2) y correcciones de la v0.3
+
+**Origen.** Revisión de solo lectura de la v0.2 (SHA-256 `4dbcca3c8900a031474992112fb18c7dc012902e5f19bb63dcb8c65c27c0f84f`) por un agente de contexto nuevo (independencia solo de contexto), con resultado "requiere correcciones materiales" por M-1 y M-2; el resto de E-01…E-14 se clasificó como resuelto. **Las correcciones de la v0.3 no equivalen a aprobación.**
+
+| ID | Hallazgo | Corrección en la v0.3 | Dónde |
+|---|---|---|---|
+| M-1 | R-3, ES-30 y GT-23 extendían la persistencia independiente a R-4 (abierta en R2-A §16.7.2) y a R-6 [REC] | R-3 es propiedad de persistencia sin crear obligación de registrar; se conserva para R-2; para R-4 está [ABIERTA] (ADR-05.C, ADR-09.C, decisión 3); R-6 sigue [REC] y condicional; ES-30 y GT-23 limitados a R-2; §20.5.2, §20.5.3 y §20.6.1 alineadas; K-3 y las alternativas sin elegir | R-3, R-4, R-6, §20.5.1–§20.5.3, ES-30, GT-23, §20.6.1 |
+| M-2 | La fila de RT-14 sobre el propio equipo omitía R-4; la fila UI-03 afirmaba que CL-41 exige auditar un «rechazo» | Fila de §20.5.3 con R-4 relacionado y su persistencia no decidida; UI-03 cita CL-41 literalmente, deja el tipo de registro de la intención que no prevalece [ABIERTO] (OC-08) y distingue cuatro situaciones en §20.5.1 | §20.5.3, §20.5.2 (UI-03), §20.5.1 |
+
+**Observaciones editoriales no bloqueantes (no corregidas en esta ronda).** Omisión del «Aviso de operación [REC]» de R2-A; OC-41 citada en el campo 4 de UI-06 junto a un asunto distinto; OC-30 duplicada en §20.11.2; clasificación [SUP] discutible de EV-01 y EV-06; ESC-50 rotulado [DER] aunque §9.4 fila 8 es literal; "respectivamente" confuso en el origen de §20.8; [SUP] ausente de la convención de rótulos; campo 7 de UI-06 sin ES-04, 16, 20 y 23; EV-16 y las reglas de integridad de UI-08 y UI-11 (ES-07, ES-11); paso h con CMP-16 frente a R1 línea 276; ESC-53 con ES-10; orden de DB2c-10 y DB2c-11 antes de DB2c-9.
