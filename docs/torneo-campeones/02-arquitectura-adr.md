@@ -4260,6 +4260,446 @@ R1 §5.5 declara la lista **no exhaustiva** y deja la enumeración definitiva a 
 
 **Hash histórico del documento.** SHA-256 de `02-arquitectura-adr.md` **inmediatamente antes de este registro** (archivo versionado en `bbfff28`, con los metadatos de aprobación de R2-B2-b2): `8616b8c5bc20860bad9f5cfa29a972cdba0495bb02a87d5d41699b70c8da5675`. El contenido técnico aprobado de R2-B2-b2 conserva el hash `f1e1fb34ed1bdbd68628d0ab83ebec8a5ee912f0e49625fce5b124f57fddf30c`. Los hashes anteriores se conservan en `aprobaciones.md` y `bitacora.md`. **El hash del archivo con este registro se consigna en `aprobaciones.md` y `bitacora.md` y no se inserta aquí.**
 
-**Estado de versionado de este registro.** **Pendiente:** sin commit, push, PR ni merge.
+**Estado de versionado de este registro.** **Pendiente:** sin commit, push, PR ni merge. *[Nota posterior, 2026-11-21 (fecha inferida): este registro se versionó en el commit `a13b2139042ccb8bfac8f88121a3bb26dc642ce5` (verificable por Git, 2026-11-21T01:43:24Z). Esta línea conserva el estado a la fecha de su registro.]*
 
 **Condiciones para el cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. El cierre documental condicionado de R2-B2 **no equivale a aprobación global** de R2, de ADR-02.C ni de la Fase 2. Las obligaciones de R2-C, R3 y la Fase 4 conservan su alcance.
+
+
+---
+
+# PARTE VII — BLOQUE R2-C1 (v0.2-R2C1, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-21 inferida)
+
+## 21. R2-C1 — ADR-05.C: sincronización sin conexión (capacidades exigidas)
+
+### 21.0 Alcance, autorización y reglas de esta parte
+
+**Estado: v0.2-R2C1 — APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-21, fecha inferida), por acto expreso del responsable (ver «Aprobación condicional» más abajo).** La v0.2 corrigió la v0.1 tras la autoevaluación H-01…H-17 (§21.15). **No está versionado.** Esta parte **se añade al final del archivo, después del "Registro de cierre documental de R2-B2"**; no modifica ninguna línea de R1 (§0–§15), R2-A (§16), R2-B1 (§17), R2-B2 (§18–§20) ni de ese registro. **No aprueba ADR-05.C, R2-C, R2 ni la Fase 2.**
+
+**Autorización recibida.** Mensaje «TORNEO DE CAMPEONES — R2-C1: BORRADOR DOCUMENTAL DE ADR-05.C» (2026-11-21, fecha inferida: la del aviso de fecha de la sesión; no hay marca de tiempo individual del mensaje): «AUTORIZO EXCLUSIVAMENTE INICIAR EL SUBBLOQUE DOCUMENTAL R2-C1 Y ELABORAR UN BORRADOR DE ADR-05.C.» Archivo autorizado: solo `02-arquitectura-adr.md`. Sin commit, push, PR ni merge. Precedió un «R2-C: RECONOCIMIENTO PRELIMINAR (SOLO LECTURA)».
+
+**Autorización de la corrección (v0.2).** Mensaje «TORNEO DE CAMPEONES — R2-C1: CORRECCIÓN CONTROLADA H-01…H-17» (2026-11-21, fecha inferida): «AUTORIZO EXCLUSIVAMENTE CORREGIR LOS HALLAZGOS H-01 A H-17 DE LA AUTOEVALUACIÓN DE ADR-05.C.» Limitada a la Parte VII (§21); sin commit, push, PR ni merge. La autoevaluación fue del autor, **no una auditoría independiente**.
+
+**Aprobación condicional de R2-C1 como entregable documental (2026-11-21).** Por acto expreso del responsable (mensaje «TORNEO DE CAMPEONES — REGISTRO DE APROBACIÓN DOCUMENTAL CONDICIONADA DE R2-C1»), la v0.2-R2C1 quedó **APROBADA CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL**: «APRUEBO EXCLUSIVAMENTE EL BORRADOR DOCUMENTAL R2-C1 v0.2 COMO ENTREGABLE CONDICIONADO.» Significa que el borrador puede conservarse como base documental para continuar el proceso. La fecha es la del aviso de fecha de la sesión; no hay marca de tiempo individual del mensaje.
+
+- **La aprobación NO implica:** aprobar una formulación de D5-1…7; resolver decisiones abiertas; aprobar definitivamente ADR-05.C; aprobar globalmente R2-C, R2 ni la Fase 2; acreditar implementación ni pruebas; elegir CAP-02-A ni CAP-02-D ni CAP-09-P-A/B/C; resolver K-3 ni las decisiones 3 y 10 de R2-A; fijar parámetros, aceptar riesgos ni conceder excepciones; autorizar R2-C2, R2-C3 ni R2-C4.
+- **Condiciones que permanecen abiertas:** (1) OFF-20 frente a CAP-05-M-B, pendiente de DC1-2; (2) ubicación definitiva de IN-05-21; (3) las decisiones D5-1…7, sin seleccionar formulaciones; (4) las decisiones DB, las OC (incluidas OC-43 y OC-44), K-3 y las decisiones heredadas de R2-A; (5) D-2 sin excepción; (6) un ajuste editorial no bloqueante de IN-05-08 (añadir A-10 y RD-RES-13 a lo que la condiciona); (7) la limitación de revisión indicada abajo.
+- **Limitación de la revisión.** El borrador solo recibió una **autoevaluación del autor** (H-01…H-17, corregida en la v0.2) y una **comprobación final focalizada del autor** (OFF-20 frente a CAP-05-M-B: condicionado; OFF-11 frente a IN-05-21: conforme; RT-14, R1 §7.0 y fichas UI-06 y UI-10: conforme). **No hubo auditoría independiente ni revisión de contexto nuevo.** La aprobación es exclusivamente documental: **no acredita implementación ni pruebas empíricas.**
+- **Integridad.** SHA-256 del **contenido técnico aprobado** (el archivo inmediatamente antes de añadir estos metadatos): `0c62bc112c65a63bd643055c40207e768b191548821e70e51c17daab2356e938`. El hash del **archivo con los metadatos de aprobación** se registra en `aprobaciones.md` y `bitacora.md`; **no se inserta en este archivo**. Los metadatos de aprobación son solo editoriales: el título y el estado de la Parte VII, este apartado, la fila de estado de §21.1, el estado y el párrafo «Git» de §21.14 y una nota posterior de trazabilidad del commit `a13b213` en el registro de cierre de R2-B2. **El contenido arquitectónico y las formulaciones de §21.1–§21.13 y §21.15 no se modificaron.**
+- **Precedencia.** CR2C1-12 de §21.12 y el apartado «Qué no se hizo» de §21.14 describen el estado a la fecha del borrador; prevalece este apartado en cuanto al estado de aprobación.
+- **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
+- **Condición de cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. R2-C2, R2-C3 y R2-C4 no están iniciados; R2-C no tiene aprobación global.
+
+**Qué contiene.** Las capacidades y garantías **exigidas** de la sincronización sin conexión (cola, secuencia, idempotencia, revalidación, conflictos, rechazos y fallos de registro, recuperación tras interrupciones), su relación con la frontera atómica de ADR-02.C y con UI-06 (UI-10 dentro), y **siete decisiones con dos formulaciones cada una**, **sin elegir ninguna**.
+
+**Qué NO contiene ni hace.**
+
+| # | Exclusión |
+|---|---|
+| X-1 | No elige entre las formulaciones CAP-05-I, M, F, S, B, E ni C (A o B): las presenta con sus ventajas, limitaciones, riesgos y dependencias |
+| X-2 | No resuelve las decisiones 3 y 10 de R2-A, DB2c-2, DB2c-3, K-3, OC-35, OC-36, OC-37, OC-38, OC-39, OC-41, OC-42, OC-04 ni D-2, ni ninguna otra decisión abierta; no concede excepción a D-2 |
+| X-3 | No presenta como garantía aprobada ninguna afirmación que dependa de una decisión abierta |
+| X-4 | No elige base de datos, tecnología de almacenamiento, mecanismo de sincronización, librería, servicio, algoritmo de cifrado, estrategia de infraestructura ni parámetro numérico no aprobado; todo eso es de ADR-05.I y R3 (condicionado a ADR-01) |
+| X-5 | No redacta ADR-04.C ni ADR-16.C (R2-C2 y R2-C3 siguen sin iniciar), ni la consolidación del modelo de amenazas, ni R3 ni R4 |
+| X-6 | No modifica ADR-02.C, ADR-03.C ni ADR-09.C, ni UI-06 ni UI-10, ni ninguna ficha, invariante, estado prohibido, garantía o escenario aprobados; los **consume** |
+| X-7 | No acepta riesgos, no fija PAR, no concede excepciones y no declara cumplido R1 §8.1 |
+| X-8 | No modifica `00`, `01`, `aprobaciones.md` ni `bitacora.md`; **no actualiza todavía la trazabilidad histórica del commit `a13b213`** |
+
+**Fuentes leídas directamente y límites de la lectura (H-04).** **Releídas directamente al preparar la v0.2:** en `01`, OFF-01…25 (§9.3), §9.2, la tabla de §9.4, §9.5 (filas 5 y 6 y las reglas adicionales), RD-RES-04, 05, 10 y 13, RD-EVT-12, RT-13, el inicio de RT-14, RF-AUD-05, RF-AUD-06, PRV-10 y las preguntas Q-30, Q-42 y Q-43; en R1, §5.3, §5.5 (filas UI-06 y UI-10), §7.3 (FL-3) y §8.1 y §8.2 (filas de ADR-04, ADR-05 y ADR-16 y la matriz de dependencias); en R2-A, IN-03-10, 11, 17…21, CAP-03-S-A y B, IN-09-01…13, §16.7.4, §16.7.6 y §16.7.9 y la tabla de las 13 decisiones (en su registro de `aprobaciones.md`); en R2-B1, el texto de K-2 y K-3 (§17); en R2-B2, §20.2 (IF-32…41, ES-25…32), §20.3.1, GT-19…24 y la lista de ESC-43…56. **Limitaciones:** no se releyeron íntegros el resto de RT-14, el flujo §7.0 de R1, PRV-02, 03, 06, 11 y 18, §16.8.4 de R2-A, las fichas completas de UI-06 y UI-10 de §18 a §20 ni `bitacora.md`; las afirmaciones de §21 sobre esas fuentes se apoyan en lo que citan R2-A y R2-B2 (aprobados condicionalmente) y se tienen por **no comprobadas de nuevo** hasta su relectura. Del skill se consultaron SKILL.md y las puertas de aprobación; `seguridad.md` solo en sus encabezados.
+
+**Convención.** [CONF]: texto confirmado de `01` o R1. [REC]: recomendación o propuesta (no confirmada). [DER]: derivada por el autor (se explica el paso). [ABIERTO]: sin resolver; ninguna se elige. Identificadores nuevos (continúan o crean series sin colisión): **IN-05-nn** (invariantes y garantías de ADR-05.C), **ES-33…** (estados prohibidos), **ESC-57…** (escenarios), **CAP-05-x-A/B** (formulaciones), **D5-n** (decisiones de formulación), **OC-43…**, **DC1-n** (decisiones para el responsable), **RR5-nn** (riesgos documentales) y **CR2C1-nn** (criterios de aceptación).
+
+### 21.1 ADR-05.C — Identificación
+
+| Campo | Valor |
+|---|---|
+| ADR | ADR-05.C — Sincronización sin conexión: capacidades exigidas (R1 §8.1, ADR-05; R1 §8.2) |
+| Pregunta de R1 §8.1 | «¿Cómo se estructuran la cola, la secuencia, la idempotencia, la revalidación y los conflictos?» y cómo se aplica a la ruta sincronizada la frontera atómica de ADR-02.C (UI-06 con UI-10 dentro); **pregunta abierta [OFF-06, OFF-20]**: si persisten fuera de la unidad el registro de idempotencia de una operación rechazada y los metadatos de rechazadas o en conflicto |
+| Alternativas exigidas | **≥ 2** (R1 §8.1, ADR-05) |
+| Entradas | R1 §5.3, §5.5, §7.0, §7.3, §8.1, §8.2; `01` OFF-01…25, §9.2, §9.4, §9.5; R2-A (ADR-03.C, ADR-09.C, §16.7.9); R2-B1 (K-2, K-3); R2-B2 (§20) |
+| Parámetros abiertos asignados por R1 §8.1 | Q-29, Q-30, Q-42, Q-43, A-9, A-10, A-11, A-13, A-14, A-15 |
+| Requiere (R1 §8.2) | ADR-02.C (frontera atómica), ADR-03.C, ADR-09.C (persistencia de rechazos e incidencias) |
+| Alimenta | ADR-16.C (formato de cola y datos locales; R1 §8.2), ADR-08 y ADR-01/ADR-10 (R3), ADR-05.I |
+| Estado | v0.2-R2C1: APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL (2026-11-21, inferida); ADR-05.C **no** queda aprobada definitivamente |
+
+### 21.2 Dependencias y conflictos entre fuentes
+
+**Qué consume ADR-05.C de lo ya aprobado (como entrada, sin modificarlo):**
+
+| Fuente | Qué aporta a ADR-05.C | Estado |
+|---|---|---|
+| ADR-02.C / R2-B2 (§20) | Frontera atómica de UI-06 con UI-10 dentro (§20.3.1, §20.3.4); IF-32…41; ES-25…32; GT-19…24; ESC-43…56; registros de rechazo R-1…R-7 (§20.5.1) | Aprobado condicionalmente como entregable documental; formulaciones como PROPUESTA |
+| ADR-03.C / R2-A | IN-03-10 (sincronizar exige sesión válida y permisos vigentes); IN-03-11 (el contexto local no autentica ni autoriza); IN-03-19 y IN-03-20 ([REC]: la cuenta que sincroniza es la que capturó; la cola se aísla por cuenta); CAP-03-S-A y B (nivel exigido al sincronizar, OC-39 abierta) | Aprobado condicionalmente; PROPUESTA |
+| ADR-09.C / R2-A | IN-09-04 (lo aplicado se registra dentro de la misma unidad); IN-09-05 (el registro de un rechazo persiste aunque la operación no se aplique); IN-09-06; D9-1 (CAP-09-P-A/B/C); §16.7.6 (la persistencia de la idempotencia de OFF-06 y de OFF-20 es de **ADR-05.C**, no de ADR-09.C); §16.7.9 (F-1…F-3, O-1…O-3) | Aprobado condicionalmente; PROPUESTA; decisiones 3 y 10 abiertas |
+| R1 §5.3 | CMP-13 («Idempotencia, secuencia y conflictos de versión»; «No contiene reglas de negocio ni decide permisos»), CMP-04 (almacén local y cola), CMP-05 (sincronizador del cliente), CMP-08 (decide permisos), CMP-11 (aplica), CMP-16 (audita), CMP-17 (contenido de la exportación) | Aprobado (R1) |
+| `01` §9.2, §9.4, §9.5 | Estados de una operación; política de conflictos (12 filas); parámetros del modo sin conexión (Q-34) | [CONF] |
+
+**Conflictos o tensiones entre fuentes (se señalan, no se resuelven):**
+
+| # | Tensión | Fuentes | Tratamiento en este borrador |
+|---|---|---|---|
+| T-1 | R1 §5.5 y §8.1 atribuyen la persistencia de OFF-06 y OFF-20 a «ADR-05.C y ADR-09.C»; §8.2 solo hace que ADR-05.C requiera ADR-09.C | R1 §5.5, §8.1, §8.2; R2-A §16.7.6, H2A-06 | Se conserva la partición **provisional** de R2-A (H2A-06; decisión 3, **abierta**: no es una decisión definitiva); D5-1 y D5-2 la dejan explícita |
+| T-2 | OFF-07 («bloqueadas por operación anterior») es [REC]; OFF-25 (hueco bloquea; dependencia de la reanudación) es [CONF] | `01` OFF-07, OFF-25 | D5-5 |
+| T-3 | §9.4 fila 10 dice que, con el mismo editor en dos dispositivos, las operaciones «Se fusionan por identificador y secuencia»; OFF-03 asigna un «número de secuencia por partido» y OFF-25 exige una secuencia «contigua», sin precisar si es por dispositivo o por editor | `01` §9.4 fila 10, OFF-03, OFF-25 | D5-4 (OC-41) |
+| T-4 | OFF-06 exige devolver «el resultado original» ante un reenvío, pero no dice cómo se aplica a lo rechazado | `01` OFF-06; R2-A §16.7.9 | D5-1 (OC-35) |
+| T-5 | La ficha UI-03 de R2-B2-a dice que la intención que no prevalece «se audita como rechazo»; OC-08 la deja abierta | R2-B2-a §18.4.3, OC-08 | No afecta a ADR-05.C; se conserva abierta |
+| T-6 | IN-03-19 es [REC]: OFF-22 no dice que la sesión que sincroniza deba ser la de la cuenta que capturó | R2-A IN-03-19; `01` OFF-22 | IN-05-11 lo trata como [REC] |
+| T-7 | `01` OFF-12 dice que el cifrado local «se evalúa en la Fase 2» sin prometerlo; el formato de la cola es de ADR-05.C y la protección local, de ADR-16.C | `01` OFF-12; R1 §8.1, §8.2 | ADR-05.C no decide protección local; se señala la dependencia con ADR-16.C |
+| T-8 | OFF-09 dice que «ninguna captura local se pierde en silencio»; OFF-17 reconoce que el navegador puede eliminar los datos locales y que **no se promete conservación** | `01` OFF-09, OFF-17 | IN-05-12 acota la exigencia a lo que depende de la aplicación y del servidor; **no promete una persistencia imposible**; la protección y el desalojo del almacén son de ADR-16.C |
+
+### 21.3 Qué decide ADR-05.C y qué no
+
+| Asunto | ¿Lo decide ADR-05.C? | Quién |
+|---|---|---|
+| Qué capacidades exige la cola, la secuencia, la idempotencia, la revalidación, los conflictos y la recuperación | **Sí** (como capacidades exigidas, sin mecanismo) | ADR-05.C |
+| Si la idempotencia y los metadatos de OFF-20 de lo rechazado persisten de forma independiente | **Propone alternativas** (D5-1, D5-2); decide el responsable | Decisiones 3 y 10 de R2-A; DB2c-2 y DB2c-3 |
+| Frontera atómica de UI-06 y UI-10 | **No**: la **consume** de ADR-02.C | ADR-02.C |
+| Autenticación, nivel exigido al sincronizar, sesiones | **No** | ADR-03.C (OC-39) |
+| Qué se audita, inmutabilidad, persistencia independiente de R-2 | **No** | ADR-09.C |
+| Protección del almacén local, cifrado, límites de almacenamiento | **No** | ADR-16.C (R2-C3) |
+| Visibilidad y proyecciones públicas | **No** | ADR-04.C (R2-C2); ADR-06 (R3) |
+| Mecanismo concreto de cola, sincronización, orden, reintentos o reconciliación | **No** | ADR-05.I (R3, tras ADR-01) |
+| Cálculo de la tabla | **No** | ADR-08 (R3) |
+
+### 21.4 Invariantes y garantías exigidas de ADR-05.C (IN-05-nn)
+
+Son **capacidades exigidas** cuando su tipo es [CONF] o [DER]; las marcadas [REC] son **propuestas condicionadas** a una decisión del responsable (DC1-8) y las [ABIERTO] **no fijan** garantía alguna. **Ninguna está implementada ni probada.** Se **suman** a IF-01…41, ES-01…32 y GT-01…24 y no los modifican. La columna "Condicionada por" indica qué formulación o decisión abierta limita el alcance de la garantía; donde figura una decisión abierta, **la garantía vale solo en la parte confirmada** (X-3).
+
+| ID | Invariante o garantía exigida | Tipo | Fuente | Condicionada por |
+|---|---|---|---|---|
+| IN-05-01 | **Cola local persistente:** sobrevive a cerrar la app, a un reinicio y a perder la pestaña; cada operación lleva identificador único generado en el cliente, número de secuencia por partido, tipo, datos, versión base conocida, dispositivo, usuario y hora local | [CONF] | OFF-03, OFF-02 | Protección y límites del almacén local: ADR-16.C; OFF-17 |
+| IN-05-02 | **Estados de la operación local** (`pendiente`, `enviando`, `confirmada`, `en conflicto`, `rechazada`) diferenciados por operación y con resumen por partido; solo `confirmada` puede ser pública | [CONF] | OFF-04, OFF-15, §9.2 | D5-6 (estado tras un aborto técnico), OC-42, OC-44 |
+| IN-05-03 | **Disparadores de sincronización:** al recuperar la conexión con la app abierta, al abrir o volver a la app, por «Sincronizar ahora» y por reintento periódico con espera creciente; no se depende de sincronización en segundo plano; indicador permanente de pendientes. **Los plazos y la espera creciente no se fijan aquí** | [DER] (OFF-05 es DER en `01`) | OFF-05, RK-11 | iOS sin verificar en dispositivo (HR1-07) |
+| IN-05-04 | **Idempotencia de lo aplicado:** cada operación se aplica como máximo una vez; un reenvío del mismo identificador, también concurrente, devuelve el resultado original sin repetir efectos ni registros de auditoría | [CONF] | OFF-06, §9.4 fila 9, IF-34, GT-20 | — |
+| IN-05-05 | **Idempotencia de lo rechazado:** el alcance de OFF-06 sobre una operación rechazada **no está fijado por `01`** | [ABIERTO] | OFF-06; R2-A §16.7.9 | D5-1, OC-35, decisión 10 de R2-A |
+| IN-05-06 | **Orden por secuencia y contigüidad por partido:** las operaciones se validan en orden de secuencia contra el estado resultante de las anteriores aceptadas, partiendo del estado oficial; un hueco bloquea las operaciones posteriores de ese partido y se registra | [CONF] | OFF-25, IF-35, GT-21 | D5-4 (contigüidad entre dispositivos del mismo editor, OC-41) |
+| IN-05-07 | **Bloqueo por operación fallida:** que, si una operación falla, las siguientes del mismo partido queden «bloqueadas por operación anterior» y las de otros partidos continúen | [REC] | OFF-07 | D5-5, OC-37 |
+| IN-05-08 | **Dependencia de la reanudación:** si la reanudación se rechaza o queda en conflicto, ningún evento posterior de la secuencia se aplica ni se publica; un evento con el estado oficial `suspendido` y sin reanudación aceptada previa en su secuencia se rechaza | [CONF] | OFF-25, RD-EVT-12, RD-RES-13, IF-36, GT-21 | A-9, A-11, A-14 (lecturas provisionales) |
+| IN-05-09 | **Atomicidad por operación:** cada operación se aplica completa o no se aplica; una interrupción de la red durante el envío no deja estados parciales | [REC] en OFF-08; [DER] en su aplicación a la unidad | OFF-08, IF-38, GT-19 | D5-7 (qué ve el cliente tras una interrupción) |
+| IN-05-10 | **La revalidación es la de la frontera:** al sincronizar, cada operación recorre el mismo camino lógico que su equivalente en línea (autorización con el estado vigente al sincronizar, evaluada de forma atómica con la aplicación); CMP-13 no decide permisos; ningún dato local concede permisos | [CONF] en OFF-22 y RT-13 (autorización con el estado vigente al sincronizar, atómica con la aplicación, y que ningún dato local concede permisos); [DER] en IN-03-11 y en la consecuencia de que no hay otra ruta | OFF-22, OFF-23, RT-13, IF-32, IF-33, IF-39, IN-03-10, IN-03-11 | OC-04 y D-2 (instante y medición); OC-39 (nivel de autenticación) |
+| IN-05-11 | **La cuenta que sincroniza es la que capturó:** cada operación queda ligada a la cuenta que la capturó, se evalúa con esa cuenta y una sesión de otra cuenta nunca sincroniza ni apropia operaciones ajenas; la cola se aísla por cuenta en el dispositivo | [REC] | IN-03-19, IN-03-20, OFF-03, OFF-12, CAB-30 | ADR-03.C; ADR-16.C (aislamiento local) |
+| IN-05-12 | **Conflictos sin sobrescritura y sin pérdida silenciosa:** lo confirmado por el servidor nunca se sobrescribe en silencio y ninguna captura local se pierde en silencio **por la aplicación ni por el servidor**; las filas de §9.4 conservan sus resultados. **No cubre la eliminación del almacenamiento local por el navegador**, que `01` reconoce sin garantía de conservación (OFF-17; T-8) | [CONF] | OFF-09, OFF-17, §9.4, IF-37, GT-24, RD-RES-04 | D5-3 y D5-6 para los casos de fallo técnico; ADR-16.C (desalojo) |
+| IN-05-13 | **Conservación local de lo en conflicto o rechazado:** hasta que el usuario lo reintente, lo descarte con confirmación o use la exportación limitada, con retención máxima de 30 días, plazo informado y constancia mínima; sin garantía si el navegador elimina el almacenamiento local o el dispositivo permanece desconectado | [CONF] | OFF-10, OFF-17, PRV-10 | ADR-16.C; RES-07 |
+| IN-05-14 | **Lo local jamás es público;** finalizar sin conexión es «finalización pendiente» y el partido solo se considera finalizado y público cuando el servidor la confirma | [CONF] | OFF-15, OFF-21, IF-40 | — |
+| IN-05-15 | **Relojes:** el orden se basa en secuencia, no en reloj; el servidor registra su propia hora de recepción; si el reloj del dispositivo difiere más de 5 minutos del servidor al sincronizar, se avisa y se registra | [REC] | OFF-13, AM-10 | — |
+| IN-05-16 | **Actualización de la app con cola pendiente:** una nueva versión no descarta la cola; el formato de la cola tiene versión y se migra; si no es compatible, se bloquea la actualización hasta sincronizar | [REC] | OFF-16 | ADR-16.C; ADR-05.I |
+| IN-05-17 | **Exportación limitada:** el contenido lo fija CMP-17 y lo presenta CMP-05; por defecto solo identificador del partido, abreviaturas de equipos y marcador; no concede permisos, no se reimporta ni se aplica como resultado oficial | [CONF] | OFF-24, OFF-11, PRV-18 | Q-43 (criterio de autorización de eventos, minutos, dorsales y equipos); PRV-18 |
+| IN-05-18 | **Registro de rechazos, bloqueos y metadatos:** ADR-05.C **aplica** la capacidad de ADR-09.C sin redefinirla, **según la partición provisional de R2-A (decisión 3 abierta)**: los registros que una fuente exige (R-2, RF-AUD-06) persisten conforme a IN-09-05; la persistencia independiente de **R-4** (OFF-20) y del registro de idempotencia de lo rechazado (R-5) está **[ABIERTA]**; R-6 (RF-AUD-05) sigue [REC] | [CONF] el registro de R-2 (RF-AUD-06); [DER] su persistencia independiente (IN-09-05); [ABIERTO] en R-4 y R-5; [REC] en R-6 | IN-09-05, RF-AUD-06, OFF-20, §20.5.1, R2-A §16.7.4 y §16.7.6 | D5-1, D5-2, D5-3; K-3; decisiones 3 y 10 de R2-A |
+| IN-05-19 | **Recuperación tras interrupciones:** tras un corte durante el envío, un cierre forzado o una pérdida de respuesta, cada operación queda en un único estado coherente y puede reconciliarse sin duplicar efectos ni perderse; **el mecanismo no se fija** | [DER] de OFF-08, OFF-06 y OFF-09 | OFF-05, OFF-06, OFF-08, OFF-09 | D5-7, OC-43, OC-44 |
+| IN-05-20 | **Sin permisos nuevos, sin reducción de garantías y sin selección tecnológica:** ADR-05.C no concede facultad alguna y respeta PA-13 y RC-23 | [DER] / [CONF] | R1 RC-23, RC-25; R2-A IN-03-17, IN-09-11 | — |
+| IN-05-21 | **Conducta del cliente ante la pérdida de autorización [CONF en OFF-11]:** el cliente deja de enviar las operaciones de un usuario al saber que perdió autorización; con la cuenta desactivada, al primer contacto con el servidor cierra la sesión, bloquea el acceso a los datos locales, ofrece **una sola vez** la exportación limitada de OFF-24 y elimina de forma controlada los datos locales (tras exportar o confirmar, nunca antes de mostrar el aviso); una PWA no puede borrar datos de un dispositivo que nunca se conecta (riesgo residual) | [CONF] | OFF-11, OFF-12, OFF-24, §9.4 fila 5 | La ejecución local puede estar condicionada por ADR-16.C; **no se traslada definitivamente**: la ubicación de esta exigencia no está decidida y no hay respaldo documental para asignarla |
+
+### 21.5 Formulaciones alternativas, sin elegir
+
+Cada decisión presenta **dos formulaciones**. Ninguna se aprueba, ninguna se recomienda y ninguna desplaza a las demás. «Dependencias» enumera lo que impide cerrar la formulación. Las referencias a ESC-nn de §20.8 son escenarios aprobados; las nuevas (ESC-57…) están en §21.7.
+
+#### D5-1 — Alcance de la idempotencia sobre una operación rechazada (OC-35; decisión 10 de R2-A)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-05-I-A — Resultado conservado por identificador** | El servidor conserva el resultado de las operaciones rechazadas o en conflicto y devuelve el rechazo original ante un reenvío del mismo identificador, también concurrente | R2-A §16.7.9 dice de O-1: «Cumple OFF-06 al pie de la letra» (OFF-06 exige devolver «el resultado original», y `01` no fija si alcanza a lo rechazado); un reenvío no re-ejecuta la evaluación; limita la inundación de registros (CAB-14) | Exige conservar un resultado por cada operación rechazada (punto abierto de ADR-05.C, OFF-20); la retención de esos resultados depende de PRV-10 y de ADR-17 | Se pierde la visibilidad de los reintentos abusivos si no se añade un contador (O-3); crece lo conservado | O-1 u O-3 de R2-A §16.7.9; D5-2; decisión 10; PRV-10 |
+| **CAP-05-I-B — Idempotencia solo de lo aplicado; lo rechazado se reevalúa** | Solo se conserva el resultado de lo aplicado; un reenvío de una operación rechazada se evalúa de nuevo con el estado vigente en ese momento | No obliga a conservar resultados de rechazadas; el resultado puede cambiar si el estado cambió (por ejemplo, si una asignación se restablece) | Reevaluar **no devuelve «el resultado original»** de una operación rechazada; `01` no fija si OFF-06 alcanza a lo rechazado (OC-35), por lo que no hay conformidad ni disconformidad establecida; cada reenvío exige una nueva decisión de CMP-08 | Aumenta la carga de evaluación y de registro por reenvío (O-2); un resultado que cambia entre reintentos puede confundir al usuario | O-2 de R2-A; D5-3; OC-35; K-3; decisión 10 |
+
+#### D5-2 — Persistencia de los metadatos de operaciones rechazadas o en conflicto, R-4 (OFF-20; decisión 3 de R2-A)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-05-M-A — Persistencia independiente de R-4** | Los metadatos mínimos de lo rechazado o en conflicto que el servidor efectivamente recibe persisten aunque la operación no se aplique, con la misma garantía que IN-09-05 da a R-2 | El organizador ve incidencias aunque la unidad se haya abortado (OFF-20, D-9); coherente con CAP-09-P-A o P-C | Exige que ADR-09.C aplique su capacidad también a R-4 (decisión 3); aumenta el volumen del registro independiente | Inundación del registro (CAB-14); dependencia de K-3 | CAP-09-P-A o P-C; decisión 3; decisión 10; DB2c-2; DB2c-3 |
+| **CAP-05-M-B — Metadatos sin independencia de la unidad** | Los metadatos se registran cuando la decisión de rechazo no aborta la unidad; no se exige que persistan si se aborta | No amplía la capacidad general de ADR-09.C; menor volumen | Puede perder metadatos de operaciones rechazadas por abortos (restricciones de integridad); **posible no conformidad con OFF-20 [CONF]**, que dice que el servidor registra metadatos mínimos de las operaciones rechazadas o en conflicto que efectivamente recibe y no prevé excepción por aborto; **no se crea ninguna excepción a OFF-20** y la conformidad la decide el responsable | El organizador no vería ciertas incidencias; incompatible con tratar R-4 igual que R-2 | CAP-09-P-B **[DER: asociación inferida por el autor; R2-A no la formula para R-4]** (R2-A la califica como variante parcial, no conforme con el texto literal de R1); decisión 3; K-3 |
+
+#### D5-3 — Fallo del registro de un rechazo exigido (OC-36; R2-A §16.7.9)
+
+F-1 (devolver el rechazo y continuar sin registro) es **no conforme con IN-09-05** según R2-A y no se presenta como formulación viable.
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-05-F-A — Error recuperable y operación sin resolver (F-2)** | Si un registro **exigido por R-2 (RF-AUD-06)** no puede persistirse, no se devuelve un rechazo definitivo: la operación sigue `pendiente` y se reintenta | Conserva la auditoría; no añade un medio durable adicional | Un fallo del registro bloquea las operaciones rechazadas **cuyo registro exige R-2**; no alcanza a los rechazos sin registro exigido, ni a R-4 mientras su persistencia siga [ABIERTA] | **Denegación inducida** (RB2c-06); reintentos masivos (OFF-05); estado local del cliente durante el fallo (D5-6) | F-2 de R2-A; decisión 10; D5-6; D5-7 |
+| **CAP-05-F-B — Intención durable previa y conciliación (F-3)** | La intención de registro **exigido por R-2** se hace durable antes de responder y se concilia después; si no está disponible, se aplica CAP-05-F-A | Reduce la ventana de pérdida y la dependencia de un único almacén | Añade complejidad y una ventana hasta la conciliación; **solo conforme si la intención es durable antes de responder** | Una ventana de pérdida incumple IN-09-05; más superficie de fallo | F-3 de R2-A; CAP-09-P-C; decisión 10; ADR-05.I / ADR-09.I (R3) |
+
+#### D5-4 — Contigüidad de la secuencia entre dos dispositivos del mismo editor (OC-41; §9.4 fila 10)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-05-S-A — Una secuencia contigua por partido y editor, compartida por sus dispositivos** | La contigüidad de OFF-25 se evalúa sobre la secuencia del partido sin distinguir dispositivo | OFF-03 habla de un «número de secuencia por partido» y OFF-25 dice «La secuencia debe ser contigua», sin mencionar el dispositivo; un solo criterio de hueco | Exige que los dispositivos del editor coordinen la numeración; un dispositivo sin conexión no puede conocer los números del otro | Huecos aparentes que bloquearían operaciones legítimas (OFF-25); más conflictos que resolver (§9.4 filas 2, 3 y 10) | OC-41; OFF-03; OFF-25; §9.4 fila 10; ADR-05.I |
+| **CAP-05-S-B — Una secuencia contigua por dispositivo y partido, con reconciliación declarada entre ellas** | La contigüidad se evalúa por dispositivo; el cruce entre dispositivos se resuelve por identificador y por versión (§9.4 fila 10) | Cada dispositivo numera de forma autónoma sin conocer al otro; compatible con «Se fusionan por identificador y secuencia» | **Requiere una lectura de OFF-03 y OFF-25 que `01` no fija** (contigüidad por dispositivo, frente a un «número de secuencia por partido»); hay que declarar cómo se ordenan las operaciones de distintos dispositivos | Un hueco por dispositivo no cubre dependencias entre dispositivos (p. ej. una reanudación capturada en uno y eventos en otro); riesgo de contradecir OFF-25 si se lee por partido | OC-41; OFF-03; OFF-25; IF-35; ES-27; posible aclaración de `01` |
+
+#### D5-5 — Bloqueo tras una operación fallida (OFF-07 [REC]; OC-37)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-05-B-A — Adoptar OFF-07** | Si falla una operación, las siguientes **del mismo partido** quedan «bloqueadas por operación anterior» (siguen `pendiente`); las de otros partidos continúan | Evita aplicar operaciones sobre un estado incierto; simple de explicar al usuario | Bloquea operaciones que podrían ser independientes (p. ej. eventos no dependientes de la reanudación); OFF-07 es [REC], no [CONF] | Pérdida de captura aparente si el bloqueo se prolonga; presión sobre OFF-10 (retención de 30 días) | OFF-07; OC-37; DB2c-9; D5-6 |
+| **CAP-05-B-B — Bloquear solo lo que `01` confirma** | Se bloquea por hueco (OFF-25) y por dependencia de la reanudación (OFF-25, RD-EVT-12); el resto se evalúa operación por operación | Se limita a lo [CONF]; no frena operaciones independientes | Exige definir qué operaciones dependen de cuál (A-9, A-11, A-14); más casos que probar | Aplicar una operación sobre un estado que una anterior fallida habría invalidado, si el criterio de dependencia es incompleto | OFF-25; RD-EVT-12; OC-37; DB2c-9; A-9, A-11, A-14 |
+
+#### D5-6 — Estado local de una operación tras un aborto técnico distinto de un rechazo (OC-42; OC-44)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-05-E-A — Permanece `pendiente` y se reintenta** | Un aborto técnico (sin rechazo ni conflicto) no cambia el estado local: la operación sigue `pendiente` y se reintenta (OFF-05) | **No requiere un estado nuevo**: `01` solo define `en conflicto` y `rechazada` como resultados negativos; coherente con F-2 | **Requiere la transición `enviando` → `pendiente` tras un aborto técnico, que §9.2 y OFF-04 no definen (OC-44)**; el usuario no distingue un aborto técnico de una espera normal; reintentos indefinidos si el fallo persiste | Denegación inducida (RB2c-06); presión sobre OFF-10; indicadores de pendientes engañosos | §9.2; OFF-04; OFF-05; D5-3; OC-44 |
+| **CAP-05-E-B — Indicación adicional visible del fallo técnico** | El cliente muestra, sin cambiar el significado de los cinco estados, una indicación del fallo técnico y del número de reintentos | El usuario conoce la causa; ayuda a diagnosticar un fallo persistente | **Puede exigir modificar OFF-04 y §9.2** si se considera un estado nuevo (cambio de `01`, fuera de este bloque); más trabajo de interfaz (Fase 3) | Contradecir los cinco estados confirmados si se interpreta como un sexto estado | OFF-04; §9.2; UX/UI (Fase 3); modificación formal de `01` solo si el responsable la autoriza |
+
+#### D5-7 — Reconciliación tras una interrupción o pérdida de respuesta (IN-05-19; OC-43, OC-44)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-05-C-A — El reenvío idempotente como única reconciliación** | El cliente reenvía la operación hasta recibir una respuesta; la idempotencia del servidor devuelve el resultado | No requiere un canal de consulta adicional; usa OFF-06 | Para una operación rechazada depende de D5-1 (si el rechazo no se conserva, la respuesta puede cambiar); la espera puede ser larga | Reenvíos repetidos que agravan la carga o la inundación del registro | OFF-05; OFF-06; D5-1 (CAP-05-I-A o B); OC-35; OC-44 |
+| **CAP-05-C-B — Reconciliación explícita del estado de lo enviado** | Tras una interrupción, el cliente consulta al servidor el estado de las operaciones `enviando` antes de reenviar | Evita reenvíos innecesarios; el estado local se alinea con el del servidor | Añade una capacidad de consulta que el servidor debe sostener (qué conserva y por cuánto tiempo) y **podría exigir una responsabilidad nueva de CMP-13, no prevista en R1 §5.3 (donde figura como ingesta de sincronización); se deja abierta, sin modificar R1**; más superficie de revelación (el servidor responde sobre lo que recibió) | Revelar información a una sesión no legitimada si no se aplica IN-05-11; mayor complejidad | OFF-08; IN-05-11; D5-1; R1 §5.3 (responsabilidad de CMP-13); ADR-05.I; OC-43 |
+
+#### Interdependencias entre las decisiones
+
+| Decisión | Se condiciona con | Observación |
+|---|---|---|
+| D5-1 | D5-2, D5-3, D5-7, K-3, decisión 10 | CAP-05-I-A exige conservar resultados; CAP-05-I-B interactúa con CAP-05-C-A |
+| D5-2 | decisión 3 de R2-A, DB2c-3, K-3, CAP-09-P | CAP-05-M-A presupone CAP-09-P-A o P-C |
+| D5-3 | decisión 10, D5-6 | CAP-05-F-A fija el estado local `pendiente` durante el fallo |
+| D5-4 | OC-41; D5-5 | La contigüidad por dispositivo cambia qué es un «hueco» |
+| D5-5 | OC-37, D5-4, D5-6 | OFF-07 es [REC] |
+| D5-6 | OC-42, OC-44, D5-3 | CAP-05-E-B puede exigir modificar `01` |
+| D5-7 | D5-1, OC-43, OC-44 | CAP-05-C-A depende de lo que se conserve de lo rechazado |
+
+### 21.6 Relación con la frontera atómica de ADR-02.C: UI-06 con UI-10 dentro
+
+**Regla fundamental (consumida de §20.3.1 y §20.3.4, sin modificarla).** La operación recibida recorre la misma frontera lógica de autorización, aplicación y auditoría que su equivalente en línea; **no existe una segunda ruta de negocio ni una segunda unidad atómica de UI-10** (IF-32, ES-32, GT-19). ADR-05.C **aplica** esa frontera a la ruta sincronizada; no la redefine.
+
+| Paso (literal de §20.3.1) | Componente | Dentro de la unidad (literal de §20.3.1) | Qué aporta ADR-05.C (sin cambiar la clasificación) |
+|---|---|---|---|
+| a. Recepción: identificador, secuencia, versión base y datos de la operación (OFF-03) | CMP-13 | Sí, en lo que decide (idempotencia, orden, versión) | IN-05-01 (contenido mínimo de cada operación) |
+| b. Idempotencia: ¿ya se aplicó? Orden y contigüidad por partido; versión | CMP-13 | Sí | IN-05-04…IN-05-08, IN-05-12; D5-1, D5-4, D5-5; CMP-13 detecta y no decide permisos |
+| c. Revalidación completa con el flujo §7.0 (pasos 2 a 5) | CMP-08 | **Sí** (unidad indivisible: R1 §7.0) | IN-05-10 (la revalidación es la de CMP-08 con el estado vigente al sincronizar) |
+| d. Aplicación de la operación (UI-10 si es un resultado, con su recálculo; o la variante de estado de §20.3.5) | CMP-11 (CMP-12 y CMP-14 por la composición de UI-10) | **Sí** | Ninguna regla de negocio: CMP-13 solo entrega |
+| e. Registro de la idempotencia de lo aplicado y evento de auditoría de lo aplicado | CMP-13, CMP-16 | **Sí** (R1 §5.5 para la idempotencia; IN-09-04 e IN-09-06 para la auditoría) | IN-05-04; IN-05-18 (R-1 se registra dentro, IN-09-04) |
+| f. Señal de cambio, solo si ADR-06 la adopta | CMP-14 | Sí (IF-22) | Nada: es de ADR-06 (R3) |
+| g. Respuesta al cliente y estado local de la operación (§9.2) | CMP-13, CMP-05 | **No** | IN-05-02, IN-05-09, IN-05-19; D5-6, D5-7 |
+| h. Registro del rechazo (si se rechazó) | CMP-16 | **No** (IF-09) | IN-05-18: el registro de R-2 es [CONF] (RF-AUD-06) y su persistencia independiente [DER] (IN-09-05); R-4 y R-5 [ABIERTOS]; D5-1, D5-2, D5-3 |
+| i. Conservación local de lo rechazado o en conflicto (≤ 30 días), exportación limitada y constancia de eliminación | CMP-04, CMP-05 | **No** (cliente; OFF-10, OFF-24) | IN-05-13, IN-05-17, IN-05-21 |
+| j. Entrega pública y copias en Z0 | CMP-15 | **No** (§19.3) | IN-05-14 (lo local jamás es público); la entrega es de ADR-04.C y ADR-06 |
+
+**Quién decide cada aporte:** ADR-05.C (a, b, g, h y la parte de i que le asigna R1 §5.3), ADR-02.C (c, d), ADR-03.C (c, el nivel de autenticación), ADR-09.C (e, h, persistencia independiente de R-2) y ADR-16.C (el almacén de i). La ubicación definitiva de la conducta del cliente de OFF-11 (IN-05-21) no está decidida.
+
+**Límites que ADR-05.C no puede cruzar:** (1) no mueve a la unidad nada que R1 deje fuera (respuesta, estado local, registros de rechazo, exportación, entrega pública); (2) no divide la unidad ni crea una unidad adicional para UI-10 (ES-32); (3) no relaja GT-19…24 ni ES-25…32; (4) no define qué verifica cada capa de autorización (ADR-02.C); (5) no elige el mecanismo de aislamiento ni de serialización de las operaciones concurrentes sobre un mismo partido (ADR-05.I y R3).
+
+### 21.7 Estados prohibidos adicionales y casos límite
+
+#### Estados prohibidos (se suman a ES-01…32)
+
+| ID | Estado prohibido | Tipo | Fuente |
+|---|---|---|---|
+| ES-33 | Una operación enviada cuya respuesta se pierde queda sin un único estado coherente en el cliente (duplicada, descartada o `enviando` sin posibilidad de reconciliarse) | [DER] | OFF-08, OFF-09, IN-05-19 |
+| ES-34 | Una captura local **descartada en silencio** por un conflicto, un rechazo, un fallo técnico o una actualización de la app | [CONF] en OFF-09 y OFF-10 (conflicto o rechazo); [DER] en el fallo técnico; [REC] en OFF-16 (actualización de la app) | OFF-09, OFF-10, OFF-16 |
+| ES-35 | La cola o los datos preparados de una cuenta **accesibles o sincronizables** por la sesión de otra cuenta | [REC] | IN-03-19, IN-03-20, CAB-30 |
+| ES-36 | Una «finalización pendiente» tratada como finalizada o pública antes de la confirmación del servidor | [CONF] | OFF-21, OFF-15 |
+| ES-37 | Una operación aplicada porque el cliente alteró el orden, la secuencia, el reloj o el contenido local **sin que el servidor revalide** autorización, versión y contigüidad | [DER] | OFF-13, OFF-22, IF-33, AM-10 |
+
+#### Escenarios de concurrencia y de interrupción (se suman a ESC-43…56)
+
+«Admisible» significa que **equivale a alguna ordenación secuencial** (IF-05). **Ningún escenario se resuelve aquí por un mecanismo**; donde hay formulaciones, se indican sin elegir.
+
+| ID | Escenario | Origen | Resultados admisibles | Resultados prohibidos | Formulaciones / condiciones |
+|---|---|---|---|---|---|
+| ESC-57 | Corte de red durante el envío de un lote | OFF-08 [REC], OFF-06 [DER] | Cada operación queda en un único estado coherente; al volver la red se reenvían las pendientes sin duplicar efectos | Estado parcial; operación aplicada dos veces (ES-25, ES-33) | D5-7; IN-05-09, IN-05-19; OC-43, OC-44 |
+| ESC-58 | Reenvío de una operación rechazada después de que cambió el estado (p. ej. se restableció la asignación) | OFF-06 (alcance abierto); OFF-22 [DER] | **Sin elegir:** devolver el rechazo original, o reevaluar con el estado vigente | Aplicar sin revalidar (ES-26); un resultado distinto del original para lo ya aplicado (ES-31) | CAP-05-I-A o B; OC-35; K-3 |
+| ESC-59 | Dos dispositivos del mismo editor con numeraciones solapadas o con huecos aparentes | §9.4 fila 10 [CONF]; OFF-25 | **Sin elegir:** contigüidad por partido o por dispositivo, con marcador o estado desactualizado en conflicto (§9.4 fila 2) | Sobrescritura (ES-28); aplicar saltando un hueco (ES-27) | CAP-05-S-A o B; OC-41 [DER] |
+| ESC-60 | Falla una operación y existen posteriores del mismo partido independientes de ella | OFF-07 [REC]; OFF-25 [CONF] | **Sin elegir:** bloquearlas (OFF-07) o evaluarlas una por una salvo las dependientes | Aplicar una posterior que depende de una rechazada (ES-27) | CAP-05-B-A o B; OC-37 |
+| ESC-61 | El registro de un rechazo exigido no puede persistirse durante la sincronización | IN-09-05 [DER]; CAB-14 | **Sin elegir:** operación `pendiente` y reintento, o intención durable y conciliación | Devolver un rechazo definitivo sin registro (F-1); pérdida de auditoría (ES-30) | CAP-05-F-A o B; OC-36; decisión 10 |
+| ESC-62 | Sesión vencida con operaciones pendientes y otra cuenta inicia sesión en el dispositivo | IN-03-19, IN-03-20 [REC]; OFF-12; OFF-23; la continuidad de la captura es [DER] | La cola de la primera cuenta no es accesible ni se sincroniza con la sesión de la segunda; **[DER]** la captura local previamente autorizada de la primera cuenta no se altera por el inicio de sesión de la otra (inferencia del autor: OFF-23 solo dice que la captura continúa con la sesión vencida y OFF-12 exige confirmación al cerrar sesión con pendientes) | La cola de una cuenta sincronizada por otra (ES-35) | IN-05-11 [REC]; ADR-03.C; ADR-16.C |
+| ESC-63 | Actualización de la app con cola pendiente y formato de cola incompatible | OFF-16 [REC] | Se bloquea la actualización hasta sincronizar | Cola descartada o corrompida (ES-34) | IN-05-16; ADR-16.C; ADR-05.I |
+| ESC-64 | La «finalización pendiente» es rechazada o queda en conflicto | OFF-21 [CONF], §9.4 filas 3 y 8 | El partido conserva su estado oficial; la operación pasa a `en conflicto` o `rechazada` y no se publica | Partido tratado como finalizado o público (ES-36) | IN-05-14 |
+| ESC-65 | El navegador elimina los datos locales con operaciones pendientes | OFF-17 [CONF]; AM-11 | Las pendientes se pierden **sin que se prometa conservación**; la advertencia de OFF-17 ya se mostró | Prometer conservación; perder una operación **confirmada** (lo confirmado está en el servidor) | ADR-16.C (almacenamiento y desalojo); RES-07; ADR-05.C solo exige la advertencia |
+
+### 21.8 Amenazas y casos de abuso relevantes
+
+**No se amplía el modelo de amenazas:** esta sección registra cómo las capacidades de ADR-05.C tratan las amenazas que R2-A asigna a R2-C y a otros artefactos. La **consolidación del modelo** corresponde a R2-C (subbloque posterior) y no se hace aquí.
+
+| Amenaza o caso | Qué es | Cómo la tratan las capacidades exigidas | Queda para |
+|---|---|---|---|
+| **AM-04 / CAB-04** | Repetir o reordenar operaciones enviadas | IN-05-04 (idempotencia), IN-05-06 y IN-05-08 (orden, contigüidad y dependencia de la reanudación), IN-05-10 (revalidación); ESC-43, ESC-57 | D5-1, D5-4, D5-5 y D5-7 (formulaciones abiertas); R3 (mecanismo) |
+| **AM-10 / CAB-16** | Editar la cola local o el reloj para alterar el orden o la hora | IN-05-15 (orden por secuencia, no por reloj; aviso si difiere > 5 min), IN-05-10 (revalidación), ES-37 | R3 (mecanismo); ADR-16.C para la protección del almacén |
+| **AM-11 / CAB-08** | El navegador elimina los datos locales y se pierden capturas [NO VERIF] | IN-05-13 (advertencia, sin promesa de conservación), ESC-65 | **ADR-16.C** (almacenamiento y desalojo), RES-07, iOS sin verificar (HR1-07; IOS-01, IOS-04, IOS-05) |
+| **AM-33 / CAB-30** | Sincronizar la cola de otra cuenta o apropiarse de operaciones ajenas | IN-05-11 [REC] (IN-03-19 e IN-03-20), ES-35, ESC-62 | ADR-03.C; decisión de adoptar o no lo [REC] |
+| **AM-08** | Robo, pérdida o préstamo del dispositivo con cola y datos preparados | IN-05-11 e IN-05-13 solo en lo que toca a la cola | **ADR-16.C** (cifrado local y límites; HR1-03); revocación de la cuenta (OFF-12) |
+| **AM-18 / CAB-05** | Carrera entre una revocación o reasignación y la sincronización | IN-05-10 (consume IF-33, IF-39, GT-22, ESC-45) | OC-04 y D-2 (decisión 1 de R2-A; DB2c-1 y DB2c-10) |
+| **CAB-14** | Provocar un rechazo que no deje rastro o inundar el registro | D5-1, D5-3 e IN-05-18 (alternativas F y O) | Decisión 10 de R2-A; ADR-09.C |
+| AM-19, AM-34 | Reasignación propuesta a R2-C y la Fase 4 (OC-40, DB2c-11) | **No se tratan aquí**; la reasignación no está decidida | DB2c-11 |
+
+### 21.9 Matriz de trazabilidad
+
+| Fuente | Cubierta por | Observación |
+|---|---|---|
+| OFF-01 | IN-05-01, IN-05-14; variantes de estado de §20.3.5 | Capturar sin conexión, incluidos iniciar, suspender, reanudar y finalizar |
+| OFF-02 | IN-05-01 | Preparación de dispositivo: ADR-04.C (proyección de preparación) y ADR-16.C; ADR-05.C solo la consume |
+| OFF-03 | IN-05-01 | Contenido mínimo de cada operación |
+| OFF-04 | IN-05-02; D5-6 | Cinco estados diferenciados |
+| OFF-05 | IN-05-03; IN-05-19 | Disparadores; no depende del segundo plano |
+| OFF-06 | IN-05-04, IN-05-05; D5-1 | Lo aplicado [CONF]; lo rechazado [ABIERTO] |
+| OFF-07 [REC] | IN-05-07; D5-5 | Bloqueo por operación anterior |
+| OFF-08 [REC] | IN-05-09, IN-05-19; D5-7 | Atomicidad por operación |
+| OFF-09 | IN-05-12; ES-34 | Política de conflictos |
+| OFF-10 | IN-05-13; ES-34 | Nunca descarte silencioso; 30 días |
+| OFF-11 | IN-05-10 (revalidación en el servidor); IN-05-21 (conducta del cliente); ESC-45, ESC-52 (§20.8) | Revocación, desasignación y cuenta desactivada; la ubicación definitiva de la conducta del cliente no está decidida |
+| OFF-12 | IN-05-11 [REC], IN-05-13; ADR-16.C | Datos y sesión locales |
+| OFF-13 [REC] | IN-05-15; ES-37 | Relojes |
+| OFF-14 [REC] | — | Duplicados por la interfaz: UX (Fase 3); fuera de ADR-05.C |
+| OFF-15 | IN-05-02, IN-05-14 | Lo local jamás es público |
+| OFF-16 [REC] | IN-05-16; ESC-63 | Actualización con cola pendiente |
+| OFF-17 | IN-05-13; ESC-65 | Almacenamiento local no garantizado; iOS sin verificar |
+| OFF-18 | — | Consulta sin conexión: ADR-04.C y ADR-16.C |
+| OFF-19 [REC] | — | Rendimiento de sincronización: no se fija parámetro; ADR-05.I y Fase 4 |
+| OFF-20 | IN-05-18; D5-2 | Metadatos de rechazadas y en conflicto: persistencia [ABIERTA] |
+| OFF-21 | IN-05-14; ESC-64 | Finalizar sin conexión |
+| OFF-22 | IN-05-10; §21.6 | Autorización vigente al sincronizar |
+| OFF-23 | IN-05-10; OC-39 | Vencimiento de sesión; nivel de autenticación [ABIERTO] |
+| OFF-24 | IN-05-17 | Exportación limitada |
+| OFF-25 | IN-05-06, IN-05-08; D5-4 | Secuencias con reanudación |
+| §9.2, §9.4 | IN-05-02, IN-05-12; ESC-59, ESC-64 | Estados y política de conflictos |
+| RD-RES-04, 05, 10, 13; RD-EVT-12 | IN-05-08, IN-05-12 | Versión, resultado único y dependencia de la reanudación |
+| RT-13, RT-14 | IN-05-10, IN-05-18 | Autorización atómica y conflicto de interés |
+| IN-09-04, 05, 06 | IN-05-18; D5-2, D5-3 | Consumidos de ADR-09.C |
+| IN-03-10, 11, 19, 20 | IN-05-10, IN-05-11 | Consumidos de ADR-03.C |
+| IF-32…41; ES-25…32; GT-19…24; ESC-43…56 | §21.6; IN-05-04…IN-05-10 | Consumidos de ADR-02.C / R2-B2 |
+
+### 21.10 Dependencias, condiciones abiertas y decisiones
+
+#### 21.10.1 Dependencias
+
+| Elemento | Depende de lo aprobado | Alimenta (sin decidirlo) | Decisiones del responsable |
+|---|---|---|---|
+| IN-05-01…IN-05-03 (cola, estados, disparadores) | OFF-01…05; R1 §5.3 (CMP-04, CMP-05) | ADR-16.C (formato de cola y datos locales); ADR-05.I | — |
+| IN-05-04…IN-05-09 (idempotencia, orden, atomicidad) | OFF-06…08, OFF-25; IF-34…38; GT-20, GT-21 | ADR-05.I; ADR-08 (aplicación a la ruta sincronizada) | D5-1, D5-4, D5-5, D5-7; OC-35, OC-37, OC-41 |
+| IN-05-10, IN-05-11 (revalidación, cuenta) | OFF-22, OFF-23; IF-33, IF-39; IN-03-10, 11, 19, 20 | ADR-03.I; ADR-01 | OC-04, D-2 (decisión 1), OC-39 |
+| IN-05-12…IN-05-17 y IN-05-21 (conflictos, conservación, relojes, versión, exportación, conducta del cliente) | OFF-09, OFF-10, OFF-13, OFF-16, OFF-21, OFF-24 | ADR-16.C; CMP-17 | D5-6; Q-43 |
+| IN-05-18 (rechazos y metadatos) | IN-09-05; RF-AUD-06; OFF-20; §20.5.1 | ADR-09.C (consume la decisión); ADR-13 (alerta, R4) | D5-1, D5-2, D5-3; decisiones 3 y 10; K-3 |
+| IN-05-19 (recuperación) | OFF-05, OFF-06, OFF-08 | ADR-05.I | D5-7; OC-43, OC-44 |
+
+#### 21.10.2 Condiciones y decisiones heredadas (conservadas abiertas)
+
+**Ninguna se resuelve ni se infiere.** Se listan porque condicionan a ADR-05.C.
+
+| Elemento | Estado | Cómo afecta a ADR-05.C |
+|---|---|---|
+| Decisión 3 de R2-A / DB2c-3 | Abierta | Partición ADR-05.C / ADR-09.C de la persistencia de OFF-06 y OFF-20 (D5-1, D5-2) |
+| Decisión 10 de R2-A / DB2c-2 / K-3 | Abiertas | Fallo del registro y relación con OFF-06; CAP-09-P-A/B/C, F-1…F-3 y O-1…O-3 sin elegir |
+| OC-35 / OC-36 | Abiertas | D5-1 y D5-3 |
+| OC-37 / DB2c-9 | Abierta | OFF-07 [REC] (D5-5) |
+| OC-38 / DB2c-5 (Q-42 (a), A-10) | Abiertas | Quién captura sin conexión y quién reanuda sin conexión |
+| OC-39 / DB2c-8 | Abierta | Nivel de autenticación al sincronizar (CAP-03-S-A o B, de ADR-03.C) |
+| OC-41, OC-42 | Abiertas (dependencias de ADR-05.C) | D5-4 y D5-6 |
+| OC-04, D-2 / DB2c-1, DB2c-10 / decisión 1 de R2-A | Abiertas; **D-2 sin excepción** | Instante que cuenta para una operación en tránsito; medición de la revocación en sesiones conectadas |
+| OFF-06, OFF-07, OFF-20 | Alcance sobre lo rechazado abierto; OFF-07 [REC]; OFF-20 con persistencia [ABIERTA] | D5-1, D5-2, D5-5 |
+| A-9, A-10, A-11, A-13, A-14, A-15; Q-29, Q-30, Q-42, Q-43 | Abiertas (parámetros que R1 §8.1 asigna a ADR-05) | Delimitan reanudar y finalizar, la preparación manual, eventos en `programado`, efectos indirectos y el contenido exportable |
+| OC-30; OC-34 | Abiertas | Composición con UI-10; enumeración de las variantes de estado |
+| DB1-1…6, DB2a-1…10, DB2b-1…9, DB2c-1…11, OC-01…42 y las 12 decisiones de R2-A | Abiertas | Conservadas; ninguna se toca |
+| Verificación de iOS (HR1-07; IOS-01, IOS-04, IOS-05 [NO VERIF]); RES-07 | Sin verificar; sin aceptar | Lo que dependa del comportamiento de iOS se marca "no verificado en dispositivo" |
+
+#### 21.10.3 Condiciones abiertas nuevas de este borrador
+
+| ID | Condición abierta | Relación |
+|---|---|---|
+| OC-43 | Interacción entre lo que el cliente consulta tras una interrupción (D5-7) y lo que el servidor conserva de lo rechazado (D5-1): `01` no fija qué debe poder preguntar el cliente | D5-1, D5-7; OC-35 |
+| OC-44 | Estado local `enviando` cuando no llega respuesta tras una interrupción prolongada: §9.2 define los cinco estados, no la transición de `enviando` cuando no hay respuesta | D5-6, D5-7; OC-42 |
+
+#### 21.10.4 Decisiones propuestas al responsable (DC1-)
+
+**Ninguna se resuelve aquí.** Las decisiones heredadas (DB1, DB2a, DB2b, DB2c, decisiones de R2-A) permanecen como estaban.
+
+| ID | Decisión | Opciones | Efecto |
+|---|---|---|---|
+| DC1-1 | Alcance de la idempotencia sobre lo rechazado (D5-1; OC-35) | CAP-05-I-A / CAP-05-I-B / mantener abierta | Fija la lectura de OFF-06 para lo rechazado; decisión 10 |
+| DC1-2 | Persistencia de R-4 (D5-2; decisión 3; DB2c-3) | CAP-05-M-A / CAP-05-M-B / mantener abierta | Quién decide la persistencia de OFF-20 |
+| DC1-3 | Fallo del registro de un rechazo exigido (D5-3; OC-36) | CAP-05-F-A / CAP-05-F-B / mantener abierta | Conformidad con IN-09-05 |
+| DC1-4 | Contigüidad entre dispositivos del mismo editor (D5-4; OC-41) | CAP-05-S-A / CAP-05-S-B / pedir una aclaración formal de `01` | Qué es un hueco |
+| DC1-5 | Bloqueo tras una operación fallida (D5-5; OC-37; DB2c-9) | CAP-05-B-A / CAP-05-B-B / mantener abierta | Estado de OFF-07 [REC] |
+| DC1-6 | Estado local tras un aborto técnico (D5-6; OC-42, OC-44) | CAP-05-E-A / CAP-05-E-B (puede requerir modificar `01`) / mantener abierta | Estados visibles al usuario |
+| DC1-7 | Reconciliación tras una interrupción (D5-7; OC-43) | CAP-05-C-A / CAP-05-C-B / mantener abierta | Qué consulta el cliente |
+| DC1-8 | Estado de las propuestas [REC] que ADR-05.C consume: OFF-07, OFF-08, OFF-13, OFF-16, IN-03-19 e IN-03-20 | Adoptar / descartar / decidirlo en una etapa posterior | Si IN-05-07, 09, 11, 15 y 16 pasan a exigencias |
+| DC1-9 | Orientación sobre las tensiones T-1…T-8 de §21.2 | Recibir sin resolver / pedir aclaración de `01` o de R1 por edición separada | Alcance de ADR-05.C frente a ADR-09.C y ADR-16.C |
+| DC1-10 | Alcance y orden de R2-C2 (ADR-04.C) y R2-C3 (ADR-16.C), que requieren autorización separada | Autorizar / posponer | ADR-16.C depende del formato de cola |
+
+### 21.11 Riesgos y limitaciones
+
+Los riesgos se **registran sin valorar ni aceptar**. Ninguno sustituye a RB1, RB2a, RB2b, RB2c ni RES-01…12.
+
+| ID | Riesgo | Relación |
+|---|---|---|
+| RR5-01 | Elegir de hecho una formulación al describir ventajas y limitaciones | §21.5; DC1-1…DC1-7 |
+| RR5-02 | Resolver K-3 o las decisiones 3 y 10 por inferencia (p. ej. tratar R-4 como persistente) | IN-05-18; D5-1, D5-2 |
+| RR5-03 | Tratar como confirmadas las propuestas [REC] (OFF-07, 08, 13, 16; IN-03-19, 20) | DC1-8 |
+| RR5-04 | Invadir ADR-05.I y R3 al describir cola, secuencia o reconciliación | X-4; §21.3 |
+| RR5-05 | Contradecir OFF-25 u OFF-04 con CAP-05-S-B o CAP-05-E-B | D5-4, D5-6 |
+| RR5-06 | Denegación inducida o carga por reintentos (CAP-05-F-A, CAP-05-I-B, CAP-05-C-A) | RB2c-06; ESC-61 |
+| RR5-07 | Condicionar OFF-05 y OFF-17 a un comportamiento de iOS no verificado | HR1-07; IOS-01, IOS-04, IOS-05; RES-07 |
+| RR5-08 | Incoherencia con partes aprobadas (§18–§20), p. ej. la ficha UI-03 y OC-08 | T-5; §21.2 |
+| RR5-09 | Presentar este borrador como aprobación de ADR-05.C, de R2-C o de R1 §8.1 | §21.0; X-7 |
+| RR5-10 | Pérdida de capturas por desalojo del almacenamiento local, fuera del alcance de ADR-05.C | AM-11; ESC-65; ADR-16.C |
+
+**Limitaciones del análisis.** (1) Es un borrador del autor, **sin revisión de contexto nuevo ni independiente**. (2) Se leyeron las secciones pertinentes de las fuentes, no todas línea a línea. (3) No se realizó ninguna prueba, medición ni verificación en dispositivo (iOS). (4) Las lecturas marcadas [DER] son del autor y deben revisarse. (5) Las ventajas, limitaciones y riesgos de las formulaciones son un análisis documental, no una evaluación empírica.
+
+### 21.12 Criterios de aceptación del borrador y preguntas para el responsable
+
+| ID | Criterio de aceptación | Cumplimiento según el autor (a revisar) |
+|---|---|---|
+| CR2C1-01 | Alcance, fuentes y dependencias identificados | Cumple: §21.0–§21.2 |
+| CR2C1-02 | Al menos dos formulaciones diferenciadas por decisión, con ventajas, limitaciones, riesgos y dependencias | Cumple: §21.5 (D5-1…D5-7) |
+| CR2C1-03 | Ninguna formulación elegida ni aprobada | Cumple: §21.0 (X-1), §21.5 |
+| CR2C1-04 | Invariantes y garantías propuestas, con tipo y fuente | Cumple: §21.4 |
+| CR2C1-05 | Relación con la frontera atómica de ADR-02.C y con UI-06 con UI-10 dentro, sin segunda unidad | Cumple: §21.6 |
+| CR2C1-06 | Estados prohibidos, escenarios y amenazas relevantes | Cumple: §21.7 y §21.8 |
+| CR2C1-07 | Matriz de trazabilidad con OFF-01…25 | Cumple: §21.9 |
+| CR2C1-08 | Decisiones 3 y 10, DB2c-2, DB2c-3, K-3, OC-35…OC-42 y D-2 conservadas abiertas | Cumple: §21.10.2 |
+| CR2C1-09 | Conflictos entre fuentes señalados sin resolver | Cumple: §21.2 (T-1…T-8) |
+| CR2C1-10 | Sin mecanismos, tecnologías ni parámetros no aprobados | Cumple según §21.13 |
+| CR2C1-11 | Solo se modifica el archivo autorizado y los bloques previos permanecen intactos | Cumple según §21.13 |
+| CR2C1-12 | Borrador pendiente de revisión del responsable; no aprobado, registrado ni versionado | Cumple: §21.0 y §21.14 |
+
+**Preguntas concretas para el responsable** (no se responden por inferencia): (1) ¿Qué formulación, si alguna, desea evaluar con más detalle en cada D5-n (DC1-1…DC1-7)? (2) ¿Desea resolver antes las decisiones 3 y 10 de R2-A, o que ADR-05.C las conserve abiertas? (3) ¿Se adoptan o se descartan las propuestas [REC] que este borrador consume (DC1-8)? (4) ¿Desea pedir una aclaración de `01` sobre la contigüidad entre dispositivos (OFF-25, §9.4 fila 10) y sobre el estado local tras un fallo técnico (OFF-04, §9.2)? (5) ¿Autoriza R2-C2 (ADR-04.C) y R2-C3 (ADR-16.C), cuyo orden depende de este borrador (DC1-10)?
+
+### 21.13 Verificación del autor
+
+**Naturaleza.** Verificaciones **mecánicas de lectura** hechas por el autor con un guion de solo lectura. **No son una auditoría independiente ni una revisión de contexto nuevo:** el autor no puede verificar su propio trabajo con independencia. **Este borrador no ha sido auditado ni revisado por nadie más.**
+
+| # | Verificación | Resultado |
+|---|---|---|
+| V-1 | Las líneas anteriores a este apartado (todo el archivo del commit `a13b213`) son **idénticas**; el cambio son solo líneas añadidas al final; ninguna eliminada | Cumple (comparación con `git show HEAD:`) |
+| V-2 | Solo cambió `02-arquitectura-adr.md`; `00`, `01`, `aprobaciones.md` y `bitacora.md` no cambiaron | Cumple (`git status` y sumas SHA-256) |
+| V-3 | Identificadores definidos y sin referencias huérfanas: IN-05-01…21, ES-33…37, ESC-57…65, OC-43…44, DC1-1…10, RR5-01…10, CR2C1-01…12, D5-1…7 y las catorce formulaciones CAP-05-I, M, F, S, B, E y C (A y B) | Cumple (guion de lectura) |
+| V-4 | Las citas literales entre «» se buscaron en `00`, `01` y las partes previas | Todas existen, **salvo** los mensajes del responsable citados en §21.0, que proceden de la conversación y no de un archivo |
+| V-5 | Exploración de términos tecnológicos (nombres de bases de datos, productos, proveedores, librerías, algoritmos, mecanismos de sincronización o de almacenamiento y similares) | Solo aparecen en X-4 y en esta fila como **exclusión**; ninguna elección ni mecanismo |
+| V-6 | Parámetros numéricos: solo los que cita `01` (30 días, 5 minutos, 7 días, 24 horas) como referencias; ninguno nuevo | Cumple (lectura del autor) |
+| V-7 | Ninguna decisión abierta aparece resuelta: no se elige ninguna formulación; K-3, las decisiones 3 y 10 de R2-A, DB2c-2, DB2c-3, OC-35, OC-36, OC-37, OC-38, OC-39, OC-41, OC-42, OC-04 y D-2 permanecen abiertas; no se declara cumplido R1 §8.1; no se concede excepción | Cumple (lectura del autor) |
+| V-8 | Las tablas están alineadas (mismo número de columnas por fila) | Cumple (guion de lectura) |
+| V-9 | **Coherencia con la frontera:** UI-06 con UI-10 dentro se describe sin segunda unidad ni segunda ruta (§21.6); los registros de rechazo respetan §20.5.1 (R-3 solo persistencia; R-4 [ABIERTA]; R-6 [REC]) | Cumple (comparación con §20.3 y §20.5) |
+| V-10 | Cada decisión D5-n presenta **dos** formulaciones con ventajas, limitaciones, riesgos y dependencias | Cumple (§21.5) |
+| V-11 | §21.6 reproduce los pasos a–j de §20.3.1 con su clasificación literal "dentro o fuera de la unidad"; no cambia la frontera | Cumple (comparación con §20.3.1) |
+
+**Límites.** Las lecturas [DER] y la clasificación de ventajas, limitaciones y riesgos son del autor y deben revisarse. Las ocho tensiones de §21.2 son una identificación del autor.
+
+### 21.14 Estado de esta parte y lo que no se hizo
+
+**Estado: v0.2-R2C1, APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-21, inferida).** Corrigió los hallazgos H-01…H-17 (§21.15). Aprobación registrada en §21.0, `aprobaciones.md` y `bitacora.md`; **no versionado**.
+
+**Qué se hizo.** Se redactó la Parte VII (§21) como borrador de ADR-05.C: alcance, fuentes y dependencias (§21.0–§21.3), invariantes y garantías exigidas (§21.4), siete decisiones con dos formulaciones cada una (§21.5), relación con la frontera atómica de ADR-02.C (§21.6), estados prohibidos y escenarios (§21.7), amenazas relevantes (§21.8), matriz de trazabilidad (§21.9), dependencias, condiciones y decisiones abiertas (§21.10), riesgos (§21.11) y criterios de aceptación y preguntas (§21.12).
+
+**Qué no se hizo.** No se redactó ADR-04.C ni ADR-16.C (R2-C2 y R2-C3), ni la consolidación del modelo de amenazas, ni R3 ni R4; no se aprobó ADR-05.C, R2-C, R2 ni la Fase 2; no se eligió ninguna formulación; no se resolvió ninguna decisión ni condición abierta (K-3, decisiones 3 y 10 de R2-A, DB2c-2, DB2c-3, OC-35…OC-42, OC-04, D-2); no se eligió tecnología, mecanismo ni parámetro; no se aceptó ningún riesgo ni se concedió excepción; no se declaró cumplido R1 §8.1; no se modificaron otros archivos; no se actualizó la trazabilidad histórica de `a13b213`; no se crearon ramas, commits, pushes, PR ni merges; no se tocó `main`.
+
+**Git.** Rama `claude/fase-2-arquitectura-amenazas`; HEAD `a13b2139042ccb8bfac8f88121a3bb26dc642ce5`; los cambios son `02-arquitectura-adr.md`, `aprobaciones.md` y `bitacora.md` **sin confirmar** (registro de la aprobación). Cualquier commit, push o PR requiere autorización expresa y separada.
+
+### 21.15 Hallazgos de la autoevaluación de la v0.1 (H-01…H-17) y correcciones de la v0.2
+
+**Origen.** Autoevaluación crítica del autor sobre la v0.1 (SHA-256 `f31182b706fea05ef7d10b06449e56f8d9cef71194f8881ba1efe41ae9c1db1a`): **no es una auditoría independiente ni una revisión de contexto nuevo**. Las correcciones fueron autorizadas en una ronda única (§21.0). **No equivalen a aprobación.**
+
+| ID | Corrección en la v0.2 | Dónde |
+|---|---|---|
+| H-01 | §21.6 reproduce los pasos a–j de §20.3.1 con su clasificación literal y añade solo lo que aporta ADR-05.C | §21.6 |
+| H-02 | IN-05-12 acotada frente a la eliminación del almacenamiento por el navegador; nueva tensión T-8 | §21.4, §21.2 |
+| H-03 | Registro de R-2 [CONF] separado de su persistencia independiente [DER] | IN-05-18, §21.6 |
+| H-04 | Declaración de fuentes leídas corregida, con las relecturas hechas y las limitaciones | §21.0 |
+| H-05 | OFF-11 completada con la conducta del cliente (IN-05-21), sin trasladarla ni crear requisitos | §21.4, §21.9 |
+| H-06 | Referencia a ES-31 eliminada de CAP-05-I-B | D5-1 |
+| H-07 | Sesgo neutralizado en CAP-05-I-A/I-B y CAP-05-S-A, con las referencias documentales | D5-1, D5-4 |
+| H-08 | OFF-03 incorporada a D5-4 y T-3 | D5-4, §21.2 |
+| H-09 | Posible no conformidad de CAP-05-M-B con OFF-20 señalada; asociación con CAP-09-P-B marcada [DER] | D5-2 |
+| H-10 | Partición ADR-05.C / ADR-09.C identificada como provisional (decisión 3 abierta) | T-1, IN-05-18 |
+| H-11 | [CONF] y [DER] de IN-05-10 corregidos | §21.4 |
+| H-12 | Transición `enviando` → `pendiente` declarada en CAP-05-E-A (OC-44) | D5-6 |
+| H-13 | Posible responsabilidad nueva de CMP-13 en CAP-05-C-B dejada abierta | D5-7 |
+| H-14 | CAP-05-F-A acotada a los rechazos cuyo registro exige R-2 | D5-3 |
+| H-15 | Inferencia de ESC-62 marcada [DER] | §21.7 |
+| H-16 | ES-34 con [CONF], [DER] y [REC] separados | §21.7 |
+| H-17 | Encabezado de §21.4 corregido: [REC] y [ABIERTO] no se presentan como exigidos | §21.4 |
