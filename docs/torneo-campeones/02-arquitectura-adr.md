@@ -6107,3 +6107,64 @@ Todas las de la adenda anterior, con estos cambios: **DC4-2 cerrada** (única de
 **Hash histórico del documento.** SHA-256 de `02-arquitectura-adr.md` **inmediatamente antes de esta adenda** (archivo versionado en `5375df75b35620e910c64acb8e0db00756272256`): `76352638b22b902303841005f0fa702f38dfdb6926985359c17aa5cf5dc046c2`
 
 **Estado de versionado de esta adenda.** **Pendiente:** sin commit, push, PR ni merge.
+
+---
+
+# REGISTRO DE CIERRE DOCUMENTAL DE R2 (metadatos; fuera de las Partes I–X)
+
+**Naturaleza.** Este apartado contiene **únicamente metadatos de aprobación y de versionado**. No añade ni modifica contenido arquitectónico, invariantes, amenazas, riesgos, escenarios, decisiones ni condiciones de las Partes I–X ni de las adendas anteriores; el texto histórico se preserva.
+
+**Decisión expresa del responsable (2026-11-22, fecha inferida: la del aviso de fecha de la sesión; no hay marca de tiempo individual del mensaje).** Mensaje «TORNEO DE CAMPEONES — CIERRE DOCUMENTAL CONDICIONADO DE R2»: «APRUEBO EL CIERRE DOCUMENTAL CONDICIONADO DE R2 COMO CONJUNTO (R2-A, R2-B Y R2-C).» **Esta aprobación reconoce la suficiencia documental del alcance trabajado; no es la aprobación definitiva de los ADR ni la resolución de todas las decisiones.**
+
+**Estado: R2 (R2-A, R2-B y R2-C): CIERRE DOCUMENTAL CONDICIONADO APROBADO.** Alcance reconocido: el modelo de amenazas inicial (§16) y su consolidación (§24); las capacidades exigidas `.C` de ADR-03 y ADR-09 (R2-A, §16), ADR-02 y la frontera atómica (R2-B, §17–§20, con el cierre de R2-B2), y ADR-05, ADR-04 y ADR-16 (R2-C, §21–§23, con su cierre); y las dos adendas de decisiones y de matriz. Cada bloque estaba aprobado condicionalmente como entregable documental y versionado; este registro los reconoce **como conjunto** (incluye R2-B1 y R2-B2 como R2-B).
+
+**Commits verificados** (con `git log`; cada uno toca solo `02-arquitectura-adr.md`, `aprobaciones.md` y `bitacora.md`):
+
+| Bloque o registro | Commit | Fecha (UTC; verificable por Git) |
+|---|---|---|
+| R2-A | `e246508559d4b10cb2a0c9ef3a8b4fbcf46c3b9b` | 2026-11-17T04:40:26 |
+| R2-B1 | `eb0255c17d728d02003839338b4cefa18e55468d` | 2026-11-18T03:47:26 |
+| R2-B2-a | `5bfc9305e29ab3c3988e932e4f62bfa3d5278f2b` | 2026-11-19T01:49:20 |
+| R2-B2-b1 | `c87f57843bd5d497d820571937edc21c3f8c362a` | 2026-11-19T04:06:47 |
+| R2-B2-b2 | `bbfff28b5f2d0b373aed509ae6028c8debed0de6` | 2026-11-20T04:02:35 |
+| Cierre documental de R2-B2 | `a13b2139042ccb8bfac8f88121a3bb26dc642ce5` | 2026-11-21T01:43:24 |
+| R2-C1 (ADR-05.C) | `a468166210e0472e07dd5d0800985d3db1c6b940` | 2026-11-21T22:57:42 |
+| R2-C2 (ADR-04.C) | `acb29b818915a0e34a68ce23793354b34cbbdd33` | 2026-11-22T00:32:27 |
+| R2-C3 (ADR-16.C) | `d80e35c2748192172aa5271be7e46bf8c682df2c` | 2026-11-22T01:01:48 |
+| R2-C4 (modelo de amenazas) | `3ec1ab7d03a039073971bb4580d1b8caccd6d613` | 2026-11-22T02:11:07 |
+| Cierre documental de R2-C | `ddd9f36ed7dfe044874e6418d0465145c59d1a3f` (`ddd9f36`) | 2026-11-22T02:23:14 |
+| Decisiones previas al cierre de R2 | `5375df75b35620e910c64acb8e0db00756272256` (`5375df7`) | 2026-11-22T02:31:51 |
+| Matriz de formulaciones y cierre de DC4-2 | `b68d52ec847ca076d308f70dc9c058922706dd2b` (`b68d52e`) | 2026-11-22T02:41:16 |
+
+**Nota de precedencia sobre estados históricos de versionado.** Las expresiones «pendiente», «sin commit», «no versionado» o «HEAD …» de los registros y adendas anteriores describen el estado **al momento de redactarse**. Este registro **prevalece**: los commits de la tabla versionaron cada uno de ellos.
+
+**Nota de precedencia sobre el encabezado y §12 de `02`.** El encabezado (líneas 4–6: «R2, R3 y R4: NO INICIADOS Y SIN AUTORIZACIÓN» y estado documentado solo hasta R2-A) y la tabla de §12 («Sin autorización» para R2) describen el estado **de R1** y no se reescriben. **Este registro prevalece:** R2 está cerrado documentalmente de forma condicionada; **R3 y R4 siguen NO INICIADOS Y SIN AUTORIZACIÓN**; la Fase 2 sigue sin aprobación global.
+
+**Condiciones obligatorias que se preservan (el cierre NO las resuelve):**
+
+1. **Los seis ADR `.C` (02, 03, 04, 05, 09 y 16) son PROPUESTAS**, sin selección definitiva de formulaciones.
+2. **Decisión 6 de R2-A:** opción (b) registrada, con la regla de §16.8.5 y la regla de conformidad A/C/X; los `.I` no pueden redefinir ni relajar invariantes, y toda inviabilidad regresa al responsable.
+3. **La matriz es una propuesta, no un conjunto aprobado:** **30 decisiones, 69 formulaciones: 17 A, 38 C y 14 X.**
+4. **16 decisiones sin ninguna formulación admisible** (ADR-03 R y V; ADR-09 O; ADR-05 D5-1, D5-2, D5-4, D5-6 y D5-7; ADR-04 D4-1, D4-4, D4-5 y D4-8; ADR-16 D16-1, D16-2, D16-3 y D16-5), con sus restricciones para los ADR `.I` (ver abajo).
+5. **11 decisiones de R2-A abiertas** (1, 2, 3, 4, 5, 7, 8, 9, 10, 12 y 13; la 11, atendida; la 6, decidida) y las demás condiciones abiertas: DB1, DB2a, DB2b, DB2c-1…10, DC1, DC2, DC3, DC4-1 (decidida) con DC4-3 y DC4-4 abiertas, OC-01…53 salvo OC-40.
+6. **R1 §8.1 sin declarar cumplido; DB1-1 pendiente y sin excepción.** **D-2 sin excepción; K-3 pendiente.**
+7. **Las 34 amenazas, incluidas las 19 Críticas**, con sus clasificaciones originales. **AM-19:** Fase 4 (validación de entradas y consultas parametrizadas); **AM-34:** R3 (cabeceras) y Fase 4 (validación y codificación de salidas). **Ninguna tiene tratamiento completo ni mitigación demostrada;** RNF-05 es requisito confirmado y los demás controles son [REC]; la decisión 7 sigue abierta. **DC4-2: cerrada por DB2c-11.**
+8. **RES-01…13 sin aceptar** (RES-13 pendiente, nivel por evaluar). **OM-01…07 sin evaluación completa.**
+9. **Condiciones jurídicas y verificaciones empíricas pendientes:** asesoría jurídica (PEND-JUR; PRV-18; HR1-11, HR1-12, HR1-14; región, PRV-13), Q-20, Q-43, Q-40 (d), A-8 y la verificación en dispositivos (iOS: HR1-07, IOS-01…08).
+10. **Limitaciones de cobertura e independencia:** todas las evaluaciones (R2-C conjunta, global de R2, matriz) son **autoevaluaciones del autor, no auditorías independientes**; la lectura fue parcial (se declara en cada una); no hubo pruebas, verificación en dispositivo ni asesoría jurídica. R1 §8.1 y los conteos de la matriz no sustituyen una revisión independiente.
+
+**Alcance para R3 (sin permisos implícitos).**
+
+| Asunto | Restricción | Fuente |
+|---|---|---|
+| **Evaluar ADR-01 y ADR-10** | Se evalúan contra los invariantes `.C` y las formulaciones A **como propuestas**; ADR-01/10 requieren los `.C` y PEND-JUR (PRV-13); Q-07 y RNF-12 siguen como insumos; ninguna capacidad `.C` inviable con el stack se da por cumplida: regresa al responsable. | [DOC] §8.1, §8.2, §16.8.5 punto 3 |
+| **ADR-xx.I** (02, 03, 04, 05, 09 y 16) | Solo pueden elegir entre formulaciones **que el responsable haya admitido**; como la matriz es una propuesta y no hay conjunto aprobado, **ningún `.I` puede seleccionar todavía**. Las **16 decisiones sin A** tampoco pueden pasar a su `.I` hasta satisfacer sus condiciones o por decisión expresa. | [DOC] §16.8.5 punto 2; matriz; [INF] la lectura de que sin aprobación del conjunto ningún `.I` selecciona |
+| **R3 y R4** | **Este cierre no autoriza R3 ni R4 ni la evaluación de ADR-01/10:** cada bloque requiere un mensaje del responsable que lo nombre. | [DOC] §12; regla 2 del skill |
+
+**Hash histórico del documento.** SHA-256 de `02-arquitectura-adr.md` **inmediatamente antes de este registro** (archivo versionado en `b68d52ec847ca076d308f70dc9c058922706dd2b`): `30249c3c2972f8effd81e977a86130e3e16a9219f052f2dff0ee82821a1101ad`
+
+**Estado de versionado de este registro.** **Pendiente:** sin commit, push, PR ni merge.
+
+**Condición de cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. **El cierre documental condicionado de R2 no equivale a aprobar la Fase 2 ni los ADR.**
+
+**Exclusiones (el cierre NO implica):** seleccionar formulaciones o tecnologías; aprobar conjuntos definitivos; resolver otras decisiones; aceptar riesgos o conceder excepciones; declarar cumplido R1 §8.1; declarar mitigada ninguna amenaza; aprobar definitivamente ningún ADR ni la Fase 2; iniciar R3 o R4.

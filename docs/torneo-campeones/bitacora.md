@@ -1,5 +1,16 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-22 — Fase 2, R2 (cierre documental condicionado)
+
+- **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — CIERRE DOCUMENTAL CONDICIONADO DE R2»: «APRUEBO EL CIERRE DOCUMENTAL CONDICIONADO DE R2 COMO CONJUNTO (R2-A, R2-B Y R2-C).» **Estado: R2: CIERRE DOCUMENTAL CONDICIONADO APROBADO.** Reconoce la suficiencia documental del alcance trabajado; no aprueba definitivamente los ADR ni la Fase 2. Archivos: `02-arquitectura-adr.md` (registro final de metadatos), `aprobaciones.md`, `bitacora.md`.
+- **Trazabilidad:** R2-C cerrado en `ddd9f36`; decisiones previas en `5375df7`; matriz y DC4-2 en `b68d52e` (hashes completos en `02`). Notas posteriores añadidas en las entradas correspondientes.
+- **Condiciones preservadas:** seis ADR `.C` como propuestas; decisión 6 (b) y regla A/C/X; matriz propuesta (30 decisiones, 69 formulaciones: 17 A, 38 C, 14 X); 16 decisiones sin formulación admisible; 11 decisiones de R2-A pendientes; R1 §8.1 sin cumplir, DB1-1 pendiente sin excepción; D-2 sin excepción; K-3 pendiente; 34 amenazas y 19 Críticas; AM-19 (Fase 4) y AM-34 (R3 y Fase 4) sin tratamiento completo ni mitigación; DC4-2 cerrada por DB2c-11; RES-01…13 sin aceptar; OM-01…07 sin evaluación completa; condiciones jurídicas y verificaciones empíricas pendientes; evaluaciones del autor, no independientes.
+- **Alcance para R3, sin permisos implícitos:** ADR-01/10 se evalúan contra invariantes `.C` y formulaciones A como propuestas; ningún ADR-xx.I puede seleccionar todavía y las 16 decisiones sin A no pasan a su `.I`; R3 y R4 requieren autorización expresa.
+- **Precedencia:** el encabezado y §12 de `02` (estado de R1) se aclaran por el registro final, sin reescribirlos.
+- **Hash:** `02-arquitectura-adr.md` antes del registro (`b68d52e`): `30249c3c2972f8effd81e977a86130e3e16a9219f052f2dff0ee82821a1101ad`; con el registro: `4ec98f64b594e784094ce1918b51772fce060946330d3e98478d07082a49dedc`.
+- **Estado real:** R2 cerrado documentalmente de forma condicionada; **Fase 2 sin aprobación global**; R3 y R4 NO INICIADOS Y SIN AUTORIZACIÓN. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, aprobar conjuntos, R3) requiere autorización expresa e independiente.
+
 ## 2026-11-22 — Fase 2, matriz de formulaciones admisibles y cierre de DC4-2
 
 - **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — R2: AJUSTE Y REGISTRO DE MATRIZ». Se registra la matriz **como propuesta documental, no como conjunto definitivamente aprobado**; se confirma el criterio A/C/X (las C quedan fuera del conjunto admisible mientras no se satisfagan sus condiciones). Archivos: `02-arquitectura-adr.md` (adenda final), `aprobaciones.md`, `bitacora.md`.
@@ -10,7 +21,7 @@
 - **Trazabilidad:** las decisiones previas quedaron versionadas en `5375df7` (`5375df75b35620e910c64acb8e0db00756272256`, 2026-11-22T02:31:51Z); nota posterior añadida en su entrada.
 - **Hash:** `02-arquitectura-adr.md` antes de la adenda (`5375df7`): `76352638b22b902303841005f0fa702f38dfdb6926985359c17aa5cf5dc046c2`; con la adenda: `30249c3c2972f8effd81e977a86130e3e16a9219f052f2dff0ee82821a1101ad`.
 - **Estado real:** R2 y Fase 2 sin aprobación global; R3 y R4 NO INICIADOS Y SIN AUTORIZACIÓN; RES-01…13 sin aceptar. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar, aprobar conjuntos, registrar el cierre de R2, R3) requiere autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar, aprobar conjuntos, registrar el cierre de R2, R3) requiere autorización expresa e independiente. *[Nota posterior, 2026-11-22: este registro quedó versionado en el commit `b68d52ec847ca076d308f70dc9c058922706dd2b` (`b68d52e`; verificable por Git; 2026-11-22T02:41:16Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-22 — Fase 2, decisiones previas al cierre de R2
 
@@ -34,7 +45,7 @@
 - **Condiciones abiertas:** todas las formulaciones, decisiones (DB, DC, OC, R2-A), K-3, D-2 sin excepción, las 34 amenazas y 19 Críticas con los vacíos de AM-19, AM-34, AM-08 y OM-01…07, RES-01…12 sin aceptar, Q-20 y demás condiciones de privacidad, asesoría jurídica y verificación en dispositivos pendientes; R1 §8.1 no declarado cumplido.
 - **Estado real:** R2-C: cierre documental condicionado aprobado. R2-B2 cerrado condicionadamente. **R2 y Fase 2: EN DESARROLLO, SIN APROBACIÓN GLOBAL.** R3 y R4: NO INICIADOS Y SIN AUTORIZACIÓN.
 - **Archivos modificados:** los tres indicados. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar este registro, resolver decisiones, R3) requiere autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, resolver decisiones, R3) requiere autorización expresa e independiente. *[Nota posterior, 2026-11-22: este registro quedó versionado en el commit `ddd9f36ed7dfe044874e6418d0465145c59d1a3f` (`ddd9f36`; verificable por Git; 2026-11-22T02:23:14Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-22 — Fase 2, R2-C4 (aprobación condicional como entregable documental)
 
