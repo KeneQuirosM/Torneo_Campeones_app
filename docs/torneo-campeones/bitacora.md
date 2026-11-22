@@ -1,5 +1,16 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-22 — Fase 2, R3-A (aprobación condicional como entregable documental)
+
+- **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-A»: «APRUEBO EXCLUSIVAMENTE R3-A v0.2 (ADR-01 Y ADR-10) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **DR3-1** se registra solo como aprobación documental condicionada, no definitiva. No aprueba definitivamente ADR-01 ni ADR-10. Archivos: `02-arquitectura-adr.md` (solo metadatos de §25), `aprobaciones.md`, `bitacora.md`.
+- **Versión aprobada:** R3-A **v0.2-R3A** (Parte XI, §25): tres configuraciones (CFG-C1, CFG-C2, CFG-C3), RE3-01…11, NE-1…6, BK-01…14, DR3-1…9, OC-54…70, RR3-01…12, CR3A-01…17. **CFG-C3: recomendación preliminar; CFG-C1: alternativa condicionada; CFG-C2: secundaria.** Ninguna selección definitiva.
+- **Preservado:** objetivo de $0 mensuales, no demostrado; requisitos confirmados distinguidos de propuestas pendientes de adopción; DR3-2…9 y OC-54…70 según sus estados; RR3-01…12 sin aceptar; PEND-JUR, elegibilidad de proveedores, costos, dominio, respaldos y custodia pendientes; autorización en dos capas y MFA obligatorio sin cumplimiento demostrado; restricciones de R2 y bloqueos de los ADR `.I`; autoevaluación del autor, sin auditoría independiente.
+- **Trazabilidad:** el cierre de R2 quedó versionado en `d833049dc2e1a369efcb39c3a33051210d3f518f` (`d833049`; 2026-11-22T02:44:15Z); nota posterior añadida en su entrada.
+- **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `b13af5fda3ba9561e9f571b4fd684c4c0688449cf5218fad085dc62d8379ed30`; con los metadatos: `7676ab2f92424a29b08d2fd1c18b3b69babe64597bdbe88057b18a1f8906230a`. Las diferencias son solo metadatos de §25.
+- **Exclusiones (no implica):** seleccionar proveedores, regiones, tecnologías o formulaciones; autorizar gastos, cuentas o métodos de pago; resolver otras decisiones; aceptar riesgos; iniciar R3-B…F, ADR `.I` o R4; aprobar R3 o la Fase 2.
+- **Estado real:** R3-A aprobado condicionalmente (documental); R3-B…F, ADR `.I` y R4 NO INICIADOS; R3 y Fase 2 sin aprobación global; RES-01…13 sin aceptar. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, R3-B u otro subbloque, resolver decisiones) requiere autorización expresa e independiente.
+
 ## 2026-11-22 — Fase 2, R2 (cierre documental condicionado)
 
 - **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — CIERRE DOCUMENTAL CONDICIONADO DE R2»: «APRUEBO EL CIERRE DOCUMENTAL CONDICIONADO DE R2 COMO CONJUNTO (R2-A, R2-B Y R2-C).» **Estado: R2: CIERRE DOCUMENTAL CONDICIONADO APROBADO.** Reconoce la suficiencia documental del alcance trabajado; no aprueba definitivamente los ADR ni la Fase 2. Archivos: `02-arquitectura-adr.md` (registro final de metadatos), `aprobaciones.md`, `bitacora.md`.
@@ -9,7 +20,7 @@
 - **Precedencia:** el encabezado y §12 de `02` (estado de R1) se aclaran por el registro final, sin reescribirlos.
 - **Hash:** `02-arquitectura-adr.md` antes del registro (`b68d52e`): `30249c3c2972f8effd81e977a86130e3e16a9219f052f2dff0ee82821a1101ad`; con el registro: `4ec98f64b594e784094ce1918b51772fce060946330d3e98478d07082a49dedc`.
 - **Estado real:** R2 cerrado documentalmente de forma condicionada; **Fase 2 sin aprobación global**; R3 y R4 NO INICIADOS Y SIN AUTORIZACIÓN. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar este registro, aprobar conjuntos, R3) requiere autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, aprobar conjuntos, R3) requiere autorización expresa e independiente. *[Nota posterior, 2026-11-22: este registro quedó versionado en el commit `d833049dc2e1a369efcb39c3a33051210d3f518f` (`d833049`; verificable por Git; 2026-11-22T02:44:15Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-22 — Fase 2, matriz de formulaciones admisibles y cierre de DC4-2
 

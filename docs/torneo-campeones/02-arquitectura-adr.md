@@ -6168,3 +6168,341 @@ Todas las de la adenda anterior, con estos cambios: **DC4-2 cerrada** (única de
 **Condición de cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. **El cierre documental condicionado de R2 no equivale a aprobar la Fase 2 ni los ADR.**
 
 **Exclusiones (el cierre NO implica):** seleccionar formulaciones o tecnologías; aprobar conjuntos definitivos; resolver otras decisiones; aceptar riesgos o conceder excepciones; declarar cumplido R1 §8.1; declarar mitigada ninguna amenaza; aprobar definitivamente ningún ADR ni la Fase 2; iniciar R3 o R4.
+
+---
+
+# PARTE XI — BLOQUE R3-A (v0.2-R3A, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-22 inferida)
+
+## 25. R3-A — ADR-01 (arquitectura principal) y ADR-10 (región y transferencia): evaluación conjunta y borrador
+
+### 25.0 Alcance, autorización y reglas
+
+- **Autorización (2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R3-A: BORRADOR ADR-01 Y ADR-10»: «AUTORIZO EXCLUSIVAMENTE REDACTAR EL BORRADOR CONJUNTO DE ADR-01 Y ADR-10.» Se aprobó la evaluación ajustada **como insumo documental, no como selección definitiva**; se aprobó el plan de subbloques R3-A…R3-F y los pesos de los criterios. Solo se modifica este documento, con esta Parte nueva.
+- **Estado heredado.** R2 tiene cierre documental condicionado (versionado en `d833049`); los seis ADR `.C` son **propuestas**; la matriz de formulaciones (17 A, 38 C, 14 X) es una **propuesta**; las 16 decisiones sin formulación admisible **no pasan a su ADR-xx.I**; R1 §8.1 no está declarado cumplido; DB1-1 abierta, sin excepción; D-2 sin excepción; K-3 pendiente; RES-01…13 sin aceptar; PEND-JUR abierta.
+- **Qué es este borrador.** Una **evaluación de alternativas** de ADR-01 y ADR-10 con fuentes oficiales vigentes y una **recomendación preliminar no vinculante**. **No selecciona proveedores, tecnologías ni regiones; no aprueba ADR-01 ni ADR-10; no contrata servicios ni crea cuentas; no escribe código; no declara implementado ni demostrado ningún control.**
+- **Convención.** [DOC]: dato leído en la página oficial citada (§25.15). [PROP]: propuesta del autor. [INF]: inferencia del autor. [PEND]: condición pendiente o sin verificar. **Regla de lectura (v0.2):** toda celda de arquitectura o de requisito sin etiqueta propia es [PROP]; toda celda de estado es [PEND] salvo que diga «Cumple»; los datos de proveedores, precios y límites llevan [DOC] o [PEND]. [CONF]: texto confirmado de `01` o R1. Cada afirmación distingue **conformidad documental**, **viabilidad tecnológica** (según fuentes) y **demostración pendiente**.
+- **Identificadores nuevos (sin colisión con las series existentes).** **CFG-C1, CFG-C2, CFG-C3** (configuraciones; los rótulos C1, C2 y C3 de la autorización se escriben así para no confundirlos con «C1: hosting alternativo» de R1 §8.1), **RE3-01…11** (requisitos eliminatorios), **NE-1…6** (condiciones de no evasión), **BK-01…14** (capacidades de respaldo y restauración), **RR3-01…12** (riesgos de redacción), **DR3-1…9** (decisiones del responsable), **OC-54…70** (condiciones abiertas; OC-64 se conserva como identificador histórico, sin reutilizar), **CR3A-01…17** (criterios de verificación).
+- **Exclusiones.** Elegir proveedor, región o ADR; resolver decisiones de R2 o de R1; conceder excepciones; aceptar riesgos; aprobar R3-A, R3 ni la Fase 2; iniciar R3-B…F, ADR `.I` ni R4; cambiar `01` ni R1; modificar las Partes I–X ni los registros.
+
+- **Versión 0.2 (correcciones de la revisión focalizada).** Aplica M-1…M-3 y las ocho observaciones (§25.17), **sin seleccionar mecanismos de ADR-02.I**, proveedores, regiones ni tecnologías. CFG-C3 sigue siendo la **recomendación preliminar**, no una selección. Los identificadores históricos se conservan.
+- **Aprobación (metadato; 2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-A»: «APRUEBO EXCLUSIVAMENTE R3-A v0.2 (ADR-01 Y ADR-10) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: R3-A (v0.2-R3A): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.** **DR3-1 se registra únicamente como aprobación documental condicionada, no definitiva.** No aprueba definitivamente ADR-01 ni ADR-10, ni selecciona proveedores, regiones, tecnologías ni formulaciones; no acredita implementación, costo de $0, 2FA ni autorización en dos capas. Se conservan: CFG-C3 como **recomendación preliminar**, CFG-C1 como **alternativa condicionada** (elegibilidad de Hobby) y CFG-C2 como **secundaria**; el objetivo de **$0 mensuales, no demostrado**; **requisitos confirmados** (los de `01` y R1 que citan RE3-01…09, p. ej. RC-04, RC-11, RNF-05, RNF-08, RNF-14) frente a **propuestas pendientes de adopción** (RE3-10 y RE3-11 en su formulación, NE-1…6, BK-01…14 como capacidades, los valores de retención y los RPO y RTO propuestos); DR3-2…9 y OC-54…70 según sus estados; RR3-01…12 sin aceptar; PEND-JUR y las condiciones de elegibilidad, costos, dominio, respaldos y custodia pendientes; **autorización en dos capas y MFA obligatorio sin cumplimiento demostrado**; todas las restricciones heredadas de R2 y los bloqueos de los ADR `.I`; y la limitación de autoevaluación del autor, **sin auditoría independiente**. Trazabilidad: el cierre de R2 quedó versionado en el commit `d833049dc2e1a369efcb39c3a33051210d3f518f` (`d833049`; 2026-11-22T02:44:15Z). Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+### 25.1 Identificación
+
+| Campo | ADR-01 | ADR-10 |
+|---|---|---|
+| Tema | Arquitectura principal: plataforma, hosting y datos | Región, ubicación de los datos y transferencia internacional |
+| Pregunta (R1 §8.1) | ¿Qué combinación de entrega web, aplicación y almacén relacional soporta mejor los criterios de §2.4 **frente a los requisitos e invariantes fijados en R2**? | ¿Dónde se alojan los datos y bajo qué evaluación jurídica? |
+| Alternativas mínimas (R1 §8.1) | **≥ 3** (candidatos de R1 no vinculantes: Vercel + Supabase; Vercel + Neon; hosting alternativo con PostgreSQL gestionado) | ≥ 2 |
+| Dependencias (R1 §8.1, §8.2) | Q-07, PRV-13, RNF-12; requiere ADR-02.C, 03.C, 04.C, 05.C, 09.C y 16.C (propuestas) y PEND-JUR | PRV-13, PRV-15, Q-25; **decisión conjunta con ADR-01** |
+| Bloque / estado | R3 / **BORRADOR** | R3 / **BORRADOR** |
+
+### 25.2 Criterios, pesos y requisitos eliminatorios
+
+**Pesos aprobados por el responsable:** seguridad **35 %**, costo **30 %**, funcionamiento sin conexión **20 %**, mantenimiento **15 %**. **Los requisitos obligatorios son eliminatorios y no se compensan con puntuación.**
+
+| ID | Requisito eliminatorio | Fuente |
+|---|---|---|
+| RE3-01 | PostgreSQL real para las pruebas y las restricciones críticas | RNF-11, RNF-06 |
+| RE3-02 | Autorización en dos capas (servidor y capa de datos), con RLS o equivalente probada por rol, tabla y operación | RC-04, RT-02, RNF-05 |
+| RE3-03 | 2FA obligatorio para dueño y organizador (política efectiva por todos los roles vigentes) | RC-11, RF-ACC-10 |
+| RE3-04 | Respaldos automáticos **verificables** y **restauración probada antes del piloto** (RPO 24 h y RTO 8 h propuestos) | RNF-08 |
+| RE3-05 | Credenciales de servicio solo en el servidor; secretos fuera del cliente y de la cola | RNF-05, RT-09 |
+| RE3-06 | Cuentas, dominio, base de datos y hosting a nombre de la organización; accesos individuales y revocables | RNF-14, RC-18 |
+| RE3-07 | Costos y límites verificados con fuentes oficiales antes de contratar; sin servicios de pago sin autorización previa | RNF-12, RC-18 |
+| RE3-08 | Evaluación jurídica de proveedores, regiones y transferencias **antes** de tratar datos reales; solo datos sintéticos hasta entonces | PRV-13, PRV-15, RC-14, PRV-17 |
+| RE3-09 | Entornos local, staging y producción; migraciones versionadas; nada se modifica a mano en producción | RNF-16, RNF-11 |
+| RE3-10 | Auditoría de solo anexado y protección de lo local como exige R2 (los `.C` propuestos); un `.I` no relaja invariantes | RC-21; §16.8.5 |
+| RE3-11 | Ninguna configuración permite evadir la autorización en dos capas: sin escrituras directas del cliente a tablas; lecturas públicas solo por proyecciones con lista blanca; acceso solo por invitación (sin autorregistro); credenciales privilegiadas solo del lado servidor; las operaciones privilegiadas conservan ambas capas | RC-04, RT-02, PA-04, IN-03-05, RNF-05, RT-09 |
+
+### 25.3 Configuraciones evaluadas
+
+Las tres son configuraciones **completas** (cliente, autenticación, backend, datos, correo, respaldo y costos). Ninguna framework web se asume como requisito: la PWA puede ser sencilla y estática; la elección de herramientas de cliente corresponde a Fase 3 y Fase 4, no a este borrador.
+
+| Componente | CFG-C1: Vercel + Supabase | CFG-C2: Vercel + Neon + Better Auth | CFG-C3: Cloudflare + Supabase (recomendación preliminar) |
+|---|---|---|---|
+| Cliente PWA | Estática en Vercel (sin Next.js) [PROP] | Necesita servidor para la autenticación propia [INF] | Estática en Cloudflare [PROP] |
+| Autenticación y 2FA | Supabase Auth; TOTP en el plan gratuito [DOC] | Better Auth con plugin de 2FA (TOTP, OTP, códigos de respaldo) **ejecutado en nuestro código** [DOC] | Supabase Auth [DOC] |
+| Backend | Funciones SQL (RPC) y Edge Functions | Funciones de Vercel | Funciones SQL (RPC) y Edge Functions |
+| Datos | Supabase Postgres + RLS [DOC] | Neon Postgres + RLS; propagar la identidad a RLS es diseño propio [INF] | Supabase Postgres + RLS [DOC] |
+| Correo | SMTP externo (ADR-15 decidirá): Resend (100/día) o Brevo (300/día) [DOC] | Igual | Igual |
+| Respaldo | Pipeline propio (§25.7) en GitHub Actions → R2 | Pipeline propio + restauración instantánea de Neon (6 h en Free) [DOC] | Pipeline propio (§25.7) |
+| Acceso del cliente a los datos [PROP; RE3-11] | El cliente solo llega a puntos de entrada autorizados del servidor y a proyecciones públicas con lista blanca; **sin escrituras directas a tablas** | PostgreSQL **no es accesible desde los clientes**, solo desde nuestro servidor; **Data API deshabilitada** | Igual que CFG-C1 |
+| Costos [PROP] | Infraestructura, dominio y correo se estiman por separado (§25.6) | Igual | Igual |
+| Rol de R1 §8.1 | (a) Vercel + Supabase | (b) Vercel + Neon | (c) hosting alternativo + PostgreSQL gestionado |
+| Rol en la recomendación | Alternativa preferente **si** Hobby resulta elegible | Alternativa secundaria | **Recomendación preliminar** |
+
+**Regla sobre Next.js (antes OC-64).** No se asume Next.js ni otra herramienta de cliente: la PWA puede ser sencilla y estática; su elección corresponde a Fase 3 y Fase 4. El identificador OC-64 se conserva sin reutilizar.
+### 25.4 Arquitectura candidata y fronteras de confianza (válida para CFG-C3; adaptable a las demás)
+
+Las capacidades de R2 no se redefinen: la autorización definitiva se comprueba **en el servidor y en la capa de datos** (RC-04), lo local nunca es público y la frontera atómica es la de ADR-02.C. La parte `.I` de cada ADR de R2 sigue **bloqueada** hasta aprobar su conjunto admitido.
+
+| Frontera (R1 §5.6) | Componentes en la arquitectura candidata | Control requerido (R2 y `01`) | Estado |
+|---|---|---|---|
+| TB-1 dispositivo ↔ aplicación | PWA estática ↔ puntos de entrada autorizados del servidor (funciones SQL y Edge Functions); sin escrituras directas del cliente a tablas (RE3-11) | Validación en el límite y autorización del servidor (RC-04) | [PEND] diseño en ADR-02.I y Fase 4 |
+| TB-2 dispositivo ↔ almacén local | Almacén del navegador | ADR-16.C (propuesta); lo local no concede permisos | Fuera de R3-A |
+| TB-3 público ↔ borde público | CDN de Cloudflare sirve la PWA y lo público cacheado | Solo proyecciones con lista blanca (PA-04); cabeceras de seguridad (RNF-05; AM-34) | [PEND] ADR-06 |
+| TB-4 aplicación ↔ datos | Funciones SQL y RLS en Postgres (CFG-C1 y CFG-C3); PostgreSQL solo desde el servidor (CFG-C2) | RLS por rol, tabla y operación; restricciones de integridad; **la segunda capa se conserva también en operaciones privilegiadas** | [PEND] pgTAP (Fase 4/7) |
+| TB-5 aplicación ↔ correo | SMTP externo | Sin datos de jugadores ni de menores (§5.6) | [PEND] ADR-15 (R3-B) |
+| TB-6 organización ↔ desarrollador | Cuentas a nombre de la organización | Credenciales individuales y revocables (RNF-14) | [PEND] inventario en Fase 8 |
+| TB-7 dispositivo ↔ observabilidad | No se define aquí | Sin datos personales (PRV-12) | R4 (ADR-13) |
+| TB-8 aplicación ↔ borde público | Alimentación de lo público y señales de cambio | Lista blanca; señal de cambio omitida o tardía | [PEND] ADR-06 |
+| TB-9 datos ↔ respaldos | GitHub Actions → almacenamiento externo cifrado (R2) | Mismo nivel de protección que Z3; retención acotada (§25.7) | [PEND] diseño y prueba |
+
+**Condiciones de no evasión (RE3-11) [PROP; sin elegir mecanismos de ADR-02.I].** Ningún componente se da por cumplido; la demostración corresponde a Fase 4 y 7.
+| ID | Condición | CFG-C1 y CFG-C3 | CFG-C2 |
+|---|---|---|---|
+| NE-1 | Escrituras: ninguna escritura directa del cliente; toda operación que modifica pasa por un punto de entrada del servidor que evalúa la política, y la capa de datos la vuelve a comprobar | Permisos de tabla del cliente restringidos; puntos de entrada del servidor | El cliente nunca llega a la base; solo el servidor |
+| NE-2 | Lecturas públicas: solo proyecciones con lista blanca (PA-04); ninguna entidad interna expuesta | Esquemas expuestos mínimos | Igual; Data API deshabilitada |
+| NE-3 | Cuentas: solo por invitación; autorregistro deshabilitado (IN-03-05) | Configuración del proveedor de autenticación | Configuración de la autenticación propia |
+| NE-4 | Credenciales privilegiadas (clave de servicio, contraseña de la base) solo del lado servidor; nunca en el cliente, la cola ni un repositorio público (RT-09) | Bóveda de secretos del servidor | Igual |
+| NE-5 | Dos capas siempre: las operaciones privilegiadas (administración, migraciones, respaldos) no saltan la autorización; usan credenciales dedicadas y quedan auditadas | Roles dedicados | Igual |
+| NE-6 | 2FA exigido en la capa de datos y en el servidor para dueño y organizador (§25.9); la disponibilidad de MFA no lo hace obligatorio | Nivel de garantía de autenticación en las políticas | Igual |
+
+**Superficies nuevas que este borrador introduce y que R2 no tenía:** (1) cuentas y secretos de GitHub Actions y del almacenamiento externo; (2) claves de cifrado de los respaldos; (3) el proveedor de hosting estático. Se tratan en §25.7 y §25.12; su amenaza formal (AM-23, AM-32, AM-29, AM-30, AM-26) sigue siendo de R3 y R4.
+
+### 25.5 Matriz comparativa técnica y económica (fuentes al 2026-11-22; ver §25.15)
+
+| Criterio | CFG-C1 | CFG-C2 | CFG-C3 |
+|---|---|---|---|
+| Costo de infraestructura con $0 | **Posible solo si Vercel Hobby es elegible** [PEND]; **$0 no demostrado** | Igual que C1 | **Posible** [DOC: Workers Free, Supabase Free]; **$0 no demostrado** (R2: OC-66) |
+| Costo de respaldo si $0 no basta | Vercel Pro desde $20/mes [DOC] + Supabase Pro $25/mes [DOC] | Vercel Pro $20/mes + Neon Launch (uso típico ~$15/mes) [DOC] | Supabase Pro $25/mes; Workers Paid desde $5/mes si hiciera falta [DOC] |
+| Dominio y correo (separados de la infraestructura) | **Dominio a nombre de la organización: costo [PEND]** (RE3-06). Correo: Resend o Brevo gratuitos (límites en §25.6); Resend ofrece autenticación DKIM, SPF y DMARC [DOC]; usar un dominio propio para el remitente es lo habitual [INF] | Igual | Igual |
+| Condiciones de uso gratuito | Hobby: "personal or non-commercial use" [DOC]; Supabase Free: sin SLA, pausa [DOC] | Igual que C1 + Neon Free sin SLA [PEND] | Cloudflare: servicios gratuitos terminables a su discreción [DOC]; no se halló cláusula no comercial en el texto leído [DOC] |
+| Privacidad del proveedor de hosting | Hobby inscrito por defecto en el uso para entrenar IA; exclusión autogestionada en *Team Settings → Data Preferences* [DOC]; datos descritos: código, prompts y telemetría anonimizada [DOC] | Igual | Contenido del cliente conservado por el cliente [DOC]; DPA publicado [DOC] |
+| PostgreSQL y límites gratuitos | 500 MB; 2 proyectos activos; **pausa tras 7 días de baja actividad** [DOC] | 1 GB por proyecto, 100 CU-horas; **suspende a los 5 min, fijo** [DOC] | Igual que C1 (Supabase Free) |
+| Autenticación y MFA | TOTP incluido en Free [DOC]; teléfono no incluido [DOC] | Better Auth: 2FA disponible [DOC]; Auth gestionada de Neon: MFA "próximamente" [DOC] | Igual que C1 |
+| RLS y transacciones | RLS documentado [DOC] | RLS en Postgres [DOC]; identidad hacia RLS [PEND] | Igual que C1 |
+| Hosting y límites | Hobby: 100 GB de transferencia, 1 M de invocaciones; si se excede, esperar 30 días [DOC] | Igual | Workers Free: 100.000 solicitudes/día; estáticos gratis e ilimitados; 10 ms de CPU [DOC] |
+| Respaldos gestionados | **Ninguno en Free** (automáticos solo en Pro o superior) [DOC] | Restauración instantánea de hasta 6 h en Free [DOC] | Igual que C1 |
+| Regiones disponibles | Supabase: East US (N. Virginia, Ohio), West US, São Paulo [DOC]; Vercel: ejecución por defecto en iad1 [DOC] | Neon: East US (N. Virginia, Ohio), São Paulo [DOC] | Supabase como C1; regiones de Workers [PEND] |
+| Portabilidad | Postgres estándar [INF]; identidad acoplada a Supabase [INF] | Postgres estándar [INF]; autenticación propia portable [INF] | Igual que C1; hosting estático intercambiable [INF] |
+| Mantenimiento | Pocos componentes gestionados [INF] | **Autenticación propia** (sesiones, límites, CSRF) [INF] | Pocos componentes gestionados [INF] |
+
+### 25.6 Estimación de consumo y costos (supuestos explícitos; todo [INF])
+
+**Supuestos (RNF-04).** 6 torneos simultáneos, 6–16 equipos, ≤ 240 partidos por torneo (1.440 partidos); 500 lectores simultáneos en jornada; 4 jornadas intensas al mes; 40 solicitudes por lector y jornada de ≈ 30 KB; personal autenticado de decenas a cientos de personas; decenas de correos al mes.
+
+| Recurso | Estimación | Límite gratuito [DOC] | Lectura |
+|---|---|---|---|
+| Base de datos | ≈ 40 MB al año (partidos, eventos, plantillas, auditoría e índices) | Supabase 500 MB; Neon 1 GB por proyecto | Holgado |
+| Salida del API sin caché | ≈ 2–4 GB al mes | Supabase 5 GB | **Ajustado**; con caché de CDN baja |
+| Solicitudes por jornada | ≈ 20.000 por día | Workers 100.000 por día | Holgado |
+| Conexiones simultáneas | 500 lectores | Supabase Realtime: 200 | **Excede:** la lectura pública no debe usar Realtime (ADR-06/07) |
+| Invocaciones de funciones | < 100.000 al mes | Edge Functions 500.000; Vercel 1 M | Holgado |
+| Usuarios autenticados | < 1.000 | Supabase 50.000 MAU | Holgado |
+| Correo | decenas al mes | Resend 100/día; Brevo 300/día; correo integrado de Supabase 2/hora | Requiere SMTP propio |
+| Respaldos | Volcado comprimido ≲ 10 MB por día; ≈ 90 min de cómputo al mes | GitHub Free: $12 mensuales de cómputo (Linux $0,006/min); R2: 10 GB-mes | Costo ≈ $0,54 de los $12 |
+
+| Costo mensual por capa | CFG-C1 | CFG-C2 | CFG-C3 |
+|---|---|---|---|
+| Infraestructura (hosting y datos), base | $0 [PEND: Hobby] | $0 [PEND: Hobby] | $0 |
+| Infraestructura si Hobby no es elegible | $20 | $20 | $0 |
+| Infraestructura con copias gestionadas del proveedor de datos | $45 | $35 (Neon Launch típico ~$15) | $25 |
+| Dominio (RE3-06) | [PEND] costo no verificado | [PEND] | [PEND] |
+| Correo transaccional | $0 en los planes gratuitos citados (límites diarios) | Igual | Igual |
+| Respaldo (GitHub Actions + almacenamiento externo) | ≈ $0 [PEND: R2 puede exigir método de pago, OC-66] | Igual | Igual |
+| Qué lo determina | Elegibilidad de Hobby (OC-54); dominio; R2 | Igual + autenticación propia | Términos de Cloudflare (OC-55); dominio; R2 |
+
+**El costo de $0 no está demostrado:** depende de la elegibilidad de Hobby (OC-54), del costo del dominio (OC-67), de si Cloudflare R2 exige método de pago (OC-66) y del comportamiento de los excedentes (OC-63). **Almacenamiento alternativo gratuito (OC-68):** si R2 resultara incompatible con la política económica (RC-18; DR3-6), BK-03 se evalúa con otro almacenamiento gratuito externo al proveedor de datos y al de hosting; por ejemplo, el almacenamiento de artefactos de GitHub (500 MB en el plan Free [DOC], con retención limitada [PEND]) o un proveedor de objetos con nivel gratuito [no consultado]. **No se selecciona ninguno.**
+### 25.7 Respaldos automatizados, cifrados, externos y verificables
+
+**Es una propuesta de capacidades (RE3-04); no está implementada ni demostrada.** Los mecanismos concretos y la observabilidad corresponden a ADR-12 y ADR-13 (R4); aquí se fijan solo los **requisitos** que condicionan ADR-01.
+
+| ID | Capacidad exigida [PROP] | Base documental | Estado |
+|---|---|---|---|
+| BK-01 | **Automatización:** un trabajo programado diario genera un volcado lógico de la base (roles, esquema y datos) desde un repositorio privado, con una **credencial dedicada de mínimo privilegio** (lectura), distinta de la del propietario de la base y de la clave de servicio | `supabase db dump` documentado [DOC]; el *session pooler* es IPv4 y sirve a ejecutores sin IPv6 [DOC]; la guía de volcado nocturno en GitHub Actions citada es de la documentación de Neon [DOC] | [PEND] demostración; viabilidad de la credencial mínima para el esquema de autenticación (OC-69) |
+| BK-02 | **Claves separadas:** el volcado se cifra **antes de salir del ejecutor** con una clave de **cifrado** que no permite descifrar; la clave de **descifrado nunca reside** en el ejecutor, el repositorio ni el almacenamiento de respaldos. Su custodia es de la organización **fuera de línea**, con **copia de recuperación segura y un segundo custodio autorizado**, y un procedimiento de rotación y recuperación. El mecanismo concreto lo fija ADR-12 (R4) | Sin fuente oficial sobre la herramienta [INF]; sucesión de accesos (RNF-14, RNF-17) | [PEND] designación de custodios (DR3-9, OC-70) |
+| BK-03 | **Almacenamiento externo** al proveedor de datos y al de hosting, con **retención acotada y condicionada** a PEND-JUR (PRV-10) y a ADR-17 (R4); los valores de 30 diarios y 12 mensuales son un punto de partida [PROP], no una decisión; **no acepta RES-03**. Borrado por vencimiento (TB-9) | R2: 10 GB-mes, 1 M de operaciones de escritura al mes, sin cargo de salida [DOC]; **si activar R2 exige método de pago, BK-03 no se declara viable a $0** (OC-66); alternativa en OC-68 | [PEND] ubicación, retención y requisito de pago |
+| BK-04 | **Verificación automatizada, en el mismo trabajo y antes de cifrar:** se restaura el volcado en una base efímera aislada y se comprueban datos, esquema, **políticas RLS, funciones y permisos**, con una prueba de denegación para un rol sin permisos; falla de forma visible si no coincide. El ejecutor **no recibe la clave de descifrado**; la restauración integral con clave es BK-14 | Base efímera en el ejecutor [INF] | [PEND] |
+| BK-05 | **Restauración integral:** datos, roles, esquema, **autenticación** (usuarios y factores), **RLS**, funciones y permisos; ver tabla siguiente; se ejecuta como BK-14 | Supabase: lo personalizado en `auth` y `storage` se restaura aparte [DOC]; los respaldos **no incluyen los objetos de Storage** [DOC] | [PEND] incluye si el volcado cubre los factores MFA (OC-57) |
+| BK-06 | **RPO ≤ 24 h** (volcado diario); opcional cada 6 h en días de jornada | Valor de RNF-08 [CONF propuesto] | [PEND] medición |
+| BK-07 | **RTO ≤ 8 h** con un procedimiento escrito y ensayado antes del piloto | Valor de RNF-08 | [PEND] ensayo |
+| BK-08 | **Alertas por fallo:** si el volcado o la verificación fallan, se avisa a la organización y al responsable técnico; un control de antigüedad, **ejecutado en un componente distinto del ejecutor del respaldo**, avisa si el último respaldo supera el RPO. El RPO **no está garantizado**: las programaciones pueden retrasarse o perderse | Las programaciones pueden retrasarse o perderse con carga alta [DOC] | [PEND] mecanismo (ADR-13; OC-62) |
+| BK-09 | **Recuperación ante pausa del proveedor:** el plan gratuito de datos pausa por baja actividad; se restaura desde el panel dentro de 1 año [DOC] o, si no fuera posible, desde el último volcado en un **entorno aislado** (no se asume un tercer proyecto gratuito: el límite de 2 activos lo ocupan staging y producción [DOC]); la URL del proyecto puede cambiar: configuración del cliente por entorno | Pausa tras 7 días; aviso por correo ≈ 1 semana antes [DOC] | [PEND] ensayo |
+| BK-10 | **Continuidad del propio mecanismo:** los repositorios públicos desactivan las programaciones a los 60 días sin actividad [DOC]; se usa un repositorio privado y se vigila la última ejecución | GitHub Actions [DOC] | [PEND] |
+| BK-11 | **Configuración como código:** políticas RLS, funciones, migraciones y configuración de autenticación se versionan en el repositorio y son la fuente para reconstruir, no solo el volcado | RNF-11, RNF-16 | [PEND] Fase 4 |
+| BK-12 | **Datos sintéticos** hasta cumplir PRV-15: ningún respaldo contiene datos personales reales antes de la evaluación jurídica | RC-14, PRV-17 | Vigente |
+| BK-13 | **Reaplicación antes de reabrir el acceso:** tras cualquier restauración sobre un entorno que atienda usuarios, se reaplican las **revocaciones y anonimizaciones posteriores al punto del respaldo**, a partir de un registro conservado **fuera de la base restaurada** y mínimo en datos personales; **el acceso permanece cerrado hasta completarlo**. Sujeto a ADR-17 y ADR-12 (R4): **no acepta RES-03 ni resuelve OM-06** | HR1-12; RES-03 (sin aceptar); OM-06 (sin resolver); CAB-17; AM-29, AM-30 | [PEND] |
+| BK-14 | **Restauración integral autorizada:** distinta de la comprobación automatizada, la ejecutan los custodios con la clave de descifrado, en un entorno aislado, sin tocar datos reales ni producción; verifica datos, RLS, funciones, permisos, **autenticación y factores MFA**, y mide el RTO. Se realiza antes del piloto y tras cambiar de proveedor o de región [PROP] | RNF-08 (restauración probada antes del piloto) | [PEND] autorización y ensayo |
+
+**Restauración integral por componente [PROP; ninguno demostrado]:**
+
+| Componente | Cómo se recupera | Origen |
+|---|---|---|
+| Datos y esquema | Restauración del volcado en un **entorno aislado** (BK-14); no se asume un proyecto gratuito adicional | Respaldo externo |
+| Roles y permisos | Volcado de roles; revisar las contraseñas de roles personalizados, que las copias gestionadas no incluyen [DOC] | Respaldo + repositorio |
+| Usuarios y factores 2FA (autenticación) | Volcado del esquema de autenticación [PEND: OC-57]; **se verifica que los factores MFA funcionan tras restaurar** (BK-14); si no los cubre, procedimiento de re-enrolamiento con la recuperación de RF-ACC-09 | Respaldo + procedimiento |
+| Políticas RLS y funciones | Migraciones versionadas (BK-11); comparar con `supabase db diff` [DOC] | Repositorio |
+| Revocaciones y anonimizaciones posteriores al respaldo | Reaplicación antes de reabrir el acceso (BK-13) | Registro fuera de la base restaurada |
+| Edge Functions y su código | Despliegue desde el repositorio | Repositorio |
+| Secretos y variables | Bóveda de la organización; **nunca en el volcado** [PROP] | Custodia de la organización (RNF-14) |
+| Almacenamiento de objetos (si se usa) | Copia propia aparte; los respaldos no lo incluyen [DOC] | Copia externa |
+| Configuración del hosting y del dominio | Repositorio y registros de la organización | Repositorio |
+
+### 25.8 Prevención de cargos imprevistos
+
+| Proveedor | Mecanismo documentado | Medida propuesta [PROP] |
+|---|---|---|
+| Vercel Hobby | Gratuito; al exceder, esperar 30 días [DOC] | Sin método de pago en la cuenta |
+| Supabase | Pro: "spend cap" activo por defecto [DOC]; el comportamiento de Free ante exceso [PEND] | Sin método de pago hasta autorización; mantener el tope activo si se pagara |
+| Cloudflare | Workers Free: al exceder, las operaciones fallan [DOC]; existe un límite de gasto configurable [DOC]; **si activar R2 exige método de pago es [PEND] (OC-66)** | Sin plan de pago ni método de pago hasta autorización; si R2 lo exigiera, se evalúa el almacenamiento alternativo (OC-68) antes de registrar un método de pago |
+| GitHub Actions | Cómputo incluido mensual; existen presupuestos y alertas [DOC] | Presupuesto en $0 y alerta al 80 % |
+| Netlify (variante) | Plan gratuito con límites mensuales duros [DOC] | No se usa en las configuraciones |
+| Política general | — | **Ninguna cuenta con tarjeta ni plan de pago sin tu autorización previa**; alertas al 80 % de cada cuota; revisión mensual del consumo |
+
+### 25.9 MFA: disponibilidad frente a cumplimiento efectivo de RC-11
+
+| Nivel | Qué se verificó | Qué falta para cumplir RC-11 |
+|---|---|---|
+| Disponibilidad [DOC] | Supabase Auth ofrece TOTP en el plan gratuito; el nivel de garantía de autenticación viaja en la credencial y permite reglas propias. Better Auth ofrece 2FA (TOTP, OTP, códigos de respaldo). | — |
+| Obligatoriedad efectiva [PEND] | La disponibilidad **no** hace obligatorio el segundo factor. | Que la capa de datos y el servidor **exijan** el nivel de garantía alto para operaciones de dueño y organizador; que no exista una vía sin 2FA |
+| Enrolamiento y recuperación [PEND] | No verificado en producción. | Flujo de alta del segundo factor; recuperación (RF-ACC-09; CAP-03-R, decisión 7 abierta) |
+| Política efectiva por roles [PEND] | La política efectiva de 2FA se calcula por cuenta con todos los roles vigentes (IN-03-02, IN-03-03). | Regla en la capa de datos |
+| Demostración [PEND] | — | Pruebas por rol (anónimo, sin rol, delegado, editor, organizador, dueño) en Fase 4 y 7 |
+| Sesión de CFG-C2 [PEND] | Con autenticación propia, el riesgo de solicitudes forzadas desde otro sitio (AM-07, solo si la credencial viaja de forma automática) es de diseño propio | Prueba de intención por operación con efecto (CAB-23, [REC]); decisión 7 abierta |
+| Formulaciones de R2 | Las de ADR-03.C que dependen de decisiones abiertas siguen **fuera del conjunto admitido**. | Aprobación del conjunto por el responsable |
+
+**Conclusión del borrador:** **RC-11 no está cumplido** por la sola disponibilidad de MFA en ningún proveedor; queda como requisito eliminatorio **condicionado** a la demostración.
+
+### 25.10 Región, residencia y condiciones jurídicas (ADR-10)
+
+| Opción | Disponible [DOC] | Evaluación [INF] | Estado |
+|---|---|---|---|
+| R-1: São Paulo (Supabase o Neon; Vercel gru1) | Sí | Más cercana a Costa Rica entre las opciones documentadas; latencia **sin medir** | [PEND] medición |
+| R-2: EE. UU. este (N. Virginia) | Sí; es la ejecución por defecto de Vercel (iad1) | Opción por defecto; latencia sin medir | [PEND] |
+| R-3: EE. UU. este (Ohio) | Sí (Supabase y Neon) | Alternativa de R-2 | [PEND] |
+| R-4: región en Costa Rica o Centroamérica | **No documentada** en las fuentes leídas | — | No evaluable |
+
+- Ninguna opción está en Costa Rica: todas implican **transferencia internacional** (PRV-13, Q-25). Los DPA de Supabase y de Cloudflare están publicados; el de Neon se rige por los términos de Databricks [DOC]; **ninguno se ha evaluado jurídicamente** y **no es asesoría legal**.
+- El almacenamiento de respaldos (R2) tiene su propia ubicación [PEND: OC-61]; TB-9 exige el mismo nivel de protección que Z3.
+- **No se selecciona región.** La decisión requiere PEND-JUR (PRV-13, PRV-15), mediciones de latencia (necesitan cuentas, no autorizadas) y tu decisión.
+
+### 25.11 Portabilidad y estrategia de migración
+
+| Riesgo de dependencia | Mitigación propuesta [PROP] | Estado |
+|---|---|---|
+| Identidad acoplada a funciones de Supabase en las políticas RLS | Encapsular el acceso a la identidad en una función propia (una sola definición, K-1) para poder sustituir el proveedor | [PEND] ADR-02.I |
+| Usuarios y factores de autenticación no portables | Documentar la exportación y el re-enrolamiento; ensayo de migración semestral | [PEND] OC-57 |
+| Edge Functions con un runtime específico | Mantener la lógica crítica en SQL y en funciones portables; las Edge Functions, delgadas | [PEND] |
+| Hosting estático | Intercambiable entre Cloudflare, Vercel y Netlify; configuración por variables de entorno | [INF] |
+| Terminación o retirada del plan gratuito por el proveedor | Respaldo externo y migraciones en el repositorio; ruta de salida documentada hacia CFG-C2 (Neon + Better Auth) como plan alternativo de datos | [PEND] |
+| Ensayo | Restaurar el último respaldo en un Postgres distinto y ejecutar las pruebas contra él | [PEND] Fase 7 |
+
+### 25.12 Puntuación y recomendación preliminar
+
+Escala 1–5; **juicio del autor [PROP]**, no vinculante. Se puntúan solo configuraciones **no eliminadas**: ninguna lo está, pero **todas están condicionadas** (§25.2). Los eliminatorios no se compensan.
+
+| Criterio (peso) | CFG-C1 | CFG-C2 | CFG-C3 | Fundamento |
+|---|---|---|---|---|
+| Seguridad (35 %) | 4 | 3 | 4 | C2 asume sesiones y autenticación propias; C3 expone menos código servidor |
+| Costo (30 %) | 4 | 4 | 5 | Solo infraestructura: C1 y C2 dependen de la elegibilidad de Hobby; C3 se sostiene en $0. Dominio, correo y R2 afectan a las tres por igual (§25.6) y el $0 no está demostrado |
+| Sin conexión (20 %) | 4 | 4 | 4 | Independiente del proveedor; depende de ADR-05.I (bloqueado) y no está demostrado |
+| Mantenimiento (15 %) | 4 | 3 | 4 | C2 mantiene autenticación propia |
+| **Total ponderado** | **4,00** | **3,50** | **4,30** | La diferencia entre C1 y C3 es pequeña y depende de un criterio |
+
+**Recomendación preliminar no vinculante.** (1) **CFG-C3** como línea principal a profundizar. (2) **CFG-C1** como alternativa preferente **si** Hobby resulta elegible y se hace la exclusión del uso para IA. (3) **CFG-C2** como alternativa secundaria; no se descarta por la autenticación nativa de Neon, pero requiere asumir la autenticación propia. **No se selecciona ningún proveedor, región ni ADR.**
+
+### 25.13 Condiciones, decisiones y riesgos
+
+**Decisiones del responsable (DR3):**
+
+| ID | Decisión | Relación |
+|---|---|---|
+| DR3-1 | Aprobar, ajustar o rechazar este borrador y su recomendación preliminar (no es una selección) | §25.12 |
+| DR3-2 | Elegibilidad de Vercel Hobby (uso no comercial) y exclusión del uso para IA: confirmarla con asesoría o descartar CFG-C1 y CFG-C2 con $0 | OC-54 |
+| DR3-3 | Región a evaluar (R-1, R-2, R-3) tras PEND-JUR y mediciones | OC-60, OC-61; PRV-13 |
+| DR3-4 | Respaldos: aprobar BK-01…14 como **requisitos** (sin elegir mecanismos) | RNF-08, RNF-14 |
+| DR3-5 | Tolerar la pausa del plan gratuito de datos (mejor esfuerzo, RC-17) o autorizar un plan de pago | BK-09; OC-59 |
+| DR3-6 | Política de pagos: ninguna cuenta con método de pago sin autorización previa; umbral de alertas | §25.8 |
+| DR3-7 | Términos de Cloudflare y de Netlify: confirmación jurídica | OC-55, OC-56 |
+| DR3-8 | Autorizar, o no, el siguiente subbloque propuesto (R3-B: ADR-15, correo transaccional) | Plan R3 |
+| DR3-9 | Designar al custodio de la clave de descifrado y a un segundo custodio autorizado, y la regla de recuperación | BK-02; RNF-14, RNF-17 |
+
+**Condiciones abiertas nuevas:**
+
+| ID | Condición | Relación |
+|---|---|---|
+| OC-54 | Elegibilidad de Vercel Hobby para una organización sin fines comerciales; mecanismo de exclusión del uso para IA (solo hacia adelante) | DR3-2 |
+| OC-55 | Términos del plan gratuito de Cloudflare (sin cláusula no comercial hallada); confirmación jurídica | DR3-7 |
+| OC-56 | Términos del cliente y DPA de Netlify: las páginas consultadas devolvieron error y no se leyeron | DR3-7 |
+| OC-57 | Si el volcado incluye usuarios y factores 2FA del esquema de autenticación; procedimiento si no | BK-05 |
+| OC-58 | Licencia y madurez de Better Auth (no verificadas) | CFG-C2 |
+| OC-59 | Si el volcado nocturno cuenta como actividad para evitar la pausa del plan gratuito | BK-09 |
+| OC-60 | Latencia desde Costa Rica por región (requiere cuentas y pruebas, no autorizadas) | ADR-10 |
+| OC-61 | Regiones de ejecución de Workers y ubicación del almacenamiento de respaldos | ADR-10; TB-9 |
+| OC-62 | Notificaciones de fallo de GitHub Actions y control de antigüedad del respaldo en un componente distinto del ejecutor | BK-08; ADR-13 |
+| OC-63 | Comportamiento del plan gratuito de Supabase ante exceso de cuota | §25.8 |
+| OC-64 | **Retirada como condición:** la regla de no asumir Next.js pasa a §25.3; el identificador no se reutiliza | §25.3 |
+| OC-65 | Identidad hacia RLS y reparto servidor/capa de datos con proveedores gestionados (ADR-02.I bloqueado) | R2: ADR-02.C, K-1 |
+| OC-66 | Si activar Cloudflare R2 exige método de pago o suscripción; no se registra ningún método de pago | BK-03; DR3-6 |
+| OC-67 | Costo del dominio a nombre de la organización y del dominio remitente del correo | RE3-06; RE3-07 |
+| OC-68 | Almacenamiento externo gratuito alternativo para los respaldos si R2 fuera incompatible con la política económica | BK-03 |
+| OC-69 | Si una credencial de volcado de mínimo privilegio puede cubrir el esquema de autenticación | BK-01 |
+| OC-70 | Procedimiento de recuperación y rotación de la clave de descifrado | BK-02; DR3-9 |
+
+**Riesgos de redacción (RR3):**
+
+| ID | Riesgo | Vínculo |
+|---|---|---|
+| RR3-01 | Leer la recomendación como selección o como aprobación de ADR-01 o ADR-10 | §25.0 |
+| RR3-02 | Tratar los respaldos o el 2FA como implementados o demostrados | §25.7, §25.9 |
+| RR3-03 | Relajar un requisito eliminatorio para acomodarlo a un plan gratuito | §25.2 |
+| RR3-04 | Tomar los consumos estimados por mediciones | §25.6 |
+| RR3-05 | Considerar resuelta la elegibilidad de Hobby o los términos de Cloudflare y Netlify | OC-54…56 |
+| RR3-06 | Tomar una región por defecto como decisión jurídica | §25.10 |
+| RR3-07 | Reabrir invariantes de R2 por conveniencia de un proveedor, o iniciar un ADR `.I` | R2 |
+| RR3-08 | Dependencia oculta de un proveedor por funciones de identidad en RLS | §25.11 |
+| RR3-09 | Cargos imprevistos por añadir un método de pago sin autorización | §25.8 |
+| RR3-10 | Confundir esta autoevaluación del autor con una auditoría independiente | §25.14 |
+| RR3-11 | Dar por impedida la evasión de la autorización en dos capas solo porque el proveedor ofrece MFA y RLS | §25.4, RE3-11 |
+| RR3-12 | Declarar demostrado el costo de $0 o entregar la clave de descifrado al ejecutor habitual | §25.6, BK-02 |
+
+### 25.14 Verificación del autor (autoevaluación; no es auditoría independiente)
+
+| ID | Criterio | Resultado |
+|---|---|---|
+| CR3A-01 | Las partes I–X y los registros anteriores no cambian (prefijo idéntico al HEAD) | Cumple (comprobado) |
+| CR3A-02 | Tres alternativas completas (cliente, autenticación, backend, datos, correo, respaldo, costos) | Cumple: §25.3 |
+| CR3A-03 | Pesos 35/30/20/15 y eliminatorios no compensables | Cumple: §25.2, §25.12 |
+| CR3A-04 | Datos de proveedores, precios y límites llevan [DOC] o [PEND]; el resto sigue la regla de lectura de §25.0 | Cumple con esa regla (lectura del autor) |
+| CR3A-05 | Ningún proveedor, región o ADR seleccionado ni aprobado | Cumple: §25.0, §25.12 |
+| CR3A-06 | Respaldos cifrados con claves separadas, externos y verificables; restauración integral autorizada; RPO y RTO; alertas; pausa; reaplicación | Cumple como propuesta; **no demostrado** |
+| CR3A-07 | Prevención de cargos y portabilidad | Cumple: §25.8, §25.11 |
+| CR3A-08 | MFA: disponibilidad frente a cumplimiento efectivo | Cumple: §25.9 |
+| CR3A-09 | Región y condiciones jurídicas (PEND-JUR) sin asesoría legal | Cumple: §25.10 |
+| CR3A-10 | Restricciones de R2 y los bloqueos de los `.I` preservados | Cumple: §25.0, §25.4 |
+| CR3A-11 | Identificadores nuevos sin colisión | Cumple (comprobado) |
+| CR3A-12 | Sin código, cuentas, contratación ni dependencias | Cumple |
+| CR3A-13 | Sin términos o precios inventados: lo no leído se marca [PEND] | Cumple: OC-55…56, OC-58 |
+| CR3A-14 | Limitaciones de fuentes declaradas | Cumple: §25.15 |
+| CR3A-15 | Ninguna configuración permite evadir la autorización en dos capas (RE3-11, NE-1…6) | Cumple como condición; **no demostrado** |
+| CR3A-16 | Costos de infraestructura, dominio y correo separados; el $0 no se declara demostrado | Cumple: §25.6 |
+| CR3A-17 | La clave de descifrado no se entrega al ejecutor habitual; la comprobación automatizada se distingue de la restauración integral autorizada | Cumple: BK-02, BK-04, BK-14 |
+
+### 25.15 Fuentes oficiales y límites de lectura
+
+**Consultadas (2026-11-22; páginas descargadas y convertidas a texto):** Vercel (precios, plan Hobby, límites, uso justo, términos, aviso de cambios de marzo de 2026, regiones y región de funciones); Supabase (precios, respaldos, pausa del plan gratuito, restauración y CLI, conexión a Postgres, regiones, MFA, límites de autenticación y de Edge Functions, términos, privacidad y DPA); Neon (precios, planes, regiones, escala a cero, restauración, copias, hoja de ruta de la autenticación, términos); Cloudflare (acuerdo de suscripción, DPA, Workers, Hyperdrive, Pages, R2, guía de Next.js); Netlify (precios, privacidad); GitHub (facturación y límites de Actions, eventos programados, planes); Better Auth (introducción y plugin de 2FA); Resend y Brevo (precios).
+**Límites.** Algunas páginas son dinámicas y el texto extraído puede omitir contenido; los términos y el DPA del cliente de Netlify no se leyeron; las regiones de Workers, las condiciones de R2 y la licencia de Better Auth no se verificaron; los precios cambian y deben reconfirmarse al contratar (RNF-12). **Pendiente de verificar en v0.2:** si activar R2 exige método de pago, el costo del dominio y el comportamiento de los excedentes del plan gratuito de Supabase. **No hubo cuentas, pruebas, mediciones ni evaluación jurídica.** La evaluación es del autor, sin contexto nuevo.
+
+### 25.16 Estado y preguntas para el responsable
+
+**Estado:** R3-A **v0.2-R3A: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL** (corrige M-1…M-3 y las ocho observaciones de la revisión focalizada; ver §25.17). **No versionado.** Autoevaluación del autor, no auditoría independiente. R3-B…F, los ADR `.I` y R4: **NO INICIADOS**. R2 conserva su cierre documental condicionado; la Fase 2 sigue sin aprobación global.
+
+**Preguntas:** DR3-1 a DR3-9 (§25.13) y las condiciones OC-54 a OC-70. Siguen abiertas todas las decisiones y condiciones heredadas de R1 y R2.
+
+### 25.17 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| M-1 | Condiciones de no evasión: sin escrituras directas, lecturas por proyecciones con lista blanca, solo invitación, credenciales privilegiadas del lado servidor; CFG-C2 sin acceso directo a la base y con Data API deshabilitada; dos capas también en operaciones privilegiadas (RE3-11, NE-1…6) | §25.2, §25.3, §25.4 |
+| M-2 | Costos separados (infraestructura, dominio, correo); requisito de pago de R2 como condición pendiente; $0 no declarado demostrado; almacenamiento alternativo sin seleccionar; restauraciones aisladas sin tercer proyecto gratuito | §25.5, §25.6, §25.8, BK-09 |
+| M-3 | Claves de cifrado y descifrado separadas, custodia fuera del ejecutor, segundo custodio; credencial mínima; verificación de RLS, funciones, permisos, autenticación y MFA; comprobación automatizada frente a restauración integral autorizada; reaplicación de revocaciones y anonimizaciones; retención condicionada sin aceptar RES-03 ni resolver OM-06 (BK-01…05, BK-13, BK-14) | §25.7 |
+| Obs. 1 | CR3A-04: regla de lectura de etiquetas | §25.0, §25.14 |
+| Obs. 2 | CR3A-01 y CR3A-11 comprobados | §25.14 |
+| Obs. 3 | CR3A-06 condicionado a no demostrado | §25.14 |
+| Obs. 4 | Puntuación de costo: solo infraestructura; dominio, correo y R2 afectan a las tres por igual | §25.12 |
+| Obs. 5 | BK-01: la guía de volcado nocturno es de la documentación de Neon | §25.7 |
+| Obs. 6 | BK-06 y BK-08: RPO no garantizado; control de antigüedad fuera del ejecutor | §25.7 |
+| Obs. 7 | OC-64 pasa a regla de §25.3 (identificador conservado) | §25.3, §25.13 |
+| Obs. 8 | CFG-C2: riesgo de solicitudes forzadas (AM-07) como diseño propio | §25.9 |
+
