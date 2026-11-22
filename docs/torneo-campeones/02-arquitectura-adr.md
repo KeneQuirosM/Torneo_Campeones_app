@@ -4286,7 +4286,7 @@ R1 §5.5 declara la lista **no exhaustiva** y deja la enumeración definitiva a 
 - **Limitación de la revisión.** El borrador solo recibió una **autoevaluación del autor** (H-01…H-17, corregida en la v0.2) y una **comprobación final focalizada del autor** (OFF-20 frente a CAP-05-M-B: condicionado; OFF-11 frente a IN-05-21: conforme; RT-14, R1 §7.0 y fichas UI-06 y UI-10: conforme). **No hubo auditoría independiente ni revisión de contexto nuevo.** La aprobación es exclusivamente documental: **no acredita implementación ni pruebas empíricas.**
 - **Integridad.** SHA-256 del **contenido técnico aprobado** (el archivo inmediatamente antes de añadir estos metadatos): `0c62bc112c65a63bd643055c40207e768b191548821e70e51c17daab2356e938`. El hash del **archivo con los metadatos de aprobación** se registra en `aprobaciones.md` y `bitacora.md`; **no se inserta en este archivo**. Los metadatos de aprobación son solo editoriales: el título y el estado de la Parte VII, este apartado, la fila de estado de §21.1, el estado y el párrafo «Git» de §21.14 y una nota posterior de trazabilidad del commit `a13b213` en el registro de cierre de R2-B2. **El contenido arquitectónico y las formulaciones de §21.1–§21.13 y §21.15 no se modificaron.**
 - **Precedencia.** CR2C1-12 de §21.12 y el apartado «Qué no se hizo» de §21.14 describen el estado a la fecha del borrador; prevalece este apartado en cuanto al estado de aprobación.
-- **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
+- **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge. *[Nota posterior, 2026-11-22 (fecha inferida): la Parte VII y sus registros se versionaron en el commit `a468166210e0472e07dd5d0800985d3db1c6b940` (verificable por Git, 2026-11-21T22:57:42Z). Esta línea conserva el estado a la fecha de su registro.]*
 - **Condición de cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. R2-C2, R2-C3 y R2-C4 no están iniciados; R2-C no tiene aprobación global.
 
 **Qué contiene.** Las capacidades y garantías **exigidas** de la sincronización sin conexión (cola, secuencia, idempotencia, revalidación, conflictos, rechazos y fallos de registro, recuperación tras interrupciones), su relación con la frontera atómica de ADR-02.C y con UI-06 (UI-10 dentro), y **siete decisiones con dos formulaciones cada una**, **sin elegir ninguna**.
@@ -4703,3 +4703,428 @@ Los riesgos se **registran sin valorar ni aceptar**. Ninguno sustituye a RB1, RB
 | H-15 | Inferencia de ESC-62 marcada [DER] | §21.7 |
 | H-16 | ES-34 con [CONF], [DER] y [REC] separados | §21.7 |
 | H-17 | Encabezado de §21.4 corregido: [REC] y [ABIERTO] no se presentan como exigidos | §21.4 |
+
+
+---
+
+# PARTE VIII — BLOQUE R2-C2 (v0.2-R2C2, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-22 inferida)
+
+## 22. R2-C2 — ADR-04.C: visibilidad, proyecciones públicas y coherencia pública (capacidades exigidas)
+
+### 22.0 Alcance, autorización y reglas de esta parte
+
+**Estado: v0.2-R2C2 — APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-22, fecha inferida), por acto expreso del responsable (ver «Aprobación condicional» más abajo).** La v0.2 corrigió la v0.1 tras la revisión focalizada F-01…F-06 (§22.15). **No está versionado.** Esta parte **se añade al final del archivo, después de la Parte VII (R2-C1)**; no modifica ninguna línea de R1 (§0–§15), R2-A (§16), R2-B1 (§17), R2-B2 (§18–§20), R2-C1 (§21) ni de los registros de metadatos. **No aprueba ADR-04.C, R2-C, R2 ni la Fase 2.**
+
+**Autorización recibida.** Mensaje «TORNEO DE CAMPEONES — R2-C2: BORRADOR DE ADR-04.C» (2026-11-21, fecha inferida: la del aviso de fecha de la sesión; no hay marca de tiempo individual del mensaje): «AUTORIZO EXCLUSIVAMENTE INICIAR R2-C2 Y REDACTAR UN BORRADOR DOCUMENTAL DE ADR-04.C.» Archivo autorizado: solo `02-arquitectura-adr.md`. Sin commit, push, PR ni merge. **No se actualiza la trazabilidad histórica del commit `a468166`.**
+
+**Autorización de la corrección (v0.2).** Mensaje «TORNEO DE CAMPEONES — R2-C2: CORRECCIÓN FOCALIZADA DE ADR-04.C» (2026-11-22, fecha inferida: la del aviso de fecha de la sesión): «AUTORIZO EXCLUSIVAMENTE CORREGIR LOS HALLAZGOS F-01…F-06 Y LAS TRES OBSERVACIONES EDITORIALES DE LA REVISIÓN FOCALIZADA DE ADR-04.C.» Limitada a la Parte VIII (§22); sin commit, push, PR ni merge. La revisión fue una **autoevaluación del autor, no una auditoría independiente**.
+
+**Aprobación condicional de R2-C2 como entregable documental (2026-11-22).** Por acto expreso del responsable (mensaje «TORNEO DE CAMPEONES — REGISTRO DE APROBACIÓN DOCUMENTAL CONDICIONADA DE R2-C2»), la v0.2-R2C2 quedó **APROBADA CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL**: «APRUEBO EXCLUSIVAMENTE R2-C2 v0.2 (ADR-04.C) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» La fecha es la del aviso de fecha de la sesión; no hay marca de tiempo individual del mensaje.
+
+- **La aprobación NO implica:** seleccionar ninguna de las 16 formulaciones; validar alternativas no conformes; aprobar definitivamente ADR-04.C; aprobar globalmente R2-C, R2 ni la Fase 2; acreditar implementación ni pruebas; resolver Q-20, PRV-18, Q-40 (d), A-8, K-3 ni las decisiones de R2-A; fijar parámetros, aceptar riesgos ni conceder excepciones; autorizar R2-C3 ni R2-C4.
+- **Condiciones que permanecen abiertas:** (1) D4-1…8 sin elegir formulaciones; (2) CAP-04-C-B no conforme con R1 §5.5 salvo aclaración formal de OC-46; (3) CAP-04-M-B condicionada por RF-PUB-02, Q-20 y PRV-18; (4) CAP-04-X-B limitada a copias futuras, sin garantía sobre copias anteriores; (5) CAP-04-G-B sin adoptar la ampliación de RT-14; (6) Q-20: mientras permanezca abierta, ninguna formulación publica, prepara ni copia nombres personales de jugadores, menores o adultos; (7) A-8 y la circularidad T-8 sin resolver; (8) OC-45…47, DC2-1…11 y las demás decisiones abiertas; (9) RES-02 y RES-08 sin aceptar; (10) sin parámetros fijados, riesgos aceptados ni excepciones concedidas; (11) la limitación de revisión indicada abajo.
+- **Limitación de la revisión.** El borrador solo recibió una **revisión focalizada del autor** (F-01…F-06 y tres observaciones editoriales, corregidas en la v0.2). **No hubo auditoría independiente ni revisión de contexto nuevo.** La aprobación es exclusivamente documental: **no acredita implementación ni pruebas empíricas** y no sustituye la asesoría jurídica (PEND-JUR).
+- **Integridad.** SHA-256 del **contenido técnico aprobado** (el archivo inmediatamente antes de añadir estos metadatos): `2a6b03cec0c6ad9d8fff43ec3016f31374f624013ef05472d3d6cb816acdcbea`. El hash del **archivo con los metadatos de aprobación** se registra en `aprobaciones.md` y `bitacora.md`; **no se inserta en este archivo**. Los metadatos de aprobación son solo editoriales: el título y el estado de la Parte VIII, este apartado, la fila de estado de §22.1, el estado y el párrafo «Git» de §22.14 y una nota posterior de trazabilidad del commit `a468166` en la Parte VII. **El contenido arquitectónico y las formulaciones de §22.1–§22.13 y §22.15 no se modificaron.**
+- **Precedencia.** CR2C2-12 de §22.12 y el apartado «Qué no se hizo» de §22.14 describen el estado a la fecha del borrador; prevalece este apartado en cuanto al estado de aprobación.
+- **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
+- **Condición de cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. R2-C3 y R2-C4 no están iniciados; R2-C no tiene aprobación global.
+
+**Qué contiene.** Las capacidades y garantías **exigidas** de la visibilidad y de las proyecciones: garantía de coherencia de la información pública, visibilidad y etiquetas de menores, proyección de preparación y estados de publicación, consistencia entre lo privado y lo público, dependencia de ADR-02.C y sus fronteras atómicas, casos límite, amenazas y decisiones pendientes; y **ocho decisiones con dos formulaciones cada una, sin elegir ninguna**.
+
+**Qué NO contiene ni hace.**
+
+| # | Exclusión |
+|---|---|
+| X-1 | No elige entre las formulaciones CAP-04-P, C, V, M, R, X, A ni G (A o B): las presenta con sus ventajas, limitaciones, riesgos y dependencias |
+| X-2 | No resuelve Q-20, PRV-18, Q-40 (d), A-8, DB2b-8, DB2b-3, OC-20, OC-26, OC-27, OC-28 ni OC-29, ni las decisiones de privacidad y autorización de menores, ni ninguna otra decisión abierta; no concede excepción a D-2 |
+| X-3 | No presenta como garantía aprobada ninguna afirmación que dependa de una decisión abierta; **la garantía de coherencia pública sigue sin demostrarse** y su mecanismo y plazo son de ADR-06 |
+| X-4 | No elige base de datos, tecnología de almacenamiento, caché, expiración, invalidación, regeneración, tiempo real, red de entrega, librería, servicio, cifrado ni parámetro numérico no aprobado; todo eso es de ADR-04.I, ADR-06, ADR-07 y R3 (condicionado a ADR-01) |
+| X-5 | No redacta ADR-16.C ni R2-C4 (la consolidación del modelo de amenazas), ni R3 ni R4; no trata AM-19 ni AM-34, cuya reasignación está propuesta y abierta (OC-40, DB2c-11) |
+| X-6 | No modifica ADR-02.C, ADR-03.C, ADR-05.C, ADR-09.C ni ninguna ficha, invariante, estado prohibido, garantía o escenario aprobados; los **consume** |
+| X-7 | No acepta riesgos (RES-02 y RES-08 siguen sin aceptar), no fija PAR, no concede excepciones y no declara cumplido R1 §8.1 |
+| X-8 | No modifica `00`, `01`, `aprobaciones.md` ni `bitacora.md`; **no garantiza el cumplimiento legal ni sustituye la asesoría jurídica** (PEND-JUR) |
+
+**Lectura previa directa y límites de la lectura.** **Leídos directamente para este borrador:** en `01`, §9.6 (matriz de visibilidad), RF-PUB-01…09, RF-PWA-02, PRV-01…18, las preguntas Q-05, Q-11, Q-20 y Q-40, A-8, CL-15, CL-25, CL-26 y CL-30, RD-CAL-08, RD-RES-07, RD-TAB-11 y RK-16 (en parte); en R1, §5.3 (CMP-09, CMP-14, CMP-15, CMP-17), §5.5 (coherencia pública), §5.6 (clasificación de datos por zona), PA-04 y PA-08, FL-4 (§7.4) y la fila de ADR-04, ADR-06, ADR-07 y ADR-08 de §8.1 y §8.2; en R2-A, AM-12, AM-13, AM-27, AM-28 y AM-31, RES-02 y RES-08, CAB citados y HR1-11 y HR1-12 de R1; en R2-B2, IF-20…24, IF-31, ES-14…24, GT-13, OC-20, OC-26…29, DB2b-8 y CAND-14…19; y en R2-C1, §21 (en particular IN-05-01, IN-05-14 y OFF-02). **Limitaciones:** no se releyeron íntegros PRV-02 (solo su estado), RD-JUG-01, RF-TOR-02, RD-CAL-06/07, la matriz §7.1 ni R1 §5.7; las citas a esas fuentes se apoyan en lo que dicen R1, R2-A y R2-B2 y se tienen por **no comprobadas de nuevo**. Del skill se consultaron SKILL.md y las puertas de aprobación.
+
+**Convención.** [CONF]: texto confirmado de `01` o R1. [REC]: recomendación o propuesta (no confirmada). [DER]: derivada por el autor (se explica el paso). [ABIERTO]: sin resolver; ninguna se elige. [COND]: condicionado a una decisión abierta. Identificadores nuevos (sin colisión con las series existentes): **IN-04-nn** (invariantes y garantías de ADR-04.C), **ES-38…** (estados prohibidos), **ESC-66…** (escenarios), **CAP-04-x-A/B** (formulaciones), **D4-n** (decisiones de formulación), **OC-45…**, **DC2-n** (decisiones para el responsable), **RR4-nn** (riesgos documentales) y **CR2C2-nn** (criterios de aceptación).
+
+### 22.1 ADR-04.C — Identificación
+
+| Campo | Valor |
+|---|---|
+| ADR | ADR-04.C — Visibilidad y proyecciones: capacidades exigidas (R1 §8.1, ADR-04; R1 §8.2) |
+| Pregunta de R1 §8.1 | «¿Cómo se representa la visibilidad (`01 §9.6`) y se calculan las etiquetas de menores y la proyección de preparación?»; **ADR-04.C fija la garantía exigida de coherencia pública** (CL-15, sin estado intermedio público); si la clasificación se materializa o se calcula al servirla es parte de su decisión, y el mecanismo lo decide ADR-06 |
+| Alternativas exigidas | **≥ 2** (R1 §8.1, ADR-04) |
+| Parámetros abiertos asignados por R1 §8.1 | Q-20, Q-40 (d), A-8, PRV-18 |
+| Requiere (R1 §8.2) | ADR-02.C (alcance de A-8 y frontera atómica) |
+| Alimenta | ADR-06, ADR-07 y ADR-08 (R3), ADR-16.C (copias y datos preparados en el dispositivo), ADR-04.I |
+| Estado | v0.2-R2C2: APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL (2026-11-22, inferida); ADR-04.C **no** queda aprobada definitivamente |
+
+### 22.2 Dependencias y conflictos entre fuentes
+
+**Qué consume ADR-04.C de lo ya aprobado (como entrada, sin modificarlo):**
+
+| Fuente | Qué aporta a ADR-04.C | Estado |
+|---|---|---|
+| ADR-02.C / R2-B2 (§18–§20) | Frontera atómica de UI-05, UI-10 y UI-07 (IF-20, IF-22, ES-14, ES-20; GT-13 exige la coherencia pública **a ADR-04.C**); UI-09 (generación y regeneración); CAND-14…19; OC-20, OC-28, OC-29 | Aprobado condicionalmente como entregable documental; PROPUESTA |
+| ADR-05.C / R2-C1 (§21) | IN-05-01 (cola), IN-05-14 (lo local jamás es público), consumo de la proyección de preparación (OFF-02) y de las copias locales (OFF-18) | Aprobado condicionalmente; PROPUESTA |
+| ADR-09.C / R2-A | IN-09-07 (la auditoría no contiene datos personales de menores más allá de identificadores internos) | Aprobado condicionalmente; PROPUESTA |
+| R1 §5.3, §5.6, §7.4 | Responsabilidades de CMP-09 (habilitar y retirar visibilidad), CMP-14 (aplicar el modelo y proyectar), CMP-15 (servir), CMP-17 (políticas de privacidad); zonas de datos; propagación (FL-4) | Aprobado (R1) |
+| `01` §9.6, PRV-02…06, 09, 11, 18, RF-PUB-01…09, CL-15, CL-25, CL-26, CL-30 | Matriz de visibilidad; reglas de menores; requisitos públicos | [CONF] salvo lo marcado [REC], [DER] o [COND] |
+
+**Conflictos o tensiones entre fuentes (se señalan, no se resuelven):**
+
+| # | Tensión | Fuentes | Tratamiento en este borrador |
+|---|---|---|---|
+| T-1 | RF-PUB-09 pide el resultado confirmado en vistas públicas en ≤ 60 s, pero es [REC] y no cubre cambios de visibilidad ni de privacidad; R1 FL-4 dice que para estos **no existe una garantía de plazo** y que el plazo es de ADR-06 | `01` RF-PUB-09, CL-30; R1 §7.4 | IN-04-09; D4-6 |
+| T-2 | El estado de PRV-02 se lee de tres maneras: `01` lo rotula «CONF (Q-05 «información deportiva necesaria»)» para los menores y [COND] Q-20 / PEND-JUR para los adultos; la fila de Q-20 dice que «PRV-02/04 no se aprueban»; y R1 §5.6 dice que PRV-02 es [COND] y que «no se publica ningún dato personal» mientras Q-20 esté abierta. **No se resuelve Q-20**; ADR-04.C aplica el cierre más conservador (solo etiquetas) | `01` PRV-02, Q-20; R1 §5.6 | IN-04-03; D4-4 |
+| T-3 | RF-PUB-02 [CONF] publica goleadores, tarjetas y plantillas; PRV-18 [CONF] exige evaluar la identificación indirecta con asesoría jurídica antes del lanzamiento y su resultado es [PEND-JUR] | `01` RF-PUB-02, PRV-18 | D4-4; OC-45 |
+| T-4 | RF-PUB-06 y RF-PWA-02 exigen vistas disponibles sin conexión; PRV-06 y CL-26 exigen que una revocación vuelva a etiqueta y HR1-11 reconoce que las copias locales no se pueden purgar a distancia | `01` RF-PUB-06, PRV-06; R1 HR1-11 | D4-6; RES-02 |
+| T-5 | RF-PUB-01 dice que un torneo `archivado` no aparece públicamente «por ahora»; Q-40 (d) deja abierta su visibilidad | `01` RF-PUB-01, Q-40 | D4-7 |
+| T-6 | A-8 tiene una lectura provisional («No restringida por RT-14 en esta versión») y R1 §5.3 dice que CMP-09 aplica una guardia **opcional** según A-8 | `01` A-8, RD-CAL-08; R1 §5.3 | D4-8 |
+| T-7 | R1 y `01` dicen que ADR-04.C «fija la garantía exigida» y que ADR-06 decide el mecanismo; R1 §5.5 declara además la garantía como "exigida (no demostrada)" | R1 §5.5, §8.1; R2-B2 GT-13 | IN-04-06: se conserva «no demostrada» |
+| T-8 | R1 §8.2 dice que ADR-04.C requiere ADR-02.C «(alcance de A-8 y frontera atómica)»; R2-B1 §17.6 (fila de A-8) y su reparto dejan a ADR-04.C el punto opcional de guardia y la lectura de A-8 al responsable (DB1-3; Fase 4). La dependencia queda **circular** entre R1 §8.2 y R2-B1 | R1 §8.2; R2-B1 §17.6, DB1-3 | D4-8: se **registra** la circularidad; **no se resuelve** y no se atribuye la decisión de A-8 a ADR-02.C |
+
+### 22.3 Qué decide ADR-04.C y qué no
+
+| Asunto | ¿Lo decide ADR-04.C? | Quién |
+|---|---|---|
+| Garantía exigida de coherencia pública | **Sí** (como capacidad exigida; ya anticipada por R1 §5.5) | ADR-04.C |
+| Si la clasificación se materializa o se calcula al servir | **Propone alternativas** (D4-1); decide el responsable | OC-20; DC2-1 |
+| Representación de la visibilidad y de las etiquetas de menores | **Propone alternativas** (D4-3, D4-4) | ADR-04.C |
+| Campos públicos de jugador y edad de corte (Q-20) | **No** | Responsable; PEND-JUR |
+| Evaluación de la identificación indirecta (PRV-18) | **No** | Asesoría jurídica; RES-08 |
+| Visibilidad de `archivado` (Q-40 (d)) | **Propone alternativas** (D4-7); decide el responsable | Responsable; antes de la Fase 3 |
+| Alcance de A-8 frente a RT-14 | **Propone alternativas** (D4-8); decide el responsable | Responsable (DB1-3; Fase 4); R2-B1 §17.6 |
+| Frontera atómica de UI-05, UI-07, UI-09, UI-10 | **No** | ADR-02.C |
+| Mecanismo de actualización, expiración, caché, señal de cambio y plazo | **No** | ADR-06, ADR-07 (R3) |
+| Cálculo de la clasificación | **No** | ADR-08 (R3) |
+| Protección del almacén local y de las copias | **No** | ADR-16.C (R2-C3) |
+| Implementación de proyecciones | **No** | ADR-04.I (R3, tras ADR-01) |
+
+### 22.4 Invariantes y garantías exigidas de ADR-04.C (IN-04-nn)
+
+Son **capacidades exigidas** cuando su tipo es [CONF] o [DER]; las [REC] son **propuestas condicionadas** a una decisión del responsable (DC2-8), las [COND] valen solo si se cumple la condición y las [ABIERTO] **no fijan** garantía alguna. **Ninguna está implementada ni probada.** Se suman a IF-01…41, ES-01…37 y GT-01…24, e IN-05-01…21, y no los modifican.
+
+| ID | Invariante o garantía exigida | Tipo | Fuente | Condicionada por |
+|---|---|---|---|---|
+| IN-04-01 | **Lo público es una proyección con lista blanca de campos:** el público lee vistas derivadas, nunca las entidades internas; sin inicio de sesión; sin identidad de editores, correos ni campos internos | [CONF] | PA-04, RF-PUB-03, PRV-03 | D4-3, D4-4 |
+| IN-04-02 | **Nunca públicos** (en ninguna vista ni respuesta pública): fecha de nacimiento o edad exacta, documento de identidad, teléfono, correo, dirección, fotografías, datos y evidencia de consentimiento, identidad del editor asignado, correos de usuarios y el nombre completo interno de un jugador sin autorización | [CONF] | PRV-03, RF-PUB-03 | — |
+| IN-04-03 | **Menores y nombre público:** un menor aparece como «Jugador n.º {dorsal} ({equipo})» mientras no conste una autorización de publicación vigente; con autorización, con su nombre público; las estadísticas cuentan igual. La etiqueta y su cálculo se hacen **en el servidor**. **Mientras Q-20 permanezca abierta, ninguna formulación de este borrador permite publicar, preparar ni copiar nombres personales de jugadores, menores o adultos: solo etiquetas** (R1 §5.6: «no se publica ningún dato personal»). Las reglas de PRV-02 son de dos tipos: la de **menores** ([CONF] en Q-05) y la de **adultos** ([COND] Q-20 / PEND-JUR; `01` propone la misma regla conservadora por defecto) | [CONF] en la regla de menores de PRV-02 y en el cálculo en servidor; [COND] en la regla de adultos y en toda publicación de nombre (Q-20, PEND-JUR) | PRV-02, PRV-04, PA-04, R1 §5.6 | Q-20, PRV-18; D4-4 |
+| IN-04-04 | **Visibilidad:** un resultado es público solo si el torneo está `publicado`, `en curso` o `finalizado`, la jornada está `publicada` y la operación está `confirmada`; las doce combinaciones que RF-PUB-04 prueba sobre la matriz de §9.6 se cumplen; un borrador o una jornada no publicada no se enumera ni se accede por URL (404 indistinguible de inexistente) | [CONF] en §9.6 (las tres condiciones) y RF-PUB-01; [DER] en RF-PUB-04, **fuente de las doce combinaciones** | `01` §9.6, RF-PUB-01, RF-PUB-04, CL-25 | D4-3, D4-7 |
+| IN-04-05 | **Lo local jamás es público:** solo la operación `confirmada` de un partido visible puede ser pública; el registro de incidencias, la exportación limitada y la auditoría **no** autorizan publicar | [CONF] | OFF-15, OFF-20, OFF-24, IF-23, IN-05-14 | — |
+| IN-04-06 | **Coherencia pública (garantía exigida, no demostrada):** las vistas públicas relacionadas con un mismo torneo mantienen **coherencia entre resultados y clasificaciones**; no se publica un resultado confirmado junto con una clasificación que no lo refleje de forma persistente (CL-15, sin estado intermedio público). **ADR-04.C la fija; ADR-06 decide el mecanismo; este borrador no afirma que se cumpla.** CAP-04-C-B (D4-2) **no relaja** esta garantía: se presenta como alternativa **no conforme con este texto**, salvo aclaración formal de OC-46 | [CONF] como garantía exigida; [ABIERTO] su demostración y mecanismo | R1 §5.5, §7.4; CL-15; RD-TAB-11; ES-14; GT-13 | D4-1, D4-2; ADR-06 |
+| IN-04-07 | **Entrada única:** la coherencia pública parte de **un estado confirmado único** por partido y de una **única fuente de verdad** de la clasificación (CMP-12 con definición única); ADR-04.C no redefine la frontera atómica | [CONF] | IF-20, IF-21, IF-22, GT-13, RD-TAB-10, ADR-02.C | OC-20 |
+| IN-04-08 | **Proyecciones derivadas persistentes, si existen,** quedan dentro de la misma unidad transaccional que su fuente; **que existan o no lo decide ADR-04.C** | [CONF] en lo transaccional; [ABIERTO] que existan | IF-22, ES-14, R1 §5.5 | D4-1; OC-20 |
+| IN-04-09 | **Cambios de visibilidad y de privacidad:** despublicar, ocultar un nombre, revocar una autorización de nombre público y anonimizar deben registrar también una **señal de cambio** hacia las proyecciones públicas y de preparación **si ADR-06 la adopta**; **no existe una garantía definida de plazo** para estos cambios (RF-PUB-09 cubre resultados confirmados y es [REC]) y no se promete uno | [CONF] en la ausencia de plazo; [COND] en la señal (ADR-06) | R1 §7.4; RF-PUB-09, CL-30; HR1-11; OC-29 | D4-6; ADR-06 |
+| IN-04-10 | **Ocultar y anonimizar son acciones distintas:** ocultar vuelve a etiqueta y es reversible; anonimizar borra irreversiblemente nombre y datos personales y conserva identificador interno, dorsal, estadísticas y resultados; tras anonimizar, las tablas y goleadores no cambian y ninguna proyección derivada persistente conserva datos personales | [CONF] | PRV-06, CL-26, ES-20 | OC-26, OC-28; DB2b-8 |
+| IN-04-11 | **Datos internos de menores:** el nombre interno y el indicador de menor residen solo en Z2 y Z3, no en Z1 ni en Z4 y no se persisten en Z0; el nombre público con autorización puede tener copias derivadas en Z1 y Z0, sujetas a ADR-06 y HR1-11; **mientras Q-20 esté abierta, ninguna de esas copias contiene nombre público, solo etiqueta** [COND] | [CONF]; [COND] en lo relativo al nombre público (Q-20) | R1 §5.6, PA-08, PRV-09, PRV-11 | HR1-11; ADR-16.C |
+| IN-04-12 | **Proyección de preparación:** contiene solo lo necesario para trabajar sin conexión (partidos asignados de los próximos 7 días y en juego, plantillas con etiqueta y dorsal —y con nombre público solo cuando Q-20 lo permita [COND]—, resumen del reglamento) y **nunca campos internos**; los partidos del propio equipo de un dueño u organizador con rol de delegado no se preparan para captura (RT-14); el editor ve etiqueta y dorsal, y el nombre público solo cuando Q-20 lo permita [COND] | [CONF] en OFF-02, PRV-09, PRV-11 y RT-14; [COND] en el nombre público (Q-20) | OFF-02, PRV-09, PRV-11, RT-14 | ADR-05.C (consumo); A-13 |
+| IN-04-13 | **Aviso de antigüedad:** cada vista pública indica «Actualizado a las hh:mm» y, sin conexión, la última versión guardada con ese sello y aviso de que puede estar desactualizada; los datos preparados avisan tras 24 horas sin actualizarse | [DER] en RF-PUB-06; [CONF] en OFF-02 | RF-PUB-06, RF-PWA-02, OFF-02, OFF-18 | ADR-16.C; ADR-06 |
+| IN-04-14 | **Vista previa al compartir (RF-PUB-05 [REC])** limitada al título y la descripción del torneo; no incluye datos de jugadores | [REC] en RF-PUB-05; [DER] la exclusión de jugadores | RF-PUB-05, PRV-03 | Q-13 |
+| IN-04-15 | **Aviso de privacidad** accesible desde el pie de toda vista pública; su texto lo redacta o valida el responsable con asesoría jurídica | [CONF] | RF-PUB-08, PRV-07 | PEND-JUR |
+| IN-04-16 | **Identificación indirecta de menores:** la combinación de equipo, dorsal, minuto, estadísticas, calendario o resúmenes exportados puede identificar a un menor aunque no se publique su nombre; se evalúa con asesoría jurídica antes del lanzamiento y **el contenido público definitivo depende de Q-20 y de ese resultado** | [CONF] la evaluación exigida; [ABIERTO] su resultado | PRV-18, PRV-02, Q-20, AM-31 | OC-45; RES-08 |
+| IN-04-17 | **`archivado`:** un torneo `archivado` no aparece públicamente «por ahora»; no se asume un archivo histórico público | [CONF] en RF-PUB-01; [ABIERTO] Q-40 (d) | RF-PUB-01, §9.6, Q-11, Q-40 | D4-7 |
+| IN-04-18 | **Sin permisos nuevos, sin reducción de garantías y sin selección tecnológica:** ADR-04.C no concede facultad alguna y respeta PA-13 y RC-23 | [DER] / [CONF] | R1 RC-23; R2-A IN-03-17, IN-09-11 | — |
+
+### 22.5 Formulaciones alternativas, sin elegir
+
+Cada decisión presenta **dos formulaciones**. Ninguna se aprueba, ninguna se recomienda y ninguna desplaza a las demás. «Dependencias» enumera lo que impide cerrar la formulación. Las formulaciones describen **capacidades**, no mecanismos. Los escenarios ESC-66… están en §22.7.
+
+#### D4-1 — Materialización de la clasificación y de las proyecciones derivadas (IN-04-08; OC-20)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-04-P-A — Clasificación y proyecciones derivadas persistentes** | La clasificación y las estadísticas públicas existen como estado derivado persistente, actualizado dentro de la misma unidad que el resultado que lo origina (UI-05, UI-10) | Un único estado confirmado y derivado coherente por construcción dentro de la unidad (ES-14); la lectura pública no recalcula | Exige que UI-05, UI-07, UI-09 y UI-10 mantengan lo derivado; la anonimización debe alcanzar lo derivado (ES-20); más estado que reconstruir y verificar | Un derivado persistente con datos personales tras anonimizar (ES-20); deriva si la unidad no lo actualiza; mayor superficie para IN-04-10 | ADR-02.C (IF-22, GT-13); ADR-08; OC-20, OC-28; DB2b-3 |
+| **CAP-04-P-B — Clasificación calculada al servir** | No existe estado derivado persistente: la clasificación se calcula al servir a partir del estado confirmado único | No hay estado derivado que escribir ni anonimizar; la coherencia descansa en un único resultado confirmado (IF-22) | La lectura pública exige calcular con la definición única de CMP-12; la coherencia entre vistas depende de calcular sobre el mismo estado (D4-2) | Calcular con estados distintos en vistas distintas; carga de lectura (RF-PUB-09, CL-30) | ADR-08 (dónde vive el cálculo); ADR-06; OC-20 |
+
+#### D4-2 — Formulación de la garantía de coherencia entre vistas públicas (IN-04-06)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-04-C-A — Un único estado confirmado en las respuestas servidas por torneo** | Las respuestas públicas que el sistema sirve para un torneo reflejan, en el momento en que se sirven, el mismo conjunto de resultados confirmados y la clasificación que lo refleja; ninguna respuesta servida presenta un resultado confirmado junto con una clasificación que no lo refleje. **Quedan fuera de la garantía las copias locales y las vistas ya almacenadas, y se conservan las tolerancias documentadas** (RF-PUB-09 [REC] y CL-30: hasta 60 s; RF-PUB-06: última versión guardada con su sello; HR1-11) | Reproduce el texto de R1 §5.5 («coherencia entre resultados y clasificaciones» en las vistas relacionadas con un mismo torneo); verificable con CL-15 | Exige que la entrega pública presente un estado coherente por torneo, lo que condiciona a ADR-06; es la garantía más exigente **entre las respuestas servidas** | Un plazo de propagación más largo o un mecanismo más complejo; no se puede probar en esta fase (no demostrada) | ADR-06; ADR-07; CL-15; ES-14; IN-04-06 |
+| **CAP-04-C-B — Coherencia dentro de cada respuesta pública (no conforme con el texto literal de R1 §5.5 y con ES-42, salvo aclaración formal de OC-46)** | Cada respuesta pública es coherente consigo misma (un resultado y la clasificación que ella muestra se corresponden); entre respuestas distintas puede haber un desfase acotado, indicado con «Actualizado a las hh:mm» | Menor exigencia sobre la entrega: la coherencia se exige dentro de cada respuesta | **No conforme con el texto literal de R1 §5.5**, que exige coherencia entre las vistas públicas relacionadas con un mismo torneo, **ni con ES-42**, salvo que una aclaración formal de OC-46 limite esas vistas a una sola respuesta; requeriría una aclaración o una edición separada de R1; **no se crea ninguna excepción** y la decisión es del responsable | Un visitante ve un resultado en una vista y una clasificación sin él en otra (ES-42) | R1 §5.5; CL-15; ES-42; OC-46; ADR-06; DC2-2 |
+
+#### D4-3 — Representación de la visibilidad (§9.6; IN-04-01, IN-04-04)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-04-V-A — La proyección pública contiene solo lo visible** | Lo no visible (borrador, jornada no publicada, `archivado` si aplica, operación no confirmada) no se incorpora a ninguna proyección pública | Reduce el riesgo de fuga por una regla de filtrado omitida (AM-12, AM-13); coherente con PA-04 | Despublicar exige retirar lo ya incorporado, y las copias previas no se purgan a distancia (HR1-11); depende de una señal de cambio (ADR-06) | Un retiro tardío deja datos visibles en copias; trabajo de actualización por cada cambio de visibilidad | PA-04; ADR-06; HR1-11; OC-29 |
+| **CAP-04-V-B — La proyección de uso público contiene datos y la visibilidad se aplica al servir** | La **proyección de uso público** guarda también lo no visible y el estado de publicación de CMP-09 se aplica al servir cada respuesta | Despublicar tiene efecto inmediato sobre lo servido desde el origen; no hay que retirar contenido de las proyecciones | Lo no visible reside en las proyecciones de uso público (Z1 podría contenerlo), lo que podría chocar con la lista blanca de PA-04 si la proyección llega a Z1; mayor riesgo de fuga por un fallo del filtro | AM-12 y AM-13 (un campo o un estado fuera de la lista blanca); la regla debe probarse en cada vista (§9.6; las doce combinaciones de RF-PUB-04) | PA-04; R1 §5.3 (CMP-14 lee el estado de CMP-09); `01` §9.6; ADR-06 |
+
+#### D4-4 — Campos públicos y etiquetas de menores (PRV-02, PRV-18; Q-20)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-04-M-A — Lista blanca de PRV-02 y RF-PUB-02** | La proyección pública incluye solo los campos de una lista blanca cerrada, con las plantillas, goleadores y tarjetas de RF-PUB-02; los menores aparecen con etiqueta salvo autorización vigente; la etiqueta se calcula en el servidor; **mientras Q-20 esté abierta, ningún nombre de jugador (menor o adulto) se publica y solo se muestran etiquetas** [COND] | Es lo que dicen PRV-02 y RF-PUB-02; sin recorte adicional de contenido | Deja la identificación indirecta (equipo + dorsal + estadísticas) a PRV-18, **abierta**; la parte de nombre público es [COND] a Q-20 | AM-31 (identificación indirecta) sin mitigación propia; RES-08 | PRV-02, PRV-18, Q-20; RF-PUB-02; asesoría jurídica |
+| **CAP-04-M-B — Lista blanca más reducción adicional de la combinación identificadora** | Además de la lista blanca, se limita la granularidad pública de los datos de menores (por ejemplo, el nivel de detalle de eventos, minutos o estadísticas individuales) hasta que PRV-18 concluya | Reduce el riesgo de AM-31 mientras la evaluación está abierta | **Contradice RF-PUB-02 [CONF] y la regla de PRV-02 de que las estadísticas cuentan igual con etiqueta o con nombre, si reduce goleadores, tarjetas o plantillas**; no contradice PRV-18, que prevé mitigaciones; **anticiparía el contenido público que fijan Q-20 y la evaluación de PRV-18** (ambas abiertas) y este borrador **no fija ninguna granularidad**; exigiría una lectura formal de `01` o su modificación, que no se propone ni se concede | Una restricción adicional no respaldada por `01`; fricción con lo que el organizador espera ver | PRV-18; Q-20; RF-PUB-02; modificación de `01` solo si el responsable la autoriza |
+
+#### D4-5 — Proyección de preparación (OFF-02; IN-04-12)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-04-R-A — Proyección de preparación propia, por editor** | Una proyección distinta de la pública, construida para cada editor con sus partidos asignados y los campos mínimos de OFF-02; **mientras Q-20 esté abierta, con etiquetas y sin nombres de jugador** [COND] | Permite excluir de origen los partidos del propio equipo con RT-14 y los campos internos; ajustada a PRV-09 y PRV-11 | Una proyección más que mantener y sincronizar con cambios de visibilidad y de privacidad; depende de la asignación vigente | Preparar datos obsoletos tras una revocación de asignación (OFF-11); fuga de campos internos por error de construcción | OFF-02; PRV-09, PRV-11; RT-14; ADR-05.C (IN-05-01); ADR-16.C |
+| **CAP-04-R-B — Preparación derivada de la proyección pública** | La preparación reutiliza lo público (plantillas con etiqueta y dorsal —y nombre público solo cuando Q-20 lo permita [COND]—, resumen del reglamento) más los datos de asignación de cada editor | Menos proyecciones distintas; lo que sale ya cumple la lista blanca | Los partidos del propio equipo con RT-14 y la asignación del editor deben filtrarse por separado; lo público puede no contener todo lo que OFF-02 requiere | Mezclar datos de asignación con una proyección pública (IN-04-02: identidad del editor nunca pública); dependencia entre vistas | OFF-02; PRV-03; RT-14; ADR-05.C |
+
+#### D4-6 — Efecto de la revocación, ocultación y anonimización sobre las copias (IN-04-09; HR1-11; RES-02)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-04-X-A — Retiro en origen y señal de cambio, sin promesa de plazo** | El cambio se aplica en origen y se registra una señal de cambio si ADR-06 la adopta; las copias locales anteriores **pueden persistir sin plazo garantizado** hasta la próxima sincronización o limpieza (HR1-11), y un dispositivo que no se conecte puede conservarlas indefinidamente | Coherente con lo confirmado en `01` y R1; no cambia el contenido de las copias | El nombre de un menor puede seguir visible en una copia local hasta que el dispositivo se actualice (AM-28, RES-02, **sin aceptar**); **solo aplica a nombres ya publicados, y mientras Q-20 esté abierta no se publica ninguno** [COND] | AM-28; riesgo residual alto no eliminable por diseño | ADR-06; HR1-11; RES-02 (aceptación solo con asesoría jurídica) |
+| **CAP-04-X-B — Contenido restringido de las copias locales** | **Desde su adopción**, las copias locales **nuevas** de vistas públicas y de datos preparados contienen etiqueta y no nombre público de menores, aunque exista autorización vigente; **no modifica las copias ya guardadas**, que siguen sujetas a HR1-11 | Reduce el riesgo residual de AM-28 **en las copias que se generen desde su adopción** | **Cambia el comportamiento de PRV-02 sin conexión** (el nombre autorizado no se vería en las copias); requiere una lectura formal de `01` o su modificación, que no se propone aquí; menor utilidad sin conexión; **no ofrece garantía sobre las copias existentes ni sobre lo que un dispositivo ya haya guardado** | Una autorización vigente no se refleja en la copia; fricción con RF-PUB-06 | PRV-02; RF-PUB-06; RF-PWA-02; ADR-16.C; modificación de `01` solo si el responsable la autoriza |
+
+#### D4-7 — Visibilidad de un torneo `archivado` (Q-40 (d); IN-04-17)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-04-A-A — `archivado` no público** | Un torneo `archivado` no aparece en lo público (lectura actual de RF-PUB-01, «por ahora»); no se asume archivo histórico público | Coincide con RF-PUB-01 y con Q-11 (sin histórico); sin proyecciones adicionales que mantener | Un enlace compartido previamente deja de funcionar | Enlaces rotos; un torneo ya publicado desaparece de lo público | Q-40 (d); RF-PUB-01; Q-11 |
+| **CAP-04-A-B — `archivado` público en solo lectura** | Un torneo `archivado` sigue visible al público en solo lectura | Mantiene los enlaces y la consulta histórica | **Requiere decidir Q-40 (d)**; añade un estado visible que debe respetar la lista blanca y las revocaciones de privacidad; contradice «no se asume archivo histórico público» salvo decisión formal | Datos de menores visibles durante más tiempo; más retiros si cambian autorizaciones | Q-40 (d); PRV-06; RES-02 |
+
+#### D4-8 — Publicación y RT-14 (A-8; CMP-09)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-04-G-A — Publicar y despublicar no restringidos por RT-14** | Habilitar y retirar la visibilidad no está sujeto a RT-14 (lectura provisional de A-8, RD-CAL-08) | Coincide con la lectura vigente; sin guardia adicional | El conflicto de interés se evalúa solo sobre lo que modifica partidos, no sobre su exposición pública | RK-16 (roles combinados) si se interpreta que publicar equivale a una decisión sobre el propio equipo | A-8; RD-CAL-08; RT-14; R2-B1 §17.6; DB1-3 |
+| **CAP-04-G-B — Guardia opcional de RT-14 al habilitar la visibilidad** | Al habilitar la visibilidad de partidos de un equipo del que el actor es o ha sido delegado, se aplica la restricción de RT-14 | Cierra una posible vía de exposición de un propio equipo; es la guardia que R1 §5.3 deja prevista como opcional | **Ampliaría el alcance de RT-14** más allá de lo confirmado en `01` (RT-14 se evalúa sobre los partidos que la operación modifica y RD-CAL-08 [REC] dice que la publicación no los modifica); **reproduce la alternativa de A-8 que R2-B1 §17.6 ya lista** (punto opcional de guardia); la lectura de A-8 **corresponde al responsable (DB1-3; Fase 4)**, no a ADR-02.C | Bloqueos de publicación inesperados; extensión de RT-14 no autorizada | A-8; RT-14; R2-B1 §17.6; DB1-3; responsable (Fase 4); T-8 |
+
+#### Interdependencias entre las decisiones
+
+| Decisión | Se condiciona con | Observación |
+|---|---|---|
+| D4-1 | D4-2, D4-4, OC-20, OC-28 | CAP-04-P-A exige que la anonimización alcance lo derivado; CAP-04-P-B traslada la coherencia al cálculo |
+| D4-2 | D4-1, D4-6, ADR-06 | CAP-04-C-B puede no ser conforme con R1 §5.5 |
+| D4-3 | D4-7, D4-6 | CAP-04-V-A exige retirar lo incorporado; CAP-04-V-B exige filtrar al servir |
+| D4-4 | Q-20, PRV-18, OC-45 | CAP-04-M-B puede exigir modificar `01` |
+| D4-5 | ADR-05.C, A-13, D4-6 | La proyección de preparación es la que consume IN-05-01 |
+| D4-6 | HR1-11, RES-02, ADR-06, ADR-16.C | CAP-04-X-B puede exigir modificar `01` |
+| D4-7 | Q-40 (d), D4-3 | Condición antes de la Fase 3 |
+| D4-8 | A-8, DB1-3, T-8 | CAP-04-G-B amplía el alcance de RT-14 |
+
+### 22.6 Relación con la frontera atómica de ADR-02.C
+
+**Regla fundamental (consumida de R1 §5.5, §7.4 y de IF-22, sin modificarla).** Lo transaccional es el **estado de los datos de Z2 y Z3** y, **si existieran**, sus proyecciones derivadas persistentes; la **entrega y el efecto hacia Z1 y Z0 son posteriores y no forman parte de la transacción**: ninguna atomicidad se atribuye a operaciones externas a ella. **ADR-02.C fija la frontera; ADR-04.C fija la garantía de coherencia; ADR-06 decide el mecanismo y el plazo; ADR-08 consume ambas.**
+
+| Operación o unidad (de ADR-02.C) | Qué entrega a lo público | Dentro de la unidad (según §19 y §20) | Qué aporta ADR-04.C (sin cambiar la clasificación) |
+|---|---|---|---|
+| UI-10 Confirmar un resultado (también dentro de UI-06) | Resultado confirmado único; clasificación derivada | Marcador, eventos, estado, recálculo, **derivadas persistentes si existen**, señal de cambio si ADR-06 la adopta y auditoría | IN-04-06, IN-04-07, IN-04-08: la garantía de coherencia que esa unidad no puede demostrar por sí sola; D4-1, D4-2 |
+| UI-05 Corregir un resultado | Resultado corregido y clasificación recalculada sin estado intermedio público | Igual que UI-10 (equivalente para correcciones) | Igual; CL-15 |
+| UI-07 Anonimizar un jugador | Etiqueta en lugar del nombre; estadísticas intactas | Anonimización en la fuente y en las **derivadas persistentes, si existen**; señal de cambio si ADR-06 la adopta | IN-04-10, IN-04-11; D4-1, D4-6; OC-26, OC-28 |
+| UI-09 Generar o regenerar el calendario | Calendario público de las jornadas visibles | Partidos nuevos, archivo de los anteriores, asignaciones perdidas y auditoría | IN-04-04: lo no publicado no se expone; efecto sobre jornadas publicadas |
+| Habilitar y retirar la visibilidad (CAND-22) | Estado de publicación de torneos y jornadas | **No está enumerada como unidad**; su enumeración corresponde a la Fase 4 (R1 §5.5 es no exhaustiva; DB2b-5) | IN-04-04; D4-3, D4-7, D4-8 |
+| Ocultar o revocar un nombre público (CAND-20) | Vuelve a etiqueta | **No enumerada como unidad**; Fase 4 | IN-04-03, IN-04-09, IN-04-10; D4-6 |
+
+**Límites que ADR-04.C no puede cruzar:** (1) no mueve a la unidad nada que R1 deje fuera (entrega pública, señal entregada, efecto sobre Z1 y Z0); (2) no redefine las unidades UI-05, UI-07, UI-09 ni UI-10 ni crea una segunda unidad; (3) no afirma que la coherencia se cumple (X-3); (4) no elige el mecanismo (X-4); (5) no concede permisos ni reduce garantías (IN-04-18).
+
+### 22.7 Estados prohibidos adicionales y casos límite
+
+#### Estados prohibidos (se suman a ES-01…37)
+
+| ID | Estado prohibido | Tipo | Fuente |
+|---|---|---|---|
+| ES-38 | Un campo de la lista «nunca público» (PRV-03) en cualquier vista o respuesta pública | [CONF] | PRV-03, RF-PUB-03 |
+| ES-39 | El nombre de un menor publicado **sin autorización vigente**, o tras ocultarlo o anonimizarlo en una proyección bajo control del sistema (las copias locales no purgables son un riesgo residual: HR1-11) | [CONF] | PRV-02, PRV-06, CL-26 |
+| ES-40 | Un torneo en `borrador`, una jornada no publicada o un torneo `archivado` (por ahora) accesibles o enumerables públicamente | [CONF] | RF-PUB-01, §9.6, CL-25 |
+| ES-41 | Una operación `pendiente`, `enviando`, `en conflicto` o `rechazada` visible al público | [CONF] | OFF-15, §9.6 |
+| ES-42 | Un resultado confirmado publicado junto con una clasificación que no lo refleja, o una clasificación que refleja un resultado no confirmado, **en vistas públicas relacionadas con un mismo torneo** (extiende ES-14, que cubre la clasificación derivada persistente) | [CONF] en CL-15 y R1 §5.5 como garantía exigida; [DER] en su extensión a las vistas | CL-15, R1 §5.5, ES-14 |
+| ES-43 | Una proyección de preparación con campos internos o con partidos del propio equipo de un actor con restricción de RT-14 | [CONF] | OFF-02, PRV-11, RT-14 |
+| ES-44 | Una vista previa de compartir o una exportación pública que incluya datos de jugadores | [DER] | RF-PUB-05, PRV-03, OFF-24 |
+
+#### Escenarios de concurrencia y de privacidad (se suman a ESC-43…65)
+
+«Admisible» significa que **equivale a alguna ordenación secuencial** (IF-05). **Ningún escenario se resuelve aquí por un mecanismo**; donde hay formulaciones, se indican sin elegir.
+
+| ID | Escenario | Origen | Resultados admisibles | Resultados prohibidos | Formulaciones / condiciones |
+|---|---|---|---|---|---|
+| ESC-66 | Una lectura pública coincide con la confirmación de un resultado que cambia la clasificación | CL-15, CL-30 [CONF]; R1 §5.5 | **Sin elegir:** se ve el estado anterior completo o el posterior completo (CAP-04-C-A), o la respuesta es coherente consigo misma con un desfase acotado (CAP-04-C-B, posible no conformidad) | Resultado nuevo con clasificación antigua en vistas relacionadas (ES-42) | D4-1, D4-2; ADR-06 |
+| ESC-67 | Corrección de una jornada anterior que altera desempates y la tabla pública | CL-15, RD-TAB-11, UI-05 [CONF] | La corrección y el recálculo se aplican como una sola unidad; ningún estado intermedio público | Tabla que mezcla datos previos y posteriores (ES-14, ES-42) | IN-04-06, IN-04-07; D4-1, D4-2 |
+| ESC-68 | Se despublica una jornada o un torneo mientras un editor sincroniza resultados de esos partidos | §9.6, OFF-15 [CONF]; RD-CAL-08 [REC] (una jornada con resultados confirmados no se despublica salvo el dueño); CAND-22 | El resultado puede quedar `confirmada` pero **no es público** mientras la jornada no esté publicada; sin estados intermedios (IF-05) | Publicar un resultado de una jornada no publicada (ES-40); una operación no confirmada visible (ES-41) | IN-04-04; D4-3 |
+| ESC-69 | Se oculta, se revoca la autorización o se anonimiza un jugador mientras una vista pública se sirve o existe una copia local | PRV-02, PRV-06, CL-26 [CONF]; HR1-11 | Las respuestas nuevas usan la etiqueta; las estadísticas no cambian; una copia local puede conservar el nombre hasta su actualización (riesgo residual, **sin plazo prometido**) | Datos personales en una proyección derivada persistente bajo control del sistema (ES-39, ES-20) | CAP-04-X-A o B; OC-29; RES-02 [sin aceptar] |
+| ESC-70 | Una autorización de nombre público se revoca y se vuelve a otorgar | PRV-02, PRV-06 (ocultar es reversible; anonimizar no) [CONF] | Ocultar y reaplicar la autorización es reversible; anonimizar no | Tratar anonimizar como reversible | IN-04-10 |
+| ESC-71 | Alguien comparte o consulta el enlace de un torneo en `borrador`, de una jornada no publicada o de uno `archivado` | CL-25, RF-PUB-01 [CONF]; RF-PUB-05 [REC] | 404 indistinguible de inexistente; la vista previa no revela el nombre del torneo no publicado [DER] | Enumeración o fuga por la vista previa (ES-40, ES-44) | IN-04-04, IN-04-14; D4-7 |
+| ESC-72 | Un editor prepara el dispositivo y luego cambian la visibilidad o la privacidad de lo preparado | OFF-02, OFF-18, RF-PUB-06 [CONF]; HR1-11 | La preparación avisa tras 24 horas sin actualización; la copia local puede quedar desactualizada hasta sincronizar | Promesa de purga a distancia; campos internos en la preparación (ES-43) | IN-04-12, IN-04-13; D4-5, D4-6; ADR-05.C, ADR-16.C |
+| ESC-73 | Un menor con etiqueta cuyo equipo, dorsal y estadísticas lo hacen identificable | PRV-18, CAB-12 [CONF la evaluación]; resultado [PEND-JUR] | **Sin resolver:** la evaluación de PRV-18 decide el contenido público definitivo | Publicar datos que la evaluación no haya aprobado cuando Q-20 esté abierta | D4-4; Q-20; RES-08; OC-45 |
+| ESC-74 | Un editor con un partido del propio equipo pide prepararlo o publicarlo | RT-14, OFF-02 [CONF]; A-8 [provisional] | Los partidos del propio equipo de un dueño u organizador con rol de delegado no se preparan para captura | Preparar el partido propio (ES-43) | D4-5, D4-8; A-8 |
+
+### 22.8 Amenazas y casos de abuso relevantes
+
+**No se amplía el modelo de amenazas:** esta sección registra cómo las capacidades de ADR-04.C tratan las amenazas que R2-A asigna a R2-C. La **consolidación del modelo** corresponde al subbloque posterior (R2-C4) y no se hace aquí.
+
+| Amenaza o caso | Qué es | Cómo la tratan las capacidades exigidas | Queda para |
+|---|---|---|---|
+| **AM-12 / CAB-03** | Enumerar o acceder a torneos, borradores y jornadas no publicados | IN-04-01, IN-04-04; ES-40; ESC-68, ESC-71 | D4-3, D4-7; Fase 4 (pruebas de §9.6) |
+| **AM-13 / CAB-11, CAB-18** | Fuga técnica de datos internos de menores o no públicos por una proyección | IN-04-01, IN-04-02, IN-04-11; ES-38; ES-44 | D4-3, D4-4; pruebas de contrato (Fase 4) |
+| **AM-27 / CAB-28** | Contaminar la entrega pública con datos no públicos o con un estado incoherente | IN-04-01, IN-04-06, IN-04-07; ES-42; ESC-66, ESC-67 | D4-2; ADR-06 (R3) |
+| **AM-28 / CAB-29** | Señal de cambio omitida o tardía tras revocar, ocultar o anonimizar: el nombre de un menor sigue visible en copias | IN-04-09, IN-04-10; ES-39; ESC-69 | D4-6; ADR-06; **RES-02 sin aceptar** |
+| **AM-31 / CAB-12** | Identificar a un menor por la combinación de equipo, dorsal, minuto, estadísticas o calendario | IN-04-16; ESC-73 | D4-4; PRV-18; **RES-08 sin aceptar**; asesoría jurídica |
+| AM-19, AM-34 | Inyección en la capa de datos y de contenido en vistas públicas | **No se tratan aquí**: su reasignación está propuesta y abierta (OC-40, DB2c-11) | DB2c-11 |
+
+### 22.9 Matriz de trazabilidad
+
+| Fuente | Cubierta por | Observación |
+|---|---|---|
+| §9.6 (matriz de visibilidad) | IN-04-04; ES-40, ES-41; ESC-68, ESC-71; D4-3 | Las tres condiciones de publicación y las filas de la matriz; las doce combinaciones son de RF-PUB-04 |
+| RF-PUB-01 | IN-04-04, IN-04-17; D4-7 | `archivado` no público «por ahora» |
+| RF-PUB-02 | IN-04-01, IN-04-03; D4-4 | Contenido de la página del torneo; tensión con PRV-18 (T-3) |
+| RF-PUB-03 | IN-04-01, IN-04-02 | Sin datos privados |
+| RF-PUB-04 | IN-04-04 | Visibilidad (DER) |
+| RF-PUB-05 [REC] | IN-04-14; ES-44 | Vista previa al compartir |
+| RF-PUB-06; RF-PWA-02 | IN-04-13; D4-6; ESC-72 | Sello de antigüedad y copias sin conexión |
+| RF-PUB-08 | IN-04-15 | Aviso de privacidad |
+| RF-PUB-09 [REC]; CL-30 | IN-04-09; ESC-66; T-1 | Resultado confirmado visible en ≤ 60 s; sin plazo para cambios de privacidad |
+| RF-PUB-07 [REC] | — | Estados de carga, vacío y error: UX (Fase 3); fuera de ADR-04.C |
+| PRV-02, PRV-04 | IN-04-03; D4-4 | PRV-04 es [REC]; PRV-02 es [COND] mientras Q-20 esté abierta |
+| PRV-03 | IN-04-02; ES-38 | Nunca públicos |
+| PRV-05 | IN-04-02 (los metadatos de consentimiento no son públicos) | Registro de autorizaciones: ADR-09.C y CMP-17 |
+| PRV-06; CL-26 | IN-04-10; ES-39; ESC-69, ESC-70; D4-6 | Ocultar y anonimizar |
+| PRV-09, PRV-11 | IN-04-11, IN-04-12; D4-5 | Control de acceso y minimización |
+| PRV-18 | IN-04-16; D4-4; ESC-73 | Identificación indirecta |
+| OFF-02, OFF-18 | IN-04-12, IN-04-13; D4-5 | Preparación del dispositivo y consulta sin conexión |
+| OFF-15; OFF-20; OFF-24 | IN-04-05; ES-41 | Lo local no es público; registros y exportación no autorizan publicar |
+| CL-15; RD-TAB-11; RD-RES-07 | IN-04-06, IN-04-07; ES-42; ESC-66, ESC-67 | Coherencia y publicación automática |
+| CL-25 | IN-04-04; ESC-71 | 404 indistinguible |
+| RD-CAL-08 [REC]; A-8 | D4-8; ESC-68 | Publicación por jornada |
+| Q-20; Q-40 (d); Q-11 | IN-04-03, IN-04-16, IN-04-17; D4-4, D4-7 | Parámetros abiertos que R1 §8.1 asigna a ADR-04 |
+| PA-04, PA-08; R1 §5.6 | IN-04-01, IN-04-11 | Proyección con lista blanca; datos por zona |
+| IF-20…24, IF-31; ES-14, ES-20; GT-13 | IN-04-06…IN-04-08, IN-04-10 | Consumidos de ADR-02.C / R2-B2 |
+| IN-05-01, IN-05-14 | IN-04-05, IN-04-12 | Consumidos de ADR-05.C / R2-C1 |
+| IN-09-07 | IN-04-10 | La auditoría no contiene datos personales de menores |
+
+### 22.10 Dependencias, condiciones abiertas y decisiones
+
+#### 22.10.1 Dependencias
+
+| Elemento | Depende de lo aprobado | Alimenta (sin decidirlo) | Decisiones del responsable |
+|---|---|---|---|
+| IN-04-01…IN-04-05 (lista blanca, visibilidad, lo local) | PA-04, PRV-03, §9.6, OFF-15; R1 §5.6 | ADR-04.I; ADR-16.C | D4-3, D4-7; Q-40 (d) |
+| IN-04-06…IN-04-08 (coherencia, entrada única, derivadas) | IF-20…22, ES-14, GT-13; CL-15 | ADR-06, ADR-07, ADR-08 (R3) | D4-1, D4-2; OC-20, OC-46 |
+| IN-04-09…IN-04-11 (cambios de privacidad, ocultar y anonimizar, datos internos) | PRV-02, PRV-06, CL-26, ES-20; R1 §7.4 | ADR-06; ADR-16.C; ADR-17 (retención) | D4-6; OC-26, OC-28, OC-29, OC-47; RES-02 |
+| IN-04-12…IN-04-15 (preparación, antigüedad, compartir, aviso) | OFF-02, OFF-18, RF-PUB-05, 06, 08 | ADR-05.C (consumo); ADR-16.C | D4-5; Q-13 |
+| IN-04-16 (identificación indirecta) | PRV-18, PRV-02, Q-20 | Asesoría jurídica; ADR-17 | D4-4; OC-45; RES-08 |
+| IN-04-17 (`archivado`) | RF-PUB-01, Q-40 | — | D4-7 |
+
+#### 22.10.2 Condiciones y decisiones heredadas (conservadas abiertas)
+
+**Ninguna se resuelve ni se infiere.** Se listan porque condicionan a ADR-04.C.
+
+| Elemento | Estado | Cómo afecta a ADR-04.C |
+|---|---|---|
+| Q-20 (campos públicos y edad de corte); PRV-02, PRV-04 [COND] | Abierta; **no se publica ningún dato personal mientras esté abierta** | Contenido público de jugador (D4-4) |
+| PRV-18; RES-08; AM-31 | Evaluación jurídica pendiente; riesgo sin aceptar | Identificación indirecta (D4-4; OC-45) |
+| Q-40 (d) | Abierta; antes de la Fase 3 | Visibilidad de `archivado` (D4-7) |
+| A-8 | Lectura provisional; DB1-3 abierta | D4-8; T-8 |
+| OC-20 / DB2b-3 | Abiertas | Materialización de la clasificación (D4-1) |
+| OC-26, OC-27, OC-28 / DB2b-8 | Abiertas | Alcance de la anonimización y de lo derivado persistente |
+| OC-29 | Abierta | Señal de cambio y plazo (ADR-06) |
+| HR1-11, HR1-12; RES-02 | Riesgos sin aceptar | Copias locales y respaldos |
+| RF-PUB-05, RF-PUB-09, RD-CAL-08 [REC]; PRV-04 [REC] | Recomendaciones no confirmadas | IN-04-14, IN-04-09, D4-8, IN-04-03 |
+| Decisión 3 y 10 de R2-A; K-3; D-2; DB1, DB2a, DB2b, DB2c, DC1 y OC-01…44 | Abiertas | Conservadas; ninguna se toca |
+| OC-40 / DB2c-11 | Reasignación propuesta de AM-19 y AM-34, no aplicada | AM-34 (contenido en vistas públicas) no se trata aquí |
+
+#### 22.10.3 Condiciones abiertas nuevas de este borrador
+
+| ID | Condición abierta | Relación |
+|---|---|---|
+| OC-45 | Contenido público definitivo de los datos de jugadores (combinación de equipo, dorsal, minuto, estadísticas y calendario): `01` deja el resultado de la evaluación de PRV-18 abierto y pendiente de asesoría jurídica | D4-4; Q-20; PRV-18; RES-08 |
+| OC-46 | Qué vistas públicas son «relacionadas con un mismo torneo» a efectos de la garantía de coherencia: R1 §5.5 y CL-15 no las enumeran | D4-2; IN-04-06 |
+| OC-47 | Si las copias locales de vistas públicas y de datos preparados pueden contener el nombre público de un menor con autorización vigente: PRV-02 no distingue entre la vista servida y su copia | D4-6; HR1-11; RF-PUB-06 |
+
+#### 22.10.4 Decisiones propuestas al responsable (DC2-)
+
+**Ninguna se resuelve aquí.** Las decisiones heredadas permanecen como estaban.
+
+| ID | Decisión | Opciones | Efecto |
+|---|---|---|---|
+| DC2-1 | Materialización de la clasificación (D4-1; OC-20) | CAP-04-P-A / CAP-04-P-B / mantener abierta | Si existen derivadas persistentes; DB2b-3 |
+| DC2-2 | Formulación de la coherencia pública (D4-2; OC-46) | CAP-04-C-A / CAP-04-C-B (posible no conformidad con R1 §5.5) / pedir una aclaración de R1 | Alcance de la garantía |
+| DC2-3 | Representación de la visibilidad (D4-3) | CAP-04-V-A / CAP-04-V-B / mantener abierta | Dónde se aplica §9.6 |
+| DC2-4 | Campos públicos y etiquetas (D4-4; Q-20; PRV-18; OC-45) | CAP-04-M-A / CAP-04-M-B (puede exigir modificar `01`) / mantener abierta | Contenido público de jugador |
+| DC2-5 | Proyección de preparación (D4-5) | CAP-04-R-A / CAP-04-R-B / mantener abierta | Qué consume ADR-05.C |
+| DC2-6 | Efecto sobre las copias (D4-6; OC-47; RES-02) | CAP-04-X-A / CAP-04-X-B (puede exigir modificar `01`) / mantener abierta | Riesgo residual de AM-28 |
+| DC2-7 | Visibilidad de `archivado` (D4-7; Q-40 (d)) | CAP-04-A-A / CAP-04-A-B / mantener abierta | Antes de la Fase 3 |
+| DC2-8 | Publicación y RT-14 (D4-8; A-8) | CAP-04-G-A / CAP-04-G-B (amplía RT-14) / mantener abierta | Alcance de A-8 |
+| DC2-9 | Estado de las propuestas [REC] que ADR-04.C consume (RF-PUB-05, RF-PUB-09, RD-CAL-08, PRV-04) | Adoptar / descartar / decidirlo en una etapa posterior | Si IN-04-03, 09 y 14 pasan a exigencias |
+| DC2-10 | Orientación sobre las tensiones T-1…T-8 de §22.2 | Recibir sin resolver / pedir aclaración de `01` o de R1 por edición separada | Alcance frente a ADR-06 y ADR-16.C |
+| DC2-11 | Alcance y orden de R2-C3 (ADR-16.C) y R2-C4 (consolidación del modelo de amenazas), que requieren autorización separada | Autorizar / posponer | ADR-16.C consume la proyección de preparación y las copias |
+
+### 22.11 Riesgos y limitaciones
+
+Los riesgos se **registran sin valorar ni aceptar**. Ninguno sustituye a RB1, RB2a, RB2b, RB2c, RR5 ni RES-01…12.
+
+| ID | Riesgo | Relación |
+|---|---|---|
+| RR4-01 | Elegir de hecho una formulación al describir ventajas y limitaciones | §22.5; DC2-1…DC2-8 |
+| RR4-02 | Resolver Q-20, PRV-18, Q-40 (d) o A-8 por inferencia | D4-4, D4-7, D4-8 |
+| RR4-03 | Tratar como confirmadas las propuestas [REC] (RF-PUB-05, RF-PUB-09, RD-CAL-08, PRV-04) | DC2-9 |
+| RR4-04 | Invadir ADR-06, ADR-07 y R3 al describir actualización, expiración o entrega | X-4; §22.3 |
+| RR4-05 | Contradecir `01` o R1 con CAP-04-M-B, CAP-04-X-B, CAP-04-G-B o CAP-04-C-B | D4-2, D4-4, D4-6, D4-8 |
+| RR4-06 | Presentar la coherencia pública como demostrada o cumplida | IN-04-06; X-3 |
+| RR4-07 | Publicar datos que permitan identificar a un menor sin que PRV-18 haya concluido | AM-31; RES-08; OC-45 |
+| RR4-08 | Nombre de un menor visible en copias locales tras una revocación | AM-28; RES-02; HR1-11 |
+| RR4-09 | Incoherencia con las fronteras aprobadas de UI-05, UI-07, UI-09 y UI-10 | §22.6 |
+| RR4-10 | Interpretar este borrador como cumplimiento legal o sustituto de la asesoría jurídica | X-8; PEND-JUR |
+
+**Limitaciones del análisis.** (1) Es un borrador del autor, **sin revisión de contexto nuevo ni independiente**. (2) Se leyeron las secciones pertinentes de las fuentes (§22.0), no todas línea a línea. (3) No se realizó ninguna prueba ni medición (RF-PUB-09, CL-30). (4) Las lecturas [DER] y la clasificación de ventajas, limitaciones y riesgos son del autor y deben revisarse. (5) Las referencias jurídicas de `01` §10 son conocimiento general no verificado y no son asesoría legal.
+
+### 22.12 Criterios de aceptación del borrador y preguntas para el responsable
+
+| ID | Criterio de aceptación | Cumplimiento según el autor (a revisar) |
+|---|---|---|
+| CR2C2-01 | Alcance, fuentes y dependencias identificados | Cumple: §22.0–§22.3 |
+| CR2C2-02 | Al menos dos formulaciones diferenciadas por decisión, con ventajas, limitaciones, riesgos y dependencias | Cumple: §22.5 (D4-1…D4-8) |
+| CR2C2-03 | Ninguna formulación elegida ni aprobada | Cumple: §22.0 (X-1), §22.5 |
+| CR2C2-04 | Invariantes y garantías propuestas, con tipo y fuente | Cumple: §22.4 |
+| CR2C2-05 | Relación con la frontera atómica de ADR-02.C sin redefinirla | Cumple: §22.6 |
+| CR2C2-06 | Estados prohibidos, escenarios y amenazas relevantes | Cumple: §22.7 y §22.8 |
+| CR2C2-07 | Matriz de trazabilidad | Cumple: §22.9 |
+| CR2C2-08 | Decisiones abiertas de privacidad y autorización de menores conservadas (Q-20, PRV-18, Q-40 (d), A-8, OC-26…29) | Cumple: §22.10.2 |
+| CR2C2-09 | Conflictos entre fuentes señalados sin resolver | Cumple: §22.2 (T-1…T-8) |
+| CR2C2-10 | Sin mecanismos, tecnologías ni parámetros no aprobados | Cumple según §22.13 |
+| CR2C2-11 | Solo se modifica el archivo autorizado y los bloques previos permanecen intactos | Cumple según §22.13 |
+| CR2C2-12 | Borrador pendiente de revisión del responsable; no aprobado, registrado ni versionado | Cumple: §22.0 y §22.14 |
+
+**Preguntas concretas para el responsable** (no se responden por inferencia): (1) ¿Qué formulación, si alguna, desea evaluar con más detalle en cada D4-n (DC2-1…DC2-8)? (2) ¿Desea que Q-20, PRV-18 y Q-40 (d) se traten antes de la Fase 3, o que ADR-04.C las conserve abiertas? (3) ¿Pide una aclaración de R1 §5.5 sobre qué vistas están «relacionadas con un mismo torneo» (OC-46)? (4) ¿Se adoptan o se descartan las propuestas [REC] que este borrador consume (DC2-9)? (5) ¿Autoriza R2-C3 (ADR-16.C) y R2-C4, cuyo orden depende de este borrador (DC2-11)?
+
+### 22.13 Verificación del autor
+
+**Naturaleza.** Verificaciones **mecánicas de lectura** hechas por el autor con un guion de solo lectura. **No son una auditoría independiente ni una revisión de contexto nuevo:** el autor no puede verificar su propio trabajo con independencia. **Este borrador no ha sido auditado ni revisado por nadie más.**
+
+| # | Verificación | Resultado |
+|---|---|---|
+| V-1 | Las líneas anteriores a la Parte VIII (todo el archivo del commit `a468166`) son **idénticas**; el cambio son solo líneas añadidas al final; ninguna eliminada | Cumple (comparación con `git show HEAD:`) |
+| V-2 | Solo cambió `02-arquitectura-adr.md`; `00`, `01`, `aprobaciones.md` y `bitacora.md` no cambiaron | Cumple (`git status` y sumas SHA-256) |
+| V-3 | Identificadores definidos y sin referencias huérfanas: IN-04-01…18, ES-38…44, ESC-66…74, OC-45…47, DC2-1…11, RR4-01…10, CR2C2-01…12, D4-1…8 y las dieciséis formulaciones CAP-04-P, C, V, M, R, X, A y G (A y B) | Cumple (guion de lectura) |
+| V-4 | Las citas literales entre «» se buscaron en `00`, `01` y las partes previas | Todas existen, **salvo** los mensajes del responsable citados en §22.0, que proceden de la conversación y no de un archivo |
+| V-5 | Exploración de términos tecnológicos (nombres de bases de datos, productos, proveedores, librerías, algoritmos, mecanismos de caché, expiración, invalidación, tiempo real o entrega y similares) | Solo aparecen en X-4 y en esta fila como **exclusión**; ninguna elección ni mecanismo |
+| V-6 | Parámetros numéricos: solo los que cita `01` (60 s, 24 horas, 7 días, 404) como referencias; ninguno nuevo | Cumple (lectura del autor) |
+| V-7 | Ninguna decisión abierta aparece resuelta: no se elige ninguna formulación; Q-20, PRV-18, Q-40 (d), A-8, OC-20, OC-26…29, K-3, D-2 y las demás permanecen abiertas; no se acepta RES-02 ni RES-08; no se declara cumplido R1 §8.1 | Cumple (lectura del autor) |
+| V-8 | Las tablas están alineadas (mismo número de columnas por fila) | Cumple (guion de lectura) |
+| V-9 | **Coherencia con la frontera:** §22.6 reproduce lo que las fichas de UI-05, UI-07, UI-09 y UI-10 dejan dentro y fuera de la unidad y no cambia la clasificación | Cumple (comparación con §19, §20.3.1 y R1 §7.4) |
+| V-10 | Cada decisión D4-n presenta **dos** formulaciones con ventajas, limitaciones, riesgos y dependencias | Cumple (§22.5) |
+
+**Límites.** Las lecturas [DER] y la clasificación de ventajas, limitaciones y riesgos son del autor y deben revisarse. Las ocho tensiones de §22.2 son una identificación del autor.
+
+### 22.14 Estado de esta parte y lo que no se hizo
+
+**Estado: v0.2-R2C2, APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-22, inferida).** Corrigió los hallazgos F-01…F-06 y tres observaciones editoriales (§22.15). Aprobación registrada en §22.0, `aprobaciones.md` y `bitacora.md`; **no versionado**.
+
+**Qué se hizo.** Se redactó la Parte VIII (§22) como borrador de ADR-04.C: alcance, fuentes y dependencias (§22.0–§22.3), invariantes y garantías exigidas (§22.4), ocho decisiones con dos formulaciones cada una (§22.5), relación con la frontera atómica de ADR-02.C (§22.6), estados prohibidos y escenarios (§22.7), amenazas relevantes (§22.8), matriz de trazabilidad (§22.9), dependencias, condiciones y decisiones abiertas (§22.10), riesgos (§22.11) y criterios de aceptación y preguntas (§22.12).
+
+**Qué no se hizo.** No se redactó ADR-16.C ni la consolidación del modelo de amenazas (R2-C3 y R2-C4), ni R3 ni R4; no se aprobó ADR-04.C, R2-C, R2 ni la Fase 2; no se eligió ninguna formulación; no se resolvió ninguna decisión ni condición abierta (Q-20, PRV-18, Q-40 (d), A-8, OC-20, OC-26…29, K-3, D-2 y las demás); no se eligió tecnología, mecanismo ni parámetro; no se aceptó ningún riesgo ni se concedió excepción; no se declaró cumplido R1 §8.1; no se modificaron otros archivos; no se actualizó la trazabilidad histórica de `a468166`; no se crearon ramas, commits, pushes, PR ni merges; no se tocó `main`.
+
+**Git.** Rama `claude/fase-2-arquitectura-amenazas`; HEAD `a468166210e0472e07dd5d0800985d3db1c6b940`; los cambios son `02-arquitectura-adr.md`, `aprobaciones.md` y `bitacora.md` **sin confirmar** (registro de la aprobación). Cualquier commit, push o PR requiere autorización expresa y separada.
+
+### 22.15 Hallazgos de la revisión focalizada de la v0.1 (F-01…F-06) y correcciones de la v0.2
+
+**Origen.** Autoevaluación del autor sobre la v0.1 (SHA-256 `72fe0c4b9f41d20b8f93bf396e360fc8bc22c95a2f52af94f1b29e68d5abf0e0`): **no es una auditoría independiente ni una revisión de contexto nuevo**. Las correcciones fueron autorizadas en una ronda única (§22.0). **No equivalen a aprobación.**
+
+| ID | Corrección en la v0.2 | Dónde |
+|---|---|---|
+| F-01 | CAP-04-C-A acotada a las respuestas servidas por el sistema; las copias locales, las vistas almacenadas y las tolerancias documentadas (RF-PUB-09 [REC], CL-30, RF-PUB-06, HR1-11) quedan fuera de la garantía y se conservan | D4-2 |
+| F-02 | CAP-04-C-B rotulada no conforme con el texto literal de R1 §5.5 y con ES-42, salvo aclaración formal de OC-46; ventaja sobre copias locales eliminada; se conserva sin elegirla | D4-2 |
+| F-03 | CAP-04-M-B: contradice RF-PUB-02 y la regla de PRV-02 sobre estadísticas si reduce goleadores, tarjetas o plantillas; anticiparía Q-20 y PRV-18 sin fijar granularidad | D4-4 |
+| F-04 | CAP-04-X-B prospectiva (copias nuevas; las existentes siguen sujetas a HR1-11); CAP-04-X-A reconoce que las copias anteriores pueden persistir sin plazo | D4-6 |
+| F-05 | La decisión de A-8 se atribuye al responsable (DB1-3; Fase 4); se incorpora R2-B1 §17.6; circularidad con R1 §8.2 registrada como T-8 sin resolverla | D4-8, §22.2, §22.3 |
+| F-06 | Condición de Q-20 propagada a IN-04-03, IN-04-11, IN-04-12, CAP-04-M-A, CAP-04-R-A/B y CAP-04-X-A: mientras Q-20 siga abierta solo etiquetas; reglas de menores [CONF] y de adultos [COND] distinguidas; T-2 ampliada | §22.2, §22.4, D4-4…D4-6 |
+| Obs. 1 | Rótulo de IN-04-06 alineado con CAP-04-C-B, sin relajar la garantía | IN-04-06 |
+| Obs. 2 | "Proyección de uso público" en CAP-04-V-B | D4-3 |
+| Obs. 3 | RF-PUB-04 identificada como fuente de las doce combinaciones | IN-04-04, §22.9 |
