@@ -4726,7 +4726,7 @@ Los riesgos se **registran sin valorar ni aceptar**. Ninguno sustituye a RB1, RB
 - **Limitación de la revisión.** El borrador solo recibió una **revisión focalizada del autor** (F-01…F-06 y tres observaciones editoriales, corregidas en la v0.2). **No hubo auditoría independiente ni revisión de contexto nuevo.** La aprobación es exclusivamente documental: **no acredita implementación ni pruebas empíricas** y no sustituye la asesoría jurídica (PEND-JUR).
 - **Integridad.** SHA-256 del **contenido técnico aprobado** (el archivo inmediatamente antes de añadir estos metadatos): `2a6b03cec0c6ad9d8fff43ec3016f31374f624013ef05472d3d6cb816acdcbea`. El hash del **archivo con los metadatos de aprobación** se registra en `aprobaciones.md` y `bitacora.md`; **no se inserta en este archivo**. Los metadatos de aprobación son solo editoriales: el título y el estado de la Parte VIII, este apartado, la fila de estado de §22.1, el estado y el párrafo «Git» de §22.14 y una nota posterior de trazabilidad del commit `a468166` en la Parte VII. **El contenido arquitectónico y las formulaciones de §22.1–§22.13 y §22.15 no se modificaron.**
 - **Precedencia.** CR2C2-12 de §22.12 y el apartado «Qué no se hizo» de §22.14 describen el estado a la fecha del borrador; prevalece este apartado en cuanto al estado de aprobación.
-- **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
+- **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge. *[Nota posterior, 2026-11-22 (fecha inferida): la Parte VIII y sus registros se versionaron en el commit `acb29b818915a0e34a68ce23793354b34cbbdd33` (verificable por Git, 2026-11-22T00:32:27Z). Esta línea conserva el estado a la fecha de su registro.]*
 - **Condición de cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. R2-C3 y R2-C4 no están iniciados; R2-C no tiene aprobación global.
 
 **Qué contiene.** Las capacidades y garantías **exigidas** de la visibilidad y de las proyecciones: garantía de coherencia de la información pública, visibilidad y etiquetas de menores, proyección de preparación y estados de publicación, consistencia entre lo privado y lo público, dependencia de ADR-02.C y sus fronteras atómicas, casos límite, amenazas y decisiones pendientes; y **ocho decisiones con dos formulaciones cada una, sin elegir ninguna**.
@@ -5128,3 +5128,412 @@ Los riesgos se **registran sin valorar ni aceptar**. Ninguno sustituye a RB1, RB
 | Obs. 1 | Rótulo de IN-04-06 alineado con CAP-04-C-B, sin relajar la garantía | IN-04-06 |
 | Obs. 2 | "Proyección de uso público" en CAP-04-V-B | D4-3 |
 | Obs. 3 | RF-PUB-04 identificada como fuente de las doce combinaciones | IN-04-04, §22.9 |
+
+
+---
+
+# PARTE IX — BLOQUE R2-C3 (v0.2-R2C3, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-22 inferida)
+
+## 23. R2-C3 — ADR-16.C: almacenamiento local seguro en el dispositivo (capacidades exigidas)
+
+### 23.0 Alcance, autorización y reglas de esta parte
+
+**Estado: v0.2-R2C3 — APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-22, fecha inferida), por acto expreso del responsable (ver «Aprobación condicional» más abajo).** La v0.2 corrigió la v0.1 tras la revisión focalizada G-01…G-08 (§23.15). **No está versionado.** Esta parte **se añade al final del archivo, después de la Parte VIII (R2-C2)**; no modifica ninguna línea de R1 (§0–§15), R2-A (§16), R2-B1 (§17), R2-B2 (§18–§20), R2-C1 (§21), R2-C2 (§22) ni de los registros de metadatos. **No aprueba ADR-16.C, R2-C, R2 ni la Fase 2.**
+
+**Autorización recibida.** Mensaje «TORNEO DE CAMPEONES — R2-C3: BORRADOR DOCUMENTAL DE ADR-16.C» (2026-11-22, fecha inferida: la del aviso de fecha de la sesión; no hay marca de tiempo individual del mensaje): «AUTORIZO EXCLUSIVAMENTE INICIAR R2-C3 Y REDACTAR UN BORRADOR DOCUMENTAL DE ADR-16.C (ALMACENAMIENTO LOCAL SEGURO).» Archivo autorizado: solo `02-arquitectura-adr.md`. Sin commit, push, PR ni merge. **No se actualiza la trazabilidad histórica del commit `acb29b8`.**
+
+**Autorización de la corrección (v0.2).** Mensaje «TORNEO DE CAMPEONES — R2-C3: CORRECCIÓN AGRUPADA DE ADR-16.C» (2026-11-22, fecha inferida): «AUTORIZO EXCLUSIVAMENTE CORREGIR LOS HALLAZGOS G-01…G-08 DE LA REVISIÓN FOCALIZADA DE ADR-16.C.» Limitada a la Parte IX (§23); sin commit, push, PR ni merge. La revisión fue una **autoevaluación del autor, no una auditoría independiente**.
+
+**Aprobación condicional de R2-C3 como entregable documental (2026-11-22).** Por acto expreso del responsable (mensaje «TORNEO DE CAMPEONES — REGISTRO DE APROBACIÓN DOCUMENTAL CONDICIONADA DE R2-C3»), la v0.2-R2C3 quedó **APROBADA CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL**: «APRUEBO EXCLUSIVAMENTE R2-C3 v0.2 (ADR-16.C) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» Esta aprobación permite conservar el borrador como base documental para continuar el proceso. La fecha es la del aviso de fecha de la sesión; no hay marca de tiempo individual del mensaje.
+
+- **La aprobación NO implica:** aprobar definitivamente ADR-16.C ni ninguna de sus formulaciones; aprobar R2-C, R2 ni la Fase 2; acreditar implementación, seguridad efectiva ni pruebas; resolver Q-20, Q-43, PRV-18, K-3, D-2 ni las decisiones de R2-A; fijar parámetros ni aceptar riesgos residuales; autorizar R2-C4.
+- **Condiciones que permanecen abiertas:** (1) D16-1…6 y sus doce formulaciones, sin elegir ninguna; (2) CAP-16-K-B contradictoria con OFF-20, sin excepción ni aprobación de esa formulación; (3) posible tensión de CAP-16-A-B con IN-03-20; (4) OC-48: cuenta revocada mientras otra cuenta utiliza el dispositivo; (5) protección criptográfica local sin seleccionar; (6) Q-20, Q-43 y PRV-18 pendientes; (7) ubicación de IN-05-21 y demás decisiones heredadas; (8) OC-49, OC-50 y OC-51 abiertas; (9) RES-02, RES-04, RES-07 y RES-08 sin aceptar; (10) K-3, D-2 y las decisiones DB, OC y de R2-A sin resolver; (11) las evidencias de iOS no verificadas en dispositivo; (12) la limitación de revisión indicada abajo.
+- **Limitación de la revisión.** El borrador solo recibió una **autoevaluación del autor** (revisión focalizada G-01…G-08, corregida en la v0.2). **No hubo auditoría independiente ni revisión de contexto nuevo.** La aprobación es exclusivamente documental: **no acredita implementación, seguridad efectiva ni pruebas empíricas**, no verifica nada en dispositivo y no sustituye la asesoría jurídica (PEND-JUR).
+- **Integridad.** SHA-256 del **contenido técnico aprobado** (el archivo inmediatamente antes de añadir estos metadatos): `0823e55d11eb05fd9c609617525b447548555330a5c2515a6d5ef50728d390cb`. El hash del **archivo con los metadatos de aprobación** se registra en `aprobaciones.md` y `bitacora.md`; **no se inserta en este archivo**. Los metadatos de aprobación son solo editoriales: el título y el estado de la Parte IX, este apartado, la fila de estado de §23.1, el estado y el párrafo «Git» de §23.14 y una nota posterior de trazabilidad del commit `acb29b8` en la Parte VIII. **El contenido arquitectónico y las formulaciones de §23.1–§23.13 y §23.15 no se modificaron.**
+- **Precedencia.** CR2C3-12 de §23.12 y el apartado «Qué no se hizo» de §23.14 describen el estado a la fecha del borrador; prevalece este apartado en cuanto al estado de aprobación.
+- **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
+- **Condición de cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. R2-C4 no está iniciado; R2-C no tiene aprobación global.
+
+**Qué contiene.** Las capacidades y garantías **exigidas** para proteger los datos locales del dispositivo (acceso no autorizado ante pérdida o robo, datos de menores y de adultos, datos para operar sin conexión, retención, exportación y eliminación, revocación de permisos y cuentas desactivadas, pérdida por limpieza del navegador y dependencias del formato de cola de ADR-05.C), y **seis decisiones con dos formulaciones cada una, sin elegir ninguna**.
+
+**Qué NO contiene ni hace.**
+
+| # | Exclusión |
+|---|---|
+| X-1 | No elige entre las formulaciones CAP-16-P, A, R, C, V ni K (A o B): las presenta con sus ventajas, limitaciones, riesgos y dependencias |
+| X-2 | No resuelve OFF-12 («El cifrado local se evalúa en Fase 2 y no se promete»), Q-20, Q-43, PRV-18, la ubicación de IN-05-21, OC-47 ni ninguna otra decisión abierta; no concede excepción a D-2 |
+| X-3 | No promete conservación de datos locales ni borrado a distancia: `01` OFF-12, OFF-17 y R1 HR1-11 los excluyen; **no presenta como garantía aprobada** ninguna afirmación que dependa de una decisión abierta |
+| X-4 | No elige tecnología de almacenamiento, API del navegador, algoritmo de cifrado, gestión de claves, mecanismo de sincronización, librería, servicio ni parámetro numérico no aprobado; todo eso es de ADR-16.I y R3 (condicionado a ADR-01) |
+| X-5 | No verifica nada en dispositivo: toda afirmación sobre iOS es **no verificada en dispositivo** (§2.5, HR1-07, IOS-01…08) |
+| X-6 | No redacta R2-C4 (consolidación del modelo de amenazas), R3 ni R4; no modifica ADR-02.C, ADR-03.C, ADR-04.C, ADR-05.C ni ADR-09.C: los **consume** |
+| X-7 | No acepta riesgos (RES-02, RES-04, RES-07 y RES-08 siguen sin aceptar), no fija PAR, no concede excepciones y no declara cumplido R1 §8.1 |
+| X-8 | No modifica `00`, `01`, `aprobaciones.md` ni `bitacora.md`; no sustituye la asesoría jurídica (PEND-JUR) |
+
+**Lectura previa directa y límites de la lectura.** **Leídos directamente para este borrador:** en `01`, OFF-01…25 (§9.3), §9.2, §9.4, PRV-10, PRV-11, PRV-12, PRV-15, PRV-17 y PRV-18, RF-PWA-01…04, RNF-07, RT-09, RK-11 y RK-15 y las filas de HR1 citadas; en R1, §2.5, §5.3 (CMP-04, CMP-05, CMP-17), §5.6 (clasificación de datos por zona), PA-01 y PA-08 y la fila de ADR-16 de §8.1 y §8.2; en R2-A, IN-03-11, IN-03-12, IN-03-19, IN-03-20, IOS-01…08, AM-08, AM-10, AM-11 y AM-33, CAB-08, CAB-16 y CAB-30, RES-02, RES-04, RES-07 y RES-08; en R2-C1 (§21), IN-05-01, IN-05-11…16, IN-05-21, T-7 y D5-6; y en R2-C2 (§22), IN-04-11…13, D4-5, D4-6 y OC-47. **Limitaciones:** no se releyeron íntegros R2-A F-07…F-10 (las fuentes externas de iOS), la matriz §7.1 ni RF-PUB-06; las afirmaciones sobre iOS se apoyan en lo que registra R2-A (IOS-01…08), son **no verificadas en dispositivo** y no se contrastaron con las fuentes originales. Del skill se consultaron SKILL.md y las puertas de aprobación.
+
+**Convención.** [CONF]: texto confirmado de `01` o R1. [REC]: recomendación o propuesta (no confirmada). [DER]: derivada por el autor. [ABIERTO]: sin resolver; ninguna se elige. [COND]: condicionado a una decisión abierta. [NO VERIF]: afirmación sobre el dispositivo no verificada. Identificadores nuevos (sin colisión con las series existentes): **IN-16-nn**, **ES-45…**, **ESC-75…**, **CAP-16-x-A/B**, **D16-n**, **OC-48…**, **DC3-n**, **RR16-nn** y **CR2C3-nn**.
+
+### 23.1 ADR-16.C — Identificación
+
+| Campo | Valor |
+|---|---|
+| ADR | ADR-16.C — Almacenamiento local seguro en el dispositivo: capacidades exigidas (R1 §8.1, ADR-16; R1 §8.2) |
+| Pregunta de R1 §8.1 | «¿Qué protección local se justifica (cifrado local, límites) frente a pérdida o robo?»; `01 OFF-12` dice que se evalúa en la Fase 2 |
+| Alternativas exigidas | **≥ 2** (R1 §8.1, ADR-16) |
+| Insumos de R1 §8.1 | RK-11; §2.5 (excepción de verificación de iOS) |
+| Requiere (R1 §8.2) | ADR-05.C (formato de cola y datos locales) |
+| Alimenta | ADR-01/ADR-10 (R3), ADR-16.I |
+| Estado | v0.2-R2C3: APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL (2026-11-22, inferida); ADR-16.C **no** queda aprobada definitivamente |
+
+### 23.2 Dependencias y conflictos entre fuentes
+
+**Qué consume ADR-16.C de lo ya aprobado (como entrada, sin modificarlo):**
+
+| Fuente | Qué aporta a ADR-16.C | Estado |
+|---|---|---|
+| ADR-05.C / R2-C1 (§21) | Contenido y formato de la cola (IN-05-01), aislamiento por cuenta [REC] (IN-05-11), conservación y retención local (IN-05-13), versión del formato [REC] (IN-05-16) y conducta del cliente ante la pérdida de autorización (IN-05-21, ubicación sin decidir); T-7 | Aprobado condicionalmente; PROPUESTA |
+| ADR-04.C / R2-C2 (§22) | Proyección de preparación y datos preparados (IN-04-12), aviso de antigüedad (IN-04-13), datos internos de menores no persistidos en Z0 (IN-04-11), copias locales y D4-5, D4-6 y OC-47; **la condición de Q-20** | Aprobado condicionalmente; PROPUESTA |
+| ADR-03.C / R2-A | IN-03-11 (el contexto local no autentica ni autoriza), IN-03-12 (el secreto de portador de la sesión no reside en almacenamiento local legible por los scripts de la página), IN-03-19 e IN-03-20 [REC] | Aprobado condicionalmente; PROPUESTA |
+| R1 §5.3, §5.6; PA-01, PA-08 | Responsabilidades de CMP-04 y CMP-05; datos por zona; minimización | Aprobado (R1) |
+| `01` OFF-10, 11, 12, 16, 17, 24; PRV-10, 11, 12; RK-11, RK-15 | Retención, revocación, datos mínimos, actualización, no conservación, exportación | [CONF] salvo lo marcado [REC] |
+
+**Conflictos o tensiones entre fuentes (se señalan, no se resuelven):**
+
+| # | Tensión | Fuentes | Tratamiento en este borrador |
+|---|---|---|---|
+| T-1 | OFF-12 dice que el cifrado local se evalúa en la Fase 2 «y no se promete»; R1 §8.1 y AM-08 lo tratan como pregunta abierta de ADR-16.C | `01` OFF-12; R1 §8.1; R2-A AM-08 | D16-1; IN-16-18 |
+| T-2 | OFF-09 dice que ninguna captura local se pierde en silencio; OFF-17 reconoce que el navegador puede eliminar el almacenamiento y que no se promete conservación | `01` OFF-09, OFF-17; R2-C1 T-8 | IN-16-11; D16-4 |
+| T-3 | OFF-23 permite continuar la captura con la sesión vencida; una protección en reposo ligada a la sesión podría impedirlo | `01` OFF-23; R2-A IN-03-10 | D16-1 (CAP-16-P-B); OC-49 |
+| T-4 | OFF-11 exige eliminar de forma controlada los datos locales al primer contacto con el servidor tras desactivar la cuenta, pero una PWA no puede borrar datos de un dispositivo que nunca se conecta (riesgo residual) | `01` OFF-11, OFF-12; HR1-11 | IN-16-09, IN-16-10; D16-3 |
+| T-5 | R1 §5.6 permite copias derivadas del nombre público con autorización en Z0, pero mientras Q-20 esté abierta no se publica ningún dato personal | R1 §5.6; `01` Q-20; R2-C2 T-2, OC-47 | IN-16-03; ES-46 |
+| T-6 | OFF-10 fija un máximo de 30 días para lo en conflicto o rechazado, pero `01` no fija un plazo máximo local para las operaciones **pendientes** | `01` OFF-10 | D16-3; OC-50 |
+| T-7 | RNF-07 fija iOS 16.4 como mínimo, pero R2-A (IOS-07) registra que el comportamiento de almacenamiento en iOS 16.4 no está documentado en las fuentes leídas | `01` RNF-07; R2-A IOS-07 | OC-51; [NO VERIF] |
+| T-8 | R1 §5.3 asigna a CMP-04 ejecutar los plazos de retención local y a CMP-05 presentar la exportación; `01` OFF-11 describe acciones del cliente sobre sesión y datos locales sin asignar componente, y la ubicación de IN-05-21 sigue sin decidir | R1 §5.3; `01` OFF-11; R2-C1 IN-05-21 | OC-48 |
+
+### 23.3 Qué decide ADR-16.C y qué no
+
+| Asunto | ¿Lo decide ADR-16.C? | Quién |
+|---|---|---|
+| Qué protección local se exige frente a pérdida o robo (cifrado en reposo, límites) | **Propone alternativas** (D16-1); decide el responsable | OFF-12; DC3-1 |
+| Aislamiento de los datos locales por cuenta | **Propone alternativas** (D16-2) | IN-03-20 [REC]; DC3-2 |
+| Retención y eliminación local (pendientes, constancia) | **Propone alternativas** (D16-3, D16-6) | OFF-10; PRV-10 (valores PEND-JUR) |
+| Mitigación de la pérdida por limpieza del navegador | **Propone alternativas** (D16-4) | OFF-17; RES-07 |
+| Migración del formato de cola | **Propone alternativas** (D16-5) | OFF-16 [REC] |
+| Contenido y formato de la cola | **No** | ADR-05.C |
+| Contenido de la proyección de preparación y de las copias públicas | **No** | ADR-04.C |
+| Autenticación, sesión, nivel exigido al sincronizar | **No** | ADR-03.C |
+| Contenido de la exportación limitada | **No** | CMP-17; Q-43 |
+| Mecanismo de almacenamiento, cifrado y gestión de claves | **No** | ADR-16.I (R3, tras ADR-01) |
+
+### 23.4 Invariantes y garantías exigidas de ADR-16.C (IN-16-nn)
+
+Son **capacidades exigidas** cuando su tipo es [CONF] o [DER]; las [REC] son **propuestas condicionadas** a una decisión del responsable (DC3-7), las [COND] valen solo si se cumple la condición y las [ABIERTO] **no fijan** garantía alguna. **Ninguna está implementada ni probada.** Se suman a IN-05-01…21 e IN-04-01…18 y no los modifican.
+
+| ID | Invariante o garantía exigida | Tipo | Fuente | Condicionada por |
+|---|---|---|---|---|
+| IN-16-01 | **Minimización en el dispositivo:** los datos descargados para trabajar sin conexión contienen solo lo necesario (OFF-02) y nunca campos internos de jugadores; el almacén local no guarda más de lo que OFF-12 y PRV-11 permiten | [CONF] | OFF-02, OFF-12, PRV-11, PA-08 | D16-3 |
+| IN-16-02 | **Datos internos de menores:** el nombre interno y el indicador de menor no se persisten en el almacén local (solo se presentan de forma transitoria a los roles que PRV-09 autoriza) | [CONF] | R1 §5.6, PRV-09, PRV-11, IN-04-11 | — |
+| IN-16-03 | **Nombres personales y Q-20:** mientras Q-20 permanezca abierta, ninguna formulación de este borrador permite persistir en el almacén local, en datos preparados ni en copias nombres personales de jugadores, menores o adultos: solo etiquetas. Cuando Q-20 lo permita, el nombre público con autorización vigente puede tener copias derivadas (R1 §5.6), sujetas a HR1-11 | [CONF] en la prohibición de **publicar** datos personales mientras Q-20 esté abierta (R1 §5.6: «no se publica ningún dato personal»); **[DER]** en su extensión conservadora a **persistir, preparar o copiar** nombres personales; [CONF] en las etiquetas; [COND] en el nombre público | R1 §5.6, PRV-02, Q-20, IN-04-03, IN-04-12 | Q-20; OC-47 |
+| IN-16-04 | **Credenciales y secretos:** el secreto de portador de la sesión no reside en almacenamiento local legible por los scripts de la página; el secreto de autenticación y del segundo factor no se persiste en el dispositivo; las credenciales de servicio con privilegios totales nunca llegan al navegador ni a la cola local | [DER] en IN-03-12 (precisa §5.6); [CONF] en R1 §5.6; [REC] en RT-09 | IN-03-12, RT-09, R1 §5.6 | ADR-03.I (R3) |
+| IN-16-05 | **Sesión local mínima:** el dispositivo conserva solo la información mínima para continuar la captura con la sesión vencida (OFF-23), con borrado al cerrar sesión una vez sincronizado o descartado (OFF-12); **para sincronizar se exige sesión válida y permisos vigentes**; **sin sesión no se puede preparar ni descargar datos nuevos** (OFF-23) | [CONF] | OFF-12, OFF-23, IN-03-10, R1 §5.6 | D16-1 (CAP-16-P-B), OC-49 |
+| IN-16-06 | **Ningún dato local concede permisos ni es fuente de verdad:** el servidor y la capa de datos deciden; el cliente propone | [CONF] en OFF-22 y PA-01; [DER] en IN-03-11 | OFF-22, PA-01, IN-03-11 | — |
+| IN-16-07 | **Aislamiento por cuenta:** la cola y los datos preparados se aíslan por cuenta en el dispositivo: iniciar sesión con otra cuenta no da acceso a los de la primera | [REC] | IN-03-20, IN-05-11, AM-33, CAB-30 | D16-2; DC3-7 |
+| IN-16-08 | **Cierre de sesión con pendientes:** exige confirmación explícita y borra los datos locales tras sincronizar o descartar | [CONF] | OFF-12 | — |
+| IN-16-09 | **Pérdida del dispositivo:** el dueño o el organizador revoca la cuenta y el servidor deja de aceptar sus operaciones; **una PWA no puede borrar datos a distancia**: el riesgo residual se documenta y no se promete borrado remoto | [CONF] | OFF-11, OFF-12, HR1-11, AM-08 | RES-02 (sin aceptar) |
+| IN-16-10 | **Cuenta desactivada y revocación:** el cliente deja de enviar las operaciones de un usuario al saber que perdió autorización; con la cuenta desactivada, al primer contacto con el servidor cierra la sesión, bloquea el acceso local, ofrece una sola vez la exportación limitada y elimina de forma controlada los datos locales (tras exportar o confirmar, nunca antes de mostrar el aviso). **Es la misma exigencia que IN-05-21; su ubicación definitiva sigue sin decidir** | [CONF] la conducta; [ABIERTO] su ubicación | OFF-11, IN-05-21 | OC-48 |
+| IN-16-11 | **Retención y eliminación de lo en conflicto o rechazado:** se conserva hasta que el usuario lo reintente, lo descarte con confirmación o use la exportación limitada; máximo de 30 días, plazo informado al detectar el conflicto o el rechazo; avisos previos «cuando sea técnicamente posible» (7 y 1 días antes, propuesto [REC]); al vencer, eliminación controlada y constancia mínima sin datos personales cuando corresponda y sea viable. No existe ruta que borre una operación rechazada sin acción explícita del usuario o sin el plazo informado y la constancia posterior | [CONF]; [REC] en los avisos de 7 y 1 días | OFF-10, PRV-10 (valores PEND-JUR), IN-05-13 | D16-3, D16-6; PEND-JUR |
+| IN-16-12 | **Almacenamiento no garantizado:** la interfaz advierte (al preparar y junto al indicador de pendientes) que el navegador puede eliminar los datos locales; se solicita almacenamiento persistente y se avisa si no se concede; **no se promete conservación**. El comportamiento de iOS es **no verificado en dispositivo** | [CONF] | OFF-17, §2.5, RK-11, HR1-07, IOS-01…08 | D16-4; RES-07 (sin aceptar) |
+| IN-16-13 | **Un desalojo no se supone parcial:** lo documentado (no verificado) es que el desalojo elimina todos los datos de un origen a la vez (IOS-05); ADR-16.C no supone un desalojo parcial ni el comportamiento de iOS 17 para iOS 16.4 | [DER] sobre fuentes [NO VERIF] | IOS-05, IOS-07, RNF-07 | OC-51 |
+| IN-16-14 | **El desalojo local no afecta a lo ya confirmado en el servidor:** una operación `confirmada` ya está en el servidor; lo que se pierde es lo capturado y no sincronizado, que **no se publica ni se recupera** | [DER] | OFF-15, OFF-17, IF-23 | RES-07 |
+| IN-16-15 | **Actualización de la app:** una nueva versión no descarta la cola; el formato tiene versión y se migra; si no es compatible, se bloquea la actualización hasta sincronizar | [REC] | OFF-16, RF-PWA-03, IN-05-16 | D16-5; DC3-7 |
+| IN-16-16 | **Exportación limitada:** su contenido lo fija CMP-17 y lo presenta CMP-05 (por defecto, identificador del partido, abreviaturas de equipos y marcador); no concede permisos; **el archivo exportado llega al dispositivo y no puede purgarse a distancia** | [CONF] | OFF-24, HR1-14, RES-04 (sin aceptar) | Q-43; PRV-18 |
+| IN-16-17 | **Registros y monitoreo sin datos personales:** los registros técnicos del almacén local omiten nombres, correos e identificadores de dispositivo cuando sea posible | [REC] | PRV-12 | — |
+| IN-16-18 | **Cifrado local:** `01` dice que el cifrado local se evalúa en la Fase 2 y no se promete; ADR-16.C **no lo exige ni lo descarta**: presenta alternativas (D16-1) | [CONF] en OFF-12; [ABIERTO] la decisión | OFF-12, HR1-03 | D16-1; DC3-1 |
+| IN-16-19 | **Contenido y formato de la cola son de ADR-05.C:** ADR-16.C protege el contenedor y no redefine el contenido | [CONF] | R1 §8.1, §8.2; IN-05-01 | ADR-05.C |
+| IN-16-20 | **Datos sintéticos y puerta de lanzamiento:** las pruebas del almacén local usan exclusivamente datos y cuentas sintéticos; no se procesan datos personales reales antes de cumplir PRV-15 | [CONF] | PRV-15, PRV-17 | PEND-JUR |
+| IN-16-21 | **Sin permisos nuevos, sin reducción de garantías y sin selección tecnológica:** ADR-16.C no concede facultad alguna y respeta PA-13 y RC-23 | [DER] / [CONF] | R1 RC-23; R2-A IN-03-17, IN-09-11 | — |
+
+### 23.5 Formulaciones alternativas, sin elegir
+
+Cada decisión presenta **dos formulaciones**. Ninguna se aprueba, ninguna se recomienda y ninguna desplaza a las demás. «Dependencias» enumera lo que impide cerrar la formulación. Las formulaciones describen **capacidades**, no mecanismos. Los escenarios ESC-75… están en §23.7.
+
+#### D16-1 — Protección del almacén local frente a pérdida o robo (OFF-12; HR1-03; IN-16-18)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-16-P-A — Sin protección criptográfica adicional del almacén** | La protección descansa en la minimización (IN-16-01…IN-16-04), el aislamiento por cuenta y la eliminación controlada; el almacén local no incorpora una protección propia adicional en reposo | No contradice OFF-12 (el cifrado local se evalúa y no se promete); no condiciona la captura a la sesión (OFF-23); sin riesgo de perder capturas por una clave inaccesible | Un dispositivo perdido o prestado y sin protección del propio sistema expone lo que contiene el almacén (etiquetas, partidos asignados, operaciones capturadas) aunque sea lo mínimo | AM-08 (divulgación) con impacto reducido por minimización, **sin eliminarlo**; ningún RES de R2-A cubre AM-08 y el riesgo no está aceptado | OFF-12; PRV-11; IN-16-01; HR1-03 |
+| **CAP-16-P-B — Protección adicional en reposo de la cola y los datos preparados** | La cola y los datos preparados se guardan con una protección adicional en reposo; **dónde y cómo se guarda su material de protección, el algoritmo y el mecanismo son de ADR-16.I y no se fijan aquí** | Reduce la exposición ante pérdida o robo con acceso al almacén; no contradice OFF-12 (el cifrado local no se promete) | **Si el material de protección depende de la sesión, la captura con sesión vencida (OFF-23) podría no ser posible**; si se pierde el material, se pierden capturas pendientes (choca con «ninguna captura local se pierde en silencio»); `01` no promete el cifrado | AM-08; complejidad y fallos de recuperación (RR16-03); no cubre un dispositivo ya desbloqueado | OFF-12, OFF-23, OFF-09; IN-03-12; ADR-03.C; OC-49; ADR-16.I |
+
+#### D16-2 — Aislamiento de los datos locales por cuenta (IN-16-07 [REC])
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-16-A-A — Separación estricta por cuenta** | La cola y los datos preparados de cada cuenta están separados: otra cuenta no tiene acceso ni conoce el contenido ni el número de pendientes | Está dirigida a impedir que otra cuenta lea, sincronice o se apropie de lo ajeno (AM-33, CAB-30); coherente con IN-03-20; **no es una garantía absoluta** (depende de lo [REC] y de ADR-16.I) | Un dispositivo con varias cuentas guarda más estructuras; hay que decidir qué se hace con lo de una cuenta cuando se cierra su sesión; **no define quién elimina los datos de una cuenta revocada o desactivada si otra cuenta usa el dispositivo** (ESC-77; OC-48) | Fugas por un fallo de separación; mayor complejidad | IN-03-20, IN-05-11 [REC]; ADR-03.C; OFF-12 |
+| **CAP-16-A-B — Una cola local con operaciones etiquetadas por cuenta** | Una sola cola en el dispositivo cuyas operaciones llevan su cuenta; otra cuenta solo conoce un resumen agregado (por ejemplo, que existen pendientes de otra cuenta) y no su contenido | Menos estructuras; permite avisar de que existen pendientes de otra cuenta antes de cerrar o limpiar | El resumen agregado revela la existencia de actividad ajena; el aislamiento del contenido depende de una regla de acceso en vez de una separación; **posible tensión con IN-03-20** («no da acceso a la cola de la primera»): un resumen agregado revela su existencia; **no se resuelve** | Un fallo de la regla expone operaciones ajenas (AM-33) | IN-03-19, IN-03-20 [REC]; OFF-03; OFF-12; DC3-7 |
+
+#### D16-3 — Retención local de las operaciones pendientes y eliminación (OFF-10; T-6; OC-50)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-16-R-A — Las pendientes se conservan hasta sincronizar o descartar** | Las operaciones `pendiente` no tienen plazo máximo local propio; lo en conflicto o rechazado sigue el máximo de 30 días de OFF-10 | No contradice `01`, que **tampoco fija** un plazo para las pendientes; ninguna captura se pierde en silencio por la aplicación; sin parámetro nuevo | Un dispositivo desconectado puede conservar datos sin límite de tiempo (PRV-10, valores PEND-JUR) | Datos locales que persisten indefinidamente en un dispositivo perdido (AM-08) | OFF-09, OFF-10; PRV-10; OC-50 |
+| **CAP-16-R-B — Las pendientes también tienen un plazo máximo local** | Las operaciones `pendiente` también tienen un plazo máximo local, con avisos y eliminación controlada al vencer | Limita cuánto tiempo persisten los datos en un dispositivo desconectado | **Exige un parámetro que `01` no fija** (este borrador no lo fija) y puede perder capturas legítimas si el dispositivo permanece desconectado (choca con OFF-09 y con RK-15 en lo conceptual: «sin recuperación excepcional»); la eliminación depende de que la app se ejecute; **las operaciones bloqueadas por un hueco o por una reanudación rechazada permanecen `pendiente` por diseño** (OFF-07 [REC], OFF-25): un plazo las eliminaría y chocaría con OFF-25 | Pérdida de capturas por vencimiento; confusión con el plazo de OFF-10 | OFF-07, OFF-09, OFF-10, OFF-25; PRV-10; OC-50; DC3-3 |
+
+#### D16-4 — Mitigación de la pérdida por limpieza o desalojo del navegador (OFF-17; RES-07)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-16-C-A — Mitigación mínima de OFF-17** | Advertencia visible al preparar y junto al indicador de pendientes, solicitud de almacenamiento persistente, aviso si no se concede y ninguna promesa de conservación | Es exactamente lo confirmado en `01` y en la excepción de §2.5; sin parámetros ni funciones nuevas | No reduce la probabilidad de pérdida; depende de lo que decida el navegador (**no verificado en dispositivo**) | RES-07 sin aceptar; AM-11; IOS-01, IOS-04, IOS-05, IOS-07 [NO VERIF] | OFF-17; §2.5; RK-11; ADR-05.C |
+| **CAP-16-C-B — Mitigación reforzada con prioridad de sincronización** | Además de lo anterior, con la aplicación abierta (OFF-05; sin sincronización en segundo plano), el cliente da prioridad a sincronizar las pendientes al detectar conexión y avisa cuando existen pendientes sin sincronizar durante un tiempo que este borrador no fija; **sin copia adicional del contenido** | Reduce la ventana en la que una pérdida afecta a capturas no sincronizadas | Se apoya en los disparadores de OFF-05 y exige un criterio de «tiempo» no fijado; no elimina la pérdida si no hay conexión ni cuando la aplicación está cerrada | Alertas excesivas; un parámetro no aprobado; AM-11 persiste | OFF-05, OFF-17; IN-05-03; OC-50 |
+
+#### D16-5 — Migración del formato de cola (OFF-16 [REC]; IN-16-15)
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-16-V-A — Bloqueo de la actualización si el formato no es compatible** | Una nueva versión migra la cola; si el formato no es compatible, **se bloquea la actualización hasta sincronizar** | Es lo que propone OFF-16 y comprueba RF-PWA-03; evita que **la actualización** provoque la pérdida de la cola; **no protege frente a la eliminación externa del almacenamiento por el navegador** (OFF-17) | El usuario puede quedarse en una versión anterior hasta sincronizar; requiere conexión para desbloquear | Versiones desactualizadas; fricción | OFF-16, RF-PWA-03 (DER); IN-05-16 [REC]; ADR-05.C |
+| **CAP-16-V-B — Compatibilidad hacia atrás durante la migración** | La nueva versión sabe leer la cola en el formato anterior hasta que se sincronice, sin bloquear la actualización | No bloquea al usuario; la actualización no descarta la cola (sin protección frente a la eliminación externa, OFF-17) | **No es lo que describe OFF-16** (que habla de bloquear si no es compatible): es una alternativa que exige una lectura de `01`; añade complejidad de mantenimiento de formatos | Pérdida o corrupción de la cola si la lectura del formato anterior falla | OFF-16; RF-PWA-03; ADR-05.C; ADR-16.I |
+
+#### D16-6 — Constancia de la eliminación (OFF-10; OFF-11; IN-16-11); `01` no exige constancia de la exportación
+
+| Formulación | Qué exige | Ventajas | Limitaciones | Riesgos | Dependencias |
+|---|---|---|---|---|---|
+| **CAP-16-K-A — Constancia local mínima** | La constancia queda en el dispositivo, sin datos personales protegidos («N operaciones eliminadas por vencimiento», fecha), cuando corresponda y sea viable | Es lo que dice OFF-10 para la eliminación por vencimiento (para otras eliminaciones `01` no exige constancia); sin datos nuevos en el servidor | Si el dispositivo se pierde o se limpia, la constancia se pierde; el organizador no se entera | Falta de trazabilidad hacia el organizador | OFF-10; PRV-10 |
+| **CAP-16-K-B — Constancia local y aviso al servidor en el siguiente contacto** | Además de la constancia local, al siguiente contacto con el servidor se informa de que se eliminaron datos locales de la cuenta | El dueño o el organizador pueden conocer que los datos locales se eliminaron | **Contradice OFF-20 en lo relativo a las operaciones nunca recibidas** («Las operaciones nunca recibidas permanecen solo en el dispositivo»): el aviso revelaría su existencia y su número; **no se concede ninguna excepción**. Además **añade un registro en el servidor que `01` no describe** (OFF-20 solo registra lo rechazado o en conflicto que el servidor recibe) y datos sujetos a minimización y retención; requiere decisión sobre qué se registra | Más datos de incidencias (PRV-10, PRV-12); extensión de OFF-20 no autorizada | OFF-10, OFF-11, OFF-20; PRV-10, PRV-12; DC3-6 |
+
+#### Interdependencias entre las decisiones
+
+| Decisión | Se condiciona con | Observación |
+|---|---|---|
+| D16-1 | OFF-23, OC-49, D16-2 | CAP-16-P-B puede chocar con la captura con sesión vencida |
+| D16-2 | IN-05-11 [REC], IN-03-20 [REC], DC3-7 | Las dos formulaciones dependen de adoptar lo [REC] |
+| D16-3 | OC-50, D16-4, D16-6, OFF-07, OFF-25 | CAP-16-R-B exige un parámetro no fijado y afectaría a lo bloqueado |
+| D16-4 | RES-07, ADR-05.C (IN-05-03), OC-51 | Mitigación sobre fuentes no verificadas |
+| D16-5 | IN-05-16 [REC], ADR-05.C | Ambas formulaciones deben coordinarse con el formato de ADR-05.C |
+| D16-6 | OFF-20, PRV-10 | CAP-16-K-B contradice OFF-20 en lo nunca recibido y extiende lo que registra el servidor |
+
+### 23.6 Relación con ADR-05.C, ADR-04.C y ADR-03.C
+
+**Regla fundamental (consumida de R1 §8.2 y de §21, sin modificarla).** **ADR-05.C fija qué contiene la cola y su formato; ADR-16.C protege el contenedor** (R1 §8.2: ADR-16.C requiere ADR-05.C, "formato de cola y datos locales"). Los datos preparados y las copias públicas los fija ADR-04.C; la sesión y el nivel de autenticación, ADR-03.C.
+
+| Dato o función local | Quién fija su contenido | Qué aporta ADR-16.C (capacidad exigida) |
+|---|---|---|
+| Cola de operaciones (identificador, secuencia, versión base, dispositivo, usuario y hora local) | ADR-05.C (IN-05-01) | IN-16-01, IN-16-05…IN-16-08; D16-1, D16-2, D16-3, D16-5 |
+| Datos preparados para operar sin conexión (partidos asignados, plantillas con etiqueta y dorsal, resumen del reglamento) | ADR-04.C (IN-04-12) | IN-16-01…IN-16-03; sin campos internos; sin nombres mientras Q-20 esté abierta |
+| Copias de vistas públicas (última versión guardada) | ADR-04.C (IN-04-13; D4-6) | IN-16-03, IN-16-09; HR1-11 |
+| Sesión local mínima | ADR-03.C (IN-03-10, IN-03-12) | IN-16-04, IN-16-05 |
+| Operaciones en conflicto o rechazadas y su retención | ADR-05.C (IN-05-13) | IN-16-11; D16-3, D16-6 |
+| Exportación limitada | CMP-17 (contenido); CMP-05 (presentación) | IN-16-16 |
+| Conducta del cliente ante la pérdida de autorización | ADR-05.C (IN-05-21; ubicación pendiente) | IN-16-10; OC-48 |
+
+**Límites que ADR-16.C no puede cruzar:** (1) no redefine el contenido ni el formato de la cola (IN-16-19); (2) no decide el contenido de los datos preparados ni de las copias públicas; (3) no concede permisos ni los deriva de datos locales (IN-16-06); (4) no promete conservación ni borrado a distancia (X-3); (5) no elige mecanismo, tecnología ni parámetro (X-4); (6) no resuelve qué componente asume la conducta de OFF-11.
+
+### 23.7 Estados prohibidos adicionales y casos límite
+
+#### Estados prohibidos (se suman a ES-01…44)
+
+| ID | Estado prohibido | Tipo | Fuente |
+|---|---|---|---|
+| ES-45 | Un campo interno de jugador, el nombre interno o el indicador de menor persistidos en el almacén local | [CONF] | PRV-11, R1 §5.6, PA-08 |
+| ES-46 | Un nombre personal de jugador (menor o adulto) persistido en el almacén local, en datos preparados o en copias **mientras Q-20 esté abierta** | [CONF] en no publicar datos personales mientras Q-20 esté abierta (R1 §5.6); **[DER]** en su extensión a persistir, preparar o copiar; [COND] (Q-20) | R1 §5.6, IN-04-03, IN-16-03 |
+| ES-47 | El secreto de autenticación, el del segundo factor o las credenciales de servicio persistidos o legibles en el almacén local | [DER] en IN-03-12; [CONF] en R1 §5.6; [REC] en RT-09 | IN-03-12, R1 §5.6, RT-09 |
+| ES-48 | Datos locales de una cuenta accesibles o sincronizables por otra cuenta | [REC] | IN-03-20, IN-05-11, AM-33 |
+| ES-49 | Datos locales eliminados **antes de mostrar el aviso** o antes de exportar o confirmar (cuenta desactivada), o una operación rechazada eliminada sin acción explícita del usuario o sin el plazo informado y la constancia posterior | [CONF] | OFF-11, OFF-10 |
+| ES-50 | Una promesa de conservación de los datos locales o de borrado a distancia, en la interfaz o en la documentación | [CONF] | OFF-12, OFF-17, HR1-11 |
+| ES-51 | Una actualización de la app que descarta o corrompe la cola pendiente | [REC] | OFF-16, RF-PWA-03 |
+| ES-52 | Un dato local tratado como fuente de verdad o como concesión de permisos | [CONF] en OFF-22 y PA-01; [DER] en IN-03-11 | OFF-22, PA-01, IN-03-11 |
+
+#### Escenarios de pérdida, revocación y limpieza (se suman a ESC-43…74)
+
+**Ningún escenario se resuelve aquí por un mecanismo**; donde hay formulaciones, se indican sin elegir. Los resultados «admisibles» son los que `01` y las partes aprobadas permiten.
+
+| ID | Escenario | Origen | Resultados admisibles | Resultados prohibidos | Formulaciones / condiciones |
+|---|---|---|---|---|---|
+| ESC-75 | Pérdida o robo del dispositivo con la cola y los datos preparados | OFF-12, CAB-08, AM-08 [CONF] | El almacén contiene solo datos mínimos sin campos internos; el dueño o el organizador revoca la cuenta y el servidor deja de aceptar sus operaciones; los datos locales no se purgan a distancia (riesgo residual) | Campos internos o secretos en el almacén (ES-45, ES-47); promesa de borrado remoto (ES-50) | CAP-16-P-A o B; RES-02 sin aceptar |
+| ESC-76 | Un dispositivo compartido con pendientes de una cuenta en el que inicia sesión otra | IN-03-20 [REC]; OFF-12; ESC-62 | **Sin elegir:** separación estricta por cuenta o una cola etiquetada con acceso restringido | Datos o cola de una cuenta accesibles a otra (ES-48) | CAP-16-A-A o B; DC3-2; DC3-7 |
+| ESC-77 | Cuenta desactivada o revocada con pendientes y un dispositivo que no vuelve a conectarse **o que usa otra cuenta** | OFF-11, OFF-12 [CONF]; HR1-11 | Al primer contacto: cierra sesión, bloquea el acceso local, ofrece una sola vez la exportación limitada y elimina de forma controlada; **sin ese contacto, los datos locales persisten (riesgo residual)**; si **otra cuenta** usa el mismo dispositivo, el primer contacto de la cuenta A puede no producirse y el tratamiento de sus datos locales **no está definido (OC-48)** | Eliminar antes del aviso o de exportar o confirmar (ES-49); prometer borrado remoto (ES-50) | IN-16-10; OC-48; D16-3 |
+| ESC-78 | El navegador elimina el almacenamiento local con pendientes | OFF-17 [CONF]; IOS-05 [NO VERIF]; ESC-65 | Se pierden las capturas no sincronizadas; **no se promete conservación**; lo confirmado en el servidor no se pierde | Prometer conservación (ES-50); dar por perdida una operación ya `confirmada` | CAP-16-C-A o B; RES-07 sin aceptar |
+| ESC-79 | Vence el máximo de 30 días de una operación en conflicto o rechazada con el dispositivo desconectado | OFF-10 [CONF] | La eliminación controlada se aplica al vencer cuando la app se ejecuta; **no se garantizan avisos ni conservación** si el dispositivo permanece desconectado | Borrar sin plazo informado, constancia o acción del usuario (ES-49) | CAP-16-K-A o B; PRV-10 [PEND-JUR] |
+| ESC-80 | Una actualización de la app con la cola pendiente en un formato no compatible | OFF-16 [REC] | **Sin elegir:** se bloquea la actualización hasta sincronizar, o se lee el formato anterior hasta sincronizar | Cola descartada o corrompida (ES-51) | CAP-16-V-A o B; IN-05-16 |
+| ESC-81 | Cierre de sesión con pendientes | OFF-12 [CONF] | Exige confirmación explícita y borra los datos locales tras sincronizar o descartar | Borrar las pendientes sin sincronizar ni descartar (ES-49) | IN-16-08 |
+| ESC-82 | Sesión vencida con captura en curso y protección en reposo ligada a la sesión | OFF-23 [CONF] | La captura continúa con la información local mínima; sincronizar exige sesión válida | Impedir la captura local autorizada previamente [DER: tensión con CAP-16-P-B] | CAP-16-P-B; OC-49 |
+| ESC-83 | Exportación limitada al desactivar la cuenta y archivo que llega al dispositivo | OFF-11, OFF-24 [CONF]; HR1-14 | Se ofrece una sola vez; el archivo contiene solo lo que fija CMP-17; no se reimporta | Exportar más de lo autorizado (Q-43); prometer purga del archivo | IN-16-16; RES-04 sin aceptar |
+| ESC-84 | Datos preparados con más de 24 horas y cambios posteriores de privacidad | OFF-02, HR1-11 [CONF]; ESC-72 | Aviso de antigüedad; la copia local puede quedar desactualizada hasta la próxima sincronización o limpieza, **sin plazo prometido** | Promesa de purga a distancia (ES-50); nombres con Q-20 abierta (ES-46) | IN-04-13; D4-6; OC-47 |
+
+### 23.8 Amenazas y casos de abuso relevantes
+
+**No se amplía el modelo de amenazas:** esta sección registra cómo las capacidades de ADR-16.C tratan las amenazas que R2-A asigna a R2-C. La **consolidación del modelo** corresponde a R2-C4 y no se hace aquí.
+
+| Amenaza o caso | Qué es | Cómo la tratan las capacidades exigidas | Queda para |
+|---|---|---|---|
+| **AM-08 / CAB-08** | Robo, pérdida o préstamo del dispositivo con cola y datos preparados | IN-16-01…IN-16-04, IN-16-09; ES-45, ES-47; ESC-75 | D16-1 (cifrado local: pregunta abierta); **ningún RES lo cubre, no está aceptado** |
+| **AM-11 / CAB-08** | El navegador elimina los datos locales y se pierden capturas [NO VERIF] | IN-16-11…IN-16-14; ES-50; ESC-78 | D16-4; **RES-07 sin aceptar**; verificación en dispositivo (§2.5; 5E y Fase 7) |
+| **AM-33 / CAB-30** | Sincronizar la cola de otra cuenta o apropiarse de operaciones ajenas | IN-16-07; ES-48; ESC-76 | D16-2; adoptar o no lo [REC] (DC3-7); ADR-03.C |
+| AM-10 / CAB-16 | Editar la cola local o el reloj | La protección del almacén (D16-1) **no sustituye** la revalidación del servidor (IN-16-06) | **ADR-05.C** (IN-05-10, IN-05-15) |
+| AM-28 / CAB-29 | Nombre de un menor visible en copias locales tras revocar u ocultar | IN-16-03, IN-16-09; ES-46; ESC-84 | **ADR-04.C** (D4-6; OC-47); RES-02 sin aceptar |
+| CAB-18 (AM-13) | Uso de la exportación para filtrar datos | IN-16-16; ESC-83 | CMP-17; Q-43; **RES-04 sin aceptar** |
+| AM-19, AM-34 | Inyección en la capa de datos y de contenido en vistas públicas | **No se tratan aquí**: reasignación propuesta y abierta (OC-40, DB2c-11) | DB2c-11 |
+
+### 23.9 Matriz de trazabilidad
+
+| Fuente | Cubierta por | Observación |
+|---|---|---|
+| OFF-02 | IN-16-01, IN-16-03 | Preparación del dispositivo; contenido: ADR-04.C |
+| OFF-03 | IN-16-19 | Contenido de la cola: ADR-05.C |
+| OFF-10 | IN-16-11; D16-3, D16-6; ES-49; ESC-79 | Retención, avisos [REC], constancia |
+| OFF-11 | IN-16-09, IN-16-10; ES-49; ESC-77, ESC-83 | Revocación y cuenta desactivada; ubicación pendiente (OC-48) |
+| OFF-12 | IN-16-01, IN-16-05, IN-16-08, IN-16-09, IN-16-18; D16-1 | Datos y sesión locales; cifrado «no se promete» |
+| OFF-16 [REC]; RF-PWA-03 | IN-16-15; D16-5; ESC-80 | Actualización con cola pendiente |
+| OFF-17 | IN-16-12; D16-4; ES-50; ESC-78 | Almacenamiento no garantizado |
+| OFF-22; OFF-23 | IN-16-05, IN-16-06; ESC-82 | Autorización definitiva del servidor; sesión vencida |
+| OFF-24 | IN-16-16; ESC-83 | Exportación limitada |
+| PRV-10 | IN-16-11; D16-3 | Retención (valores PEND-JUR) |
+| PRV-11; PA-08; R1 §5.6 | IN-16-01…IN-16-03; ES-45, ES-46 | Minimización y zonas |
+| PRV-12 [REC] | IN-16-17 | Registros sin datos personales |
+| PRV-15, PRV-17 | IN-16-20 | Puerta de lanzamiento y datos sintéticos |
+| RT-09 [REC]; IN-03-12 | IN-16-04; ES-47 | Credenciales y secretos |
+| IN-03-11 | IN-16-06; ES-52 | El contexto local no autentica |
+| IN-03-19, IN-03-20 [REC]; IN-05-11 | IN-16-07; D16-2; ES-48; ESC-76 | Aislamiento por cuenta |
+| HR1-03 | IN-16-18; D16-1 | Cifrado local |
+| HR1-07; §2.5; IOS-01…08 | IN-16-12, IN-16-13; OC-51 | iOS no verificado en dispositivo |
+| HR1-11; HR1-14 | IN-16-09, IN-16-16; ESC-84 | Copias y exportación no purgables |
+| RK-11; RK-15 | IN-16-12; D16-3, D16-4 | Riesgo de iOS; RK-15 no cubre el desalojo |
+| AM-08, AM-11, AM-33; CAB-08, CAB-30; RES-02, 04, 07 | §23.8 | Amenazas y riesgos residuales |
+| IN-05-01, 11, 13, 16, 21 | IN-16-07, IN-16-10, IN-16-11, IN-16-15, IN-16-19 | Consumidos de ADR-05.C / R2-C1 |
+| IN-04-03, 11, 12, 13; D4-6; OC-47 | IN-16-02, IN-16-03; ES-46; ESC-84 | Consumidos de ADR-04.C / R2-C2 |
+
+### 23.10 Dependencias, condiciones abiertas y decisiones
+
+#### 23.10.1 Dependencias
+
+| Elemento | Depende de lo aprobado | Alimenta (sin decidirlo) | Decisiones del responsable |
+|---|---|---|---|
+| IN-16-01…IN-16-06 (minimización, secretos, sesión) | OFF-02, OFF-12, PRV-11, IN-03-11, IN-03-12; R1 §5.6 | ADR-16.I; ADR-03.I | D16-1; OC-49 |
+| IN-16-07…IN-16-10 (cuenta, pérdida, revocación) | OFF-11, OFF-12; IN-03-20 [REC]; IN-05-11, IN-05-21 | ADR-16.I | D16-2; OC-48; DC3-7 |
+| IN-16-11, IN-16-12…IN-16-14 (retención, desalojo) | OFF-10, OFF-17; PRV-10; RK-11 | ADR-16.I; verificación en 5E y Fase 7 | D16-3, D16-4, D16-6; OC-50, OC-51; RES-07 |
+| IN-16-15, IN-16-19 (formato) | OFF-16 [REC]; IN-05-01, IN-05-16 | ADR-05.I; ADR-16.I | D16-5 |
+| IN-16-16, IN-16-17, IN-16-20 | OFF-24; PRV-12, PRV-15, PRV-17 | CMP-17 | Q-43; PEND-JUR |
+
+#### 23.10.2 Condiciones y decisiones heredadas (conservadas abiertas)
+
+**Ninguna se resuelve ni se infiere.** Se listan porque condicionan a ADR-16.C.
+
+| Elemento | Estado | Cómo afecta a ADR-16.C |
+|---|---|---|
+| Q-20; PRV-02, PRV-04 [COND]; PRV-18; RES-08 | Abiertas; sin nombres personales mientras Q-20 siga abierta | IN-16-03; ES-46 |
+| OC-47 / D4-6 (R2-C2) | Abierta | Nombre público en copias y datos preparados |
+| IN-05-21 (ubicación); D5-6, D5-7 (R2-C1) | Abiertas | OC-48; estado local tras un fallo técnico |
+| OC-42, OC-44 (R2-C1) | Abiertas | Estado local tras un aborto técnico o una interrupción |
+| Q-43; HR1-14; RES-04 | Abiertas; sin aceptar | IN-16-16; ESC-83 |
+| RES-02, RES-07 | Sin aceptar | IN-16-09, IN-16-12; AM-11, AM-28 |
+| HR1-03 (cifrado local); OFF-12 | Abierta («no se promete») | D16-1 |
+| HR1-07, §2.5; IOS-01…08 | Sin verificar en dispositivo | IN-16-12, IN-16-13; OC-51 |
+| IN-03-19, IN-03-20, OFF-16, OFF-10 (avisos 7 y 1 días), PRV-12, RT-09 [REC] | Recomendaciones no confirmadas | DC3-7 |
+| PRV-10 (valores); PEND-JUR | Pendiente de asesoría jurídica | IN-16-11 |
+| Decisiones 3 y 10 de R2-A; K-3; D-2; DB1, DB2a, DB2b, DB2c, DC1, DC2 y OC-01…47 | Abiertas | Conservadas; ninguna se toca |
+
+#### 23.10.3 Condiciones abiertas nuevas de este borrador
+
+| ID | Condición abierta | Relación |
+|---|---|---|
+| OC-48 | Ubicación definitiva de la conducta del cliente ante la pérdida de autorización (OFF-11; IN-05-21; IN-16-10): `01` la describe sin asignar componente y R1 §5.3 asigna la retención local a CMP-04 y la exportación a CMP-05; tampoco define qué ocurre con los datos locales de la cuenta A, revocada o desactivada, mientras **otra cuenta usa el mismo dispositivo** | T-8; IN-05-21; ADR-05.C; ESC-77 |
+| OC-49 | Si una protección adicional en reposo puede coexistir con la captura con sesión vencida (OFF-23): `01` no lo define | D16-1; T-3 |
+| OC-50 | Si existe un plazo máximo local para las operaciones `pendiente` y qué significa "sin sincronizar durante un tiempo" en CAP-16-C-B: `01` no fija ningún parámetro | D16-3, D16-4; T-6 |
+| OC-51 | Comportamiento del almacenamiento en iOS 16.4 (mínimo de RNF-07) frente a lo documentado para iOS 17: no está documentado en las fuentes leídas | T-7; IOS-07 [NO VERIF] |
+
+#### 23.10.4 Decisiones propuestas al responsable (DC3-)
+
+**Ninguna se resuelve aquí.** Las decisiones heredadas permanecen como estaban.
+
+| ID | Decisión | Opciones | Efecto |
+|---|---|---|---|
+| DC3-1 | Protección del almacén ante pérdida o robo (D16-1; OFF-12; HR1-03) | CAP-16-P-A / CAP-16-P-B / mantener abierta | Si se exige una protección adicional en reposo |
+| DC3-2 | Aislamiento por cuenta (D16-2) | CAP-16-A-A / CAP-16-A-B / mantener abierta | Qué ve otra cuenta en un dispositivo compartido |
+| DC3-3 | Retención local de las pendientes (D16-3; OC-50) | CAP-16-R-A / CAP-16-R-B (exige un parámetro) / mantener abierta | Cuánto persisten los datos en un dispositivo desconectado |
+| DC3-4 | Mitigación de la pérdida por limpieza del navegador (D16-4; OC-50, OC-51) | CAP-16-C-A / CAP-16-C-B / mantener abierta | Alcance de la mitigación de RES-07 |
+| DC3-5 | Migración del formato de cola (D16-5) | CAP-16-V-A / CAP-16-V-B (exige una lectura de `01`) / mantener abierta | Qué pasa con la cola al actualizar |
+| DC3-6 | Constancia de la eliminación (D16-6); `01` **no** exige constancia de la exportación | CAP-16-K-A / CAP-16-K-B (contradice OFF-20 en lo nunca recibido y extiende lo que registra el servidor) / mantener abierta | Trazabilidad hacia el organizador |
+| DC3-7 | Estado de las propuestas [REC] que ADR-16.C consume (IN-03-19, IN-03-20, OFF-16, OFF-10 avisos, PRV-12, RT-09) | Adoptar / descartar / decidirlo en una etapa posterior | Si IN-16-07, 15 y 17 pasan a exigencias |
+| DC3-8 | Ubicación de la conducta de OFF-11 (OC-48) | Asignarla a un componente / mantener abierta | Cierra la condición abierta de R2-C1 |
+| DC3-9 | Orientación sobre las tensiones T-1…T-8 de §23.2 | Recibir sin resolver / pedir aclaración de `01` o de R1 por edición separada | Alcance frente a ADR-05.C, ADR-04.C y ADR-03.C |
+| DC3-10 | Alcance y orden de R2-C4 (consolidación del modelo de amenazas), que requiere autorización separada | Autorizar / posponer | Cierra el bloque R2-C |
+
+### 23.11 Riesgos y limitaciones
+
+Los riesgos se **registran sin valorar ni aceptar**. Ninguno sustituye a RB1, RB2a, RB2b, RB2c, RR5, RR4 ni RES-01…12.
+
+| ID | Riesgo | Relación |
+|---|---|---|
+| RR16-01 | Elegir de hecho una formulación al describir ventajas y limitaciones | §23.5; DC3-1…DC3-6 |
+| RR16-02 | Prometer conservación o borrado a distancia, o presentar el cifrado local como garantizado | X-3; ES-50; OFF-12 |
+| RR16-03 | Una protección en reposo que impida la captura con sesión vencida o que cause pérdida de capturas por una clave inaccesible | CAP-16-P-B; OFF-23; OC-49 |
+| RR16-04 | Tratar como confirmadas las propuestas [REC] (IN-03-19, IN-03-20, OFF-16, avisos de OFF-10, PRV-12, RT-09) | DC3-7 |
+| RR16-05 | Invadir ADR-16.I y R3 al describir almacenamiento, cifrado o claves | X-4; §23.3 |
+| RR16-06 | Fijar de hecho un parámetro no aprobado (plazo máximo de pendientes, «tiempo» sin sincronizar) | CAP-16-R-B, CAP-16-C-B; OC-50 |
+| RR16-07 | Apoyarse en un comportamiento de iOS no verificado o no documentado para iOS 16.4 | HR1-07; IOS-07; OC-51 |
+| RR16-08 | Nombres personales persistidos en el dispositivo mientras Q-20 siga abierta | IN-16-03; ES-46 |
+| RR16-09 | Ampliar lo que registra el servidor (CAP-16-K-B) o la exportación sin respaldo en `01` | OFF-20; OFF-24; PRV-10 |
+| RR16-10 | Presentar este borrador como cumplimiento legal o como verificación en dispositivo | X-5, X-8 |
+
+**Limitaciones del análisis.** (1) Es un borrador del autor, **sin revisión de contexto nuevo ni independiente**. (2) Se leyeron las secciones pertinentes de las fuentes (§23.0), no todas línea a línea. (3) No se realizó ninguna prueba, medición ni verificación en dispositivo. (4) Las lecturas [DER] y la clasificación de ventajas, limitaciones y riesgos son del autor y deben revisarse. (5) Las afirmaciones sobre iOS provienen de R2-A, son **no verificadas en dispositivo** y no se contrastaron con las fuentes originales.
+
+### 23.12 Criterios de aceptación del borrador y preguntas para el responsable
+
+| ID | Criterio de aceptación | Cumplimiento según el autor (a revisar) |
+|---|---|---|
+| CR2C3-01 | Alcance, fuentes y dependencias identificados | Cumple: §23.0–§23.3 |
+| CR2C3-02 | Al menos dos formulaciones diferenciadas por decisión, con ventajas, limitaciones, riesgos y dependencias | Cumple: §23.5 (D16-1…D16-6) |
+| CR2C3-03 | Ninguna formulación elegida ni aprobada | Cumple: §23.0 (X-1), §23.5 |
+| CR2C3-04 | Invariantes y garantías propuestas, con tipo y fuente | Cumple: §23.4 |
+| CR2C3-05 | Relación con ADR-05.C, ADR-04.C y ADR-03.C sin redefinirlos | Cumple: §23.6 |
+| CR2C3-06 | Estados prohibidos, escenarios y amenazas relevantes | Cumple: §23.7 y §23.8 |
+| CR2C3-07 | Matriz de trazabilidad | Cumple: §23.9 |
+| CR2C3-08 | Decisiones abiertas conservadas (OFF-12, Q-20, IN-05-21, OC-47…, RES-02, RES-04, RES-07) | Cumple: §23.10.2 |
+| CR2C3-09 | Conflictos entre fuentes señalados sin resolver | Cumple: §23.2 (T-1…T-8) |
+| CR2C3-10 | Sin mecanismos, tecnologías ni parámetros no aprobados; sin promesas de conservación ni de borrado remoto | Cumple según §23.13 |
+| CR2C3-11 | Solo se modifica el archivo autorizado y los bloques previos permanecen intactos | Cumple según §23.13 |
+| CR2C3-12 | Borrador pendiente de revisión del responsable; no aprobado, registrado ni versionado | Cumple: §23.0 y §23.14 |
+
+**Preguntas concretas para el responsable** (no se responden por inferencia): (1) ¿Qué formulación, si alguna, desea evaluar con más detalle en cada D16-n (DC3-1…DC3-6)? (2) ¿Se adoptan o se descartan las propuestas [REC] que este borrador consume (DC3-7)? (3) ¿Desea decidir ahora la ubicación de la conducta de OFF-11 (DC3-8) o conservarla abierta? (4) ¿Acepta que ADR-16.C no fije ningún plazo máximo para las pendientes (OC-50) hasta que `01` lo defina? (5) ¿Autoriza R2-C4, la consolidación del modelo de amenazas (DC3-10)?
+
+### 23.13 Verificación del autor
+
+**Naturaleza.** Verificaciones **mecánicas de lectura** hechas por el autor con un guion de solo lectura. **No son una auditoría independiente ni una revisión de contexto nuevo:** el autor no puede verificar su propio trabajo con independencia. **Este borrador no ha sido auditado ni revisado por nadie más.**
+
+| # | Verificación | Resultado |
+|---|---|---|
+| V-1 | Las líneas anteriores a la Parte IX (todo el archivo del commit `acb29b8`) son **idénticas**; el cambio son solo líneas añadidas al final; ninguna eliminada | Cumple (comparación con `git show HEAD:`) |
+| V-2 | Solo cambió `02-arquitectura-adr.md`; `00`, `01`, `aprobaciones.md` y `bitacora.md` no cambiaron | Cumple (`git status` y sumas SHA-256) |
+| V-3 | Identificadores definidos y sin referencias huérfanas: IN-16-01…21, ES-45…52, ESC-75…84, OC-48…51, DC3-1…10, RR16-01…10, CR2C3-01…12, D16-1…6 y las doce formulaciones CAP-16-P, A, R, C, V y K (A y B) | Cumple (guion de lectura) |
+| V-4 | Las citas literales entre «» se buscaron en `00`, `01` y las partes previas | Todas existen, **salvo** los mensajes del responsable citados en §23.0, que proceden de la conversación y no de un archivo |
+| V-5 | Exploración de términos tecnológicos (nombres de bases de datos, productos, proveedores, librerías, algoritmos de cifrado, API del navegador, mecanismos de almacenamiento o de gestión de claves y similares) | Solo aparecen en X-4 y en esta fila como **exclusión**; ninguna elección ni mecanismo |
+| V-6 | Parámetros numéricos: solo los que cita `01` (30 días, 7 y 1 días [REC], 24 horas, iOS 16.4); ninguno nuevo | Cumple (lectura del autor) |
+| V-7 | Ninguna decisión abierta aparece resuelta: no se elige ninguna formulación; OFF-12 (cifrado), Q-20, Q-43, IN-05-21, OC-47 y las demás permanecen abiertas; no se acepta ningún RES; no se prometen conservación ni borrado remoto; no se declara cumplido R1 §8.1 | Cumple (lectura del autor) |
+| V-8 | Las tablas están alineadas (mismo número de columnas por fila) | Cumple (guion de lectura) |
+| V-9 | **Coherencia con lo aprobado:** ADR-16.C protege el contenedor y no redefine el contenido de la cola (§21) ni el de los datos preparados (§22); la condición de Q-20 se propaga | Cumple (comparación con §21, §22 y R1 §5.6) |
+| V-10 | Cada decisión D16-n presenta **dos** formulaciones con ventajas, limitaciones, riesgos y dependencias | Cumple (§23.5) |
+
+**Límites.** Las lecturas [DER] y la clasificación de ventajas, limitaciones y riesgos son del autor y deben revisarse. Las ocho tensiones de §23.2 son una identificación del autor.
+
+### 23.14 Estado de esta parte y lo que no se hizo
+
+**Estado: v0.2-R2C3, APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (2026-11-22, inferida).** Corrigió los hallazgos G-01…G-08 (§23.15). Aprobación registrada en §23.0, `aprobaciones.md` y `bitacora.md`; **no versionado**.
+
+**Qué se hizo.** Se redactó la Parte IX (§23) como borrador de ADR-16.C: alcance, fuentes y dependencias (§23.0–§23.3), invariantes y garantías exigidas (§23.4), seis decisiones con dos formulaciones cada una (§23.5), relación con ADR-05.C, ADR-04.C y ADR-03.C (§23.6), estados prohibidos y escenarios (§23.7), amenazas relevantes (§23.8), matriz de trazabilidad (§23.9), dependencias, condiciones y decisiones abiertas (§23.10), riesgos (§23.11) y criterios de aceptación y preguntas (§23.12).
+
+**Qué no se hizo.** No se redactó R2-C4 (consolidación del modelo de amenazas), R3 ni R4; no se aprobó ADR-16.C, R2-C3, R2-C, R2 ni la Fase 2; no se eligió ninguna formulación; no se resolvió ninguna decisión ni condición abierta (OFF-12 cifrado, Q-20, Q-43, IN-05-21, OC-47, D-2 y las demás); no se eligió tecnología, mecanismo ni parámetro; no se aceptó ningún riesgo ni se concedió excepción; no se verificó nada en dispositivo; no se declaró cumplido R1 §8.1; no se modificaron otros archivos; no se actualizó la trazabilidad histórica de `acb29b8`; no se crearon ramas, commits, pushes, PR ni merges; no se tocó `main`.
+
+**Git.** Rama `claude/fase-2-arquitectura-amenazas`; HEAD `acb29b818915a0e34a68ce23793354b34cbbdd33`; los cambios son `02-arquitectura-adr.md`, `aprobaciones.md` y `bitacora.md` **sin confirmar** (registro de la aprobación). Cualquier commit, push o PR requiere autorización expresa y separada.
+
+### 23.15 Hallazgos de la revisión focalizada de la v0.1 (G-01…G-08) y correcciones de la v0.2
+
+**Origen.** Autoevaluación del autor sobre la v0.1 (SHA-256 `3557619651fc682db87115ce6ad5b07726873b74547b48aa3a5b51f54e21658b`): **no es una auditoría independiente ni una revisión de contexto nuevo**. Las correcciones fueron autorizadas en una ronda única (§23.0). **No equivalen a aprobación.**
+
+| ID | Corrección en la v0.2 | Dónde |
+|---|---|---|
+| G-01 | CAP-16-K-B señalada como contradictoria con OFF-20 en lo nunca recibido, sin conceder excepción; D16-6 y DC3-6 ya no presentan una constancia de la exportación como exigencia | D16-6, DC3-6 |
+| G-02 | OFF-07 y OFF-25 incorporadas a CAP-16-R-B; CAP-16-R-A: `01` no contradice la ausencia de plazo pero tampoco fija uno | D16-3 |
+| G-03 | Garantía absoluta de CAP-16-V-A eliminada: evita pérdidas provocadas por la actualización, sin proteger frente al desalojo externo (OFF-17) | D16-5 |
+| G-04 | Lenguaje absoluto de CAP-16-A-A corregido; escenario de la cuenta A revocada o desactivada con otra cuenta en el mismo dispositivo incorporado a ESC-77 y OC-48; posible tensión de CAP-16-A-B con IN-03-20 señalada sin resolverla | D16-2, §23.7, §23.10.3 |
+| G-05 | IN-16-03 y ES-46: [CONF] la prohibición de publicar; [DER] su extensión a persistir, preparar o copiar nombres personales; sin relajar la protección | §23.4, §23.7 |
+| G-06 | CAP-16-P-B: la custodia del material de protección pasa a ADR-16.I; sesgo de CAP-16-P-A respecto de OFF-12 neutralizado | D16-1 |
+| G-07 | CAP-16-C-B acotada a la aplicación abierta (OFF-05); IN-16-14 acotada: el desalojo local no afecta a lo confirmado en el servidor | D16-4, §23.4 |
+| G-08 | IN-16-05 completada: sin sesión no se puede preparar ni descargar datos nuevos (OFF-23) | §23.4 |
