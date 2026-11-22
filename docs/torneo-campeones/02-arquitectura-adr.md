@@ -8577,3 +8577,382 @@ Las pruebas se ejecutan **contra PostgreSQL real** (RNF-11, HR1-13) con **datos 
 | M-3 | Estados neutrales y condicionados de GV-01, GV-02 y GV-03 (ninguna seleccionada ni descartada); matriz GV × verificaciones omitidas (servidor, auditoría, ámbito, autenticación, reglas deportivas, recálculo, RT-14, atomicidad); mecanismos de autorización previa documentados sin seleccionar (OC-215, OC-216, RR2I-21) | §31.5, §31.16 |
 | M-4 | AZ-25: la capa de datos accede al estado vigente de cuenta, sesión, rol y nivel MFA; las afirmaciones firmadas obsoletas no bastan; vinculado a SI-07 y OC-179; mecanismo [PEND] (OC-213) | §31.3, §31.7, §31.8, §31.16 |
 | M-5 | H2B1-04, H2B1-06 (A-6) y OC-202…204 vinculadas a condiciones (OC-217, OC-199, OC-202…204); propiedad de tablas, FORCE RLS y privilegios efectivos [PEND] (OC-214, RR2I-22) | §31.2, §31.8, §31.16, §31.17 |
+
+---
+
+# PARTE XVIII — BLOQUE R3-E / ADR-04.I (v0.2-R3E-04I, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, R3-E PARCIAL EN CURSO; 2026-11-22 inferida)
+
+## 32. R3-E — ADR-04.I (implementación de la visibilidad, las proyecciones públicas y la coherencia pública): evaluación y borrador condicionado
+
+### 32.0 Alcance, autorización, puerta de entrada y reglas
+
+- **Autorización (2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R3-E: INICIO DE ADR-04.I»: «AUTORIZO EXCLUSIVAMENTE INICIAR EL BORRADOR DOCUMENTAL CONDICIONADO DE ADR-04.I.» Solo se modifica este documento, con esta Parte nueva. **No se redactan ADR-05.I ni ADR-16.I; no se inicia R3-F ni R4.**
+- **Puerta de entrada (verificada, solo lectura previa).** R1 §8.2: ADR-04.I requiere ADR-04.C y ADR-01. ADR-04.C requiere ADR-02.C (alcance de A-8 y frontera atómica). ADR-04.C es **propuesta** (§22); ADR-01, ADR-06, ADR-08, ADR-03.I, ADR-09.I y ADR-02.I están aprobados solo de forma documental condicionada y **no seleccionan proveedor ni mecanismo**. La matriz de R2 clasifica como **A** D4-2 (CAP-04-C-A), D4-3 (CAP-04-V-A), D4-6 (CAP-04-X-A) y D4-7 (CAP-04-A-A), candidatas **no admitidas** por el responsable; **D4-1, D4-4, D4-5 y D4-8 no tienen formulación A** y quedan **bloqueadas para selección**. **No hay bloqueo obligatorio para redactar un borrador condicionado que no selecciona.** Un `.I` solo puede **elegir** entre formulaciones que el responsable haya admitido: no hay conjunto admitido, así que **este borrador no elige nada.**
+- **Qué es este borrador.** Una evaluación de alternativas de implementación con una **recomendación preliminar no vinculante**. **C-A, V-A, X-A y A-A se tratan solo como candidatas documentales no admitidas;** las formulaciones C no se consideran rechazadas ni las A aprobadas. **No se seleccionan mecanismos de materialización, invalidación, publicación ni filtrado,** ni proveedores. No resuelve Q-20, Q-40 (d), A-8, RT-14 ni OC-46; no aprueba ADR; no acepta riesgos ni concede excepciones; **no concede excepción a D-2**; **no declara cumplido R1 §8.1**; no escribe código ni crea cuentas.
+- **Convención.** [DOC]: dato leído en la página oficial citada (§32.17). [CONF]: texto confirmado de `01`, R1 o R2 con el estado que allí declara. [REC]: recomendación sin decidir. [PROP]: propuesta del autor. [INF]: inferencia o cálculo del autor. [PEND]: pendiente o sin verificar. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; **lo no leído se marca [PEND] y no se penaliza en la puntuación.** Una **inferencia por ausencia de documentación** se rotula [INF], nunca [DOC]. **«Por diseño» solo se usa cuando la propia definición de la alternativa lo garantiza; nunca para una inferencia.** Los hechos generales de PostgreSQL y de redes de entrega de contenido no verificados en fuente oficial son [INF].
+- **Identificadores nuevos (sin colisión).** **ALT-04-A, ALT-04-B, ALT-04-C** (alternativas de implementación de la frontera pública), **VP-01…27** (requisitos de seguridad y de visibilidad verificables), **DR4I-1…11** (decisiones del responsable), **OC-218…245** (condiciones abiertas), **RR4I-01…22** (riesgos de redacción), **CR4I-01…18** (criterios de revisión documental).
+- **Versión 0.2 (correcciones de la revisión focalizada).** Aplica M-1…M-6 (§32.19): **lista cerrada de parámetros públicos** y prevención de inferencias (VP-25); **frontera ampliada a metadatos y canales laterales** (VP-26) sin prometer eliminación absoluta; **tensión entre vistas con privilegios del invocador y del creador** documentada sin declarar segura ninguna por sí sola; **mínimo privilegio para toda ruta de lectura pública del servidor** (VP-27, [PROP]); **tabla de tres niveles** (origen, caché compartida y copias descargadas) y precisión de que agrupar datos no demuestra atomicidad ni coherencia transaccional; VP-14 vinculado con SI-07 y AZ-03; «GV-01-compatible» reformulado. **Sin seleccionar ALT-04, GV, formulaciones ni mecanismos; D4-1, D4-4, D4-5, D4-8, Q-20, Q-40 (d), A-8 y RT-14 sin resolver; CL-30 y R1 §8.1 sin declarar cumplidos; D-2 sin excepción.**
+- **Exclusiones.** Admitir, seleccionar o descartar formulaciones (A, C o X); elegir mecanismo de materialización, invalidación, publicación o filtrado, motor, extensión, red de entrega o proveedor; resolver D4-1, D4-4, D4-5, D4-8, Q-20, Q-40 (d), A-8, RT-14, OC-46, OC-45, OC-47, OC-102, OC-121, OC-122, OC-123, OC-124, D-2 ni otra decisión heredada; aceptar riesgos o brechas; aprobar ADR-04.I, R3-E, R3 ni la Fase 2; redactar ADR-05.I ni ADR-16.I; iniciar R3-F ni R4; modificar las Partes I–XVII ni los registros.
+- **Aprobación (metadato; 2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-04.I»: «APRUEBO EXCLUSIVAMENTE ADR-04.I v0.2-R3E-04I COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: ADR-04.I (v0.2-R3E-04I): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL; R3-E sigue como bloque parcial en curso.** **Esta aprobación NO equivale a aprobar R3-E completo, a seleccionar arquitectura, alternativa, mecanismo ni proveedor, ni a admitir formulaciones.** El evento de aprobación es independiente y no reutiliza identificadores DR4I. No aprueba definitivamente ADR-04.I ni admite o selecciona formulaciones, alternativas, mecanismos de materialización, invalidación, publicación o filtrado, ni proveedores; no acredita la separación de lo no publicado, la coherencia pública, la retirada de visibilidad, la protección frente a filtraciones ni control alguno; no declara cumplido CL-30 ni R1 §8.1. Se conservan: **ALT-04-A, ALT-04-B y ALT-04-C sin selección**; rangos **ALT-04-A y ALT-04-B: 2,80–4,10; ALT-04-C: 2,35–3,95**, que se solapan y **no discriminan**; **VP-01…27** con sus distintos niveles de confirmación (confirmados, [DER], garantías exigidas no demostradas, [REC], propuestas [PROP] y mecanismos [PEND]); **DR4I-1…11 y OC-218…245 abiertas**; **RR4I-01…22 sin aceptar**; **D4-1, D4-4, D4-5, D4-8, Q-20, Q-40 (d), A-8, RT-14 y OC-46 sin resolver**; **C-A, V-A, X-A y A-A como candidatas A no admitidas** y **V-B y A-B no descartadas**; **CL-30 y R1 §8.1 sin cumplimiento demostrado**; **D-2 sin excepción**; la **separación entre datos internos, confirmados y publicados** (incluida la separación entre cálculo interno y proyección pública, OC-123 de ADR-08); la **protección frente a parámetros públicos manipulables, metadatos y rutas de lectura alternativas como requisitos y no como garantías demostradas** (VP-25, VP-26 y VP-27); las **limitaciones de las vistas públicas, de las políticas por fila, del acceso directo y de los privilegios del servidor**, incluida la tensión entre vistas con privilegios del invocador y del creador (ninguna segura por sí sola); la **separación entre retirada del origen, caché compartida y copias descargadas**; las dependencias de **ADR-02.I, ADR-06, ADR-08 y ADR-09.I** (OC-190, OC-191 y OC-214; OC-85…100; OC-101, OC-102, OC-121, OC-122, OC-123 y OC-124; K-3 y las brechas RX-03, RX-04 y RX-05); la limitación de **autoevaluación del autor, sin auditoría independiente**; y **R3-E como bloque parcial en curso, con ADR-05.I y ADR-16.I, R3-F y R4 sin iniciar**. Trazabilidad posterior: ADR-02.I v0.2-R3E-02I (Parte XVII) y su registro de aprobación quedaron versionados en el commit `f4aa2dd5e0b97aa3401d0258adce9674ba66a2d5` (`f4aa2dd`; verificable por Git; 2026-11-22T19:44:19Z). Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Nota posterior de trazabilidad (2026-11-22, inferida; solo informativa).** ADR-02.I v0.2-R3E-02I (Parte XVII) y su registro de aprobación quedaron versionados en el commit `f4aa2dd5e0b97aa3401d0258adce9674ba66a2d5` (`f4aa2dd`; verificable por Git; 2026-11-22T19:44:19Z). Las expresiones «No versionado» de §31.19 y «Estado de versionado: Pendiente» del registro de ADR-02.I describen el momento de redactarse. **No se reescribe la aprobación histórica;** `aprobaciones.md` y `bitacora.md` **no se modifican en esta entrega.**
+
+### 32.1 Identificación
+
+| Campo | ADR-04.I |
+|---|---|
+| Tema | Implementación de la visibilidad, de la proyección pública derivada de datos autorizados y de la coherencia pública, sin seleccionar mecanismos |
+| Pregunta (R1 §8.1) | ¿Cómo se implementan, de modo verificable y **sin** seleccionar tecnología hasta ADR-01, las capacidades de ADR-04.C (IN-04-01…18): separación entre lo interno, lo confirmado y lo publicado; proyección pública solo con datos autorizados; coherencia entre resultados, posiciones, goleadores y tarjetas; y revocación de visibilidad sin filtraciones? |
+| Alternativas mínimas | ≥ 2 (aquí 3: A, B y C; difieren en **dónde se aplica la frontera pública:** capa de datos, servidor o ambos). **D4-1, D4-4, D4-5 y D4-8 no forman parte de ninguna alternativa** |
+| Dependencias (R1 §8.2) | ADR-04.C (propuesta); ADR-01 (documental condicionado); y, por ADR-04.C, ADR-02.C |
+| Dependencias laterales | ADR-02.I (acceso directo GV, rol de servicio, estado vigente; OC-190, OC-191, OC-214); ADR-06 y ADR-07 (R3-C: señal de cambio, caché y actualización); ADR-08 (R3-D: separación entre cálculo interno y proyección pública, MO-25; OC-101, OC-123); ADR-09.I (auditoría y brechas RX-03…05); ADR-03.I; ADR-05.I y ADR-16.I (no redactados) |
+| Componentes | CMP-09 (torneo y visibilidad), CMP-12 (clasificación), CMP-14 (proyecciones), CMP-15 (entrega pública), CMP-16 (auditoría) |
+| Fronteras de confianza | TB-3 (público ↔ borde público), TB-8 (aplicación ↔ borde público) y TB-4 (aplicación ↔ datos) |
+| Bloque / estado | R3-E (parcial) / **BORRADOR** |
+
+### 32.2 Entradas heredadas: candidatas A, lo bloqueado y lo que no se resuelve
+
+| Decisión de ADR-04.C | Formulaciones (clasificación de la matriz de R2) | Tratamiento en este borrador |
+|---|---|---|
+| **D4-2** coherencia pública | **C-A** (un único estado confirmado en las respuestas servidas por torneo): **A**. **C-B**: X (no conforme con R1 §5.5 y ES-42 salvo aclaración de OC-46) | C-A es candidata A **no admitida**; C-B queda excluida por la matriz. **No se fija** |
+| **D4-3** representación de la visibilidad | **V-A** (la proyección pública contiene solo lo visible): **A**. **V-B** (se guarda también lo no visible y se aplica al servir): **C**, puede chocar con PA-04 | V-A es candidata A **no admitida**; **V-B sigue en juego** (no rechazada). **No se fija** |
+| **D4-6** copias locales | **X-A** (retiro en origen y señal de cambio, sin promesa de plazo): **A**. **X-B**: X (requiere modificar `01`) | X-A es candidata A **no admitida**; X-B queda excluida por la matriz. **No se fija** |
+| **D4-7** `archivado` | **A-A** (`archivado` no público «por ahora»): **A**. **A-B** (público en solo lectura): **C**, condicionada a Q-40 (d) | A-A es candidata A **no admitida**; **A-B sigue en juego**. **No se fija** |
+| **D4-1** materialización de la clasificación | **P-A** (derivadas persistentes) y **P-B** (calculada al servir): **C**; sin evaluación de conformidad (OC-20, DB2b-3) | **BLOQUEADA** (ninguna A). Las alternativas son compatibles con ambas; **no se elige** |
+| **D4-4** campos públicos y etiquetas de menores | **M-A** (lista blanca): **C** (Q-20, PRV-18). **M-B**: X (contradice RF-PUB-02) | **BLOQUEADA** (ninguna A). **Mientras Q-20 siga abierta no se publica ningún nombre: solo etiquetas** [CONF cierre conservador] |
+| **D4-5** proyección de preparación | **R-A** y **R-B**: **C**; sin evaluación de conformidad con OFF-02, PRV-09 y PRV-11 | **BLOQUEADA** (ninguna A). No se diseña; solo se señala qué no debe impedirse (§32.3, VP-17) |
+| **D4-8** publicar y RT-14 (A-8) | **G-A** y **G-B**: **C** (A-8 abierta; G-B amplía RT-14) | **BLOQUEADA** (ninguna A). **No se decide** la guardia opcional; A-8 y RT-14 sin resolver |
+
+**Condiciones heredadas que no se resuelven:** Q-20 y PRV-18; Q-40 (d); A-8 y DB1-3; RT-14, A-15 y A-16; OC-20 y DB2b-3; OC-45, OC-46 y OC-47; HR1-11 y RES-02; OC-26…29; DC2-1…11; K-3 y las brechas de ADR-09.I (RX-03, RX-04, RX-05); **OC-102, OC-121, OC-122, OC-123 y OC-124 de ADR-08 y OC-101** (quién deriva goleadores y tarjetas); **OC-190, OC-191, OC-211 y OC-214 de ADR-02.I**; **OC-85…100 de ADR-06/07**; D-2 y DB2c-10 (sin excepción).
+
+### 32.3 Requisitos verificables (VP)
+
+| ID | Requisito verificable | Fuente | Naturaleza |
+|---|---|---|---|
+| VP-01 | **Lo público es una proyección con lista blanca de campos:** el público lee vistas derivadas, nunca las entidades internas; sin inicio de sesión; sin identidad de editores, correos ni campos internos | IN-04-01; PA-04; RF-PUB-03; PRV-03 | Confirmado |
+| VP-02 | **Nunca públicos:** fecha de nacimiento o edad exacta, documento, teléfono, correo, dirección, fotografías, datos de consentimiento, identidad del editor asignado, correos de usuarios y el nombre interno de un jugador sin autorización; **mientras Q-20 esté abierta ningún nombre (menor o adulto) se publica y solo se muestran etiquetas** | IN-04-02, 03; ES-38, ES-39; Q-20 | Confirmado; Q-20 abierta |
+| VP-03 | **Menores:** etiqueta «Jugador n.º {dorsal} ({equipo})» salvo autorización vigente; **la etiqueta se calcula en el servidor**; las estadísticas cuentan igual; ocultar es reversible y anonimizar no (IN-04-10) | IN-04-03, 10; PRV-02, 06 | Confirmado; nombre público [COND] (Q-20) |
+| VP-04 | **Visibilidad:** un resultado es público solo si el torneo está `publicado`, `en curso` o `finalizado`, la jornada está `publicada` y la operación está `confirmada` (las doce combinaciones de §9.6); un borrador, una jornada no publicada o un `archivado` (por ahora) **no se enumeran ni se acceden** y responden 404 indistinguible de inexistente | IN-04-04; RF-PUB-04; ES-40; CL-25 | Confirmado |
+| VP-05 | **Lo local jamás es público:** solo la operación `confirmada` de un partido visible puede ser pública; el registro de incidencias, la exportación limitada y la auditoría no autorizan publicar | IN-04-05; OFF-15; ES-41 | Confirmado |
+| VP-06 | **Separación estricta entre lo interno, lo confirmado y lo publicado** (§32.5): el cálculo **oficial interno** usa todos los resultados confirmados; la **proyección pública** solo incorpora lo **publicado y confirmado** y **ninguna salida pública (tabla, goleadores, tarjetas, totales, posiciones) permite inferir lo no publicado**; dónde y cómo se filtra lo decide este ADR, no ADR-08 | MO-25 (R3-D); RF-PUB-02; PU-07; IN-04-04 | Garantía exigida; mecanismo [PEND] (OC-225) |
+| VP-07 | **Coherencia entre vistas públicas del mismo torneo:** ninguna respuesta servida presenta un resultado confirmado junto con una clasificación que no lo refleje; las respuestas se generan desde **una lectura consistente** del estado confirmado y visible; **agrupar o leer juntos los datos no demuestra atomicidad ni coherencia transaccional ni cumple RT-14** (se evalúa por efecto al escribir); **qué vistas son «relacionadas» (OC-46) sigue abierto**; **no se afirma que se cumpla** (OC-227, OC-224) | IN-04-06, 07; CL-15; PU-03, PU-15 (R3-C) | Garantía exigida; no demostrada |
+| VP-08 | **Resultados, posiciones, goleadores y tarjetas derivan del mismo estado confirmado y visible;** tras una corrección se recalculan los tres desde ese estado; quién deriva goleadores y tarjetas (CMP-12 u otro) **sigue abierto** (OC-101 de ADR-08); una diferencia legítima entre marcador y eventos (Q-30) no es falla de coherencia | RD-RES-06; MO-17; CL-29; IN-04-07 | Garantía exigida; OC-101 abierta |
+| VP-09 | **Despublicar o retirar visibilidad:** el cambio se aplica en origen y registra una señal de cambio **si ADR-06 la adopta** (OC-228); **sin promesa de plazo** para lo público ni para copias locales; en lo sensible a privacidad (despublicado, ocultado, anonimizado) **no se sirve contenido obsoleto**; la purga reduce la obsolescencia pero no garantiza una retirada absoluta; **CL-30 sin cumplimiento demostrado**; qué se garantiza en el origen, en la caché compartida y en las copias descargadas: §32.8 | IN-04-09; PU-04, PU-16; HR1-11 | Confirmado en la ausencia de plazo; señal [COND] |
+| VP-10 | **Anonimizar y ocultar** se reflejan en lo público sin alterar tablas ni goleadores; **la anonimización alcanza las derivadas persistentes si existen** (D4-1 abierta) | IN-04-10; PRV-06; GT-17 | Confirmado; derivadas [COND] |
+| VP-11 | **`archivado`:** no público «por ahora» y no enumerable; no se asume archivo histórico público; **Q-40 (d) abierta** | IN-04-17; RF-PUB-01; Q-40 (d) | Confirmado ("por ahora"); abierto |
+| VP-12 | **Acceso directo a datos:** el público **nunca alcanza las entidades internas**; si existe un rol público de la capa de datos, solo lee objetos de lista blanca; **vistas, funciones y tablas se exponen solo por decisión expresa**; **una vista con privilegios del invocador exige concesiones y políticas del rol público sobre las tablas subyacentes y una vista con privilegios del creador puede omitir las políticas: ninguna opción es segura por sí sola** (§32.9); se revisan los privilegios por defecto | IN-04-01; AZ-05, AZ-08, AZ-09 (ADR-02.I); OC-190, OC-191, OC-232 | Garantía exigida; mecanismo [PEND] |
+| VP-13 | **Aislamiento entre torneos en lo público:** una respuesta pública de un torneo no contiene datos de otro; las claves de caché incluyen el torneo y la visibilidad; ninguna entrada del usuario entra en la clave; los identificadores recibidos se validan contra el ámbito del torneo (VP-25; OC-233) | IN-02-04; PU-19; PU-08 | Confirmado / propuesta |
+| VP-14 | **Autorización de publicación y conflicto de interés:** quién habilita y retira la visibilidad la fija la matriz de `01 §7.1`; **la autorización se evalúa con el estado vigente de cuenta, rol, sesión y nivel de autenticación en el momento de publicar o retirar** (SI-07 de ADR-03.I; AZ-03 y AZ-25 de ADR-02.I); **si publicar equivale a una decisión sujeta a RT-14 (A-8, G-B) sigue abierto**; el efecto sobre la clasificación del equipo del actor (OC-121) tampoco se resuelve (OC-222) | A-8; RT-14; D4-8; RD-CAL-08 [REC]; SI-07; AZ-03 | Condicionado (abierto) |
+| VP-15 | **Caché compartida y respuestas obsoletas:** solo se guardan proyecciones públicas con lista blanca, nunca respuestas autenticadas ni con datos internos; vencimiento, ventana de contenido obsoleto y revalidación distinguidos; **sin seleccionar mecanismo (ADR-06)** | PU-01, 08, 16, 19 (R3-C) | Propuesta; ADR-06 condicionado |
+| VP-16 | **Service Worker y copias offline:** red primero con respaldo en la copia, antigüedad visible («Actualizado a las hh:mm»), límite de antigüedad; **sin nombres** mientras Q-20 esté abierta; las copias locales no se purgan a distancia (HR1-11) | IN-04-13; PU-18; RF-PWA-02; ADR-16.C | Confirmado / propuesta |
+| VP-17 | **Proyección de preparación (D4-5 bloqueada):** si existe, **nunca** contiene campos internos ni partidos del propio equipo de un actor con restricción de RT-14, y no se sirve a quien no tenga la asignación vigente; **no se diseña aquí** | IN-04-12; ES-43; OFF-02; PRV-11 | Garantía exigida; D4-5 bloqueada |
+| VP-18 | **Concurrencia:** una lectura pública que coincide con una confirmación, una corrección, una despublicación, un ocultamiento o una anonimización **equivale a alguna ordenación secuencial** (ESC-66…74); sin estados mezclados; la serialización se coordina con OC-186 de ADR-02.I (OC-235) | IN-04-06; GT-12; ESC-66…74 | Garantía exigida; no demostrada |
+| VP-19 | **Recálculo y recuperación ante fallos:** si falla la actualización de lo derivado o la señal de cambio, **no se sirve un estado mezclado**; la proyección se reconstruye desde las fuentes y, ante una discrepancia, **prevalecen las fuentes**; el respaldo de vencimiento acota, sin garantía absoluta, la obsolescencia | GT-10; PU-09; PU-16; R3-C | Propuesta [REC]; no demostrada |
+| VP-20 | **Auditoría:** publicar, despublicar, ocultar, revocar un nombre y anonimizar quedan auditados en la misma unidad (IN-09-04) con el **actor derivado de la identidad autenticada**; **las brechas RX-03, RX-04 y RX-05 de ADR-09.I siguen abiertas** | RF-AUD-02; SV-16 (ADR-09.I); IN-09-04 | [DER] / confirmado; brechas abiertas |
+| VP-21 | **Respuestas y vistas previas sin filtración:** 404 indistinguible entre «no existe» y «no publicado»; la vista previa al compartir **no incluye datos de jugadores ni el nombre de un torneo no publicado** | IN-04-04, 14 [REC]; RF-PUB-05; ES-44 | [REC]; DC2-9 |
+| VP-22 | **Rendimiento y límites gratuitos:** lectura pública a escala RNF-04 con p95 ≤ 1 s (propuesto) sin Redis ni servicios adicionales salvo necesidad demostrada; consumo por capas sin medir | PU-12; RNF-04, 12 | Propuesta [REC] |
+| VP-23 | **Cierre conservador de Q-20:** ningún nombre en lo público, en cachés ni en copias locales mientras Q-20 esté abierta; la edad de corte y los campos definitivos no se fijan | IN-04-11; Q-20; OC-45 | Confirmado (cierre conservador) |
+| VP-24 | **Sin permisos nuevos, sin reducción de garantías y sin selección tecnológica;** ninguna lectura de A-8, A-16, Q-20, Q-40 (d) ni OC-46 se adopta para hacer viable una alternativa | IN-04-18; IN-02-18; PA-13 | [DER] / [CONF] |
+| VP-25 | **Lista cerrada de parámetros públicos:** el público solo puede enviar los parámetros de una **lista cerrada** (torneo, jornada y los estrictamente necesarios); **no controla** filtros arbitrarios, orden, **selección de columnas**, **conteos totales**, paginación fuera de límites, **recursos relacionados** ni identificadores no validados; el **ámbito del torneo y su visibilidad se validan** antes de responder; ningún parámetro, combinación de parámetros ni diferencia entre respuestas permite **inferir datos no publicados**; mecanismo [PEND] | IN-04-01, 04; IN-02-04; IN-02-27 [REC]; AZ-06, AZ-13 | Garantía exigida; mecanismo [PEND] (OC-243) |
+| VP-26 | **Metadatos y canales laterales:** ningún metadato público **deriva de datos no publicados**: validadores de caché (**ETag**, **Last-Modified**), marcas de actualización («Actualizado a las hh:mm»), **identificadores secuenciales o huecos**, **sitemap**, **feeds**, **vistas previas**, **tamaños y tiempos de respuesta**; la marca «Actualizado» refleja solo lo publicado. **No se promete eliminación absoluta de canales laterales:** se registran las limitaciones verificables (variación de tamaño o de tiempo) y las condiciones pendientes | IN-04-04, 14 [REC]; RF-PUB-05; PU-05; ES-40, ES-44 | Garantía exigida; límites declarados (OC-244) |
+| VP-27 | **Mínimo privilegio en toda ruta de lectura pública del servidor [PROP]:** el **renderizado**, los **feeds**, las **vistas previas** y los **recursos auxiliares** no usan un rol con acceso a entidades internas **sin justificación y controles demostrables**; la alternativa de un rol de lectura limitado a objetos públicos y el mecanismo quedan **pendientes**; no se selecciona | IN-02-14; IN-04-01; AZ-08 (ADR-02.I); OC-190 | Propuesta [PROP]; alternativa y mecanismo [PEND] (OC-245) |
+
+### 32.4 Alternativas de implementación de la frontera pública
+
+Las tres alternativas difieren en **dónde se aplica la frontera pública** (lista blanca de campos y filtro de visibilidad): en la capa de datos, en el servidor o en ambos. **Ninguna fija** la materialización (D4-1), el campo público definitivo (D4-4), la preparación (D4-5), la guardia de publicación (D4-8), ni los mecanismos de señal de cambio, invalidación, caché ni copias, que son transversales (ADR-06, ADR-07, ADR-16). Ninguna elige proveedor; las sub-formas son familias de mecanismos.
+
+| Criterio | ALT-04-A: frontera pública en la capa de datos | ALT-04-B: frontera pública en el servidor | ALT-04-C: frontera pública en ambos |
+|---|---|---|---|
+| Idea | Un **rol público** de solo lectura accede únicamente a **vistas de lista blanca** que **ya filtran** por visibilidad y confirmación; las entidades internas no son alcanzables por ese rol | El servidor expone **puntos de lectura públicos** que construyen las respuestas con lista blanca y filtro de visibilidad; el público **no** alcanza la capa de datos | El servidor aplica lista blanca y filtro, **y** la capa de datos expone al servidor solo vistas visibles (una segunda barrera) |
+| Separación interno / confirmado / publicado (VP-06) | Se codifica en las vistas; **condicionada** a cómo se define «publicado» y a OC-225 (OC-123 de ADR-08) | Se codifica en el servidor; **condicionada** a OC-225 | Doble codificación: **condicionada** y con riesgo de deriva (RR4I-01) |
+| V-A (lo no visible no se incorpora) | Compatible: la vista no devuelve lo no visible [INF]; si hubiera derivadas persistentes, deben poder retirarse (D4-1 bloqueada) | Compatible: el servidor no lo incorpora [INF]; ídem derivadas | Compatible |
+| C-A (coherencia por torneo) | Lectura consistente en una sola consulta o transacción de solo lectura [INF; no demostrada] | Lectura consistente exige coordinar varias lecturas [INF; no demostrada] | Igual que B más A |
+| X-A (retiro en origen y señal, sin plazo) | El retiro es inmediato en origen; la señal es de ADR-06 | Igual | Igual |
+| A-A (`archivado` no público) | Excluido por la propia vista [INF] | Excluido por el servidor [INF] | Ambos |
+| Acceso directo y RLS (VP-12) | **Aplica de lleno:** el rol público accede a la capa de datos; **una vista con privilegios del creador puede omitir las políticas y una con privilegios del invocador exige concesiones del rol público sobre tablas subyacentes** [DOC; §32.9]; privilegios por defecto a revisar; **exige** gobierno de GV (ADR-02.I) | **Compatible con GV-01, condicionada a OC-190** (no entregar credenciales de conexión), **sin seleccionarla**; el servidor lee con un rol cuyo alcance debe limitarse (VP-27; OC-245) | Ambos riesgos; más superficie |
+| Complejidad y mantenimiento | Lógica de filtrado en SQL difícil de revisar [INF] | Código de aplicación ordinario [INF] | **Dos puntos de aplicación** de la lista blanca y del filtro: mantener y probar ambos |
+| Riesgo principal | Vista que elude políticas o expone una columna; función privilegiada | Respuesta que omite un filtro; punto de lectura olvidado | Deriva entre las dos barreras; falsa sensación de seguridad |
+| Dependencias adicionales | ADR-02.I (GV, privilegios, OC-190, OC-191, OC-214); ADR-01 | ADR-01; ADR-06 (caché) | Las de A y B |
+
+**Rutas de lectura alternativas de la frontera pública (M-4).** La frontera pública incluye **todas** las rutas por las que el servidor o la capa de datos entregan contenido sin autenticación: el **renderizado** de páginas, los **feeds**, las **vistas previas** al compartir, las **imágenes sociales** y los **recursos auxiliares** (sitemap, listados). Cada ruta debe producir solo proyecciones de lista blanca (VP-01, VP-26) y **no usar un rol de lectura con acceso a entidades internas sin justificación y controles demostrables** (VP-27). En ALT-04-B y ALT-04-C un **error de filtro en cualquier ruta** filtraría directamente; si el rol de lectura pública del servidor puede limitarse a objetos públicos es una **alternativa documentada y no seleccionada** (OC-245; DR4I-11).
+
+
+**Compatibilidad con las formulaciones de ADR-04.C (cómo podría implementarse cada una; no selecciona).**
+
+| Formulación | Qué exige a la implementación | ALT-04-A / B / C |
+|---|---|---|
+| **C-A** (candidata A) | Una lectura consistente del estado confirmado y visible por torneo; vistas «relacionadas» por definir (OC-46) | Las tres la pueden **exigir**; la demostración es [PEND] (OC-227); C-B (X) no se evalúa |
+| **V-A** (candidata A) | Lo no visible no se incorpora a ninguna proyección pública; despublicar retira lo incorporado | Las tres; en B y C el filtro vive en el servidor; en A y C, en la vista |
+| **V-B** (C, **no rechazada**) | Se guarda también lo no visible y se aplica el estado de publicación al servir; puede chocar con la lista blanca de PA-04 si llega a Z1 | **No se evalúa** como alternativa; la **frontera** se aplicaría al servir (B) o en la vista (A); su conformidad es del responsable (DR4I-1) |
+| **X-A** (candidata A) | Retiro en origen y señal de cambio si ADR-06 la adopta; copias sin plazo de purga | Las tres; **X-B (X)** no se evalúa |
+| **A-A** (candidata A) / **A-B** (C) | `archivado` no público / público en solo lectura (Q-40 (d)) | A-A lo cumple por exclusión; **A-B** exigiría mantener visible lo archivado: **no se evalúa** |
+| **P-A / P-B** (D4-1, bloqueada) | Persistente o calculada al servir | **Compatible con ambas;** no se elige (OC-219) |
+| **M-A** (D4-4, bloqueada) | Lista blanca y etiquetas; **ningún nombre mientras Q-20 esté abierta** | VP-02, VP-23; **no se decide** el contenido definitivo (OC-220) |
+| **R-A / R-B** (D4-5, bloqueada) | Proyección de preparación propia o derivada de la pública | **No se diseña** (OC-221) |
+| **G-A / G-B** (D4-8, bloqueada) | Publicar no sujeto a RT-14 / guardia opcional | **No se decide;** A-8 y RT-14 abiertas (OC-222) |
+
+### 32.5 Separación entre lo interno, lo confirmado y lo publicado
+
+| Nivel | Qué es | Quién lo ve | Qué datos incluye | Evidencia y límites |
+|---|---|---|---|---|
+| **Interno** (Z2/Z3) | Todo el estado de torneo, incluidos borradores, operaciones no confirmadas y datos internos de jugadores | Roles autorizados según CMP-08 | Entidades internas, cola de operaciones, auditoría, datos de menores | IN-04-01…05; PA-04; no es público |
+| **Confirmado** | Operaciones `confirmada` por el servidor; base del cálculo **oficial interno** de la clasificación y de las estadísticas | Roles autorizados; **no es automáticamente público** | Resultados y eventos confirmados de **todas** las jornadas, publicadas o no | OFF-15; IN-04-05; MO-25 (R3-D) |
+| **Publicado** | Lo confirmado **y** visible: torneo `publicado`, `en curso` o `finalizado` y jornada `publicada` | Público anónimo | Solo campos de lista blanca; etiquetas en lugar de nombres mientras Q-20 siga abierta | IN-04-04; RF-PUB-02, RF-PUB-04; VP-04 |
+
+**Consecuencia (OC-123 de ADR-08, preservada; OC-225).** La **tabla de posiciones oficial interna** puede considerar resultados de jornadas no publicadas; la **tabla pública** no puede. Por eso la entrada de la proyección pública se **filtra por visibilidad antes de calcular o de servir**, y ninguna salida pública (posiciones, goleadores, tarjetas, totales, número de partidos) debe permitir inferir lo no publicado (VP-06). **Dónde se filtra** (vista, servidor o ambos) es la diferencia entre ALT-04-A, B y C; **cómo se materializa** es D4-1 (bloqueada) y ADR-06. **Esta Parte no lo decide.**
+
+### 32.6 Publicación y despublicación de resultados, calendarios, clasificaciones y estadísticas
+
+| Elemento | Qué debe cumplirse | Estado |
+|---|---|---|
+| Resultados | Públicos solo si el torneo está en un estado visible, la jornada `publicada` y la operación `confirmada`; la corrección de una jornada anterior deja las vistas relacionadas sin mezcla de estados | VP-04, VP-07, VP-18 |
+| Calendario | Solo las jornadas publicadas; la regeneración (UI-09) no expone lo no publicado | VP-04; ESC-68 |
+| Clasificación | Calculada **solo con lo publicado y confirmado** para lo público; la oficial interna con todo lo confirmado | VP-06; MO-25 |
+| Goleadores y tarjetas | Derivan del mismo estado confirmado y visible; **quién los deriva sigue abierto** (OC-101 de ADR-08) | VP-08; OC-226 |
+| Despublicar una jornada con resultados confirmados | RD-CAL-08 [REC]: solo el dueño; el resultado puede quedar confirmado **sin ser público** mientras la jornada no esté publicada; sin estados intermedios (ESC-68) | VP-09; A-8 abierta |
+| Quién habilita o retira la visibilidad | Matriz de `01 §7.1`; **la guardia de RT-14 es opcional y abierta** (G-A o G-B, bloqueada) | VP-14; OC-222 |
+| Auditoría | En la misma unidad, con el actor autenticado; brechas de ADR-09.I abiertas | VP-20 |
+
+### 32.7 Revocación de visibilidad y prevención de filtraciones
+
+| Vector de filtración | Control exigido | Evidencia y límites | Estado |
+|---|---|---|---|
+| Campo interno o no autorizado en una proyección pública | Lista blanca cerrada; el público lee vistas, nunca entidades (VP-01) | IN-04-01, 02; ES-38 | Garantía exigida |
+| Agregados y estadísticas que revelan lo no publicado | Entrada filtrada por visibilidad antes de calcular (VP-06) | MO-25; PU-07 | Garantía exigida; OC-225 |
+| Enumeración de torneos o jornadas no publicados | 404 indistinguible; sin listados de borradores (VP-04, VP-21) | CL-25; ES-40 | Confirmado |
+| Vista previa al compartir y exportaciones | Sin datos de jugadores ni del nombre de un torneo no publicado (VP-21) | RF-PUB-05 [REC]; ES-44 | [REC] |
+| Caché compartida y claves | Solo proyecciones públicas; claves que incluyen torneo y visibilidad; sin respuestas autenticadas (VP-15) | PU-01, 08, 19; R3-C | Propuesta; mecanismo [PEND] |
+| Contenido obsoleto tras despublicar, ocultar o anonimizar | No se sirve contenido obsoleto en lo sensible a privacidad; la purga no garantiza retirada absoluta (VP-09) | PU-16; IN-04-09 | Propuesta; no demostrado |
+| Copias locales y Service Worker | Sin nombres mientras Q-20 esté abierta; sin purga a distancia; antigüedad visible (VP-16) | HR1-11; RES-02; PU-18 | Riesgo residual sin aceptar |
+| Acceso directo a la capa de datos, vistas y funciones | Rol público limitado a lista blanca; privilegios por defecto revisados; vistas que respeten las políticas o no expuestas (VP-12) | [DOC: Supabase y Neon]; ADR-02.I | Condicionado a OC-190, OC-191, OC-232 |
+| Mensajes de error y tiempos | Respuestas uniformes ([REC] IN-02-27) | IN-04-04 | [REC] |
+| Parámetros de la consulta manipulables (filtros, orden, columnas, conteos, paginación, recursos relacionados, identificadores) | Lista cerrada de parámetros; validación del ámbito del torneo (VP-25) | IN-04-04; [INF: conteos y orden permiten inferir lo no publicado] | Garantía exigida; OC-243 |
+| Metadatos: validadores de caché, marcas de actualización, identificadores secuenciales | Ningún metadato deriva de datos no publicados (VP-26) | PU-05; RF-PUB-06 | Garantía exigida; OC-244 |
+| Rutas auxiliares: sitemap, feeds, vistas previas, imágenes sociales, renderizado | Solo proyecciones de lista blanca; mínimo privilegio de lectura (VP-26, VP-27) | RF-PUB-05 [REC]; ES-44 | Garantía exigida; OC-245 |
+| Tamaños y tiempos de respuesta | **No se promete eliminar este canal;** se registra como limitación verificable (VP-26) | [INF] | Límite declarado; OC-244 |
+
+### 32.8 Caché CDN, respuestas obsoletas, Service Worker y copias offline
+
+- **No se selecciona** mecanismo de caché, de invalidación ni de señal de cambio: son de **ADR-06 y ADR-07** (aprobados solo de forma documental condicionada) y de **ADR-16.I** (no redactado). ADR-04.I solo fija **qué debe cumplir la frontera pública** frente a ellos: VP-09, VP-13, VP-15, VP-16 y VP-19.
+- **Preservado de R3-C:** el límite de obsolescencia es la **suma** del vencimiento, la ventana de contenido obsoleto y una revalidación (CL-30 no demostrado); en lo sensible a privacidad **no se sirve contenido obsoleto** (PU-16); la purga **no garantiza** una retirada absoluta; el sondeo adaptable y la clave de caché normalizada son propuestas [REC] (PU-17, PU-19); **OC-85…100 siguen abiertas.**
+- **Copias offline:** una copia local o de Service Worker **no se purga a distancia** (HR1-11); expirar una copia HTTP no equivale a eliminarla; la señal de cambio, si ADR-06 la adopta, **no promete plazo** (X-A, candidata no admitida). La exposición residual de un nombre de menor en una copia local depende de Q-20 (cerrada de forma conservadora: solo etiquetas) y de OC-47.
+- **Frontera.** Que una respuesta pública pueda guardarse en una caché compartida exige que **sea la misma para todos** y no contenga nada autenticado (PU-08); por eso la frontera de ALT-04-A, B o C debe producir **respuestas sin variación por usuario.**
+
+**Tres niveles de retirada (M-5).** Qué se puede afirmar al despublicar, ocultar o anonimizar, **sin seleccionar mecanismo**:
+
+| Nivel | Qué puede lograrse | Garantía demostrable hoy | Límite |
+|---|---|---|---|
+| **Origen** (proyección o consulta que sirve el servidor) | Retirada inmediata en origen de lo que se despublica; lo derivado persistente, si existe, se retira o reconstruye (D4-1 bloqueada) | **Ninguna demostrada:** la unidad atómica y la señal no están demostradas (OC-102, OC-186, OC-228) | La señal de cambio depende de ADR-06 y no se promete plazo |
+| **Caché compartida** (CDN) | Vencimiento, ventana de contenido obsoleto y revalidación; purga por URL o etiqueta [DOC, R3-C]; sin servir obsoleto en lo sensible a privacidad [PROP] | **Ninguna demostrada;** **CL-30 sin cumplimiento demostrado;** la purga **no garantiza retirada absoluta** | Límites de la purga y del plan; claves de caché (OC-233); OC-85…100 abiertas |
+| **Copias ya descargadas** (navegador, Service Worker, dispositivo) | Se actualizan al reconectar; antigüedad visible; sin nombres mientras Q-20 siga abierta | **Ninguna:** no hay purga a distancia (HR1-11; RES-02) | Un dispositivo que no se conecte conserva la copia sin plazo |
+
+### 32.9 Acceso directo a datos, RLS y aislamiento entre torneos
+
+**Hechos [DOC] (Supabase y Neon, ya leídos para ADR-02.I).** La API de datos se rige por **concesiones** y **políticas por fila**; en proyectos existentes los objetos nuevos del esquema público reciben **por defecto** privilegios para los roles anónimo, autenticado y de servicio, y existe una opción que **revoca esa exposición automática**; los **esquemas dedicados** delimitan la superficie expuesta; **las vistas omiten las políticas por defecto** (se crean con el usuario propietario) y, a partir de PostgreSQL 15, una vista puede **obedecer las políticas** de sus tablas subyacentes con la opción de seguridad del invocador, o protegerse revocando acceso o ubicándola en un esquema no expuesto; **una política ausente o mal configurada puede exponer una tabla** y la API de datos de Neon **no tiene capa de permisos propia**.
+**Inferencias [INF].** (1) Con ALT-04-A el rol público **es** una vía de acceso directo (GV-02 o GV-03 de ADR-02.I para lo público): sus vistas son la frontera, y una vista que elude las políticas o expone una columna rompe VP-01; (2) el público **solo** debe alcanzar objetos de lista blanca, nunca tablas internas; (3) el aislamiento entre torneos exige que **ninguna** vista mezcle datos de torneos distintos salvo por parámetro autorizado; (4) con ALT-04-B, el acceso directo del público a la capa de datos **no existe** si no se entregan credenciales de conexión (OC-190). **Pendiente [PEND]:** propiedad de tablas y vistas, FORCE RLS y privilegios efectivos (OC-214 de ADR-02.I; OC-232), y el comportamiento de cada configuración.
+**Tensión entre vistas con privilegios del invocador y del creador (M-3).** Una vista con **privilegios del invocador** hace que el rol público **evalúe las concesiones y las políticas de las tablas subyacentes**: para que funcione, ese rol necesita acceso a esas tablas, lo que **contradice VP-01** («el público nunca alcanza las entidades internas»). Una vista con **privilegios del creador** evita ese acceso, pero **omite las políticas por defecto** [DOC]: su filtro es la **única barrera**. **Ninguna opción se declara segura por sí sola ni se selecciona.** La elección es del responsable con GV de ADR-02.I (DR4I-8) y su verificación queda en **OC-232** (propiedad de tablas y vistas, FORCE RLS, privilegios efectivos); las funciones de la capa de datos siguen la misma lógica de privilegios del invocador o del creador (AZ-09 de ADR-02.I).
+### 32.10 Autorización de publicación, conflictos de interés y auditoría
+
+- **Quién publica o retira la visibilidad** lo fija la matriz de `01 §7.1` (dueño y organizador, con las restricciones de `01`). **Si publicar o despublicar es una decisión sujeta a RT-14 (G-B) sigue abierto** (A-8, DB1-3, D4-8): ADR-04.I **no lo decide** ni añade una guardia. Se soporta ambas lecturas como **parámetro** (IN-02-17 de ADR-02.C).
+- **Efecto sobre la clasificación.** Que la publicación, la despublicación o una corrección ajena cambie la clasificación pública del equipo del actor en conflicto es parte de **OC-121 (ADR-08), abierta.**
+- **Auditoría.** Publicar, despublicar, ocultar, revocar un nombre y anonimizar son operaciones **aplicadas** y se auditan en la unidad (IN-09-04) con el actor derivado de la identidad autenticada (SV-16 de ADR-09.I). **Las brechas RX-03 (filtrado silencioso), RX-04 (previo a la aplicación) y RX-05 (llamada directa) siguen abiertas;** la persistencia de los rechazos (K-3) no se resuelve.
+### 32.11 Cambios concurrentes, recálculo y recuperación ante fallos
+
+| Escenario | Qué debe cumplirse | Estado |
+|---|---|---|
+| Lectura pública concurrente con confirmar o corregir un resultado (ESC-66, ESC-67) | Se ve el estado anterior completo o el posterior completo; **sin mezcla** de resultado nuevo con clasificación antigua (ES-42) | Garantía exigida; no demostrada (VP-07, VP-18) |
+| Despublicar una jornada mientras se sincronizan resultados (ESC-68) | El resultado puede quedar confirmado **sin ser público**; sin estados intermedios | Condicionado |
+| Ocultar o anonimizar durante una lectura o una copia (ESC-69, ESC-70) | Las respuestas nuevas usan la etiqueta; las estadísticas no cambian; copias sin plazo | Condicionado a ADR-06 y HR1-11 |
+| Cambio de reglamento permitido simultáneo con una confirmación (OC-124 de ADR-08) | Una sola versión del reglamento en el cálculo | **OC-124 abierta** |
+| Fallo de la actualización de lo derivado o de la señal de cambio | No se sirve un estado mezclado; se reconstruye desde las fuentes y prevalecen las fuentes; el respaldo de vencimiento acota la obsolescencia | Propuesta [REC] (VP-19) |
+| Recálculo tras una corrección de una jornada anterior (UI-05) | Resultado, eventos, estado, recálculo, derivadas persistentes (si existen), señal (si ADR-06) y auditoría en una sola unidad; **OC-102 abierta** | Garantía exigida; no demostrada |
+| Elección entre calcular al servir o materializar (D4-1) | **No se elige;** ambas son compatibles con las tres alternativas; el efecto en consumo es de ADR-06 | Bloqueada (OC-219) |
+
+### 32.12 Costos, rendimiento y límites de la capa gratuita
+
+- **Estimaciones heredadas de R3-C [INF].** El consumo de lecturas públicas a escala RNF-04 (100–500 lectores) se estimó **por capas** (CDN, origen, backend, PostgreSQL y transferencia); **no se midió** y el 304 no evita consultas (OC-99). **ADR-04.I no añade cifras nuevas.**
+- **Hechos [DOC] de límites ya leídos (R3-C, ADR-02.I):** límites del plan gratuito de Supabase (500 MB de base de datos; pausa por inactividad), de Neon (1 GB por proyecto), de las funciones de borde de Supabase (2 s de CPU, 256 MB) y de Cloudflare y Vercel en lo relativo a caché y purga (R3-C). **Los límites de cómputo del plan elegido para lecturas públicas no se evaluaron** [PEND] (OC-237).
+- **Diferencia entre alternativas [INF].** ALT-04-A concentra el filtrado en la capa de datos (más carga de consultas por lectura no cacheada); ALT-04-B lo hace en el servidor (más cómputo en el servidor); ALT-04-C duplica ambos. Ninguna diferencia está medida. La **materialización** (D4-1) puede reducir lecturas a costa de estado derivado: **no se elige.**
+### 32.13 Compatibilidad con las configuraciones de R3-A y con R3-B…D, ADR-02.I, ADR-09.I y ADR-03.I (sin seleccionar)
+
+| Configuración o bloque | Observación | Estado |
+|---|---|---|
+| CFG-C1 (Vercel + Supabase) | Patrón de rol público y vistas posible [DOC: roles anónimo y autenticado, vistas, esquemas dedicados, opción de no exponer automáticamente]; la API de datos expone el esquema público por defecto; caché y purga de Vercel [DOC, R3-C] | Condicionado; no se selecciona |
+| CFG-C2 (Vercel + Neon + Better Auth) | Lo público puede servirse solo desde el servidor; la API de datos de Neon es opcional y sin capa de permisos propia [DOC]; caché de Vercel [DOC, R3-C] | Condicionado; no se selecciona |
+| CFG-C3 (Cloudflare + Supabase) | Caché de Cloudflare con reglas y revalidación asíncrona [DOC, R3-C]; **el entorno de Cloudflare para sesiones, cookies y reglas de caché no se evaluó** (OC-182 de ADR-03.I; OC-238) | Condicionado; no se selecciona |
+| ADR-06 y ADR-07 (R3-C) | Señal de cambio, caché y actualización **sin seleccionar**; PU-01…19 y OC-85…100 preservadas | Dependencia abierta |
+| ADR-08 (R3-D) | Separación entre cálculo interno y proyección pública (MO-25); **OC-101, OC-102, OC-121, OC-122, OC-123 y OC-124 abiertas** | Dependencia abierta |
+| ADR-02.I | GV-01/02/03 sin seleccionar; OC-190, OC-191, OC-211, OC-214; AZ-05, AZ-08, AZ-09; A-8 y D4-8 abiertas | Dependencia abierta |
+| ADR-09.I y ADR-03.I | Auditoría con brechas RX-03…05; SI-06, SI-07; actor autenticado | Dependencia abierta |
+| ADR-05.I y ADR-16.I | No redactados; la proyección de preparación (D4-5) y las copias locales dependen de ellos | Dependencia abierta |
+
+### 32.14 Evaluación, puntuación y recomendación preliminar
+
+**Regla.** Pesos aprobados (R1 §2.4 y R3-A): seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %. Se puntúa **solo con evidencia leída**; lo no leído es [PEND] y se trata con rangos de sensibilidad, sin penalizar documentación incompleta. Escala 1–5; juicio del autor [PROP], no vinculante. El criterio sin conexión **no discrimina** (3): lo público sin conexión es una copia y no depende de la frontera. **Regla uniforme de rangos:** (i) **Seguridad y mantenimiento** son juicios [PROP] no verificados: **valor central y rango ±1 para las tres alternativas**; el valor central es **el mismo (3) cuando no existe evidencia diferenciadora** y **menor (2) solo cuando la propia definición implica un hecho estructural** (dos puntos de aplicación de la lista blanca); (ii) **Costo** puntúa solo **planes y servicios:** techo 5 y el límite inferior baja **1 punto por cada aspecto de costo no evaluado**; el desarrollo propio se pondera en Mantenimiento; **que una función sea gratuita o de pago ni favorece ni penaliza.** **Aspectos de costo no evaluados:** A: límites de cómputo de la capa de datos para lecturas públicas (1); B: límites de ejecución del servidor para lecturas públicas (1); C: ambos (2).
+
+| Criterio (peso) | ALT-04-A | ALT-04-B | ALT-04-C |
+|---|---|---|---|
+| Seguridad (35 %) [PROP, no verificado; central 3 en las tres] | 2–4 | 2–4 | 2–4 |
+| Costo (30 %) [aspectos no evaluados: A 1, B 1, C 2] | 4–5 | 4–5 | 3–5 |
+| Sin conexión (20 %) | 3 | 3 | 3 |
+| Mantenimiento (15 %) [PROP; central A 3, B 3, C 2] | 2–4 | 2–4 | 1–3 |
+| **Total (rango)** | **2,80–4,10** | **2,80–4,10** | **2,35–3,95** |
+
+**Fundamento.** *Seguridad:* los tres juicios son **[PROP] no verificados** y de igual valor central porque ninguna ventaja está demostrada; los riesgos propios (vistas que eluden políticas en A; punto de lectura omitido en B; deriva entre barreras en C) se registran como condiciones. *Costo:* sin servicio nuevo evidente [INF]; los límites inferiores reflejan solo aspectos no evaluados. *Sin conexión:* no discrimina. *Mantenimiento:* A y B (3) sin evidencia diferenciadora; **C (2)** por mantener y probar dos puntos de aplicación.
+**Sensibilidad.** Los rangos de A y B son **idénticos** (2,80–4,10) y el de C (2,35–3,95) está **contenido** en ellos: **el puntaje no discrimina.**
+**Puntuaciones sin cambio en v0.2.** Las correcciones (M-1…M-6) añaden condiciones, no ventajas demostradas; la regla uniforme de rangos no cambia y **no se discrimina** entre ALT-04-A, ALT-04-B y ALT-04-C.
+**Recomendación preliminar NO vinculante [PROP].** (1) **Los requisitos eliminatorios son los VP confirmados** (VP-01, VP-02, VP-04, VP-05, VP-11, VP-13 y VP-23); **ninguna alternativa fija C-A, V-A, X-A ni A-A, ni D4-1, D4-4, D4-5 o D4-8.** (2) La evidencia documentada **no discrimina** entre ALT-04-A, B y C: **no se expresa preferencia.** (3) El **gobierno del acceso directo (DR2I-1 / DR9I-3)** pesa más que la elección entre alternativas, porque ALT-04-A convierte el rol público en una vía de acceso directo y ALT-04-B depende de que no se entreguen credenciales de conexión. (4) **No se selecciona nada;** la decisión es del responsable y **posterior** a ADR-01, ADR-02.I, ADR-06/07, ADR-08 y la admisión de las formulaciones. Los puntajes no sustituyen a los requisitos obligatorios, que son eliminatorios y no compensables.
+
+### 32.15 Condiciones, decisiones, riesgos y dependencias
+
+**Condiciones abiertas (OC-218…245).** Ninguna se resuelve aquí.
+
+| ID | Condición | Origen | Bloquea |
+|---|---|---|---|
+| OC-218 | Admisión formal por el responsable de C-A, V-A, X-A y A-A como conjunto admitido; D4-1, D4-4, D4-5 y D4-8 sin A | Regla del cierre de R2; matriz | ADR-04.I definitivo |
+| OC-219 | D4-1: materialización de la clasificación (calculada al servir o persistente) y su efecto en rendimiento y anonimización; bloqueada | OC-20; DB2b-3; D4-1 | Cierre de ADR-04.I |
+| OC-220 | D4-4: contenido público definitivo de jugador; Q-20, PRV-18, OC-45; mientras tanto solo etiquetas | D4-4 | VP-02, VP-23 |
+| OC-221 | D4-5: proyección de preparación (R-A o R-B); bloqueada; depende de ADR-05.I y ADR-16.I | D4-5; OFF-02 | VP-17 |
+| OC-222 | D4-8, A-8 y RT-14: guardia opcional al publicar; sin resolver | A-8; DB1-3; D4-8 | VP-14 |
+| OC-223 | Q-40 (d): visibilidad de `archivado`; antes de la Fase 3 | Q-40 (d); D4-7 | VP-11 |
+| OC-224 | **OC-46:** qué vistas públicas son «relacionadas con un mismo torneo»; sin enumerar | OC-46; D4-2 | VP-07 |
+| OC-225 | **OC-123 de ADR-08 (preservada):** filtro por visibilidad de la entrada de la proyección pública y separación entre cálculo interno y público (MO-25) | ADR-08; MO-25 | VP-06 |
+| OC-226 | **OC-101 de ADR-08 (preservada):** quién deriva goleadores y tarjetas (CMP-12, CMP-14 u otro) | ADR-08; RD-RES-06 | VP-08 |
+| OC-227 | Lectura consistente para generar el documento público de un torneo; demostración de C-A; unidad de la garantía | PU-15; OC-94 (R3-C); IN-04-06 | VP-07 |
+| OC-228 | Señal de cambio, invalidación y plazo; **sin seleccionar** (ADR-06); OC-29 y OC-85…100 abiertas; referenciada en VP-09 y en la tabla de tres niveles | ADR-06; OC-29 | VP-09, VP-15 |
+| OC-229 | Contenido obsoleto en lo sensible a privacidad y purga de copias; HR1-11, RES-02, OC-47 | PU-16; OC-95; HR1-11 | VP-09, VP-16 |
+| OC-230 | Service Worker y copias offline; ADR-16.I no redactado; verificación en dispositivos iOS | PU-18; ADR-16.C | VP-16 |
+| OC-231 | **OC-190 y OC-191 de ADR-02.I y OC-122 de ADR-08:** acceso directo de lo público a la capa de datos y qué cuenta como verificación | ADR-02.I; ADR-08 | VP-12 |
+| OC-232 | Vistas, funciones, propiedad de tablas, FORCE RLS y privilegios efectivos de los roles públicos: no verificados | OC-214 (ADR-02.I); [DOC] | VP-12, VP-13 |
+| OC-233 | Aislamiento entre torneos en respuestas públicas, claves de caché e identificadores recibidos; referenciada en VP-13 y VP-25 | PU-19; OC-97; IN-02-04 | VP-13, VP-25 |
+| OC-234 | Auditoría de publicar, despublicar, ocultar, revocar y anonimizar; actor autenticado; brechas RX-03…05 | ADR-09.I; OC-127; OC-147 | VP-20 |
+| OC-235 | Serialización entre lecturas públicas y cambios (ESC-66…74); **OC-186 de ADR-02.I**; referenciada en VP-18 | GT-12; ADR-02.I | VP-18 |
+| OC-236 | Recálculo y recuperación ante fallos de lo derivado y de la señal; **OC-102 y OC-124 de ADR-08** | GT-10; ADR-08 | VP-19 |
+| OC-237 | Medición de rendimiento y consumo; límites de cómputo del plan elegido para lecturas públicas | PU-12; OC-99 | VP-22 |
+| OC-238 | Entorno de Cloudflare (CFG-C3): sesiones, cookies y reglas de caché | OC-182 (ADR-03.I) | ADR-01 |
+| OC-239 | Hechos generales de PostgreSQL y de redes de entrega de contenido no verificados en fuente oficial | §32.0 [INF] | ADR-04.I definitivo |
+| OC-240 | Verificación empírica (pruebas de §32.16) y en dispositivos antes de cualquier aprobación | RNF-11; HR1-07 | Fase 3 |
+| OC-241 | Dependencias: ADR-01; ADR-02.I (A-8); ADR-06/07; ADR-08; ADR-05.I y ADR-16.I no redactados | R1 §8.2 | ADR-04.I definitivo |
+| OC-242 | Propuestas [REC] RF-PUB-05, RF-PUB-09, RD-CAL-08 y PRV-04 (DC2-9) sin decidir | DC2-9; IN-04-03, 09, 14 | VP-09, VP-21 |
+| OC-243 | **Lista cerrada de parámetros públicos** y prevención de inferencias por filtros, orden, columnas, conteos, paginación, recursos relacionados e identificadores; mecanismo sin seleccionar | VP-25; IN-04-04 | VP-25 |
+| OC-244 | **Metadatos y canales laterales:** validadores de caché, marcas de actualización, identificadores secuenciales, sitemap, feeds, vistas previas, tamaños y tiempos; límites verificables; sin promesa de eliminación absoluta | VP-26; PU-05 | VP-26 |
+| OC-245 | **Mínimo privilegio de lectura pública del servidor:** alternativa (rol de lectura limitado a objetos públicos) y mecanismo; rutas de renderizado, feeds, vistas previas y recursos auxiliares; sin seleccionar | VP-27; AZ-08 (ADR-02.I); OC-190 | VP-27 |
+
+**Decisiones que corresponden al responsable (DR4I-1…11).** Ninguna se toma aquí.
+
+| ID | Decisión | Condiciones |
+|---|---|---|
+| DR4I-1 | Admitir, ajustar o rechazar C-A, V-A, X-A y A-A como conjunto admitido; qué hacer con V-B y A-B (condicionadas); **no se admite aquí** | OC-218 |
+| DR4I-2 | D4-1: materializar o calcular al servir (heredada, bloqueada) | OC-219 |
+| DR4I-3 | D4-4, Q-20 y PRV-18: contenido público definitivo de jugador (heredada, bloqueada) | OC-220 |
+| DR4I-4 | D4-5: proyección de preparación (heredada, bloqueada) | OC-221 |
+| DR4I-5 | D4-8, A-8 y RT-14: guardia al publicar (heredada, bloqueada) | OC-222 |
+| DR4I-6 | Q-40 (d): visibilidad de `archivado` (heredada) | OC-223 |
+| DR4I-7 | OC-46: qué vistas son «relacionadas» y unidad de la garantía de coherencia | OC-224, OC-227 |
+| DR4I-8 | Gobierno del acceso directo de lo público a la capa de datos y de las vistas con privilegios del invocador o del creador (con DR2I-1 y DR9I-3); **ninguna opción es segura por sí sola** | OC-231, OC-232 |
+| DR4I-9 | Dónde se aplica la frontera pública (capa de datos, servidor o ambos) y qué demostración se exige, **después** de ADR-01 y de las decisiones previas | OC-225, OC-241 |
+| DR4I-10 | Estado de las propuestas [REC] RF-PUB-05, RF-PUB-09, RD-CAL-08 y PRV-04 (DC2-9) | OC-242 |
+| DR4I-11 | Mínimo privilegio de las rutas de lectura pública del servidor: qué rol de lectura y qué controles demostrables (VP-27); no se selecciona | OC-245, OC-243, OC-244 |
+
+**Riesgos de redacción (RR4I-01…22).** No se aceptan; se registran.
+
+| ID | Riesgo | Mitigación documental |
+|---|---|---|
+| RR4I-01 | Deriva entre dos puntos de aplicación de la lista blanca o del filtro (ALT-04-C) y falsa sensación de seguridad | VP-01; pruebas de cobertura; preferir una sola definición |
+| RR4I-02 | Tratar una candidata A como admitida o fijar D4-1, D4-4, D4-5 o D4-8 por la forma de las alternativas | Rotulado «candidata no admitida»; formulaciones bloqueadas fuera de las alternativas |
+| RR4I-03 | Una salida pública (tabla, goleadores, tarjetas, totales) que permita inferir lo no publicado | VP-06; OC-225; pruebas de inferencia |
+| RR4I-04 | Una vista o función de la capa de datos que elude las políticas o expone una columna interna | VP-12; OC-232; revisión de privilegios por defecto |
+| RR4I-05 | Credenciales de conexión entregadas a clientes que convierten ALT-04-B en acceso directo | OC-190 (ADR-02.I); OC-231 |
+| RR4I-06 | Respuesta pública que mezcla un resultado nuevo con una clasificación antigua (ES-42) | VP-07, VP-18; OC-227; no se afirma cumplido |
+| RR4I-07 | Caché compartida o clave de caché que mezcla torneos o guarda respuestas autenticadas | VP-13, VP-15; PU-08, PU-19 |
+| RR4I-08 | Contenido obsoleto servido tras despublicar, ocultar o anonimizar | VP-09; PU-16; OC-229 |
+| RR4I-09 | Nombres de menores en copias locales o en Service Worker (HR1-11) y promesa de purga a distancia | VP-16, VP-23; no se promete borrado remoto; RES-02 sin aceptar |
+| RR4I-10 | Enumeración de torneos o jornadas no publicados, o vista previa que revele datos | VP-04, VP-21; ES-40, ES-44 |
+| RR4I-11 | Presentar la guardia de RT-14 al publicar como decidida, o resolver A-8 por la forma de la alternativa | VP-14; OC-222; DR4I-5 |
+| RR4I-12 | Efecto de una corrección ajena sobre la clasificación del equipo del actor resuelto en silencio (OC-121) | VP-14; OC-121 preservada |
+| RR4I-13 | Brechas de auditoría (RX-03, RX-04, RX-05) y K-3 dadas por resueltas | VP-20; OC-234; no se acepta |
+| RR4I-14 | Publicar datos de jugadores que la evaluación de PRV-18 no haya aprobado (identificación indirecta) | VP-02, VP-23; OC-220; AM-31; RES-08 |
+| RR4I-15 | Estados mezclados por fallo de recálculo o de la señal de cambio | VP-19; OC-236; las fuentes prevalecen |
+| RR4I-16 | Límites de cómputo y de consultas de lectura pública no evaluados | OC-237; medición en Fase 4 |
+| RR4I-17 | Hechos de PostgreSQL y de redes de entrega no verificados usados como definitivos | Rotulados [INF]; OC-239 |
+| RR4I-18 | Contradecir ADR-05.I o ADR-16.I (no redactados) en preparación y copias locales | OC-221, OC-230, OC-241 |
+| RR4I-19 | **Inferencia de lo no publicado por parámetros manipulables** (filtros, orden, columnas, conteos, paginación, recursos relacionados, identificadores) | VP-25; OC-243 |
+| RR4I-20 | **Canales laterales por metadatos** (validadores de caché, marcas de actualización, identificadores, sitemap, feeds, vistas previas, tamaños y tiempos) | VP-26; OC-244; sin promesa de eliminación |
+| RR4I-21 | Ruta de lectura pública del servidor con un rol que alcanza entidades internas; un error de filtro filtra directamente | VP-27; OC-245; DR4I-11 |
+| RR4I-22 | Tratar una vista con privilegios del invocador o del creador como segura por sí sola | VP-12; §32.9; OC-232; DR4I-8 |
+
+**Dependencias que impiden la aprobación definitiva.** 1. **ADR-01** (selección de configuración). 2. **Admisión de formulaciones** (C-A, V-A, X-A, A-A) y las **cuatro decisiones sin A** (D4-1, D4-4, D4-5, D4-8). 3. **Q-20, PRV-18, Q-40 (d), A-8, RT-14 y OC-46.** 4. **ADR-06 y ADR-07** (señal, invalidación y caché). 5. **ADR-08:** OC-101, OC-102, OC-121, OC-122, OC-123 y OC-124. 6. **ADR-02.I:** gobierno del acceso directo (OC-190, OC-191), privilegios (OC-214) y OC-232, OC-245. 7. **ADR-09.I:** brechas RX-03, RX-04 y RX-05, K-3. 8. **ADR-05.I y ADR-16.I** (preparación y copias locales). 9. Verificación empírica y en dispositivos (OC-240). 10. D-2 sin excepción; RES-01…13 y HR1-11 sin aceptar; R1 §8.1 sin cumplimiento demostrado.
+
+### 32.16 Pruebas negativas y criterios de revisión documental
+
+| Prueba | Qué demuestra | Requisito | Tipo |
+|---|---|---|---|
+| Consultar como anónimo cada vista, función y tabla expuesta | Solo se alcanza lo de lista blanca; ninguna entidad interna | VP-01, VP-12 | DB, E2E |
+| Pedir torneos en borrador, jornadas no publicadas y `archivado`, por enlace y por enumeración | 404 indistinguible; sin listado | VP-04, VP-11, VP-21 | E2E |
+| Confirmar un resultado en una jornada no publicada y comparar la tabla pública con la interna | La tabla pública no incorpora ni permite inferir lo no publicado | VP-06 | I, E2E |
+| Verificar goleadores, tarjetas y totales públicos con una jornada no publicada | Sin inferencia de lo no publicado | VP-06, VP-08 | I |
+| Lectura pública concurrente con confirmar, corregir, despublicar y anonimizar | Sin estado mezclado | VP-07, VP-18 | I (concurrencia) |
+| Despublicar, ocultar o anonimizar y volver a pedir la vista, la caché y la copia | Etiqueta en lo nuevo; sin contenido obsoleto en lo sensible; sin promesa de purga de copias | VP-09, VP-10, VP-16 | I, E2E |
+| Inspeccionar cachés y claves: respuestas autenticadas, variación por usuario, mezcla de torneos | Solo proyecciones públicas; claves con torneo y visibilidad | VP-13, VP-15 | I, E2E |
+| Vista previa y exportación pública de un torneo no publicado y de uno con jugadores | Sin nombres ni datos de jugadores | VP-21 | E2E |
+| Rol público con una vista sobre una tabla protegida; tabla nueva sin política | No expone filas ni objetos por defecto | VP-12 | DB |
+| Enviar parámetros fuera de la lista (filtros, orden, columnas, conteos, paginación extrema, recursos relacionados, identificadores de otro torneo o inexistentes) | Rechazo o respuesta sin inferencia de lo no publicado | VP-25 | I, E2E |
+| Comparar validadores de caché, marcas de actualización, identificadores, sitemap, feeds y vistas previas antes y después de confirmar algo no publicado | Ningún metadato cambia ni revela lo no publicado; tamaños y tiempos como límite declarado | VP-26 | I, E2E |
+| Revisar el rol de lectura de cada ruta pública del servidor (renderizado, feeds, vistas previas, recursos auxiliares) | Sin acceso a entidades internas sin justificación y control | VP-27 | DB, I |
+| Fallo inyectado en la actualización de lo derivado y de la señal | No se sirve estado mezclado; se reconstruye desde las fuentes | VP-19 | I |
+| Publicar y despublicar con un actor en conflicto de interés (según la lectura abierta de A-8) | Se aplica la lectura que decida el responsable; sin resolverla aquí | VP-14 | I |
+| Auditoría de cada cambio de visibilidad y de privacidad | Evento con actor autenticado; brechas declaradas | VP-20 | DB |
+
+| ID | Criterio de revisión documental (autoevaluación del autor; no es auditoría independiente) | Resultado |
+|---|---|---|
+| CR4I-01 | Las Partes I–XVII y los registros anteriores no cambian (prefijo idéntico al HEAD) | Cumple (comprobado al generar) |
+| CR4I-02 | Al menos dos alternativas con matriz de conformidad, sin seleccionar; R1 §8.1 sin declarar cumplido | Cumple: §32.4 |
+| CR4I-03 | C-A, V-A, X-A y A-A solo como candidatas; V-B y A-B no rechazadas; D4-1, D4-4, D4-5 y D4-8 bloqueadas | Cumple: §32.2, §32.4 |
+| CR4I-04 | Separación entre lo interno, lo confirmado y lo publicado; **metadatos y canales laterales** sin promesa de eliminación absoluta; OC-123 preservada | Cumple: §32.5; VP-06, VP-26 |
+| CR4I-05 | Publicación y despublicación de resultados, calendarios, clasificaciones y estadísticas | Cumple: §32.6 |
+| CR4I-06 | Coherencia entre resultados, posiciones, goleadores y tarjetas sin afirmar cumplimiento; OC-101 preservada | Cumple: VP-07, VP-08 |
+| CR4I-07 | Revocación de visibilidad y prevención de filtraciones por vector | Cumple: §32.7 |
+| CR4I-08 | Caché, obsolescencia, Service Worker y copias offline sin seleccionar mecanismo | Cumple: §32.8 |
+| CR4I-09 | Acceso directo, RLS, vistas y aislamiento entre torneos, con evidencia separada de inferencia | Cumple: §32.9; VP-12, VP-13 |
+| CR4I-10 | Autorización de publicación, RT-14, A-8 y auditoría sin resolver | Cumple: §32.10 |
+| CR4I-11 | Concurrencia, recálculo y recuperación ante fallos | Cumple: §32.11 |
+| CR4I-12 | Costos, rendimiento y CFG-C1/C2/C3 sin seleccionar proveedor | Cumple: §32.12, §32.13 |
+| CR4I-13 | Puntuación solo con evidencia leída; regla uniforme de rangos; aritmética comprobada | Cumple: §32.14 (comprobado al generar) |
+| CR4I-14 | Identificadores nuevos únicos, definidos y sin colisión | Cumple (comprobado al generar) |
+| CR4I-15 | Nota posterior de trazabilidad de ADR-02.I sin reescribir lo histórico | Cumple: §32.0 |
+| CR4I-16 | Sin código, cuentas, servicios ni gastos; sin ADR-05.I, ADR-16.I, R3-F ni R4 | Cumple |
+| CR4I-17 | Lista cerrada de parámetros públicos, metadatos y canales laterales, mínimo privilegio de lectura pública y tensión entre vistas del invocador y del creador documentados sin seleccionar | Cumple como propuesta: VP-25, VP-26, VP-27; §32.9 |
+| CR4I-18 | Tres niveles de retirada con garantías y límites; agrupar datos no demuestra atomicidad; CL-30 sin cumplimiento demostrado; VP-14 con SI-07 y AZ-03; OC-228, OC-233 y OC-235 referenciadas | Cumple: §32.8; VP-07, VP-09, VP-14, VP-18 |
+
+### 32.17 Evidencia documentada frente a inferencias; fuentes y límites
+
+| Afirmación | Etiqueta | Fuente |
+|---|---|---|
+| Los invariantes IN-04-01…18, D4-1…8, ES-38…44, ESC-66…74, la clasificación A, C y X y DC2-1…11 | [CONF] / [DOC] interno | §22; matriz de R2 (§B) |
+| Requisitos y propuestas de lo público (PU-01…19) y condiciones OC-85…100 | [CONF] / [PROP] internos | §27 (R3-C) |
+| Separación entre cálculo interno y proyección pública; OC-101, OC-102, OC-121, OC-122, OC-123, OC-124 | [CONF] / [PROP] internos | §28 (R3-D) |
+| Supabase: concesiones y políticas por fila; privilegios por defecto del esquema público; opción de no exponer automáticamente; esquemas dedicados; las vistas omiten las políticas por defecto y pueden obedecerlas con la opción de seguridad del invocador (PostgreSQL 15 o superior); el rol de servicio omite las políticas | [DOC] | Supabase: seguridad de la API de datos, políticas por fila |
+| Neon: la API de datos no tiene capa de permisos propia; una política ausente puede exponer una tabla | [DOC] | Neon: API de datos |
+| Límites del plan gratuito de Supabase y Neon; límites de caché y purga de Cloudflare y Vercel | [DOC] | Leídos en R3-A, R3-C y ADR-02.I |
+| Que un rol público sea una vía de acceso directo; que el filtrado en vistas o en el servidor evite la inferencia de lo no publicado; que una lectura consistente sea alcanzable en una consulta; diferencias de carga entre alternativas | **[INF]** | Razonamiento del autor; no verificado |
+| Que los parámetros de una API de datos (filtros, orden, columnas, conteos, recursos relacionados) permitan inferir lo no publicado; que los validadores de caché, las marcas de actualización, los identificadores y los tamaños o tiempos revelen actividad no publicada | **[INF]** | Razonamiento del autor; no verificado empíricamente (OC-243, OC-244) |
+| Que una vista con privilegios del invocador exija concesiones del rol público sobre las tablas subyacentes y una con privilegios del creador omita las políticas | [DOC] / **[INF]** | Supabase: vistas y políticas por fila; la consecuencia sobre VP-01 es inferencia |
+| Propiedad de tablas y vistas, FORCE RLS, privilegios efectivos, rendimiento de las vistas y comportamiento de cada configuración; entorno de Cloudflare | **[PEND]** | No leído |
+| Juicios de seguridad, costo y mantenimiento de la puntuación | [PROP] / [INF] | Autor; no verificados |
+
+**Fuentes oficiales consultadas (2026-11-22; páginas descargadas y convertidas a texto, ya leídas en R3-A, R3-C, ADR-09.I y ADR-02.I):** Supabase (seguridad de la API de datos, políticas por fila, funciones, límites); Neon (API de datos); Cloudflare y Vercel (caché y purga, según R3-C). **Límites.** No se leyó la documentación oficial de PostgreSQL ni el rendimiento de las vistas con las tablas previstas, ni cómo cada configuración trata una consulta pública denegada; no se verificó empíricamente ningún comportamiento.
+### 32.18 Estado y preguntas para el responsable
+
+**Estado:** R3-E / ADR-04.I **v0.2-R3E-04I: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL** (corrige M-1…M-6 de la revisión focalizada; ver §32.19 y el metadato de §32.0); **R3-E continúa como bloque parcial en curso.** **No versionado.** Autoevaluación del autor, no auditoría independiente. **C-A, V-A, X-A y A-A son candidatas A no admitidas; V-B y A-B condicionadas, no rechazadas; D4-1, D4-4, D4-5 y D4-8 bloqueadas.** Los otros ADR `.I` (05 y 16), R3-F y R4: **NO INICIADOS.** Siguen abiertas todas las decisiones y condiciones heredadas de R1, R2, R3-A…D y ADR-09.I, ADR-03.I y ADR-02.I.
+
+**Preguntas:** DR4I-1 a DR4I-11 y las condiciones OC-218 a OC-245 (§32.15); en particular, dónde se aplica la frontera pública (DR4I-9) y el gobierno del acceso directo de lo público a la capa de datos (DR4I-8).
+
+### 32.19 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| M-1 | VP-25: lista cerrada de parámetros públicos (filtros, orden, selección de columnas, conteos, paginación, recursos relacionados, identificadores) con validación del ámbito del torneo y prevención de inferencias; mecanismo [PEND] (OC-243, RR4I-19) | §32.3, §32.7, §32.16 |
+| M-2 | VP-26: frontera ampliada a ETag, Last-Modified, marcas de actualización, identificadores secuenciales, sitemap, feeds, vistas previas, tamaños y tiempos; ningún metadato deriva de datos no publicados; sin promesa de eliminación absoluta de canales laterales (OC-244, RR4I-20) | §32.3, §32.7, §32.16 |
+| M-3 | Tensión entre vistas con privilegios del invocador (exige acceso del rol público a tablas subyacentes: contradice VP-01) y del creador (puede omitir las políticas); ninguna opción segura por sí sola; vinculada a OC-232, GV de ADR-02.I y DR4I-8 (RR4I-22) | §32.3 (VP-12), §32.4, §32.9, §32.15 |
+| M-4 | VP-27 [PROP]: mínimo privilegio para todas las rutas de lectura pública del servidor (renderizado, feeds, vistas previas, recursos auxiliares); alternativa y mecanismo pendientes (OC-245, DR4I-11, RR4I-21) | §32.3, §32.4, §32.15 |
+| M-5 | Tabla de tres niveles (origen, caché compartida, copias descargadas) con garantías demostrables y límites; VP-07 precisa que agrupar datos no demuestra atomicidad ni coherencia transaccional ni cumple RT-14; CL-30 sin cumplimiento demostrado | §32.3 (VP-07, VP-09), §32.8 |
+| M-6 | VP-14 vinculado con SI-07 y AZ-03 (autorización vigente al publicar); OC-228, OC-233 y OC-235 referenciadas en VP-09, VP-13, VP-18 y VP-25; «GV-01-compatible» reformulado como «compatible con GV-01, condicionada a OC-190, sin seleccionarla» | §32.3, §32.4, §32.15 |
