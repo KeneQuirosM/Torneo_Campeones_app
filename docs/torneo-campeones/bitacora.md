@@ -1,5 +1,18 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-22 — Fase 2, R2-C (cierre documental condicionado)
+
+- **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — CIERRE DOCUMENTAL CONDICIONADO DE R2-C»: «APRUEBO EL CIERRE DOCUMENTAL CONDICIONADO DEL CONJUNTO R2-C (R2-C1, R2-C2, R2-C3 Y R2-C4).» **Estado: R2-C: CIERRE DOCUMENTAL CONDICIONADO APROBADO.** No implica aprobar definitivamente los ADR, seleccionar formulaciones, aceptar riesgos, acreditar mitigaciones ni aprobar globalmente R2 o la Fase 2. Archivos: `02-arquitectura-adr.md` (apartado final «REGISTRO DE CIERRE DOCUMENTAL DE R2-C», solo metadatos), `aprobaciones.md`, `bitacora.md`.
+- **Evaluación conjunta:** autoevaluación del autor, no auditoría independiente; cierre viable; un hallazgo material (M-1) y observaciones no bloqueantes; lectura parcial declarada; sin pruebas, verificación en dispositivo ni asesoría jurídica.
+- **M-1:** RES-02 conserva su alcance sobre AM-28; la cita de IN-16-09 se relaciona con HR1-11 y no extiende RES-02 a AM-08; AM-08 sigue sin riesgo residual registrado, pendiente de DC4-1; no se acepta ni crea ningún riesgo residual.
+- **Observaciones registradas:** OBS-C-1 (remisiones cruzadas de OFF-10, 11, 16 y 24 entre ADR-05.C y ADR-16.C, sin decidir ubicación), OBS-C-2 (avisos de 7 y 1 días [REC]), OBS-C-3 (encabezado histórico de `02`, aclarado por precedencia), OBS-C-4 (limitaciones de cobertura e independencia).
+- **Commits verificados:** R2-C1 `a468166`; R2-C2 `acb29b8`; R2-C3 `d80e35c`; R2-C4 `3ec1ab7` (`3ec1ab7d03a039073971bb4580d1b8caccd6d613`).
+- **Hash:** SHA-256 de `02-arquitectura-adr.md` antes del registro de cierre: `733532c9a3f5f69c55b06613ed30c05885a119fe5bb294b3022bcec6312e8ea7`; con el registro: `19e8abf62cfdcbf03c2bc4e4b71c3575752e2860faae10c6a6995cffde96accc`. La diferencia es solo el apartado final.
+- **Condiciones abiertas:** todas las formulaciones, decisiones (DB, DC, OC, R2-A), K-3, D-2 sin excepción, las 34 amenazas y 19 Críticas con los vacíos de AM-19, AM-34, AM-08 y OM-01…07, RES-01…12 sin aceptar, Q-20 y demás condiciones de privacidad, asesoría jurídica y verificación en dispositivos pendientes; R1 §8.1 no declarado cumplido.
+- **Estado real:** R2-C: cierre documental condicionado aprobado. R2-B2 cerrado condicionadamente. **R2 y Fase 2: EN DESARROLLO, SIN APROBACIÓN GLOBAL.** R3 y R4: NO INICIADOS Y SIN AUTORIZACIÓN.
+- **Archivos modificados:** los tres indicados. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, resolver decisiones, R3) requiere autorización expresa e independiente.
+
 ## 2026-11-22 — Fase 2, R2-C4 (aprobación condicional como entregable documental)
 
 - **Decisión del responsable (2026-11-22, fecha inferida: la del aviso de la sesión):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R2-C4»: «APRUEBO EXCLUSIVAMENTE R2-C4 v0.2 COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» No acredita mitigación de amenazas, implementación, pruebas ni aceptación de riesgos, y no aprueba R2-C como bloque, R2 ni la Fase 2. Archivos: `02-arquitectura-adr.md` (solo metadatos de aprobación y estado de §24), `aprobaciones.md`, `bitacora.md`.
@@ -11,7 +24,7 @@
 - **Trazabilidad de R2-C3:** la Parte IX y los registros de R2-C3 quedaron versionados en el commit `d80e35c2748192172aa5271be7e46bf8c682df2c` (verificable por Git; 2026-11-22T01:01:48Z). Ver nota posterior en la entrada de R2-C3.
 - **Estado real:** **R2-C4: APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL.** R2-C3, R2-C2 y R2-C1: aprobados condicionalmente y versionados. R2-C completo, sin aprobación global. R2-B2: cierre documental condicionado aprobado y versionado. **Fase 2: EN DESARROLLO, SIN APROBACIÓN GLOBAL.** R3 y R4: NO INICIADOS Y SIN AUTORIZACIÓN. ADR .C: PROPUESTA. PAR-01…06 sin fijar; RES-01…12 sin aceptar; D-2 sin excepción.
 - **Archivos modificados:** `02-arquitectura-adr.md` (solo metadatos de §24), `aprobaciones.md`, `bitacora.md`. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar este registro, resolver decisiones, R3) requiere una autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, resolver decisiones, R3) requiere una autorización expresa e independiente. *[Nota posterior, 2026-11-22: la Parte X y los registros de R2-C4 quedaron versionados en el commit `3ec1ab7d03a039073971bb4580d1b8caccd6d613` (verificable por Git; 2026-11-22T02:11:07Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-22 — Fase 2, R2-C3 (aprobación condicional como entregable documental)
 

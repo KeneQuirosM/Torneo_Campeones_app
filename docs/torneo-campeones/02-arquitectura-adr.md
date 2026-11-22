@@ -5857,3 +5857,47 @@ Por tanto, **ninguna** de las 34 amenazas puede darse por mitigada con la eviden
 | Obs. 2 | AM-03: relación indirecta con D-2 y RES-05, sin presumir cobertura | §24.4, HC4-05 |
 | Obs. 3 | AM-02: la referencia posterior es una mención editorial, no tratamiento | §24.4 |
 | Obs. 4 | Limitación de lectura de las celdas CAB declarada | §24.1 |
+
+---
+
+# REGISTRO DE CIERRE DOCUMENTAL DE R2-C (metadatos; fuera de las Partes I–X)
+
+**Naturaleza.** Este apartado contiene **únicamente metadatos de aprobación y de versionado**. No añade ni modifica contenido arquitectónico, fichas, invariantes, estados prohibidos, garantías, escenarios, evidencias, amenazas, riesgos, decisiones ni condiciones de las Partes I–X.
+
+**Decisión expresa del responsable (2026-11-22, fecha inferida: la del aviso de fecha de la sesión; no hay marca de tiempo individual del mensaje).** Mensaje «TORNEO DE CAMPEONES — CIERRE DOCUMENTAL CONDICIONADO DE R2-C»: «APRUEBO EL CIERRE DOCUMENTAL CONDICIONADO DEL CONJUNTO R2-C (R2-C1, R2-C2, R2-C3 Y R2-C4).» Esta aprobación **no implica** aprobar definitivamente los ADR, seleccionar formulaciones, aceptar riesgos, acreditar mitigaciones ni aprobar globalmente R2 o la Fase 2.
+
+**Estado: R2-C (R2-C1, R2-C2, R2-C3 y R2-C4): CIERRE DOCUMENTAL CONDICIONADO APROBADO.** Alcance: la coherencia y suficiencia documental condicionada del conjunto de §21–§24 (ADR-05.C, ADR-04.C, ADR-16.C y la consolidación del modelo de amenazas), cada uno aprobado condicionalmente como entregable documental y versionado.
+
+**Evaluación conjunta.** Evaluación de solo lectura hecha por **el autor**, sin contexto nuevo: dictamen «el cierre documental condicionado es viable»; sin bloqueos de integración; un hallazgo material (M-1) y observaciones no bloqueantes, registrados abajo. **Es una autoevaluación, no una auditoría independiente.** Cobertura: se leyeron completas las tablas de invariantes IN-05, IN-04 e IN-16, las tensiones T-1…T-8 de cada Parte y las secciones de amenazas §21.8, §22.8, §23.8 y §24; no se releyeron todas las fichas de formulaciones CAP ni todas las matrices de trazabilidad. La unicidad y continuidad de identificadores se comprobó mecánicamente (ES-33…52, ESC-57…84, OC-43…53, sin definiciones duplicadas); la coherencia semántica entre Partes es lectura del autor. No se ejecutó ninguna prueba, no hubo verificación en dispositivo ni asesoría jurídica.
+
+**Hallazgo M-1 (aclaración expresa).** (1) **RES-02 conserva su alcance original sobre AM-28** (§16.10.1). (2) La referencia de IN-16-09 (§23.4) a RES-02 se relaciona con **HR1-11**, la raíz común (una PWA no puede purgar datos a distancia), pero **no extiende formalmente RES-02 a AM-08**. (3) **AM-08 continúa sin riesgo residual registrado, pendiente de DC4-1** (§24.6, HC4-02). (4) **No se acepta ni se crea ningún riesgo residual**; las menciones de "riesgo residual" de IN-05-21 y de T-4 de §23.2 para dispositivos que nunca se conectan no constituyen un RES registrado.
+
+**Observaciones no bloqueantes (registradas; no se corrigen contenidos).**
+
+| ID | Observación | Estado |
+|---|---|---|
+| OBS-C-1 | **Remisiones cruzadas de OFF-10, OFF-11, OFF-16 y OFF-24** entre ADR-05.C (IN-05-13, IN-05-21, IN-05-16, IN-05-17) y ADR-16.C (IN-16-11, IN-16-10, IN-16-15, IN-16-16): el mismo texto normativo figura en ambos ADR. **No se decide su ubicación definitiva;** OC-48 cubre solo la de OFF-11 | Abierta |
+| OBS-C-2 | **Diferencia relativa a los avisos de 7 y 1 días [REC]:** IN-16-11 los recoge y IN-05-13 no. Siguen siendo propuesta no adoptada (DC3-7) | Abierta |
+| OBS-C-3 | **Estado histórico desactualizado del encabezado de `02`** (líneas 4–6: "R2, R3 y R4: NO INICIADOS Y SIN AUTORIZACIÓN", y estado documentado solo hasta R2-A) | Se aclara por **precedencia de este registro**; no se reescribe el encabezado |
+| OBS-C-4 | **Limitaciones de cobertura e independencia** de la evaluación conjunta (párrafo «Evaluación conjunta») | Registrada |
+
+**Commits verificados** (con `git log`; cada uno toca solo `02-arquitectura-adr.md`, `aprobaciones.md` y `bitacora.md`):
+
+| Bloque | Commit | Fecha (UTC; verificable por Git) |
+|---|---|---|
+| R2-C1 | `a468166210e0472e07dd5d0800985d3db1c6b940` (`a468166`) | 2026-11-21T22:57:42 |
+| R2-C2 | `acb29b818915a0e34a68ce23793354b34cbbdd33` (`acb29b8`) | 2026-11-22T00:32:27 |
+| R2-C3 | `d80e35c2748192172aa5271be7e46bf8c682df2c` (`d80e35c`) | 2026-11-22T01:01:48 |
+| R2-C4 | `3ec1ab7d03a039073971bb4580d1b8caccd6d613` (`3ec1ab7`) | 2026-11-22T02:11:07 |
+
+**Nota de precedencia sobre estados históricos de versionado.** Las expresiones «sin versionar», «pendiente», «sin commit», «no versionado» o «HEAD …» de §21.0, §22.0, §23.0, §23.14, §24.0 y §24.13 describen el estado del documento **al momento de redactarse o aprobarse cada bloque**. Este registro **prevalece**: R2-C1, R2-C2, R2-C3 y R2-C4 están versionados en los commits de la tabla anterior. No se reescribe el texto histórico.
+
+**Condiciones que permanecen abiertas (el cierre NO las resuelve).** (1) Las formulaciones de D5-1…7, D4-1…8 y D16-1…6, sin elegir ninguna; (2) DB1-1…6, DB2a-1…10, DB2b-1…9, DB2c-1…11, DC1-1…10, DC2-1…11, DC3-1…10, DC4-1…4, OC-01…53 y las 12 decisiones abiertas de R2-A (la 11, atendida), incluidas la partición ADR-05.C / ADR-09.C y la persistencia del rechazo; (3) K-3 pendiente; D-2 sin excepción; (4) las 34 amenazas y sus clasificaciones, incluidas las 19 Críticas; los vacíos de AM-19 y AM-34 (reasignación propuesta, no aplicada: OC-40, DB2c-11), de AM-08 (DC4-1) y de OM-01…07; (5) RES-01…12 sin aceptar; ninguna amenaza declarada mitigada ni control implementado o probado; (6) Q-20, Q-43, Q-40 (d), PRV-18, A-8 (DB1-3), OC-48…51 y las demás condiciones de privacidad; (7) CAP-16-K-B contradictoria con OFF-20 y CAP-04-X-B y CAP-04-C-B como alternativas no conformes, sin aprobar; (8) **asesoría jurídica pendiente** (PEND-JUR; HR1-11, HR1-12, HR1-14, PRV-18) y **verificación en dispositivos pendiente** (iOS: HR1-07, IOS-01…08); (9) **R1 §8.1 no se declara cumplido**; sin parámetros fijados ni excepciones concedidas.
+
+**Exclusiones (el cierre NO implica):** aprobar definitivamente ADR-05.C, ADR-04.C ni ADR-16.C; seleccionar formulaciones o tecnologías; aceptar riesgos o conceder excepciones; reasignar amenazas; resolver decisiones; acreditar mitigaciones, implementación o pruebas; aprobar globalmente R2, R2-C o la Fase 2; iniciar R3 o R4.
+
+**Hash histórico del documento.** SHA-256 de `02-arquitectura-adr.md` **inmediatamente antes de este registro** (archivo versionado en `3ec1ab7d03a039073971bb4580d1b8caccd6d613`): `733532c9a3f5f69c55b06613ed30c05885a119fe5bb294b3022bcec6312e8ea7`
+
+**Estado de versionado de este registro.** **Pendiente:** sin commit, push, PR ni merge.
+
+**Condiciones para el cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. El cierre documental condicionado de R2-C **no equivale** a aprobar R2 ni la Fase 2. R3 y R4: **NO INICIADOS Y SIN AUTORIZACIÓN.**
