@@ -5951,3 +5951,159 @@ Por tanto, **ninguna** de las 34 amenazas puede darse por mitigada con la eviden
 **Hash histórico del documento.** SHA-256 de `02-arquitectura-adr.md` **inmediatamente antes de esta adenda** (archivo versionado en `ddd9f36ed7dfe044874e6418d0465145c59d1a3f`): `19e8abf62cfdcbf03c2bc4e4b71c3575752e2860faae10c6a6995cffde96accc`
 
 **Estado de versionado de esta adenda.** **Pendiente:** sin commit, push, PR ni merge.
+
+---
+
+# ADENDA DE MATRIZ DE FORMULACIONES ADMISIBLES Y CIERRE DE DC4-2 (metadatos; fuera de las Partes I–X)
+
+**Naturaleza.** Esta adenda registra una **propuesta documental**, **no un conjunto definitivamente aprobado**, y la resolución de DC4-2. No añade ni modifica contenido arquitectónico, invariantes, amenazas, riesgos, escenarios ni condiciones de las Partes I–X, ni la adenda anterior («ADENDA DE DECISIONES PREVIAS AL CIERRE DE R2»), ni §16.3, §16.5 o §16.10.1. **El texto histórico se preserva;** esta adenda prevalece solo en lo que se indica.
+
+**Autorización (2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R2: AJUSTE Y REGISTRO DE MATRIZ»: «AUTORIZO AJUSTAR Y REGISTRAR LA MATRIZ COMO PROPUESTA DOCUMENTAL, NO COMO CONJUNTO DEFINITIVAMENTE APROBADO.» Previa propuesta de solo lectura («R2: MATRIZ DE FORMULACIONES ADMISIBLES»). **Este registro no aprueba R2 ni la Fase 2.**
+
+**Trazabilidad.** La adenda anterior y sus registros quedaron versionados en el commit `5375df75b35620e910c64acb8e0db00756272256` (`5375df7`; 2026-11-22T02:31:51Z; verificable por Git). Su expresión «Estado de versionado: Pendiente» describe el momento de redactarse; **esta adenda prevalece**.
+
+## A. Criterio de clasificación (confirmado por el responsable)
+
+| Marca | Significado |
+|---|---|
+| **A (admisible)** | Hay evidencia documental **positiva** de conformidad con `01` o R1, y sus dependencias abiertas no condicionan esa conformidad. |
+| **C (condicionada)** | Su conformidad depende de una decisión, aclaración o lectura abierta, o **no hay evidencia positiva suficiente**. **Queda fuera del conjunto admisible mientras sus condiciones de conformidad no se satisfagan.** |
+| **X (excluida)** | Señalada no conforme, contradice una fuente [CONF] o exige modificar `01` sin autorización. |
+
+Regla: **la ausencia de hallazgos no hace conforme una formulación.** Las dependencias de mecanismo o de parámetros de R3 y la viabilidad con el stack **no** se consideran condiciones de conformidad (§E.4). **Ninguna formulación se selecciona y ningún conjunto queda definitivamente aprobado.**
+
+## B. Matriz ajustada (propuesta)
+
+**ADR-02.C (R2-B1 §17.3.3; DB1-1)**
+
+| Decisión | A (evidencia positiva) | C (condición) | X (motivo) |
+|---|---|---|---|
+| Reparto de la autorización | **CAP-02-A** — conformidad documentada: sin celdas "No conforme" (21 conformes, 5 condicionadas a K-1, K-3 y K-5); **dependencias de integración**, no de conformidad (ver §E.4) | **CAP-02-D** — K-2 (18 celdas) e independencia respecto de A no demostrada (DB1-1) | **CAP-02-B** — no conforme; lo excluye RT-02. **CAP-02-C** — no conforme tal como está definida; completada es A más versión |
+
+**ADR-03.C (R2-A §16.6)**
+
+| Decisión | A (evidencia positiva) | C (condición) | X (motivo) |
+|---|---|---|---|
+| Nivel (N) | **N-C** — conforme con IN-03-02, IN-03-04 (bajo ambas lecturas) e IN-03-16; "Viable" | **N-B** — lectura de "nueva autenticación" (decisión 12) y K-5 | **N-A** — no conforme con IN-03-04 |
+| Sincronizar (S) | **S-A**, **S-B** — conformes con IN-03-02, 10, 11 y 19; "Viable" | — | — |
+| Recuperación (R) | — | **R-A** — medios fuertes, no solo el correo (IN-03-15 es [REC]: decisión 7; RES-01). **R-C** — hereda las de R-A y R-B | **R-B** — como vía única no cumple IN-03-15 [REC]; solo último recurso |
+| Vigencia de la revocación (V) | — | **V-A**, **V-B** — D-2 y decisión 1 (S2 no demostrable) | **V-C** — exige un canal que el MVP no tiene (ADR-07, R3) |
+
+**ADR-09.C (R2-A §16.7; R2-B2-b2 §20.5)**
+
+| Decisión | A (evidencia positiva) | C (condición) | X (motivo) |
+|---|---|---|---|
+| Inmutabilidad (M) | **M1** — mínimo exigido (RF-AUD-03); "Viable". **M2**, **M3** — conformes, **opcionales: no se exigen** (son [REC]; su exigencia depende de la decisión 7) | — | — |
+| Persistencia del rechazo (P) | **P-A** — "plenamente conforme" en las tres columnas | **P-C** — intención durable antes de responder; K-3 y decisión 10 | **P-B** — variante parcial; diverge de R1 |
+| Fallo del registro (F) | **F-2** — "Conforme" | **F-3** — intención durable (igual que P-C) | **F-1** — no conforme (pérdida de auditoría) |
+| Registro de reenvíos (O) | — | **O-1**, **O-2**, **O-3** — alcance de OFF-06 sobre lo rechazado (OC-35); O-1 y O-3 dependen de D5-1 y de la decisión 10; ninguna tiene conformidad establecida | — |
+
+**ADR-05.C (§21.5)**
+
+| Decisión | A (evidencia positiva) | C (condición) | X (motivo) |
+|---|---|---|---|
+| D5-1 idempotencia de lo rechazado | — | **I-A** — decisión 10, D5-2, PRV-10. **I-B** — OC-35; sin conformidad establecida | — |
+| D5-2 metadatos de rechazadas (R-4) | — | **M-A** — decisión 3, DB2c-2 y DB2c-3 | **M-B** — posible no conformidad con OFF-20 [CONF] |
+| D5-3 fallo del registro | **F-A** (= F-2 de R2-A) — "Conforme" | **F-B** — intención durable previa | — |
+| D5-4 secuencia entre dispositivos | — | **S-A**, **S-B** — OC-41 y §9.4 fila 10; S-B exige una lectura que `01` no fija | — |
+| D5-5 bloqueo tras fallo | **B-B** — se apoya en OFF-25 y RD-EVT-12 [CONF] (reserva: lecturas provisionales A-9, A-11, A-14) | **B-A** — OFF-07 es [REC] (decisión 7) | — |
+| D5-6 estado tras aborto técnico | — | **E-A** — transición no definida por `01` (OC-44) | **E-B** — puede exigir modificar OFF-04 y §9.2 |
+| D5-7 reconciliación tras interrupción | — | **C-A** — D5-1 y OC-35. **C-B** — responsabilidad de CMP-13 no prevista en R1 §5.3; OC-43 | — |
+
+**ADR-04.C (§22.5)**
+
+| Decisión | A (evidencia positiva) | C (condición) | X (motivo) |
+|---|---|---|---|
+| D4-1 materialización | — | **P-A**, **P-B** — R1 §8.1 admite ambas lecturas y R2-B documenta la unidad para ambas (OC-20), pero **no hay evaluación de conformidad** con IN-04-06, 07 e IN-04-10; OC-20, DB2b-3 y (P-A) OC-28 abiertas | — |
+| D4-2 coherencia | **C-A** — texto literal de R1 §5.5, CL-15 e IN-04-06 (garantía exigida, no demostrada) | — | **C-B** — no conforme con R1 §5.5 y ES-42, salvo aclaración de OC-46 |
+| D4-3 visibilidad | **V-A** — PA-04, §9.6 e IN-04-04 | **V-B** — puede chocar con PA-04 si llega a Z1 | — |
+| D4-4 campos públicos | — | **M-A** — Q-20 y PRV-18 | **M-B** — contradice RF-PUB-02 [CONF] |
+| D4-5 preparación | — | **R-A**, **R-B** — **sin evaluación de conformidad** con OFF-02, PRV-09 y PRV-11 (solo diseño dirigido a ellas); Q-20 [COND]. R-B además: lo público puede no cubrir OFF-02 | — |
+| D4-6 copias locales | **X-A** — IN-04-09 [CONF] en la ausencia de plazo y HR1-11 (RES-02 sin aceptar; la señal de cambio depende de ADR-06) | — | **X-B** — requiere modificar `01` (PRV-02 sin conexión) |
+| D4-7 `archivado` | **A-A** — RF-PUB-01 [CONF] ("por ahora") | **A-B** — Q-40 (d) | — |
+| D4-8 publicar y RT-14 | — | **G-A**, **G-B** — A-8 abierta (DB1-3, T-8) | — |
+
+**ADR-16.C (§23.5)**
+
+| Decisión | A (evidencia positiva) | C (condición) | X (motivo) |
+|---|---|---|---|
+| D16-1 protección en reposo | — | **P-A** — se apoya en el aislamiento por cuenta IN-16-07, que es [REC] (decisión 7), y el resultado de la evaluación de OFF-12 está abierto (RES-13 pendiente). **P-B** — compatibilidad con OFF-23 (OC-49) | — |
+| D16-2 aislamiento por cuenta | — | **A-A**, **A-B** — dependen del [REC] IN-03-20 (decisión 7, DC3-7); A-A: OC-48; A-B: tensión con IN-03-20 | — |
+| D16-3 retención de pendientes | — | **R-A** — conforme con OFF-09, pero `01` no fija plazo para pendientes (T-6) y PRV-10 es PEND-JUR (retención sin límite) | **R-B** — exige un parámetro no fijado (OC-50) y choca con OFF-09 |
+| D16-4 pérdida por desalojo | **C-A** — IN-16-12 [CONF] (OFF-17); iOS sin verificar | **C-B** — criterio de "tiempo" no fijado (OC-50) | — |
+| D16-5 migración del formato | — | **V-A** — OFF-16 es [REC]. **V-B** — lectura que `01` no fija | — |
+| D16-6 constancia de eliminación | **K-A** — IN-16-11 e IN-05-13 [CONF] ("constancia mínima"; OFF-10) | — | **K-B** — contradice OFF-20 |
+
+## C. Conteos recalculados
+
+| Concepto | Valor |
+|---|---|
+| Decisiones evaluadas | **30** (ADR-02.C: 1; ADR-03.C: 4; ADR-09.C: 4; ADR-05.C: 7; ADR-04.C: 8; ADR-16.C: 6) |
+| Formulaciones evaluadas | **69** |
+| **A (admisibles)** | **17** (ADR-02: 1; ADR-03: 3; ADR-09: 5; ADR-05: 2; ADR-04: 4; ADR-16: 2) |
+| **C (condicionadas)** | **38** |
+| **X (excluidas)** | **14** |
+| Decisiones con ≥ 2 formulaciones A | **2** (ADR-03 S; ADR-09 M) |
+| Decisiones con exactamente 1 formulación A | **12** |
+| Decisiones **sin ninguna** formulación A | **16** |
+
+**Corrección de conteos.** La propuesta de solo lectura previa afirmó 17 formulaciones A; el recuento de su propia matriz era **21**. Tras los cambios de §D hay **17** A; la coincidencia de cifras es casual.
+
+Decisiones sin ninguna formulación A (16): ADR-03 R y V; ADR-09 O; ADR-05 D5-1, D5-2, D5-4, D5-6 y D5-7; ADR-04 D4-1, D4-4, D4-5 y D4-8; ADR-16 D16-1, D16-2, D16-3 y D16-5.
+
+## D. Cambios de clasificación respecto de la propuesta previa
+
+| Formulación | Antes | Ahora | Motivo |
+|---|---|---|---|
+| ADR-02 **CAP-02-A** | C | **A** | Conformidad documentada sin celdas "No conforme"; sus condiciones son dependencias de integración (§E.4) |
+| ADR-04 D4-1 **P-A**, **P-B** | A | **C** | R1 §8.1 las admite como lecturas, pero no hay evaluación de conformidad con IN-04-06, 07 e IN-04-10; OC-20, DB2b-3 y OC-28 abiertas |
+| ADR-04 D4-5 **R-A** | A | **C** | Evidencia solo por diseño; sin evaluación de conformidad con OFF-02, PRV-09 y PRV-11; Q-20 [COND] |
+| ADR-16 D16-1 **P-A** | A | **C** | Se apoya en IN-16-07 [REC] (decisión 7); el resultado de la evaluación de OFF-12 está abierto |
+| ADR-16 D16-3 **R-A** | A | **C** | `01` no fija plazo para pendientes (T-6) y PRV-10 es PEND-JUR |
+
+Balance: 21 − 5 + 1 = **17**. Las demás clasificaciones no cambian.
+
+## E. Reglas de lectura
+
+1. **R1 §8.1 por ADR (texto confirmado).** R1 §8.1 exige "≥ 3 alternativas viables" en el ADR principal y "≥ 2" en los demás, "salvo excepción justificada". **Los textos no definen qué es una "alternativa" de un ADR `.C`** (si una formulación completa o una opción por decisión). Cada ADR `.C` tiene ≥ 2 formulaciones evaluadas, pero **no se declara cumplido R1 §8.1** ni se concede excepción.
+2. **Lectura por decisión (interpretación de los borradores, no requisito confirmado).** Los borradores evalúan ≥ 2 formulaciones por decisión. Con esta matriz, solo 2 de 30 decisiones tienen ≥ 2 A. **Este conteo no se convierte en requisito de R1 §8.1** y no sustituye a la lectura por ADR.
+3. **DB1-1 continúa abierta, sin excepción:** ADR-02.C tiene una formulación A (CAP-02-A) y una C (CAP-02-D); CAP-02-D no cuenta como segunda forma.
+4. **CAP-02-A: conformidad, dependencias de integración y viabilidad.** *Conformidad:* documentada en R2-B1 (§17.3.3): ninguna celda "No conforme". *Dependencias de integración* (las 5 celdas condicionadas): **K-1**, propiedad que se exige a ADR-02.I (R3); **K-3**, que ADR-09.C se formule con P-A o P-C (P-B queda excluida); **K-5**, que ADR-03.C se formule con N-B o N-C (N-A queda excluida). Estas dependencias se satisfacen **solo dentro de los conjuntos propuestos**, y se mantienen como condición: si se admitiera P-B o N-A, CAP-02-A dejaría de ser conforme. *Viabilidad:* **no evaluada** (depende de ADR-01; sin stack).
+5. **Controles [REC].** Ninguna clasificación A se apoya en un [REC] como requisito obligatorio. M2 y M3 (ADR-09) son admisibles **solo como opcionales**. Las formulaciones que se apoyan en un [REC] (D16-1 P-A, D16-2, D16-5, D5-5 B-A, ADR-03 R) son C hasta resolver la **decisión 7, que sigue abierta**.
+
+## F. Condiciones que bloquean pasar de C a A (o admitir una X)
+
+| Condición | Formulaciones afectadas |
+|---|---|
+| Decisión 10 de R2-A, K-3 y OC-35 | ADR-09 P-C, F-3 y O-1…3; ADR-05 D5-1 (I-A, I-B), F-B y D5-7 (C-A) |
+| Decisión 3 de R2-A (partición ADR-05.C / ADR-09.C) | ADR-05 D5-2 (M-A) |
+| Decisión 7 ([REC]) | ADR-03 R-A y R-C; ADR-05 B-A; ADR-16 D16-1 P-A, D16-2, D16-5 V-A y B-A |
+| Decisiones 1 (D-2) y 12 | ADR-03 N-B, V-A y V-B |
+| OC-41, OC-43 y OC-44 | ADR-05 D5-4, D5-6 y D5-7 |
+| OC-20, DB2b-3, OC-28 | ADR-04 D4-1 |
+| Q-20, PRV-18 | ADR-04 D4-4 (M-A) y D4-5 |
+| Q-40 (d); A-8 (DB1-3) | ADR-04 D4-7 (A-B); D4-8 |
+| OC-46 | ADR-04 D4-2 (C-B, hoy X) |
+| OC-48, OC-49, OC-50, OC-51; PEND-JUR | ADR-16 D16-1 (P-B), D16-2, D16-3, D16-4 (C-B) |
+| K-2 e independencia de D (DB1-1) | ADR-02 CAP-02-D |
+| Modificación formal de `01` (no autorizada) | ADR-04 X-B; ADR-05 E-B (hoy X) |
+
+**Efecto sobre R3 (evidencia §8.2 y regla de la decisión 6; el resto es inferencia).** Los ADR-xx.I solo pueden elegir dentro de un conjunto admitido; **las 16 decisiones sin A no pueden pasar a su ADR-xx.I** hasta satisfacer sus condiciones o hasta decisión expresa del responsable. **Inferencia:** ADR-01 y ADR-10 pueden evaluarse contra los invariantes `.C` y las 17 formulaciones A. La inviabilidad con el stack regresa al responsable.
+
+## G. DC4-2: cerrada como resuelta por DB2c-11
+
+**DC4-2** («Mientras DB2c-11 siga abierta, ¿quién consume AM-19 y AM-34?») **queda cerrada exclusivamente como resuelta por DB2c-11**, decisión registrada en la adenda anterior: AM-19 → Fase 4 (validación de entradas y consultas parametrizadas); AM-34 → R3 (cabeceras de seguridad) y Fase 4 (validación y codificación de salidas). Esta adenda **prevalece** sobre «sin cerrar formalmente» de la adenda anterior.
+
+- **AM-19 y AM-34 conservan su clasificación Crítica, sin tratamiento documental completo y sin mitigación demostrada.** El cierre de DC4-2 **no declara tratada ni mitigada** ninguna.
+- **RNF-05 se preserva como requisito confirmado** (cabeceras de seguridad, para AM-34). Los controles de validación de entradas, consultas parametrizadas y escape según el contexto de salida **siguen siendo recomendaciones [REC]**; la decisión 7 permanece abierta.
+- No se cierran HC4-03, DC4-3, DC4-4 ni OC-52; OM-01…07 no se tocan; el consumo por R3 y la Fase 4 es una **obligación futura**, no un tratamiento.
+
+## H. Condiciones que permanecen abiertas y exclusiones
+
+Todas las de la adenda anterior, con estos cambios: **DC4-2 cerrada** (única decisión resuelta por esta adenda). Siguen abiertas: la aprobación del conjunto admitido (esta matriz es **propuesta**), DB1-1 y R1 §8.1 (no cumplido), las decisiones 1, 2, 3, 4, 5, 7, 8, 9, 10, 12 y 13 de R2-A, K-3, D-2 sin excepción, DB, DC (DC4-3, DC4-4), OC-01…53 salvo OC-40, OM-01…07, RES-01…13 sin aceptar, la asesoría jurídica y la verificación en dispositivos. **R2 y Fase 2 sin aprobación global; R3 y R4 NO INICIADOS Y SIN AUTORIZACIÓN.**
+
+**Exclusiones (esta adenda NO hace):** seleccionar formulaciones; aprobar conjuntos definitivos; resolver decisiones distintas de DC4-2; aceptar riesgos o conceder excepciones; declarar cumplido R1 §8.1; declarar amenazas tratadas o mitigadas; aprobar R2 ni la Fase 2; iniciar R3 o R4.
+
+**Hash histórico del documento.** SHA-256 de `02-arquitectura-adr.md` **inmediatamente antes de esta adenda** (archivo versionado en `5375df75b35620e910c64acb8e0db00756272256`): `76352638b22b902303841005f0fa702f38dfdb6926985359c17aa5cf5dc046c2`
+
+**Estado de versionado de esta adenda.** **Pendiente:** sin commit, push, PR ni merge.

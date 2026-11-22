@@ -1,5 +1,17 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-22 — Fase 2, matriz de formulaciones admisibles y cierre de DC4-2
+
+- **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — R2: AJUSTE Y REGISTRO DE MATRIZ». Se registra la matriz **como propuesta documental, no como conjunto definitivamente aprobado**; se confirma el criterio A/C/X (las C quedan fuera del conjunto admisible mientras no se satisfagan sus condiciones). Archivos: `02-arquitectura-adr.md` (adenda final), `aprobaciones.md`, `bitacora.md`.
+- **Conteos:** 30 decisiones, 69 formulaciones: **17 A, 38 C, 14 X**; ≥ 2 A en 2 decisiones; 1 A en 12; sin A en 16. Corrige el "17" de la propuesta previa, cuya matriz contenía 21 A.
+- **Cambios:** CAP-02-A C → A (dependencias de integración K-1, K-3, K-5 declaradas); D4-1 P-A y P-B, D4-5 R-A, D16-1 P-A y D16-3 R-A A → C.
+- **R1 §8.1:** se distingue el requisito por ADR (texto) de la lectura por decisión (interpretación, no requisito confirmado); no se declara cumplido; DB1-1 abierta, sin excepción. **Decisión 7 abierta:** ningún [REC] se usa como requisito.
+- **DC4-2 cerrada exclusivamente como resuelta por DB2c-11.** AM-19 y AM-34 siguen Críticas, sin tratamiento completo ni mitigación; RNF-05 requisito confirmado; controles [REC] como recomendaciones.
+- **Trazabilidad:** las decisiones previas quedaron versionadas en `5375df7` (`5375df75b35620e910c64acb8e0db00756272256`, 2026-11-22T02:31:51Z); nota posterior añadida en su entrada.
+- **Hash:** `02-arquitectura-adr.md` antes de la adenda (`5375df7`): `76352638b22b902303841005f0fa702f38dfdb6926985359c17aa5cf5dc046c2`; con la adenda: `30249c3c2972f8effd81e977a86130e3e16a9219f052f2dff0ee82821a1101ad`.
+- **Estado real:** R2 y Fase 2 sin aprobación global; R3 y R4 NO INICIADOS Y SIN AUTORIZACIÓN; RES-01…13 sin aceptar. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar, aprobar conjuntos, registrar el cierre de R2, R3) requiere autorización expresa e independiente.
+
 ## 2026-11-22 — Fase 2, decisiones previas al cierre de R2
 
 - **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — DECISIONES PREVIAS AL CIERRE DE R2», tras la propuesta de solo lectura. Archivos: `02-arquitectura-adr.md` (adenda final de metadatos), `aprobaciones.md`, `bitacora.md`.
@@ -9,7 +21,7 @@
 - **Hash:** `02-arquitectura-adr.md` antes de la adenda (`ddd9f36`): `19e8abf62cfdcbf03c2bc4e4b71c3575752e2860faae10c6a6995cffde96accc`; con la adenda: `76352638b22b902303841005f0fa702f38dfdb6926985359c17aa5cf5dc046c2`.
 - **Abiertas:** enumeración del conjunto admitido por decisión; DB1-1; 11 decisiones de R2-A; K-3; D-2 sin excepción; DB, DC (DC4-2 superada sin cerrar), OC; OM-01…07; Q-20 y demás; asesoría jurídica y verificación en dispositivos; RES-01…13 sin aceptar.
 - **Estado real:** R2 y Fase 2 sin aprobación global; R3 y R4 NO INICIADOS Y SIN AUTORIZACIÓN. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar, enumerar los conjuntos admitidos, registrar el cierre de R2, R3) requiere autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar, enumerar los conjuntos admitidos, registrar el cierre de R2, R3) requiere autorización expresa e independiente. *[Nota posterior, 2026-11-22: este registro quedó versionado en el commit `5375df75b35620e910c64acb8e0db00756272256` (`5375df7`; verificable por Git; 2026-11-22T02:31:51Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-22 — Fase 2, R2-C (cierre documental condicionado)
 
