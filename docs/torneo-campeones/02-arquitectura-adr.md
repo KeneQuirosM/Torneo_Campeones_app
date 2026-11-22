@@ -5901,3 +5901,53 @@ Por tanto, **ninguna** de las 34 amenazas puede darse por mitigada con la eviden
 **Estado de versionado de este registro.** **Pendiente:** sin commit, push, PR ni merge.
 
 **Condiciones para el cierre de la Fase 2.** Las decisiones que la Fase 1 asignó a la Fase 2 deberán resolverse antes de cerrar globalmente la Fase 2, salvo modificación o excepción formalmente aprobada. El cierre documental condicionado de R2-C **no equivale** a aprobar R2 ni la Fase 2. R3 y R4: **NO INICIADOS Y SIN AUTORIZACIÓN.**
+
+---
+
+# ADENDA DE DECISIONES PREVIAS AL CIERRE DE R2 (metadatos; fuera de las Partes I–X)
+
+**Naturaleza.** Esta adenda contiene **únicamente metadatos de decisión y de trazabilidad**. No añade ni modifica contenido arquitectónico, invariantes, amenazas, riesgos, escenarios ni condiciones de las Partes I–X, ni la tabla de §16.3, ni la de §16.5, ni la de §16.10.1. **El texto histórico se preserva** (incluidas la asignación de AM-19 y AM-34 a R2-B en §16.3 y §16.5, los textos de §21–§24 y los registros de cierre de R2-B2 y R2-C). **Esta adenda prevalece** sobre las expresiones históricas que la contradigan, solo en lo que se indica abajo.
+
+**Autorización (2026-11-22, fecha inferida: la del aviso de la sesión).** Mensaje «TORNEO DE CAMPEONES — DECISIONES PREVIAS AL CIERRE DE R2»: «AUTORIZO EXCLUSIVAMENTE REGISTRAR LAS SIGUIENTES DECISIONES». Previa propuesta de solo lectura («R2: PREPARACIÓN DE DECISIONES PARA EL CIERRE»). **Este registro no aprueba R2 ni la Fase 2.**
+
+## A. Decisión 6 de R2-A (§16.10.3): opción (b) — registrada
+
+1. **Se adopta la regla de §16.8.5** (hasta ahora propuesta [REC]) y **se admiten conjuntos de formulaciones conformes** (§16.6.8, opción b), en lugar de elegir una formulación por decisión.
+2. **Se excluyen del conjunto admitido** las formulaciones no conformes y las dependientes de condiciones abiertas no satisfechas. Las Partes señalan, entre ellas, CAP-04-C-B (no conforme con R1 §5.5, salvo la aclaración de OC-46) y CAP-16-K-B (contradictoria con OFF-20); la determinación de las demás se hace al fijar cada conjunto, **no aquí**.
+3. **Los ADR-xx.I no pueden redefinir, relajar ni reinterpretar invariantes `.C`.** Toda capacidad admitida que resulte inviable o desproporcionada con el stack **regresa al usuario para decisión expresa**; ADR-01 no puede darla por cumplida sin esa decisión (§16.8.5, puntos 2 y 3).
+4. **No se selecciona ninguna formulación concreta** y **no se enumera todavía el conjunto admitido por decisión** (queda pendiente, ver condiciones). **No se declara cumplido R1 §8.1**: **DB1-1 continúa abierta, sin excepción**, y CAP-02-D no cuenta como segunda forma. Admitir conjuntos no equivale a elegir ni a conceder excepción.
+5. **Efecto sobre las demás decisiones:** no resuelve las decisiones 1, 2, 3, 4, 5, 7, 8, 9, 10, 12 ni 13 de R2-A, ni K-3, ni D-2, ni DB, OC o DC. Las formulaciones que dependan de ellas permanecen fuera del conjunto admitido mientras no se resuelvan.
+
+## B. DB2c-11 / OC-40: reasignación de AM-19 y AM-34 — registrada
+
+| Amenaza | Asignación histórica (preservada) | Nueva asignación (por trazabilidad posterior) |
+|---|---|---|
+| **AM-19** (inyección en la capa de datos) | R2-A: **R2-B**; Fase 4 (§16.3, §16.5) | **Fase 4**: validación de entradas y consultas parametrizadas |
+| **AM-34** (inyección de contenido en vistas públicas, panel, correos y proyecciones) | R2-A: **R2-B**; R3 (cabeceras); Fase 4 (§16.3, §16.5) | **R3**: cabeceras de seguridad. **Fase 4**: validación y codificación de salidas |
+
+- La decisión del responsable **no coincide literalmente con ninguna de las dos opciones de DB2c-11** (reasignación a R2-C y la Fase 4 / mantener la de R2-A): **no asigna estas amenazas a R2-C**. Se registra tal como fue emitida. Las Partes VII–X y los registros de cierre que las describen "sin tratamiento" o "reasignación propuesta, no aplicada" conservan su texto histórico; **esta adenda prevalece** sobre «no aplicada».
+- **Se conservan** ambas amenazas como **Críticas**, **sin tratamiento documental completo** y **sin mitigación demostrada**. R2 **no** incorpora ninguna capacidad `.C` para ellas.
+- **Controles exigidos y recomendados, sin mezclar:** AM-19: `01` no exige la validación de entradas; la validación en el límite y las consultas parametrizadas siguen siendo **[REC]**. AM-34: exigido, RNF-05 (cabeceras de seguridad); el escape según el contexto de salida y la validación siguen siendo **[REC]**. **La asignación de responsable no convierte ningún [REC] en requisito.** **La decisión 7 de R2-A (controles [REC]) permanece abierta.**
+- **DC4-2** (quién consume AM-19 y AM-34 "mientras DB2c-11 siga abierta"): su condición queda superada por esta decisión; **no se declara cerrada formalmente** ni se resuelve DC4-4; queda para la confirmación del responsable.
+- OC-40 y DB2c-11: **decisión registrada**; el resto de DB2c (DB2c-1…10) sigue abierta.
+
+## C. DC4-1: RES-13 — registro autorizado (opción A)
+
+| ID | Riesgo residual | Amenazas | Raíz | Nivel residual [SUP] | Responsable (documental) | Aceptación |
+|---|---|---|---|---|---|---|
+| **RES-13** | Una PWA no puede borrar a distancia los datos locales de un dispositivo perdido, robado o prestado que no vuelve a conectarse; la exposición depende de lo que contenga el almacén local (IN-16-01…04, IN-16-09; D16-1) | **AM-08** (exclusivamente) | **HR1-11** | **Por evaluar** (no se estima aquí) | ADR-16.C (R2-C), como AM-08 en R2-A | **PENDIENTE** |
+
+- **Registrar no es aceptar.** RES-13 **no está aceptado**; la aceptación es solo del usuario, por escrito y con motivo (decisión 8 de R2-A).
+- **RES-02 conserva su alcance original sobre AM-28**; esta adenda **no lo modifica ni lo extiende**. La referencia de IN-16-09 a RES-02 sigue sin extender RES-02 a AM-08.
+- **RES-13 no pertenece a la serie `RD-RES-nn` de `01`** (p. ej. RD-RES-13 «Reanudar un partido suspendido»); son series distintas.
+- Efecto: el conjunto de riesgos residuales de R2 pasa a **RES-01…13, todos sin aceptar**. Los textos históricos que dicen «RES-01…12» o «AM-08 sin riesgo residual registrado» conservan su redacción; **esta adenda prevalece**. **D16-1 sigue abierta.**
+
+## D. Condiciones que permanecen abiertas
+
+(1) Enumerar el conjunto de formulaciones admitido por decisión (ADR-02.C, 03.C, 04.C, 05.C, 09.C, 16.C) **no se ha hecho** y requiere autorización; (2) **DB1-1** sin excepción y R1 §8.1 no cumplido; (3) las decisiones 1 (D-2, sin excepción), 2, 3, 4, 5, 7, 8, 9, 10, 12 y 13 de R2-A (**11 abiertas**; la 11, atendida; la 6, decidida en esta adenda); K-3; DB1, DB2a, DB2b y DB2c-1…10, DC1, DC2, DC3, DC4-2 (superada, sin cerrar formalmente), DC4-3, DC4-4, OC-01…53 salvo OC-40; (4) las 34 amenazas y 19 Críticas; ninguna mitigada; OM-01…07 sin evaluación completa; (5) RES-01…13 sin aceptar; nivel de RES-13 por evaluar; (6) Q-20, Q-43, Q-40 (d), PRV-18, A-8, OC-48…51; (7) asesoría jurídica y verificación en dispositivos pendientes; (8) **R2 y Fase 2 sin aprobación global**; R3 y R4 **NO INICIADOS Y SIN AUTORIZACIÓN**.
+
+**Exclusiones (esta adenda NO hace):** aprobar R2 ni la Fase 2; elegir formulaciones o tecnologías; declarar cumplido R1 §8.1 ni conceder excepciones; aceptar riesgos; declarar mitigada ninguna amenaza; resolver decisiones distintas de las tres indicadas; iniciar R3 o R4.
+
+**Hash histórico del documento.** SHA-256 de `02-arquitectura-adr.md` **inmediatamente antes de esta adenda** (archivo versionado en `ddd9f36ed7dfe044874e6418d0465145c59d1a3f`): `19e8abf62cfdcbf03c2bc4e4b71c3575752e2860faae10c6a6995cffde96accc`
+
+**Estado de versionado de esta adenda.** **Pendiente:** sin commit, push, PR ni merge.

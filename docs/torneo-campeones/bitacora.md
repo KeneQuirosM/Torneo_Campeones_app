@@ -1,5 +1,16 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-22 — Fase 2, decisiones previas al cierre de R2
+
+- **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — DECISIONES PREVIAS AL CIERRE DE R2», tras la propuesta de solo lectura. Archivos: `02-arquitectura-adr.md` (adenda final de metadatos), `aprobaciones.md`, `bitacora.md`.
+- **Decisión 6 de R2-A, opción (b):** se adopta la regla de §16.8.5 y se admiten conjuntos de formulaciones conformes, excluidas las no conformes y las dependientes de condiciones abiertas; los `.I` no pueden redefinir ni relajar invariantes y la inviabilidad regresa al usuario. Sin seleccionar formulaciones, sin enumerar aún los conjuntos y sin declarar cumplido R1 §8.1; DB1-1 abierta, sin excepción.
+- **DB2c-11 / OC-40:** AM-19 → Fase 4 (validación de entradas, consultas parametrizadas); AM-34 → R3 (cabeceras) y Fase 4 (validación y codificación de salidas). Asignación histórica de R2-A preservada; no coincide literalmente con las opciones de DB2c-11. Ambas siguen Críticas, sin tratamiento completo ni mitigación demostrada; [REC] sin convertir en requisito; decisión 7 abierta.
+- **DC4-1, opción A:** RES-13 registrado (solo AM-08; raíz HR1-11; PENDIENTE; nivel por evaluar). Registrar no es aceptar; RES-02 no se modifica. Riesgos residuales: RES-01…13 sin aceptar.
+- **Hash:** `02-arquitectura-adr.md` antes de la adenda (`ddd9f36`): `19e8abf62cfdcbf03c2bc4e4b71c3575752e2860faae10c6a6995cffde96accc`; con la adenda: `76352638b22b902303841005f0fa702f38dfdb6926985359c17aa5cf5dc046c2`.
+- **Abiertas:** enumeración del conjunto admitido por decisión; DB1-1; 11 decisiones de R2-A; K-3; D-2 sin excepción; DB, DC (DC4-2 superada sin cerrar), OC; OM-01…07; Q-20 y demás; asesoría jurídica y verificación en dispositivos; RES-01…13 sin aceptar.
+- **Estado real:** R2 y Fase 2 sin aprobación global; R3 y R4 NO INICIADOS Y SIN AUTORIZACIÓN. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar, enumerar los conjuntos admitidos, registrar el cierre de R2, R3) requiere autorización expresa e independiente.
+
 ## 2026-11-22 — Fase 2, R2-C (cierre documental condicionado)
 
 - **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — CIERRE DOCUMENTAL CONDICIONADO DE R2-C»: «APRUEBO EL CIERRE DOCUMENTAL CONDICIONADO DEL CONJUNTO R2-C (R2-C1, R2-C2, R2-C3 Y R2-C4).» **Estado: R2-C: CIERRE DOCUMENTAL CONDICIONADO APROBADO.** No implica aprobar definitivamente los ADR, seleccionar formulaciones, aceptar riesgos, acreditar mitigaciones ni aprobar globalmente R2 o la Fase 2. Archivos: `02-arquitectura-adr.md` (apartado final «REGISTRO DE CIERRE DOCUMENTAL DE R2-C», solo metadatos), `aprobaciones.md`, `bitacora.md`.
