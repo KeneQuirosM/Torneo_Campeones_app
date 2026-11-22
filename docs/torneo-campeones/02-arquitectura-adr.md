@@ -6767,3 +6767,284 @@ Eliminatorios aplicables: sin método de pago (RC-18; cumplen ambos [DOC]), entr
 | Obs. 6 | Custodia del secreto SMTP en el proveedor de datos (RM-14, OC-84) | §26.2, §26.6 |
 | Obs. 7 | CR3B-01 comprobado; CR3B-13 y CR3B-14 añadidos | §26.13 |
 
+---
+
+# PARTE XIII — BLOQUE R3-C (v0.2-R3C, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-22 inferida)
+
+## 27. R3-C — ADR-06 (caché y expiración de lo público) y ADR-07 (actualización de vistas y tiempo real): evaluación y borradores
+
+### 27.0 Alcance, autorización, puerta de entrada y reglas
+
+- **Autorización (2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — INICIO DE R3-C»: «AUTORIZO EXPRESAMENTE INICIAR R3-C, LIMITADO A LA EVALUACIÓN Y REDACCIÓN DEL BORRADOR DE ADR-06 Y ADR-07, EN ESE ORDEN.» Solo se modifica este documento, con esta Parte nueva. Esta autorización satisface DR15-7 en cuanto a **iniciar** R3-C; no resuelve otras decisiones.
+- **Puerta de entrada (verificada).** R2 tiene cierre documental condicionado; R3-A y R3-B están aprobados de forma documental condicionada. R1 §8.2: ADR-06 **requiere** ADR-04.C (garantía de coherencia) y ADR-01; ADR-07 requiere ADR-06. ADR-04.C y ADR-01 son **propuestas**; en ADR-04.C siguen **sin formulación admisible** D4-1 (materialización), D4-4, D4-5 y D4-8. **No hay bloqueo obligatorio para redactar;** ADR-06 **no puede cerrarse de forma definitiva** hasta que ADR-04.C y ADR-01 se aprueben, y ADR-07 depende de ADR-06.
+- **Qué son estos borradores.** Evaluaciones de alternativas con fuentes oficiales y **recomendaciones preliminares no vinculantes**. **No seleccionan mecanismos ni proveedores, no aprueban ADR, no resuelven decisiones, no crean cuentas ni escriben código.** Los números de TTL, intervalos y umbrales son **ejemplos ilustrativos sin fijar** (no están aprobados).
+- **Convención.** [DOC]: dato leído en la página oficial citada (§27.14). [PROP]: propuesta del autor. [INF]: inferencia o cálculo del autor. [PEND]: condición pendiente o sin verificar. [CONF]: texto confirmado de `01` o R1. **Regla de lectura:** toda celda de requisito o de arquitectura sin etiqueta propia es [PROP]; toda celda de estado es [PEND] salvo que diga «Cumple». **Lo no leído se marca [PEND] y no se penaliza en la puntuación.** **Requisitos confirmados, recomendaciones y estimaciones se distinguen:** lo [CONF] viene de `01` o R1; RF-PUB-09 y RD-RES-08 son recomendaciones [REC]; las cifras de §27.8 son **estimaciones [INF]** del autor.
+- **Identificadores nuevos (sin colisión; se evita «RP-nn», que ya usa el informe en `01`).** **ALT-06-A, ALT-06-B, ALT-06-C** y **ALT-07-A, ALT-07-B, ALT-07-C** (alternativas), **PU-01…19** (requisitos de la entrega pública), **DR67-1…7** (decisiones del responsable), **OC-85…100** (condiciones abiertas), **RR67-01…13** (riesgos de redacción), **CR3C-01…15** (criterios de verificación).
+- **Exclusiones.** Elegir mecanismo, proveedor, dominio o región; resolver OC-20, OC-29, OC-46, Q-20, D-2, A-8 ni las decisiones abiertas de ADR-04.C; aceptar riesgos; aprobar R3-C, R3 ni la Fase 2; iniciar R3-D…F, ADR `.I` ni R4; modificar las Partes I–XII ni los registros.
+
+- **Versión 0.2 (correcciones de la revisión focalizada).** Aplica M-1…M-5 y las seis observaciones (§27.16): límite de obsolescencia (vencimiento, ventana de contenido obsoleto y revalidación), consumo por capas, lectura consistente, sondeo adaptable, Service Worker y claves de caché. **Sin seleccionar mecanismos, proveedores, TTL ni intervalos;** no resuelve RT-14, A-8, Q-20, HR1-01 ni D-2 (sin excepción).
+- **Aprobación (metadato; 2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-C»: «APRUEBO EXCLUSIVAMENTE R3-C v0.2 (ADR-06 Y ADR-07) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: R3-C (v0.2-R3C): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.** **DR67-1 se registra únicamente como aprobación documental condicionada, no definitiva.** No aprueba definitivamente ADR-06 ni ADR-07, ni selecciona mecanismos, proveedores ni parámetros; no acredita CL-30, el consumo, el costo de $0 ni ningún control. Se conservan: las **seis alternativas** (ALT-06-A, ALT-06-B, ALT-06-C, ALT-07-A, ALT-07-B, ALT-07-C) con sus **puntuaciones ajustadas** (ALT-06-A 3,45–4,10; ALT-06-B 3,30–3,65; ALT-06-C 2,85–3,20; ALT-07-A 4,10; ALT-07-B 2,55–2,90; ALT-07-C 2,85–3,65), **sin selección definitiva**; el **solapamiento de ALT-06-A y ALT-06-B**; **ALT-07-A como recomendación preliminar** (no vinculante); **PU-01…19**, con los **requisitos confirmados** (PU-01, PU-05, PU-06, PU-07, PU-09, PU-13 y, en lo de `01 §3` y RC-05, PU-10; PU-04 en la ausencia de plazo) distinguidos de las **propuestas** o recomendaciones [REC] (PU-02, PU-08, PU-12, PU-16, PU-17, PU-18, PU-19), de las **garantías exigidas no demostradas** (PU-03, PU-11, PU-15) y de lo condicionado (PU-14); **DR67-2…7 y OC-85…100 abiertas**; **RR67-01…13 sin aceptar**; **CL-30 sin cumplimiento demostrado**; **RT-14, A-8, Q-20, HR1-01 y D4-1 pendientes**; **D-2 sin excepción**; **TTL, intervalos y mecanismos sin fijar**; el **objetivo de $0 mensuales sin viabilidad demostrada**; las restricciones heredadas de R2 y los bloqueos de los ADR `.I`; y la limitación de **autoevaluación del autor, sin auditoría independiente**. Trazabilidad: R3-B quedó versionado en el commit `ea9cfd35aedbcdcf8e8a40bdff4191e883efdaf0` (`ea9cfd3`; 2026-11-22T05:29:42Z). Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+### 27.1 Identificación
+
+| Campo | ADR-06 | ADR-07 |
+|---|---|---|
+| Tema | Actualización, expiración y caché de lo público | Actualización de las vistas abiertas y tiempo real |
+| Pregunta (R1 §8.1) | ¿Cómo se mantienen las proyecciones públicas actualizadas (por señal de cambio, por expiración o ambas) y en qué plazo ante cambios de visibilidad y privacidad? **¿Con qué mecanismo se cumple la garantía de coherencia que fija ADR-04.C?** | ¿Cómo se cumple RF-PUB-09 (≤ 60 s «sin recargar manualmente más de una vez»)? Tres niveles: expiración con refresco manual; actualización periódica automática; empuje en tiempo real (HR1-01) |
+| Alternativas mínimas | ≥ 2 | ≥ 2 (se comparan los tres niveles) |
+| Dependencias | Q-40 (d), Q-29, HR1-11; requiere ADR-04.C y ADR-01 | Q-16 (mejor esfuerzo), RNF-04, RNF-15; requiere ADR-06 |
+| Componente | CMP-15 (entrega pública) con CMP-14 (proyecciones) | CMP-15 y el cliente (CMP-01, CMP-03) |
+| Frontera de confianza | TB-3 y TB-8 | TB-3 |
+| Bloque / estado | R3 / **BORRADOR** | R3 / **BORRADOR** |
+
+### 27.2 Cuatro conceptos que no deben confundirse
+
+| Concepto | Qué es | Quién lo controla | Qué NO promete |
+|---|---|---|---|
+| **Expiración de caché** | El vencimiento de una copia pública **compartida** (CDN) o del navegador, por TTL o por purga | ADR-06; cabeceras y reglas de caché | No es una revocación de permisos ni una eliminación de copias locales |
+| **Revocación de permisos** | El servidor deja de aceptar operaciones de una cuenta (D-2: ≤ 60 s como objetivo para sesiones conectadas, **sin excepción** y sin garantía para desconectados) | ADR-03.C; ADR-02.C; el servidor y la capa de datos | **No pasa por la caché pública:** lo autenticado nunca se guarda en caché compartida |
+| **Actualización pública** | Que un resultado confirmado aparezca en las vistas públicas (RF-PUB-09 [REC]: ≤ 60 s; CL-30) | ADR-06 y ADR-07 | No cubre cambios de visibilidad ni de privacidad (IN-04-09) |
+| **Eliminación de copias locales** | Borrar lo guardado en el dispositivo (Service Worker, almacenamiento local) | ADR-16.C; HR1-11; OFF-11 | **No es posible a distancia;** expirar una copia HTTP no equivale a eliminarla |
+
+### 27.3 Requisitos de la entrega pública (PU)
+
+| ID | Requisito | Fuente | Naturaleza |
+|---|---|---|---|
+| PU-01 | En la caché compartida solo se guardan **proyecciones públicas con lista blanca**; nunca respuestas autenticadas, con datos internos o de menores, ni lo local | PA-04, PRV-03; IN-04-01, IN-04-02 | Confirmado |
+| PU-02 | Un resultado confirmado aparece en lo público en ≤ 60 s (propuesto) sin que el visitante recargue más de una vez. **CL-30:** ninguna vista sirve datos anteriores a 60 s tras la confirmación; el límite es la **suma** del vencimiento, la ventana de contenido obsoleto y una revalidación; **no demostrado** | RF-PUB-09, CL-30; HR1-01 | Propuesta [REC]; CL-30 es un caso límite del informe |
+| PU-03 | **Coherencia:** ninguna respuesta servida presenta un resultado confirmado junto con una clasificación que no lo refleje; la unidad se define por torneo (OC-46) y el documento se **genera desde una lectura consistente** (PU-15) | IN-04-06; CAP-04-C-A; CL-15 | Garantía exigida, no demostrada |
+| PU-04 | **Cambios de visibilidad y de privacidad** (despublicar, ocultar, revocar nombre, anonimizar): retiro en origen y señal de cambio **si ADR-06 la adopta**; **sin promesa de plazo** para lo público ni para las copias locales; **en lo sensible a privacidad no se sirve contenido obsoleto** (PU-16) | IN-04-09; HR1-11; OC-29 | Confirmado en la ausencia de plazo; señal [COND] |
+| PU-05 | Cada vista pública indica «Actualizado a las hh:mm»; sin conexión, la última versión guardada con ese sello y aviso | RF-PUB-06; RF-PWA-02; IN-04-13 | Confirmado |
+| PU-06 | Mientras Q-20 siga abierta, ninguna caché ni copia contiene nombres personales: solo etiquetas | IN-04-03; IN-16-03 | Confirmado (cierre conservador) |
+| PU-07 | Un torneo en borrador, una jornada no publicada o un `archivado` no se sirven desde caché ni se pueden enumerar (404 indistinguible de inexistente) | IN-04-04; AM-12 | Confirmado |
+| PU-08 | Lo cacheable **no varía por usuario**: la misma respuesta para todos; nada con credenciales o cookies de sesión se almacena en caché compartida | RNF-05; AM-13 | Propuesta |
+| PU-09 | Ante un fallo del origen se sirve la última versión válida con aviso y un límite de antigüedad; sin servicio, error explícito | RF-PUB-07; RNF-03 | Confirmado (errores y recuperación) |
+| PU-10 | La actualización no depende de sincronización en segundo plano ni se presume tiempo real; el marcador en vivo está fuera del MVP. **Esto no resuelve HR1-01** (el nivel de actualización lo decide el responsable, DR67-2) | `01 §3`; RC-05; RD-RES-08 [REC]; HR1-01 | Confirmado en lo de `01 §3` y RC-05; RD-RES-08 es [REC] |
+| PU-11 | La corrección de una jornada anterior deja las vistas relacionadas del torneo sin mezcla de estados: se renuevan juntas | CL-15; IN-04-06 | Garantía exigida |
+| PU-12 | Consumo dentro de los límites gratuitos a escala RNF-04 (100–500 lectores) y p95 ≤ 1 s (propuesto), **sin Redis ni servicios adicionales** salvo necesidad demostrada | RNF-04, RNF-12 | Propuesta [REC] |
+| PU-13 | Cabeceras de seguridad y de caché coherentes; las credenciales de purga o de generación, solo del servidor | RNF-05; NE-4; RT-09 | Confirmado |
+| PU-14 | **RT-14 y A-8:** ADR-06 no decide si publicar o despublicar está sujeto a la guardia de RT-14 (D4-8); la entrega solo aplica lo que CMP-14 fije | RT-14; A-8; D4-8 | Condicionado (abierto) |
+| PU-15 | **Lectura consistente:** el documento público de un torneo se genera desde **una lectura consistente del estado confirmado** (resultados y clasificación del mismo momento); **agrupar datos en un documento no garantiza coherencia transaccional ni RT-14**, que se evalúa por efecto al escribir | IN-04-07; UI-05, UI-10; ADR-02.C; RT-14 | Garantía exigida; dependencia [PEND] (OC-94) |
+| PU-16 | **Límite de obsolescencia:** se distinguen el **vencimiento**, la **ventana de contenido obsoleto** y la **revalidación asíncrona** (la primera solicitud tras vencer puede recibir contenido obsoleto [DOC: Cloudflare]); en lo sensible a privacidad (despublicado, ocultado, anonimizado) **no se sirve contenido obsoleto**; la purga reduce la obsolescencia pero **no garantiza una retirada absoluta** | CL-30; IN-04-09; PRV-06 | Propuesta; no demostrado (OC-95) |
+| PU-17 | **Sondeo adaptable:** intervalos con **variación aleatoria**, **espera exponencial** ante fallos, **pausa** con la pestaña en segundo plano o sin conexión, **coordinación entre pestañas** del mismo dispositivo y respeto de `Retry-After`, para evitar solicitudes masivas simultáneas; sin fijar parámetros | RNF-04, RNF-15; RF-PUB-07; AM-14 | Propuesta [REC] |
+| PU-18 | **Service Worker y copias offline:** red primero para los documentos públicos con respaldo en la copia, **antigüedad visible** (PU-05) y límite de antigüedad; no se sirven copias sensibles sin revalidación; son copias locales con los límites de HR1-11 | RF-PWA-02; RF-PUB-06; ADR-16.C; HR1-11 | Propuesta; copias [CONF] en sus límites |
+| PU-19 | **Clave de caché normalizada:** se ignoran solo los parámetros que **no** afectan el contenido ni su visibilidad; los que sí lo afectan (torneo, jornada, visibilidad) forman parte de la clave; ninguna entrada del usuario ni credencial entra en la clave | RNF-05; PU-08; AM-34 | Propuesta (OC-97) |
+
+### 27.4 ADR-06: alternativas de caché y expiración (conformes en lo documental con PU-01…19; ALT-06-C es desfavorable por consumo, PU-12)
+
+| Criterio | ALT-06-A: expiración corta con revalidación | ALT-06-B: señal de cambio con purga explícita y expiración de respaldo | ALT-06-C: sin caché compartida; solo validación condicional |
+|---|---|---|---|
+| Idea | Los documentos públicos del torneo se sirven con vencimiento corto y se revalidan sin bloquear al lector; la coherencia sale de servir **un solo documento por torneo** | Tras confirmar un resultado o cambiar la visibilidad, el servidor purga lo afectado; el vencimiento más largo es solo el respaldo | Cada solicitud llega al origen, que responde 304 si nada cambió; sin copia compartida |
+| Coherencia (PU-03, PU-11, PU-15) | Exige que el documento se **genere desde una lectura consistente** del estado confirmado; agrupar datos **no garantiza** coherencia transaccional ni RT-14 [PEND: OC-94, OC-46] | Igual; la purga renueva lo relacionado del torneo; si falla, manda el vencimiento de respaldo | Igual (sin copia compartida), con la misma exigencia de lectura consistente |
+| Cambios de visibilidad y privacidad (PU-04, PU-16) | **Límite = vencimiento + ventana de contenido obsoleto + una revalidación asíncrona** (la primera solicitud tras vencer recibe contenido obsoleto [DOC: Cloudflare]); sin promesa de plazo; **en lo sensible a privacidad no se sirve contenido obsoleto** (la solicitud espera al origen) [PROP; OC-95] | **Más rápido, sin retirada absoluta:** la purga puede fallar o llegar tarde y manda el vencimiento de respaldo; exige señal durable (IN-04-09 [COND]) y credencial de purga | Inmediato en lo compartido (no hay copia compartida) |
+| Frente a CL-30 (≤ 60 s para resultados) | La suma de vencimiento, ventana de contenido obsoleto y revalidación debe caber en 60 s; **no demostrado** | Igual; la purga lo acorta cuando funciona | Cumple por construcción en lo compartido; no demostrado |
+| Copias locales (HR1-11) | No se eliminan; la caché del navegador y del Service Worker son copias locales (ADR-16.C) | Igual | Igual |
+| Consumo y costo (por capas, §27.8) | Pocas llamadas al origen por ubicación y vencimiento; **cada una implica al menos una consulta a PostgreSQL** [INF]; $0 nominal | $0 nominal; las purgas tienen límites (abajo) | **Alto** hacia el origen y PostgreSQL: §27.8; $0 solo si el origen soporta la carga |
+| Complejidad (PU-12) | **Baja** | Media: señal durable, credencial, manejo de fallos | Baja, pero frágil ante picos |
+| Estado frente a R2 | Compatible con D4-2 (C-A) y D4-6 (X-A) admisibles; requiere decidir D4-1 [PEND] | Requiere la señal de OC-29 [PEND] | Compatible; sin ventaja de caché |
+
+**Mecanismos nativos y límites documentados por configuración [DOC salvo indicación]:**
+
+| Configuración | Caché y expiración | Purga e invalidación | Límites y salvedades |
+|---|---|---|---|
+| CFG-C3 (Cloudflare) | Cloudflare **no cachea HTML ni JSON por defecto**: se necesitan **reglas de caché**; respeta `Cache-Control` en los planes gratuitos; revalida **de forma asíncrona** con `stale-while-revalidate` | Plan gratuito: purga por URL (**800 URL por segundo**, 100 por solicitud) y por etiqueta, prefijo, host o todo (**5 solicitudes por minuto**, cubeta de 25) | Las reglas de caché operan sobre una **zona** (dominio en Cloudflare) [INF] → OC-67, OC-85; la Cache API de un Worker **no se replica** entre centros de datos; un Worker en la ruta cuenta contra 100.000 solicitudes diarias, lo estático cacheado no [DOC] |
+| CFG-C1 y CFG-C2 (Vercel) | `s-maxage` y `stale-while-revalidate`; `CDN-Cache-Control`; valor por defecto `public, max-age=0, must-revalidate` (no cachea); regeneración incremental disponible en todos los planes | La purga está disponible en **todos los planes**; desde funciones, **50 llamadas por segundo en Hobby**; invalidación por etiqueta; las regiones se actualizan en ≈ 300 ms | Hobby: elegibilidad pendiente (OC-54); `stale-if-error` y sus límites [PEND: OC-90] |
+| Capa de datos (Supabase o Neon) | No se verificó si las respuestas de la API de datos son cacheables en un CDN o necesitan una capa de documentos intermedia [PEND: OC-86] | — | Los documentos públicos deben generarse en el servidor con lista blanca (PU-01) |
+
+**Recomendación preliminar no vinculante para ADR-06 (v0.2).** Con la evidencia leída, **ALT-06-A** sigue siendo la base más simple y barata y no introduce credenciales de purga, **siempre que** la ventana de contenido obsoleto se acote a lo que permite CL-30 y no se sirva contenido obsoleto en lo sensible a privacidad (PU-16). **ALT-06-B** es un **complemento condicionado** si el responsable exige un retiro más rápido ante cambios de privacidad (OC-29) y adopta la señal de cambio; **no garantiza una retirada absoluta**. **ALT-06-C** no es recomendable por el consumo. Con la nueva puntuación **A y B se solapan**. **No se selecciona mecanismo:** depende de D4-1, OC-20, OC-29, OC-46, OC-94 y de ADR-01.
+
+### 27.5 ADR-07: alternativas de actualización de las vistas abiertas
+
+| Criterio | ALT-07-A: sondeo periódico optimizado (nivel 2) | ALT-07-B: suscripciones en tiempo real (nivel 3) | ALT-07-C: híbrido |
+|---|---|---|---|
+| Nivel de HR1-01 | Expiración con refresco manual (nivel 1, cumple el texto literal) o actualización periódica automática (nivel 2) | Empuje en tiempo real (nivel 3): **fuera del MVP** (`01 §3`, RD-RES-08) | Sondeo para el público y suscripción solo para personal autenticado |
+| Cómo funciona | El cliente pide el documento público con validación condicional y **sondeo adaptable** (PU-17): intervalos con variación aleatoria, espera exponencial ante fallos, pausa con la pestaña oculta o sin conexión, coordinación entre pestañas y respeto de `Retry-After` [PROP; sin fijar parámetros; la API de visibilidad de página está documentada [DOC: MDN]] | Canal persistente del proveedor de datos o del hosting | Dos canales |
+| Límites gratuitos [DOC] | Sin conexiones persistentes; depende de la caché (§27.4) | Supabase Realtime Free: **200 conexiones simultáneas**, **100 mensajes por segundo**, 2 M de mensajes al mes; **500 lectores superan las 200 conexiones**. Cloudflare Durable Objects (WebSockets): plan gratuito con 100.000 solicitudes diarias y tope de duración; Vercel: WebSockets en **versión beta pública** | Cabe en 200 solo para el personal |
+| Autenticación y datos | Público anónimo; sin credenciales; solo la lista blanca | Los cambios de Postgres se **autorizan por suscriptor**, y el rendimiento escala con ellos; las políticas RLS **no se aplican a DELETE**; los canales privados usan políticas sobre `realtime.messages` [DOC]; un canal público anónimo ampliaría la exposición | Igual que B para el personal |
+| Reconexión y pérdida de eventos | Cada solicitud trae el estado completo: **no se pierden eventos** [INF]; tras una caída, la reconexión usa espera exponencial con variación aleatoria para **evitar solicitudes masivas simultáneas** [PROP] | Reconexión automática de `supabase-js` [DOC]; los eventos durante una desconexión pueden perderse: **hace falta una resincronización** [INF]; reproducción de mensajes de 72 h para Broadcast [DOC] | Resincronización por sondeo |
+| Coherencia | La del documento por torneo (PU-03) | Los eventos llegan por tabla: riesgo de mostrar resultados y clasificación en momentos distintos [INF] | Igual que B para el personal |
+| Consumo y simplicidad | Solo solicitudes cacheadas; **sin Redis ni conexiones permanentes** | Conexiones permanentes y un servicio adicional; riesgo de superar la cuota | Más piezas |
+| Cuándo se justifica | **Ahora** | Solo si el responsable aprueba marcadores en vivo (hoy fuera del MVP) | No hay requisito que lo justifique hoy |
+
+**Recomendación preliminar no vinculante para ADR-07.** **ALT-07-A** (sondeo con validación condicional y espera creciente) es la única que cumple PU-10 y PU-12 sin servicios adicionales; **ALT-07-B y ALT-07-C no están justificadas para el MVP** y quedan como referencia si los marcadores en vivo se aprueban. **No se selecciona mecanismo ni el nivel (DR67-2).**
+
+### 27.6 Compatibilidad con las tres configuraciones de R3-A (sin seleccionar proveedores)
+
+| Configuración | ADR-06 | ADR-07 | Estado |
+|---|---|---|---|
+| CFG-C1 (Vercel + Supabase) | Cabeceras de caché del CDN; purga disponible; Hobby pendiente | Sondeo del CDN; Realtime de Supabase disponible pero fuera de alcance | Compatible; OC-54, OC-86, OC-90 |
+| CFG-C2 (Vercel + Neon + Better Auth) | Igual que CFG-C1 | Neon ofrece Realtime en beta [DOC]; no se evalúa | Compatible |
+| CFG-C3 (Cloudflare + Supabase) | Reglas de caché sobre una zona (dominio); asíncrono con revalidación; purga limitada en el plan gratuito | Sondeo del CDN; los estáticos cacheados no consumen invocaciones | Compatible; OC-67, OC-85 |
+
+### 27.7 Seguridad, privacidad y revocación de visibilidad
+
+| Riesgo | Control propuesto [PROP] | Relación | Estado |
+|---|---|---|---|
+| Caché de una respuesta con datos internos o de otra persona | Respuestas públicas sin cookies ni credenciales; `private` o `no-store` en todo lo autenticado [DOC: MDN]; sin variación por usuario | PU-01, PU-08; AM-13 | [PEND] |
+| Despublicado que sigue servido desde caché | El retiro en origen es inmediato; la copia compartida desaparece al vencer **más la ventana de contenido obsoleto**, o por purga (**sin retirada absoluta garantizada:** la purga puede fallar o llegar tarde); **sin promesa de plazo**; 404 indistinguible; **en lo sensible a privacidad no se sirve contenido obsoleto** | PU-04, PU-07, PU-16; AM-12; D4-6 | [PEND] OC-29, OC-95 |
+| Anonimización y copias | Tras anonimizar, ningún documento ni caché compartida conserva datos personales: regenerar y, si ALT-06-B, purgar; las copias locales **no son eliminables a distancia** | IN-04-10, ES-20; HR1-11; RES-02 | [PEND] |
+| Mezcla de resultados y clasificación | Un documento por torneo, o renovación conjunta (PU-11) | PU-03; AM-27 | [PEND] OC-46 |
+| Credencial de purga o de generación expuesta | Solo en el servidor, alcance mínimo, rotación | PU-13; NE-4; AM-26 | [PEND] |
+| Agotar la cuota o saturar el origen con solicitudes automáticas | Sondeo adaptable (PU-17): variación aleatoria, espera exponencial, pausa oculta o sin conexión, un solo sondeo por dispositivo y respeto de `Retry-After`; límites en el borde; el CDN puede colapsar solicitudes iguales [DOC: Cloudflare] | RNF-05; AM-14; PU-17 | [PEND] OC-98 |
+| Suplantación, envenenamiento o fragmentación de caché | Clave de caché **normalizada** (PU-19): se ignoran solo los parámetros que no afectan el contenido ni su visibilidad; ninguna entrada del usuario forma parte de la clave; cabeceras de seguridad | RNF-05; AM-34; PU-19 | [PEND] OC-97 |
+| Service Worker y copias offline | Red primero para los documentos públicos con respaldo en la copia, antigüedad visible y límite de antigüedad; no se sirven copias sensibles sin revalidación; son copias locales (HR1-11) | PU-18; ADR-16.C; HR1-11 | [PEND] OC-91, OC-96 |
+
+### 27.8 Consumo estimado a escala RNF-04, por capas (supuestos explícitos; todo [INF])
+
+**Supuestos.** 500 lectores simultáneos durante una jornada de 2 horas; 4 jornadas intensas al mes; documento público de ≈ 30 KB y respuesta 304 de ≈ 0,5 KB; el 5 % de los sondeos encuentra un cambio. **Escenario base:** 3 ubicaciones de borde, 5 documentos por torneo y 6 torneos simultáneos. **Escenario reducido:** 1 ubicación, 1 documento y 1 torneo. Los intervalos de 30 y 60 s son **ilustrativos**.
+
+**Un HTTP 304 no garantiza evitar consultas:** si lo responde el CDN con su copia, no llega al origen; si lo responde el origen, **comprueba la versión y normalmente consulta a PostgreSQL** [INF].
+
+| Capa | Sondeo cada 30 s [ilustrativo] | Sondeo cada 60 s [ilustrativo] | Límite gratuito o salvedad |
+|---|---|---|---|
+| **Solicitudes al CDN** (cliente → CDN) | 500 × 240 = **120.000** por jornada; 480.000 al mes | 500 × 120 = **60.000** por jornada; 240.000 al mes | Vercel Hobby: 1 M de solicitudes de CDN al mes [DOC]; en Cloudflare, **lo cacheado no invoca el Worker** y solo cuenta lo que llega a él (100.000 al día) [DOC] |
+| **Transferencia** cliente ↔ CDN | Con validación condicional ≈ 0,24 GB por jornada; sin ella ≈ 3,6 GB | ≈ 0,12 GB; sin validación ≈ 1,8 GB | Vercel Hobby: 100 GB al mes [DOC] |
+| **Llamadas al origen** (CDN → origen), expiración corta | Base: 240 × 3 × 5 × 6 = **21.600** por jornada. Reducido: **240** | Base: 10.800. Reducido: 120 | Depende de OC-88 (ubicaciones reales) y de la caché por niveles |
+| **Invocaciones del backend** | Si el origen es una función: igual que las llamadas al origen; ≈ 86.400 al mes en el escenario base | ≈ 43.200 al mes | Edge Functions: 500.000 al mes; Vercel Hobby: 1 M de invocaciones [DOC]. Si el origen es la API de datos directa no hay función [PEND: OC-86] |
+| **Consultas a PostgreSQL** | **≥ 1 por llamada al origen**, también con 304: ≈ 21.600 por jornada en el escenario base; ≈ 86.400 al mes | ≈ 10.800 por jornada | Supabase Free: sin tope documentado de solicitudes de API [DOC]; Neon Free: 100 CU-horas al mes y suspensión a los 5 min (activo durante la jornada) [DOC]; **número y costo por solicitud [PEND: OC-99]** |
+| **Salida del origen** (origen → CDN) | ≈ 43 MB por jornada (5 % de 30 KB y 95 % de 0,5 KB por llamada) | ≈ 21 MB | Supabase Free: 5 GB de salida al mes [DOC] |
+| **ALT-06-C: sin caché compartida** (todas las solicitudes al origen) | **120.000 consultas** por jornada; 3,6 GB sin 304 o 0,24 GB con 304 | 60.000 consultas; 1,8 GB o 0,12 GB | Con 304 se ahorra transferencia, **no consultas**; sin 304 supera los 5 GB de salida al mes |
+| **Conexiones persistentes** (ALT-07-B) | **500** lectores | — | **200** (Supabase Realtime Free) [DOC] |
+
+**Lectura.** Con caché compartida y validación condicional, las solicitudes al CDN y la transferencia caben holgadamente; el cuello de botella potencial son **las llamadas al origen y las consultas a PostgreSQL**, que dependen de las ubicaciones reales y del vencimiento. La estimación es **orientativa**: no hubo mediciones ni cuentas.
+
+### 27.9 Funcionamiento sin conexión y recuperación
+
+- **Service Worker y copias offline (PU-18) [PROP; sin elegir mecanismo].** Los documentos públicos se piden con **red primero** y, si falla, se muestra la **última copia con su sello «Actualizado a las hh:mm»** y el aviso de desactualizada (PU-05, RF-PWA-02). Hay un **límite de antigüedad visible** de las copias; **no se sirven copias sensibles sin revalidación**. Son **copias locales** con los límites de ADR-16.C, IN-16-12 y HR1-11: **no se promete borrado a distancia** ni conservación (OC-96, OC-91).
+- Ante un fallo del origen, la entrega puede servir lo último válido con aviso (PU-09); no se asume sincronización en segundo plano (PU-10; iOS sin verificar, HR1-07).
+- La reconexión tras una pérdida de red usa la **resincronización por documento completo**, lo que evita depender de eventos perdidos [INF].
+
+### 27.10 Evaluación, puntuación y recomendación preliminar
+
+**Regla.** Pesos aprobados (R1 §2.4 y R3-A): seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %. Se puntúa **solo con evidencia leída**; lo no leído, [PEND] y rango de sensibilidad. Escala 1–5; juicio del autor [PROP], no vinculante. El criterio sin conexión **no discrimina** (3).
+
+| Criterio (peso) | ALT-06-A | ALT-06-B | ALT-06-C |
+|---|---|---|---|
+| Seguridad (35 %) | 3–4 | 3–4 | 3–4 |
+| Costo (30 %) | 4–5 | 4 | 2 (consumo inferido) |
+| Sin conexión (20 %) | 3 | 3 | 3 |
+| Mantenimiento (15 %) | 4 | 3 | 4 |
+| **Total (rango)** | **3,45–4,10** | **3,30–3,65** | **2,85–3,20** |
+
+| Criterio (peso) | ALT-07-A | ALT-07-B | ALT-07-C |
+|---|---|---|---|
+| Seguridad (35 %) | 4 | 3–4 | 3–4 |
+| Costo (30 %) | 5 | 2 | 3–4 |
+| Sin conexión (20 %) | 3 | 3 | 3 |
+| Mantenimiento (15 %) | 4 | 2 | 2–3 |
+| **Total (rango)** | **4,10** | **2,55–2,90** | **2,85–3,65** |
+
+**Fundamento (v0.2).** ALT-06-A: seguridad 3–4 porque la ventana de contenido obsoleto puede servir lo retirado si no se acota (PU-16); sin credenciales de purga y con el menor mantenimiento; su costo depende de reglas de caché y de un dominio (OC-85, OC-67). ALT-06-B: añade una credencial y una señal durable, y la purga no garantiza una retirada absoluta. ALT-06-C: el costo 2 se apoya en un consumo **inferido** (§27.8). ALT-07-A: sin servicios adicionales; ALT-07-B: excede el cupo de conexiones gratuitas del público; ALT-07-C: dos canales. **Los rangos de ALT-06-A y ALT-06-B se solapan** y los eliminatorios no se compensan: ninguna alternativa se da por cumplida (§27.11).
+
+### 27.11 Compatibilidad con R2 y condiciones heredadas
+
+| Asunto de R2 | Tratamiento en este borrador | Estado |
+|---|---|---|
+| Garantía de coherencia (IN-04-06; D4-2 CAP-04-C-A admisible) | Un documento por torneo **generado desde una lectura consistente** (PU-15; OC-94) o renovación conjunta; **agrupar no garantiza coherencia**; la unidad depende de OC-46 | No demostrada |
+| Materialización (D4-1; OC-20; DB2b-3) | Ambas lecturas son posibles para ADR-06; **no se decide** | Abierta: D4-1 sin formulación admisible |
+| Señal de cambio y plazo (D4-6 CAP-04-X-A admisible; OC-29) | Se presenta como opción (ALT-06-B); **sin promesa de plazo** | Abierta |
+| RT-14 y A-8 (D4-8) | ADR-06 no decide la guardia de publicación; **agrupar datos en un documento no garantiza RT-14**, que se evalúa por efecto al escribir | Abierta |
+| Q-20 y nombres | Solo etiquetas en toda caché (PU-06) | Abierta |
+| D-2 sin excepción; revocación de permisos | No pasa por la caché pública; no se toca (§27.2) | Abierta |
+| OFF y copias locales (ADR-05.C, ADR-16.C) | La expiración de caché no elimina copias locales | Abierta (RES-02 sin aceptar) |
+| Bloqueos de los ADR `.I` | Se preservan las 16 decisiones sin formulación admisible | Abiertas |
+
+### 27.12 Condiciones, decisiones y riesgos
+
+**Decisiones del responsable (DR67):**
+
+| ID | Decisión | Relación |
+|---|---|---|
+| DR67-1 | Aprobar, ajustar o rechazar estos borradores y sus recomendaciones preliminares (no son una selección) | §27.4, §27.5 |
+| DR67-2 | Nivel de actualización de ADR-07: 1 (expiración con refresco manual), 2 (periódica automática) o 3 (empuje); **no se presume tiempo real** | HR1-01; RD-RES-08 |
+| DR67-3 | Vencimientos, ventana de contenido obsoleto e intervalos de sondeo: hoy son ejemplos ilustrativos sin fijar | PU-02; PU-16; RNF-04 |
+| DR67-4 | Si ADR-06 adopta una señal de cambio y su alcance ante cambios de visibilidad y privacidad | OC-29; D4-6; IN-04-09 |
+| DR67-5 | Unidad de coherencia por torneo y materialización de la clasificación (dependencias de ADR-04.C) | OC-46; D4-1; OC-20 |
+| DR67-6 | Política de purga urgente por anonimización y custodia de la credencial de purga | PU-04, PU-13; NE-4 |
+| DR67-7 | Autorizar, o no, el siguiente subbloque (R3-D: ADR-08) | Plan R3 |
+
+**Condiciones abiertas nuevas:**
+
+| ID | Condición | Relación |
+|---|---|---|
+| OC-85 | Las reglas de caché de Cloudflare operan sobre una zona: dominio en Cloudflare y reglas suficientes en el plan gratuito | CFG-C3; OC-67 |
+| OC-86 | Si las respuestas de la API de datos son cacheables en un CDN o se necesita una capa de documentos públicos generados en el servidor | PU-01; ADR-04.C |
+| OC-87 | Definición de «mensaje» y conteo por suscriptor en los límites de Realtime (100 por segundo) | ALT-07-B |
+| OC-88 | Número real de ubicaciones de borde y caché por niveles para estimar llamadas al origen | §27.8 |
+| OC-89 | Soporte de `ETag` y `If-None-Match` en la capa de datos y el CDN para devolver 304 | ALT-07-A |
+| OC-90 | Comportamiento de `stale-while-revalidate` y `stale-if-error` en Vercel y límites en Hobby | PU-09 |
+| OC-91 | Efecto de la caché del navegador y del Service Worker sobre la retirada de visibilidad | HR1-11; ADR-16.C |
+| OC-92 | Dónde y con qué credencial se generan los documentos públicos por torneo | PU-13; NE-4 |
+| OC-93 | Latencia desde Costa Rica del borde o de la región para p95 ≤ 1 s (requiere cuentas y mediciones) | RNF-04; OC-60 |
+| OC-94 | Punto de generación del documento público por torneo y aislamiento de su lectura (consistencia con UI-05 y UI-10); dependencia de ADR-02.C, ADR-04.C y D4-1 | PU-15; OC-20; OC-46 |
+| OC-95 | Cómo se trata el contenido obsoleto en revalidaciones sensibles a privacidad y cómo se acota la suma de ventanas frente a CL-30 | PU-16 |
+| OC-96 | Estrategia concreta del Service Worker (red primero con respaldo) y límite de antigüedad de las copias offline | PU-18; OC-91 |
+| OC-97 | Qué parámetros de la solicitud afectan el contenido o su visibilidad y cuáles se ignoran en la clave de caché | PU-19 |
+| OC-98 | Coordinación entre pestañas, respeto de `Retry-After` y colapso de solicitudes en el navegador y en el CDN | PU-17 |
+| OC-99 | Número y costo de las consultas a PostgreSQL por solicitud al origen (también con 304) | §27.8 |
+| OC-100 | Cabecera de etiquetas de caché y límites de la purga por etiqueta en el plan gratuito de Cloudflare | ALT-06-B |
+
+**Riesgos de redacción (RR67):**
+
+| ID | Riesgo | Vínculo |
+|---|---|---|
+| RR67-01 | Confundir expiración de caché con revocación de permisos o con eliminación de copias locales | §27.2 |
+| RR67-02 | Presentar el sondeo como tiempo real, o suponer tiempo real | HR1-01 |
+| RR67-03 | Prometer un plazo para retirar lo despublicado o anonimizado de las copias locales | PU-04; HR1-11 |
+| RR67-04 | Servir desde caché datos internos, autenticados o de menores | PU-01, PU-08 |
+| RR67-05 | Mostrar resultados y clasificación en momentos distintos | PU-03 |
+| RR67-06 | Dar por demostrados el consumo, el costo de $0 o el p95 | §27.8 |
+| RR67-07 | Credenciales de purga o de generación expuestas | PU-13 |
+| RR67-08 | Seleccionar un mecanismo de forma implícita o fijar TTL no aprobados | DR67-3 |
+| RR67-09 | Agotar cuotas o saturar el origen por sondeo sin variación aleatoria ni espera exponencial, o por 500 conexiones persistentes | §27.8; PU-17 |
+| RR67-10 | Confundir esta autoevaluación del autor con una auditoría independiente | §27.13 |
+| RR67-11 | Servir contenido obsoleto de algo retirado por privacidad, o prometer una retirada absoluta por purga | PU-16 |
+| RR67-12 | Creer que agrupar datos en un documento garantiza coherencia transaccional o RT-14 | PU-15 |
+| RR67-13 | Suponer que un HTTP 304 evita consultas a PostgreSQL | §27.8 |
+
+### 27.13 Verificación del autor (autoevaluación; no es auditoría independiente)
+
+| ID | Criterio | Resultado |
+|---|---|---|
+| CR3C-01 | Las Partes I–XII y los registros anteriores no cambian (prefijo idéntico al HEAD) | Cumple (comprobado) |
+| CR3C-02 | Al menos dos alternativas conformes en lo documental por ADR, con fuentes oficiales; ALT-06-C marcada desfavorable por consumo | Cumple: §27.4, §27.5 |
+| CR3C-03 | Caché, invalidación, coherencia y separación público, privado y local | Cumple: §27.2, §27.3, §27.7 |
+| CR3C-04 | Revocación de visibilidad sin promesa de plazo ni de borrado local | Cumple: §27.2, §27.7 |
+| CR3C-05 | Consumo y costos a escala RNF-04 con supuestos explícitos | Cumple: §27.8 |
+| CR3C-06 | Límites gratuitos, concurrencia, reconexión, pérdida de eventos y autenticación del tiempo real | Cumple: §27.5 |
+| CR3C-07 | Funcionamiento sin conexión y recuperación | Cumple: §27.9 |
+| CR3C-08 | Tres configuraciones de R3-A evaluadas sin seleccionar proveedores | Cumple: §27.6 |
+| CR3C-09 | Sin penalizar documentación incompleta; rangos de sensibilidad | Cumple: §27.10 |
+| CR3C-10 | Invariantes de R2 y decisiones abiertas de ADR-04.C preservados | Cumple: §27.11 |
+| CR3C-11 | Sin Redis ni conexiones permanentes salvo necesidad demostrada; sin código, cuentas ni gastos | Cumple |
+| CR3C-12 | Lo no leído se marca [PEND]; sin parámetros fijados | Cumple: §27.0, OC-85…93 |
+| CR3C-13 | Vencimiento, ventana de contenido obsoleto y revalidación distinguidos; CL-30 sin declarar cumplido; purga sin retirada absoluta | Cumple como propuesta: PU-16; no demostrado |
+| CR3C-14 | Consumo separado en CDN, origen, backend, PostgreSQL y transferencia; 304 no implica ausencia de consultas | Cumple: §27.8 |
+| CR3C-15 | Sondeo adaptable, Service Worker y claves de caché; lectura consistente sin garantizar RT-14 | Cumple como propuesta: PU-15, PU-17, PU-18, PU-19 |
+
+### 27.14 Fuentes oficiales y límites de lectura
+
+**Consultadas (2026-11-22; páginas descargadas y convertidas a texto):** Cloudflare (comportamiento de caché por defecto, `Cache-Control` y revalidación asíncrona, purga y sus límites, Cache API de Workers, precios y límites de Durable Objects, Workers); Vercel (caché de CDN y cabeceras, regeneración incremental, purga y límites, WebSockets en funciones); Supabase (Realtime: visión general, Postgres Changes, Authorization, límites y precios); MDN (caché HTTP, `Cache-Control`, `ETag`, eventos enviados por el servidor, WebSockets, visibilidad de página, Service Workers).
+**Límites.** Algunas páginas son dinámicas y el texto extraído puede omitir contenido; no se leyó si las respuestas de la API de datos son cacheables, ni los límites de `stale-if-error` en Vercel, ni los términos de uso de caché de los planes gratuitos. Los consumos y llamadas al origen son **cálculos del autor**. **Pendiente en v0.2:** la cabecera de etiquetas de la purga de Cloudflare, el número de consultas por solicitud y el soporte de `Retry-After` en el CDN. Las cifras por capa son **cálculos del autor**. **No hubo cuentas, pruebas, mediciones ni evaluación jurídica.** La evaluación es del autor, sin contexto nuevo.
+
+### 27.15 Estado y preguntas para el responsable
+
+**Estado:** R3-C **v0.2-R3C: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL** (corrige M-1…M-5 y las seis observaciones de la revisión focalizada; ver §27.16). **No versionado.** Autoevaluación del autor, no auditoría independiente. R3-D…F, los ADR `.I` y R4: **NO INICIADOS**. R3-A y R3-B conservan su aprobación documental condicionada; la Fase 2 sigue sin aprobación global.
+
+**Preguntas:** DR67-1 a DR67-7 (§27.12) y las condiciones OC-85 a OC-100. Siguen abiertas todas las decisiones y condiciones heredadas de R1, R2, R3-A y R3-B.
+
+### 27.16 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| M-1 | Límite de obsolescencia = vencimiento + ventana de contenido obsoleto + revalidación; CL-30 sin declarar cumplido; sin contenido obsoleto en lo sensible a privacidad; la purga no garantiza retirada absoluta; ALT-06-A recalculada (3,45–4,10) | §27.3 (PU-02, PU-04, PU-16), §27.4, §27.7, §27.10 |
+| M-2 | Consumo separado en solicitudes al CDN, llamadas al origen, invocaciones del backend, consultas a PostgreSQL y transferencia, con escenarios; el 304 no evita consultas | §27.8, OC-99 |
+| M-3 | Generación desde una lectura consistente; agrupar datos no garantiza coherencia ni RT-14; dependencia en OC-94 | §27.3 (PU-15), §27.4, §27.11 |
+| M-4 | Sondeo adaptable: variación aleatoria, espera exponencial, pausa oculta o sin conexión, coordinación entre pestañas, `Retry-After`; sin fijar parámetros | §27.3 (PU-17), §27.5, §27.7 |
+| M-5 | Service Worker (red primero, antigüedad visible, sin copias sensibles sin revalidación) y clave de caché normalizada sin eliminar parámetros que afectan el contenido o la visibilidad | §27.3 (PU-18, PU-19), §27.7, §27.9 |
+| Obs. 1 | Encabezado de §27.4 y CR3C-02: ALT-06-C desfavorable por consumo | §27.4, §27.13 |
+| Obs. 2 | PU-10: naturaleza distinguida (`01 §3` confirmado; RD-RES-08 [REC]); no resuelve HR1-01 | §27.3 |
+| Obs. 3 | Puntuación de ALT-06-C: el costo se apoya en un consumo inferido | §27.10 |
+| Obs. 4 | CR3C-01 comprobado | §27.13 |
+| Obs. 5 | Cabecera de etiquetas y límites de la purga por etiqueta de Cloudflare como [PEND] (OC-100) | §27.12 |
+| Obs. 6 | Cálculos revisados por capas; el rango de ALT-06-A cambia con M-1; requisitos, recomendaciones y estimaciones distinguidos | §27.0, §27.8, §27.10 |
+

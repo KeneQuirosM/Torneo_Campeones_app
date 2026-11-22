@@ -1,5 +1,16 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-22 — Fase 2, R3-C (aprobación condicional como entregable documental)
+
+- **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-C»: «APRUEBO EXCLUSIVAMENTE R3-C v0.2 (ADR-06 Y ADR-07) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **DR67-1** se registra solo como aprobación documental condicionada, no definitiva. No aprueba definitivamente ADR-06 ni ADR-07. Archivos: `02-arquitectura-adr.md` (solo metadatos de §27), `aprobaciones.md`, `bitacora.md`.
+- **Versión aprobada:** R3-C **v0.2-R3C** (Parte XIII, §27): ALT-06-A/B/C y ALT-07-A/B/C con puntuaciones ajustadas, **sin selección definitiva**; solapamiento de ALT-06-A y ALT-06-B; **ALT-07-A como recomendación preliminar**; PU-01…19, DR67-1…7, OC-85…100, RR67-01…13, CR3C-01…15.
+- **Preservado:** requisitos confirmados distinguidos de propuestas; DR67-2…7 y OC-85…100 abiertas; RR67-01…13 sin aceptar; CL-30 sin cumplimiento demostrado; RT-14, A-8, Q-20, HR1-01 y D4-1 pendientes; D-2 sin excepción; TTL, intervalos y mecanismos sin fijar; objetivo de $0 sin viabilidad demostrada; restricciones de R2 y bloqueos de los ADR `.I`; autoevaluación del autor, sin auditoría independiente.
+- **Trazabilidad:** R3-B quedó versionado en `ea9cfd35aedbcdcf8e8a40bdff4191e883efdaf0` (`ea9cfd3`; 2026-11-22T05:29:42Z); nota posterior añadida en su entrada.
+- **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `c7df7c78de6f46d8c57c1c913a520d3f350e2e3aa0b7497dd86b9c1593a98ff0`; con los metadatos: `2caebb8e913002d98b18e674a9d90b59eb4ec03a0476a0ab731488e0e2f89138`. Las diferencias son solo metadatos de §27.
+- **Exclusiones (no implica):** seleccionar mecanismos, proveedores o parámetros; resolver otras decisiones; conceder excepción a D-2; aceptar riesgos; autorizar gastos; iniciar R3-D…F, ADR `.I` o R4; aprobar R3 o la Fase 2.
+- **Estado real:** R3-A, R3-B y R3-C aprobados condicionalmente (documental); R3-D…F, ADR `.I` y R4 NO INICIADOS; R3 y Fase 2 sin aprobación global. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, R3-D u otro subbloque, resolver decisiones) requiere autorización expresa e independiente.
+
 ## 2026-11-22 — Fase 2, R3-B (aprobación condicional como entregable documental)
 
 - **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-B»: «APRUEBO EXCLUSIVAMENTE R3-B v0.2 (ADR-15) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **DR15-1** se registra solo como aprobación documental condicionada, no definitiva. No aprueba definitivamente ADR-15. Archivos: `02-arquitectura-adr.md` (solo metadatos de §26), `aprobaciones.md`, `bitacora.md`.
@@ -9,7 +20,7 @@
 - **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `db0f2794a436c16b7b792a910136b36f20852f4ffd7b55c9df0e763ede907694`; con los metadatos: `5ce55bb176cd8929cc8b434c637fc69364b53a18a868535d7fcc180b187ec03c`. Las diferencias son solo metadatos de §26.
 - **Exclusiones (no implica):** seleccionar proveedores o mecanismos; crear cuentas, enviar correos o autorizar gastos; resolver otras decisiones; aceptar riesgos; iniciar R3-C…F, ADR `.I` o R4; aprobar R3 o la Fase 2.
 - **Estado real:** R3-A y R3-B aprobados condicionalmente (documental); R3-C…F, ADR `.I` y R4 NO INICIADOS; R3 y Fase 2 sin aprobación global. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar este registro, R3-C u otro subbloque, resolver decisiones) requiere autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, R3-C u otro subbloque, resolver decisiones) requiere autorización expresa e independiente. *[Nota posterior, 2026-11-22: este registro quedó versionado en el commit `ea9cfd35aedbcdcf8e8a40bdff4191e883efdaf0` (`ea9cfd3`; verificable por Git; 2026-11-22T05:29:42Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-22 — Fase 2, R3-A (aprobación condicional como entregable documental)
 
