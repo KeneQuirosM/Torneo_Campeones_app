@@ -8167,3 +8167,413 @@ Escala: **Por diseño** (la alternativa lo cumple por su propia definición, **s
 | M-5 | SI-10 reforzado (temporalidad, notificación, recuperación segura) y SI-24 (continuidad del último dueño sin vía de omisión); umbrales y mecanismos [PEND] (OC-184, DR3I-11) | §30.3, §30.9, §30.11 |
 | M-6 | El límite de verificación del segundo factor sin encabezado leído pasa a [INF]; celdas «Por diseño» basadas en inferencias pasan a «Condicionado»; la asimetría de documentación sobre R no es ventaja técnica | §30.4–§30.6, §30.11, §30.16 |
 | Obs. | Sesiones y cookies en CFG-C3 pendientes (OC-182); OC-170 vinculado a SI-04 y §30.4; se preservan las brechas RX-04 y RX-05 de ADR-09.I y la nota de trazabilidad de `dfacd85` | §30.0, §30.4, §30.13, §30.15 |
+
+---
+
+# PARTE XVII — BLOQUE R3-E / ADR-02.I (v0.2-R3E-02I, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, R3-E PARCIAL EN CURSO; 2026-11-22 inferida)
+
+## 31. R3-E — ADR-02.I (implementación de la autorización y de la frontera atómica): evaluación y borrador condicionado
+
+### 31.0 Alcance, autorización, puerta de entrada y reglas
+
+- **Autorización (2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R3-E: INICIO DE ADR-02.I»: «AUTORIZO EXPRESAMENTE INICIAR EXCLUSIVAMENTE EL BORRADOR DOCUMENTAL CONDICIONADO DE ADR-02.I.» Solo se modifica este documento, con esta Parte nueva. **No se redactan otros ADR `.I`; no se inicia R3-F ni R4.**
+- **Puerta de entrada (verificada, solo lectura previa).** R1 §8.2: ADR-02.I requiere ADR-02.C y ADR-01; ADR-02.C requiere ADR-03.C y ADR-09.C. ADR-02.C es **propuesta** (§17); ADR-01 está aprobado solo de forma documental condicionada y **no selecciona proveedor**; ADR-03.I y ADR-09.I están aprobados solo de forma documental condicionada. La matriz de R2 clasifica **CAP-02-A como A** (candidata documental **no admitida** por el responsable), **CAP-02-D como C** (condicionada a K-2 y con independencia respecto de A **no demostrada**) y **CAP-02-B y CAP-02-C como X**. **No hay bloqueo obligatorio para redactar un borrador condicionado que no selecciona.** Un `.I` solo puede **elegir** entre formulaciones que el responsable haya admitido: no hay conjunto admitido, así que **este borrador no elige nada.**
+- **Qué es este borrador.** Una evaluación de alternativas de implementación con una **recomendación preliminar no vinculante**. Examina **CAP-02-A únicamente como candidata documental**; **no elige mecanismos para CAP-02-D**, ni resuelve DB1-1, K-2, K-3, RT-14 ni A-1…A-16; no admite ni selecciona formulaciones (A, C o X); no aprueba ADR; no acepta riesgos ni concede excepciones; **no concede excepción a D-2**; no escribe código ni crea cuentas.
+- **Convención.** [DOC]: dato leído en la página oficial citada (§31.17). [CONF]: texto confirmado de `01`, R1 o R2 con el estado que allí declara. [REC]: recomendación sin decidir. [PROP]: propuesta del autor. [INF]: inferencia o cálculo del autor. [PEND]: pendiente o sin verificar. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; **lo no leído se marca [PEND] y no se penaliza en la puntuación.** Una **inferencia por ausencia de documentación** se rotula [INF], nunca [DOC]. **«Por diseño» solo se usa cuando la propia definición de la alternativa lo garantiza; nunca para una inferencia.** Los hechos generales de PostgreSQL (privilegios, disparadores, políticas, propiedad de tablas) no se leyeron en fuente oficial de PostgreSQL y son [INF].
+- **Identificadores nuevos (sin colisión).** **ALT-02-A, ALT-02-B, ALT-02-C** (alternativas de implementación), **GV-01, GV-02, GV-03** (variantes de gobierno del acceso del cliente a la capa de datos), **AZ-01…27** (requisitos de seguridad verificables), **DR2I-1…11** (decisiones del responsable), **OC-185…217** (condiciones abiertas), **RR2I-01…22** (riesgos de redacción), **CR2I-01…18** (criterios de revisión documental).
+- **Versión 0.2 (correcciones de la revisión focalizada).** Aplica M-1…M-5 (§31.20): K-1 e IN-02-01 pasan a «Condicionada» y se distingue **invocar** una función de **verificar de forma independiente** en el servidor; ALT-02-B solo es candidata a CAP-02-A si lo derivado cubre la **decisión completa** (con prueba de cobertura); los estados de GV-01, GV-02 y GV-03 son **neutrales y condicionados**, con una matriz de verificaciones posiblemente omitidas; la capa de datos necesita **estado vigente** y no le bastan afirmaciones firmadas obsoletas; H2B1-04, A-6/H2B1-06 y OC-202…204 quedan vinculadas; propiedad de tablas, FORCE RLS y privilegios efectivos quedan [PEND]. **Sin seleccionar ALT-02, GV ni mecanismos; sin admitir formulaciones A, C ni X; DB1-1, CAP-02-D, K-2, K-3, RT-14 y A-1…A-16 sin resolver; R1 §8.1 sin declarar cumplido; D-2 sin excepción.**
+- **Exclusiones.** Admitir, seleccionar o descartar formulaciones (A, C o X); elegir mecanismo, motor, extensión, lenguaje o proveedor; elegir mecanismos para CAP-02-D, K-2 o la proyección; resolver DB1-1, K-3, RT-14, A-1…A-16, H2B1-xx, OC-102, OC-121, OC-122, OC-124, D-2 ni otra decisión heredada; aceptar riesgos o brechas; aprobar ADR-02.I, R3 ni la Fase 2; redactar ADR-04.I, 05.I ni 16.I; iniciar R3-F ni R4; modificar las Partes I–XVI ni los registros.
+- **Aprobación (metadato; 2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-02.I»: «APRUEBO EXCLUSIVAMENTE ADR-02.I v0.2-R3E-02I COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: ADR-02.I (v0.2-R3E-02I): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL; R3-E sigue como bloque parcial en curso.** **Esta aprobación NO equivale a aprobar R3-E completo, a seleccionar arquitectura, proveedor, variante de acceso ni mecanismo, ni a admitir formulaciones.** El evento de aprobación es independiente y no reutiliza identificadores DR2I. No aprueba definitivamente ADR-02.I ni admite o selecciona formulaciones, alternativas, variantes de acceso, mecanismos o proveedores; no acredita autorización en ambas capas, aislamiento entre torneos, atomicidad, auditoría, segundo factor, revocación efectiva ni control alguno; no resuelve DB1-1 ni declara cumplido R1 §8.1. Se conservan: **ALT-02-A, ALT-02-B y ALT-02-C sin selección** y **GV-01, GV-02 y GV-03 sin selección ni descarte**, con estados neutrales y condicionados; rangos **ALT-02-A y ALT-02-B: 2,80–4,10; ALT-02-C: 2,65–3,95**, que se solapan y **no discriminan**; **CAP-02-A como candidata A no admitida** y **CAP-02-D no evaluada ni rechazada**; **AZ-01…27** con su naturaleza documental distinguida (confirmados, [DER], garantías exigidas no demostradas, [REC], pendientes de decisión y mecanismos [PEND]); **DR2I-1…11 y OC-185…217 abiertas**; **RR2I-01…22 sin aceptar**; **DB1-1, K-2, K-3, RT-14 y A-1…A-16 sin resolver**; **D-2 sin excepción**; **R1 §8.1 sin cumplimiento demostrado**; la **diferencia entre invocar una función de la capa de datos (V1) y verificar de forma independiente en el servidor (V2)**, sin decidir cuál cumple IN-02-01; el **acceso directo, la auditoría, la atomicidad, el segundo factor y el aislamiento entre torneos pendientes de demostración**; la **cobertura de la decisión completa** exigida a lo derivado o duplicado, con prueba verificable; el **estado vigente de cuenta, sesión, rol y nivel MFA** accesible desde la capa de datos, sin que basten afirmaciones firmadas obsoletas; las dependencias de **ADR-03.I, ADR-09.I y ADR-08** (OC-102, OC-121, OC-122 y OC-124 abiertas; K-3 y las brechas RX-04 y RX-05; SI-06, SI-07 y OC-179); la limitación de **autoevaluación del autor, sin auditoría independiente**; y **R3-E como bloque parcial en curso, con los otros tres ADR `.I` (04, 05 y 16), R3-F y R4 sin iniciar**. Trazabilidad posterior: ADR-03.I v0.2-R3E-03I (Parte XVI) y su registro de aprobación quedaron versionados en el commit `83b7571c3173d247588807884a990397d7fbed06` (`83b7571`; verificable por Git; 2026-11-22T18:15:35Z). Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Nota posterior de trazabilidad (2026-11-22, inferida; solo informativa).** ADR-03.I v0.2-R3E-03I (Parte XVI) y su registro de aprobación quedaron versionados en el commit `83b7571c3173d247588807884a990397d7fbed06` (`83b7571`; verificable por Git; 2026-11-22T18:15:35Z). Las expresiones «No versionado» de §30.18 y «Estado de versionado: Pendiente» del registro de ADR-03.I describen el momento de redactarse. **No se reescribe la aprobación histórica;** `aprobaciones.md` y `bitacora.md` **no se modifican en esta entrega.**
+
+### 31.1 Identificación
+
+| Campo | ADR-02.I |
+|---|---|
+| Tema | Implementación del reparto de la autorización entre servidor y capa de datos y de la frontera atómica, sin seleccionar proveedor |
+| Pregunta (R1 §8.1) | ¿Cómo se implementan, con ambas capas siempre presentes, las capacidades de ADR-02.C (IN-02-01…29; UI-01…13; GT-01…18) de modo verificable, **sin** seleccionar tecnología hasta ADR-01 y sin conceder excepciones? |
+| Alternativas mínimas | ≥ 2 (aquí 3, que implementan **la misma formulación candidata CAP-02-A** y difieren en **dónde vive la definición única y cómo se ejecuta en las dos capas**) |
+| Exigencia de R1 §8.1 (≥ 2 formas de reparto) | **No declarada cumplida.** ALT-02-A/B/C **no son tres formas de reparto:** implementan una sola (CAP-02-A). **DB1-1 sigue abierta;** CAP-02-D no se cuenta como segunda forma |
+| Dependencias (R1 §8.2) | ADR-02.C (propuesta); ADR-01 (documental condicionado); y, por ADR-02.C, ADR-03.C y ADR-09.C. Consumido por ADR-04.C/I, ADR-05.C/I, ADR-08 y ADR-14 |
+| Dependencias laterales | ADR-03.I (identidad, estado vigente, SI-06, SI-07); ADR-09.I (auditoría de lo aplicado y de los rechazos, brechas RX-04 y RX-05); ADR-08 (R3-D: OC-102, OC-121, OC-122, OC-124); ADR-15 (invitaciones); ADR-05.I (sincronización); ADR-14 (identidad de ejecución, R4) |
+| Componentes | CMP-07 (roles y asignaciones; fuente única), CMP-08 (decisor único), CMP-06 (nivel de autenticación), CMP-09, CMP-10, CMP-11, CMP-13, CMP-16 (auditoría) |
+| Fronteras de confianza | TB-1 (dispositivo ↔ aplicación) y TB-4 (aplicación ↔ datos) |
+| Bloque / estado | R3-E (parcial) / **BORRADOR** |
+
+### 31.2 Entradas heredadas: formulaciones, condiciones y lo que no se resuelve
+
+| Elemento heredado | Estado | Tratamiento en este borrador |
+|---|---|---|
+| **CAP-02-A** (reparto con decisión completa en ambas capas, una sola definición) | **A**: sin celdas «No conforme»; conformidad condicionada a **K-1, K-3 y K-5** | Candidata documental **no admitida**; las tres alternativas la implementan; **no se admite ni se selecciona** |
+| **CAP-02-D** (decisión sobre una proyección derivada de permisos) | **C**: condicionada a **K-2** (a, b, c, d); independencia respecto de A **no demostrada**; H2B1-10 y DB1-6 | **No se evalúan mecanismos para D** ni para la proyección; solo se registra qué condiciones impondría (§31.9) y que **no es rechazada** |
+| **CAP-02-B y CAP-02-C** | **X** (no conformes tal como se definen); C completada ≡ A más comprobación de versión | Se usan solo como referencia de «una sola capa»; **no son alternativas** |
+| Solo servidor o solo capa de datos | Excluidas por RT-02, RC-04 e IN-02-01 [CONF] | **No son alternativas** (§31.6, faceta 1) |
+| **K-1** (una sola definición idéntica en todas las capas que la ejecutan) | Propiedad **exigida** a ADR-02.I (H2B1-03); su incumplimiento es la deriva de RB1-01 | Eje de las tres alternativas; **no se demuestra** |
+| **K-3** (persistencia del rechazo impuesto por la capa de datos: P-A o P-C) | **Abierta** (decisión 10 de R2-A; D9-1) | **No se resuelve;** ver ADR-09.I (RX-04, RX-05; OC-127, OC-147) |
+| **K-5** (nivel de autenticación: formulaciones de ADR-03.C) | **Abierta** | Depende de N-B o N-C (ADR-03.I; OC-155, OC-170) |
+| **DB1-1** (déficit frente a R1 §8.1), **DB1-2…6** | **Abiertas** | No se resuelven |
+| **A-1, A-2, A-4, A-5, A-6, A-8, A-12, A-15, A-16** | **Abiertas**; el evaluador las soporta como **parámetros** (IN-02-17) | **No se elige ninguna lectura** |
+| **H2B1-02, H2B1-04, H2B1-05, H2B1-06 y H2B1-07** | **Abiertas** | Vinculadas así: **H2B1-02** → OC-202; **H2B1-04** (RT-14 «en el servidor, en la misma transacción y al sincronizar», sin decir «solo» en el servidor) → OC-217; **H2B1-05** → OC-203; **H2B1-06** (A-6 frente a RT-12 y RF-EQP-06) → OC-199; **H2B1-07** → OC-204. **Ninguna se resuelve** |
+| **OC-102** (atomicidad del recálculo), **OC-121** (efecto de una corrección sobre la clasificación del equipo del actor), **OC-122** (acceso directo y privilegios), **OC-124** (versión del reglamento en la unidad) de ADR-08 | **Abiertas** (R3-D aprobado solo documental condicionado) | **Se preservan explícitamente;** ver §31.9, §31.10 y §31.16 (OC-185…188 las vinculan) |
+| **ADR-09.I:** SV-02, SV-03, SV-16, SV-18, OC-127, OC-147; brechas **RX-04 y RX-05** | **Abiertas** | Se preservan; la auditoría de lo aplicado por acceso directo **no se da por resuelta** |
+| **ADR-03.I:** SI-06, SI-07, SI-19; OC-179 | **Abiertas** (mecanismo del estado vigente) | Se preservan |
+| D-2 y DB2c-10 | **Sin excepción** | No se toca |
+
+### 31.3 Requisitos de seguridad verificables (AZ)
+
+| ID | Requisito verificable | Fuente | Naturaleza |
+|---|---|---|---|
+| AZ-01 | **Ambas capas siempre presentes:** toda autorización se comprueba en el servidor **y** en la capa de datos; ningún permiso se verifica en una sola; ocultar un control o confiar en el cliente no es un control. **Qué constituye «verificación en ambas capas»** —que el servidor **invoque** una función de la capa de datos, o que ejecute **una evaluación propia e independiente** con la misma definición— **no está decidido** (AZ-27; OC-211; DR2I-11) | IN-02-01; RT-02; RC-04; CL-48 | Confirmado; alcance de «verificación» abierto |
+| AZ-02 | **Una sola definición** de la decisión, ejecutada de forma **idéntica** en todas las capas que la ejecutan; la deriva entre capas se previene o se detecta (**propiedad exigida K-1; no demostrada**); si hay comprobaciones **derivadas** o **duplicadas**, deben cubrir la **decisión completa** (AZ-26) | IN-02-02; K-1; H2B1-03 | [DER]; garantía exigida |
+| AZ-03 | **Evaluación por usuario, rol, torneo, equipo, partido y efecto, con el estado vigente** de cuenta, roles, permisos y ámbito del torneo **en cada operación**; ninguna decisión depende solo de afirmaciones potencialmente obsoletas de una credencial (AZ-25) | IN-02-06; IN-02-03; SI-07 (ADR-03.I) | Confirmado / garantía exigida |
+| AZ-04 | **Decisión y aplicación en la misma unidad:** ninguna operación se aplica con una autorización ya revocada y confirmada, ni queda a medias; las dos capas deciden sobre el mismo estado confirmado. **La atomicidad no se declara demostrada** | IN-02-03; GT-02, GT-04, GT-08; RT-13 | [DER]; garantía exigida |
+| AZ-05 | **Sin escrituras directas que omitan las reglas de negocio:** ninguna vía (cliente, función invocable, rol de servicio, vista) modifica datos de negocio sin pasar por la definición única y su auditoría; **mecanismo [PEND]** | IN-02-01, 02; MO-26 (R3-D); SV-02, SV-03 (ADR-09.I) | Garantía exigida; mecanismo [PEND] |
+| AZ-06 | **Aislamiento entre torneos impuesto en la capa de datos** aunque cliente y servidor se equivoquen; toda referencia entre entidades pertenece al mismo torneo; sin transferencia de permisos | IN-02-04, 05; RT-01, RT-08 | Confirmado |
+| AZ-07 | **La capa de datos conoce la identidad y el nivel de autenticación de forma verificable,** no declarada por el cliente ni guardada en el dispositivo | IN-02-25; IN-03-11; SI-01, SI-06 | [DER] |
+| AZ-08 | **Mínimo privilegio y privilegios por defecto:** se revisan y, cuando proceda, se revocan los privilegios por defecto de los roles de cliente y de servicio sobre tablas, vistas y funciones; **ninguna vista ni función elude las políticas** sin decisión expresa; ninguna medida aislada se presenta como suficiente | IN-02-14; SV-18; SI-19; [DOC] | Garantía exigida; configuración [PEND] |
+| AZ-09 | **Funciones privilegiadas:** ruta de búsqueda fijada, permiso de invocación restringido y **ningún cliente la invoca directamente con parámetros propios** salvo decisión expresa del responsable | MO-26; OC-122 (R3-D); [DOC] | Garantía exigida; mecanismo [PEND] |
+| AZ-10 | **Las credenciales de servicio no llegan al cliente** ni sustituyen la decisión de permiso de un usuario | IN-02-29 [REC]; RT-09 | [REC]; DB1-5 |
+| AZ-11 | **Operaciones deportivas, efectos derivados y auditoría en una sola unidad** (UI-05, UI-10: resultado, eventos, estado, historial, recálculo, derivadas, señal de cambio si ADR-06 la adopta y auditoría, juntos o ninguno). **Mecanismo [PEND] (OC-102); no demostrada** | GT-11; IN-09-04; IF-20 | Garantía exigida |
+| AZ-12 | **RT-14 por efecto:** se evalúa sobre el conjunto completo de partidos afectados **antes de aplicar**, incluidos efectos en cascada y automáticos, y se rechaza por completo si alcanza a un equipo del que el actor es o fue delegado; **si un cambio indirecto de la clasificación o de resoluciones manuales cae bajo RT-14 es [PEND] (OC-121)** | IN-02-12; GT-14; RT-14; A-15; A-16 | [CONF] el efecto directo; indirecto abierto |
+| AZ-13 | **Serialización** de las operaciones que compiten por un mismo partido, clasificación o registro; protección atómica del último dueño; un editor vigente por partido; un delegado por equipo y torneo | GT-12, GT-03, GT-05; IN-02-10, 21, 22 | Confirmado / garantía exigida |
+| AZ-14 | **Versión del reglamento consistente en la unidad** (cambio permitido simultáneo con una confirmación o corrección); **mecanismo [PEND] (OC-124)** | MO-27 (R3-D); IN-02-03 | Garantía exigida |
+| AZ-15 | **Revocación inmediata:** toda operación nueva posterior a t0 se rechaza con el estado vigente; la renovación de una sesión no restituye lo revocado; el reflejo ≤ 60 s es un objetivo (**D-2 sin excepción, sin medición**) | IN-03-06, 07; RF-ACC-07; SI-07, SI-08 | Confirmado; objetivo sin validar |
+| AZ-16 | **Invitaciones, delegación y anti-escalada:** alta de cuentas solo con invitación vigente impuesta en las dos capas; nadie se concede roles ni asignaciones; ningún rol concede uno igual o superior al propio salvo RT-03 y RT-06; la creación de torneo es una operación del sistema autorizada previamente; los roles no se derivan de datos editables por la persona usuaria | IN-02-08, 09, 24, 26; IN-03-05; SI-05, SI-06 | Confirmado |
+| AZ-17 | **Facultades reservadas al dueño** y exigencia de nueva autenticación con segundo factor y motivo en las operaciones sobre dueños; el significado de «nueva» **sigue abierto** (H2A-11) | IN-02-09; IN-03-04; SI-04 | Confirmado; lectura abierta |
+| AZ-18 | **Operaciones sincronizadas:** recorren el mismo camino lógico que su equivalente en línea; la autorización se evalúa con el estado vigente **al sincronizar** y con la cuenta que capturó; RT-05 se verifica al sincronizar; el contexto local no autoriza | IN-02-11; IN-03-10, 11, 19; OFF-11, OFF-22; SI-16 | Confirmado / [REC] IN-03-19 |
+| AZ-19 | **Idempotencia y fallos parciales:** un reenvío no repite efectos ni registros de auditoría (el registro de idempotencia es de ADR-05); ningún fallo deja una operación a medias; el registro de un rechazo sigue las condiciones de ADR-09.I (**brechas RX-04 y RX-05 abiertas**) | OFF-06; IN-09-04, 05; K-3 | Confirmado / condicionado |
+| AZ-20 | **Trazabilidad:** toda concesión, modificación o revocación de permisos y todo rechazo o bloqueo por RT-14 producen el evento auditable con el **actor derivado de la identidad autenticada**; no se definen aquí los plazos de retención | IN-02-16; RT-10; RF-AUD-06; SV-16 | [DER] / confirmado |
+| AZ-21 | **El estado del torneo y del partido es una entrada del evaluador** (operaciones bloqueadas en `archivado` como parámetro de Q-40 (c)); las lecturas alternativas de A-1…A-16 son parámetros y **no se elige ninguna** | IN-02-17, 20; PA-13 | [CONF] / [DER] |
+| AZ-22 | **Pruebas negativas** por rol, vía de acceso, torneo y efecto, contra PostgreSQL real, que demuestran la **ausencia** de cada vía de omisión; los fixtures usan datos sintéticos | RNF-11; HR1-13; §31.13 | Confirmado |
+| AZ-23 | **Respuestas de denegación que no distinguen** entre «no existe» y «pertenece a otro torneo» e **intentos denegados** hacia la bitácora de seguridad | IN-02-27, 28 [REC] | [REC]; DB1-5 |
+| AZ-24 | **Sin permisos nuevos, sin reducción de garantías, sin proveedor ni mecanismo seleccionado,** sin conceder permiso por interpretación de lo ambiguo | IN-02-14, 18, 19; PA-13 | [DER] / [CONF] |
+| AZ-25 | **Estado vigente accesible desde la capa de datos:** la capa de datos accede, de forma verificable y vigente, al estado de la **cuenta** (activa, desactivada, eliminada), de la **sesión** (vigente o revocada), de los **roles** y del **nivel de autenticación (MFA)**; **las afirmaciones firmadas de una credencial, potencialmente obsoletas, no bastan** para autorizar operaciones privilegiadas ni para las políticas por fila; la renovación no restituye lo revocado; **mecanismo [PEND] (OC-213; SI-07 y OC-179 de ADR-03.I)** | IN-02-25; IN-02-03; SI-06, SI-07 | Garantía exigida; mecanismo [PEND] |
+| AZ-26 | **Cobertura de la decisión completa en lo derivado o duplicado:** si las comprobaciones de la capa de datos se **derivan** de una especificación común (ALT-02-B) o se **implementan por separado** (ALT-02-C), deben cubrir **todos** los elementos: efecto de RT-14, nivel de autenticación y MFA, cuenta, rol, ámbito del torneo, último dueño, invitación vigente y las restricciones relevantes (unicidades, referencias al mismo torneo, estado del torneo y del partido); **con una prueba verificable de equivalencia de cobertura**; si falta un elemento, **la brecha se declara** y la alternativa no es candidata a CAP-02-A en ese elemento (**sin seleccionar CAP-02-C**) | IN-02-02; K-1; §17.3.3 | Garantía exigida; no demostrada (OC-212) |
+| AZ-27 | **Invocación frente a verificación independiente:** se distinguen (V1) el servidor que **invoca** una función de la capa de datos (ambas «ejecuciones» comparten código y fallo) y (V2) el servidor que ejecuta **su propia evaluación** de la misma definición; **cuál cumple IN-02-01 lo decide el responsable** (DR2I-11) y no se presume | IN-02-01; IN-02-02; RT-02 | Pendiente de decisión (OC-211) |
+
+### 31.4 Alternativas de implementación
+
+Las tres alternativas implementan **la misma formulación candidata CAP-02-A** (decisión completa en las dos capas con **una sola definición**, K-1) y difieren en **dónde vive esa definición y cómo se ejecuta en las dos capas.** **No cubren CAP-02-D ni la proyección de permisos.** **No fijan** el acceso del cliente (variantes GV), el nivel de autenticación, la persistencia del rechazo ni las lecturas de A-1…A-16. Ninguna elige proveedor ni lenguaje; las sub-formas son familias de mecanismos.
+
+| Criterio | ALT-02-A: definición única en la capa de datos, invocada por el servidor | ALT-02-B: definición única en el servidor, con las comprobaciones de la capa de datos derivadas de una especificación común | ALT-02-C: dos implementaciones con prueba de equivalencia |
+|---|---|---|---|
+| Idea | La decisión de CMP-08 (roles, ámbito, efecto de RT-14, último dueño, invitación, nivel) vive como **funciones, restricciones y políticas** en la capa de datos; el servidor **invoca la misma definición** antes de aplicar (V1: invocación), y la capa de datos la **reejecuta dentro de la unidad que aplica**. **Si la invocación cuenta como verificación del servidor es OC-211** | La decisión vive como **módulo del servidor**; las verificaciones de la capa de datos se **derivan o generan** de una **especificación común** y **solo si cubren la decisión completa** (RT-14 por efecto, nivel de autenticación y MFA, cuenta, rol, ámbito, último dueño, invitación y restricciones: AZ-26) | Una implementación en el servidor y otra en la capa de datos, **escritas por separado**, y una **batería de equivalencia** que las compara con las mismas pruebas; **debe cubrir la decisión completa** (AZ-26) |
+| K-1 (una sola definición idéntica) | **Condicionada:** una definición con dos ejecuciones **si** el servidor la invoca efectivamente; **la invocación comparte código y fallo** y no equivale por sí sola a una verificación independiente (AZ-27; OC-211) | **Condicionada** a que la derivación sea mecánica, verificable y de **cobertura completa** (OC-189, OC-212) | **Por probar:** dos definiciones que pueden divergir entre pruebas |
+| Decisión y aplicación en la misma unidad (AZ-04) | Natural si la reejecución ocurre en la transacción que aplica; **no demostrada** (OC-102, OC-186) | El servidor decide y la capa de datos reverifica en la unidad; la coordinación entre ambas **no demostrada** | Igual que B; la copia del servidor puede decidir sobre un estado distinto |
+| Efecto de RT-14 (AZ-12) | Se evalúa sobre el conjunto de partidos en la capa de datos [INF]; cambios indirectos de clasificación: **OC-121 abierta** | Se evalúa en el servidor y se reverifica en la capa de datos; **OC-121 abierta** | Dos evaluaciones; **OC-121 abierta** |
+| Estado vigente y revocación (AZ-03, AZ-15) | La capa de datos consulta el estado vigente [INF]; sin depender de afirmaciones de la credencial (SI-07) | El servidor consulta; la capa de datos debe consultar también (SI-07) | Ambas consultan |
+| Pruebas negativas (AZ-22) | Sobre la capa de datos real; existen marcos para funciones y políticas de PostgreSQL [DOC: Supabase, pgTAP] | Pruebas del servidor sin base de datos más pruebas de la capa de datos; verificación de la derivación | Las dos suites **más** la de equivalencia |
+| Privilegios y funciones privilegiadas (AZ-08, AZ-09) | **Más funciones con privilegios elevados** que gobernar: ruta de búsqueda, permiso de invocación, vistas y políticas [DOC] | Menos funciones privilegiadas; el servidor usa el rol de la aplicación; el rol de servicio debe seguir en el servidor [DOC] | Ambas |
+| Riesgo principal | Funciones privilegiadas, vistas que eluden políticas y lógica en SQL difícil de revisar [INF] | Derivación incorrecta o incompleta; coordinación de la unidad | **Deriva** entre las dos definiciones (RR2I-01) |
+| Dependencias adicionales | ADR-01 (capacidades de la capa de datos del proveedor); ADR-09.I; ADR-03.I | ADR-01; herramienta de derivación (no seleccionada) [PEND] | ADR-01; coste de la batería de equivalencia |
+
+**Variantes y formulaciones fuera de las alternativas.** **CAP-02-D** (proyección) **no se evalúa** y **no se rechaza**: sus condiciones K-2 y H2B1-10 siguen abiertas. **CAP-02-B y CAP-02-C** (X) y los repartos de una sola capa **no son alternativas.** **«Mandato firmado por operación»** y **«permisos fijados al iniciar la sesión»** quedan descartados por R2 (§17.3.3) y no se reabren.
+
+**Invocar frente a verificar de forma independiente (M-1).** (V1) El servidor **invoca** la función de la capa de datos: una sola definición y un solo código; un defecto o una función omitida afecta a las dos «ejecuciones». (V2) El servidor ejecuta **su propia evaluación** con la misma definición: dos ejecuciones separadas, con el riesgo de deriva de K-1. **ADR-02.I no decide cuál cumple IN-02-01 ni admite CAP-02-A;** lo decide el responsable (DR2I-11). **DB1-1 y R1 §8.1 no se resuelven con esta distinción.**
+
+**Cobertura de la decisión completa en ALT-02-B y ALT-02-C (M-2).** ALT-02-B solo es **candidata a CAP-02-A** si lo derivado cubre los elementos siguientes en la capa de datos **y** existe una prueba verificable de equivalencia de cobertura. **Si falta alguno, la brecha se declara y la alternativa no se completa; no se selecciona CAP-02-C (X).**
+
+| Elemento de la decisión completa | Dónde debe cubrirse | Prueba verificable de cobertura | Estado |
+|---|---|---|---|
+| Efecto de RT-14 (conjunto de partidos afectado, cascada, rechazo completo) | Servidor y capa de datos | Fixtures por caso de RT-14, incluidos efectos automáticos | [PEND] (OC-212; OC-121 abierta) |
+| Nivel de autenticación y segundo factor | Servidor y capa de datos | Rechazo de una operación con nivel insuficiente por cada vía | [PEND] (K-5; OC-213) |
+| Cuenta (activa, desactivada, eliminada) y sesión vigente | Servidor y capa de datos | Rechazo con cuenta desactivada y con sesión revocada | [PEND] (OC-213) |
+| Rol y permisos vigentes | Servidor y capa de datos | Rechazo con rol revocado, incluida una renovación posterior | [PEND] |
+| Ámbito del torneo y aislamiento entre torneos | Capa de datos (y servidor) | Acceso cruzado entre torneos | [PEND] (OC-193) |
+| Último dueño y unicidades (un editor por partido, un delegado por equipo y torneo) | Capa de datos | Concurrencia sobre cada hecho | [PEND] (OC-186) |
+| Invitación vigente | Servidor y capa de datos | Alta sin invitación, vencida o con otro correo | [PEND] |
+| Estado del torneo y del partido; restricciones relevantes (referencias al mismo torneo; transiciones) | Capa de datos | Operaciones bloqueadas por estado | [PEND] (Q-40 (c)) |
+
+
+### 31.5 Variantes de gobierno del acceso del cliente a la capa de datos (no se seleccionan)
+
+El borrador de ADR-09.I y de ADR-03.I dejó abierta **si los clientes pueden alcanzar la capa de datos directamente** como decisión de ADR-02.I y del responsable (DR9I-3). Las variantes son **transversales a ALT-02-A, B y C**.
+
+| Variante | Descripción | Condición para IN-02-01 / RC-04 (ambas capas) | Efecto en AZ-05, AZ-09 y la auditoría | Estado |
+|---|---|---|---|---|
+| **GV-01** Sin acceso directo | Los clientes alcanzan **solo** el servidor; la capa de datos no está expuesta a clientes; el servidor usa un rol de aplicación de mínimo privilegio | Toda llamada pasa por el servidor y por la capa de datos; **que el servidor cumpla «verificación» si solo invoca la función es OC-211** | Las escrituras y funciones las invoca el servidor; P-A o P-C de ADR-09.I aplicables a los rechazos que el servidor observa; RX-05 no existiría [INF] | **Condicionada** a OC-190 (no entregar credenciales de conexión ni exponer la capa de datos) y a OC-211; no seleccionada |
+| **GV-02** Acceso directo solo a funciones expuestas | Los clientes pueden invocar **funciones** de la capa de datos y no tablas; las tablas no admiten escritura directa | **Pendiente de demostrar** que existe una verificación del servidor en las llamadas directas (por ejemplo una vía obligatoria que pase por él); sin esa demostración la conformidad con IN-02-01 **no está establecida** (OC-191) | AZ-05 y AZ-09 dependen del contenido de cada función (OC-216); RX-05 abierta; auditoría de lo aplicado ante llamada directa **no resuelta** (OC-147) | **Pendiente de demostrar;** no rechazada; no seleccionada |
+| **GV-03** Acceso directo a tablas bajo políticas | Los clientes leen y escriben tablas bajo privilegios y políticas por fila | **Pendiente de demostrar** igual que GV-02; además las reglas de negocio quedarían en políticas, funciones o disparadores | AZ-05 más exigente: toda escritura que una política permita debe seguir pasando por la decisión completa, la auditoría y el recálculo (OC-216); RX-03 y RX-05 abiertas | **Pendiente de demostrar;** no rechazada; no seleccionada |
+
+**Qué verificaciones podrían omitirse según la variante (M-3) [INF; no demostrado; se decide por cada función o política]:**
+
+| Verificación o garantía | GV-01 | GV-02 | GV-03 |
+|---|---|---|---|
+| Verificación del servidor (IN-02-01) | Presente si el servidor evalúa o invoca (OC-211); depende de OC-190 | **Omitible** en llamadas directas salvo vía obligatoria demostrada (OC-191) | **Omitible** igual |
+| Auditoría de lo aplicado (IN-09-04) | La escribe el servidor en la unidad [INF] | Omitible si la función no la incluye (OC-147, OC-216) | Omitible si la política permite escribir sin auditoría (OC-147) |
+| Control de ámbito y aislamiento entre torneos (IN-02-04) | Servidor y capa de datos | Depende de la función; la capa de datos impone referencias y restricciones | Depende de políticas y restricciones; un error de política expone filas [DOC: Neon] |
+| Autenticación y nivel MFA (IN-02-15, 25; SI-07) | Servidor y capa de datos con estado vigente (AZ-25) | La función debe consultar el estado vigente; afirmaciones obsoletas no bastan | Igual para cada política |
+| Reglas deportivas (transiciones, validaciones; CMP-11) | Servidor | Omitibles si la función no las aplica | Omitibles: una política de escritura no ejecuta las reglas de CMP-11 por sí sola |
+| Recálculo y efectos derivados (UI-05, UI-10; ADR-08; OC-102) | En la unidad del servidor o de la función | Omitibles si la escritura directa no dispara el recálculo | Omitibles igual |
+| RT-14 por efecto (IN-02-12; OC-121) | Servidor y capa de datos | Omitible si la función no calcula el conjunto de efectos | Omitible: las políticas rara vez calculan efectos en cascada [INF] |
+| Atomicidad y serialización (AZ-04, AZ-13; OC-186) | Unidad del servidor | Atómica solo si la función cubre toda la unidad | Atómica solo si la unidad se confina a una escritura permitida |
+
+**Mecanismos de autorización previa documentados (no se seleccionan; ninguno demuestra por sí solo la «verificación del servidor»; OC-215).** (a) **Comprobaciones previas de la solicitud** de la API de datos, que permiten rechazar el acceso directo a ciertas tablas, vistas o funciones y **solo funcionan con esa API** [DOC: Supabase]; (b) **concesiones de privilegios** y **políticas por fila** (con las afirmaciones de la credencial, sujetas a obsolescencia: AZ-25) [DOC]; (c) **esquemas dedicados** y la opción de **no exponer automáticamente** objetos nuevos [DOC: Supabase]; (d) **funciones con privilegios del invocador** y la **revocación del permiso de ejecución** [DOC: Supabase]; (e) en Neon, la API de datos autoriza **solo** con concesiones y políticas, sin capa de permisos propia [DOC].
+
+**Lectura.** **Ninguna variante se selecciona, se admite ni se descarta definitivamente.** GV-01, GV-02 y GV-03 quedan **condicionadas** (GV-01 a OC-190 y OC-211; GV-02 y GV-03 a demostrar la verificación del servidor, OC-191) y su gobierno es del responsable (DR2I-1). Que una función o un mecanismo del proveedor haga de «verificación del servidor» **no se afirma** (OC-191, OC-215).
+### 31.6 Comparación por las diez facetas pedidas
+
+| Faceta | ALT-02-A | ALT-02-B | ALT-02-C |
+|---|---|---|---|
+| 1. Autorización en servidor, base de datos y capas combinadas | **Solo servidor** o **solo capa de datos**: excluidas (IN-02-01). Combinadas: definición única en datos, servidor la invoca | Combinadas: definición en servidor, verificaciones derivadas en datos | Combinadas: dos definiciones |
+| 2. Comprobación de cuenta, rol, permisos y ámbito en cada operación | Consulta de estado vigente en la capa de datos [INF]; sin afirmaciones obsoletas (SI-07) | El servidor consulta y la capa de datos reverifica; SI-07 exigido en ambas | Ambas consultan |
+| 3. Prohibición de escrituras directas que omitan reglas | Escritura solo mediante funciones o restricciones de la capa de datos; vías de acceso directo según GV | Escritura solo mediante el servidor; restricciones derivadas en la capa de datos; según GV | Según GV |
+| 4. RLS, funciones privilegiadas, permisos de invocación y aislamiento | Más funciones privilegiadas y vistas que gobernar [DOC]; aislamiento por restricciones y políticas | Menos funciones privilegiadas; aislamiento impuesto en la capa de datos [CONF AZ-06] | Ambos |
+| 5. Atomicidad entre operaciones deportivas, efectos derivados y auditoría | La reejecución y la auditoría pueden ir en una función transaccional [INF]; **no demostrada** (OC-186) | Exige coordinar servidor y capa de datos en una unidad: transacción interactiva u optimismo [INF]; **no demostrada** | Igual que B |
+| 6. RT-14 por efecto, incluidos cambios indirectos en clasificaciones | Conjunto de partidos afectado calculado en la capa de datos [INF]; indirecto **OC-121 abierta** | Calculado en el servidor y reverificado [INF]; **OC-121 abierta** | Dos cálculos; **OC-121 abierta** |
+| 7. Revocación inmediata y D-2 sin excepción | Estado vigente en cada operación; renovación no restituye; **D-2 sin excepción ni medición** | Igual | Igual |
+| 8. Invitaciones, delegación y anti-escalada | Impuestas por restricciones y funciones; roles solo de CMP-07 (AZ-16) | Impuestas por el servidor y reverificadas en datos | Dos implementaciones |
+| 9. Operaciones sincronizadas tras cambios de permisos | La revalidación al sincronizar llama a la misma definición | El servidor revalida con su módulo y la capa de datos reverifica | Dos revalidaciones |
+| 10. Concurrencia, idempotencia, fallos parciales, trazabilidad y pruebas negativas | Serialización por torneo, partido o registro [PROP]; pruebas en la capa de datos real | Serialización coordinada servidor–datos; más pruebas | La batería de equivalencia es adicional |
+
+### 31.7 Matriz de conformidad con los invariantes y requisitos
+
+Escala: **Por diseño** (la propia definición de la alternativa lo garantiza, **sin demostrar**), **Condicionada** (depende de una decisión o verificación [PEND], con su condición), **Por probar** (solo se logra mediante pruebas). Autoevaluación del autor, no auditoría independiente. **Ninguna celda declara cumplimiento demostrado.**
+
+| Invariante o requisito | ALT-02-A | ALT-02-B | ALT-02-C |
+|---|---|---|---|
+| IN-02-01 (ambas capas) — AZ-01, AZ-27 | **Condicionada:** la invocación de la función por el servidor (V1) **no equivale por sí sola** a verificación independiente (OC-211); con GV-01 depende además de OC-190; con GV-02 y GV-03, de demostrar la verificación del servidor (OC-191) | **Condicionada:** V2 con cobertura completa (OC-212) y las mismas condiciones sobre GV | **Condicionada:** V2 con cobertura completa y equivalencia (OC-212); mismas condiciones sobre GV |
+| IN-02-02 / K-1 (una sola definición) — AZ-02, AZ-26 | **Condicionada:** una definición compartida por invocación efectiva; comparte código y fallo (OC-211) | **Condicionada** a la derivación mecánica y a la **cobertura completa** (OC-189, OC-212); sin cobertura, la brecha se declara | **Por probar:** solo por equivalencia de cobertura completa (RR2I-01) |
+| IN-02-03 (misma unidad) — AZ-04 | **Condicionada** (OC-186, OC-102) | **Condicionada** (OC-186, OC-102) | **Condicionada** (OC-186, OC-102) |
+| IN-02-04, 05 (aislamiento entre torneos) — AZ-06 | **Condicionada** a restricciones y políticas verificadas (OC-193) | **Condicionada** igual | Igual |
+| IN-02-06, 07, 08, 09 (dimensiones, unión de roles, anti-escalada) — AZ-03, AZ-16 | **Condicionada** a la definición única y al estado vigente | Igual | Igual |
+| IN-02-10 (último dueño atómico) — AZ-13 | **Condicionada** a serialización (OC-186) | Igual | Igual |
+| IN-02-11 (RT-05 al asignar, al otorgar y al sincronizar) — AZ-18 | **Condicionada** (ADR-05.I) | Igual | Igual |
+| IN-02-12, 13 (RT-14 por efecto; historial como fuente) — AZ-12 | **Condicionada:** efecto directo [CONF]; **indirecto OC-121 abierta**; A-1…A-16 parámetros | Igual | Igual |
+| IN-02-14, 29 (mínimo privilegio; credenciales de servicio) — AZ-08, AZ-10 | **Condicionada** a la revisión de privilegios por defecto (OC-192) | Igual | Igual |
+| IN-02-15, 25 (nivel de autenticación verificable) — AZ-07, AZ-25 | **Condicionada** a K-5 y al acceso de la capa de datos al **estado vigente** de cuenta, sesión, rol y nivel (OC-213; SI-07 y OC-179); las afirmaciones firmadas **no bastan** | Igual | Igual |
+| IN-02-16 (evento auditable) — AZ-20 | **Condicionada** a ADR-09.I (OC-127, OC-147) | Igual | Igual |
+| IN-02-20, 21, 22, 24, 26 (estado, un delegado, un editor, invitación, creación de torneo) | **Condicionada** a restricciones de unicidad impuestas en datos (OC-193) | Igual | Igual |
+| K-3 (persistencia del rechazo impuesto por la capa de datos) | **Abierta;** no se resuelve | **Abierta** | **Abierta** |
+| CAP-02-D / K-2 / DB1-1 | **No evaluada** | **No evaluada** | **No evaluada** |
+| Pruebas negativas — AZ-22 | **Por probar** (capa de datos real) | **Por probar** | **Por probar** (más equivalencia) |
+
+### 31.8 RLS, funciones privilegiadas, permisos de invocación y aislamiento (evidencia)
+
+**Hechos [DOC] (Supabase).** La API de datos se rige por **dos capas de control**: **concesiones** de privilegios (qué roles alcanzan una tabla, vista o función) y **políticas de seguridad por fila** (qué filas); se usan ambas para cada objeto expuesto. El **rol de servicio omite las políticas** y debe quedar en el servidor. En proyectos existentes, los objetos nuevos del esquema público reciben **por defecto** privilegios para los roles anónimo, autenticado y de servicio; existe una opción que **revoca esa exposición automática**. Los **esquemas dedicados** delimitan la superficie expuesta y las tablas y funciones internas pueden quedar en esquemas no expuestos. **Las vistas omiten las políticas por defecto** porque se crean con el usuario propietario; una vista sobre una tabla protegida expone todas sus filas. Las **funciones de privilegios del creador** pueden devolver filas que el invocador no podría leer, deben fijar su ruta de búsqueda y **cualquier rol puede invocarlas por defecto** salvo que se restrinja; la opción por defecto es la del **invocador**. Las **comprobaciones previas a la solicitud** de la API de datos permiten, por ejemplo, rechazar el acceso directo a ciertas tablas o funciones, pero **solo funcionan con la API de datos**, no con otros productos. Las políticas distinguen condiciones sobre filas existentes y sobre la fila resultante. **Neon:** su API de datos **no tiene capa de permisos propia:** autoriza solo con las concesiones y las políticas por fila, de modo que **una política ausente o mal configurada puede exponer una tabla** [DOC].
+**Inferencias [INF].** (1) Con la API de datos expuesta, un cliente **puede llamar directamente** a la capa de datos con su credencial (GV-02, GV-03). (2) Una política por fila no sustituye la **verificación del servidor** que exige IN-02-01: si el cliente no pasa por el servidor, esa verificación no ocurre. (3) Una política que filtra en silencio (cero filas) no genera un rechazo observable (ADR-09.I, RX-03). (4) Las restricciones de integridad, unicidad y referencias entre entidades **sí** se imponen en la capa de datos aunque el cliente y el servidor se equivoquen.
+**Pendiente [PEND]:** el comportamiento exacto de cada configuración ante una llamada directa denegada; el rendimiento de las políticas con las tablas previstas; los límites de cómputo de la capa de datos en el plan elegido; la compatibilidad de las comprobaciones previas con GV-01 (OC-190, OC-194).
+**Propiedad de tablas, FORCE RLS y privilegios efectivos [PEND] (M-5).** Quién es el **propietario** de las tablas y de las funciones, si las políticas por fila se **imponen** también a ese propietario (por ejemplo, mediante la opción de forzarlas) y cuáles son los **privilegios efectivos** de cada rol (incluidos los heredados por defecto) **no se leyeron en fuente oficial de PostgreSQL ni se verificaron** [INF]. **No se atribuye garantía alguna** al aislamiento o a la inmutabilidad hasta comprobarlos (OC-214; RR2I-22).
+**Estado vigente desde la capa de datos (M-4).** Una política por fila o una función que decida con las **afirmaciones firmadas** de la credencial (rol, nivel de autenticación) **queda obsoleta** hasta que se renueve la credencial [DOC: vida de 5 min a 1 h; el nivel baja tras renovar]. Por eso la capa de datos necesita **acceso a un estado vigente** de cuenta, sesión, roles y nivel de autenticación (AZ-25; SI-07 y OC-179 de ADR-03.I). **De dónde lo lee y quién lo mantiene son [PEND]** (OC-213); en una sesión opaca con registro en el servidor, ese estado puede estar en la propia base de datos; en una credencial firmada, **no** [INF].
+### 31.9 Atomicidad, serialización, idempotencia, fallos parciales y trazabilidad
+
+| Unidad o garantía | Qué exige ADR-02.C | Qué dice este borrador | Estado |
+|---|---|---|---|
+| UI-05 y UI-10 (corregir y confirmar un resultado con recálculo) | GT-11: resultado, eventos, estado, historial, recálculo, derivadas persistentes, señal de cambio (si ADR-06) y auditoría **juntos o ninguno**; GT-14: RT-14 sobre el conjunto de partidos antes de aplicar | Las tres alternativas **pueden enunciar** la unidad; **ninguna la demuestra.** **OC-102 (mecanismo del recálculo) y OC-124 (versión del reglamento en la unidad) de ADR-08 se preservan abiertas** (OC-185, OC-188). **OC-121** (efecto sobre la clasificación del equipo del actor) **abierta** (OC-187) | Garantía exigida; no demostrada |
+| UI-01…04, 11, 12 (roles, asignaciones, último dueño, revocación, invitaciones) | GT-01…06: misma unidad para fuente, efectos compuestos y auditoría; serialización; revocación aplicada antes y válida o rechazada | La serialización por hecho (dueños activos, editor de un partido, delegado de un torneo, invitación, restricción) es **condición de todas**; mecanismo [PEND] (OC-186) | Garantía exigida |
+| UI-06 (operación sincronizada) | Mismo camino lógico que lo equivalente en línea; autorización con estado vigente al sincronizar | Preservado; **ADR-05.I** define la ruta; no se resuelve OFF-06 sobre lo rechazado | Condicionado a ADR-05 |
+| Idempotencia y reenvíos | OFF-06: un efecto y un registro de auditoría por operación | ADR-02.I **no define** el registro de idempotencia (ADR-05); exige que la autorización no se evalúe dos veces con efectos acumulables | Condicionado |
+| Fallos parciales | Ninguna operación a medias; si el registro de lo aplicado falla, no se aplica (IN-09-04) | **La auditoría de lo aplicado ante una mutación directa del cliente no se da por resuelta** (ADR-09.I, OC-147); la ventana entre unidades independientes de un rechazo es de ADR-09.I (OC-149) | Condicionado |
+| Trazabilidad | IN-02-16, RF-AUD-06 | Evento por toda concesión, modificación y revocación, y por todo rechazo por RT-14; **brechas RX-04 y RX-05 abiertas** | Condicionado a ADR-09.I |
+| CAP-02-D (no evaluada) | K-2a completitud, K-2b derivación, K-2c actualización, K-2d garantías (GT-01…10 bajo D) | **No se elige mecanismo para la proyección.** Si el responsable la admitiera, exigiría una proyección reconstruible desde las fuentes y actualizada en la misma unidad, **sin ventana con proyección obsoleta** (GT-09, GT-10) | Fuera de este borrador |
+
+### 31.10 RT-14 y conflictos de interés evaluados por efecto
+
+- **Efecto directo [CONF].** RT-14 se evalúa sobre **todo partido que la operación modificaría**, incluidos efectos automáticos o en cascada (IN-02-12, GT-14); el rechazo es completo.
+- **Efecto indirecto en la clasificación [PEND].** La corrección de un partido ajeno puede cambiar posiciones, desempates o la obsolescencia de una resolución manual del equipo del actor. **Si ese cambio cae bajo RT-14 queda abierto** (OC-121 de ADR-08; A-15; A-16; D4-8). ADR-02.I **no lo decide:** solo exige que la definición única admita ambas lecturas como parámetro (IN-02-17) y que, **mientras esté abierta, se aplique la lectura provisional por caso de `01 §13.7` sin conceder permisos por interpretación** (PA-13).
+- **Parámetros.** A-1, A-2, A-4, A-5, A-6, A-8, A-12, A-15 y A-16 se soportan como parámetros del evaluador; **no se elige ninguna lectura** ni se usa una alternativa para hacerla viable. A-8 (publicar y despublicar) y su punto opcional de guardia son de ADR-04; D4-8 sigue abierta.
+- **Sin atajos.** Ninguna alternativa evalúa RT-14 solo en una capa; el efecto indirecto no se resuelve eligiendo dónde vive la definición.
+### 31.11 Revocación inmediata, invitaciones, delegación y escalada
+
+| Asunto | Qué debe cumplirse | Alternativas | Estado |
+|---|---|---|---|
+| Revocación inmediata (AZ-15; D-2) | Rechazo de toda operación posterior a t0 con estado vigente; la renovación no restituye; **D-2 sin excepción ni medición** | Las tres consultan el estado vigente; el mecanismo es de ADR-03.I (OC-179) | Garantía exigida; objetivo sin validar |
+| Facultades revocadas en vuelo (UI-11) | «Aplicada antes y válida» o «rechazada», nunca a medias (CL-45) | Serialización respecto a las operaciones en línea y sincronizadas | Condicionado (OC-186) |
+| Invitación y concesión de roles | Solo con invitación vigente; imposición en las dos capas; nadie se invita ni se concede roles; el dueño reserva ciertas facultades | Restricciones y funciones en la capa de datos (A), servidor más derivadas (B), dos implementaciones (C) | Condicionado a ADR-03.I y ADR-15 |
+| Delegación (RT-05, un delegado por equipo y torneo) | Verificación al asignar, al otorgar el rol y al sincronizar; unicidades impuestas en datos (GT-16) | Igual | Condicionado |
+| Anti-escalada | Roles solo de CMP-07 y decididos por CMP-08; sin datos editables como fuente; sin vía de administración de identidad accesible a clientes | Igual (SI-06 de ADR-03.I) | Garantía exigida |
+| Creación de torneo (IN-02-26) | El creador queda como organizador de ese torneo y de ninguno más, como operación autorizada previamente; sin autoasignación discrecional | Igual | Confirmado; mecanismo [PEND] |
+
+### 31.12 Operaciones sincronizadas después de cambios de permisos
+
+- **Autorización al sincronizar [CONF].** Cada operación recorre el mismo camino lógico que su equivalente en línea y se evalúa con el **estado vigente al sincronizar** y con **la cuenta que capturó** (OFF-22, IN-03-19 [REC]); las operaciones de un usuario desasignado, reasignado o sin rol **se rechazan con motivo** aunque se hayan capturado con permiso (OFF-11).
+- **Formulaciones de ADR-03.C.** S-A y S-B son candidatas A **no admitidas**; ADR-02.I **no las elige** ni fija el nivel de autenticación al sincronizar (DB2c-8).
+- **Interacción con RT-14 y RT-05.** Las operaciones sincronizadas **heredan** la situación del actor y se evalúan por efecto; RT-05 se verifica también al sincronizar (IN-02-11). **A-9…A-14 y la reanudación sin conexión (A-10)** siguen abiertas.
+- **Captura sin conexión.** El contexto local no autentica ni autoriza (IN-03-11); una captura con permisos luego revocados no se aplica ni se pierde en silencio (OFF-09, OFF-10); el **registro y la persistencia del rechazo** son de ADR-09.I y ADR-05.I, con **RX-04 y RX-05 abiertas**.
+### 31.13 Pruebas negativas
+
+| Prueba | Qué demuestra | Requisito | Tipo |
+|---|---|---|---|
+| Escribir datos de negocio por cada vía posible del cliente (según GV) sin pasar por el servidor | Que ninguna vía omite las reglas ni la auditoría; o que la brecha queda declarada | AZ-05, AZ-01 | I, DB |
+| Llamar directamente a una función privilegiada con el rol anónimo, autenticado y de otro torneo | Rechazo o ausencia de la función en la superficie expuesta | AZ-09, AZ-06 | DB |
+| Consultar una vista sobre una tabla protegida; crear una tabla nueva sin política | Que no se exponen filas ni objetos por defecto | AZ-08 | DB |
+| Editor, organizador y delegado intentan operaciones fuera de su ámbito, torneo, partido o efecto | Rechazo en las dos capas | AZ-01, AZ-03, AZ-06 | I, DB |
+| Un delegado se asigna como editor de un partido de su equipo; asignación y sincronización | RT-05 en las tres etapas | AZ-16, AZ-18 | I |
+| Un dueño u organizador con rol de delegado corrige un resultado de su equipo, por la vía directa y por la mediada; y un resultado ajeno que altera su clasificación | Efecto directo rechazado; efecto indirecto **según la lectura abierta (OC-121), sin decidirla** | AZ-12 | I |
+| Revocar un rol o cuenta con una operación en curso y una credencial no vencida; con una renovación posterior | «Aplicada antes y válida» o «rechazada»; la renovación no restituye | AZ-15, AZ-04 | I |
+| Revocar y degradar al último dueño de forma simultánea desde dos sesiones | El sistema no queda sin dueño activo | AZ-13 | I (concurrencia) |
+| Asignar dos editores a un mismo partido; invitar al mismo delegado a dos equipos del torneo | Un editor vigente; un delegado por equipo y torneo | AZ-13 | I (concurrencia) |
+| Autoconcederse roles; reutilizar o cambiar de correo una invitación; modificar campos editables del perfil | Anti-escalada; alta solo por invitación vigente | AZ-16 | I, E2E |
+| Cambio de reglamento permitido simultáneo con una confirmación | Una sola versión en el cálculo (**OC-124 de ADR-08 abierta**) | AZ-14 | I (concurrencia) |
+| Operación sincronizada tras revocar el rol del capturador; tras una restauración de sesión | Rechazo con motivo; sin pérdida silenciosa | AZ-18 | I, E2E |
+| Inyección de fallo en la escritura de auditoría de lo aplicado | La operación no se aplica | AZ-04, AZ-19 | I |
+| Equivalencia de las dos definiciones (solo ALT-02-C o derivación de ALT-02-B) | Que ambas deciden igual con las mismas entradas (fixtures) | AZ-02 | U, DB |
+| Respuestas de denegación para un recurso inexistente y uno de otro torneo | Respuestas indistinguibles ([REC]) | AZ-23 | I |
+
+Las pruebas se ejecutan **contra PostgreSQL real** (RNF-11, HR1-13) con **datos sintéticos**.
+### 31.14 Compatibilidad con las configuraciones de R3-A y límites gratuitos (sin seleccionar)
+
+| Configuración o bloque | Observación | Estado |
+|---|---|---|
+| CFG-C1 (Vercel + Supabase) y CFG-C3 (Cloudflare + Supabase) | La API de datos de Supabase **expone** por defecto tablas y funciones del esquema público a los roles de cliente [DOC] (GV-02 y GV-03 serían posibles por diseño; GV-01 exige **cerrar** esa exposición, [DOC: opción de no exponer automáticamente, esquemas dedicados]); el rol de servicio omite políticas [DOC]; funciones por defecto del invocador [DOC]; pruebas con pgTAP [DOC]; límites de las funciones de borde de Supabase (2 s de CPU, 256 MB, 150 s de espera) [DOC]: **relevantes si la definición viviera allí; los límites del plan elegido no se evaluaron** [PEND]. **El entorno de Cloudflare (CFG-C3) no se evaluó** (OC-194) | Condicionado; no se selecciona |
+| CFG-C2 (Vercel + Neon + Better Auth) | El servidor se conecta con un rol de aplicación; la API de datos de Neon es **opcional**: si no se usa y **no se entregan credenciales de conexión a clientes**, GV-01 es el caso [INF]; si se usa, **autoriza solo con concesiones y políticas** [DOC] (GV-02 o GV-03) | Condicionado; no se selecciona |
+| ADR-03.I | SI-06, SI-07 y SI-19 aplican a las tres alternativas; el mecanismo del estado vigente (OC-179) **no se resuelve** | Dependencia abierta |
+| ADR-09.I | La auditoría de lo aplicado y de los rechazos se integra en la unidad (IN-09-04); **RX-04, RX-05, OC-127 y OC-147 abiertas** | Dependencia abierta |
+| ADR-08 (R3-D) | El motor de reglas y la clasificación **no se deciden aquí**; **OC-102, OC-121, OC-122 y OC-124 permanecen abiertas** | Dependencia abierta |
+| ADR-04.I, ADR-05.I, ADR-16.I | No se redactan; ADR-02.I les deja la frontera atómica y la decisión sobre el acceso directo | Dependencia abierta |
+
+### 31.15 Evaluación, puntuación y recomendación preliminar
+
+**Regla.** Pesos aprobados (R1 §2.4 y R3-A): seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %. Se puntúa **solo con evidencia leída**; lo no leído es [PEND] y se trata con rangos de sensibilidad, sin penalizar documentación incompleta. Escala 1–5; juicio del autor [PROP], no vinculante. El criterio sin conexión **no discrimina** (3): la autorización es del servidor y de la capa de datos. **Regla uniforme de rangos:** (i) **Seguridad y mantenimiento** son juicios [PROP] no verificados: **valor central y rango ±1 para las tres alternativas**; el valor central es **el mismo (3) cuando no existe evidencia diferenciadora**, y menor (2) **solo cuando la propia definición implica un hecho estructural documentado** (dos definiciones que mantener y probar para K-1); (ii) **Costo** puntúa solo **planes y servicios**: techo 5 y el límite inferior baja **1 punto por cada aspecto de costo no evaluado**; el desarrollo propio se pondera en Mantenimiento y no se duplica en Costo; **que una función sea gratuita o de pago ni favorece ni penaliza.** **Aspectos de costo no evaluados:** límites de cómputo y de conexiones de la capa de datos del plan elegido (1 en cada alternativa).
+
+| Criterio (peso) | ALT-02-A | ALT-02-B | ALT-02-C |
+|---|---|---|---|
+| Seguridad (35 %) [PROP, no verificado; central 3 en las tres] | 2–4 | 2–4 | 2–4 |
+| Costo (30 %) [aspectos no evaluados: 1 en cada una] | 4–5 | 4–5 | 4–5 |
+| Sin conexión (20 %) | 3 | 3 | 3 |
+| Mantenimiento (15 %) [PROP; central A 3, B 3, C 2] | 2–4 | 2–4 | 1–3 |
+| **Total (rango)** | **2,80–4,10** | **2,80–4,10** | **2,65–3,95** |
+
+**Fundamento.** *Seguridad:* los tres juicios son **[PROP] no verificados** y de igual valor central porque ninguna ventaja está demostrada; los riesgos propios de cada alternativa (funciones privilegiadas en A; derivación en B; deriva en C) se registran como condiciones, no como valores distintos. *Costo:* sin servicio nuevo evidente [INF]; los límites inferiores reflejan solo aspectos no evaluados. *Sin conexión:* no discrimina. *Mantenimiento:* A y B (3) sin evidencia diferenciadora; **C (2)** porque exige mantener y probar **dos definiciones** (hecho estructural de K-1 y de RD-TAB-10 en ADR-08).
+**Sensibilidad.** Los rangos de A y B son **idénticos** (2,80–4,10) y el de C (2,65–3,95) está **contenido** en ellos: **el puntaje no discrimina.** El gobierno del acceso del cliente (GV) **pesa más que la elección entre alternativas** y no está puntuado porque **no es una alternativa** sino una decisión del responsable.
+**Puntuaciones sin cambio en v0.2.** Las correcciones (M-1…M-5) añaden condiciones, no ventajas demostradas; la regla uniforme de rangos no cambia y **no se discrimina** entre ALT-02-A, ALT-02-B y ALT-02-C.
+**Recomendación preliminar NO vinculante [PROP].** (1) **Los requisitos eliminatorios son los AZ confirmados** (AZ-01, AZ-03, AZ-04 en lo confirmado, AZ-06, AZ-15, AZ-16 y AZ-17); **ninguna alternativa fija CAP-02-D, K-3, DB1-1, RT-14 ni A-1…A-16.** (2) La evidencia documentada **no discrimina** entre ALT-02-A y ALT-02-B; ALT-02-C añade una definición duplicada y se sostiene **solo por pruebas**: **no se expresa preferencia.** (3) **Antes de cualquier elección** conviene que el responsable decida el **gobierno del acceso directo del cliente (GV, DR2I-1)**, porque de ello depende que IN-02-01 se cumpla con «ambas capas siempre presentes». (4) **No se selecciona nada;** la decisión es del responsable y **posterior** a ADR-01, ADR-03.I, ADR-09.I, ADR-08 y la admisión de las formulaciones. Los puntajes no sustituyen a los requisitos obligatorios, que son eliminatorios y no compensables.
+
+### 31.16 Condiciones, decisiones, riesgos y dependencias
+
+**Condiciones abiertas (OC-185…217).** Ninguna se resuelve aquí.
+
+| ID | Condición | Origen | Bloquea |
+|---|---|---|---|
+| OC-185 | **OC-102 de ADR-08 (preservada):** mecanismo de atomicidad del recálculo en el entorno elegido | ADR-08; AZ-11 | AZ-11; ADR-08 |
+| OC-186 | Mecanismo de la unidad atómica de decisión y aplicación y de la **serialización** (por torneo, partido o registro) en las tres alternativas; no demostrado | GT-01…14; IN-02-03 | AZ-04, AZ-13 |
+| OC-187 | **OC-121 de ADR-08 (preservada):** si el efecto de una corrección sobre la clasificación del equipo del actor cae bajo RT-14 | ADR-08; A-15; A-16; D4-8 | AZ-12 |
+| OC-188 | **OC-124 de ADR-08 (preservada):** versión del reglamento fijada en la unidad ante un cambio simultáneo | ADR-08; MO-27 | AZ-14 |
+| OC-189 | Derivación mecánica y verificable de las comprobaciones de la capa de datos desde una especificación común (ALT-02-B) | K-1; H2B1-03 | AZ-02 |
+| OC-190 | Que los clientes no alcancen la capa de datos (GV-01): no entregar credenciales de conexión y cerrar la exposición; configuración no leída; **GV-01 queda condicionada a esta y a OC-211** | AZ-05; ADR-09.I OC-127 | GV |
+| OC-191 | Si una vía de acceso directo (GV-02, GV-03) puede contar como verificación del servidor; **demostración inexistente; las variantes no se rechazan** | IN-02-01; RT-02; OC-122 (R3-D) | GV; DR2I-1 |
+| OC-192 | Revisión y revocación de privilegios por defecto de los roles de cliente y de servicio sobre tablas, vistas y funciones | AZ-08; SV-18; SI-19 | AZ-08 |
+| OC-193 | Restricciones de unicidad, aislamiento y referencias entre entidades impuestas en la capa de datos y su verificación contra PostgreSQL real | AZ-06, AZ-13; GT-16 | AZ-06 |
+| OC-194 | Comportamiento de cada configuración ante una llamada directa denegada; rendimiento de las políticas; límites de cómputo del plan; entorno de Cloudflare (CFG-C3) | §31.8; CFG | ADR-01 |
+| OC-195 | Evaluación de CAP-02-D (K-2, H2B1-10) **si el responsable la admitiera**; hoy no evaluada | DB1-1; DB1-6 | CAP-02-D |
+| OC-196 | DB1-1: si D cuenta como segunda forma de reparto frente a R1 §8.1; sin resolver | R1 §8.1; H2B1-11 | ADR-02 definitivo |
+| OC-197 | K-3: persistencia del rechazo impuesto por la capa de datos (P-A o P-C) y brechas RX-04 y RX-05 de ADR-09.I | K-3; ADR-09.I | AZ-19, AZ-20 |
+| OC-198 | K-5 y nivel de autenticación verificable en la capa de datos (N-B o N-C); mecanismo del estado vigente (OC-179 de ADR-03.I) | K-5; ADR-03.I | AZ-07, AZ-15 |
+| OC-199 | Lecturas de A-1, A-2, A-4, A-5, A-6, A-8, A-12, A-15 y A-16 como parámetros; ninguna se elige | DB1-3; IN-02-17 | AZ-12, AZ-21 |
+| OC-200 | Preguntas Q-40 (a)–(c), Q-42, Q-21, Q-22, Q-23 y Q-29 que condicionan celdas de la matriz | H2B1-08 | AZ-21 |
+| OC-201 | Propuestas [REC] IN-02-27, 28 y 29 sin decidir (DB1-5) | H2B1-09 | AZ-10, AZ-23 |
+| OC-202 | H2B1-02: que la capa de datos reciba identidad y nivel de forma verificable y lea roles e historial sin una credencial que evada la decisión | IN-02-25 | AZ-07 |
+| OC-203 | H2B1-05: alcance de las lecturas de datos internos tras revocar (H2A-09) | IN-03-06 | AZ-15 |
+| OC-204 | H2B1-07: operaciones automáticas heredan la situación del actor; la identidad de ejecución de las tareas programadas es de ADR-14 (R4) | RT-14; IN-09-09 | AZ-12 |
+| OC-205 | D-2 y DB2c-10: sin excepción ni medición; alcance de «sesión conectada» (H2A-10) | D-2 | AZ-15 |
+| OC-206 | A-9…A-14 y reanudación sin conexión (A-10); nivel al sincronizar (DB2c-8) | ADR-05; ADR-03 | AZ-18 |
+| OC-207 | Hechos generales de PostgreSQL (privilegios, disparadores, propiedad de tablas, comportamiento de políticas) no verificados en fuente oficial | §31.0 [INF] | ADR-02.I definitivo |
+| OC-208 | Verificación empírica (pruebas de §31.13) antes de cualquier aprobación; verificación en dispositivos para la parte sin conexión | RNF-11; HR1-13 | Fase 3 |
+| OC-209 | Dependencias de ADR-01 (selección de configuración) para todo mecanismo concreto | R1 §8.2 | ADR-02.I definitivo |
+| OC-210 | Coherencia de ADR-02.I con ADR-04.C/I (A-8 y visibilidad), ADR-05.I y ADR-16.I, no redactados | R1 §8.2 | ADR-02.I definitivo |
+| OC-211 | **Qué constituye verificación en ambas capas:** invocación de una función de la capa de datos (V1) o evaluación propia e independiente (V2); decisión del responsable; no resuelve DB1-1 ni admite CAP-02-A | IN-02-01; AZ-27 | IN-02-01; DR2I-11 |
+| OC-212 | Cobertura de la decisión completa en lo derivado (ALT-02-B) o duplicado (ALT-02-C) y **prueba verificable de equivalencia de cobertura**; brechas declaradas | AZ-26; K-1 | AZ-02, AZ-26 |
+| OC-213 | **Acceso de la capa de datos al estado vigente** de cuenta, sesión, roles y nivel MFA; las afirmaciones firmadas obsoletas no bastan; mecanismo sin seleccionar | AZ-25; SI-07; OC-179 de ADR-03.I | AZ-03, AZ-07, AZ-25 |
+| OC-214 | Propiedad de tablas y funciones, FORCE RLS y privilegios efectivos de cada rol: no leídos ni verificados | §31.8; AZ-08 | AZ-06, AZ-08 |
+| OC-215 | Mecanismos de autorización previa documentados (comprobaciones previas de la API de datos, concesiones, esquemas dedicados, funciones del invocador): evaluar su suficiencia como «verificación del servidor» sin seleccionarlos | §31.5; [DOC] | GV; OC-211 |
+| OC-216 | Matriz GV × verificaciones omitidas: qué funciones o políticas cubrirían reglas deportivas, recálculo, RT-14, auditoría y atomicidad; no demostrado | §31.5; AZ-05, AZ-11, AZ-12 | GV-02, GV-03 |
+| OC-217 | **H2B1-04:** RT-14 «se aplica en el servidor, en la misma transacción y al sincronizar» sin decir «solo» en el servidor; cómo se evalúa en las dos capas | H2B1-04; IN-02-12; RT-02 | AZ-12 |
+
+**Decisiones que corresponden al responsable (DR2I-1…11).** Ninguna se toma aquí.
+
+| ID | Decisión | Condiciones |
+|---|---|---|
+| DR2I-1 | Gobierno del acceso del cliente a la capa de datos (GV-01, GV-02, GV-03; **ninguna seleccionada ni descartada**) y qué demostración se exigiría a GV-02 y GV-03 (con DR9I-3) | OC-190, OC-191, OC-197, OC-215, OC-216 |
+| DR2I-2 | Admitir, ajustar o rechazar CAP-02-A como formulación admitida; **no se admite aquí** | OC-196 |
+| DR2I-3 | DB1-1 y tratamiento de CAP-02-D (K-2, H2B1-10, DB1-6) frente a R1 §8.1 | OC-195, OC-196 |
+| DR2I-4 | K-3: formulación de P de ADR-09.C (P-A o P-C) y tratamiento de las brechas | OC-197 |
+| DR2I-5 | K-5: N-B o N-C y la lectura de «nueva autenticación» (con DR3I-5) | OC-198 |
+| DR2I-6 | Lecturas de A-1, A-2, A-4, A-5, A-6, A-8, A-12, A-15 y A-16 (DB1-3) | OC-199, OC-187 |
+| DR2I-7 | Preguntas de `01` que condicionan celdas (Q-40, Q-42, Q-21, Q-22, Q-23, Q-29) (DB1-4) | OC-200 |
+| DR2I-8 | Propuestas [REC] IN-02-27, 28 y 29 (DB1-5) | OC-201 |
+| DR2I-9 | Dónde vive la definición única (A, B o C), **después** de ADR-01 y de las decisiones previas | OC-189, OC-209 |
+| DR2I-10 | Mecanismo de la unidad atómica y de la serialización, y su vínculo con OC-102 y OC-124 de ADR-08 (con ADR-08) | OC-185, OC-186, OC-188 |
+| DR2I-11 | **Qué constituye verificación en ambas capas** (invocación V1 o evaluación independiente V2) frente a IN-02-01; sin resolver DB1-1 ni admitir CAP-02-A | OC-211, OC-212 |
+
+**Riesgos de redacción (RR2I-01…22).** No se aceptan; se registran.
+
+| ID | Riesgo | Mitigación documental |
+|---|---|---|
+| RR2I-01 | **Deriva** entre dos definiciones de la decisión (K-1; RB1-01) | AZ-02; equivalencia por pruebas; preferir una sola definición |
+| RR2I-02 | Tratar CAP-02-A como admitida o fijar CAP-02-D, K-3 o DB1-1 por la forma de las alternativas | Rotulado «candidata no admitida»; D, K-3 y DB1-1 fuera de las alternativas |
+| RR2I-03 | **Acceso directo del cliente que omite la verificación del servidor** (IN-02-01) | GV; OC-190, OC-191; DR2I-1; no se acepta |
+| RR2I-04 | Escrituras que omiten las reglas de negocio y su auditoría (mutación directa) (AZ-05) | OC-147 de ADR-09.I; OC-190; brecha declarada |
+| RR2I-05 | Funciones privilegiadas o vistas que eluden las políticas; privilegios por defecto del rol de servicio | AZ-08, AZ-09; OC-192 |
+| RR2I-06 | Decisión basada en afirmaciones obsoletas de una credencial tras una revocación | AZ-03, AZ-15; SI-07; OC-198 |
+| RR2I-07 | Atomicidad declarada sin demostración (recálculo, auditoría, efectos derivados) | AZ-04, AZ-11; OC-185, OC-186; no se declara |
+| RR2I-08 | RT-14 evaluado en una sola capa o sin efectos en cascada; efecto indirecto en la clasificación resuelto en silencio | AZ-12; OC-187; A-15, A-16 |
+| RR2I-09 | Perder la serialización del último dueño, del editor o del delegado bajo concurrencia | AZ-13; OC-186 |
+| RR2I-10 | Escalada de privilegios por autoconcesión, invitación o datos editables | AZ-16; SI-06 |
+| RR2I-11 | Operación sincronizada aplicada con permisos revocados o por una sesión ajena | AZ-18; OC-206 |
+| RR2I-12 | Rechazos no observados (RX-04, RX-05) o auditoría de lo aplicado ausente | OC-197; ADR-09.I; no se acepta |
+| RR2I-13 | Presentar D-2 como cumplida o conceder una excepción implícita | AZ-15; OC-205 |
+| RR2I-14 | Conceder permisos por interpretación de lo ambiguo (A-1…A-16) para hacer viable una alternativa | AZ-21, AZ-24; OC-199 |
+| RR2I-15 | Límites de cómputo y de conexiones de la capa de datos o de las funciones de borde no evaluados | OC-194; medición en Fase 4 |
+| RR2I-16 | Hechos de PostgreSQL no verificados usados como definitivos | Rotulados [INF]; OC-207 |
+| RR2I-17 | Pruebas negativas incompletas que dejan vías de omisión sin cubrir | AZ-22; §31.13; OC-208 |
+| RR2I-18 | Contradecir ADR-04, ADR-05 o ADR-16 (no redactados) al fijar la frontera atómica | OC-210; dependencias abiertas |
+| RR2I-19 | Tratar la **invocación** de una función de la capa de datos como verificación independiente del servidor sin decisión | AZ-27; OC-211; DR2I-11 |
+| RR2I-20 | ALT-02-B con lo derivado **incompleto** que degenera en CAP-02-C (X) o deja una brecha de cobertura sin declarar | AZ-26; OC-212 |
+| RR2I-21 | Que los estados de GV-01, GV-02 o GV-03 se lean como selección o descarte | Estados neutrales y condicionados; DR2I-1 |
+| RR2I-22 | Atribuir garantías de aislamiento o inmutabilidad sin verificar propiedad de tablas, FORCE RLS ni privilegios efectivos | OC-214; §31.8 |
+
+**Dependencias que impiden la aprobación definitiva.** 1. **ADR-01** (selección de configuración). 2. **Admisión de formulaciones** (CAP-02-A) y **DB1-1** abierta. 3. **K-3 y las brechas RX-04 y RX-05** de ADR-09.I, y **OC-147**. 4. **ADR-03.I** (estado vigente, OC-179; K-5). 5. **ADR-08:** OC-102, OC-121, OC-122 y OC-124. 6. **Gobierno del acceso directo (GV)**, OC-191, OC-211 y OC-213. 7. **A-1…A-16** y las preguntas de `01` que condicionan celdas. 8. **ADR-04.C/I, ADR-05.C/I y ADR-16.C/I** para la frontera completa. 9. Verificación empírica (OC-208). 10. D-2 sin excepción y RT-14 sin resolver; RES-01…13 sin aceptar.
+
+### 31.17 Evidencia documentada frente a inferencias; fuentes y límites
+
+| Afirmación | Etiqueta | Fuente |
+|---|---|---|
+| Los invariantes IN-02-01…29, UI-01…13, GT-01…18, CAP-02-A/B/C/D y su clasificación A, C y X; K-1…K-5; DB1-1…6; A-1…A-16 | [CONF] / [DOC] interno | §17; matriz de R2 (§B) |
+| Supabase: la API de datos usa concesiones y políticas por fila; el rol de servicio omite las políticas; privilegios por defecto para anónimo, autenticado y servicio en el esquema público; opción de no exponer automáticamente; esquemas dedicados; las vistas omiten las políticas por defecto; funciones de privilegios del creador y ruta de búsqueda; comprobaciones previas solo para la API de datos | [DOC] | Supabase: seguridad de la API de datos, políticas por fila, funciones |
+| Neon: la API de datos no tiene capa de permisos propia; autoriza solo con concesiones y políticas por fila; una política ausente puede exponer una tabla | [DOC] | Neon: API de datos |
+| Supabase: límites de las funciones de borde (memoria 256 MB; 2 s de CPU; 150 s de espera); pruebas con pgTAP | [DOC] | Supabase: límites de funciones; pruebas |
+| Que una política que filtra en silencio no genere rechazo observable; que una llamada directa no pase por el servidor; que una función de la capa de datos pueda reejecutar la definición dentro de la unidad que aplica; que una restricción de unicidad impida un duplicado | **[INF]** | Razonamiento del autor; conocimiento general de PostgreSQL (OC-207) |
+| Que una función de la capa de datos invocada por el servidor no equivalga por sí sola a una verificación independiente; que las afirmaciones firmadas queden obsoletas hasta renovar; que sin FORCE RLS el propietario de una tabla omita las políticas | **[INF]** | Razonamiento del autor; no leído en fuente oficial de PostgreSQL (OC-214) |
+| Propiedad de tablas, FORCE RLS y privilegios efectivos; si una comprobación previa u otro mecanismo basta como «verificación del servidor» | **[PEND]** | No verificado (OC-214, OC-215) |
+| Que el límite de cómputo del plan elegido sea suficiente; el rendimiento de las políticas; el comportamiento de cada configuración ante una llamada denegada; el entorno de Cloudflare | **[PEND]** | No leído |
+| Juicios de seguridad, costo y mantenimiento de la puntuación | [PROP] / [INF] | Autor; no verificados |
+
+**Fuentes oficiales consultadas (2026-11-22; páginas descargadas y convertidas a texto, la mayoría ya leídas en R3-D, R3-E/ADR-09.I y R3-E/ADR-03.I):** Supabase (seguridad de la API de datos, políticas por fila, roles, funciones de base de datos, límites de funciones, pruebas); Neon (API de datos, políticas por fila). **Límites.** No se leyó la documentación oficial de PostgreSQL ni el rendimiento de las políticas, ni cómo cada configuración trata una llamada directa denegada; no se verificó empíricamente ningún comportamiento.
+### 31.18 Criterios de revisión documental (autoevaluación del autor; no es auditoría independiente)
+
+| ID | Criterio | Resultado |
+|---|---|---|
+| CR2I-01 | Las Partes I–XVI y los registros anteriores no cambian (prefijo idéntico al HEAD) | Cumple (comprobado al generar) |
+| CR2I-02 | Al menos dos alternativas con matriz de conformidad, sin seleccionar; sin declarar cumplido el déficit de R1 §8.1 | Cumple: §31.1, §31.4, §31.7 |
+| CR2I-03 | CAP-02-A solo como candidata no admitida; CAP-02-D no evaluada ni rechazada; DB1-1, K-2, K-3 y A-1…A-16 sin resolver; R1 §8.1 sin declarar cumplido | Cumple: §31.2, §31.4 |
+| CR2I-04 | Autorización en servidor, base de datos y capas combinadas; solo-una-capa excluida | Cumple: §31.2, §31.6 |
+| CR2I-05 | Acceso directo del cliente, RLS, funciones privilegiadas y aislamiento, con evidencia separada de inferencia | Cumple: §31.5, §31.8; AZ-05, AZ-08, AZ-09 |
+| CR2I-06 | Atomicidad sin declarar demostrada; OC-102, OC-121, OC-122 y OC-124 de ADR-08 preservadas | Cumple: §31.9, §31.10; OC-185…188 |
+| CR2I-07 | RT-14 por efecto, con el cambio indirecto de clasificación como [PEND]; parámetros A-1…A-16 sin elegir | Cumple: §31.10; AZ-12 |
+| CR2I-08 | Revocación inmediata y D-2 sin excepción; sin medición | Cumple: §31.11; AZ-15 |
+| CR2I-09 | Invitaciones, delegación y anti-escalada; operaciones sincronizadas tras cambios de permisos | Cumple: §31.11, §31.12 |
+| CR2I-10 | Concurrencia, idempotencia, fallos parciales, trazabilidad y pruebas negativas | Cumple: §31.9, §31.13 |
+| CR2I-11 | Compatibilidad condicionada con CFG-C1/C2/C3 y límites gratuitos, sin seleccionar proveedor | Cumple: §31.14 |
+| CR2I-12 | Puntuación solo con evidencia leída; regla uniforme de rangos; aritmética comprobada | Cumple: §31.15 (comprobado al generar) |
+| CR2I-13 | Brechas de ADR-09.I (RX-04, RX-05; OC-127, OC-147), K-3 y SI-06/SI-07 de ADR-03.I preservados | Cumple: §31.2, §31.9 |
+| CR2I-14 | Identificadores nuevos únicos, definidos y sin colisión | Cumple (comprobado al generar) |
+| CR2I-15 | Nota posterior de trazabilidad de ADR-03.I sin reescribir lo histórico | Cumple: §31.0 |
+| CR2I-16 | Sin código, cuentas, servicios ni gastos; sin otros ADR `.I`, R3-F ni R4 | Cumple |
+| CR2I-17 | K-1 e IN-02-01 «Condicionada»; invocación frente a verificación independiente; cobertura de la decisión completa de ALT-02-B con prueba verificable; GV con estados neutrales y matriz de verificaciones omitidas | Cumple como propuesta: §31.4, §31.5, §31.7; AZ-26, AZ-27 |
+| CR2I-18 | Estado vigente desde la capa de datos; propiedad de tablas, FORCE RLS y privilegios efectivos [PEND]; H2B1-04, H2B1-06 y OC-202…204 vinculadas | Cumple: AZ-25; §31.2, §31.8 |
+
+### 31.19 Estado y preguntas para el responsable
+
+**Estado:** R3-E / ADR-02.I **v0.2-R3E-02I: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL** (corrige M-1…M-5 de la revisión focalizada; ver §31.20 y el metadato de §31.0); **R3-E continúa como bloque parcial en curso.** **No versionado.** Autoevaluación del autor, no auditoría independiente. **CAP-02-A es candidata A no admitida; CAP-02-D no evaluada y no rechazada; DB1-1, K-2, K-3, RT-14 y A-1…A-16 sin resolver.** Los otros ADR `.I` (04, 05 y 16), R3-F y R4: **NO INICIADOS.** Siguen abiertas todas las decisiones y condiciones heredadas de R1, R2, R3-A…D, ADR-09.I y ADR-03.I.
+
+**Preguntas:** DR2I-1 a DR2I-11 y las condiciones OC-185 a OC-217 (§31.16); en particular, el gobierno del acceso directo del cliente (DR2I-1) y qué constituye «verificación en ambas capas» (DR2I-11, OC-211).
+
+### 31.20 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| M-1 | K-1 e IN-02-01 pasan a «Condicionada» en ALT-02-A y GV-01; se distingue invocación (V1) de verificación independiente (V2); AZ-27, OC-211 y DR2I-11; sin resolver DB1-1 ni admitir CAP-02-A (RR2I-19) | §31.3, §31.4, §31.5, §31.7, §31.16 |
+| M-2 | ALT-02-B solo es candidata a CAP-02-A si lo derivado cubre la decisión completa (RT-14, nivel y MFA, cuenta, rol, ámbito, último dueño, invitación, restricciones); AZ-26; tabla de cobertura con prueba verificable; brecha declarada sin seleccionar CAP-02-C (OC-212, RR2I-20) | §31.3, §31.4, §31.7, §31.16 |
+| M-3 | Estados neutrales y condicionados de GV-01, GV-02 y GV-03 (ninguna seleccionada ni descartada); matriz GV × verificaciones omitidas (servidor, auditoría, ámbito, autenticación, reglas deportivas, recálculo, RT-14, atomicidad); mecanismos de autorización previa documentados sin seleccionar (OC-215, OC-216, RR2I-21) | §31.5, §31.16 |
+| M-4 | AZ-25: la capa de datos accede al estado vigente de cuenta, sesión, rol y nivel MFA; las afirmaciones firmadas obsoletas no bastan; vinculado a SI-07 y OC-179; mecanismo [PEND] (OC-213) | §31.3, §31.7, §31.8, §31.16 |
+| M-5 | H2B1-04, H2B1-06 (A-6) y OC-202…204 vinculadas a condiciones (OC-217, OC-199, OC-202…204); propiedad de tablas, FORCE RLS y privilegios efectivos [PEND] (OC-214, RR2I-22) | §31.2, §31.8, §31.16, §31.17 |
