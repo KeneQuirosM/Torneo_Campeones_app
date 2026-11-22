@@ -7408,3 +7408,363 @@ Esta tabla **no** selecciona ni descarta configuración alguna; solo muestra que
 | H-7 | MO-28: «recalcular la clasificación actual» frente a «reconstruir lo publicado en una fecha anterior»; mecanismo de historial [PEND] (OC-125, DR8-9) | §28.3, §28.6 |
 | H-8 | Retiradas las afirmaciones sin fuente sobre límites de CPU; TB-3 sustituido por MO-24 e IN-04-05 | §28.1, §28.4, §28.10, §28.14 |
 | Obs. seguridad | Los juicios de seguridad se rotulan [PROP] no verificados y se añade una sensibilidad para C | §28.12 |
+
+---
+
+# PARTE XV — BLOQUE R3-E / ADR-09.I (v0.2-R3E-09I, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, R3-E PARCIAL EN CURSO; 2026-11-22 inferida)
+
+## 29. R3-E — ADR-09.I (implementación de la auditoría y del historial de solo anexado): evaluación y borrador condicionado
+
+### 29.0 Alcance, autorización, puerta de entrada y reglas
+
+- **Autorización (2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — INICIO CONTROLADO DE R3-E / ADR-09.I»: «AUTORIZO EXPRESAMENTE INICIAR R3-E SOLO COMO TRABAJO DOCUMENTAL PARCIAL Y CONDICIONADO, COMENZANDO POR EL BORRADOR DE ADR-09.I.» Solo se modifica este documento, con esta Parte nueva. **No se redactan los otros cinco ADR `.I`; no se inicia R3-F ni R4.**
+- **Puerta de entrada (verificada, solo lectura previa).** R1 §8.2: ADR-09.I requiere ADR-09.C y ADR-01 y es requisito de ADR-17. ADR-09.C es **propuesta** (§16.7); ADR-01 está aprobado solo de forma documental condicionada y **no selecciona proveedor**. La matriz de R2 clasifica como **A** (admisibles como candidatas) M1, M2, M3, P-A y F-2; **O (reenvíos) no tiene formulación A.** **No hay bloqueo obligatorio para redactar un borrador condicionado que no selecciona.** La regla del cierre de R2 dice que un `.I` solo puede **elegir** entre formulaciones que el responsable haya **admitido**: no hay conjunto admitido, así que **este borrador no elige nada.**
+- **Qué es este borrador.** Una evaluación de alternativas de implementación con una **recomendación preliminar no vinculante**. **Las formulaciones A se tratan solo como candidatas documentales, todavía no admitidas por el responsable.** No selecciona formulaciones, mecanismos ni proveedores; no aprueba ADR; no resuelve O, D5-1 ni otras decisiones; no acepta riesgos ni concede excepciones; no escribe código ni crea cuentas.
+- **Convención.** [DOC]: dato leído en la página oficial citada (§29.17). [CONF]: texto confirmado de `01`, R1 o R2 con el estado que allí declara. [PROP]: propuesta del autor. [INF]: inferencia o cálculo del autor. [PEND]: pendiente o sin verificar. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; **lo no leído se marca [PEND] y no se penaliza en la puntuación.** Los hechos generales de PostgreSQL (privilegios, disparadores, políticas de acceso por fila) **no se leyeron en fuente oficial en esta ronda** (el sitio de PostgreSQL no estaba accesible) y son [INF].
+- **Identificadores nuevos (sin colisión).** **ALT-09-A, ALT-09-B, ALT-09-C** (alternativas de implementación), **SV-01…19** (requisitos de seguridad verificables), **RX-01…06** (clases de rechazo según dónde ocurren y quién puede observarlos), **DR9I-1…10** (decisiones del responsable), **OC-126…153** (condiciones abiertas), **RR9I-01…19** (riesgos de redacción), **CR9I-01…18** (criterios de revisión documental).
+- **Versión 0.2 (correcciones de la revisión focalizada).** Aplica M-1…M-8 y la observación sobre los privilegios del rol de servicio (§29.19): acceso directo también para lo **aplicado**; clasificación de los rechazos; **P y F no fijados** (P-A y F-2 son candidatas A no admitidas; P-C y F-3 siguen en juego como formulaciones C condicionadas); prevención, detección y recuperación distinguidas con los límites de M2 y M3; fallos entre unidades en línea y sincronizadas; actor derivado de la identidad autenticada; rangos de puntuación con una regla uniforme; precisiones de Neon y de las inferencias por ausencia. **No selecciona ni admite formulaciones, no resuelve O ni K-3.**
+- **Exclusiones.** Admitir o seleccionar M, P, F u O; elegir mecanismo, motor, extensión, proveedor o destino externo; fijar plazos de retención o una política de purga; resolver O, D5-1, K-3, DB2c, D-2, A-1…A-16 ni otra decisión heredada; aceptar riesgos; aprobar ADR-09.I, R3 ni la Fase 2; redactar ADR-02.I, 03.I, 04.I, 05.I ni 16.I; iniciar R3-F ni R4; modificar las Partes I–XIV ni los registros.
+- **Aprobación (metadato; 2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-09.I»: «APRUEBO EXCLUSIVAMENTE ADR-09.I v0.2-R3E-09I COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: ADR-09.I (v0.2-R3E-09I): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL; R3-E sigue como bloque parcial en curso.** **Esta aprobación NO equivale a aprobar R3-E completo ni a admitir formulaciones.** El evento de aprobación es independiente y no reutiliza identificadores DR9I. No aprueba definitivamente ADR-09.I ni selecciona formulaciones, mecanismos ni proveedores; no acredita inmutabilidad, persistencia del rechazo, detección de alteración, aislamiento ni control alguno. Se conservan: **ALT-09-A, ALT-09-B y ALT-09-C sin selección**; rangos **ALT-09-A 2,95–4,25; ALT-09-B 2,85–4,45; ALT-09-C 2,40–4,30**, que se solapan por completo y **no discriminan**; **M1 como requisito** (RF-AUD-03); **P-A y F-2 como candidatas A no admitidas** y **P-C y F-3 como formulaciones C condicionadas, no seleccionadas ni excluidas**; **P y F sin fijar**; **SV-01…19** y **RX-01…06**, con sus garantías exigidas y sus **brechas explícitas, no aceptadas**; las **diferencias entre operaciones aplicadas, rechazos observables por el servidor y eventos no observables** (acceso directo, filtrado silencioso, borde y autenticación); **DR9I-1…10 y OC-126…153 abiertas**; **RR9I-01…19 sin aceptar**; **K-3, O, ADR-01, ADR-02.I, ADR-03.C, ADR-17, PEND-JUR y DB2c-3 pendientes**; **D-2 sin excepción y RT-14 sin resolver**; la limitación de **autoevaluación del autor, sin auditoría independiente**; y **los otros cinco ADR `.I`, R3-F y R4 sin iniciar**. Trazabilidad posterior: R3-D v0.2 (Parte XIV) quedó versionado en el commit `efee9903e3550224b9c438d2aec487680b44cbaa` (`efee990`; verificable por Git; 2026-11-22T15:37:58Z). Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Nota posterior de trazabilidad (2026-11-22, inferida; solo informativa).** R3-D v0.2 (Parte XIV) y sus registros quedaron versionados en el commit `efee9903e3550224b9c438d2aec487680b44cbaa` (`efee990`; verificable por Git; 2026-11-22T15:37:58Z). Las expresiones «No versionado» de §28.17 y «Estado de versionado: Pendiente» del registro de R3-D describen el momento de redactarse. **No se reescribe la aprobación histórica;** los registros `aprobaciones.md` y `bitacora.md` **no se modifican en esta entrega** y la trazabilidad en ellos queda pendiente de una instrucción expresa.
+
+### 29.1 Identificación
+
+| Campo | ADR-09.I |
+|---|---|
+| Tema | Implementación de la auditoría y del historial de asignaciones de solo anexado, del registro de rechazos y de su integridad |
+| Pregunta | ¿Cómo se implementan las capacidades de ADR-09.C (IN-09-01…13) **sin** seleccionar tecnología hasta ADR-01, de modo que la inmutabilidad, la persistencia del rechazo y la detección de alteración sean verificables? |
+| Alternativas mínimas | ≥ 2 (aquí 3, anidadas **solo por el nivel de detección y de testigo externo**: A ⊂ B ⊂ C; **P y F no se fijan**) |
+| Dependencias (R1 §8.2) | ADR-09.C (propuesta); ADR-01 (documental condicionado); consumido por ADR-02.C/I, ADR-05.C/I y ADR-17. **Lateral:** ADR-03.C (identidad y sesión: de ella sale el actor, SV-16) |
+| Dependencias laterales | ADR-03.C (actor y sesión); ADR-02.I (acceso directo, privilegios, RLS: R3-D OC-122); ADR-05.I (O/D5-1); ADR-14 (identidad de ejecución de las verificaciones); ADR-17 y PEND-JUR (retención); ADR-12 (respaldos, R4) |
+| Componentes | CMP-16 (auditoría) con CMP-07 (historial de asignaciones, fuente única), CMP-08 y CMP-13; registros de rechazos del torneo y bitácora de seguridad global |
+| Frontera de confianza | Límite de la capa de datos frente al administrador (IN-09-03); acceso directo del cliente (TB-1/TB-3) |
+| Bloque / estado | R3-E (parcial) / **BORRADOR** |
+
+### 29.2 Entradas heredadas: invariantes, candidatas A y lo bloqueado
+
+**Invariantes de ADR-09.C (no se redefinen):** IN-09-01 (solo anexado, incluido el rol de servicio) y IN-09-02 (historial de roles) [CONF]; IN-09-03 (documentar el límite frente al administrador) [CONF]; IN-09-04 (lo aplicado se registra en la misma unidad) y IN-09-05 (el rechazo persiste aunque no se aplique) [DER]; IN-09-06 (contenido mínimo) y IN-09-07 (sin datos personales de menores) y IN-09-08 (visibilidad por rol y torneo) [CONF]; IN-09-10 (retención fuera de alcance) y IN-09-11 (sin permisos nuevos ni selección tecnológica); [REC] IN-09-09, IN-09-12 e IN-09-13.
+
+| Decisión de ADR-09.C | Formulación (clasificación de la matriz de R2) | Tratamiento en este borrador |
+|---|---|---|
+| Inmutabilidad (M) | **M1** (mínimo **exigido**, RF-AUD-03), **M2** y **M3** (opcionales [REC]: su exigencia depende de la decisión 7): **A** | M1 es el **requisito**; M1, M2 y M3 son candidatas documentales **no admitidas**; M2 y M3 se anidan en ALT-09-B y C |
+| Persistencia del rechazo (P) | **P-A** (unidad independiente posterior): **A**. **P-C** (canal separado con intención durable antes de responder; K-3): **C, condicionada, no excluida**. **P-B**: X | **P no se fija.** P-A es candidata A **no admitida**; P-C **sigue en juego** y no se evalúa en profundidad aquí (su conformidad depende de la condición de durabilidad); P-B queda excluida por la matriz |
+| Fallo del registro (F) | **F-2** (error recuperable; la operación queda sin resolver): **A**. **F-3** (intención durable previa, F-2 como último recurso): **C, condicionada, no excluida**. **F-1**: X | **F no se fija.** F-2 es candidata A **no admitida**; F-3 **sigue en juego**; F-1 queda excluida por la matriz |
+| Registro de reenvíos (O) | **O-1, O-2, O-3: ninguna A** (alcance de OFF-06 sobre lo rechazado; OC-35; D5-1; decisión 10) | **BLOQUEADA.** No se selecciona ni se prefiere; solo se señala qué no debe impedirse (§29.7) |
+
+**Condiciones heredadas que no se resuelven:** K-3 (la persistencia del rechazo impuesto por la capa de datos depende de P-A o P-C; la conformidad de CAP-02-A queda condicionada), DB2c-2 y DB2c-3 (partición con ADR-05.C), DB2c-10 y D-2 (sin excepción), PEND-JUR y PRV-10 (retención), IN-09-10 (retención fuera de alcance) y ADR-17.
+
+### 29.3 Requisitos de seguridad verificables (SV)
+
+| ID | Requisito verificable | Fuente | Naturaleza |
+|---|---|---|---|
+| SV-01 | Ningún rol de la aplicación —incluidos el dueño y el **rol de servicio**— tiene privilegio de actualizar, borrar ni vaciar las tablas de auditoría y del historial de asignaciones; **prueba negativa por rol**. Los privilegios concedidos **por defecto** a los roles de la capa de datos se **revisan y, cuando proceda, se revocan de forma explícita** (SV-18) | IN-09-01, 02; RF-AUD-03; RC-21 | Confirmado |
+| SV-02 | **Ningún cliente alcanza las tablas de auditoría por una vía directa para escribir**, y la lectura directa respeta IN-09-08 (rol y torneo); la **consulta de privilegios y de políticas de acceso** lo demuestra. **Una medida aislada no se presenta como suficiente** frente a todos los accesos privilegiados (SV-18) | IN-09-08; RC-04; IN-02-01 | Garantía exigida; mecanismo [PEND] (OC-127) |
+| SV-03 | **Lo aplicado se registra en la misma unidad:** para las operaciones **mediadas por el servidor**, si el registro falla la operación no se aplica; **inyección de fallo** en la escritura de auditoría. **Condicionado a SV-02 y a OC-127:** si un cliente pudiera **mutar datos de negocio directamente**, la operación se aplicaría **sin la auditoría del servidor** (RR9I-15); si la auditoría de lo aplicado debe imponerla la capa de datos es **[PEND]**. **No se declara demostrada ninguna atomicidad** entre la operación y su registro | IN-09-04; PA-14; RF-AUD-02 | [DER]; condicionado |
+| SV-04 | **Alcance acotado a las clases RX-01 y RX-02** (rechazos decididos por el servidor o abortos cuyo error el servidor observa): el rechazo deja un registro escrito **fuera de la unidad de la operación y confirmado antes de devolver el rechazo**, mediante la formulación de P que se admita (candidata A **P-A** o formulación C **P-C**, **sin fijar**). **Las clases RX-03 a RX-06 no están cubiertas** y quedan como **brechas declaradas, no aceptadas** (§29.6; OC-146, OC-127) | IN-09-05; K-3; RF-AUD-06 [CONF] en su alcance; RF-AUD-05 [REC] | [DER] en RX-01 y RX-02; mecanismo [PEND] |
+| SV-05 | **Fallo del registro de un rechazo (RX-01 y RX-02):** (a) **operaciones sincronizadas:** queda «pendiente» y se reintenta (OFF-05); (b) **operaciones en línea:** el usuario recibe un **error recuperable que indica que el resultado es incierto**, sin presentar un rechazo definitivo sin registro; las dos descripciones corresponden a la candidata **F-2** o a la condicionada **F-3**, **sin fijar**; **los duplicados de un rechazo en línea no se pueden deducir sin identificador de operación** (OC-150; O abierta) | CAP-09-F-2 y F-3; IN-09-05; OFF-05 | Formulación de F sin admitir |
+| SV-06 | El contenido mínimo está completo (actor, cuenta y rol, hora **del servidor**, torneo, entidad, acción, antes/después minimizados, motivo, origen); la hora del cliente es informativa | IN-09-06; RF-AUD-01; OFF-13 | Confirmado |
+| SV-07 | **Sin datos personales de menores, secretos, contraseñas, códigos de segundo factor, identificadores de sesión ni credenciales de servicio** en ningún registro; revisión de esquema y de una muestra | IN-09-07, 12; RF-AUD-04; PRV-12; AM-25 | Confirmado (menores); [REC] el resto |
+| SV-08 | **Aislamiento entre torneos:** un actor del torneo X no lee ni escribe auditoría del torneo Y; la bitácora de seguridad global solo la ve el dueño | IN-09-08; IN-02-04; RF-ADM-03; RF-AUD-05 | Confirmado |
+| SV-09 | **Separación de funciones:** el rol que escribe auditoría no modifica datos de negocio y el de negocio no modifica auditoría; el rol de verificación es de solo lectura; las migraciones y la administración están fuera de la aplicación y su uso se registra | IN-09-01, 03; IN-02-14 | Propuesta |
+| SV-10 | **Detección de alteración (si se adopta M2 o M3):** una verificación reproducible detecta la **modificación o el borrado de un registro intermedio** cuyo elemento de integridad no haya sido recalculado. **M2 no garantiza detectar** el **truncamiento de la cola**, una **restauración a un estado anterior** ni una **reescritura completa recalculada** por quien controle la base de datos, **salvo que exista un ancla externa confiable** cuya custodia esté fuera de ese control (OC-148); **M3 no es una garantía absoluta:** depende de la custodia, la frecuencia y la verificación del testigo | CAP-09-M2, M3 (candidatas) | [REC] opcional; no exigida |
+| SV-11 | Se documenta el **límite frente al administrador** y lo que cada nivel (M1, M2, M3) reduce y **no** reduce | IN-09-03; RF-AUD-03 | Confirmado |
+| SV-12 | **Recuperación (distinta de prevención y detección):** tras restaurar, se verifica la integridad **y se compara con un ancla externa**, si existe, para detectar la **pérdida de registros recientes**; sin ancla externa, **la restauración a un estado anterior puede no ser detectable** (RR9I-17); toda pérdida conocida de cobertura se registra como incidente; prueba de restauración | AM-16, AM-17; RNF-08; ADR-12 (R4) | Propuesta |
+| SV-13 | Toda función con privilegios del creador fija su ruta de búsqueda y restringe quién la ejecuta; **ningún cliente la invoca directamente** con parámetros propios | MO-26 (R3-D); OC-122 | Garantía exigida; mecanismo [PEND] |
+| SV-14 | **Ninguna purga ni eliminación de auditoría** salvo la que defina ADR-17, como acción privilegiada, auditada y fuera de los roles de la aplicación | IN-09-10; PRV-10; PEND-JUR | Condicionado (ADR-17) |
+| SV-15 | **Inundación:** el volumen de registros de rechazos tiene un límite verificable que no elimina la trazabilidad de intentos abusivos (CAB-14) | CAB-14; AM-17; O | Condicionado a O (bloqueada) |
+| SV-16 | **Actor de confianza:** el actor de cada registro se **deriva de la identidad autenticada** de la sesión, **dentro de la unidad**, y **nunca de un campo manipulable por el cliente**; en una operación sincronizada, el actor es **la cuenta que capturó** (IN-05-11) y la hora del servidor es la de auditoría; ninguna sesión de otra cuenta registra o aplica operaciones ajenas | IN-09-06; IN-05-11; OFF-22; ADR-03.C | Garantía exigida; mecanismo [PEND] (OC-151) |
+| SV-17 | **Correspondencia entre entidad y auditoría:** cada registro pertenece al **mismo torneo** que la entidad auditada y la referencia entre ambos se impone en la capa de datos (no solo en la aplicación) | IN-02-04; IN-09-08 | Garantía exigida; mecanismo [PEND] |
+| SV-18 | **Privilegios del rol de servicio y de los roles por defecto:** se **revisan** los privilegios concedidos por defecto al rol de servicio, al anónimo y al autenticado sobre las tablas de auditoría y del historial, y se **revocan explícitamente** los de actualizar, borrar y vaciar cuando existan; la omisión de las políticas por fila por el rol de servicio (que debe permanecer en el servidor) se trata como **riesgo a controlar**. **Ninguna medida aislada (permisos, políticas, bloqueos o revocación) se presenta como garantía frente a todos los accesos privilegiados**, que incluyen al administrador (IN-09-03) | IN-09-01, 03; RC-04; [DOC] Supabase | Garantía exigida; configuración [PEND] (OC-152, OC-153) |
+| SV-19 | **Brechas declaradas:** toda clase de rechazo no cubierta (RX-03 a RX-06) o todo evento que no alcance la aplicación figura como brecha **explícita, no aceptada**; el responsable decide si se exige su registro y cómo | RF-AUD-05, 06; IN-09-05 | Condicionado a DR9I-9 |
+
+### 29.4 Alternativas de implementación (anidadas)
+
+Las tres alternativas **comparten una base de requisitos**: M1 (**exigido**, RF-AUD-03), SV-01…09, 11…14 y 16…19. **Difieren únicamente en la detección de alteración y en el testigo externo.** **La formulación de P (persistencia del rechazo) y la de F (fallo del registro) NO forman parte de ninguna alternativa:** quedan por admitir (candidatas A **P-A** y **F-2**; formulaciones C **P-C** y **F-3**, que siguen en juego). **Ninguna alternativa elige tecnología.** Las sub-formas de implementación son familias de mecanismos, no productos.
+
+| Criterio | ALT-09-A: permisos y separación de funciones (M1) | ALT-09-B: A + defensa en profundidad y detección de alteración (M2) | ALT-09-C: B + testigo externo de solo anexado (M3) |
+|---|---|---|---|
+| Idea | Tablas de auditoría de solo anexado por **privilegios** (solo insertar y consultar); roles separados (SV-09); auditoría de lo aplicado en la misma unidad (SV-03, condicionada); revisión y revocación de privilegios por defecto (SV-18) | A más **bloqueos activos** de actualización y borrado en la capa de datos (no solo privilegios) y un **elemento por registro que permite detectar** una modificación o un borrado **intermedios**; verificación reproducible | B más una **copia de solo anexado fuera del control del administrador de la base de datos**, que sirve de **ancla externa** |
+| Formulaciones de M que cubre | M1 | M2 (incluye M1) | M3 (incluye M2) |
+| Límite frente al administrador (IN-09-03) | **No reducido:** se documenta (SV-11) | **Parcialmente reducido [INF]:** detecta alteraciones que no recalculen el elemento de integridad; **no** garantiza detectar truncamiento de la cola, restauración anterior ni reescritura completa recalculada sin ancla externa (SV-10) | **Reducido más [INF]:** el testigo externo permite comparar, **si su custodia, frecuencia y verificación son confiables**; **no es una garantía absoluta** |
+| Detección de alteración (SV-10) | No | Sí, con los límites de SV-10 | Sí, con ancla externa y con los límites de SV-10 |
+| Complejidad | La menor | Media: verificación periódica y gestión de la cadena ante purgas (ADR-17) | Mayor: destino externo, transferencia (PRV-13, Q-25), credenciales y su custodia |
+| Exigencia | **Mínimo exigido** por RF-AUD-03 | [REC]: no exigida; depende de la decisión 7 | [REC]: no exigida; depende de la decisión 7 |
+| Dependencias adicionales | ADR-02.I (acceso directo, RLS, rol de servicio); ADR-03.C (actor); K-3 | ADR-14 (quién ejecuta la verificación); ADR-17 (cadena y purga) | ADR-10 / PRV-13 / Q-25 (transferencia); ADR-12; costo y custodia del testigo [PEND] |
+
+**Variantes y formulaciones fuera de las alternativas.** **P-B y F-1** (X) quedan excluidas por la matriz; **P-C y F-3** (C) **no están excluidas** y se mantienen en juego, con su condición de durabilidad antes de responder; **P-A y F-2** (A) son candidatas no admitidas; **O-1…O-3** carecen de A y están **bloqueadas**. Cualquier regla sobre inundación (SV-15) depende de O.
+
+**Prevención, detección y recuperación (por alternativa).** Son tres funciones distintas y ninguna sustituye a las otras.
+
+| Función | ALT-09-A (M1) | ALT-09-B (M2) | ALT-09-C (M3) |
+|---|---|---|---|
+| **Prevención** (impedir la alteración) | Privilegios y roles separados; **frente al administrador no previene** | Más bloqueos activos; **un propietario o administrador puede retirarlos o eludirlos [INF]** | Igual que B; el testigo externo no previene |
+| **Detección** (notar una alteración) | No | **Parcial:** alteración o borrado intermedios no recalculados; **no** truncamiento de cola, restauración anterior ni reescritura recalculada sin ancla externa | **Mayor, si el ancla es confiable:** permite comparar la cola y detectar la restauración; **no absoluta** |
+| **Recuperación** (volver a un estado correcto) | Respaldos y volcados [PEND] (ADR-12); una restauración anterior **puede no ser detectable** | Igual; la verificación puede revelar una laguna **interna** | Los registros recientes pueden recuperarse del testigo externo [INF]; su custodia es [PEND] |
+
+
+### 29.5 Matriz de conformidad con los invariantes y requisitos
+
+Escala: **Por diseño** (la alternativa lo cumple por su definición, **sin demostrar**), **Condicionado** (depende de una decisión o verificación [PEND]), **No aplica**. Autoevaluación del autor, no auditoría independiente.
+
+| Invariante o requisito | ALT-09-A | ALT-09-B | ALT-09-C |
+|---|---|---|---|
+| IN-09-01, 02 (solo anexado; historial de roles) — SV-01 | Por diseño; **condicionado a SV-02** (acceso directo) | Por diseño; refuerzo con bloqueos | Igual que B |
+| IN-09-03 (límite frente al administrador) — SV-11 | Documentado; límite **no reducido** | Documentado y reducido | Documentado y reducido más |
+| IN-09-04 (misma unidad) — SV-03 | **Condicionado a SV-02 y OC-127:** vale para operaciones mediadas por el servidor; **un cliente que mute datos directamente** aplicaría sin auditoría del servidor; no se declara atomicidad demostrada | Igual | Igual |
+| IN-09-05 (el rechazo persiste) — SV-04, SV-05, SV-19 | **Condicionado por clase (§29.6):** RX-01 y RX-02 con la formulación de P que se admita; **RX-03 a RX-06 son brechas declaradas** (K-3, OC-127, OC-146); P y F **sin fijar** | Igual | Igual |
+| IN-09-06, 07, 12 (contenido, sin datos personales) — SV-06, SV-07 | Por diseño; campos de adultos y usuarios [PEND] (PRV-14, OC-132) | Igual | Igual; la copia externa **no debe** llevar más datos (OC-139) |
+| IN-09-08 (visibilidad por rol y torneo) — SV-08 | Condicionado a RLS y a SV-02 | Igual | Igual; el testigo externo no es consultable por organizadores |
+| IN-09-10 (retención fuera de alcance) — SV-14 | No aplica; **no preclude** una purga controlada (OC-133) | **Condicionado:** la cadena y la purga deben convivir (OC-134) | Condicionado: el testigo externo y la purga |
+| IN-09-11 (sin permisos nuevos ni selección tecnológica) | Por diseño | Por diseño | Por diseño |
+| K-3 (persistencia del rechazo impuesto por la capa de datos) | **Condicionado** (OC-127) | Igual | Igual |
+| O (reenvíos) — SV-15 | **Bloqueada** | **Bloqueada** | **Bloqueada** |
+| Prevención, detección y recuperación — SV-10, SV-12 | Prevención por permisos; **sin detección**; la restauración anterior **puede no detectarse** | **Detección parcial** (límites de SV-10); la restauración anterior **puede no detectarse** sin ancla externa | **Detección mayor** si el ancla es confiable; **no absoluta**; costo y destino [PEND] |
+| SV-16, SV-17, SV-18 (actor, correspondencia, privilegios del rol de servicio) | **Condicionado** a ADR-03.C, ADR-02.I y OC-151…153 | Igual | Igual |
+
+### 29.6 Acceso directo del cliente, privilegios y RLS (hallazgo central)
+
+**Evidencia [DOC] (Supabase, guía de seguridad del acceso a datos y de roles).** Las **concesiones de privilegios** determinan qué roles alcanzan una tabla, vista o función por la API de datos; las **políticas de acceso por fila** limitan qué filas ve cada rol; ambas se usan juntas. El rol de servicio **omite** las políticas por fila y debe quedar en el servidor. En proyectos existentes, los objetos nuevos del esquema público reciben por defecto privilegios para los roles anónimo, autenticado y de servicio (selección, inserción, actualización, borrado, vaciado, entre otros). Una tabla sin políticas queda accesible con la concesión. Sobre funciones: las de privilegios del **creador** pueden devolver filas que el invocador no podría leer y deben fijar su ruta de búsqueda; la opción por defecto es la del **invocador** [DOC: Supabase, funciones]. Neon documenta el uso de políticas por fila con sesión JWT y una API de datos [DOC: Neon]; cómo se aplica a este proyecto es [PEND].
+**Implicación [INF].** Si los clientes **pueden alcanzar la capa de datos directamente** (sin pasar por CMP-xx del servidor), (i) la inmutabilidad depende de que **no se concedan** actualizar, borrar ni vaciar a ningún rol alcanzable (SV-01, SV-02); (ii) un rechazo producido por la **política de acceso** de la capa de datos ante una llamada directa **aborta esa llamada sin que el código del servidor intervenga**, de modo que **P-A en la aplicación no puede registrarlo**; solo un mecanismo **de la propia capa de datos** podría dejar rastro, y su durabilidad y consulta no se leyeron [PEND]. Si, en cambio, los clientes **no** alcanzan la capa de datos directamente, P-A es aplicable en el servidor, pero entonces el acceso directo debe quedar **impedido y verificado** (SV-02). **Esta disyuntiva es de ADR-02.I y del responsable (DR9I-3); este borrador no la resuelve.** Es también el contenido de K-3.
+
+**Operaciones aplicadas por acceso directo (M-1).** El mismo razonamiento vale para lo **aplicado**: si un cliente pudiera **modificar datos de negocio directamente** bajo las políticas de acceso, la operación se aplicaría **sin pasar por la auditoría escrita por el servidor** (IN-09-04, RF-AUD-02). Que la capa de datos **imponga** esa auditoría (por ejemplo, ligándola a la propia modificación) es una posibilidad **[PEND]** que **no se selecciona** y cuya compatibilidad con ADR-02.C y con la frontera atómica no se verificó (OC-147). Mientras tanto, SV-03 vale solo para lo mediado por el servidor y la brecha figura como riesgo no aceptado (RR9I-15).
+
+**Clasificación de los rechazos (M-2).** «Rechazo» no es un solo caso. La siguiente tabla ordena **dónde ocurre y quién puede observarlo**; **no resuelve K-3 ni P**.
+
+| Clase | Dónde ocurre | ¿Quién lo observa? | Alcance en `01` | Estado en este borrador |
+|---|---|---|---|---|
+| RX-01 | Decisión de CMP-08 en el servidor (por ejemplo RT-14 vigente o histórico, falta de autoridad, intento de levantar la restricción) | El servidor | **RF-AUD-06 [CONF]** (rechazos y bloqueos por conflicto de interés); intentos de escalada o acceso cruzado: **RF-AUD-05 [REC]** | Cubierta por SV-04 con la formulación de P que se admita |
+| RX-02 | Aborto por restricción de integridad, privilegio o política, con **error que el servidor recibe** | El servidor | RF-AUD-06 si es de RT-14 (también se impone en la capa de datos, RC-04); el resto [REC] | Cubierta por SV-04; cobertura del resto [PEND] (DR9I-9) |
+| RX-03 | **Filtrado silencioso** por una política de acceso: la consulta o la modificación afecta **cero filas sin error** [INF] | Nadie lo ve como rechazo | No definido por `01` | **Brecha declarada** (OC-146) |
+| RX-04 | Bloqueo **antes de la aplicación**: borde, autenticación fallida, límites de tasa | El borde o el servicio de identidad; **no** el código de aplicación | Fallos de autenticación: F-05 y RF-AUD-05 [REC] (EV-01) | **Brecha declarada**; su registro es del servicio que lo bloquea [PEND] |
+| RX-05 | **Llamada directa** del cliente a la capa de datos rechazada por privilegios o políticas | La capa de datos; **el servidor no** | RF-AUD-05 [REC]; RF-AUD-06 si es de RT-14 | **Brecha declarada** (K-3; OC-127; DR9I-3) |
+| RX-06 | Rechazo de una operación **sincronizada** (permisos revocados, conflicto) | El servidor | OFF-20 y RF-AUD-06 en lo que corresponda; su persistencia es de ADR-05.C | **Fuera de ADR-09.I** (DB2c-3); O abierta |
+
+**Diferencia de estatus.** **RF-AUD-06 es obligatorio [CONF]** y cubre el conflicto de interés; **RF-AUD-05 es recomendado [REC] (prioridad S)** y cubre intentos de escalada o acceso cruzado; ampliar el registro a otras clases requiere decisión del responsable (DR9I-9). Las brechas **no se aceptan** aquí.
+**Opciones de registro de lo no observable por el servidor [PEND; ninguna se elige]:** (a) impedir el acceso directo y registrar en el servidor; (b) aceptar el registro de la propia capa de datos con sus límites (por ejemplo la extensión de auditoría que documenta Supabase [DOC], cuya durabilidad y consulta en el plan gratuito se desconocen); (c) no registrar los rechazos por política de acceso en llamadas directas y **declararlo** como brecha (**no se acepta aquí**; requeriría una decisión del responsable, RR9I-03).
+**Esquemas expuestos [PEND].** La guía de seguridad de Supabase nombra esquemas dedicados como control, pero **no se leyó** cómo configurar qué esquemas expone la API de datos ni si impide el acceso directo a las tablas de auditoría; la viabilidad de la opción (a) queda [PEND] (OC-153).
+### 29.7 Reenvíos, duplicados e idempotencia (sin resolver O)
+
+| Asunto | Qué se puede decir | Qué queda bloqueado |
+|---|---|---|
+| Operación **aplicada**, reenvío | OFF-06: sin repetir efectos **ni registros de auditoría**. Una restricción de unicidad por identificador de operación junto con la escritura de auditoría **en la misma unidad** hace que un reenvío no genere un segundo registro [PROP; el registro de idempotencia es de ADR-05.C] | El esquema exacto y dónde vive el registro de idempotencia (ADR-05.C, D5-1) |
+| Operación **rechazada**, reenvío | **`01` no fija** el alcance de OFF-06 sobre lo rechazado (OC-35; D5-1; decisión 10). O-1 (un registro por identificador), O-2 (uno por intento) y O-3 (un registro más contador) **no tienen A** | **BLOQUEADO.** ADR-09.I no selecciona ni prefiere ninguna; solo exige que el esquema de rechazos **no impida** ninguna de las tres hasta que se decida (OC-135) |
+| Eventos duplicados por reintento del servidor | Los reintentos **internos** de escritura de lo **aplicado** y de las operaciones **sincronizadas** pueden ser idempotentes por identificador de operación [PROP]. **Una operación en línea no tiene identificador de operación de cliente** (OFF-06 rige para las sincronizadas): un **rechazo en línea repetido no puede deduplicarse** sin un criterio que `01` no fija (O; OC-150) | **BLOQUEADO** para rechazos en línea |
+| Orden y secuencia | El orden lo da la secuencia por partido, no el reloj (OFF-13, IN-05-06); la hora del servidor es la de auditoría | — |
+| Respuesta incierta | Si el servidor cae **entre** la operación y su registro de rechazo (dos unidades independientes), el actor **no recibe respuesta definitiva y puede no quedar registro**; **no se afirma ninguna garantía transaccional entre las dos unidades** (OC-149; RR9I-16) | Depende de la formulación de P y de F que se admita |
+
+### 29.8 Retención, privacidad y eliminación (sin política definitiva)
+
+- **Sin política.** IN-09-10 deja la retención fuera de ADR-09.C. PRV-10 dice que la auditoría se conserva mientras exista el torneo más el plazo jurídico, pero **el plazo es PEND-JUR** y la política es de **ADR-17 (R4)**. Este borrador **no fija plazos ni una política de purga.**
+- **Privacidad.** IN-09-07 excluye datos personales de menores; **la minimización de datos de adultos y de usuarios la fija ADR-09.I** (IN-09-07) y no está definida [PEND] (OC-132, DR9I-5). Tras anonimizar (PRV-06) la auditoría no conserva campos personales, por lo que **la anonimización no exige modificar la auditoría** [INF].
+- **Eliminación.** Ningún rol de la aplicación puede borrar auditoría (SV-01). Una eventual purga por vencimiento sería una **acción privilegiada y auditada** definida por ADR-17 (SV-14). **Compatibilidad a preservar [PROP]:** la estructura no debe impedir una purga controlada **por periodo** (por ejemplo, sellados o cadenas por periodo en B y C) ni obligar a conservar para siempre; **no se define cómo** (OC-133, OC-134).
+- **Copia externa (ALT-09-C).** Una copia fuera de la base de datos es un **tratamiento y posible transferencia** (PRV-13, Q-25, ADR-10, PEND-JUR) y su eliminación debe seguir la política de ADR-17; con solo identificadores internos (IN-09-07) el riesgo de datos personales es menor, pero **no está evaluado** (OC-139).
+### 29.9 Costos, límites de la capa gratuita y volumen
+
+**Evidencia [DOC] (consultada 2026-11-22).** Supabase: base de datos de **500 MB** por proyecto en el plan gratuito; **pausa por baja actividad en 7 días** del plan gratuito; las **copias de seguridad diarias automáticas** se documentan para los planes Pro, Team y Enterprise (7, 14 y 30 días) y la recuperación a un punto en el tiempo es un complemento de planes de pago; **el plan gratuito no figura en esa lista [INF: inferencia por ausencia, no una afirmación de la página]**; existe un comando de la interfaz de línea de comandos para volcar la base de datos [DOC: Supabase, respaldos y volcado]. Neon: plan gratuito con **1 GB** de almacenamiento por proyecto y **restauración instantánea hasta 6 horas con 1 GB de historial** [DOC: Neon, planes y restauración]. Las condiciones de la copia externa (destino, límites gratuitos, régimen) **no se evaluaron** [PEND].
+**Estimación de volumen [INF; supuestos explícitos].** Escala RNF-04: hasta 6 torneos × 240 partidos. Supuesto: **20 registros de auditoría por partido** (resultado, eventos, correcciones, W.O., recálculos) → **28,800 registros**. Supuesto: **500 bytes por registro** (sin datos personales; antes/después minimizados) → **≈ 14.4 MB**; con un elemento de detección de **≈ 64 bytes** por registro (ALT-09-B) → **≈ 16.2 MB**. Es una fracción de 500 MB y de 1 GB, **sin contar** índices, historial de asignaciones, bitácora de seguridad, incidencias (OFF-20) ni inundaciones de rechazos (CAB-14; O). **No medido;** los supuestos pueden fallar por factores de varios órdenes en un escenario de abuso.
+**Implicaciones [INF].** (1) El almacenamiento de auditoría **no parece el cuello de botella** de la capa gratuita, pero **sí lo pueden ser** las inundaciones sin límite (SV-15). (2) Sin copias de seguridad automáticas documentadas para el plan gratuito de Supabase, la **recuperación de la auditoría** dependería de volcados manuales o de una copia externa [PEND] (ADR-12, R4); esto **no se acepta aquí** (RR9I-06). (3) La pausa por inactividad de 7 días afecta a la disponibilidad, no a la inmutabilidad.
+### 29.10 Recuperación, integridad y pruebas
+
+| Prueba o control | Qué demuestra | Requisito | Tipo |
+|---|---|---|---|
+| Consulta de privilegios y políticas por rol (anónimo, autenticado, servicio, aplicación, verificación) | Que ninguno puede actualizar, borrar ni vaciar auditoría; que las tablas no son escribibles por un cliente | SV-01, SV-02 | DB |
+| Intentos de actualizar y borrar como dueño, organizador y rol de servicio | Rechazo en la capa de datos, no solo en la interfaz | SV-01 | I, DB |
+| Inyección de fallo en la escritura de auditoría de lo aplicado | La operación no se aplica | SV-03 | I |
+| Rechazo por restricción de integridad y por política de acceso en una llamada **mediada por el servidor** y en una **directa** (si fuera posible) | Que el rechazo deja registro, o que la brecha queda declarada (§29.6) | SV-04, SV-02 | I |
+| Fallo de la escritura del rechazo | Error recuperable; la operación sincronizada sigue «pendiente» | SV-05 | I |
+| Revisión de esquema y de una muestra de 50 registros (RF-AUD-04) y de secretos | Sin datos personales de menores ni secretos | SV-07 | DB, D |
+| Acceso cruzado entre torneos y de organizadores a la bitácora global | Aislamiento | SV-08 | DB, E2E |
+| Verificación reproducible de la cadena tras alterar y tras borrar un registro como administrador (en un entorno de prueba) | Detección (si se adopta M2 o M3) | SV-10 | DB |
+| Restauración desde copia y verificación de integridad | Cobertura de auditoría y detección de lagunas | SV-12 | I |
+| Funciones de privilegios del creador: ruta de búsqueda y ejecución restringida | Sin invocación directa indebida | SV-13 | DB |
+| Derivación del actor: intento de enviar un actor distinto en la solicitud; sesión de otra cuenta que sincroniza operaciones ajenas | El actor sale de la identidad autenticada o de la cuenta que capturó | SV-16 | I, DB |
+| Auditoría ligada a una entidad de otro torneo | Rechazo por correspondencia entre entidad y auditoría | SV-17 | DB |
+| Revisión de privilegios por defecto del rol de servicio, anónimo y autenticado sobre auditoría | Revocación explícita; sin presentar una medida aislada como suficiente | SV-18 | DB |
+| Restauración a un estado anterior con y sin ancla externa | Que la pérdida de la cola se detecta **solo** con ancla; sin ella, queda como brecha | SV-10, SV-12 | I |
+| Mutación directa de datos de negocio por un cliente, si fuera posible | Si existe auditoría; si no, la brecha de RR9I-15 | SV-03 | I, DB |
+| Marcos de prueba para funciones y políticas: existen para PostgreSQL [DOC: Supabase, pgTAP] | Viabilidad de pruebas en la capa de datos; **no** selecciona herramienta | RNF-11 | DB |
+
+Los fixtures usan **solo datos sintéticos**. Las pruebas de restricciones se ejecutan **contra PostgreSQL real** (RNF-11, HR1-13).
+### 29.11 Compatibilidad con las configuraciones de R3-A y con R3-B, R3-C y R3-D (sin seleccionar)
+
+| Configuración o bloque | Observación | Estado |
+|---|---|---|
+| CFG-C1 (Vercel + Supabase) y CFG-C3 (Cloudflare + Supabase) | Supabase **expone una API de datos** con roles anónimo, autenticado y de servicio: el acceso directo del cliente es **posible por diseño** y debe **impedirse o gobernarse** (§29.6); la extensión de auditoría y los volcados están documentados [DOC] | Condicionado a ADR-02.I; no se selecciona |
+| CFG-C2 (Vercel + Neon + Better Auth) | Acceso desde el servidor por conexión; Neon documenta una API de datos con políticas por fila como **opción** [DOC]; **si no se usa y no se exponen credenciales de conexión a los clientes**, el acceso directo no ocurre [INF], pero una credencial expuesta lo permite; la restauración gratuita es de 6 horas [DOC]; **la configuración de esquemas expuestos es [PEND]** | Condicionado; no se selecciona |
+| R3-B (ADR-15, correo) | Los eventos de invitación, recuperación y segundo factor (EV-02) **no** registran secretos ni enlaces (IN-09-12) | Compatible |
+| R3-C (ADR-06/07) | Si ADR-06 adopta una **señal de cambio durable**, no es auditoría: su registro dentro de la unidad no sustituye a SV-03 | Compatible; sin dependencia |
+| R3-D (ADR-08) | Las correcciones auditan «antes/después» de la clasificación con **identificadores** (CL-15) y no datos personales; OC-121 (RT-14 sobre el efecto de una corrección) y OC-122 (acceso directo y privilegios) **no se resuelven aquí** | Compatible; dependencias abiertas |
+
+### 29.12 Evaluación, puntuación y recomendación preliminar
+
+**Regla.** Pesos aprobados (R1 §2.4 y R3-A): seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %. Se puntúa **solo con evidencia leída**; lo no leído es [PEND] y se trata con rangos de sensibilidad, sin penalizar documentación incompleta. Escala 1–5; juicio del autor [PROP], no vinculante. El criterio sin conexión **no discrimina** (3): la auditoría es del servidor. **Regla uniforme de rangos (v0.2):** (i) **Seguridad y mantenimiento** son juicios [PROP] no verificados: se da un valor central y el rango es **±1 para las tres alternativas**; (ii) **Costo:** el techo es 5 y el límite inferior baja **1 punto por cada aspecto de costo no evaluado** que afecta a la alternativa (respaldos y recuperación: A, B y C; verificación periódica y su ejecutor: B y C; destino y custodia del testigo externo: solo C). **Así lo desconocido ensancha el rango, pero no desplaza el valor central ni castiga a ninguna alternativa más allá de los aspectos que realmente le corresponden.**
+
+| Criterio (peso) | ALT-09-A | ALT-09-B | ALT-09-C |
+|---|---|---|---|
+| Seguridad (35 %) [PROP, no verificado; central A 3, B 4, C 4] | 2–4 | 3–5 | 3–5 |
+| Costo (30 %) [aspectos pendientes: A 1, B 2, C 3] | 4–5 | 3–5 | 2–5 |
+| Sin conexión (20 %) | 3 | 3 | 3 |
+| Mantenimiento (15 %) [PROP; central A 4, B 3, C 2] | 3–5 | 2–4 | 1–3 |
+| **Total (rango)** | **2,95–4,25** | **2,85–4,45** | **2,40–4,30** |
+
+**Fundamento.** *Seguridad:* A (3) documenta pero **no reduce** el límite del administrador; B (4) detecta alteraciones intermedias, con los límites de SV-10; C (4) añade un testigo externo **que no es una garantía absoluta** y cuya custodia no se evaluó. *Costo:* sin servicio nuevo en ninguna [INF]; los límites inferiores reflejan solo los aspectos no evaluados. *Sin conexión:* no discrimina. *Mantenimiento:* A (4) la menor carga; B (3) cadena y verificación; C (2) destino y credenciales [INF].
+
+**Sensibilidad.** Los **rangos se solapan por completo** (A 2,95–4,25; B 2,85–4,45; C 2,40–4,30). **El puntaje no discrimina entre las alternativas** y tampoco entre añadir o no detección o testigo externo.
+
+**Recomendación preliminar NO vinculante [PROP].** (1) **El requisito exigido es M1** (RF-AUD-03); **ninguna alternativa fija P ni F**, que siguen por admitir (P-A y F-2 candidatas A; P-C y F-3 condicionadas, no excluidas). (2) La evidencia documentada **no discrimina** entre ALT-09-A, B y C ni entre añadir o no la detección de alteración (B) o el testigo externo (C): depende de la **decisión 7**, de la evaluación del riesgo residual frente al administrador (AM-24, probabilidad baja e impacto alto) y de los límites de SV-10. (3) **O sigue bloqueada** y **K-3 y DR9I-3 deben resolverse antes** de poder afirmar cobertura de los rechazos. (4) **No se selecciona nada;** la decisión es del responsable y **posterior** a ADR-01, ADR-02.C/I, ADR-03.C, ADR-05.C y la admisión de las formulaciones. Los puntajes no sustituyen a los requisitos obligatorios, que son eliminatorios y no compensables.
+
+### 29.13 Compatibilidad con R2 y condiciones heredadas
+
+| Elemento | Estado en ADR-09.I | Observación |
+|---|---|---|
+| IN-09-01…13 de ADR-09.C | Preservados; no se redefinen ni se relajan | SV-01…19 los operacionalizan |
+| K-3; DB2c-2 y DB2c-3 | **Abiertas** | P-A solo es viable si el rechazo pasa por el servidor (§29.6) |
+| O, D5-1, decisión 10, OC-35 | **Abiertas; O bloqueada** | Sin selección ni preferencia |
+| DB2c-10; D-2 (revocación ≤ 60 s) | Preservadas; **sin excepción** | No se toca |
+| PEND-JUR, PRV-10, IN-09-10, ADR-17 | Pendientes | Sin plazos ni política |
+| ADR-02.C (UI-xx y frontera atómica) y R3-D (OC-102, OC-121, OC-122) | Consumidos; no se redefinen | La auditoría de lo aplicado va dentro de la unidad |
+| ADR-03.C (identidad, sesión y nivel de autenticación) | **Dependencia lateral; no se resuelve** | De ella sale el actor autenticado (SV-16) y la cuenta del capturador (IN-05-11) |
+| ADR-05.C (OFF-06, OFF-20) | Preservado | El registro de idempotencia y de incidencias es de ADR-05 |
+| ADR-14, ADR-12, ADR-13 (R4) | Dependencias laterales | No se evalúan aquí |
+| RT-14, A-8, A-16, D4-8 | **Abiertos** | La auditoría registra; no autoriza |
+| A-1…A-16 | Parámetros abiertos | No se resuelven |
+| Matriz de R2 (17 A, 38 C, 14 X) | **Propuesta, no conjunto admitido** | Ninguna A se considera admitida |
+| R1 §8.1; DB1-1; RES-01…13 | Sin declarar cumplido / pendientes / sin aceptar | Preservados |
+
+### 29.14 Condiciones, decisiones y riesgos
+
+**Condiciones abiertas (OC-126…153).** Ninguna se resuelve aquí.
+
+| ID | Condición | Origen | Bloquea |
+|---|---|---|---|
+| OC-126 | Admisión formal por el responsable de M1 (y de M2 y M3 si procede), P-A y F-2 como conjunto admitido | Regla del cierre de R2; matriz | ADR-09.I definitivo |
+| OC-127 | **K-3 / acceso directo:** si los clientes pueden alcanzar la capa de datos —para **lo rechazado y para lo aplicado**— y cómo se registran los rechazos y las operaciones que el servidor no observa | K-3; DB2c-2; MO-26 (R3-D) | P (formulación); ADR-02.I |
+| OC-128 | Decisión 7: exigir o no M2 y M3 ([REC]) | R2-A decisión 7 | ALT-09-B y C |
+| OC-129 | **O (reenvíos):** alcance de OFF-06 sobre lo rechazado; elección de O-1, O-2 u O-3 | D5-1; decisión 10; OC-35 | SV-15; ADR-05.I |
+| OC-130 | DB2c-3: partición entre ADR-05.C y ADR-09.C del registro de idempotencia (OFF-06) y de incidencias (OFF-20) | DB2c-3 | ADR-05.I |
+| OC-131 | D-2 / DB2c-10: la revocación ≤ 60 s no se trata aquí; no se concede excepción | D-2 | — |
+| OC-132 | Minimización de datos de adultos y de usuarios en la auditoría (qué campos y qué «antes/después») | IN-09-07; PRV-14 | SV-07 |
+| OC-133 | Retención y purga: plazo jurídico y política (ADR-17); compatibilidad de la estructura con una purga controlada por periodo | PRV-10; PEND-JUR; IN-09-10 | SV-14 |
+| OC-134 | Convivencia de la detección de alteración con la purga (cadenas o sellados por periodo) | M2, M3; ADR-17 | ALT-09-B y C |
+| OC-135 | El esquema de rechazos no debe impedir O-1, O-2 ni O-3 hasta decidir | O | SV-15 |
+| OC-136 | Quién ejecuta la verificación periódica y bajo qué identidad (ADR-14, R4; RT-14 solo rige efectos de una operación de un actor) | ADR-14 | SV-10 |
+| OC-137 | Respaldos y restauración de la auditoría en la capa gratuita; el plan gratuito de Supabase no figura con copias automáticas [DOC] | ADR-12; RNF-08 | SV-12 |
+| OC-138 | Durabilidad, consulta y límites del registro de la propia capa de datos (extensión de auditoría) en el plan gratuito | §29.6 (b) | OC-127 |
+| OC-139 | Copia externa: destino, régimen, transferencia (PRV-13, Q-25, ADR-10), custodia de credenciales y eliminación | ADR-10; PEND-JUR | ALT-09-C |
+| OC-140 | Hechos generales de PostgreSQL (privilegios, disparadores, políticas, propiedad de tablas, superusuario) a verificar en fuente oficial | §29.0 [INF] | ADR-02.I |
+| OC-141 | Límite y control del volumen de rechazos (CAB-14) con O bloqueada | SV-15 | ADR-05.I |
+| OC-142 | Dependencias de ADR-01 (selección de configuración) para todo mecanismo concreto | R1 §8.2 | ADR-09.I definitivo |
+| OC-143 | Verificación empírica en la capa de datos elegida (pruebas §29.10) antes de cualquier aprobación | RNF-11; HR1-13 | Fase 3 |
+| OC-144 | Delimitación de EV-01…EV-06 [REC] (qué eventos de seguridad se registran) y su alcance en bitácora global | §16.7.2; decisión 7 | SV-06 |
+| OC-145 | Consulta jurídica sobre conservación de bitácoras y de datos de usuarios (correo y rol) | PEND-JUR; PRV-14 | OC-132, OC-133 |
+| OC-146 | Alcance de los rechazos que se registran: RX-03 (filtrado silencioso), RX-04 (borde y autenticación), RX-05 (llamada directa); qué parte de RF-AUD-05 [REC] se exige | RF-AUD-05, 06; §29.6 | SV-04, SV-19 |
+| OC-147 | Si la capa de datos debe **imponer** la auditoría de lo aplicado ante una mutación directa y su compatibilidad con la frontera atómica de ADR-02.C | IN-09-04; ADR-02.C | SV-03 |
+| OC-148 | **Ancla externa confiable:** qué la constituye, su custodia fuera del control del administrador, su frecuencia y su verificación | M2, M3; SV-10, SV-12 | ALT-09-B y C |
+| OC-149 | **Ventana de fallo entre unidades independientes** (respuesta incierta) y su tratamiento por la formulación de P y de F | P, F; IN-09-05 | SV-04, SV-05 |
+| OC-150 | **Duplicados de rechazos en línea** sin identificador de operación (criterio que `01` no fija) | O; OFF-06; D5-1 | SV-05, SV-15 |
+| OC-151 | Derivación del actor desde la identidad autenticada y verificación de que el cliente no lo puede fijar | SV-16; ADR-03.C; IN-05-11 | SV-16 |
+| OC-152 | Revisión de privilegios por defecto del rol de servicio, anónimo y autenticado, y su revocación | SV-18; IN-09-01 | SV-01, SV-18 |
+| OC-153 | Configuración de esquemas expuestos y de las vías de acceso directo en la configuración elegida [PEND; no leído] | §29.6; SV-02 | SV-02, ADR-02.I |
+
+**Decisiones que corresponden al responsable (DR9I-1…10).** Ninguna se toma aquí.
+
+| ID | Decisión | Condiciones |
+|---|---|---|
+| DR9I-1 | Admitir, ajustar o rechazar M1/M2/M3 y las formulaciones de **P** (P-A, P-C) y de **F** (F-2, F-3) como conjunto admitido; **P y F no se fijan en este borrador** | OC-126 |
+| DR9I-2 | Exigir o no M2 y M3 (decisión 7) | OC-128, OC-134, OC-139 |
+| DR9I-3 | Acceso directo del cliente a la capa de datos: permitirlo, impedirlo o gobernarlo (con ADR-02.I) y cómo registrar rechazos no observables | OC-127, OC-138 |
+| DR9I-4 | O (reenvíos) y D5-1 (heredadas; decisión 10) | OC-129, OC-135, OC-141 |
+| DR9I-5 | Minimización de datos de adultos y de usuarios en la auditoría | OC-132, OC-145 |
+| DR9I-6 | Retención y purga (con ADR-17 y PEND-JUR) | OC-133, OC-134 |
+| DR9I-7 | Identidad y régimen de la verificación periódica (con ADR-14) | OC-136 |
+| DR9I-8 | Respaldos de la auditoría y copia externa (con ADR-12, ADR-10 y PRV-13) | OC-137, OC-139 |
+| DR9I-9 | Qué clases de rechazo (RX-03 a RX-06) se exigen registrar más allá de RF-AUD-06, y cómo tratar las brechas | OC-146, OC-127 |
+| DR9I-10 | Revisión y revocación de los privilegios del rol de servicio y de los roles por defecto (con ADR-02.I) | OC-152, OC-153 |
+
+**Riesgos de redacción (RR9I-01…19).** No se aceptan; se registran.
+
+| ID | Riesgo | Mitigación documental |
+|---|---|---|
+| RR9I-01 | Tratar una candidata A como admitida o seleccionada, o fijar P o F por la forma de las alternativas | Rotulado «candidata no admitida»; P y F fuera de las alternativas |
+| RR9I-02 | Dar por demostrada la inmutabilidad con solo privilegios, sin cubrir el acceso directo y los roles de servicio | SV-01, SV-02; pruebas de privilegios (§29.10) |
+| RR9I-03 | Rechazos impuestos por la capa de datos a llamadas directas **sin registro** (brecha de IN-09-05) | §29.6; OC-127; DR9I-3; no se acepta |
+| RR9I-04 | Pérdida de auditoría por fallo del almacén o por F-1 (no conforme) | F-2 como candidata; SV-05; F-1 excluida |
+| RR9I-05 | Denegación inducida del servicio por F-2 (el fallo del registro bloquea operaciones rechazadas) [DOC de R2-A] | Alerta (ADR-13); error recuperable; sin aceptar |
+| RR9I-06 | Recuperación de la auditoría insuficiente en la capa gratuita (copias automáticas no documentadas para el plan gratuito de Supabase) | OC-137; ADR-12; no se acepta |
+| RR9I-07 | Inundación de registros por rechazos repetidos (CAB-14) | SV-15; OC-141; O bloqueada |
+| RR9I-08 | Datos personales, secretos o enlaces en la auditoría o en la copia externa (AM-25) | SV-07; IN-09-12; OC-132, OC-139 |
+| RR9I-09 | Una purga futura rompe la cadena de detección o se usa para ocultar alteraciones | OC-134; SV-14; acción privilegiada y auditada |
+| RR9I-10 | Función con privilegios del creador que evita las políticas por fila o invocable por clientes | SV-13; OC-122; OC-140 |
+| RR9I-11 | Presentar el límite frente al administrador como resuelto cuando solo se detecta (M2, M3) | SV-11; IN-09-03 |
+| RR9I-12 | Contradecir R2 al fijar el esquema de rechazos antes de decidir O | OC-135; no se selecciona |
+| RR9I-13 | Estimaciones de volumen que subestimen abuso o carga | OC-141; medición en Fase 4; supuestos explícitos |
+| RR9I-14 | Hechos de PostgreSQL no verificados en fuente oficial usados como definitivos | Rotulados [INF]; OC-140 |
+| RR9I-15 | **Operaciones aplicadas por acceso directo del cliente sin la auditoría del servidor** (IN-09-04) | SV-03 condicionado; OC-127, OC-147; no se acepta |
+| RR9I-16 | **Ventana de fallo entre unidades independientes:** respuesta incierta y posible ausencia de registro | OC-149; sin garantía transaccional; no se acepta |
+| RR9I-17 | Truncamiento de cola, restauración anterior o reescritura completa **no detectados** (M2 sin ancla externa); M3 presentado como garantía absoluta | SV-10, SV-12; OC-148; no se acepta |
+| RR9I-18 | **Suplantación del actor** (campo del cliente, sesión ajena) o auditoría ligada a una entidad de otro torneo | SV-16, SV-17; OC-151 |
+| RR9I-19 | Privilegios por defecto del rol de servicio o de los roles de cliente sobre la auditoría; o creer que una medida aislada basta | SV-18; OC-152; DR9I-10 |
+
+### 29.15 Dependencias que impiden la aprobación definitiva
+
+1. **ADR-03.C** (identidad, sesión y actor) y **ADR-01**: ADR-01 solo está aprobado de forma documental condicionada y no selecciona proveedor (OC-142). 2. **Admisión del conjunto de formulaciones** por el responsable (OC-126, DR9I-1); la matriz de R2 es propuesta. 3. **K-3 y el acceso directo** (OC-127, DR9I-3) y **ADR-02.I**. 4. **O** sin formulación A (OC-129, DR9I-4) y D5-1. 5. **Decisión 7** sobre M2 y M3 (OC-128). 6. **ADR-17 y PEND-JUR** para la retención (OC-133, OC-145). 7. **ADR-12** (respaldos) y **ADR-14** (identidad de ejecución), de R4. 8. **DB2c-3** con ADR-05. 9. **Verificación empírica** (OC-143) y asesoría jurídica. 10. D-2, RT-14, A-8, A-16 y las 16 decisiones sin A de R2 **siguen abiertas**.
+### 29.16 Criterios de revisión documental (autoevaluación del autor; no es auditoría independiente)
+
+| ID | Criterio | Resultado |
+|---|---|---|
+| CR9I-01 | Las Partes I–XIV y los registros anteriores no cambian (prefijo idéntico al HEAD) | Cumple (comprobado) |
+| CR9I-02 | Al menos dos alternativas con matriz comparativa, sin seleccionar | Cumple: §29.4, §29.5 |
+| CR9I-03 | M, P y F tratadas solo como candidatas o formulaciones por admitir (**P y F no se fijan; P-C y F-3 siguen en juego**); O bloqueada | Cumple: §29.2, §29.4, §29.7 |
+| CR9I-04 | Requisitos de seguridad verificables con prueba asociada | Cumple: §29.3, §29.10 |
+| CR9I-05 | Acceso directo del cliente, privilegios y RLS, con hallazgo y sin resolver | Cumple: §29.6; OC-127 |
+| CR9I-06 | Aislamiento entre torneos y separación de funciones | Cumple: SV-08, SV-09 |
+| CR9I-07 | Retención, privacidad y eliminación sin política definitiva | Cumple: §29.8 |
+| CR9I-08 | Costos y límites gratuitos con supuestos explícitos y evidencia separada de la inferencia | Cumple: §29.9, §29.17 |
+| CR9I-09 | Recuperación, integridad y pruebas | Cumple: §29.10 |
+| CR9I-10 | Puntuación solo con evidencia leída; regla uniforme de rangos; sin castigar solo lo desconocido; aritmética comprobada | Cumple: §29.12 (comprobado) |
+| CR9I-11 | K-3, DB2c, D-2, PEND-JUR, ADR-17, RT-14, A-8 y A-16 preservados abiertos | Cumple: §29.13 |
+| CR9I-12 | Dependencias que impiden la aprobación definitiva identificadas | Cumple: §29.15 |
+| CR9I-13 | Identificadores nuevos únicos, definidos y sin colisión | Cumple (comprobado) |
+| CR9I-14 | Nota posterior de trazabilidad de R3-D sin reescribir lo histórico | Cumple: §29.0 |
+| CR9I-15 | Sin código, cuentas, servicios ni gastos; sin otros `.I`, R3-F ni R4 | Cumple |
+| CR9I-16 | Acceso directo para lo aplicado y para lo rechazado; clasificación RX-01…06; RF-AUD-06 [CONF] distinguido de RF-AUD-05 [REC]; brechas declaradas y no aceptadas | Cumple como propuesta: §29.6; SV-03, SV-04, SV-19 |
+| CR9I-17 | Prevención, detección y recuperación distinguidas; límites de M2 y M3 (sin ancla externa y sin garantía absoluta); fallos entre unidades y duplicados sin identificador | Cumple: §29.4, SV-05, SV-10, SV-12, §29.7 |
+| CR9I-18 | Actor derivado de la identidad autenticada, correspondencia entidad–auditoría, privilegios del rol de servicio y ADR-03.C como dependencia | Cumple como propuesta: SV-16, SV-17, SV-18; §29.13, §29.15 |
+
+### 29.17 Evidencia documentada frente a inferencias; fuentes y límites
+
+| Afirmación | Etiqueta | Fuente |
+|---|---|---|
+| Los invariantes IN-09-01…13, D9-1, D9-2, F y O y sus clasificaciones A, C y X | [CONF] / [DOC] interno | §16.7; matriz de R2 (§B) |
+| Supabase: privilegios + políticas por fila; el rol de servicio omite las políticas; privilegios por defecto del esquema público; funciones de privilegios del creador | [DOC] | Supabase: seguridad de la API de datos, roles, políticas por fila, funciones |
+| Supabase: 500 MB; pausa a los 7 días; respaldos diarios documentados para Pro/Team/Enterprise; recuperación a un punto en el tiempo como complemento de pago; volcado por CLI | [DOC] | Supabase: facturación, pausa, respaldos, volcado |
+| Que el plan gratuito de Supabase **no tiene** copias automáticas | **[INF]** (inferencia por ausencia: la página las lista solo para planes de pago) | Supabase: respaldos |
+| Que, sin exponer credenciales de conexión, un cliente no alcanza la capa de datos en Neon | **[INF]** | Razonamiento del autor; esquemas expuestos [PEND] |
+| El filtrado silencioso por política de acceso (cero filas sin error), el recálculo de cadenas por un administrador, el truncamiento de cola y la restauración anterior no detectados | **[INF]** | Conocimiento general; no leído en fuente oficial (OC-140) |
+| Supabase: extensión de auditoría disponible y configurable | [DOC] | Supabase: PGAudit |
+| Neon: 1 GB; restauración instantánea de 6 horas con 1 GB de historial en el plan gratuito; políticas por fila con sesión JWT | [DOC] | Neon: planes, restauración, RLS |
+| Marcos de prueba para funciones y políticas en PostgreSQL | [DOC] | Supabase: pruebas con pgTAP (consultada en R3-D) |
+| Privilegios, disparadores, propiedad de tablas y superusuario en PostgreSQL; que un rechazo por política aborta sin intervención del servidor; que una restricción de unicidad evita un segundo registro | [INF] | Conocimiento general; **no leído** en fuente oficial en esta ronda (OC-140) |
+| Volumen estimado (≈ 28,800 registros; ≈ 14.4 MB) | [INF] | Cálculo del autor con supuestos de §29.9 |
+| Juicios de seguridad, costo y mantenimiento de la puntuación | [PROP] / [INF] | Autor; no verificados |
+
+**Fuentes oficiales consultadas (2026-11-22; páginas descargadas y convertidas a texto):** Supabase (respaldos, seguridad de la API de datos y políticas por fila, roles, PGAudit, facturación, pausa por inactividad, volcado, funciones de base de datos, pruebas); Neon (planes, restauración instantánea, políticas por fila). **No se obtuvieron** las páginas de PostgreSQL (acceso denegado) ni la de transacciones de Supabase. **Límites.** No se leyó cómo persiste y se consulta la extensión de auditoría en el plan gratuito, ni los términos de una copia externa, ni el comportamiento exacto de cada configuración ante una llamada directa denegada; todo ello es [PEND].
+### 29.18 Estado y preguntas para el responsable
+
+**Estado:** R3-E / ADR-09.I **v0.2-R3E-09I: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL** (corrige M-1…M-8 y la observación del rol de servicio; ver §29.19 y el metadato de §29.0); **R3-E continúa como bloque parcial en curso.** **No versionado.** Autoevaluación del autor, no auditoría independiente. **Las formulaciones A son candidatas no admitidas; P y F no se fijan; O sigue bloqueada.** Los demás ADR `.I`, R3-F y R4: **NO INICIADOS.** Siguen abiertas todas las decisiones y condiciones heredadas de R1, R2 y R3-A…D.
+
+**Preguntas:** DR9I-1 a DR9I-10 y las condiciones OC-126 a OC-153 (§29.14); en particular, si los clientes pueden alcanzar la capa de datos directamente (DR9I-3, OC-127), porque de ello depende la viabilidad de P-A.
+
+### 29.19 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| M-1 | IN-09-04 y SV-03 condicionados a SV-02 y OC-127; caso de operaciones aplicadas por acceso directo sin auditoría del servidor; sin atomicidad demostrada ni mecanismo (OC-147, RR9I-15) | §29.3, §29.5, §29.6, §29.14 |
+| M-2 | Clasificación RX-01…06 por dónde ocurre el rechazo y quién lo observa; RF-AUD-06 [CONF] frente a RF-AUD-05 [REC]; SV-04 acotado; SV-19 y brechas declaradas sin aceptar (OC-146, DR9I-9) | §29.3, §29.6 |
+| M-3 | Eliminada la selección implícita: P y F fuera de las alternativas; P-A y F-2 candidatas A no admitidas; P-C y F-3 condicionadas, no excluidas; recomendación sin fijar P ni F; M1 como requisito | §29.2, §29.4, §29.12, §29.16 |
+| M-4 | Prevención, detección y recuperación por alternativa; límites de M2 (cola, restauración anterior, reescritura completa sin ancla externa) y de M3 (no absoluta); SV-10 y SV-12 ajustados (OC-148, RR9I-17) | §29.3, §29.4, §29.5 |
+| M-5 | Fallos de auditoría en línea y sincronizados; ventana de fallo entre unidades, respuesta incierta y duplicados sin identificador de operación; O abierta (OC-149, OC-150, RR9I-16) | §29.3 (SV-05), §29.7 |
+| M-6 | SV-16 (actor derivado de la identidad autenticada; capturador offline) y SV-17 (correspondencia entidad–auditoría y torneo); ADR-03.C como dependencia (OC-151, RR9I-18) | §29.1, §29.3, §29.13, §29.15 |
+| M-7 | Regla uniforme de rangos (±1 en seguridad y mantenimiento; costo según aspectos no evaluados); puntuaciones recalculadas sin castigar solo lo desconocido | §29.12 |
+| M-8 | Neon evita el acceso directo solo si no se exponen credenciales; «no figura» pasa de [DOC] a [INF]; esquemas expuestos [PEND] (OC-153) | §29.9, §29.11, §29.6, §29.17 |
+| Obs. rol de servicio | SV-18 y SV-01: revisión y revocación explícita de privilegios del rol de servicio y de los roles por defecto, sin afirmar que una medida aislada impide todos los accesos privilegiados (OC-152, DR9I-10, RR9I-19) | §29.3, §29.14 |
