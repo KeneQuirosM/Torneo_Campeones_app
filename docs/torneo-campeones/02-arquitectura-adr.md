@@ -5537,3 +5537,323 @@ Los riesgos se **registran sin valorar ni aceptar**. Ninguno sustituye a RB1, RB
 | G-06 | CAP-16-P-B: la custodia del material de protección pasa a ADR-16.I; sesgo de CAP-16-P-A respecto de OFF-12 neutralizado | D16-1 |
 | G-07 | CAP-16-C-B acotada a la aplicación abierta (OFF-05); IN-16-14 acotada: el desalojo local no afecta a lo confirmado en el servidor | D16-4, §23.4 |
 | G-08 | IN-16-05 completada: sin sesión no se puede preparar ni descargar datos nuevos (OFF-23) | §23.4 |
+
+---
+
+# PARTE X — BLOQUE R2-C4 (v0.2-R2C4, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-22 inferida)
+
+## 24. R2-C4 — Consolidación documental del modelo de amenazas
+
+### 24.0 Alcance, autorización y reglas
+
+- **Autorización (texto del responsable, conversación de 2026-11-22):** «AUTORIZO EXCLUSIVAMENTE INICIAR R2-C4 Y REDACTAR EL BORRADOR DOCUMENTAL DE CONSOLIDACIÓN DEL MODELO DE AMENAZAS.» Se modifica solo este documento y solo esta sección, añadida al final. **No se autorizó** commit, push, PR ni merge.
+- **Estado de las Partes previas:** R1, R2-A, R2-B1, R2-B2-a, R2-B2-b1, R2-B2-b2 (con su cierre), R2-C1, R2-C2 y R2-C3 están aprobados condicionalmente **como entregables documentales** y versionados (último commit `d80e35c`). **R2-C como bloque, R2, ADR-02.C…ADR-16.C y la Fase 2 no tienen aprobación global.** Esta Parte no aprueba R2-C como bloque, R2, ADR-02.C…ADR-16.C ni la Fase 2.
+- **Aprobación (metadato; 2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R2-C4»: «APRUEBO EXCLUSIVAMENTE R2-C4 v0.2 COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: R2-C4 (v0.2-R2C4): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.** No acredita mitigación de amenazas, implementación, pruebas ni aceptación de riesgos, y no aprueba R2-C como bloque, R2 ni la Fase 2. La revisión fue **autoevaluación del autor**: sin auditoría independiente ni comprobación exhaustiva de cada relación de trazabilidad. Se conservan: las 34 amenazas y sus clasificaciones (19 Críticas); 13 con tratamiento documental, 6 con mención o contexto y 15 sin referencia posterior por identificador (ocho de ellas Críticas: AM-03, 05, 07, 20, 21, 25, 26, 30); AM-19 y AM-34 sin tratamiento posterior y sin reasignación aprobada; AM-08 sin riesgo residual identificado, pendiente de DC4-1; OM-01…07 sin evaluación completa; DC4-1…4, OC-52 y OC-53 abiertas; RES-01…12 sin aceptar; ninguna amenaza declarada mitigada. Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Qué es esta sección.** R2-A (§16.0, §16.3) declaró que su modelo de amenazas es inicial y parcial y que "será consolidado durante R2-C". Esta sección **reúne, relaciona y contrasta** lo ya escrito; **no crea amenazas con número AM, no modifica §16.3, no reescribe ningún ADR y no declara mitigada ninguna amenaza**.
+- **Convención de controles.** **E** = exigido (por `01` o por la fuente que R2-A cita como exigida); **P** = propuesto **[REC]** (sin fuente en `01`; no adoptado); **C** = condicionado (a una decisión, a una verificación en dispositivo, a asesoría jurídica o a un artefacto posterior); **PE** = pendiente (sin control documental, o con control sin cerrar). Un control documental es una **capacidad escrita**, no un control implementado ni probado (§24.8).
+- **Exclusiones (esta sección NO hace):** (1) elegir entre las formulaciones de ADR-05.C, ADR-04.C o ADR-16.C; (2) resolver DB1, DB2a, DB2b, DB2c, DC1, DC2, DC3, OC, K-3, D-2 ni las decisiones de R2-A; (3) aplicar la reasignación de AM-19 y AM-34 (OC-40, DB2c-11); (4) aceptar RES-01…RES-12 ni ningún otro riesgo; (5) conceder excepciones (D-2, R1 §8.1); (6) fijar parámetros, tecnologías o mecanismos; (7) emitir asesoría jurídica ni verificar en dispositivo; (8) actualizar la trazabilidad histórica de `d80e35c` en `aprobaciones.md` ni `bitacora.md`; (9) iniciar R3 ni R4.
+- **Continuidad de identificadores.** Se conservan AM-01…AM-34, CAB-01…30, OM-01…07, RES-01…12, TB-1…9 y toda la numeración previa. Series nuevas de esta sección: **HC4-nn** (hallazgos), **DC4-n** (decisiones del responsable), **OC-52…** (condiciones abiertas), **CA-C4-nn** (criterios de aceptación). No se crea ningún AM-35 o posterior.
+
+### 24.1 Fuentes leídas y límites
+
+Leídas directamente en esta sesión: §16.3 (tabla de 34 amenazas), §16.4 (CAB-01…30 y OM-01…07), §16.5 (responsables), §16.8.1, §16.10.1 (RES-01…12) y §16.10.3 (13 decisiones) de R2-A; §17.8 y §17.10 (R2-B1: RB1-01…05, tratadas o contexto); §20.9 y §20.10 (R2-B2-b2); §21.8, §22.8 y §23.8 con sus riesgos (RR5-nn, RR4-nn, RR16-nn) y condiciones abiertas (OC-43…51). Los conteos de referencias por Parte se obtuvieron por búsqueda textual del identificador.
+
+**Límites.** (1) Las columnas "Exigidos" y "Propuestos" de §24.3 reproducen **literalmente** la tabla de R2-A; no se reinterpretan. (2) La columna "Estado documental" de §24.4 es una **lectura del autor** (autoevaluación), no una auditoría independiente. (3) No se ejecutó ninguna prueba ni verificación en dispositivo. (4) No se revisó la consistencia de `01` consigo mismo. (5) **Limitación de lectura:** varias celdas de la tabla CAB (§16.4) se leyeron truncadas; los casos citados por amenaza se tomaron de la tabla de §16.3 (columna "Casos"), leída completa.
+
+### 24.2 Inventario consolidado de las 34 amenazas
+
+Tabla única; la identidad de cada amenaza es la de R2-A. Columnas copiadas de §16.3. Nivel: **19 de 34 son Críticas** (H2A-12; sin reclasificar, decisión 9 de R2-A abierta).
+
+| ID | Categoría | Riesgo | Estado de origen | Casos | Responsable asignado por R2-A |
+|---|---|---|---|---|---|
+| AM-01 | Elevación | Crítico | Exigido | CAB-01, CAB-02 | **R2-B** (ADR-02.C) |
+| AM-02 | Suplantación | Crítico | Exigido + [REC] | CAB-09 | **ADR-03.C**. El 2FA del delegado es opcional por decisión de `01` (Q-39): RES-10 |
+| AM-03 | Suplantación | Crítico | Exigido + [REC] | CAB-19 | **ADR-03.C** |
+| AM-04 | Manipulación | Alto | Exigido | CAB-04 | **R2-C** (ADR-05.C) |
+| AM-05 | Denegación | Crítico | Exigido + [REC] | CAB-10, CAB-15 | **ADR-03.C** |
+| AM-06 | Divulgación | Medio | Propuesto [REC] | CAB-15 | **ADR-03.C** |
+| AM-07 | Manipulación | Crítico | Propuesto [REC] | CAB-23 | **ADR-03.I** (R3) |
+| AM-34 | Manipulación / Divulgación | Crítico | Exigido + [REC] | CAB-25 | **R2-B**; **R3** (cabeceras); **Fase 4** |
+| AM-08 | Divulgación | Alto | Exigido | CAB-08 | **R2-C** (ADR-16.C) |
+| AM-09 | Elevación | Alto | Exigido | CAB-05, CAB-06 | **ADR-03.C** |
+| AM-10 | Manipulación | Alto | Exigido | CAB-16 | **R2-C** (ADR-05.C) |
+| AM-11 | Denegación | Alto | Exigido | CAB-08 | **R2-C** (ADR-05.C, ADR-16.C); RES-07 |
+| AM-33 | Suplantación | Alto | Exigido + [REC] | CAB-30 | **ADR-03.C**; **R2-C** |
+| AM-12 | Divulgación | Alto | Exigido | CAB-03 | **R2-C** (ADR-04.C) |
+| AM-13 | Divulgación | Crítico | Exigido | CAB-11, CAB-18 | **R2-C** (ADR-04.C) |
+| AM-31 | Divulgación | Crítico | Exigido | CAB-12 | **R2-C** (ADR-04.C); asesoría jurídica; RES-08 |
+| AM-14 | Denegación | Medio | Exigido | CAB-26 | **R3** (ADR-06, ADR-07) |
+| AM-15 | Elevación / Divulgación | Crítico | Exigido | CAB-01, CAB-07 | **R2-B** (ADR-02.C) |
+| AM-16 | Manipulación | Alto | Exigido | CAB-13 | **ADR-09.C** |
+| AM-17 | Repudio | Alto | Exigido | CAB-07, CAB-14 | **ADR-09.C** |
+| AM-18 | Manipulación | Alto | Exigido | CAB-05 | **R2-B** (ADR-02.C) |
+| AM-19 | Manipulación / Divulgación | Crítico | Propuesto [REC] | CAB-24 | **R2-B**; **Fase 4** |
+| AM-20 | Suplantación | Crítico | Exigido + [REC] | CAB-09 | **ADR-03.C**; ADR-15 (R3) |
+| AM-21 | Divulgación | Crítico | Exigido | CAB-11 | **R3** (ADR-15); **R4** (ADR-14) |
+| AM-22 | Elevación | Alto | Exigido + [REC] | CAB-27 | **R4** (ADR-14); **ADR-09.C** (registro) |
+| AM-23 | Suplantación / Elevación | Crítico | Exigido + [REC] | CAB-21 | **R3** (ADR-01); **R4** (ADR-11). No es de ADR-03.C |
+| AM-32 | Denegación | Crítico | Exigido | CAB-22 | **R4** (ADR-11, ADR-12); **Fase 8** |
+| AM-24 | Manipulación / Repudio | Medio | Exigido + [REC] | CAB-13 | **ADR-09.C**; ADR-09.I (R3) |
+| AM-25 | Divulgación | Crítico | Exigido + [REC] | CAB-11, CAB-20 | **R4** (ADR-13); **ADR-09.C** (lo que la auditoría no contiene) |
+| AM-26 | Divulgación | Crítico | Exigido | CAB-20 | **R3** (ADR-01); **Fase 7** |
+| AM-27 | Manipulación / Divulgación | Crítico | Exigido | CAB-28 | **R2-C** (ADR-04.C); **R3** (ADR-06) |
+| AM-28 | Divulgación | Crítico | Exigido (el requisito carece de mecanismo y plazo; no eliminable por diseño) | CAB-29 | **R2-C**; **R3** (ADR-06); RES-02 |
+| AM-29 | Divulgación | Alto | Exigido | CAB-17 | **R4** (ADR-12, ADR-11) |
+| AM-30 | Divulgación | Crítico | Exigido (el requisito carece de mecanismo y plazo; no eliminable por diseño) | CAB-17 | **R4** (ADR-12, ADR-17); RES-03 |
+
+Recuento: **34** amenazas; categorías, riesgo y responsable tal como las fija R2-A. Ninguna identidad se duplica ni se omite (CA-C4-01).
+
+### 24.3 Controles exigidos y propuestos según R2-A (literal)
+
+| ID | Exigidos (fuente) | Propuestos [REC] |
+|---|---|---|
+| AM-01 | RC-04 y RT-02 (servidor **y** capa de datos); RF-ACC-15 (ningún rol se modifica por parámetros del cliente) | — |
+| AM-02 | RF-ACC-10 (2FA obligatorio para dueño y organizador; límites de intentos); RF-ACC-09 (nueva autenticación con 2FA para designar o revocar un dueño; procedimientos de recuperación); RNF-05 | IN-03-14, IN-03-15, IN-03-16, IN-03-21 |
+| AM-03 | RF-ACC-07 (revocación inmediata en el servidor); RF-ACC-16 (invalidación al revocar y al cambiar la contraseña) | IN-03-12 |
+| AM-04 | OFF-06 (idempotencia); OFF-07 y OFF-25 (orden y contigüidad); RT-13 | — |
+| AM-05 | RNF-05 (límites de frecuencia en autenticación e invitaciones); RF-ACC-09 (procedimientos de recuperación de cuenta perdida). **RT-06 no lo cubre:** solo impide revocar o degradar al último dueño | PAR-02 (bloqueo temporal y nunca permanente) |
+| AM-06 | — (`01` no lo exige) | IN-03-13 |
+| AM-07 | — (RNF-05 no lo menciona) | Verificación de intención y de origen en toda solicitud con efecto (referencia de seguridad de la skill) |
+| AM-34 | RNF-05 (cabeceras de seguridad) | Validación de la entrada y **escape según el contexto de salida** (público, panel, correo); IN-03-12 (el secreto de sesión no es legible por scripts) |
+| AM-08 | OFF-12 y PRV-11 (solo datos mínimos, sin datos internos); revocación de la cuenta por dueño u organizador (OFF-12); **el cifrado local es una pregunta abierta de ADR-16.C** | — |
+| AM-09 | PA-01, PA-05 y RC-04 (lo local no autoriza); OFF-22 y OFF-23 (se rechaza lo sincronizado sin sesión y permisos vigentes): IN-03-10, IN-03-11 | — |
+| AM-10 | OFF-13 (el orden depende de la secuencia y no del reloj; aviso si la diferencia supera 5 min); RC-08 | — |
+| AM-11 | OFF-17 y RC-24 (advertencia, solicitud de almacenamiento persistente, sin promesa de conservación); RK-11 en `01` | — |
+| AM-33 | OFF-03 (cada operación guarda su usuario); OFF-22 (autorización por los roles de la cuenta); OFF-12 (cerrar sesión con pendientes exige confirmación y borra los datos locales tras sincronizar o descartar) | IN-03-19, IN-03-20 |
+| AM-12 | PA-04 (solo proyecciones públicas); `01 §9.6` (visibilidad) | — |
+| AM-13 | PRV-02 y PRV-03 (nunca públicos); lista blanca y etiquetas calculadas en el servidor (PA-04) | — |
+| AM-31 | PRV-02 (etiqueta por defecto); PRV-03; PRV-18 (evaluación con asesoría jurídica antes del lanzamiento; `01` la deja abierta); Q-20 (campos públicos, abierta) | — |
+| AM-14 | RNF-03, RNF-04, RNF-15 (degradación explícita, capacidad, red lenta) | — |
+| AM-15 | RT-08 (toda referencia pertenece al mismo torneo); RT-01 y RT-02 (capa de datos) | — |
+| AM-16 | RF-AUD-03 y RC-21 (solo anexado); RF-ACC-11 (el historial no se altera): IN-09-01, IN-09-02 | — |
+| AM-17 | RF-AUD-02 (mutaciones listadas); RT-10 (permisos auditados); RF-AUD-06 (rechazos) y su persistencia independiente **[DER]**: IN-09-04, IN-09-05 | — |
+| AM-18 | RT-13 (autorización evaluada en la misma transacción que aplica); UI-11 | — |
+| AM-19 | — (`01` no exige la validación de entradas: RNF-06 trata la integridad frente a la concurrencia, el reintento y la desconexión, y las restricciones críticas en la base de datos, **no la inyección**) | Validación en el límite de confianza y consultas parametrizadas (referencia de seguridad de la skill) |
+| AM-20 | RF-ACC-02 (un solo uso, vencimiento, correo coincidente, rol y ámbito inmutables) | IN-03-15, IN-03-21; PAR-04 |
+| AM-21 | §5.1 y §5.6 (Z4 no recibe datos de jugadores ni de menores); PRV-14 | — |
+| AM-22 | RT-14 (lo automático hereda la situación del actor que dispara); la identidad sin actor es una pregunta abierta de ADR-14 | IN-09-09 (se audita con su origen) |
+| AM-23 | RNF-14 (credenciales individuales y revocables del desarrollador); RC-18 (cuentas a nombre de la organización) | Segundo factor para las cuentas administrativas de la plataforma y revocación inmediata del acceso al terminar la relación (sin elegir mecanismo) |
+| AM-32 | RNF-17 (manual de operación y sucesión de accesos); RNF-14 (inventario de cuentas y administradores, firmado en la Fase 8); RF-ACC-09 (segundo dueño y procedimientos de recuperación). **RT-06 no lo cubre:** solo impide revocar o degradar al último dueño, no su ausencia o pérdida | — |
+| AM-24 | RF-AUD-03 (se documenta el límite frente al administrador de la base de datos): IN-09-03 | CAP-09-M2 y CAP-09-M3 (detección de alteración, copia externa) |
+| AM-25 | PRV-12 y RNF-09 (registros y monitoreo sin datos personales) | Lo que no debe registrarse (§16.7.5) |
+| AM-26 | RT-09 (nunca llegan al navegador ni a la cola local) | — |
+| AM-27 | PA-04 (lista blanca); PRV-03; garantía exigida de coherencia (§5.5, CL-15) | — |
+| AM-28 | PRV-06 (ocultar y anonimizar); PRV-02; HR1-11 (no hay plazo definido y **no se promete uno**) | — |
+| AM-29 | §5.6 y TB-9 (mismo nivel de protección que Z3); PRV-17 (datos sintéticos fuera de producción) | — |
+| AM-30 | PRV-06 (ningún campo personal queda tras anonimizar); `01` no fija la retención de los respaldos (PEND-JUR) | — |
+
+### 24.4 Matriz amenaza → fuente → ADR, capacidad, invariante, escenario → control documental → estado
+
+Fuente común de la columna 2: §16.3, §16.4 y §16.8.1 (R2-A) y las secciones de amenazas de las Partes III, VI, VII, VIII y IX. Los identificadores citados existen en el documento. Donde no hay referencia posterior a R2-A, se dice.
+
+| ID | ADR, capacidad, invariante, escenario | Controles (E, P, C, PE) | Estado documental (lectura del autor) |
+|---|---|---|---|
+| AM-01 | ADR-02.C: IN-02-01, 04, 06, 08 (§17.10); IF-03, IF-13; RB1-01 | **E:** autorización en ambas capas (RC-04, RT-02, RF-ACC-15). **PE:** deriva entre las ejecuciones de la decisión (RB1-01; K-1) | Capacidad descrita en IN-02 (R2-B1); su conformidad depende de la formulación de ADR-02.C no elegida y de K-1; sin prueba ni verificación |
+| AM-02 | ADR-03.C: IN-03-02, 03, 04, 09, 21 [REC]; PAR-01, 02, 06; CAB-09 | **E:** 2FA de dueño y organizador (RF-ACC-10). **P:** IN-03-14, 15, 16, 21. **C:** PAR-01…06 sin validación (RES-09); 2FA del delegado opcional (RES-10) | Capacidad fijada en ADR-03.C (R2-A); sin aprobación global; sin prueba. Única referencia posterior: mención editorial (C-08, §17), **no tratamiento** |
+| AM-03 | ADR-03.C: IN-03-06, 07, 08, 12, 16; CAP-03-V; PAR-03; CAB-19; D-2 | **E:** revocación y sesión (RF-ACC-07, RF-ACC-16). **P:** IN-03-12, 16. **C:** objetivo ≤ 60 s (D-2) no es garantía (RES-05) | Capacidad fijada; sin referencia por identificador en las Partes III–IX. Relación **indirecta** con D-2 y RES-05 (DB2c-1, DB2c-10), que no equivale a cobertura completa; D-2 abierta sin excepción |
+| AM-04 | ADR-05.C: IN-05-04, 06, 08, 10; ESC-43, ESC-57; R2-B2: IF-34, IF-35, ES-25, ES-27, GT-20, GT-21 | **E:** un efecto, un registro, secuencia contigua (OFF-06, 07, 25). **C:** formulaciones D5-1, 4, 5, 7 abiertas | Tratada documentalmente por ADR-05.C (R2-C1); formulación sin elegir; sin prueba |
+| AM-05 | ADR-03.C: IN-03-02, 03, 04; CAP-03-N, CAP-03-R; CAB-10, CAB-15 | **E:** límites de frecuencia (RNF-05) y procedimientos de recuperación (RF-ACC-09). **P:** PAR-02 (bloqueo temporal, nunca permanente); sin diferencias observables entre cuenta existente e inexistente (CAB-15 [REC]). **C:** PAR-02; lectura de "nueva autenticación" (decisión 12); RES-12 | Capacidad fijada en ADR-03.C; sin referencia posterior por identificador |
+| AM-06 | ADR-03.C: IN-03-02, 03, 09; PAR; CAB-15 | **P:** IN-03-13 **[REC]** (`01` no lo exige; decisión 7) | Propuesta de R2-A; sin referencia posterior por identificador |
+| AM-07 | ADR-03.I (R3); CAB-23 | **P:** prueba de intención en solicitudes con efecto **[REC]**. **C:** solo si el mecanismo de sesión envía la credencial de forma automática | Condicionada a R3; sin tratamiento en R2-B ni R2-C |
+| AM-34 | Sin ADR que la trate (OC-40, DB2c-11); ADR-06 (R3, cabeceras); Fase 4; CAB-25 | **P:** escape según el contexto de salida y cabeceras de seguridad **[REC]**. **E:** RNF-05. **PE:** reasignación propuesta, no aplicada | Sin tratamiento documental posterior; mantiene la asignación formal de R2-A a R2-B (reasignación propuesta, no aplicada); hallazgo HC4-03 |
+| AM-08 | ADR-16.C: IN-16-01…04, 09; ES-45, ES-47; ESC-75; ADR-05.C: IN-05-11, 13 (solo cola); CAB-08 | **E:** datos mínimos sin internos y revocación de la cuenta (OFF-12, OFF-17, PRV-11). **C:** D16-1 (cifrado local, pregunta abierta). **PE:** ningún RES la cubre | Tratada documentalmente por ADR-16.C; hallazgo HC4-02; sin verificación en dispositivo |
+| AM-09 | ADR-03.C: IN-03-10, 11, 19, 20; CAP-03-S; RB1-02; CAB-05, CAB-06 | **E:** lo local no autoriza (PA-01, PA-05, RC-04); se rechaza lo sincronizado sin sesión y permisos vigentes (OFF-22, OFF-23). Sin propuestas [REC] | Capacidad fijada en ADR-03.C; **contexto** en R2-B1 (RB1-02), no tratamiento |
+| AM-10 | ADR-05.C: IN-05-15, IN-05-10; ES-37; ADR-16.C: IN-16-06; R2-B2: IF-35, IF-33; CAB-16 | **E:** orden por secuencia y no por reloj; aviso > 5 min (OFF-13). **C:** formulaciones D5 abiertas; la protección del almacén no sustituye la revalidación del servidor | Tratada documentalmente por ADR-05.C y ADR-16.C; sin prueba |
+| AM-11 | ADR-16.C: IN-16-11…14; ES-50; ESC-78; ADR-05.C: IN-05-13; ESC-65; CAB-08 | **E:** advertencia sin promesa de conservación (OFF-17). **C:** [NO VERIF] iOS (HR1-07; IOS-01, 04, 05, 07; OC-51); D16-4. **PE:** RES-07 y RK-11 sin aceptar | Tratada documentalmente; comportamiento en dispositivo sin verificar |
+| AM-33 | ADR-03.C: IN-03-19, 20 [REC]; ADR-05.C: IN-05-11 [REC]; ES-35; ESC-62; ADR-16.C: IN-16-07; ES-48; ESC-76; R2-B2: IF-33; CAB-30 | **E:** OFF-03 (cada operación guarda su usuario), OFF-22, OFF-12. **P:** IN-03-19, 20. **C:** adoptar o no lo [REC] (DC3-7) | Tratada documentalmente por ADR-03.C, ADR-05.C y ADR-16.C; lo [REC] sin adoptar |
+| AM-12 | ADR-04.C: IN-04-01, 04; ES-40; ESC-68, ESC-71; CAB-03 | **E:** solo lo publicado es visible (PA-04, `01 §9.6`). **C:** D4-3, D4-7 | Tratada documentalmente por ADR-04.C (R2-C2); pruebas de §9.6 en la Fase 4 |
+| AM-13 | ADR-04.C: IN-04-01, 02, 11; ES-38, ES-44; ADR-16.C: IN-16-16; ESC-83; CAB-11, CAB-18 | **E:** ninguna zona prohibida de §5.6 recibe el dato (PRV-02, 03, 08, OFF-24). **C:** D4-3, D4-4; Q-43. **PE:** RES-04 sin aceptar | Tratada documentalmente; la exportación remite a CMP-17 y Q-43 (abierta) |
+| AM-31 | ADR-04.C: IN-04-16; ESC-73; CAB-12 | **E:** evaluación jurídica y de diseño antes del lanzamiento (PRV-18). **C:** D4-4; OC-45; asesoría jurídica. **PE:** RES-08 sin aceptar | Tratada documentalmente; la evaluación de PRV-18 sigue abierta |
+| AM-14 | ADR-06 y ADR-07 (R3); CAB-26 | **E:** degradación explícita; mejor esfuerzo (RNF-03, 04, 15) | Sin tratamiento documental posterior a R2-A; depende de R3 |
+| AM-15 | ADR-02.C: IN-02-01, 04, 05, 06; IF-13; R2-B2: IF-24, GT-14 (CAB-07); CAB-01, CAB-07 | **E:** aislamiento en la capa de datos (RT-02, RT-08, RT-14) | Capacidad descrita en IN-02 (R2-B1) y en R2-B2; su conformidad depende de la formulación de ADR-02.C no elegida y de K-1; sin prueba |
+| AM-16 | ADR-09.C: IN-09-01, 02, 03; CAP-09-M; CAB-13 | **E:** ningún rol de la aplicación altera la auditoría (RF-ACC-11, RC-21) | Capacidad fijada en ADR-09.C (R2-A); sin referencia posterior por identificador |
+| AM-17 | ADR-09.C: IN-09-04…07; CAP-09-P; §16.7.2; CAB-07, CAB-14 | **E:** el rechazo persiste de forma independiente (RF-AUD-01, 04, 06; RT-10, RT-13). **P:** volumen que no impide registrar. **C:** decisión 10, K-3, OC-35 | Capacidad fijada; la persistencia del rechazo sigue abierta (K-3; decisión 10) |
+| AM-18 | R2-B2: IF-33, IF-39, GT-22, ES-26; ESC-45, 52, 53; ADR-05.C: IN-05-10; CAB-05 | **E:** rechazada y conservada según OFF-10, nunca a medias (RT-13, OFF-11, 22). **C:** OC-04; D-2 | Tratada documentalmente por R2-B2 y ADR-05.C; OC-04 y D-2 abiertas |
+| AM-19 | Sin ADR que la trate: R2-B1, R2-B2, ADR-05.C, ADR-04.C y ADR-16.C la dejan fuera (OC-40, DB2c-11); CAB-24 | **P:** validación en el límite de confianza **[REC]** (sin fuente en `01`). **PE:** reasignación propuesta, no aplicada | Sin tratamiento documental posterior; mantiene la asignación formal de R2-A a R2-B (reasignación propuesta, no aplicada); hallazgo HC4-03 |
+| AM-20 | ADR-03.C: IN-03-05, 21 [REC]; ADR-15 (R3); CAB-09 | **E:** invitaciones (RF-ACC-01, 02). **P:** IN-03-21. **C:** RES-01 | Capacidad fijada en ADR-03.C; comparte con R3 |
+| AM-21 | ADR-15 (R3); ADR-14 (R4); CAB-11 | **E:** ninguna zona prohibida de §5.6 recibe el dato (PRV-02, 03) | Sin tratamiento documental posterior a R2-A; depende de R3 y R4 |
+| AM-22 | ADR-09.C (registro); ADR-14 (R4); CAB-27 | **E:** hereda la situación del actor (RT-14). **P:** IN-09-09 (se audita con su origen); una tarea sin actor no ejecuta operaciones sobre el estado [REC] | Sin tratamiento documental posterior a R2-A; depende de R4 |
+| AM-23 | ADR-01 (R3); ADR-11 (R4); IN-02-29 [REC] (RB1-03); CAB-21 | **E:** credenciales individuales y revocables (RNF-14). **P:** IN-02-29. **C:** RES-11 | Contexto en R2-B1 (RB1-03); mecanismo en R3 y R4 |
+| AM-32 | ADR-11 y ADR-12 (R4); Fase 8; RB1-05; CAB-22 | **E:** sucesión de accesos y manual de operación (RNF-17, RNF-14). **C:** RES-11 | Contexto en R2-B1 (RB1-05); mecanismo en R4 y la Fase 8 |
+| AM-24 | ADR-09.C: IN-09-01, 03; CAP-09-M; ADR-09.I; CAB-13 | **E:** RF-AUD-03 (límite frente a la infraestructura documentado). **P:** CAP-09-M2, CAP-09-M3 (detección de alteración, copia externa). **C:** RES-06 | Capacidad fijada; el límite frente a la infraestructura es un riesgo residual sin aceptar |
+| AM-25 | ADR-09.C: IN-09-07, 12; ADR-13 (R4); CAB-11, CAB-20 | **E:** PRV-12. **P:** IN-09-12 | Sin tratamiento documental posterior a R2-A; depende de R4 |
+| AM-26 | ADR-01 (R3); Fase 7; CAB-20 | **E:** 0 apariciones de credenciales de servicio en cliente, cola, registros y telemetría (RT-09, PRV-12) | Sin tratamiento documental posterior a R2-A; revisión en la Fase 7 |
+| AM-27 | ADR-04.C: IN-04-01, 06, 07; ES-42; ESC-66, ESC-67; ADR-06 (R3); CAB-28 | **E:** solo proyecciones con lista blanca y garantía de coherencia (PA-04, PRV-03, CL-15). **C:** D4-2; OC-46 | Tratada documentalmente por ADR-04.C; la coherencia no se presenta como demostrada |
+| AM-28 | ADR-04.C: IN-04-09, 10; ES-39; ESC-69; ADR-16.C: IN-16-03, 09; ES-46; ESC-84; ADR-06 (R3); CAB-29 | **E:** señal de cambio sin mecanismo ni plazo (HR1-11). **C:** D4-6; OC-47. **PE:** RES-02 sin aceptar | Tratada documentalmente por ADR-04.C y ADR-16.C; sin plazo; riesgo residual sin aceptar |
+| AM-29 | ADR-12 y ADR-11 (R4); CAB-17 | **E:** mismo nivel de protección que Z3 (PRV-06, PRV-17, TB-9, HR1-12) | Sin tratamiento documental posterior a R2-A; depende de R4 |
+| AM-30 | ADR-12 y ADR-17 (R4); IN-09-10 (fuera de alcance); CAB-17 | **E:** sin mecanismo ni plazo. **PE:** RES-03 sin aceptar; PEND-JUR | Sin tratamiento documental posterior a R2-A; depende de R4 y de asesoría jurídica |
+
+**Cobertura posterior a R2-A (búsqueda textual del identificador desde la Parte III), en tres clases que no deben mezclarse.** (1) **Tratamiento documental** (capacidad descrita en R2-B o R2-C): AM-01, 04, 08, 10, 11, 12, 13, 15, 18, 27, 28, 31, 33 (13). (2) **Solo mención o contexto, sin tratamiento:** AM-02 (mención editorial, C-08), AM-09 (RB1-02), AM-19, AM-34 (fuera de alcance, OC-40), AM-23 (RB1-03), AM-32 (RB1-05) (6). (3) **Sin ninguna referencia por identificador:** AM-03, 05, 06, 07, 14, 16, 17, 20, 21, 22, 24, 25, 26, 29, 30 (**15**). Esto es lo esperado para las de ADR-03.C, ADR-09.C, R3 y R4, pero **no es una prueba de cobertura** (HC4-05).
+
+**Críticas sin referencia posterior.** **Ocho** de las 19 amenazas Críticas están en la clase (3): **AM-03, AM-05, AM-07, AM-20, AM-21, AM-25, AM-26 y AM-30**. Conservan íntegras sus obligaciones de §16.3 (§24.3); ninguna se presenta como cubierta. AM-03 mantiene una relación **indirecta** con D-2 y RES-05, que no presume cobertura completa.
+
+### 24.5 Amenazas compartidas entre bloques (una sola identidad)
+
+| Amenaza | Bloques que intervienen | Reparto documentado | Lo que sigue abierto |
+|---|---|---|---|
+| AM-04 y AM-10 | ADR-05.C; R2-B2 (IF-34, IF-35); R3 (ADR-05.I) | Orden, idempotencia y reloj en ADR-05.C; la autorización con el estado vigente en R2-B2 | D5-1, 4, 5, 7 (formulaciones); OC-35 |
+| AM-08 | ADR-16.C; ADR-05.C (solo cola); ADR-03.C (revocación OFF-12) | Almacenamiento local en ADR-16.C; la cola en ADR-05.C | D16-1; sin RES (HC4-02) |
+| AM-11 | ADR-05.C (advertencia); ADR-16.C (desalojo) | ADR-05.C remite el almacenamiento a ADR-16.C | D16-4; RES-07; OC-48…51; iOS [NO VERIF] |
+| AM-33 | ADR-03.C; ADR-05.C; ADR-16.C; R2-B2 | Atribución de la cola a la cuenta en ADR-03.C; consumida por ADR-05.C y ADR-16.C | Adoptar o no lo [REC] (decisión 7; DC1-8; DC3-7) |
+| AM-28 | ADR-04.C; ADR-16.C; ADR-06 (R3) | Señal de cambio en ADR-04.C; copias locales en ADR-16.C | D4-6; OC-47; RES-02; sin plazo |
+| AM-13 | ADR-04.C; ADR-16.C; CMP-17 | Proyecciones en ADR-04.C; exportación remitida a CMP-17 | Q-43; RES-04 |
+| AM-18 | R2-B2; ADR-05.C; ADR-03.C | Frontera atómica en R2-B2; revalidación en ADR-05.C | OC-04; D-2 |
+| AM-01 y AM-15 | R2-B1 (ADR-02.C) | AM-15 es el resultado exitoso de AM-01 (§16.3); controles distintos (autorización frente a aislamiento) | K-1 |
+| AM-19 y AM-34 | R2-A (asignó a R2-B); R2-B2-b2, R2-C1, R2-C2 y R2-C3 (las dejan fuera); R3; Fase 4 | **Ninguno las trata** | DB2c-11 (OC-40) |
+| AM-02 y AM-20 | ADR-03.C; ADR-15 (R3) | Aviso al titular IN-03-21 [REC] | RES-01 |
+| AM-23 y AM-32 | R2-B1 (contexto: RB1-03, RB1-05); R3 y R4; Fase 8 | Mención contextual en R2-B1; mecanismo en R3, R4 y la Fase 8 (R2-A §16.5) | Sin tratamiento documental; RES-11 |
+| AM-21 | R3 con R4 | Reparto de R2-A §16.5 | **Sin ninguna referencia posterior** (HC4-05) |
+| AM-34 (además de lo dicho arriba) | R3 (cabeceras); Fase 4 | Contexto en R2-B1; sin tratamiento | DB2c-11 |
+
+### 24.6 Duplicaciones, contradicciones y amenazas sin cobertura documental (hallazgos HC4)
+
+| ID | Tipo | Hallazgo | Estado |
+|---|---|---|---|
+| HC4-01 | Duplicación | AM-11 figura con dos responsables (ADR-05.C y ADR-16.C) y ADR-05.C la remite a ADR-16.C; no hay contradicción | Se conserva una identidad; remisión cruzada ya documentada en §21.8 y §23.8 |
+| HC4-02 | Sin cobertura | **AM-08** (dispositivo robado o prestado con datos locales) **no tiene riesgo residual registrado** (§23.8: "ningún RES lo cubre"); el cifrado local es una pregunta abierta (D16-1) | **Sin resolver.** No se crea RES-13; ver DC4-1 |
+| HC4-03 | Sin cobertura | **AM-19 y AM-34** no son tratadas por ningún bloque: R2-A las asignó a R2-B, R2-B2-b2 propone devolverlas a R2-C y a la Fase 4, y R2-C1, R2-C2 y R2-C3 las dejan fuera. Ambas son Críticas (§24.2) y **carecen de tratamiento documental posterior**, pero **mantienen su asignación formal de R2-A a R2-B**; la reasignación continúa pendiente (DB2c-11) | **Sin resolver.** No se aplica la reasignación (DC4-2) |
+| HC4-04 | Contradicción aparente | §16.5 de R2-A dice "R2-B … no iniciado" y "R2-C … no iniciado": es el estado histórico de esa fecha | Sin corregir (no se modifica R2-A) |
+| HC4-05 | Sin cobertura | **15** amenazas (AM-03, 05, 06, 07, 14, 16, 17, 20, 21, 22, 24, 25, 26, 29, 30) no tienen referencia por identificador después de R2-A; **ocho son Críticas** (AM-03, 05, 07, 20, 21, 25, 26, 30). AM-03 se relaciona solo indirectamente con D-2 y RES-05. R3 y R4 no se han iniciado | Esperado; no es cobertura demostrada |
+| HC4-06 | Sin cobertura | OM-02…OM-06 (A-24) siguen **sin evaluar** y sin referencia posterior; OM-01 y OM-07 aparecen solo como contexto en R2-B1 (§17: "la autorización no lo impide"), que las remite a R2-B2 y R4; **R2-B2 no las evalúa** (ninguna de las Partes IV–VI las nombra) y R2-A las asignó a R2-B y R4 | Sin resolver; no se evalúan aquí |
+| HC4-07 | Tensión | AM-30 y AM-28 se exigen "sin mecanismo ni plazo" (HR1-11, HR1-12) mientras los riesgos RES-02 y RES-03 son "no eliminables por diseño"; ninguna Parte fija plazo | Conservada; sin aceptar |
+| HC4-08 | Dependencia circular | La lectura de A-8 es circular entre R1 §8.2 y R2-B1 §17.6 (T-8 de §22.2; D4-8; DB1-3); afecta a la frontera de ADR-04.C y, por tanto, a AM-12 y AM-13 | Conservada; abierta |
+| HC4-09 | Cobertura parcial | CAB-18 (AM-13): RES-04 asigna R2-B y R2-C, ADR-16.C remite a CMP-17 y a Q-43, y R2-B no la desarrolla | Abierta (Q-43) |
+| HC4-10 | Sin evidencia | Ningún control de las 34 amenazas tiene prueba ejecutada, verificación en dispositivo ni evaluación jurídica (§24.8) | Estado, no defecto |
+
+**Candidatas a amenaza nueva.** Tras esta lectura **no se identifica ninguna candidata nueva** que no esté ya en AM-01…34 u OM-01…07. Si el responsable o la revisión independiente identifica alguna, se registrará como **"candidata pendiente"**, sin número AM y sin control asignado, y no se tratará como aprobada.
+
+### 24.7 Riesgos residuales documentados (sin aceptar)
+
+Ninguno está aceptado; la aceptación es solo del usuario (decisión 8 de R2-A). Se consolidan por amenaza, sin reestimar niveles.
+
+| Riesgo | Amenazas | Fuente | Nivel estimado [SUP] (R2-A) | Estado |
+|---|---|---|---|---|
+| RES-01 | AM-02, AM-20 | §16.10.1 | Medio | Pendiente |
+| RES-02 | AM-28 | §16.10.1; RR4-08 | Alto, no eliminable por diseño | Pendiente |
+| RES-03 | AM-30 | §16.10.1 | Alto, no eliminable por diseño | Pendiente |
+| RES-04 | AM-13 (CAB-18) | §16.10.1 | Medio, no eliminable por diseño | Pendiente |
+| RES-05 | AM-03 | §16.10.1 (D-2) | Medio | Pendiente; sin excepción |
+| RES-06 | AM-24 | §16.10.1 | Medio con M1; Bajo con M2 o M3 | Pendiente |
+| RES-07 | AM-11 | §16.10.1; RR5-10 | Medio | Pendiente; RK-11 sin aceptar |
+| RES-08 | AM-31 | §16.10.1; RR4-07 | Alto | Pendiente |
+| RES-09 | AM-02, AM-03, AM-05 | §16.10.1 | Medio | Pendiente |
+| RES-10 | AM-02 | §16.10.1 | Alto | Pendiente |
+| RES-11 | AM-23, AM-32 | §16.10.1; RB1-03, RB1-05 | Medio | Pendiente |
+| RES-12 | AM-05 | §16.10.1 | Medio | Pendiente |
+
+**Amenazas sin riesgo residual asociado:** AM-01, 04, 06, 07, 08, 09, 10, 12, 14, 15, 16, 17, 18, 19, 21, 22, 25, 26, 27, 29, 33, 34. Para AM-08 es el hallazgo HC4-02; para el resto no se afirma que el residuo sea nulo, solo que R2-A no registró ninguno. Los riesgos propios de cada bloque (RB1-01…05, RR5-01…10, RR4-01…10, RR16-01…10) son riesgos **de redacción o de interpretación** de cada Parte, no riesgos residuales de amenaza, y se mantienen en su Parte.
+
+### 24.8 Garantía documental frente a control implementado o probado
+
+| Nivel | Qué hay | Qué falta |
+|---|---|---|
+| Documental (hoy) | Capacidades exigidas `.C` (IN-nn-nn), invariantes, escenarios (ES, ESC, GT, IF), casos de abuso (CAB) y riesgos, escritos y revisados por el autor y, en parte, por revisiones focalizadas | Aprobación global de R2-C, R2 y la Fase 2 |
+| Mecanismo | Nada: los `.I` (ADR-nn.I) dependen de ADR-01 y de R3 | Selección y diseño en R3 |
+| Implementado | **Nada.** No hay código en esta fase | Fase 4 en adelante |
+| Probado | **Nada.** "Caso de prueba futuro" de §16.4 es una promesa, no un resultado | Fase 4 y Fase 7; verificación en dispositivo (iOS) |
+| Jurídico | **Nada.** PRV-18, PEND-JUR, HR1-11, HR1-12 y HR1-14 requieren asesoría jurídica | Asesoría jurídica |
+
+Por tanto, **ninguna** de las 34 amenazas puede darse por mitigada con la evidencia disponible; las expresiones "tratada" y "fijada" de §24.4 significan "descrita en una capacidad exigida", no "mitigada".
+
+### 24.9 Decisiones abiertas que bloquean el cierre de cada amenaza
+
+| Amenaza | Bloqueos (decisión, condición o riesgo abiertos) |
+|---|---|
+| AM-01 | K-1; RB1-01; decisión 9 (priorización) |
+| AM-02 | Decisiones 2, 4, 7, 8, 12, 13; RES-01, RES-09, RES-10 |
+| AM-03 | Decisión 1 (D-2: DB2c-1, DB2c-10; sin excepción); RES-05; decisión 2 |
+| AM-04 | D5-1, D5-4, D5-5, D5-7; DC1; OC-35, OC-43 |
+| AM-05 | Decisiones 2, 12; RES-12 |
+| AM-06 | Decisión 7 |
+| AM-07 | Decisión 7; R3 |
+| AM-34 | DB2c-11 (OC-40); R3; Fase 4 |
+| AM-08 | D16-1; DC4-1 (HC4-02) |
+| AM-09 | Decisión 7 (IN-03-19, 20) |
+| AM-10 | D5; DC1; OC-35 |
+| AM-11 | D16-4; OC-48, OC-49, OC-50, OC-51; HR1-07; RES-07; RK-11 |
+| AM-33 | Decisión 7; DC1-8; DC3-7 |
+| AM-12 | D4-3, D4-7; DC2 |
+| AM-13 | D4-3, D4-4; Q-43; RES-04 |
+| AM-31 | Q-20; PRV-18; OC-45; RES-08; asesoría jurídica |
+| AM-14 | R3 |
+| AM-15 | K-1 |
+| AM-16 | Decisión 3 |
+| AM-17 | K-3; decisión 10; OC-35; DB2b |
+| AM-18 | OC-04; D-2 |
+| AM-19 | DB2c-11 (OC-40) |
+| AM-20 | RES-01; R3 |
+| AM-21 | R3; R4 |
+| AM-22 | R4; decisión 7 |
+| AM-23 | RES-11; R3; R4 |
+| AM-32 | RES-11; R4; Fase 8 |
+| AM-24 | RES-06; decisión 3 |
+| AM-25 | R4 |
+| AM-26 | R3; Fase 7 |
+| AM-27 | D4-2; OC-46; ADR-06 |
+| AM-28 | D4-6; OC-47; RES-02; HR1-11; ADR-06 |
+| AM-29 | R4 |
+| AM-30 | RES-03; HR1-12; PEND-JUR; R4 |
+
+### 24.10 Condiciones abiertas, decisiones del responsable y riesgos de esta Parte
+
+| ID | Descripción | Origen |
+|---|---|---|
+| DC4-1 | ¿Cómo se registra el riesgo residual de AM-08 (o se decide dejarlo sin registrar)? Opciones: pedir su registro como riesgo residual adicional; aceptar que lo cubra la decisión sobre D16-1; mantenerlo abierto | HC4-02 |
+| DC4-2 | Mientras DB2c-11 siga abierta, ¿quién consume AM-19 y AM-34? No se aplica la reasignación ni se decide aquí | HC4-03; OC-40; DB2c-11 |
+| DC4-3 | ¿Se desea que la consolidación pase a un artefacto propio (p. ej. un modelo de amenazas independiente de R2-A) o permanezca como Parte X? Esta Parte no lo decide | §24.0 |
+| DC4-4 | ¿La revisión de AM-19 y AM-34 y de OM-01…07 debe hacerse antes de aprobar R2-C como bloque? | HC4-03; HC4-06 |
+| OC-52 | Estado de OM-02…OM-06 (sin evaluar desde R2-A) y su asignación a R3 o R4 | HC4-06; §16.4 |
+| OC-53 | Si la ausencia de referencias a 15 amenazas (HC4-05) debe resolverse con una revisión de ADR-03.C y ADR-09.C, o esperar a R3 y R4 | HC4-05 |
+
+| Riesgo | Descripción |
+|---|---|
+| RRC4-01 | Leer la consolidación como mitigación o como aprobación de R2-C, R2 o la Fase 2 |
+| RRC4-02 | Resolver por inferencia DB2c-11, D-2, K-3 o la aceptación de un RES |
+| RRC4-03 | Tomar "tratada" por "mitigada" (§24.8) |
+| RRC4-04 | Que la columna de estado de §24.4 se tome por una auditoría independiente |
+| RRC4-05 | Que los conteos de §24.4 se tomen por una prueba de cobertura |
+
+### 24.11 Criterios de aceptación documental (verificables)
+
+| ID | Criterio | Cómo se comprueba |
+|---|---|---|
+| CA-C4-01 | Las 34 amenazas AM-01…34 figuran, una vez cada una, en §24.2, §24.3 y §24.4; no se crea ninguna AM-35 | Comprobación textual de los identificadores |
+| CA-C4-02 | §24.3 reproduce literalmente las columnas "Exigidos" y "Propuestos" de §16.3 | Comparación contra §16.3 |
+| CA-C4-03 | Cada identificador citado en la Parte X existe definido en el documento | Comprobación de huérfanos |
+| CA-C4-04 | AM-19 y AM-34 quedan sin tratar y su reasignación no se aplica | Lectura de §24.5, §24.6, §24.10 |
+| CA-C4-05 | Ningún RES figura como aceptado; ninguna excepción concedida | Lectura de §24.7 y §24.0 |
+| CA-C4-06 | No se eligen formulaciones de ADR-05.C, ADR-04.C ni ADR-16.C | Lectura de §24.0 y §24.9 |
+| CA-C4-07 | Las Partes I a IX y el registro de cierre de R2-B2 no cambian (prefijo idéntico a `d80e35c`) | Comparación de prefijo contra el commit |
+| CA-C4-08 | No se usan nombres de tecnología, proveedor ni parámetros nuevos | Búsqueda de términos |
+| CA-C4-09 | Cada control se rotula E, P, C o PE y se distingue de un control implementado o probado | Lectura de §24.0, §24.4 y §24.8 |
+
+### 24.12 Verificación del autor (autoevaluación, no auditoría independiente)
+
+| Comprobación | Resultado |
+|---|---|
+| Prefijo idéntico al HEAD `d80e35c` | Conforme (comparado por byte) |
+| 34 amenazas presentes, sin AM-35 | Conforme |
+| §24.3 literal | Conforme (generada desde la tabla de §16.3) |
+| Identificadores citados definidos | Conforme por script: todos existen en el documento previo, salvo los nuevos DC4-1…4, OC-52 y OC-53, definidos en §24.10 |
+| Tablas con igual número de columnas | Conforme |
+| Sin nombres de tecnología | Conforme (búsqueda de términos) |
+| Lo que **no** se comprobó | Exactitud semántica de la columna 2 de §24.4 frente a cada Parte (lectura del autor); coherencia de `01` consigo mismo; cualquier prueba, verificación en dispositivo o asesoría jurídica |
+
+### 24.13 Estado y preguntas para el responsable
+
+**Estado:** R2-C4 **v0.2-R2C4: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL** (v0.1 corregida en F-1…F-4 y cuatro observaciones; ver §24.14). **No versionado** (sin commit, push, PR ni merge). Sin aprobación global de R2-C, R2 ni la Fase 2. Autoevaluación del autor, no auditoría independiente.
+
+**Preguntas para el responsable:** DC4-1 a DC4-4 (§24.10), más las condiciones OC-52 y OC-53. Siguen abiertas todas las decisiones de R2-A, K-3, D-2, DB1…DB2c, DC1…DC3, OC-01…OC-51 y RES-01…RES-12.
+
+### 24.14 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| F-1 | AM-01 y AM-15: la capacidad está descrita en IN-02, pero su conformidad depende de la formulación de ADR-02.C no elegida y de K-1 | §24.4 |
+| F-2 | AM-19 y AM-34: sin tratamiento posterior, con asignación formal de R2-A a R2-B vigente; reasignación pendiente | §24.4, HC4-03 |
+| F-3 | OM-01 y OM-07: contexto en R2-B1, que las remite a R2-B2 y R4; R2-B2 no las evalúa | HC4-06 |
+| F-4 | §24.5 alineada con §24.4: tres clases (tratamiento, mención o contexto, sin referencia) | §24.4, §24.5 |
+| Obs. 1 | Ocho Críticas sin referencia posterior destacadas | §24.4, HC4-05 |
+| Obs. 2 | AM-03: relación indirecta con D-2 y RES-05, sin presumir cobertura | §24.4, HC4-05 |
+| Obs. 3 | AM-02: la referencia posterior es una mención editorial, no tratamiento | §24.4 |
+| Obs. 4 | Limitación de lectura de las celdas CAB declarada | §24.1 |
