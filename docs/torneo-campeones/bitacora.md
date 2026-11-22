@@ -1,5 +1,16 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-22 — Fase 2, R3-D (aprobación condicional como entregable documental)
+
+- **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-D»: «APRUEBO EXCLUSIVAMENTE R3-D v0.2 (ADR-08) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **La aprobación documental condicionada de R3-D se registra como un evento independiente, sin reutilizar identificadores de decisiones deportivas;** **DR8-1** (alcance de CMP-12 sobre goleadores y tarjetas, OC-101) **no fue aprobada ni resuelta y permanece abierta**. No aprueba definitivamente ADR-08. Archivos: `02-arquitectura-adr.md` (solo metadatos de §28), `aprobaciones.md`, `bitacora.md`.
+- **Versión aprobada:** R3-D **v0.2-R3D** (Parte XIV, §28): ALT-08-A, ALT-08-B y ALT-08-C **sin selección definitiva**; rangos A y B 3,30–4,10, C 2,80–3,60 (sensibilidad documentada); MO-01…28, DR8-1…9, OC-101…125, RR8-01…18, CR3D-01…18, EC-01…21.
+- **Preservado:** MO con sus niveles de confirmación; DR8-1…9 (incluidas DR8-1, DR8-8 y DR8-9) y OC-101…125 abiertas; RR8-01…18 sin aceptar; RT-14, A-16, D4-8, A-8 pendientes y D-2 sin excepción; separación de cálculo oficial interno y proyección pública; atomicidad, autorizaciones y aislamiento por torneo sin cumplimiento demostrado; dependencias de ADR-01, ADR-02.C, ADR-04.C y ADR-05.C; alcance del MVP y exclusiones; autoevaluación del autor, sin auditoría independiente.
+- **Trazabilidad:** R3-C quedó versionado en `ed1550b9d0b89bf475b25c4e53bd79e30a3b4aa5` (`ed1550b`; 2026-11-22T05:48:03Z); nota posterior añadida en su entrada.
+- **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `989bcc994a6bb2f45105cc694873803d50ffb995a3e8fdba39b00261b4e742a1`; con los metadatos: `fdccd3f62efe52bac0f3877ffc99bdd903884a6c8b98b4a320339d6489cc77b3`. Las diferencias son solo metadatos de §28.
+- **Exclusiones (no implica):** seleccionar alternativa, tecnología o mecanismo; resolver otras decisiones; conceder excepción a D-2; aceptar riesgos; autorizar gastos; iniciar R3-E, R3-F, ADR `.I` o R4; aprobar R3 o la Fase 2.
+- **Estado real:** R3-A, R3-B, R3-C y R3-D aprobados condicionalmente (documental); R3-E, R3-F, ADR `.I` y R4 NO INICIADOS; R3 y Fase 2 sin aprobación global. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, R3-E u otro subbloque, resolver decisiones) requiere autorización expresa e independiente.
+
 ## 2026-11-22 — Fase 2, R3-C (aprobación condicional como entregable documental)
 
 - **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-C»: «APRUEBO EXCLUSIVAMENTE R3-C v0.2 (ADR-06 Y ADR-07) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **DR67-1** se registra solo como aprobación documental condicionada, no definitiva. No aprueba definitivamente ADR-06 ni ADR-07. Archivos: `02-arquitectura-adr.md` (solo metadatos de §27), `aprobaciones.md`, `bitacora.md`.
@@ -9,7 +20,7 @@
 - **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `c7df7c78de6f46d8c57c1c913a520d3f350e2e3aa0b7497dd86b9c1593a98ff0`; con los metadatos: `2caebb8e913002d98b18e674a9d90b59eb4ec03a0476a0ab731488e0e2f89138`. Las diferencias son solo metadatos de §27.
 - **Exclusiones (no implica):** seleccionar mecanismos, proveedores o parámetros; resolver otras decisiones; conceder excepción a D-2; aceptar riesgos; autorizar gastos; iniciar R3-D…F, ADR `.I` o R4; aprobar R3 o la Fase 2.
 - **Estado real:** R3-A, R3-B y R3-C aprobados condicionalmente (documental); R3-D…F, ADR `.I` y R4 NO INICIADOS; R3 y Fase 2 sin aprobación global. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar este registro, R3-D u otro subbloque, resolver decisiones) requiere autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, R3-D u otro subbloque, resolver decisiones) requiere autorización expresa e independiente. *[Nota posterior, 2026-11-22: este registro quedó versionado en el commit `ed1550b9d0b89bf475b25c4e53bd79e30a3b4aa5` (`ed1550b`; verificable por Git; 2026-11-22T05:48:03Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-22 — Fase 2, R3-B (aprobación condicional como entregable documental)
 

@@ -7048,3 +7048,363 @@ Eliminatorios aplicables: sin método de pago (RC-18; cumplen ambos [DOC]), entr
 | Obs. 5 | Cabecera de etiquetas y límites de la purga por etiqueta de Cloudflare como [PEND] (OC-100) | §27.12 |
 | Obs. 6 | Cálculos revisados por capas; el rango de ALT-06-A cambia con M-1; requisitos, recomendaciones y estimaciones distinguidos | §27.0, §27.8, §27.10 |
 
+---
+
+# PARTE XIV — BLOQUE R3-D (v0.2-R3D, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-22 inferida)
+
+## 28. R3-D — ADR-08 (motor de reglas deportivas y fuente única de clasificación): evaluación y borrador
+
+### 28.0 Alcance, autorización, puerta de entrada y reglas
+
+- **Autorización (2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — INICIO DE R3-D (ADR-08)»: «AUTORIZO EXPRESAMENTE INICIAR R3-D, LIMITADO A LA EVALUACIÓN Y REDACCIÓN DEL BORRADOR DE ADR-08.» Solo se modifica este documento, con esta Parte nueva. Esta autorización satisface DR15-7 en cuanto a **iniciar** R3-D; no resuelve otras decisiones.
+- **Puerta de entrada (verificada).** R2 tiene cierre documental condicionado; R3-A, R3-B y R3-C están aprobados de forma documental condicionada. R1 §8.2: ADR-08 **requiere** ADR-02.C (frontera atómica, UI-05 y UI-10), ADR-04.C (coherencia pública), ADR-05.C y ADR-01; todos son **propuestas** o aprobaciones condicionadas, y en ADR-04.C siguen **sin formulación admisible** D4-1 (materialización), D4-4, D4-5 y D4-8. **No hay bloqueo obligatorio para redactar;** ADR-08 **no puede cerrarse de forma definitiva** hasta que esos ADR se aprueben.
+- **Qué es este borrador.** Una evaluación de alternativas con una **recomendación preliminar no vinculante**. **No selecciona tecnología ni mecanismo, no aprueba ADR, no resuelve decisiones, no acepta riesgos ni excepciones, no escribe código, no crea cuentas ni gasta.** Las cifras de rendimiento y de consumo son **estimaciones [INF]** sin medir.
+- **Convención.** [CONF]: texto confirmado de `01` o R1 (con su estado `CONF`, `DER`, `REC` o `COND` tal como lo declara la fuente). [DOC]: dato leído en la página oficial citada (§28.16). [PROP]: propuesta del autor. [INF]: inferencia o cálculo del autor. [PEND]: pendiente o sin verificar. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; **lo no leído se marca [PEND] y no se penaliza en la puntuación.** No se reinterpretan los requisitos de `01`: donde la fuente es `COND` o `DER`, aquí también lo es.
+- **Identificadores nuevos (sin colisión).** **ALT-08-A, ALT-08-B, ALT-08-C** (alternativas), **MO-01…28** (requisitos del motor), **DR8-1…9** (decisiones del responsable), **OC-101…125** (condiciones abiertas), **RR8-01…18** (riesgos de redacción), **CR3D-01…18** (criterios de verificación), **EC-01…21** (casos límite). **Versión 0.2:** corrige H-1…H-8 y la observación de puntuación de seguridad de la revisión focalizada (§28.18); los identificadores existentes se conservan.
+- **Exclusiones.** Elegir alternativa, lenguaje, motor de base de datos o proveedor; resolver Q-21…Q-33, A-16, RT-14, A-8, D4-1, D-2 ni otra decisión heredada; aceptar riesgos; aprobar R3-D, R3 ni la Fase 2; iniciar R3-E, R3-F, ADR `.I` ni R4; modificar las Partes I–XIII ni los registros.
+- **Aprobación (metadato; 2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-D»: «APRUEBO EXCLUSIVAMENTE R3-D v0.2 (ADR-08) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: R3-D (v0.2-R3D): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.** **La aprobación documental condicionada de R3-D se registra como un evento independiente, sin reutilizar identificadores de decisiones deportivas.** **DR8-1 (alcance de CMP-12 respecto de goleadores y tarjetas, vinculada a OC-101) es una decisión deportiva abierta: NO fue aprobada ni resuelta por este registro y permanece abierta**, igual que DR8-2…9; el contenido técnico de §28 no se altera. No aprueba definitivamente ADR-08 ni selecciona tecnología ni mecanismo; no acredita atomicidad, autorización, aislamiento por torneo, rendimiento ni control alguno. Se conservan: **ALT-08-A, ALT-08-B y ALT-08-C sin selección definitiva**; rangos **ALT-08-A y ALT-08-B: 3,30–4,10; ALT-08-C: 2,80–3,60**, con la sensibilidad documentada (3,15–3,95 si la seguridad de ALT-08-C fuera 3–4) y rangos que se solapan; **sin preferencia entre las tres** con la evidencia disponible; **MO-01…28** con sus distintos niveles de confirmación (confirmado, `COND`, `DER`, [REC], propuesta, garantía exigida y [PEND]); **DR8-1…9 abiertas** (incluidas DR8-1, DR8-8 y DR8-9); **OC-101…125 abiertas**; **RR8-01…18 sin aceptar**; **RT-14, A-16, D4-8, A-8 y D-2 sin excepción**; la **separación entre cálculo oficial interno y proyección pública** (MO-25); **atomicidad, autorizaciones y aislamiento por torneo sin cumplimiento demostrado**; las **dependencias de ADR-01, ADR-02.C, ADR-04.C y ADR-05.C** abiertas; el **alcance del MVP** y las funcionalidades expresamente excluidas (eliminatorias, grupos, fair play, sanciones y suspensiones automáticas, tiempo real, puntos editables salvo Q-33); y la limitación de **autoevaluación del autor, sin auditoría independiente**. Trazabilidad: R3-C quedó versionado en el commit `ed1550b9d0b89bf475b25c4e53bd79e30a3b4aa5` (`ed1550b`; 2026-11-22T05:48:03Z). Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+
+### 28.1 Identificación
+
+| Campo | ADR-08 |
+|---|---|
+| Tema | Motor de reglas deportivas y fuente única de clasificación |
+| Pregunta (R1 §8.1) | ¿Dónde vive el cálculo de la tabla y cómo se configuran los desempates? El contrato lógico está en R1 §5.9; ADR-08 **consume** la frontera atómica de ADR-02.C y la garantía de coherencia de ADR-04.C y **no las redefine** |
+| Alternativas mínimas | ≥ 2 (incluye **dos implementaciones con prueba de equivalencia**, `01` RD-TAB-10) |
+| Dependencias (R1 §8.2) | ADR-02.C, ADR-04.C, ADR-05.C, ADR-01; decisiones Q-21, Q-22, Q-23, Q-26, Q-27, Q-28, Q-29, Q-30, Q-33 y A-16 |
+| Componente | CMP-12 «Motor de clasificación y reglas» en Z2 o Z3; lo invocan CMP-11 (confirmar, corregir, anular) y CMP-09 (vista previa «antes/después», RD-REG-03) |
+| Fronteras | **MO-24 e IN-04-05** (el cliente no calcula lo oficial; lo local no es oficial); la capa de datos impone la integridad (IN-02-01) |
+| Bloque / estado | R3 / **BORRADOR** |
+
+### 28.2 Reglas confirmadas, opciones pendientes y fuera del MVP
+
+La columna «Estado» copia el estado que declara `01`; este borrador **no lo mejora**.
+
+| Regla | Estado en `01` | Fuente | Efecto sobre ADR-08 |
+|---|---|---|---|
+| Puntos 3/1/0; W.O. suma 3 al presente y 0 al ausente y cuenta PJ | [CONF] (Q-03) | RD-TAB-02, RD-REG-06 | El motor lee los puntos del reglamento; no hay valor cableado |
+| Edición de los puntos por torneo | `COND:Q-33` (el MVP los fija en 3/1/0 sin edición) | RD-REG-06 | Se admite que el valor venga del reglamento sin exponer su edición |
+| Orden por defecto: puntos, DG, GF, enfrentamiento directo, resolución manual | [CONF] (Q-03) | RD-TAB-04 | Orden de partida; los puntos son siempre el primer criterio |
+| Configuración de criterios antes de iniciar el torneo; catálogo DG, GF, GC, victorias, enfrentamiento directo; fair play fuera | [CONF] la configuración; catálogo [REC] (Q-28) | RD-TAB-05, RD-REG-04 | El motor recibe el orden configurado; valida sin duplicados y con «resolución manual» al final |
+| Algoritmo determinista y terminante con mini-tabla recalculada por subgrupo | [CONF] el orden; `COND:Q-27` la semántica | RD-TAB-06, RD-TAB-07 | El contrato se prueba con los cinco casos de RD-TAB-07 |
+| Empate sin resolver con posición compartida y marca; orden alfabético que no implica ventaja | [REC] | RD-TAB-08 | Salida «empate sin resolver» (R1 §5.9) |
+| Resolución manual (quién, motivo, etiqueta, reversible, obsoleta si cambian los resultados implicados) | `COND:Q-22` | RD-TAB-09 | Entrada opcional del motor; su ausencia no altera el resto (R1 §5.9) |
+| Estados que cuentan: solo `finalizado` y `wo` confirmados; tratamiento de `suspendido`, `aplazado` y `cancelado` | `DER` (Q-17); la parte de `suspendido` `COND:Q-29` (exclusión provisional, no aprobada) | RD-TAB-03, RD-RES-12 | El conjunto de estados es una **entrada parametrizable**; no se fija aquí |
+| W.O.: configurable por torneo; 3-0 por defecto; efectos; sin eventos; doble W.O. | [CONF] (Q-03); GF/GC por defecto y doble W.O. `COND:Q-21` | RD-WO-01…07 | El motor aplica el marcador de adjudicación **registrado** en el partido |
+| Reglamento versionado: cada cambio crea una versión con actor, fecha, motivo y antes/después | [CONF] (Q-03) | RD-REG-01 | Versión inmutable y de solo anexado |
+| Definición de «torneo iniciado» (primer partido sale de `programado`) | `DER` (Q-03), por confirmar | RD-REG-02 | Puerta de la inmutabilidad de puntos y vueltas |
+| Cambios con el torneo iniciado: solo el dueño; motivo; vista previa; criterios se recalculan; puntos y vueltas no cambian; W.O. solo hacia adelante | `COND:Q-23` | RD-REG-03 | Dos lecturas del contrato (R1 §5.9): (a) recálculo con la versión vigente; (b) ningún cambio con el torneo iniciado |
+| Recálculo automático al confirmar, corregir o anular resultados o eventos | [CONF] (N-07) | RD-TAB-11, RD-RES-06 | Una sola unidad (IF-20, GT-11) |
+| Corrección de finalizados en una operación atómica con recálculo de **tabla, goleadores y tarjetas** | [CONF] (Q-09; D-5) | RD-RES-06 | **R1 §5.9 solo define la tabla:** la propiedad de goleadores y tarjetas queda [PEND] (OC-101) |
+| Consistencia marcador–eventos; «goles sin autor» no cuentan en goleadores | `COND:Q-30` (comportamiento provisional B) | RD-EVT-02, RD-EVT-04, CL-29 | La tabla usa el marcador; los goleadores usan eventos; una diferencia **avisada** no es un fallo de coherencia |
+| Retiro o expulsión de un equipo en curso, configurable antes de iniciar | `COND` (Q-26 D; `RF-EQP-03` provisional) | CL-17 | Entrada del motor [PEND] (OC-109) |
+| Lo público muestra solo datos **publicados y confirmados**; cada sección pública se limita a ellos | [CONF] (Q-04) | RF-PUB-02; PU-07; IN-04-04; A-8 | El cálculo oficial interno y la proyección pública son salidas **distintas**; la entrada de lo público se filtra por visibilidad (MO-25, OC-123) |
+| **Fuera del MVP:** eliminatorias, grupos, fases finales, ida y vuelta; fair play; suspensiones automáticas por tarjetas; sanciones automáticas por W.O.; asistencias, penales, cambios; puntos editables salvo Q-33; tiempo real | `01` §3; RD-FOR-01, RD-FOR-02 (diseño que **no impida** añadirlos); RD-EVT-01, RD-EVT-06; RD-WO-04; Q-21 | — | **No se diseñan ni se evalúan como alternativas;** solo se comprueba que ninguna alternativa los impida (RD-FOR-02, §28.13) |
+
+### 28.3 Requisitos del motor (MO)
+
+| ID | Requisito | Fuente | Naturaleza |
+|---|---|---|---|
+| MO-01 | **Determinista y terminante:** misma entrada, misma salida; independiente del orden de inserción; sin bucles en empates circulares | §5.9; RD-TAB-06; CL-16 | Confirmado |
+| MO-02 | **Una sola fuente de verdad** de la clasificación con una definición única; toda otra vista la consume; si hubiera dos implementaciones, prueba de equivalencia sobre ≥ 10 fixtures | RD-TAB-10; IF-21; IN-04-07 | Confirmado (H-10) |
+| MO-03 | Puntos 3/1/0 **leídos del reglamento**; sin valor cableado; no se expone la edición mientras Q-33 no la apruebe | RD-TAB-02; RD-REG-06 | Confirmado; edición `COND:Q-33` |
+| MO-04 | Solo cuentan `finalizado` y `wo` confirmados por el servidor; el tratamiento de `suspendido`, `aplazado` y `cancelado` es una **entrada** pendiente de Q-29 | RD-TAB-03; RD-RES-12 | `DER`; `suspendido` `COND:Q-29` |
+| MO-05 | Orden de criterios y catálogo configurables **por torneo antes de iniciar**; sin duplicados; «resolución manual» siempre última y no removible | RD-TAB-04, 05; RD-REG-04 | Confirmado; catálogo [REC] |
+| MO-06 | Enfrentamiento directo con mini-tabla de los empatados, recalculada para el subgrupo restante | RD-TAB-06, 07; Q-27 | Orden confirmado; semántica `COND:Q-27` |
+| MO-07 | «Empate sin resolver» con marca pública; el orden estable alfabético no se presenta como desempate | RD-TAB-08 | [REC] |
+| MO-08 | Resolución manual como **entrada** versionada, auditada, reversible y que **vuelve obsoleta** si cambian los resultados implicados; no la ejecuta quien tenga conflicto (RT-14) | RD-TAB-09; RT-14 | `COND:Q-22` |
+| MO-09 | **W.O.:** marcador de adjudicación registrado **con el partido** (configuración aplicada); suma PJ, puntos y GF/GC con ese marcador; sin eventos, goleadores ni tarjetas; doble W.O. según Q-21 | RD-WO-01…07 | Confirmado; GF/GC y doble W.O. `COND:Q-21` |
+| MO-10 | **Reglamento versionado e inmutable por versión:** actor, fecha, motivo y valores antes/después; el cálculo identifica la versión usada | RD-REG-01; §5.9 | Confirmado |
+| MO-11 | Antes de iniciar el torneo el reglamento es editable; después, **solo** por el camino controlado de Q-23 (dueño, motivo, vista previa, auditoría); **puntos y vueltas no se modifican**; el marcador de W.O. aplica solo hacia adelante | RD-REG-02, 03 | `COND:Q-23`; «iniciado» `DER` |
+| MO-12 | **Protección contra cambios retroactivos no autorizados:** la restricción de MO-11 se impone en el servidor **y** en la capa de datos (IN-02-01); ni la interfaz ni el cliente la deciden; el motor **no es** un punto de autorización (ver MO-26 sobre invocación directa) | IN-02-01, IN-02-02; RD-REG-03 | Garantía exigida; mecanismo [PEND] |
+| MO-13 | **Recálculo** al confirmar, corregir o anular, **dentro de la misma unidad** que el resultado, el historial y la auditoría; la señal de cambio, si ADR-06 la adopta, se entrega después y fuera de la transacción | RD-TAB-11; UI-05, UI-10; GT-11; R1 §5.9 | Confirmado (unidad); señal [COND] |
+| MO-14 | **Corrección atómica** con motivo, historial antes/después y recálculo de tabla, goleadores y tarjetas; sin estado intermedio público | RD-RES-06; CL-15 | Confirmado; garantía pública exigida a ADR-04.C, no demostrada |
+| MO-15 | **Concurrencia:** versión conocida del partido y conflicto de aplicación; operaciones que compiten por un mismo partido o una misma clasificación equivalen a un orden en serie | RD-RES-04; GT-12; N-06 | Confirmado |
+| MO-16 | **Idempotencia:** reenviar la misma operación, también de forma concurrente, produce un efecto, un registro de auditoría y la misma respuesta; **el recálculo es una función de su entrada** y no acumula efectos | RD-RES-05; OFF-06; IN-05-04 | Confirmado |
+| MO-17 | **Goleadores y tarjetas:** goles sin autogoles, sin anulados, sin `wo`, sin «sin autor»; posiciones compartidas; orden estable por nombre público; derivan de eventos activos | RD-EVT-05, 07, 08, 09; RD-WO-03 | Confirmado; «sin autor» `COND:Q-30` |
+| MO-18 | **Retiro o expulsión de un equipo:** el motor admite que sus resultados se conserven o se anulen según la configuración elegida antes de iniciar | CL-17; Q-26; `RF-EQP-03` | `COND` (provisional) |
+| MO-19 | **Trazabilidad (alcance i de MO-28):** todo recálculo puede reproducirse con (resultados vigentes, versión del reglamento, resoluciones manuales vigentes); se registra qué versión del reglamento y del motor produjo cada tabla publicada [PROP] | CL-15; RD-REG-01; RD-TAB-10 | Propuesta |
+| MO-20 | **Pruebas:** reglas con fixtures (ligas de 6 y 8 equipos; los cinco casos de RD-TAB-07; CL-15, 16, 17, 18, 29, 31); restricciones contra PostgreSQL real; valores esperados **documentados antes** de la implementación | RNF-11; RD-TAB-02, 07; HR1-13 | Confirmado |
+| MO-21 | **Rendimiento:** tabla de 16 equipos a doble vuelta (240 partidos) en ≤ 200 ms p95 en el servidor; medición en staging | RD-TAB-12 | [REC] (propuesto) |
+| MO-22 | **RT-14, A-8 y A-16 preservados:** el motor no decide quién puede publicar, corregir ni cambiar el reglamento; A-16 (conflicto del dueño u organizador sobre el reglamento y los desempates) sigue **sin resolver**; **si una corrección ajena que cambia la clasificación o la obsolescencia de una resolución manual del equipo del actor cae bajo RT-14 es [PEND]** (OC-121, DR8-8) | RT-14; A-8; A-16; D4-8 | Condicionado (abierto) |
+| MO-23 | **Sin datos personales en el cálculo:** la tabla trabaja con identificadores de equipo; los goleadores muestran lo que permita PRV-02 y, mientras Q-20 esté abierta, **solo etiquetas** | IN-04-11; IN-04-03; Q-20 | Confirmado (cierre conservador) |
+| MO-24 | **Lo local jamás es público ni oficial:** el cliente no calcula la clasificación oficial; una vista previa en el cliente no se publica ni se toma como oficial | OFF-15; IN-04-05; TB-3 | Confirmado |
+| MO-25 | **Cálculo oficial interno y proyección pública son distintos:** la salida pública solo puede incorporar datos **publicados y confirmados**; ningún resultado de una jornada no publicada, borrador o `archivado` debe poder inferirse de la tabla, los goleadores o las tarjetas públicos. Dónde se filtra y cómo se materializa lo decide ADR-04.C y ADR-06, no ADR-08 | RF-PUB-02; PU-07; IN-04-04; A-8; CL-25 | Confirmado en el principio; mecanismo [PEND] (OC-123) |
+| MO-26 | **Sin invocación directa no autorizada:** toda función de cálculo o de escritura, **incluidas las vistas previas con un reglamento propuesto**, solo se invoca por CMP-11 y CMP-09 con su autorización previa (CMP-08); se preserva el aislamiento entre torneos (IN-02-04), el mínimo privilegio (IN-02-14) y las políticas de acceso por fila; ningún cliente puede llamarla directamente con parámetros propios | IN-02-01, 02, 04, 14; MO-12 | Garantía exigida; mecanismo [PEND] (OC-122, ADR-02.I) |
+| MO-27 | **Versión de reglamento consistente en la unidad:** la versión aplicable a un cálculo se fija **dentro** de la unidad atómica de la confirmación o corrección; un cambio de reglamento permitido que ocurra de forma simultánea no puede producir un cálculo con versiones mezcladas | RD-REG-01, 03; GT-12; MO-10 | Garantía exigida; mecanismo [PEND] (OC-124) |
+| MO-28 | **Dos alcances de reproducibilidad distintos:** (i) **recalcular la clasificación actual** con los resultados vigentes y la versión del reglamento (MO-19); (ii) **reconstruir exactamente la clasificación publicada en una fecha anterior**, que requiere el estado de resultados, versión, resoluciones y visibilidad de ese momento. El segundo alcance **no está exigido por `01`** y su mecanismo de historial queda pendiente | RD-RES-06 (historial); RD-REG-01; CL-15 | (i) propuesta; (ii) [PEND] (OC-125, DR8-9) |
+
+### 28.4 Alternativas
+
+Las alternativas difieren en **dónde está la definición** del cálculo y **cómo se ejecuta dentro de la unidad atómica** de ADR-02.C. Ninguna presupone un lenguaje, un motor ni un proveedor. `01` RNF-11 ya exige pruebas «contra PostgreSQL real»; eso describe el almacén, no elige el lugar del cálculo. **Eje ortogonal:** que la clasificación se **calcule al servirla** o se **materialice** en la misma transacción es D4-1 de ADR-04.C y **no se resuelve aquí**; las tres alternativas son compatibles con ambas variantes.
+
+| Criterio | ALT-08-A: definición en la capa de datos (Z3) | ALT-08-B: función pura en el servidor de aplicación (Z2) | ALT-08-C: dos implementaciones con prueba de equivalencia |
+|---|---|---|---|
+| Idea | El cálculo es un procedimiento o función dentro del almacén; CMP-11 lo invoca como parte de la transacción de UI-10 y UI-05 [PROP] | Una **función pura** (entrada: resultados confirmados, reglamento con su versión, resoluciones manuales; salida: tabla) sin acceso a datos; CMP-11 la invoca con una lectura consistente dentro de la unidad [PROP] | Una definición en Z3 (para persistir o servir de forma atómica) y otra en Z2 (vista previa, pruebas rápidas); una **suite de equivalencia** las compara (RD-TAB-10) |
+| Una sola fuente de verdad (MO-02) | Sí: una definición | Sí: una definición | **Solo por la prueba:** dos definiciones que pueden divergir entre pruebas; exige ≥ 10 fixtures y su mantenimiento |
+| Atomicidad con la unidad (MO-13, MO-14) | **[INF], no demostrada:** podría ser la más directa (lectura, cálculo y escritura en una sola llamada a la capa de datos si la función se ejecuta dentro de la transacción de quien la llama); no leído en fuente oficial, **condicionado a OC-102** | **Condicionada a OC-102:** la lectura, el cálculo y la escritura deben ser una unidad (transacción interactiva, o concurrencia optimista con versión de la clasificación y reintento) [PROP]. Un controlador solo HTTP admite transacciones **no interactivas**; las interactivas requieren otra conexión [DOC: Neon] | **Condicionada a OC-102** en lo oficial; la copia de Z2 **no es oficial** (MO-24) |
+| Pruebas de casos límite (MO-20) | Fixtures contra la capa de datos real; existen marcos de prueba para funciones de PostgreSQL [DOC: Supabase, pgTAP]; la agilidad para iterar el algoritmo de subgrupos es **[INF]** | Pruebas unitarias sin base de datos con fixtures y propiedades (MO-01) [INF: más ágiles]; la prueba contra PostgreSQL real sigue exigida para las restricciones (RNF-11) | Las dos suites **más** la de equivalencia |
+| Versionado del reglamento y protección retroactiva (MO-10…12) | Las restricciones de MO-12 viven junto a los datos; la definición queda ligada a las migraciones versionadas | El servidor aplica MO-11; **la capa de datos debe imponer igualmente** MO-12 (IN-02-01) | Igual que A y B combinadas |
+| Privilegios y acceso directo (MO-12, MO-26) | Una función con los privilegios del **creador** puede saltar las políticas de acceso por fila; con los del **invocador** las respeta; para la primera, fijar `search_path` [DOC: Supabase, funciones]. Si la capa de datos expone la función a clientes, **cualquier cliente podría invocarla directamente** salvo que se restrinja [INF]. Evaluar quién puede ejecutarla, con qué privilegios y con qué `search_path`: **mecanismo [PEND] para ADR-02.I** | El servidor usa las credenciales de CMP-08; sin privilegios añadidos [PEND: detalle de IN-02-03]; el acceso directo a la capa de datos sigue siendo un riesgo de **cualquier** alternativa si no se restringe (MO-26) | Los de A y B; la copia de Z2 no es oficial |
+| Rendimiento (MO-21) | Cálculo local a los datos; sin transferencia de 240 partidos [INF] | Lee ≤ 240 partidos y calcula en el servidor; **sin medir**; los límites de ejecución de cada entorno no se leyeron para esta carga [PEND] | Duplica la ejecución en algunas rutas |
+| Costo (infraestructura) | Sin servicio nuevo | Sin servicio nuevo | Sin servicio nuevo; el esfuerzo de desarrollo **no** se puntúa aquí (se evalúa en Mantenimiento, sin duplicar) |
+| Mantenimiento | Lógica en SQL: **[INF]** más difícil de leer y de depurar para las mini-tablas recursivas; sin evidencia leída | **[INF]** código de aplicación ordinario; sin evidencia leída | Cada cambio de regla debe hacerse en **dos** definiciones y mantener la prueba de equivalencia (consecuencia de RD-TAB-10) |
+| Vista previa «antes/después» (RD-REG-03; CMP-09) | Se obtiene con una invocación de solo lectura con un reglamento propuesto [PROP] | Se obtiene con la misma función [PROP] | Con la copia de Z2 |
+| Riesgo principal | Privilegios y acceso directo a la función (MO-26); algoritmo en SQL | Atomicidad en entornos sin transacciones interactivas; lectura inconsistente (RR8-03); acceso directo a la capa de datos (MO-26) | Divergencia de las dos definiciones (RR8-01) |
+
+**Variantes no evaluadas como alternativas.** Una tercera implementación en el cliente (cálculo local o sin conexión) **queda excluida**: contradiría MO-24 y IN-04-05 (OFF-15). Un servicio de reglas separado queda excluido por el principio de simplicidad (sin microservicios).
+
+### 28.5 Matriz de conformidad
+
+Escala: **Cumple** (en lo documental, sin demostrar), **Condicionado** (depende de una decisión o verificación [PEND]), **No discrimina**, **Desfavorable**. Es una autoevaluación del autor, no una auditoría independiente.
+
+| Requisito o grupo | ALT-08-A | ALT-08-B | ALT-08-C |
+|---|---|---|---|
+| MO-01, MO-06, MO-07 (determinismo, subgrupos, empate sin resolver) | Cumple; pruebas menos ágiles | Cumple; pruebas más ágiles | Cumple; dos definiciones por demostrar |
+| MO-02 (una sola fuente de verdad) | Cumple | Cumple | Condicionado: depende de la prueba de equivalencia (≥ 10 fixtures) |
+| MO-03…05 (puntos, estados, criterios) | Cumple; MO-04 condicionado a Q-29 | Igual | Igual |
+| MO-08, MO-09 (resolución manual, W.O.) | Condicionado a Q-22 y Q-21 | Condicionado a Q-22 y Q-21 | Condicionado a Q-22 y Q-21 |
+| MO-10…12 (versionado, retroactividad, protección) | Cumple; A-16 abierta | Cumple; A-16 abierta | Cumple; A-16 abierta |
+| MO-13, MO-14 (recálculo y corrección atómicos) | **Condicionado a OC-102** (lo [INF] no se presenta como demostrado) | **Condicionado a OC-102** | **Condicionado a OC-102** en la parte oficial |
+| MO-15, MO-16 (concurrencia, idempotencia) | Cumple; serialización por torneo [PEND] (OC-103) | Cumple; serialización por torneo [PEND] (OC-103) | Igual |
+| MO-17 (goleadores y tarjetas) | Condicionado a OC-101 (alcance de CMP-12) | Condicionado a OC-101 | Condicionado a OC-101 |
+| MO-19 (trazabilidad) | Cumple como propuesta | Cumple como propuesta | Cumple como propuesta |
+| MO-20 (pruebas) | Cumple; la agilidad de iteración es [INF] | Cumple; pruebas sin base de datos [INF] | Cumple; la carga mayor |
+| MO-21 (rendimiento) | Condicionado a medición | Condicionado a medición | Condicionado a medición |
+| MO-22, MO-23, MO-24 (RT-14/A-8/A-16, privacidad, lo local) | Cumple; A-16 y OC-121 abiertas | Cumple; A-16 y OC-121 abiertas | Cumple si no hay copia en el cliente; A-16 y OC-121 abiertas |
+| MO-25, MO-26, MO-27 (público frente a oficial, invocación directa, versión en la unidad) | **Condicionado** a OC-122, OC-123, OC-124 | **Condicionado** a OC-122, OC-123, OC-124 | **Condicionado** a OC-122, OC-123, OC-124 |
+| MO-28 (reproducibilidad) | (i) propuesta; (ii) [PEND] (OC-125) | (i) propuesta; (ii) [PEND] (OC-125) | (i) propuesta; (ii) [PEND] (OC-125) |
+| Mantenimiento y costo | **No discrimina entre A y B** con la evidencia leída | **No discrimina entre A y B** | Añade una definición duplicada y la prueba de equivalencia que exige RD-TAB-10 [INF] |
+
+### 28.6 Versionado del reglamento y protección contra cambios retroactivos no autorizados
+
+**Marco confirmado.** El reglamento es versionado (RD-REG-01); antes de iniciar es editable (RD-REG-02) y después solo por el camino controlado de Q-23 (`COND`). **Propuesta de estructura [PROP], común a las tres alternativas y sin elegir mecanismo:**
+
+| Elemento | Propuesta | Protege contra | Condición |
+|---|---|---|---|
+| Versión inmutable | Cada cambio crea una versión de solo anexado con actor, fecha, motivo y valores antes/después (RD-REG-01); ninguna versión se modifica ni se borra | Reescribir la historia del reglamento | OC-108 |
+| Versión usada por el cálculo | Cada tabla publicada registra la versión del reglamento y las resoluciones manuales vigentes con que se calculó (MO-19) | Tablas no reproducibles; discusiones sobre «qué regla se aplicó» | DR8-3 |
+| W.O. con marcador aplicado | El partido `wo` conserva el **marcador de adjudicación aplicado** y su configuración (RD-WO-05); un cambio posterior del marcador de W.O. solo afecta a W.O. nuevos (RD-REG-03) | Alterar con efecto retroactivo W.O. ya declarados | Q-23; Q-21 |
+| Puntos y vueltas | No se modifican con el torneo iniciado (RD-REG-03); el motor lee el valor de la versión, no de una constante (MO-03) | Cambiar el valor de la victoria con efecto retroactivo | `COND:Q-23`; `COND:Q-33` |
+| Criterios de desempate | Si Q-23 adopta la lectura (a): se **recalculan sobre todo el historial** con vista previa y confirmación del dueño; si adopta (b): no cambian con el torneo iniciado | Cambios que favorezcan a un equipo sin vista previa ni auditoría | DR8-2 |
+| Imposición | Se rechaza en el servidor **y** en la capa de datos toda modificación de reglamento no permitida por el estado del torneo y por el rol (IN-02-01); la interfaz no es una defensa; **ninguna llamada directa** de un cliente a una función de cálculo o de escritura debe eludirlo (MO-26) | Llamadas directas a la API que eviten la interfaz | OC-102; OC-122; ADR-02.C |
+| Carrera con el inicio del torneo | «Iniciado» ocurre cuando el primer partido sale de `programado` (RD-REG-02, `DER`); una edición del reglamento y la salida del primer partido deben **serializarse** (una sola de ellas gana) | Reglamento editado «libremente» mientras empieza el primer partido | OC-108; GT-12 |
+| Carrera con un cambio de reglamento permitido (Q-23) | La versión del reglamento aplicable se **fija dentro de la unidad atómica** de cada confirmación o corrección; un cambio de reglamento y una confirmación simultáneos se serializan o se reintentan, sin cálculo con versiones mezcladas (MO-27) | Tablas calculadas con parte de una versión y parte de otra | OC-124; GT-12; EC-19 |
+| Conflicto de interés | ADR-08 **no** decide si un dueño u organizador en conflicto (RT-14) puede cambiar criterios con efecto sobre su equipo: **A-16 sigue sin resolver** y el motor no autoriza | Que el motor se convierta en un punto de decisión de permisos | OC-113 |
+
+### 28.7 W.O., correcciones, recálculo y trazabilidad
+
+| Operación | Qué hace el motor (propuesta) | Dentro de la unidad atómica | Fuera de la unidad | Fuente |
+|---|---|---|---|---|
+| Confirmar un resultado (UI-10) | Recalcula la clasificación afectada con el estado confirmado único | Marcador, eventos, estado, historial, recálculo (y derivada persistente si existe), señal de cambio **si ADR-06 la adopta**, auditoría | Entrega de la señal; propagación a lo público y a copias locales | RD-TAB-11; IF-20; GT-11 |
+| Corregir un finalizado (UI-05) | Recalcula con el nuevo estado; deja tabla antes/después en la auditoría; invalida resoluciones manuales cuyo empate cambió | Igual; con motivo obligatorio y sin plazo límite | Igual | RD-RES-06; CL-15; RD-TAB-09 |
+| Anular un evento | Recalcula marcador y estadísticas afectadas; el evento se conserva anulado | Igual | Igual | RD-EVT-05 |
+| Declarar un W.O. | Aplica el marcador de adjudicación vigente en ese momento y lo registra con el partido; solo sobre `programado` y sin eventos; sujeto a RT-14 | Igual (el W.O. cuenta para «torneo iniciado») | Igual | RD-WO-02…06; RD-REG-02 |
+| Revertir un W.O. | `wo` → `programado`; recalcula; auditoría | Igual | Igual | RD-WO-05 |
+| Cambiar el reglamento con el torneo iniciado (si Q-23 lo permite) | Vista previa «antes/después» de solo lectura; al confirmar, nueva versión y recálculo | Nueva versión, recálculo y auditoría | Notificación a organizadores | RD-REG-03; CMP-09 |
+| Resolución manual y su obsolescencia | Entrada que se vuelve obsoleta si cambian los resultados implicados; la salida lo indica | Igual | Etiqueta pública | RD-TAB-09; Q-22 |
+
+**Trazabilidad (MO-19 y MO-28) [PROP].** Hay que distinguir dos alcances (MO-28). (i) **Recalcular la clasificación actual** depende de tres cosas: los resultados confirmados vigentes, la versión del reglamento y **la versión de la lógica del motor**. (ii) **Reconstruir exactamente la clasificación publicada en una fecha anterior** exige además el estado de los resultados, las resoluciones manuales y la visibilidad de ese momento; **`01` no lo exige** y el mecanismo de historial queda [PEND] (OC-125, DR8-9); no se presume que el historial de RD-RES-06 baste. Si la lógica cambia (una corrección del algoritmo), una tabla antigua recalculada podría diferir; se propone registrar la versión del motor junto con la del reglamento y **decidir** si un cambio de lógica obliga a recalcular el histórico (DR8-3, OC-117). Ninguna alternativa lo resuelve por sí sola.
+
+### 28.8 Concurrencia, idempotencia y coherencia transaccional
+
+1. **Una unidad.** Resultado, eventos, estado, historial, recálculo, derivadas persistentes (si existen), señal de cambio (si ADR-06 la adopta) y auditoría se confirman juntos o ninguno (GT-11, IF-20, IF-22). ADR-08 **consume** esta frontera.
+2. **Competencia.** Dos confirmaciones de partidos **distintos** del mismo torneo compiten por la misma clasificación; deben equivaler a un orden en serie (GT-12). Dos formas [PROP, sin elegir]: (i) serializar por torneo durante el cálculo y la escritura; (ii) concurrencia optimista con una versión de la clasificación del torneo y reintento ante conflicto. El conflicto de aplicación de RD-RES-04 cubre el **partido**; el de la **clasificación** debe resolverse sin exponer un error de base de datos al usuario (OC-103).
+3. **Idempotencia.** El recálculo es una **función de su entrada**: repetirlo no cambia el resultado. La idempotencia de la **operación** (identificador único, sin efectos repetidos, sin auditoría duplicada) pertenece a CMP-13 y a OFF-06; ADR-08 solo exige que el motor no acumule efectos (MO-16). El alcance de OFF-06 sobre lo **rechazado** sigue abierto (IN-05-05, D5-1).
+4. **Sincronización con operaciones sin conexión.** Las operaciones sincronizadas se validan en secuencia contra el estado resultante de las aceptadas (IN-05-06, OFF-25) y recorren el mismo camino lógico que su equivalente en línea (IN-05-10): el motor recalcula **después** de cada operación aceptada y nunca con operaciones locales no confirmadas (MO-24).
+5. **Partidos, tabla, goleadores y tarjetas.** La tabla usa el **marcador**; goleadores y tarjetas usan **eventos activos**. Si Q-30 permite finalizar con diferencia entre ambos (con aviso), la tabla y los goleadores **pueden diferir legítimamente**; no es una falla de coherencia (CL-29). Lo que **sí** debe cumplirse es que, tras una corrección, las tres derivaciones se calculen **del mismo estado confirmado** (RD-RES-06). R1 §5.9 solo define el contrato de la **tabla**; quién derive goleadores y tarjetas (CMP-12, CMP-14 u otro) es [PEND] (OC-101, DR8-1).
+6. **Coherencia pública.** ADR-08 aporta un **estado confirmado único** y una definición única; la garantía de no publicar un resultado junto a una clasificación que no lo refleje es **exigida a ADR-04.C y ADR-06** (IN-04-06, GT-13) y **no se afirma aquí**. Agrupar datos o calcular rápido no la demuestra.
+7. **RT-14 y el efecto sobre la clasificación [PEND].** La evaluación por efecto (todos los partidos que la operación modificaría, incluidos los efectos en cascada y automáticos) la hace CMP-08 **antes** de aplicar (IN-02-12, GT-14). **Lo que ADR-08 no resuelve:** si el cambio de posiciones, de desempates o de la obsolescencia de una resolución manual del **equipo del actor en conflicto**, producido por la corrección de un partido ajeno, es un «efecto» alcanzado por RT-14 queda **abierto** (A-16, D4-8, OC-121, DR8-8). El motor no concede ni quita facultades y **no decide** esa cuestión.
+8. **Oficial interno y proyección pública (MO-25).** El motor calcula la clasificación **oficial** con todos los resultados confirmados del torneo. La **proyección pública** solo puede incorporar lo publicado y confirmado (RF-PUB-02): la entrada de lo público se filtra por visibilidad (jornadas no publicadas, borrador, `archivado`, A-8, PU-07) antes de calcular o de servir, de modo que ni la tabla ni los goleadores ni las tarjetas públicos revelen lo no publicado. **El filtro y la materialización los decide ADR-04.C y ADR-06** (OC-123, EC-20).
+9. **Versión del reglamento en la unidad (MO-27).** Dentro de cada unidad atómica la versión aplicable es una sola; un cambio de reglamento permitido concurrente se serializa o reintenta (OC-124, EC-19).
+### 28.9 Casos límite y estrategia de pruebas
+
+| ID de caso | Caso | Qué debe cumplirse | Estado de la regla | Tipo |
+|---|---|---|---|---|
+| EC-01 | Dos equipos con igual puntaje (RD-TAB-07 a) | DG; luego GF; luego resultado entre ambos; luego resolución manual | Orden [CONF]; semántica `COND:Q-27` | U |
+| EC-02 | Tres equipos A>B, B>C, C>A, mismos puntos, DG y GF (N-03; RD-TAB-07 b; CL-16) | Termina; «empate sin resolver», sin bucle | `COND:Q-27` | U (propiedad) |
+| EC-03 | Mismo ciclo con DG distinta (RD-TAB-07 c) | Resuelve la DG | `COND:Q-27` | U |
+| EC-04 | Tres empatados donde el directo separa a uno (RD-TAB-07 d) | El par restante se recalcula con su propio partido | `COND:Q-27` | U |
+| EC-05 | Cuatro equipos con 1G-1E-1P cada uno (RD-TAB-07 e) | Sin bucle; resuelve o queda sin resolver | `COND:Q-27` | U |
+| EC-06 | Empate con partidos entre los empatados aún **no jugados** | El texto de RD-TAB-06 habla de «los partidos entre los equipos del grupo empatado (ambas vueltas)»; **cómo se trata un enfrentamiento pendiente no está dicho** [PEND: verificar con el organizador] | [PEND] (OC-110) | U |
+| EC-07 | Orden de inserción distinto de los mismos resultados | Misma tabla (propiedad) | [CONF] | U (propiedad) |
+| EC-08 | Corrección de una jornada anterior que altera desempates (CL-15) | Tabla recalculada con auditoría antes/después; sin estado intermedio público (garantía exigida) | [CONF]; garantía no demostrada | I, E2E |
+| EC-09 | W.O. sobre partido con eventos previos; doble W.O. (CL-18) | Rechazado si hay eventos; doble W.O. según Q-21 (0 puntos, 0-0, PJ +1, sin GF/GC) | `COND:Q-21` | I |
+| EC-10 | Marcador distinto de la suma de eventos; partido `wo` (CL-29) | Según Q-30; `wo` exento | `COND:Q-30` | U |
+| EC-11 | Cambio de reglamento con el torneo iniciado (CL-31) | Solo el dueño (si se adopta); vista previa; auditado; recálculo; puntos y vueltas inmutables | `COND:Q-23` | I |
+| EC-12 | Equipo que se retira en curso; número impar de equipos (CL-17) | Descansos correctos; resultados según la configuración; tabla recalculada | `COND` (Q-26) | U, I |
+| EC-13 | Dos confirmaciones simultáneas en el mismo torneo | Resultado equivalente a un orden en serie; sin pérdida de actualización | [CONF] (RD-RES-04, GT-12) | I (concurrencia) |
+| EC-14 | Reenvío de la misma operación (1, 2 y 10 veces; secuencial y simultáneo) | Un efecto, un registro de auditoría, la misma respuesta | [CONF] (RD-RES-05) | I |
+| EC-15 | Edición del reglamento en el instante en que sale el primer partido | Una sola de las dos operaciones gana; sin estado intermedio | `DER` (RD-REG-02) [PEND] | I (concurrencia) |
+| EC-16 | Corrección de un resultado que vuelve obsoleta una resolución manual | Vuelve a «sin resolver» con aviso; auditado | `COND:Q-22` | U, I |
+| EC-17 | Torneos de 2, 7, 8 y 16 equipos (RD-FOR-03) | Sin degradación; 240 partidos en ≤ 200 ms p95 (propuesto) | [CONF]; rendimiento [REC] | U, L |
+| EC-18 | Goleadores con empates y un jugador con nombre oculto (RD-EVT-07; PRV-02) | Posición compartida; etiqueta; sin nombres con Q-20 abierta | [CONF] | U, E2E |
+| EC-19 | Cambio de reglamento permitido (Q-23) simultáneo con una confirmación o corrección | Un solo cálculo con **una** versión del reglamento; sin mezcla; la otra operación se serializa o reintenta | `COND:Q-23`; garantía exigida [PEND] (OC-124) | I (concurrencia) |
+| EC-20 | Tabla pública con una jornada no publicada con resultados ya confirmados | La proyección pública no revela ni infiere lo no publicado; la tabla oficial interna sí los considera | [CONF] (RF-PUB-02); mecanismo [PEND] (OC-123) | I, E2E |
+| EC-21 | Invocación directa de una función de cálculo, escritura o vista previa por un usuario sin permiso o de otro torneo | Rechazada por la autorización y por la capa de datos; sin filtración entre torneos | [CONF] (IN-02-01, 04); mecanismo [PEND] (OC-122) | I, DB |
+
+**Estrategia [PROP].** (1) **Propiedades** de MO-01 (terminación, independencia del orden, ninguna posición repetida) como pruebas unitarias. (2) **Fixtures** con valores esperados **documentados antes de 5F** y obtenidos por un método **independiente del motor** (cálculo manual o en hoja de cálculo revisado por el organizador); un motor que se prueba contra su propia salida no prueba nada (RR8-09, OC-114). (3) Pruebas de **restricciones y de atomicidad contra PostgreSQL real** (RNF-11, HR1-13), incluidas las concurrencias de EC-13, EC-15 y EC-19, y el acceso directo de EC-21. (4) Si se elige ALT-08-C, **≥ 10 fixtures de equivalencia** (RD-TAB-10). (5) Los fixtures usan **solo datos sintéticos**. Las reglas `COND` se prueban en su **forma provisional**, marcadas para no confundirlas con las definitivas (RR8-10).
+
+### 28.10 Compatibilidad con las tres configuraciones de R3-A (sin seleccionar proveedores)
+
+| Configuración (R3-A) | ALT-08-A | ALT-08-B | Observación |
+|---|---|---|---|
+| CFG-C1 (Vercel + Supabase) | Viable [INF]: la capa de datos admite funciones; invocación desde el servidor [DOC: Supabase] | Viable: una función de servidor puede conectarse directamente a PostgreSQL con un cliente y una conexión [DOC: Supabase, conexión desde funciones] | Los límites de ejecución de cada entorno **no se leyeron** para esta carga [PEND] |
+| CFG-C2 (Vercel + Neon + Better Auth) | Viable [INF] | El controlador HTTP admite transacciones **no interactivas**; las **interactivas** requieren WebSocket [DOC: Neon]; la atomicidad de B recae en la concurrencia optimista o en WebSocket | La compatibilidad de B con la transacción de ADR-02.C se verifica en ADR-01 [PEND] |
+| CFG-C3 (Cloudflare + Supabase) | Viable [INF] | Viable en lo documental; el entorno de ejecución de Cloudflare no se evaluó para esta carga [PEND] | R3-A mantiene la recomendación preliminar sin cambios |
+
+Esta tabla **no** selecciona ni descarta configuración alguna; solo muestra que **ninguna** de las alternativas obliga a una configuración concreta. Todo lo marcado [INF] o [PEND] se verifica en ADR-01 y en los ADR `.I`.
+
+### 28.11 Rendimiento y costo (supuestos [INF])
+
+- **Tamaño del problema.** RNF-04: 3–6 torneos simultáneos, 6–16 equipos, hasta 240 partidos por torneo. Un cálculo ordena como máximo 16 equipos y cruza ≤ 240 partidos; es **pequeño** [INF], pero **no está medido**: RD-TAB-12 (≤ 200 ms p95) es una meta [REC] que se mide en staging (OC-116).
+- **Frecuencia.** Se recalcula solo al confirmar, corregir o anular, no por cada lectura (salvo que D4-1 elija «calcular al servirla», en cuyo caso el cálculo se repite por solicitud y debe amortiguarlo ADR-06; esa dependencia es **abierta**, OC-104).
+- **Costo.** Ninguna alternativa añade servicio ni gasto de infraestructura; el costo diferencial es de **desarrollo y mantenimiento** (mayor en ALT-08-C). No se estima en moneda: sin datos.
+- **Serialización.** Serializar por torneo limita el paralelismo de confirmaciones de un mismo torneo, que a esta escala (pocos editores simultáneos por torneo) no parece un cuello de botella [INF]; se confirma en la medición.
+### 28.12 Evaluación, puntuación y recomendación preliminar
+
+**Regla.** Pesos aprobados (R1 §2.4 y R3-A): seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %. Se puntúa **solo con evidencia leída**; lo no leído es [PEND] y se trata con rangos de sensibilidad, sin penalizar documentación incompleta. Escala 1–5; juicio del autor [PROP], no vinculante. El criterio sin conexión **no discrimina** (3): el cálculo oficial es del servidor y lo local no es oficial (MO-24). **Costo** puntúa solo la infraestructura (ninguna alternativa añade servicio ni gasto leído); el esfuerzo de desarrollo **no** se cuenta en Costo para no duplicarlo con Mantenimiento.
+
+| Criterio (peso) | ALT-08-A | ALT-08-B | ALT-08-C |
+|---|---|---|---|
+| Seguridad (35 %) [PROP, no verificado] | 3–4 | 3–4 | 2–3 |
+| Costo de infraestructura (30 %) | 4–5 | 4–5 | 4–5 |
+| Sin conexión (20 %) | 3 | 3 | 3 |
+| Mantenimiento (15 %) | 3–4 | 3–4 | 2–3 |
+| **Total (rango)** | **3,30–4,10** | **3,30–4,10** | **2,80–3,60** |
+
+**Fundamento (v0.2).** *Seguridad:* los tres juicios son **[PROP] no verificados**, no hechos leídos. Para A y B (3–4) pesan igual el riesgo de privilegios y de acceso directo (MO-26) y la atomicidad pendiente (OC-102); para C (2–3) pesa la posible divergencia entre dos definiciones, contraria a RD-TAB-10. *Costo:* sin diferencia leída (4–5 en las tres). *Sin conexión:* no discrimina. *Mantenimiento:* sin evidencia leída que separe a A de B (3–4 en ambas); C (2–3) refleja solo un hecho estructural, que RD-TAB-10 exige dos definiciones con prueba de equivalencia. **Sensibilidad.** Si la seguridad de C fuera 3–4 (en lugar de 2–3), su total sería 3,15–3,95; los rangos de las tres alternativas **se solapan** en cualquier caso.
+
+**Recomendación preliminar NO vinculante [PROP].** **La evidencia documentada disponible no discrimina entre ALT-08-A y ALT-08-B** (rangos idénticos, 3,30–4,10); ALT-08-C tiene un rango inferior pero solapado y es la que más condiciones añade (prueba de equivalencia de RD-TAB-10). **No se expresa preferencia entre A, B y C** mientras no surja evidencia documentada nueva, en particular la de OC-102 (atomicidad), OC-122 (acceso directo y privilegios) y OC-116 (rendimiento). **No se selecciona nada:** la decisión corresponde al responsable (DR8-4) y **después** de ADR-01, ADR-02.C, ADR-04.C y ADR-05.C. Los puntajes no sustituyen a los requisitos obligatorios, que son eliminatorios y no compensables.
+
+### 28.13 Compatibilidad con R2 y condiciones heredadas
+
+| Elemento | Estado en ADR-08 | Observación |
+|---|---|---|
+| IN-02-01, 02, 03 (autorización en servidor y datos; una definición; vigente en la misma unidad) | Preservado | El motor no autoriza; MO-12 |
+| ADR-02.C (frontera atómica UI-05, UI-10, GT-11…14) | **Consumido** y no redefinido | La alternativa debe poder ejecutarse **dentro** de esa unidad (MO-13); la verificación del mecanismo es OC-102 |
+| ADR-04.C (IN-04-06…08, D4-1) | **Consumido** y no redefinido | La coherencia pública es de ADR-04.C y ADR-06; D4-1 sigue abierta (OC-104) |
+| ADR-05.C (IN-05-04…10, OFF-06, OFF-25) | Preservado | El motor recalcula tras operaciones aceptadas y nunca con locales (MO-24) |
+| ADR-01 (R3-A, aprobado de forma documental condicionada) | Dependencia | Ninguna alternativa se ejecuta sin una configuración; ADR-08 no puede cerrarse antes (OC-119) |
+| RT-14, A-8, A-16, D4-8 | Preservados y **sin resolver** | El motor no decide permisos de publicar, corregir o cambiar el reglamento (MO-22); el efecto de una corrección sobre la clasificación del equipo del actor sigue abierto (OC-121) |
+| D-2 (revocación ≤ 60 s sin excepción) | Preservado | No se toca |
+| RD-FOR-02 (no impedir fases finales y eliminatorias) | Compatible | Las tres alternativas admiten sustituir o ampliar la función de ordenamiento [INF]; no se diseña nada |
+| `01` §3 (sin tiempo real, sin sanciones automáticas) | Preservado | Fuera del MVP |
+| Q-20 (nombres) e IN-04-11 | Preservado | Solo etiquetas en los resultados públicos del motor (MO-23) |
+
+### 28.14 Condiciones, decisiones y riesgos
+
+**Condiciones abiertas (OC-101…125).** Ninguna se resuelve aquí.
+
+| ID | Condición | Origen | Bloquea |
+|---|---|---|---|
+| OC-101 | ¿Quién calcula goleadores y tarjetas (CMP-12, CMP-14 u otro)? R1 §5.9 solo define la tabla, pero RD-RES-06 exige recalcularlos en la misma corrección | RD-RES-06; RD-EVT-07, 08; §5.9 | Cierre de ADR-08 |
+| OC-102 | Mecanismo de atomicidad del recálculo en el entorno de ejecución elegido (transacción interactiva, función en la capa de datos o concurrencia optimista); **no leído a fondo** en fuentes oficiales | ADR-02.C; ADR-01 | Selección entre ALT-08-A y B |
+| OC-103 | Serialización de confirmaciones del mismo torneo (por torneo o con versión de la clasificación) y su error de conflicto sin exponer errores de base de datos | GT-12; RD-RES-04 | Diseño `.I` |
+| OC-104 | D4-1: clasificación calculada al servirla o materializada; efecto en consumo y en ADR-06 | ADR-04.C; D4-1 | Cierre de ADR-08 |
+| OC-105 | Q-29: efecto de `suspendido`, `aplazado` y `cancelado` en la tabla (exclusión provisional) | RD-TAB-03; RD-RES-12 | F4 |
+| OC-106 | Q-21: W.O. con GF/GC y doble W.O. (`COND`) | RD-WO-03, 04 | F4 / 5E |
+| OC-107 | Q-22: resolución manual (quién, almacenamiento, obsolescencia) y RT-14 sobre ella | RD-TAB-09 | F4 / 5F |
+| OC-108 | Q-23: lectura (a) o (b); definición de «torneo iniciado» (`DER`); carrera entre edición del reglamento y primer partido; carrera con un cambio permitido (OC-124) | RD-REG-02, 03 | F4 |
+| OC-109 | Q-26: retiro o expulsión en curso (CL-17); `RF-EQP-03` provisional | Q-26 | F4 / 5B |
+| OC-110 | Q-27 y Q-28: semántica del enfrentamiento directo (incluido el caso de partidos entre empatados aún no jugados, EC-06) y catálogo, contrastados con el reglamento real de la organización | RD-TAB-05, 06 | F3-F4 / 5F |
+| OC-111 | Q-30: consistencia marcador–eventos y «goles sin autor» | RD-EVT-02, 04 | F4 / 5E |
+| OC-112 | Q-33: puntos fijos o configurables; el MVP los lee del reglamento sin edición | RD-REG-06 | F4 |
+| OC-113 | A-16: conflicto del dueño u organizador sobre el reglamento y los desempates (sin resolver) | A-16; RT-14 | F4 |
+| OC-114 | Fuente independiente de valores esperados de los fixtures (cálculo manual o revisión del organizador) y su aprobación | RD-TAB-07; RNF-11 | Antes de 5F |
+| OC-115 | Cómo ejecutar las pruebas contra PostgreSQL real en el flujo de desarrollo | RNF-11; HR1-13 | Fase 3 |
+| OC-116 | Medición del rendimiento (RD-TAB-12) en staging; sin medir | RD-TAB-12 | Fase 4 |
+| OC-117 | Versión de la lógica del motor y si un cambio de lógica recalcula el histórico; alcance (i) frente a (ii) de MO-28 | MO-19, MO-28 | DR8-3 |
+| OC-118 | Registro de la versión del reglamento, de las resoluciones manuales y del motor con que se calculó cada tabla publicada (alcance i) | MO-19 | Diseño `.I` |
+| OC-119 | Dependencias: ADR-01, ADR-02.C, ADR-04.C y ADR-05.C aprobados antes de cerrar ADR-08 | R1 §8.2 | Cierre de ADR-08 |
+| OC-120 | Revisión del modelo ante RD-FOR-02 (fases finales, eliminatorias) en Fases 2 y 4 | RD-FOR-02 | F2-F4 |
+| OC-121 | **[PEND]** Si el efecto de corregir un partido ajeno sobre posiciones, desempates y resoluciones manuales del equipo del actor en conflicto cae bajo RT-14 | RT-14; A-16; D4-8; IN-02-12 | F4; no se resuelve aquí |
+| OC-122 | Invocación directa no autorizada: quién puede ejecutar las funciones de cálculo, escritura y vista previa, con qué privilegios (invocador o creador), con qué `search_path`, con RLS y con aislamiento entre torneos | MO-26; IN-02-01, 04, 14 | ADR-02.I |
+| OC-123 | Filtro por visibilidad de la entrada de la proyección pública (jornadas no publicadas, borrador, `archivado`) y su materialización | MO-25; RF-PUB-02; PU-07; A-8 | ADR-04.C; ADR-06 |
+| OC-124 | Fijar la versión del reglamento dentro de la unidad atómica ante un cambio permitido simultáneo | MO-27; Q-23; GT-12 | Diseño `.I` |
+| OC-125 | Mecanismo de historial para reconstruir exactamente la clasificación publicada en una fecha anterior (no exigido por `01`) | MO-28; RD-RES-06 | Decisión del responsable (DR8-9) |
+
+**Decisiones que corresponden al responsable (DR8-1…9).** Ninguna se toma aquí.
+
+| ID | Decisión | Condiciones |
+|---|---|---|
+| DR8-1 | Alcance de CMP-12 respecto de goleadores y tarjetas | OC-101 |
+| DR8-2 | Lectura (a) o (b) de Q-23 y definición de «torneo iniciado» | OC-108 |
+| DR8-3 | Versión del motor y reproducibilidad del histórico | OC-117, OC-118 |
+| DR8-4 | Selección del lugar de cálculo (A, B o C), **después** de ADR-01 y de los ADR `.C` | OC-102, OC-119 |
+| DR8-5 | Materializar o calcular al servirla (D4-1, heredada) | OC-104 |
+| DR8-6 | Quién aprueba los valores esperados de los fixtures | OC-114 |
+| DR8-7 | Q-26 (retiro en curso) y Q-29 (estados no finalizados) | OC-105, OC-109 |
+| DR8-8 | Si el efecto de una corrección sobre la clasificación del equipo del actor queda bajo RT-14 (A-16, D4-8) | OC-121 |
+| DR8-9 | Si se exige reconstruir exactamente lo publicado en una fecha anterior y con qué historial | OC-125 |
+
+**Riesgos de redacción (RR8-01…18).** No se aceptan; se registran.
+
+| ID | Riesgo | Mitigación documental |
+|---|---|---|
+| RR8-01 | Divergencia entre dos definiciones (ALT-08-C) | ≥ 10 fixtures de equivalencia; preferir una sola definición |
+| RR8-02 | Bucle o resultado no terminante en empates circulares (CL-16) | Pruebas de propiedad (MO-01); casos EC-02…05 |
+| RR8-03 | Recálculo con lectura inconsistente: una clasificación que no refleja el resultado confirmado (CL-15) | Lectura y escritura en la misma unidad (MO-13); garantía pública en ADR-04.C |
+| RR8-04 | Pérdida de actualización entre confirmaciones simultáneas del mismo torneo | Serialización o versión de la clasificación (OC-103); EC-13 |
+| RR8-05 | Edición del reglamento que compite con el primer partido (RD-REG-02) | Serializar; EC-15 |
+| RR8-06 | Cambio retroactivo no autorizado del reglamento o de los desempates (A-16, RT-14) | Imponer en servidor y datos; A-16 sin resolver; el motor no autoriza |
+| RR8-07 | Cambio de la configuración de W.O. con efecto sobre W.O. ya declarados | Conservar el marcador aplicado con el partido (RD-WO-05) |
+| RR8-08 | Función en la capa de datos con privilegios del creador que evita las políticas de acceso por fila, o con `search_path` sin fijar [DOC: Supabase] | Preferir privilegios del invocador cuando sea posible [INF]; control explícito de quién la ejecuta; decidir en ADR-02.I (OC-122) |
+| RR8-09 | Pruebas que usan el propio motor como oráculo | Valores esperados independientes (OC-114) |
+| RR8-10 | Reglas provisionales (Q-21, Q-27, Q-29, Q-30, Q-26) tratadas como definitivas en código o fixtures | Marcarlas como provisionales y trazar a su `COND` |
+| RR8-11 | Límites de ejecución del entorno elegido no leídos para esta carga | Medición en staging (OC-116); el tamaño del problema es pequeño [INF] |
+| RR8-12 | Controlador solo HTTP sin transacciones interactivas [DOC: Neon] que obliga a diseñar B de otra forma | Concurrencia optimista o WebSocket; verificar en ADR-01 (OC-102) |
+| RR8-13 | Cálculo en el cliente (vista previa) tomado como oficial o publicado | Excluido (MO-24); la vista previa solo se calcula en el servidor |
+| RR8-14 | Exposición de nombres de menores en goleadores con Q-20 abierta | Solo etiquetas (MO-23) |
+| RR8-15 | Mostrar el orden alfabético de un empate sin resolver como si fuera un desempate | Marca pública «Empate sin resolver» (RD-TAB-08) |
+| RR8-16 | Invocación directa no autorizada de funciones de cálculo, escritura o vista previa desde un cliente | MO-26; restricción de ejecución y privilegios mínimos (OC-122, ADR-02.I) |
+| RR8-17 | La proyección pública filtra información de jornadas no publicadas | MO-25; filtro por visibilidad (OC-123, ADR-04.C, ADR-06); EC-20 |
+| RR8-18 | Cálculo con versiones mezcladas del reglamento ante un cambio simultáneo | MO-27; fijar la versión en la unidad (OC-124); EC-19 |
+
+### 28.15 Verificación del autor (autoevaluación; no es auditoría independiente)
+
+| ID | Criterio | Resultado |
+|---|---|---|
+| CR3D-01 | Las Partes I–XIII y los registros anteriores no cambian (prefijo idéntico al HEAD) | Cumple (comprobado) |
+| CR3D-02 | Al menos dos alternativas con matriz de conformidad, evaluadas sin seleccionar tecnología | Cumple: §28.4, §28.5 |
+| CR3D-03 | Reglas confirmadas, opciones pendientes y lo fuera del MVP se distinguen sin reinterpretar `01` | Cumple: §28.2, §28.3 |
+| CR3D-04 | Determinismo, 3/1/0, desempates configurables, W.O., corrección y recálculo cubiertos | Cumple: §28.3, §28.7, §28.9 |
+| CR3D-05 | Versionado del reglamento y protección contra cambios retroactivos no autorizados, sin resolver A-16 | Cumple: §28.6 |
+| CR3D-06 | Coherencia transaccional entre partidos, tabla, goleadores y tarjetas; la garantía pública no se afirma | Cumple como propuesta: §28.8; OC-101 |
+| CR3D-07 | Concurrencia e idempotencia sin elegir mecanismo | Cumple: §28.8; OC-103 |
+| CR3D-08 | Casos límite y pruebas con oráculo independiente | Cumple: §28.9; OC-114 |
+| CR3D-09 | Tres configuraciones de R3-A sin seleccionar proveedores | Cumple: §28.10 |
+| CR3D-10 | Puntuación solo con evidencia leída; sin penalizar lo no leído; sin duplicar penalizaciones; aritmética comprobada | Cumple: §28.12 (comprobado) |
+| CR3D-11 | RT-14, A-8, A-16, D-2 e invariantes de R2 preservados; dependencias en ADR-01, 02.C, 04.C y 05.C | Cumple: §28.13 |
+| CR3D-12 | Sin código, cuentas, servicios ni gastos; sin microservicios; recomendación no vinculante | Cumple |
+| CR3D-13 | Identificadores nuevos únicos y definidos; sin colisión con los previos | Cumple (comprobado) |
+| CR3D-14 | Lo no leído se marca [PEND] | Cumple: §28.0, OC-102 |
+| CR3D-15 | Estado «pendiente de revisión»; sin iniciar R3-E, R3-F, ADR `.I` ni R4 | Cumple |
+| CR3D-16 | Atomicidad de A, B y C condicionada a OC-102; sin presentar como demostrado lo [INF] | Cumple: §28.4, §28.5 |
+| CR3D-17 | Invocación directa, privilegios, `search_path`, RLS y aislamiento; oficial interno frente a proyección pública | Cumple como propuesta: MO-25, MO-26; OC-122, OC-123 |
+| CR3D-18 | Carrera de cambio de reglamento, alcances de reproducibilidad y efecto de RT-14 sobre la clasificación, sin resolver | Cumple: MO-27, MO-28; OC-121, OC-124, OC-125 |
+
+### 28.16 Fuentes y límites de lectura
+
+**Fuentes internas (leídas):** `01-requisitos.md` (RD-TAB, RD-REG, RD-WO, RD-RES, RD-EVT, RD-FOR, RNF-04, 11, 12; Q-21…Q-33; CL-15…18, 29, 31; A-8, A-9, A-14, A-16; RT-14); este documento (R1 §5.2, §5.9, §8.1, §8.2; ADR-02.C UI-05, UI-10, GT-11…14, IN-02-01…14; ADR-04.C IN-04-06…13, D4-1…8; ADR-05.C IN-05-04…14; R3-A CFG-C1…C3).
+**Fuentes oficiales consultadas (2026-11-22; páginas descargadas y convertidas a texto):** Supabase (conexión directa a PostgreSQL desde Edge Functions; funciones de base de datos y diferencia entre `security definer` e `invoker`; límites de Edge Functions; pruebas con pgTAP); Neon (controlador serverless: HTTP con transacciones **no interactivas** y WebSocket para las interactivas; agrupación de conexiones). **No se obtuvieron:** la página de transacciones de Supabase (devolvió 404), la de límites de funciones de Vercel y la de Cloudflare Workers para esta carga; quedan [PEND].
+**Límites.** No se leyó cómo cada configuración ejecuta una función de base de datos en una sola transacción desde el cliente de datos; se marca [INF]. Las estimaciones de tamaño y rendimiento son del autor y **no se midieron**. Las cifras de límites son de la fecha de consulta y pueden cambiar. Ninguna fuente externa sustituye a `01` en las reglas deportivas.
+### 28.17 Estado y preguntas para el responsable
+
+**Estado:** R3-D **v0.2-R3D: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL** (corrige H-1…H-8 y la observación de seguridad de la revisión focalizada; ver §28.18 y el metadato de §28.0). **No versionado.** Autoevaluación del autor, no auditoría independiente. R3-E, R3-F, los ADR `.I` y R4: **NO INICIADOS.** Siguen abiertas todas las decisiones y condiciones heredadas de R1, R2, R3-A, R3-B y R3-C.
+
+**Preguntas:** DR8-1 a DR8-9 y las condiciones OC-101 a OC-125 (§28.14); en particular, si CMP-12 debe cubrir también goleadores y tarjetas (OC-101) y si el efecto de una corrección sobre la clasificación del equipo del actor queda bajo RT-14 (OC-121).
+
+### 28.18 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| H-1 | Atomicidad de A, B y C condicionada a OC-102; lo [INF] no se presenta como demostrado | §28.4, §28.5 |
+| H-2 | Mantenimiento con rangos (A y B 3–4; C 2–3); sin penalización duplicada por horas de desarrollo; Costo solo de infraestructura; totales recalculados; recomendación: la evidencia no discrimina entre A y B | §28.4, §28.5, §28.12 |
+| H-3 | Efecto de una corrección sobre la clasificación del equipo del actor reformulado como [PEND]; RT-14, A-16 y D4-8 abiertos; OC-121 y DR8-8 | §28.8 (7), MO-22, §28.13, §28.14 |
+| H-4 | MO-26: sin invocación directa no autorizada (incluidas vistas previas); privilegios del invocador o creador, `search_path`, RLS y aislamiento; mecanismo para ADR-02.I (OC-122); RR8-16; EC-21 | §28.3, §28.4, §28.6, §28.14 |
+| H-5 | MO-25: cálculo oficial interno frente a proyección pública con solo datos publicados y confirmados; OC-123; RR8-17; EC-20; respeta ADR-04.C y ADR-06 | §28.2, §28.3, §28.8 (8), §28.14 |
+| H-6 | MO-27: versión del reglamento fijada en la unidad atómica ante un cambio permitido simultáneo; EC-19; OC-124; RR8-18 | §28.3, §28.6, §28.8 (9), §28.9 |
+| H-7 | MO-28: «recalcular la clasificación actual» frente a «reconstruir lo publicado en una fecha anterior»; mecanismo de historial [PEND] (OC-125, DR8-9) | §28.3, §28.6 |
+| H-8 | Retiradas las afirmaciones sin fuente sobre límites de CPU; TB-3 sustituido por MO-24 e IN-04-05 | §28.1, §28.4, §28.10, §28.14 |
+| Obs. seguridad | Los juicios de seguridad se rotulan [PROP] no verificados y se añade una sensibilidad para C | §28.12 |
