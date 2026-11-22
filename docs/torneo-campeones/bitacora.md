@@ -1,5 +1,16 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-22 — Fase 2, R3-E parcial: ADR-03.I (aprobación condicional como entregable documental)
+
+- **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-03.I»: «APRUEBO EXCLUSIVAMENTE ADR-03.I v0.2-R3E-03I COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Esta aprobación NO equivale a aprobar R3-E completo ni a seleccionar identidad, proveedor, método de segundo factor o política de sesiones.** El evento de aprobación es independiente y no reutiliza identificadores DR3I; la aprobación es un evento independiente. No aprueba definitivamente ADR-03.I. Archivos: `02-arquitectura-adr.md` (solo metadatos de §30), `aprobaciones.md`, `bitacora.md`.
+- **Versión aprobada:** ADR-03.I **v0.2-R3E-03I** (Parte XVI, §30): ALT-03-A, B y C **sin selección**; rangos A y B 2,50–4,10, C 1,90–4,10; SI-01…24, DR3I-1…11, OC-154…184, RR3I-01…21, CR3I-01…18.
+- **Preservado:** SI confirmados, propuestos [PROP] y recomendados [REC] distinguidos; DR3I-1…11 y OC-154…184 abiertas; RR3I-01…21 sin aceptar; R y V bloqueadas; N-C, S-A y S-B candidatas no admitidas; decisión 7 y «nueva autenticación» abiertas; segundo factor obligatorio sin garantía técnica demostrada; estado vigente de cuenta, rol, sesión y nivel pendiente de mecanismo; D-2 sin excepción; ADR-09.I y sus brechas RX-04 y RX-05 pendientes; dependencias de ADR-01, ADR-02.I, ADR-15, ADR-05.I, ADR-16.I y ADR-17/PEND-JUR; autoevaluación del autor, sin auditoría independiente.
+- **Trazabilidad:** ADR-09.I quedó versionado en `dfacd8590ecc76a7a37edf2f0e331af431948457` (`dfacd85`; 2026-11-22T17:39:05Z); nota posterior añadida en su entrada.
+- **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `1649280c527acd03cb560785b985b720cad2f4f772f18922fd10342552a9060b`; con los metadatos: `4b72cb0feecec0d563ac5a4f05864c27e61c6584c415493287034c186eaa78ec`. Las diferencias son solo metadatos de §30.
+- **Exclusiones (no implica):** admitir o seleccionar formulaciones, proveedores, métodos de segundo factor o políticas de sesión; resolver decisiones ni aceptar riesgos o brechas; conceder excepción a D-2; debilitar el segundo factor; redactar otros ADR `.I`; iniciar R3-F o R4; aprobar R3-E completo, R3 o la Fase 2.
+- **Estado real:** R3-A, R3-B, R3-C y R3-D aprobados condicionalmente (documental); **R3-E parcial en curso con ADR-09.I y ADR-03.I aprobados condicionalmente (documental)**; los otros cuatro ADR `.I`, R3-F y R4 NO INICIADOS; R3 y Fase 2 sin aprobación global. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, otro ADR `.I`, resolver decisiones) requiere autorización expresa e independiente.
+
 ## 2026-11-22 — Fase 2, R3-E parcial: ADR-09.I (aprobación condicional como entregable documental)
 
 - **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-09.I»: «APRUEBO EXCLUSIVAMENTE ADR-09.I v0.2-R3E-09I COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Esta aprobación NO equivale a aprobar R3-E completo ni a admitir formulaciones.** El evento de aprobación es independiente y no reutiliza identificadores DR9I; la aprobación es un evento independiente. No aprueba definitivamente ADR-09.I. Archivos: `02-arquitectura-adr.md` (solo metadatos de §29), `aprobaciones.md`, `bitacora.md`.
@@ -9,7 +20,7 @@
 - **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `d1a043d67af1ff2cb8c04f7c440ea175fc20217f5be90c24118ab659cdb54c37`; con los metadatos: `44dccbab64ff9bd1d839ac46bd2ad52dddc33f914762ff399114d55fc1fb1e4c`. Las diferencias son solo metadatos de §29.
 - **Exclusiones (no implica):** admitir o seleccionar formulaciones, mecanismos o proveedores; resolver decisiones ni aceptar riesgos o brechas; conceder excepción a D-2; redactar otros ADR `.I`; iniciar R3-F o R4; aprobar R3-E completo, R3 o la Fase 2.
 - **Estado real:** R3-A, R3-B, R3-C y R3-D aprobados condicionalmente (documental); **R3-E parcial en curso con ADR-09.I aprobado condicionalmente (documental)**; los otros cinco ADR `.I`, R3-F y R4 NO INICIADOS; R3 y Fase 2 sin aprobación global. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar este registro, otro ADR `.I`, resolver decisiones) requiere autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, otro ADR `.I`, resolver decisiones) requiere autorización expresa e independiente. *[Nota posterior, 2026-11-22: este registro y ADR-09.I v0.2-R3E-09I quedaron versionados en el commit `dfacd8590ecc76a7a37edf2f0e331af431948457` (`dfacd85`; verificable por Git; 2026-11-22T17:39:05Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-22 — Fase 2, R3-D (aprobación condicional como entregable documental)
 

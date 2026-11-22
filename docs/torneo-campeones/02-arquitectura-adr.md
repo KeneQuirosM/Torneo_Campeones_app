@@ -7768,3 +7768,402 @@ Los fixtures usan **solo datos sintéticos**. Las pruebas de restricciones se ej
 | M-7 | Regla uniforme de rangos (±1 en seguridad y mantenimiento; costo según aspectos no evaluados); puntuaciones recalculadas sin castigar solo lo desconocido | §29.12 |
 | M-8 | Neon evita el acceso directo solo si no se exponen credenciales; «no figura» pasa de [DOC] a [INF]; esquemas expuestos [PEND] (OC-153) | §29.9, §29.11, §29.6, §29.17 |
 | Obs. rol de servicio | SV-18 y SV-01: revisión y revocación explícita de privilegios del rol de servicio y de los roles por defecto, sin afirmar que una medida aislada impide todos los accesos privilegiados (OC-152, DR9I-10, RR9I-19) | §29.3, §29.14 |
+
+---
+
+# PARTE XVI — BLOQUE R3-E / ADR-03.I (v0.2-R3E-03I, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, R3-E PARCIAL EN CURSO; 2026-11-22 inferida)
+
+## 30. R3-E — ADR-03.I (implementación de identidad, sesión y segundo factor): evaluación y borrador condicionado
+
+### 30.0 Alcance, autorización, puerta de entrada y reglas
+
+- **Autorización (2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R3-E: INICIO DE ADR-03.I»: «AUTORIZO EXPRESAMENTE INICIAR EXCLUSIVAMENTE EL BORRADOR DOCUMENTAL CONDICIONADO DE ADR-03.I.» Solo se modifica este documento, con esta Parte nueva. **No se redactan otros ADR `.I`; no se inicia R3-F ni R4.**
+- **Puerta de entrada (verificada, solo lectura previa).** R1 §8.2: ADR-03.I requiere ADR-03.C y ADR-01 (y ADR-15 depende de ADR-03.C). ADR-03.C es **propuesta** (§16.6); ADR-01 está aprobado solo de forma documental condicionada y **no selecciona proveedor**. La matriz de R2 clasifica como **A** N-C, S-A y S-B; **R** y **V** **no tienen formulación A** (R-A y R-C son C, R-B es X; V-A y V-B son C, V-C es X); N-B es C (depende de la lectura de «nueva autenticación», decisión 12). **No hay bloqueo obligatorio para redactar un borrador condicionado que no selecciona.** La regla del cierre de R2 dice que un `.I` solo puede **elegir** entre formulaciones que el responsable haya **admitido**: no hay conjunto admitido, así que **este borrador no elige nada.**
+- **Qué es este borrador.** Una evaluación de alternativas de implementación con una **recomendación preliminar no vinculante**. **N-C, S-A y S-B se tratan solo como candidatas documentales, todavía no admitidas por el responsable.** Las formulaciones **C no se consideran rechazadas** y las **A no se consideran aprobadas.** **R y V quedan bloqueadas para selección.** No selecciona proveedor, método de segundo factor, mecanismo de sesión ni política de recuperación; no aprueba ADR; no resuelve la decisión 7, R, V ni otras decisiones; no acepta riesgos ni concede excepciones; **no debilita el segundo factor obligatorio para dueño y organizador; no concede excepción a D-2**; no escribe código ni crea cuentas.
+- **Convención.** [DOC]: dato leído en la página oficial citada (§30.16). [CONF]: texto confirmado de `01`, R1 o R2 con el estado que allí declara. [REC]: recomendación sin decidir. [PROP]: propuesta del autor. [INF]: inferencia o cálculo del autor. [PEND]: pendiente o sin verificar. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; **lo no leído se marca [PEND] y no se penaliza en la puntuación.** Una **inferencia por ausencia de documentación** se rotula [INF], nunca [DOC].
+- **Identificadores nuevos (sin colisión).** **ALT-03-A, ALT-03-B, ALT-03-C** (alternativas de implementación), **SI-01…24** (requisitos de seguridad verificables), **DR3I-1…11** (decisiones del responsable), **OC-154…184** (condiciones abiertas), **RR3I-01…21** (riesgos de redacción), **CR3I-01…18** (criterios de revisión documental).
+- **Versión 0.2 (correcciones de la revisión focalizada).** Aplica M-1…M-6 y las observaciones no bloqueantes (§30.19): **estado vigente** de cuenta, roles, sesión y nivel de autenticación (nunca solo afirmaciones de una credencial); **vías de omisión del segundo factor** enumeradas ([PROP]); **invalidación de sesiones anteriores** tras recuperación, cambio de factor o pérdida de dispositivo ([REC], decisión 7); mantenimiento con el mismo criterio para A y B; protección ante **bloqueo malicioso** y continuidad del último dueño sin vía de omisión; inferencias rotuladas [INF]. **Sin seleccionar proveedor, alternativas ni formulaciones; R, V, la decisión 7 y «nueva autenticación» siguen abiertas; D-2 sin excepción.**
+- **Exclusiones.** Admitir, seleccionar o descartar formulaciones (A, C o X); elegir proveedor, biblioteca, método de segundo factor, mecanismo de sesión o política de recuperación; fijar parámetros (plazos, intentos, frescura); resolver R, V, la decisión 7, D-2, H2A-09, H2A-10, H2A-11, A-10, A-15, K-3 ni otra decisión heredada; aceptar riesgos o brechas; aprobar ADR-03.I, R3 ni la Fase 2; redactar ADR-02.I, 04.I, 05.I ni 16.I; iniciar R3-F ni R4; modificar las Partes I–XV ni los registros.
+- **Aprobación (metadato; 2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-03.I»: «APRUEBO EXCLUSIVAMENTE ADR-03.I v0.2-R3E-03I COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: ADR-03.I (v0.2-R3E-03I): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL; R3-E sigue como bloque parcial en curso.** **Esta aprobación NO equivale a aprobar R3-E completo ni a seleccionar identidad, proveedor, método de segundo factor o política de sesiones.** El evento de aprobación es independiente y no reutiliza identificadores DR3I. No aprueba definitivamente ADR-03.I ni admite o selecciona formulaciones, proveedores, mecanismos de segundo factor o de sesión ni políticas de recuperación; no acredita el segundo factor obligatorio, la revocación efectiva, la protección ante fuerza bruta o enumeración ni control alguno. Se conservan: **ALT-03-A, ALT-03-B y ALT-03-C sin selección**; rangos **ALT-03-A y ALT-03-B: 2,50–4,10; ALT-03-C: 1,90–4,10**, que se solapan y **no discriminan**; **SI-01…24**, con los **requisitos confirmados** distinguidos de los **propuestos [PROP]** (entre ellos la lista de vías de omisión del segundo factor de SI-02) y de los **recomendados [REC]** (entre ellos SI-11…15 y SI-23); **DR3I-1…11 y OC-154…184 abiertas**; **RR3I-01…21 sin aceptar**; **R y V bloqueadas**; **N-C, S-A y S-B como candidatas A no admitidas** y **N-B condicionada, no rechazada**; **N, S, R y V sin fijar**; **decisión 7 y definición de «nueva autenticación» abiertas**; **segundo factor obligatorio para dueño y organizador, sin garantía técnica demostrada y sin vías de omisión admitidas**; la **comprobación del estado vigente de cuenta, roles, sesión y nivel de autenticación pendiente de mecanismo** (OC-179); **D-2 sin excepción**; **ADR-09.I y sus brechas RX-04 y RX-05 pendientes**; las dependencias de **ADR-01, ADR-02.I, ADR-15, ADR-05.I, ADR-16.I y ADR-17/PEND-JUR**; la limitación de **autoevaluación del autor, sin auditoría independiente**; y **R3-E como bloque parcial en curso, con los otros cuatro ADR `.I` (02, 04, 05 y 16), R3-F y R4 sin iniciar**. Trazabilidad posterior: ADR-09.I v0.2-R3E-09I (Parte XV) y su registro de aprobación quedaron versionados en el commit `dfacd8590ecc76a7a37edf2f0e331af431948457` (`dfacd85`; verificable por Git; 2026-11-22T17:39:05Z). Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Nota posterior de trazabilidad (2026-11-22, inferida; solo informativa).** ADR-09.I v0.2-R3E-09I (Parte XV) y su registro de aprobación quedaron versionados en el commit `dfacd8590ecc76a7a37edf2f0e331af431948457` (`dfacd85`; verificable por Git; 2026-11-22T17:39:05Z). Las expresiones «No versionado» de §29.18 y «Estado de versionado: Pendiente» del registro de ADR-09.I describen el momento de redactarse. **No se reescribe la aprobación histórica;** `aprobaciones.md` y `bitacora.md` **no se modifican en esta entrega.**
+
+### 30.1 Identificación
+
+| Campo | ADR-03.I |
+|---|---|
+| Tema | Implementación de la identidad, la sesión y el segundo factor, sin seleccionar proveedor |
+| Pregunta (R1 §8.1) | ¿Cómo se implementan las capacidades de ADR-03.C (IN-03-01…21) de modo verificable, **sin** seleccionar tecnología hasta ADR-01, preservando el segundo factor obligatorio, la revocación efectiva y D-2 sin excepción? |
+| Alternativas mínimas | ≥ 2 (aquí 3: A, B y C; difieren en **dónde vive la identidad y cómo se guarda el estado de la sesión**; N, S, R y V no se fijan) |
+| Dependencias (R1 §8.2) | ADR-03.C (propuesta); ADR-01 (documental condicionado). Requerido por ADR-02.C y ADR-05.C, y por ADR-15 |
+| Dependencias laterales | ADR-15 (correo, enlaces y códigos; R3-B); ADR-07 (canal de aviso: V-C; R3-C); ADR-02.I (acceso directo, RLS, rol de servicio); ADR-09.I (auditoría de accesos); ADR-05.I (aplicación a la ruta sincronizada); ADR-17 y PEND-JUR; ADR-12 y ADR-14 (R4) |
+| Componentes | CMP-06 (identidad y emisión del nivel de autenticación), CMP-08 (decisor único de permisos), CMP-07 (roles y asignaciones), CMP-18 (correo), CMP-13 (operaciones sincronizadas) |
+| Fronteras de confianza | TB-1 (cliente ↔ servidor), TB-5 (correo), el límite navegador–servidor–base de datos |
+| Bloque / estado | R3-E (parcial) / **BORRADOR** |
+
+### 30.2 Entradas heredadas: invariantes, candidatas A y lo bloqueado
+
+**Invariantes de ADR-03.C (no se redefinen):** IN-03-01 (un solo emisor del nivel, CMP-06; un solo decisor, CMP-08) [DER]; IN-03-02 (política efectiva de 2FA por cuenta con todos los roles vigentes; obligatorio para dueño y organizador) [CONF]; IN-03-03 (enrolar antes de usar el rol) [CONF]; IN-03-04 (designar o revocar dueño exige nueva autenticación con 2FA) [CONF]; IN-03-05 (solo por invitación; un uso; vence; correo invitado) [CONF]; IN-03-06 (revocación inmediata en el servidor) [CONF]; IN-03-08 (cierre por inactividad y por el usuario; invalidación de sesiones anteriores; recuperación) [requisito M de `01`]; IN-03-09 (límites de intentos) [CONF]; IN-03-10 (sincronizar exige sesión válida; captura local con sesión vencida) [CONF]; IN-03-11 (el contexto local no autentica) [DER]; IN-03-17 y IN-03-18 (sin permisos nuevos; sin proveedor seleccionado). **Objetivo técnico:** IN-03-07 (≤ 60 s en sesiones conectadas, sin garantía en desconectadas; **no medible en la Fase 2**; D-2 **sin excepción**). **[REC] sin decidir (decisión 7):** IN-03-12 a IN-03-16, IN-03-19 a IN-03-21.
+
+| Decisión de ADR-03.C | Formulación (clasificación de la matriz de R2) | Tratamiento en este borrador |
+|---|---|---|
+| Nivel de autenticación y frescura (N) | **N-C** (comprobante de un solo uso por operación crítica): **A**. **N-B** (nivel con frescura): **C**, condicionada a la lectura de «nueva» (L1 reciente / L2 propia de la operación; H2A-11). **N-A**: X | N-C es candidata A **no admitida**; **N-B sigue en juego** (no rechazada); N-A queda excluida por la matriz. **N no se fija** |
+| Sincronizar (S) | **S-A** (política vigente al sincronizar) y **S-B** (S-A más reverificación tras sesión restablecida): **A** | Candidatas A **no admitidas**; **S no se fija** |
+| Recuperación (R) | **R-A** y **R-C**: **C** (medios fuertes, no solo correo; IN-03-15 [REC]). **R-B** (procedimiento organizativo como vía única): **X** | **BLOQUEADA** para selección (ninguna A). Solo se señala qué debe permitir cada alternativa y qué no debe impedir |
+| Vigencia de la revocación (V) | **V-A** (consulta periódica del cliente) y **V-B** (credencial de vida corta con renovación): **C** (D-2 y decisión 1). **V-C** (aviso activo del servidor): **X** (exige un canal que el MVP no tiene) | **BLOQUEADA** para selección (ninguna A). V-C **no se evalúa** (excluida por la matriz y por `01 §3` y RF-PWA-04) |
+
+**Condiciones heredadas que no se resuelven:** D-2 y DB2c-10 (sin excepción); decisión 1 y alcance de «sesión conectada» S1/S2/S3 (H2A-10); decisión 7 (IN-03-12…16, 21); H2A-09 (lecturas de datos internos tras revocar); H2A-11 («nueva autenticación»); decisión 12; DB2c-8 (nivel al sincronizar); A-10 y A-15; PEND-JUR; RES-01, RES-09 y RES-10 (sin aceptar).
+
+### 30.3 Requisitos de seguridad verificables (SI)
+
+| ID | Requisito verificable | Fuente | Naturaleza |
+|---|---|---|---|
+| SI-01 | **Un solo emisor del nivel de autenticación (CMP-06) y un solo decisor (CMP-08):** el nivel es un dato verificable que la persona usuaria no puede editar; servidor y capa de datos aplican **la misma definición** del permiso | IN-03-01; IN-02-01, 02 | [DER] |
+| SI-02 | **Segundo factor obligatorio para dueño y organizador, sin vía de omisión.** Lista **cerrada** de vías que se verifican, una por una, con prueba negativa: **(1) acceso**; **(2) invitación** (aceptarla no habilita el rol hasta enrolar); **(3) recuperación** (R sin fijar); **(4) sincronización**; **(5) sesión restaurada o renovada**; **(6) dispositivo o sesión «recordados» o «de confianza»** (**para dueño y organizador no se admite ningún dispositivo recordado que omita el factor obligatorio**); **(7) baja del último factor** (no deja la cuenta con el rol utilizable sin factor); **(8) restablecimiento administrativo de la cuenta o del factor**; **(9) suplantación o impersonación** (ninguna función de administración de identidad accesible a clientes ni al rol de servicio permite actuar como dueño u organizador sin el nivel exigido); **(10) mecanismo de cambio de correo o de contraseña** (SI-14). **La exhaustividad de la lista es [PROP]** del autor; **R y la decisión 7 siguen abiertas** | IN-03-02; RF-ACC-10; RC-11 | IN-03-02 y IN-03-03 **confirmados**; la **lista de vías, [PROP]** |
+| SI-03 | **Enrolar antes de usar el rol:** al otorgar dueño u organizador a una cuenta sin segundo factor, el rol **no es utilizable** hasta enrolar; rechazo en servidor y en capa de datos. **Dependencia del enrolamiento:** algunas bibliotecas exigen una contraseña para habilitar el segundo factor, de modo que **una cuenta creada sin contraseña (enlace de invitación sin credencial) puede no poder enrolar** [DOC: Better Auth]; el flujo de invitación debe prever la creación de la credencial **antes** del enrolamiento (OC-181) | IN-03-03 | Confirmado; flujo [PEND] |
+| SI-04 | **Designar o revocar a un dueño exige nueva autenticación con segundo factor y motivo;** el significado de «nueva» (L1 reciente / L2 propia de la operación) **no se fija aquí**; si se adopta N-C, requiere **estado en el servidor** para consumir el comprobante (OC-170) | IN-03-04; RF-ACC-09; H2A-11 | Confirmado; lectura abierta |
+| SI-05 | **Cuentas solo por invitación:** el registro abierto está **deshabilitado y verificado**; la invitación es de un solo uso, vence, se acepta con el correo invitado y su rol y ámbito no cambian tras emitirla; nadie se invita a sí mismo | IN-03-05; RF-ACC-01, 02 | Confirmado |
+| SI-06 | **Los roles y permisos no se derivan de datos que la persona usuaria pueda modificar** (perfil, metadatos editables, campos del cliente); salen únicamente de CMP-07 y se deciden en CMP-08; **no existe una vía de administración de identidad accesible a clientes** | IN-03-17; RC-04; IN-02-08 | Garantía exigida; mecanismo [PEND] |
+| SI-07 | **Revocación inmediata con estado vigente.** Toda operación **nueva** posterior a t0 se rechaza **consultando el estado vigente de la cuenta (activa, desactivada o eliminada), de sus roles, de la sesión (vigente o revocada) y del nivel de autenticación**; **ninguna operación privilegiada y ninguna decisión de la capa de datos (RLS) puede depender exclusivamente de afirmaciones de una credencial o de una cookie, que pueden estar obsoletas** (credencial firmada hasta su vencimiento; caché de sesión); la **renovación** de una credencial o de una sesión **no restituye** permisos revocados ni cuentas desactivadas o eliminadas. Las lecturas de datos internos (PRV-09) siguen como [REC] (H2A-09). **Mecanismo [PEND] (OC-179); D-2 sin excepción** | IN-03-06; IN-02-03; RF-ACC-07; RT-13 | Confirmado; H2A-09 [REC]; mecanismo [PEND] |
+| SI-08 | **Reflejo ≤ 60 s en sesiones conectadas como objetivo (D-2):** **sin excepción**, **sin medirse** en la Fase 2 y **sin afirmarse cumplido**; S2 abierto; la desconectada no se promete | IN-03-07; D-2; DB2c-10 | Objetivo; sin validación |
+| SI-09 | **Cierre y caducidad:** cierre de sesión por inactividad y por la persona usuaria; invalidación de las sesiones anteriores al revocar y al cambiar la contraseña (IN-03-08); **los plazos se hacen cumplir en el servidor**, con independencia de las funciones del plan del proveedor. La invalidación tras recuperación, cambio de factor o pérdida de dispositivo es SI-23 | IN-03-08; IN-03-12 [REC]; PAR-03 | Confirmado; plazos [PEND] |
+| SI-10 | **Límites de intentos fallidos por cuenta** en el acceso y en el segundo factor (el criterio de RF-ACC-10 menciona 5 intentos), **además** de los límites por origen; **un límite solo por dirección de origen no cumple este requisito.** **Protección ante bloqueo malicioso:** el bloqueo es **temporal** (nunca permanente), **se notifica al titular**, **no impide la recuperación segura del titular legítimo** y **no puede usarse para dejar sin acceso a dueño u organizador** (SI-24); umbrales, esperas y mecanismos **[PEND]** | IN-03-09; RF-ACC-10; RNF-05; PAR-02 | Confirmado; valores y mecanismo [PEND] |
+| SI-11 | **Secreto de portador de la sesión fuera del almacenamiento legible por los scripts de la página;** identificador renovado al autenticar y al cambiar privilegios; cabeceras y cookies con los atributos de seguridad que se decidan | IN-03-12 [REC]; AM-34 | [REC]; decisión 7 |
+| SI-12 | **Respuesta uniforme** en el acceso, la recuperación y las invitaciones: no revela si una cuenta existe | IN-03-13 [REC]; AM-06 | [REC]; decisión 7 |
+| SI-13 | **La recuperación no es más débil que la autenticación que sustituye** y, para dueño y organizador, **el correo por sí solo no basta**; **R no se fija** | IN-03-15 [REC]; AM-02, AM-20 | [REC]; R bloqueada |
+| SI-14 | **Reautenticación con un factor ya enrolado** tras cambio de contraseña o correo y tras alta, baja o cambio del factor o de los medios de recuperación | IN-03-16 [REC] | [REC]; decisión 7 |
+| SI-15 | **Aviso al titular por un canal independiente** ante cambios del segundo factor, de contraseña, de correo y ante una recuperación; contenido mínimo; sin datos de jugadores ni de menores. **No es requisito de `01`** | IN-03-21 [REC]; RM-05 | [REC]; decisión 7 |
+| SI-16 | **Sincronizar:** sesión válida y permisos vigentes; **la sesión que sincroniza es la de la cuenta que capturó**; con sesión vencida se continúa la captura local ya autorizada pero **no** se sincroniza ni se preparan datos nuevos | IN-03-10, 19 [REC]; OFF-22, OFF-23 | Confirmado; IN-03-19 [REC] |
+| SI-17 | **Aislamiento local por cuenta** y **el contexto local no autentica ni autoriza**; cerrar sesión con pendientes exige confirmación (OFF-12) | IN-03-11, 20 [REC]; OFF-12 | [DER] / [REC] |
+| SI-18 | **Separación entre autenticación, autorización y envío de correo:** CMP-06 autentica, CMP-08 decide, CMP-18 envía; las credenciales del servicio de correo solo del lado servidor; los mensajes no contienen datos de jugadores ni de menores; los enlaces y códigos son **tolerantes a la precarga de escáneres** | RM-01, RM-08, RM-13 (R3-B); §5.3 | Confirmado / propuesta |
+| SI-19 | **Credenciales privilegiadas** (rol de servicio, claves administrativas, claves de firma): solo del lado servidor, inventariadas, con mínimo alcance y rotación; **nunca** en el cliente ni en el repositorio; se **revisan** sus privilegios por defecto (SV-18 de ADR-09.I) | RT-09; NE-4; SV-18 | Confirmado / propuesta |
+| SI-20 | **Eventos de seguridad del acceso** (éxitos y fallos de autenticación, alta y baja de factores, recuperación, revocación de sesiones) con el **actor derivado de la identidad autenticada**, sin secretos; **las brechas de ADR-09.I (RX-04, RX-05) no se dan por resueltas** | RF-AUD-05 [REC]; EV-01…03 [REC]; SV-16, SV-19 (ADR-09.I) | [REC]; brechas abiertas |
+| SI-21 | **Aislamiento entre torneos:** la identidad no concede acceso a ningún torneo; los permisos se acotan por torneo y no se transfieren | IN-02-04, 05 | Confirmado |
+| SI-22 | **Sin permisos nuevos, sin reducción de garantías, sin proveedor ni mecanismo seleccionado:** ADR-03.I solo añade condiciones de autenticación | IN-03-17, 18 | [DER] / [CONF] |
+| SI-23 | **Sesiones anteriores tras eventos de riesgo [REC, decisión 7]:** tras una **recuperación de cuenta**, un **cambio, alta o baja de factor** o la **pérdida de un dispositivo**, se invalidan las sesiones anteriores de la cuenta (sin fijar R). **Dispositivo perdido:** la sesión se invalida en el servidor, pero **la cola y los datos locales del dispositivo** (OFF-12, IN-03-20) **no pueden borrarse a distancia** y siguen sujetos a su retención y a la protección de ADR-16; **no se promete borrado remoto de copias sin conexión**. Operaciones capturadas por esa cuenta se revalidan al sincronizar (SI-16) | IN-03-08, 16 [REC]; OFF-11, OFF-12; IN-03-20 [REC] | [REC]; decisión 7; OC-183 |
+| SI-24 | **Continuidad administrativa del último dueño sin vía de omisión del segundo factor:** la pérdida de acceso del último dueño (E6, RT-06 solo impide revocarlo) o su bloqueo malicioso se resuelve por un procedimiento que **no reduce el nivel de autenticación exigido** ni crea una vía de omisión (SI-02 vías 3, 7 y 8); su diseño depende de R (bloqueada) y del procedimiento organizativo | RF-ACC-09; RT-06; IN-03-15 [REC] | Condicionado a R; OC-184 |
+
+### 30.4 Alternativas de implementación
+
+Las tres alternativas difieren en **dónde vive la identidad y cómo se guarda el estado de la sesión.** **N, S, R y V no forman parte de ninguna alternativa:** cada una indica **cómo podría implementar** las formulaciones candidatas o bloqueadas, sin fijarlas. **Ninguna alternativa elige proveedor ni biblioteca;** los ejemplos documentados corresponden a las configuraciones de R3-A y son ilustrativos.
+
+| Criterio | ALT-03-A: identidad gestionada por el proveedor de datos, con credencial firmada de vida corta | ALT-03-B: identidad en la aplicación, con sesión opaca y registro en el servidor | ALT-03-C: servicio de identidad separado y gestionado (sin evaluar) |
+|---|---|---|---|
+| Idea | La identidad y la emisión de la sesión las hace un servicio del proveedor de datos; la sesión es una **credencial de acceso firmada de vida corta** más una **credencial de renovación de un solo uso**; el nivel de autenticación viaja en la credencial | La identidad vive en el servidor de la aplicación (biblioteca de autenticación); la sesión es un **identificador opaco** con **registro en el servidor** (cookie sin acceso de scripts); el nivel y la frescura se consultan del registro | Un servicio de identidad **distinto** de la aplicación y del proveedor de datos emite las credenciales y la aplicación las valida |
+| Patrón documentado | Supabase Auth: sesión = JWT firmado de 5 min a 1 h + refresh token de un solo uso; validar la firma no requiere al servidor de Auth [DOC]; configuraciones CFG-C1 y CFG-C3 | Better Auth: sesión en base de datos con cookie, 7 días por defecto, renovable; revocación por borrado del registro; caché de cookie opcional [DOC]; configuración CFG-C2 | **No evaluado en R3-A ni aquí** [PEND] |
+| Estado de la sesión en el servidor | Mínimo: la credencial vale **hasta su vencimiento** salvo que el servidor consulte el estado [INF: la validación de la firma no consulta estado, [DOC]] | Completo: cada solicitud consulta el registro (o una caché con vencimiento corto) [DOC] | [PEND] |
+| Revocación efectiva (SI-07, SI-08) | **Exige consultar el estado vigente en cada operación con efecto** (IN-03-06) **y en la capa de datos**: una decisión basada en afirmaciones de la credencial queda obsoleta hasta su vencimiento (5 min–1 h típico [DOC]) | Inmediata en el servidor al borrar el registro; **la caché de cookie puede mantener sesiones revocadas activas hasta su vencimiento** si se activa [DOC]; la comprobación del estado vigente sigue siendo exigible en la capa de datos | [PEND] |
+| Segundo factor (SI-02, SI-03) | TOTP y mensajería por teléfono; niveles de aseguramiento en la credencial; aplicación de la política por el servidor o por la capa de datos [DOC: Supabase]; el nivel baja tras renovar la credencial [DOC]; **la función de recordar dispositivo, si existe, no se admite para dueño y organizador** (SI-02 vía 6) [PEND: no leído] | Plugin de segundo factor: TOTP, OTP por correo o teléfono, códigos de respaldo y **dispositivos de confianza** [DOC: Better Auth]; **los dispositivos de confianza no se admiten para dueño y organizador** (SI-02 vía 6); habilitarlo exige contraseña [DOC] (SI-03) | [PEND] |
+| Complejidad y carga | **Funciones gratuitas** del proveedor para la identidad; plazos de sesión y protección de contraseñas filtradas: **planes de pago** [DOC]; el servidor debe **construir** (desarrollo propio) lo que el plan gratuito no ofrece: plazos, límites por cuenta, consulta de estado por operación [INF] | **Funciones de la biblioteca** (sesión con registro, expiración configurable, límites por ruta [DOC]); **desarrollo propio** de límites por cuenta, recuperación y consulta de estado en la capa de datos [INF]; sin plan del proveedor de identidad | Mayor integración y una dependencia más [INF] |
+| Dependencia de plan y de límites | Funciones de plazo de sesión y protección de contraseñas filtradas: **solo planes de pago** [DOC]; gancho de verificación del segundo factor: Teams y Enterprise [DOC]; 50 000 usuarios activos mensuales gratis [DOC] | Sin plan del proveedor de identidad; usa la base de datos y el servidor ya previstos [INF]; la variante gestionada de Neon declara el soporte de MFA como «próximamente» [DOC] | [PEND] |
+| Riesgo principal | Credencial válida hasta su vencimiento; configuración de la API de datos y rol de servicio; plazos de sesión no exigibles en el plan gratuito | Código de seguridad propio; caché de cookie y revocación; mantenimiento de recuperación y límites | Sin evidencia; costo, región y transferencia (PRV-13) sin evaluar |
+
+**Compatibilidad con las formulaciones de ADR-03.C (cómo podría implementarse cada una; no selecciona).**
+
+| Formulación | ALT-03-A | ALT-03-B | ALT-03-C |
+|---|---|---|---|
+| **N-C** (candidata A): comprobante de un solo uso por operación crítica | Requiere **estado en el servidor** para emitir y consumir el comprobante [INF] (OC-170, SI-04); compatible | Natural: el servidor guarda y consume comprobantes [INF] (OC-170) | [PEND] |
+| **N-B** (C, condicionada, **no rechazada**): nivel con frescura | El nivel y el momento de verificación podrían viajar en la credencial [INF: no se leyó que el momento figure en la credencial de Supabase, [PEND]] | Better Auth define la frescura por la **creación de la sesión** (por defecto 1 día) [DOC], **no** por la verificación reciente del segundo factor; equivalencia con L1 [PEND] (OC-168) | [PEND] |
+| **S-A / S-B** (candidatas A): política vigente al sincronizar, con reverificación opcional | Compatible: la sesión restablecida se valida y el servidor revalida cada operación [INF] | Compatible [INF] | [PEND] |
+| **R-A / R-C** (C; **R bloqueada**) | Supabase: no se leyó una función de códigos de recuperación [PEND] (OC-165) | Códigos de respaldo del plugin de segundo factor [DOC]; el resto [PEND] | [PEND] |
+| **V-A / V-B** (C; **V bloqueada**) | Credencial de vida corta: la renovación se pausa con la pestaña oculta [DOC]; vida muy corta aumenta la carga y los errores por desfase de reloj [DOC] | El servidor consulta el registro por solicitud; el cliente consulta el estado cada P segundos [INF] | [PEND] |
+
+**Origen de cada capacidad exigida por alternativa (gratuita, de pago o desarrollo propio).** Sin seleccionar; la elección entre pagar o construir es del responsable y se pondera en costo y mantenimiento sin favorecer ninguna.
+
+| Capacidad exigida | ALT-03-A | ALT-03-B | ALT-03-C |
+|---|---|---|---|
+| Plazos de inactividad y absoluto (SI-09) | **Plan de pago** del proveedor [DOC] **o desarrollo propio** | Configuración de la biblioteca [DOC] y/o desarrollo propio | [PEND] |
+| Protección de contraseñas filtradas | **Plan de pago** [DOC] | [PEND] | [PEND] |
+| Límites por cuenta (SI-10) | **Desarrollo propio** (los documentados son por origen [DOC]) | **Desarrollo propio** (los documentados son por dirección [DOC]) | [PEND] |
+| Gancho de verificación del segundo factor | **Teams o Enterprise** [DOC] | No aplica: la aplicación lo ve [INF] | [PEND] |
+| Consulta de estado vigente (SI-07) | **Desarrollo propio** [INF] | Registro de sesión de la biblioteca [DOC] | [PEND] |
+| Envío de mensajes de texto (si se eligiera) | [PEND] | [PEND] | [PEND] |
+| Códigos de recuperación (R bloqueada) | [PEND] | Documentados [DOC]; **la asimetría de lectura no es una ventaja técnica ni favorece a ninguna** | [PEND] |
+
+
+### 30.5 Comparación por las diez facetas pedidas
+
+| Faceta | ALT-03-A | ALT-03-B | ALT-03-C |
+|---|---|---|---|
+| 1. Identidad, autenticación y sesiones | Servicio del proveedor; sesión firmada [DOC] | Biblioteca en la aplicación; sesión con registro [DOC] | [PEND] |
+| 2. MFA obligatorio, inscripción, recuperación y pérdida de factores (sin resolver la decisión 7) | Segundo factor TOTP o teléfono; políticas por servidor o RLS con el nivel de aseguramiento [DOC]; recuperación de factores [PEND] | Plugin con TOTP, OTP, códigos de respaldo y **dispositivos de confianza (no admitidos para dueño y organizador)** [DOC]; habilitarlo exige contraseña [DOC]; recuperación sin resolver (R bloqueada); **que se hayan leído más hechos sobre B que sobre A no es una ventaja técnica** | [PEND] |
+| 3. Caducidad, renovación, cierre de sesión y revocación efectiva | Vida de la credencial, renovación de un solo uso y cierre global o local [DOC]; los cambios de plazo no destruyen sesiones activas: dura el plazo más la vida de la credencial [DOC] | Expiración y renovación por uso; revocación por registro; la caché retrasa la revocación [DOC] | [PEND] |
+| 4. Invitaciones y concesión de roles solo por mecanismos autorizados | Invitación por correo disponible [DOC]; que el registro abierto pueda cerrarse y la configuración de metadatos editables **no se leyeron** [PEND] (OC-164, OC-163) | Registro abierto desactivable [DOC]; el plugin de organización trae invitaciones y roles propios que **no se adoptan** (los roles son de CMP-07) [INF] | [PEND] |
+| 5. Separación entre autenticación, autorización y correo | El envío de correo se delega mediante un gancho con función o punto HTTP disponible en el plan gratuito [DOC]; el correo es de CMP-18 | Una función de envío se pasa a la biblioteca [DOC]; el correo es de CMP-18 | [PEND] |
+| 6. Enumeración, fuerza bruta, secuestro de sesión y escalada | Límites de la plataforma **por dirección de origen** (token 150 por 5 min; verificación del segundo factor 15 por min, **«no configurable» [INF: la columna de personalización no tenía encabezado leído]**) [DOC]; **límite por cuenta no documentado** [PEND] | Límite por dirección con reglas por ruta (100 por 10 s por defecto) [DOC]; **límite por cuenta lo construye la aplicación** [INF]; respuesta uniforme en el registro con verificación de correo [DOC] | [PEND] |
+| 7. Frontera navegador–servidor–base de datos, credenciales privilegiadas y RLS | La API de datos admite acceso directo del cliente bajo políticas por fila; el rol de servicio las omite y debe quedar en el servidor [DOC]; el nivel de aseguramiento puede usarse en políticas [DOC]; tokens en almacenamiento del navegador salvo cookies de servidor [DOC] | La base de datos no se expone al cliente por construcción **mientras no se entreguen credenciales de conexión** [INF]; cookie sin acceso de scripts [DOC] | [PEND] |
+| 8. Restricciones sin conexión, revocación y D-2 sin excepción | Captura local con sesión vencida y sincronización con revalidación (IN-03-10); la revocación en dispositivos desconectados no se promete [CONF] | Igual [CONF] | [PEND] |
+| 9. Auditoría de accesos y rechazos (ADR-09.I; brechas abiertas) | Los eventos de autenticación fallidos ocurren **en el servicio de identidad**, no en la aplicación (clase RX-04); el gancho de verificación del segundo factor solo en Teams y Enterprise [DOC] | La aplicación observa sus propios fallos [INF]; la brecha de RX-05 (llamada directa) depende de ADR-02.I | [PEND] |
+| 10. Configuraciones CFG-C1/C2/C3 y límites gratuitos | CFG-C1 y CFG-C3: 50 000 usuarios activos mensuales; correo predeterminado 2 mensajes por hora a direcciones autorizadas, con SMTP propio 30 por hora inicial [DOC] | CFG-C2: biblioteca autoalojada; sin plan de identidad; límite de usuarios del servicio gestionado de Neon 60 000 [DOC] (si se usara) | [PEND] |
+
+### 30.6 Matriz de conformidad con los invariantes y requisitos
+
+Escala: **Por diseño** (la alternativa lo cumple por su propia definición, **sin demostrar**; **no se usa cuando el cumplimiento es una inferencia [INF]**), **Condicionado** (depende de una decisión, de una verificación o de una inferencia [PEND]), **Bloqueado**. Autoevaluación del autor, no auditoría independiente.
+
+| Invariante o requisito | ALT-03-A | ALT-03-B | ALT-03-C |
+|---|---|---|---|
+| IN-03-01 (un emisor, un decisor) — SI-01 | Por diseño; condicionado a que el nivel no sea editable (SI-06) y a ADR-02.I | Por diseño; condicionado a ADR-02.I | Condicionado [PEND] |
+| IN-03-02, 03 (segundo factor obligatorio y enrolar antes de usar el rol) — SI-02, SI-03 | **Condicionado:** las diez vías de SI-02 por verificar; dispositivos recordados excluidos (vía 6) | **Condicionado:** igual; **los dispositivos de confianza del plugin no se admiten** y la recuperación y las invitaciones las construye la aplicación; enrolamiento con contraseña (OC-181) | Condicionado [PEND] |
+| IN-03-04 (nueva autenticación) — SI-04 | **Condicionado** a la lectura L1 o L2 y a la formulación N (N-B o N-C) | Igual | Condicionado [PEND] |
+| IN-03-05 (solo por invitación) — SI-05 | Condicionado a que el registro abierto se cierre y se verifique (OC-164) | Por diseño si se desactiva el registro abierto [DOC]; verificar | Condicionado [PEND] |
+| IN-03-06 (revocación inmediata) — SI-07 | **Condicionado:** consulta de estado por operación **y en la capa de datos**; sin ella, la ventana es la vida de la credencial | **Condicionado [INF]:** el registro del servidor la facilita; condicionado a la caché de cookie y a la capa de datos | Condicionado [PEND] |
+| IN-03-07 / D-2 (≤ 60 s) — SI-08 | **No demostrable;** depende de V (bloqueada) y de la pausa en segundo plano [DOC]; **sin excepción** | **No demostrable;** depende de V (bloqueada); **sin excepción** | Sin evidencia |
+| IN-03-08 (cierre y caducidad) — SI-09, SI-23 | **Condicionado:** los plazos por plataforma son de plan de pago [DOC]; en el plan gratuito los hace cumplir el servidor | **Condicionado:** expiración y renovación en la sesión [DOC]; plazos exactos y SI-23 [PEND] | Condicionado [PEND] |
+| IN-03-09 (intentos fallidos) — SI-10, SI-24 | **Condicionado:** los límites documentados son **por origen** [DOC]; el límite por cuenta y la protección ante bloqueo malicioso [PEND] | **Condicionado:** el límite por cuenta y la protección ante bloqueo malicioso los construye la aplicación [INF] | Condicionado [PEND] |
+| IN-03-10, 11, 19, 20 (sincronizar y aislamiento local) — SI-16, SI-17 | Por diseño; condicionado a ADR-05.I y ADR-16.I | Igual | Condicionado [PEND] |
+| IN-03-12…16, 21 [REC] (decisión 7) — SI-11…15 | **Sin decidir**; ver los hechos por faceta | **Sin decidir** | [PEND] |
+| R (recuperación) | **Bloqueada** | **Bloqueada** | **Bloqueada** |
+| V (vigencia) | **Bloqueada** | **Bloqueada** | **Bloqueada** |
+| Separación autenticación, autorización y correo — SI-18 | **Condicionado:** gancho de envío disponible [DOC]; separación por verificar | **Condicionado:** función de envío pasada a la biblioteca [DOC]; separación por verificar | Condicionado [PEND] |
+| Credenciales privilegiadas y RLS — SI-19; acceso directo (ADR-09.I SV-02) | **Condicionado:** la API de datos y el rol de servicio exigen control explícito | Condicionado: depende de no exponer credenciales de conexión | Condicionado [PEND] |
+| Sesiones anteriores y dispositivo perdido — SI-23 [REC] | **Sin decidir** (decisión 7); sin borrado remoto de copias | **Sin decidir** (decisión 7); sin borrado remoto | [PEND] |
+| Auditoría de accesos — SI-20 | **Brechas RX-04 y RX-05 abiertas** | **Brecha RX-05 abierta** | [PEND] |
+
+### 30.7 Frontera navegador–servidor–base de datos, credenciales privilegiadas y RLS
+
+- **Acceso directo del cliente [INF, con base en [DOC] de Supabase].** Una API de datos expuesta al cliente permite que el navegador llame a la capa de datos con la credencial de sesión; **la autorización por políticas por fila** sustituye entonces a la comprobación del servidor para esas llamadas. Eso afecta a **IN-03-01 e IN-02-02** (un solo decisor con una sola definición): el nivel de autenticación debe llegar **igual** al servidor y a la capa de datos, y la política de segundo factor (SI-02) debe aplicarse **en ambos**. **Si los clientes pueden alcanzar la capa de datos directamente es una decisión de ADR-02.I y del responsable (DR9I-3 de ADR-09.I); este borrador no la resuelve.**
+- **Rol de servicio y credenciales privilegiadas [DOC].** El rol de servicio **omite** las políticas por fila y debe permanecer en el servidor; los objetos nuevos del esquema público reciben por defecto privilegios para los roles anónimo, autenticado y de servicio. **Revisión y revocación explícitas** de esos privilegios (SI-19; SV-18 de ADR-09.I); **ninguna medida aislada** se presenta como suficiente frente a todos los accesos privilegiados.
+- **Dónde vive el secreto de la sesión [DOC / INF].** Con cookies de acceso solo por servidor, los scripts de la página no leen las credenciales, **pero** una aplicación que usa JavaScript del cliente para sesiones no puede usarlas de esa forma [DOC: Supabase]. SI-11 [REC] pide que el secreto no sea legible por scripts. **La compatibilidad con la PWA y con el funcionamiento sin conexión no se evaluó** (OC-162; DR3I-7).
+- **Roles en la credencial.** Que los permisos o el nivel viajen en la credencial exige que **no se puedan modificar por la persona usuaria** (SI-06); si el proveedor admite campos editables por el usuario, **no deben usarse como fuente de roles** [INF; no se leyó el detalle, OC-163]. Los roles de CMP-07 **no se sustituyen** por roles de una biblioteca (por ejemplo del plugin de organización).
+- **Estado vigente frente a afirmaciones de la credencial (SI-07; OC-179).** Con una credencial firmada de vida de 5 min a 1 h [DOC], una revocación de rol, de cuenta o de sesión no se refleja en sus afirmaciones hasta renovarla. **Una decisión de la capa de datos (RLS, privilegios) o una operación privilegiada que dependa solo de esas afirmaciones sigue autorizando tras t0 y viola IN-03-06 e IN-02-03** [INF]. Por eso la capa de datos y el servidor **consultan el estado vigente** de cuenta (activa, desactivada, eliminada), roles, sesión y nivel de autenticación; la **renovación no restituye** lo revocado. La caché de sesión de una biblioteca [DOC] plantea la misma exposición. **El mecanismo no se selecciona** y **D-2 sigue sin excepción ni medición.**
+### 30.8 Revocación efectiva, D-2 y funcionamiento sin conexión
+
+**Qué NO se hace:** no se afirma que el objetivo ≤ 60 s esté validado; **no se concede excepción alguna**; no se traslada la medición; no se redefine «sesión conectada»; no se elige V. **Distinción central (R2):** el **rechazo inmediato** de toda operación nueva sin autorización vigente (IN-03-06) **no depende de V**: depende de que CMP-08 consulte el estado vigente por operación. V solo decide cómo se entera el **cliente conectado**.
+| Elemento | ALT-03-A | ALT-03-B | Estado |
+|---|---|---|---|
+| Rechazo inmediato (servidor y capa de datos) | Requiere **consulta de estado vigente por operación y en las decisiones de la capa de datos**; la firma válida **no basta** [DOC: validar la firma no consulta al servidor de Auth]; la renovación no restituye lo revocado (SI-07) | Inmediato al borrar el registro; la caché de cookie puede retrasarlo [DOC]; la capa de datos también consulta el estado | Condicionado (SI-07; OC-179) |
+| Tdet (cuándo se entera el cliente) | Hasta la próxima renovación o consulta; la renovación se pausa con la pestaña oculta [DOC]; cambiar los plazos **no destruye** sesiones activas [DOC] | Hasta la próxima consulta del cliente (V-A) [INF] | **V bloqueada;** S2 abierto (H2A-10) |
+| Vida corta de credencial | 5 min–1 h típico [DOC]; acortarla aumenta la carga y los errores por desfase de reloj [DOC]: **tensión con ≤ 60 s** [INF] | No aplica (sesión opaca) | Sin fijar valores |
+| Cierre global tras revocar | Cierre global revoca las credenciales de renovación; las demás sesiones fallan al renovar [DOC]; la credencial de acceso vigente puede seguir válida hasta su vencimiento [INF] | La revocación borra los registros [DOC] | Condicionado |
+| Sin conexión (IN-03-10) | La sesión vencida no sincroniza; la captura local continúa; al volver se revalida (S-A) o se reverifica (S-B) [CONF] | Igual [CONF] | Candidatas S no admitidas |
+
+**Presupuesto temporal (R2 §16.6.4) [INF, sin medir].** T = Tdet + Tred + Tsrv + Tcli ≤ 60 s es solo una **condición de factibilidad documental**; ninguna alternativa permite afirmar que se cumple. **D-2 sigue sin excepción y sin validación empírica.**
+
+### 30.9 Segundo factor, inscripción, recuperación y pérdida de factores (sin resolver la decisión 7)
+
+- **Obligatoriedad intacta (SI-02, SI-03).** Dueño y organizador **requieren** segundo factor y deben enrolarlo **antes** de usar el rol. **Ninguna alternativa ni opción de recuperación puede ofrecer una vía que lo omita.** El segundo factor opcional del delegado (Q-39 B) está decidido en `01` y no se cambia (RES-10).
+- **Vías de omisión (SI-02) [PROP].** Se verifican diez vías: acceso, invitación, recuperación, sincronización, sesión restaurada, dispositivo recordado, baja del último factor, restablecimiento administrativo, suplantación y cambio de correo o contraseña. **Para dueño y organizador no se admiten dispositivos recordados o de confianza que omitan el factor obligatorio** (los «dispositivos de confianza» del plugin de Better Auth [DOC] y cualquier función equivalente [PEND]). **Enrolamiento con contraseña [DOC: Better Auth]:** habilitar el segundo factor exige contraseña; una cuenta creada por enlace sin credencial **puede no poder enrolar**, por lo que el flujo de invitación debe crear la credencial antes del enrolamiento (OC-181). **R y la decisión 7 siguen abiertas.**
+- **Hechos [DOC].** Supabase: factores TOTP y mensajería por teléfono; niveles de aseguramiento en la credencial; flujo de baja de factores; el nivel baja tras la renovación de la credencial [DOC]. Better Auth: TOTP, OTP por correo o teléfono, códigos de respaldo y dispositivos de confianza; **habilitar el segundo factor exige contraseña**, por lo que las cuentas sin contraseña no pueden habilitarlo salvo configuración expresa [DOC]. Neon: el MFA de la variante gestionada figura «próximamente» [DOC]; no aplica a la biblioteca autoalojada.
+- **Mensajes de texto o de voz.** IN-03-14 [REC] los trata como autenticador **restringido**; **la política es PENDIENTE DE DECISIÓN** (PAR-06; DR3I-8). **No se selecciona método.** El costo y proveedor del envío de mensajes de texto no se evaluaron (OC-166).
+- **Recuperación (R bloqueada).** SI-13: no más débil que lo que sustituye; el correo por sí solo no basta para dueño y organizador. R-A y R-C son **condicionadas, no rechazadas**; R-B como única vía es X. **No se prefiere ninguna.** Implicación para las alternativas: ALT-03-B ofrece códigos de respaldo documentados [DOC]; en ALT-03-A no se leyó una función equivalente [PEND]. **Ninguna de las dos afirmaciones selecciona R.**
+- **Pérdida de factores y último dueño.** E3 y E6 de R2 (pérdida sin medios; último dueño) **siguen abiertos** y dependen de R y del procedimiento organizativo; RT-06 no cubre la ausencia del último dueño (RR3I-03).
+- **Sesiones anteriores y dispositivo perdido (SI-23 [REC]).** Tras recuperación, cambio de factor o pérdida de un dispositivo se invalidan las sesiones anteriores (decisión 7). La **cola y los datos locales** del dispositivo perdido **no se borran a distancia** (OFF-12, IN-03-20): permanecen sujetos a su retención y a ADR-16; sus operaciones se revalidan al sincronizar (SI-16). **No se selecciona recuperación ni se promete borrado remoto** (OC-183).
+- **Continuidad del último dueño y bloqueo malicioso (SI-10, SI-24).** El bloqueo de una cuenta no debe dejar sin acceso al último dueño ni a los organizadores, **ni abrir una vía de omisión del segundo factor**; el procedimiento depende de R (bloqueada) y del procedimiento organizativo; **umbrales y mecanismos [PEND]** (OC-184; RR3I-15).
+### 30.10 Invitaciones, concesión de roles y separación entre autenticación, autorización y correo
+
+| Asunto | Qué debe cumplirse | Evidencia | Pendiente |
+|---|---|---|---|
+| Alta de cuentas | Solo por invitación; sin auto-registro; verificar la configuración cerrada (SI-05) | Better Auth: opción de desactivar el registro [DOC]; Supabase: invitación por correo [DOC]; que el registro abierto pueda cerrarse **no se leyó** [PEND] | OC-164 |
+| Enrolamiento del segundo factor al aceptar una invitación | El rol no es utilizable hasta enrolar (SI-03); la credencial de la cuenta se crea **antes** de enrolar | Better Auth: habilitar el segundo factor exige contraseña [DOC] | OC-181 |
+| Aceptación de la invitación | Con el correo invitado; de un solo uso; vence; sin cambio de rol ni ámbito; enlace tolerante a precarga (SI-05, SI-18) | Escáneres de correo (RM-13, R3-B) | ADR-15; OC-172 |
+| Concesión de roles | **Solo** por CMP-07 y decidida por CMP-08; nunca por metadatos editables ni por el proveedor (SI-06) | IN-03-17; RC-04; [INF] sobre metadatos | OC-163 |
+| Autenticación frente a autorización | CMP-06 emite el nivel; **no concede facultades**; CMP-08 decide (SI-01) | IN-03-01 | — |
+| Envío de correo | Solo por CMP-18; credenciales solo del lado servidor; mensajes sin datos de jugadores (SI-18) | R3-B (RM-01, RM-08); gancho de envío disponible en el plan gratuito [DOC] | ADR-15 |
+| Límites del correo gratuito | El correo predeterminado de Supabase envía 2 mensajes por hora y solo a direcciones autorizadas; con SMTP propio, 30 por hora inicial [DOC]: **afecta a invitaciones y recuperación** (RM-07) | [DOC] | OC-176 |
+
+### 30.11 Enumeración, fuerza bruta, secuestro de sesión y escalada de privilegios
+
+| Amenaza | Control exigido | Evidencia y límites | Estado |
+|---|---|---|---|
+| Enumeración de cuentas (AM-06) | Respuesta uniforme en acceso, recuperación e invitaciones (SI-12) | Better Auth: respuesta uniforme al registrar con verificación de correo [DOC]; Supabase [PEND] (OC-169) | [REC] decisión 7 |
+| Fuerza bruta y relleno de credenciales (AM-05) | Límites por cuenta y por origen; bloqueo temporal no permanente, notificado y sin vía de omisión (SI-10, SI-24) | Los límites documentados son **por origen** y, en el segundo factor, 15 por minuto con personalización «no» **[INF: encabezado de columna no leído]** [DOC Supabase]; Better Auth cuenta **por dirección** [DOC]; **un atacante distribuido los evita** [INF] | Condicionado (OC-161, OC-184); riesgo de **bloqueo como denegación de servicio** (RR3I-15) |
+| Secuestro de sesión (AM-03) | Renovar el identificador, plazos exigidos en servidor, secreto fuera de scripts, revocación con estado vigente, invalidación de sesiones anteriores tras eventos de riesgo (SI-07, SI-09, SI-11, SI-23) | Credencial vigente hasta su vencimiento sin consulta de estado [INF]; caché de cookie [DOC] | Condicionado; SI-23 [REC] |
+| Toma de cuenta por recuperación (AM-02, AM-20) | Recuperación no más débil; correo solo no basta para dueño y organizador (SI-13) | IN-03-15 [REC] | **R bloqueada** |
+| Escalada de privilegios (AM-32, IN-02-08) | Roles solo por CMP-07/08; sin vías de administración accesibles a clientes; sin autoasignación (SI-05, SI-06) | Rol de servicio omite las políticas [DOC] | Condicionado (SI-19) |
+| Sesión de otra cuenta sincronizando (AM-33) | La sesión que sincroniza es la de quien capturó (SI-16) | IN-03-19 [REC] | [REC]; ADR-05.I |
+| Enlaces consumidos por escáneres (AM-20) | Alternativa de confirmación o código (SI-18) | RM-13 | ADR-15 |
+
+### 30.12 Auditoría de accesos y rechazos conforme a ADR-09.I (brechas sin resolver)
+
+- Los **eventos de autenticación** (éxitos y fallos, alta y baja de factores, recuperación, revocación de sesiones) son **[REC] (EV-01…03, RF-AUD-05, prioridad S)**; no son obligatorios por `01` salvo lo de RF-AUD-06 sobre conflicto de interés.
+- **Clases de ADR-09.I:** los fallos de autenticación ocurren **antes de la aplicación** (RX-04) y los accesos directos a la capa de datos **no los observa el servidor** (RX-05): **siguen siendo brechas declaradas, no aceptadas, de ADR-09.I** (DR9I-9). ADR-03.I **no las resuelve** y no promete que el servicio de identidad las registre (OC-171).
+- **Gancho de verificación del segundo factor y de contraseña:** disponibles solo en Teams y Enterprise [DOC: Supabase]; **no se cuenta con ellos en el plan gratuito.**
+- **Actor y capturador (SV-16 de ADR-09.I; SI-16).** El actor de cada evento se deriva de la identidad autenticada y la operación sincronizada se atribuye a la cuenta que capturó.
+### 30.13 Compatibilidad con las configuraciones de R3-A y con R3-B, R3-C y ADR-09.I (sin seleccionar)
+
+| Configuración o bloque | Observación | Estado |
+|---|---|---|
+| CFG-C1 (Vercel + Supabase) y CFG-C3 (Cloudflare + Supabase) | Patrón de ALT-03-A [DOC]. Plazos de sesión y protección de contraseñas filtradas: planes de pago [DOC]; 50 000 usuarios activos mensuales gratis [DOC]; correo: ver §30.10; la API de datos admite acceso directo del cliente (ADR-02.I). **Sesiones y cookies en el entorno de CFG-C3 (Cloudflare) no se evaluaron** [PEND] (OC-182) | Condicionado; no se selecciona |
+| CFG-C2 (Vercel + Neon + Better Auth) | Patrón de ALT-03-B con la biblioteca autoalojada; la variante **gestionada** de Neon declara MFA «próximamente» y 60 000 usuarios activos gratis [DOC]; sesiones en base de datos y revocación por registro [DOC] | Condicionado; no se selecciona |
+| R3-B (ADR-15, correo) | SI-18 aplica RM-01, 08 y 13; las dos rutas de envío (SMTP, API, gancho) no se eligen aquí | Compatible; ADR-15 sin resolver |
+| R3-C (ADR-06/07) | V-C (aviso activo) **exige un canal** que ADR-07 (ALT-07-A: actualización periódica) no ofrece; V sigue bloqueada | Compatible; sin dependencia nueva |
+| R3-D (ADR-08) | El nivel de autenticación no interviene en el cálculo; RT-14 y A-16 siguen abiertos | Compatible |
+| ADR-09.I | Auditoría de accesos con brechas RX-04 y RX-05 abiertas; SV-18 (privilegios del rol de servicio) y SV-16 (actor) se reutilizan como requisitos, sin darlos por cumplidos | Compatible; dependencias abiertas |
+
+### 30.14 Evaluación, puntuación y recomendación preliminar
+
+**Regla.** Pesos aprobados (R1 §2.4 y R3-A): seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %. Se puntúa **solo con evidencia leída**; lo no leído es [PEND] y se trata con rangos de sensibilidad, sin penalizar documentación incompleta. Escala 1–5; juicio del autor [PROP], no vinculante. El criterio sin conexión **no discrimina** (3). **Regla uniforme de rangos (v0.2):** (i) **Seguridad y mantenimiento** son juicios [PROP] no verificados: **mismo valor central (3) y rango ±1 para las tres alternativas mientras no exista evidencia diferenciadora**; (ii) **Costo** puntúa solo **planes y servicios**: el techo es 5 y el límite inferior baja **1 punto por cada aspecto de costo no evaluado**; **el desarrollo propio se pondera en Mantenimiento, no en Costo, y no se duplica**. **Se distinguen tres orígenes** (§30.4): funciones **gratuitas**, funciones **de pago** y **desarrollo propio**; que una función sea de pago **ni favorece ni penaliza** a una alternativa: es un hecho que el responsable pondera. **Aspectos de costo no evaluados:** A: ruta de pago o de desarrollo propio para plazos y protección de contraseñas (documentada, **sin decidir**) y envío de mensajes de texto (2); B: almacén de sesiones y contadores y envío de mensajes de texto (2); C: plan, límites gratuitos, región y transferencia, y envío (4).
+
+| Criterio (peso) | ALT-03-A | ALT-03-B | ALT-03-C |
+|---|---|---|---|
+| Seguridad (35 %) [PROP, no verificado; central 3 en las tres] | 2–4 | 2–4 | 2–4 |
+| Costo (30 %) [aspectos no evaluados: A 2, B 2, C 4] | 3–5 | 3–5 | 1–5 |
+| Sin conexión (20 %) | 3 | 3 | 3 |
+| Mantenimiento (15 %) [PROP; central 3 en las tres] | 2–4 | 2–4 | 2–4 |
+| **Total (rango)** | **2,50–4,10** | **2,50–4,10** | **1,90–4,10** |
+
+**Fundamento (v0.2).** *Seguridad:* los tres juicios son **[PROP] no verificados** y de igual valor central porque ninguna ventaja está **demostrada**; los riesgos de A (credencial vigente hasta su vencimiento, planes de pago para plazos) y de B (código de seguridad propio, caché de cookie) se reflejan en las condiciones, no en un valor distinto. *Costo:* sin servicio nuevo evidente en A ni en B [INF]; los límites inferiores reflejan solo los aspectos no evaluados. *Sin conexión:* no discrimina. *Mantenimiento:* **mismo criterio para A, B y C**: SI-09, SI-10, SI-07 y SI-23 exigen en cualquier alternativa lógica del servidor (plazos, límites por cuenta, consulta de estado, invalidación de sesiones), y no existe evidencia leída que diferencie la carga.
+
+**Sensibilidad.** Los **rangos de A y B son idénticos** (2,50–4,10) y el de C (1,90–4,10) **los contiene**: **el puntaje no discrimina entre las alternativas.**
+
+**Recomendación preliminar NO vinculante [PROP].** (1) **Los requisitos eliminatorios son los de SI-01…24 confirmados** (en particular SI-02, SI-03, SI-05, SI-07 y SI-08); **ninguna alternativa fija N, S, R ni V.** (2) La evidencia documentada **no discrimina** entre ALT-03-A y ALT-03-B, y ALT-03-C **carece de evidencia**: **no se expresa preferencia**, salvo que surja evidencia documentada nueva. (3) **R y V siguen bloqueadas**; **la decisión 7, la lectura de «nueva autenticación» y D-2 siguen abiertas.** (4) Hechos documentados que el responsable debe conocer: **los plazos de sesión y la protección de contraseñas filtradas del proveedor de datos son de planes de pago [DOC]** y **los límites por intentos documentados son por origen [DOC]**; en cualquier alternativa, SI-07, SI-09 y SI-10 exigen que **el servidor** los haga cumplir. (5) **No se selecciona nada;** la decisión es del responsable y **posterior** a ADR-01, ADR-02.C/I, ADR-15, ADR-07, ADR-09.I y la admisión de las formulaciones. Los puntajes no sustituyen a los requisitos obligatorios, que son eliminatorios y no compensables.
+
+### 30.15 Condiciones, decisiones, riesgos y dependencias
+
+**Condiciones abiertas (OC-154…184).** Ninguna se resuelve aquí.
+
+| ID | Condición | Origen | Bloquea |
+|---|---|---|---|
+| OC-154 | Admisión formal por el responsable de N-C, S-A y S-B (y decisión sobre N-B) como conjunto admitido | Regla del cierre de R2; matriz | ADR-03.I definitivo |
+| OC-155 | Lectura de «nueva autenticación» (L1 o L2) y su efecto en N-B | H2A-11; RF-ACC-09 | N |
+| OC-156 | Decisión 7: adopción de IN-03-12…16 y 21 ([REC]) | R2-A decisión 7 | SI-11…15 |
+| OC-157 | **R (recuperación) bloqueada:** ninguna formulación A; E3 y E6 abiertos | D3-3; matriz | SI-13 |
+| OC-158 | **V (vigencia de la revocación) bloqueada** y D-2 sin excepción ni medición | D3-4; D-2; DB2c-10 | SI-08 |
+| OC-159 | Alcance de «sesión conectada» (S1, S2, S3) | H2A-10 | SI-08 |
+| OC-160 | Plazos de sesión (PAR-03) y su exigencia en el servidor cuando las funciones del plan son de pago [DOC] | SI-09; PAR-03 | SI-09 |
+| OC-161 | Límite por cuenta frente a límites por origen; bloqueo como denegación de servicio | SI-10; PAR-02; IN-03-09 | SI-10 |
+| OC-162 | Almacenamiento del secreto de sesión (cookies de servidor o cliente) y su compatibilidad con la PWA y la captura sin conexión | SI-11; IN-03-12 [REC] | SI-11 |
+| OC-163 | Que ningún rol ni nivel se derive de campos editables por la persona usuaria; detalle no leído | SI-06 | SI-06 |
+| OC-164 | Cierre verificado del registro abierto en la configuración elegida; no leído | SI-05 | SI-05 |
+| OC-165 | Códigos de recuperación y pérdida de factor en la configuración de proveedor de datos: no leído | SI-13 | R |
+| OC-166 | Costo y proveedor del envío de mensajes de texto, si se eligiera ese factor | PAR-06; IN-03-14 | DR3I-8 |
+| OC-167 | MFA en la variante gestionada de Neon («próximamente») frente a la biblioteca autoalojada | CFG-C2 | ADR-01 |
+| OC-168 | La frescura de Better Auth se define por la creación de la sesión, no por la verificación reciente del segundo factor | N-B; L1 | N |
+| OC-169 | Enumeración de cuentas en Supabase: no leído | SI-12 | SI-12 |
+| OC-170 | N-C exige estado en el servidor para comprobantes de un solo uso: diseño y compatibilidad con la frontera atómica de ADR-02.C (vinculada a SI-04 y a §30.4) | N-C; ADR-02.C; SI-04 | N |
+| OC-171 | Eventos de seguridad que no alcanzan la aplicación (RX-04, RX-05) y su registro por el servicio de identidad | SI-20; ADR-09.I | Brechas |
+| OC-172 | Enlaces y códigos tolerantes a la precarga; vías de envío (SMTP, API, gancho) | SI-18; ADR-15 | ADR-15 |
+| OC-173 | Evidencia de ALT-03-C (servicio de identidad separado): sin leer | §30.4 | ALT-03-C |
+| OC-174 | Inventario, alcance y rotación de credenciales privilegiadas y claves de firma | SI-19; RT-09 | SI-19 |
+| OC-175 | Conservación de cuentas inactivas y de auditoría de accesos (PEND-JUR; ADR-17) | IN-03; PEND-JUR | ADR-17 |
+| OC-176 | Límites del correo gratuito frente a invitaciones y recuperación (RM-07) | §30.10; ADR-15 | ADR-15 |
+| OC-177 | Verificación empírica (pruebas de §30.17) antes de cualquier aprobación; verificación en dispositivos iOS | RNF-11; HR1-07 | Fase 3 |
+| OC-178 | Hechos generales de seguridad web (cookies, orígenes, desfase de reloj) no verificados en fuente oficial en esta ronda | §30.0 [INF] | ADR-02.I |
+| OC-179 | **Estado vigente** de cuenta, roles, sesión y nivel de autenticación en el servidor y en la capa de datos, y su relación con afirmaciones obsoletas; mecanismo sin seleccionar | SI-07; IN-03-06; IN-02-03 | SI-07; ADR-02.I |
+| OC-180 | Verificación de las diez vías de omisión del segundo factor (incluidos dispositivos recordados, baja del último factor, restablecimiento administrativo y suplantación) en la configuración elegida | SI-02 [PROP] | SI-02 |
+| OC-181 | Enrolamiento del segundo factor con contraseña frente a invitaciones sin credencial | SI-03; Better Auth [DOC] | SI-03; ADR-15 |
+| OC-182 | Sesiones y cookies en el entorno de CFG-C3 (Cloudflare): no evaluadas | CFG-C3 | ADR-01 |
+| OC-183 | Invalidación de sesiones tras recuperación, cambio de factor o pérdida de dispositivo; cola local sin borrado remoto | SI-23 [REC]; OFF-12; IN-03-20 | Decisión 7; ADR-16.I |
+| OC-184 | Umbrales, notificación y recuperación segura ante bloqueo malicioso; continuidad del último dueño sin vía de omisión | SI-10, SI-24; E6 | R |
+
+**Decisiones que corresponden al responsable (DR3I-1…11).** Ninguna se toma aquí.
+
+| ID | Decisión | Condiciones |
+|---|---|---|
+| DR3I-1 | Admitir, ajustar o rechazar N-C, S-A y S-B como conjunto admitido y decidir sobre N-B; **N, S, R y V no se fijan en este borrador** | OC-154 |
+| DR3I-2 | Decisión 7: adoptar o no IN-03-12…16 y 21 [REC], y la invalidación de sesiones anteriores tras eventos de riesgo (SI-23) | OC-156, OC-183 |
+| DR3I-3 | R (recuperación): formulación y tratamiento de E3 y E6 (heredada, bloqueada) | OC-157, OC-165 |
+| DR3I-4 | V (vigencia de la revocación) y D-2 sin excepción; alcance de «conectada» (heredadas, bloqueadas) | OC-158, OC-159 |
+| DR3I-5 | Lectura L1 o L2 de «nueva autenticación» | OC-155, OC-168 |
+| DR3I-6 | Límites por cuenta y plazos de sesión (PAR-02, PAR-03) y quién los hace cumplir | OC-160, OC-161 |
+| DR3I-7 | Ubicación del secreto de sesión frente a la PWA | OC-162 |
+| DR3I-8 | Método de segundo factor y política de mensajes de texto (PAR-06; IN-03-14) | OC-166, OC-167 |
+| DR3I-9 | Evaluar o descartar ALT-03-C (servicio de identidad separado) con ADR-01 y ADR-10 | OC-173 |
+| DR3I-10 | Qué eventos de acceso se exigen y su tratamiento de brechas (con DR9I-9 de ADR-09.I) | OC-171, OC-175 |
+| DR3I-11 | Continuidad administrativa del último dueño y protección ante bloqueo malicioso, sin vía de omisión del segundo factor (con R) | OC-184, OC-157 |
+
+**Riesgos de redacción (RR3I-01…21).** No se aceptan; se registran.
+
+| ID | Riesgo | Mitigación documental |
+|---|---|---|
+| RR3I-01 | Tratar una candidata A como admitida o seleccionada, o fijar N, S, R o V por la forma de las alternativas | Rotulado «candidata no admitida»; N, S, R y V fuera de las alternativas |
+| RR3I-02 | **Debilitar el segundo factor obligatorio** por una vía de recuperación, invitación o sincronización | SI-02; prueba negativa por vía |
+| RR3I-03 | Toma de cuenta por recuperación débil; último dueño sin acceso (E3, E6) | SI-13; R bloqueada; RES-01 |
+| RR3I-04 | Credencial válida tras la revocación hasta su vencimiento, o caché de cookie que mantiene una sesión revocada | SI-07; consulta de estado por operación |
+| RR3I-05 | Presentar D-2 como cumplida o conceder una excepción implícita | SI-08; sin excepción; sin medición |
+| RR3I-06 | Enumeración de cuentas por respuestas o tiempos distintos | SI-12; OC-169 |
+| RR3I-07 | Fuerza bruta distribuida (límites solo por origen) | SI-10; OC-161 |
+| RR3I-08 | Secreto de sesión legible por scripts (XSS, AM-34) | SI-11; OC-162 |
+| RR3I-09 | Escalada por metadatos editables o por una vía de administración accesible a clientes | SI-06; OC-163 |
+| RR3I-10 | Credencial privilegiada (rol de servicio, claves de firma) filtrada o presente en el cliente | SI-19; OC-174 |
+| RR3I-11 | Enlaces de invitación o recuperación consumidos por escáneres | SI-18; OC-172 |
+| RR3I-12 | Una sesión de otra cuenta sincroniza operaciones ajenas (AM-33) | SI-16; ADR-05.I |
+| RR3I-13 | Plazos de sesión y protección de contraseñas no exigibles en el plan gratuito | SI-09; OC-160; no se acepta |
+| RR3I-14 | Mensajes de texto como único factor (cambio de SIM, IN-03-14) | Política pendiente; OC-166; no se acepta |
+| RR3I-15 | Bloqueo de cuentas usado como denegación de servicio contra dueño u organizador | SI-10; OC-161 |
+| RR3I-16 | Eventos de seguridad del acceso que no alcanzan la aplicación y no se registran (RX-04, RX-05) | SI-20; OC-171; brechas de ADR-09.I; no se acepta |
+| RR3I-17 | Límites del correo gratuito que bloquean invitaciones o recuperación | OC-176; ADR-15 |
+| RR3I-18 | Segundo factor no disponible en la variante gestionada de Neon | OC-167; ADR-01 |
+| RR3I-19 | **Omisión del segundo factor** por dispositivo recordado, baja del último factor, restablecimiento administrativo o suplantación | SI-02 (diez vías); OC-180 |
+| RR3I-20 | **Decisión basada en afirmaciones obsoletas** de una credencial o cookie en el servidor o en la capa de datos tras una revocación | SI-07; OC-179 |
+| RR3I-21 | Dispositivo perdido con sesión vigente y cola local sin borrado remoto | SI-23; OC-183; ADR-16.I; no se acepta |
+
+**Dependencias que impiden la aprobación definitiva.** 1. **ADR-01** (selección de configuración; solo aprobado de forma documental condicionada). 2. **Admisión del conjunto de formulaciones** (OC-154). 3. **R y V sin formulación A** (OC-157, OC-158) y **D-2** sin excepción ni medición. 4. **Decisión 7** y la lectura L1 o L2 (OC-155, OC-156). 5. **ADR-02.I** (acceso directo, RLS, rol de servicio) y **ADR-09.I** (brechas RX-04 y RX-05). 6. **ADR-15** (envío de correo y enlaces) y **ADR-07** (canal de aviso, V-C). 7. **ADR-05.I** y **ADR-16.I** (sincronización y almacenamiento local). 8. **ADR-17 y PEND-JUR.** 9. Verificación empírica y en dispositivos (OC-177). 10. RES-01, RES-09 y RES-10 sin aceptar.
+
+### 30.16 Evidencia documentada frente a inferencias; fuentes y límites
+
+| Afirmación | Etiqueta | Fuente |
+|---|---|---|
+| Los invariantes IN-03-01…21, las decisiones N, S, R y V y su clasificación A, C y X | [CONF] / [DOC] interno | §16.6; matriz de R2 (§B) |
+| Supabase: sesión = JWT firmado de 5 min–1 h + refresh token de un solo uso; validar la firma no consulta al servidor de Auth; cierre global revoca los refresh token; los cambios de plazo no destruyen sesiones activas (plazo + vida de la credencial); la renovación se pausa con la pestaña oculta | [DOC] | Supabase: sesiones, JWT, cierre de sesión |
+| Supabase: tiempos de sesión e inactividad y protección de contraseñas filtradas solo en planes de pago; gancho de verificación del segundo factor y de contraseña en Teams y Enterprise; ganchos de envío de correo y de mensajes en el plan gratuito | [DOC] | Supabase: sesiones, contraseñas, ganchos |
+| Supabase: TOTP y teléfono; niveles de aseguramiento; límites de intentos por origen (token 150 por 5 min; verificación del segundo factor 15 por min); correo predeterminado 2 por hora a direcciones autorizadas y 30 por hora con SMTP propio; 50 000 usuarios activos mensuales gratis | [DOC] | Supabase: MFA, límites, SMTP, facturación |
+| Que el límite de verificación del segundo factor de Supabase **no sea configurable** (la columna de personalización se leyó sin encabezado) | **[INF]** | Supabase: límites de tasa |
+| Que una decisión basada solo en afirmaciones de la credencial siga autorizando tras una revocación hasta su vencimiento | **[INF]** | Razonamiento del autor sobre lo [DOC] (vida de la credencial) |
+| Supabase: la API de datos se rige por privilegios y políticas por fila; el rol de servicio las omite; privilegios por defecto para anónimo, autenticado y servicio; tokens en cookies de servidor frente a cliente con JavaScript | [DOC] | Supabase: seguridad de la API, políticas, sesiones |
+| Better Auth: sesión en base de datos con cookie, 7 días y renovación; frescura por creación de la sesión (1 día por defecto); revocación por registro; la caché de cookie retrasa la revocación; segundo factor con TOTP, OTP y códigos de respaldo (habilitar exige contraseña); límite por dirección (100 por 10 s) con reglas por ruta; respuesta uniforme al registrar con verificación de correo; opción de desactivar el registro | [DOC] | Better Auth: sesiones, segundo factor, límites, correo y contraseña, seguridad |
+| Neon gestionado (Better Auth): MFA «próximamente»; 60 000 usuarios activos mensuales gratis | [DOC] | Neon Auth |
+| Que una credencial firmada vale hasta su vencimiento si el servidor no consulta el estado; que el plan gratuito de un proveedor no ofrece una función por no figurar en la documentación; que la API de datos permite llamadas directas del cliente | **[INF]** | Razonamiento del autor sobre lo [DOC]; no afirmaciones de la página |
+| Que Supabase cierre el registro abierto, ofrezca códigos de recuperación o respuesta uniforme; metadatos editables; evidencia de ALT-03-C; costo del envío de mensajes de texto | **[PEND]** | No leído |
+| Juicios de seguridad, costo y mantenimiento de la puntuación | [PROP] / [INF] | Autor; no verificados |
+
+**Fuentes oficiales consultadas (2026-11-22; páginas descargadas y convertidas a texto):** Supabase (sesiones, JWT, cierre de sesión, MFA, límites de tasa, seguridad de contraseñas, ganchos de autenticación, SMTP, invitación de usuarios, facturación, seguridad de la API de datos); Better Auth (gestión de sesión, segundo factor, límites de tasa, correo y contraseña, organización, seguridad); Neon (planes, Auth gestionado). **Límites.** No se leyó cómo cerrar el registro abierto en Supabase, la existencia de códigos de recuperación, la respuesta uniforme ante enumeración, los campos de metadatos editables, el detalle de los límites por cuenta, ni la evidencia de un servicio de identidad separado. No se verificó empíricamente ningún comportamiento.
+### 30.17 Pruebas y criterios de revisión documental
+
+| Prueba | Qué demuestra | Requisito | Tipo |
+|---|---|---|---|
+| Usar el rol de dueño u organizador sin segundo factor por cada vía (acceso, recuperación, invitación, sincronización, sesión restablecida) | Ninguna vía omite el segundo factor | SI-02, SI-03 | I, E2E |
+| Intentar omitir el segundo factor con dispositivo recordado, baja del último factor, restablecimiento administrativo y suplantación (SI-02 vías 6 a 9) | Ninguna omite el factor obligatorio | SI-02 | I, E2E |
+| Revocar rol o cuenta y llamar a la capa de datos con una credencial anterior no vencida; con una renovación posterior | Rechazo por estado vigente; la renovación no restituye | SI-07 | I, DB |
+| Recuperar la cuenta o cambiar de factor con una sesión anterior abierta; simular un dispositivo perdido con cola local | Sesiones anteriores invalidadas ([REC]); la cola local no se borra a distancia y se revalida al sincronizar | SI-23, SI-16 | I |
+| Bloqueo malicioso de la cuenta del último dueño | El bloqueo es temporal, se notifica y no abre una vía de omisión; continuidad por procedimiento | SI-10, SI-24 | I |
+| Designar o revocar a un dueño con una verificación anterior a la ventana y con una propia de la operación | Aplicación de L1 o L2 según se decida | SI-04 | I |
+| Registro abierto y autoinvitación; invitación reutilizada, vencida o con otro correo | Solo por invitación | SI-05 | I, E2E |
+| Modificar campos editables del perfil para obtener rol o nivel | Ningún rol ni nivel se deriva de ellos | SI-06 | I, DB |
+| Revocar y operar: una operación nueva con credencial vigente y estado revocado | Rechazo inmediato en el servidor | SI-07 | I |
+| Medición del tiempo de reflejo en sesión conectada (no en la Fase 2) | **No se mide aquí;** D-2 sin excepción | SI-08 | — |
+| Plazos de inactividad y absolutos con el plan gratuito | Los hace cumplir el servidor | SI-09 | I |
+| Intentos fallidos distribuidos por varias direcciones contra una cuenta | Límite por cuenta y bloqueo temporal | SI-10 | I |
+| Inspección del almacenamiento del navegador y de las cookies | El secreto de sesión no es legible por scripts | SI-11 | E2E |
+| Enumeración: acceso, recuperación e invitaciones con cuentas existentes e inexistentes (respuesta y tiempo) | Respuesta uniforme | SI-12 | I |
+| Sesión de otra cuenta sincronizando operaciones ajenas; sesión vencida | Rechazo; captura local sin sincronizar | SI-16, SI-17 | I, E2E |
+| Llamadas directas de un cliente a la capa de datos con la credencial de sesión | Sin eludir SI-01, SI-02, SI-06 | SI-19; ADR-09.I SV-02 | DB |
+| Revisión de privilegios por defecto del rol de servicio, anónimo y autenticado | Sin privilegios indebidos | SI-19 | DB |
+
+| ID | Criterio de revisión documental (autoevaluación del autor; no es auditoría independiente) | Resultado |
+|---|---|---|
+| CR3I-01 | Las Partes I–XV y los registros anteriores no cambian (prefijo idéntico al HEAD) | Cumple (comprobado al generar) |
+| CR3I-02 | Al menos dos alternativas con matriz de conformidad, sin seleccionar | Cumple: §30.4, §30.6 |
+| CR3I-03 | N-C, S-A y S-B solo como candidatas; N-B condicionada, no rechazada; R y V bloqueadas | Cumple: §30.2 |
+| CR3I-04 | Segundo factor obligatorio con **vías de omisión enumeradas ([PROP])** y dispositivos recordados excluidos; decisión 7 sin resolver | Cumple: SI-02, SI-03; §30.9 |
+| CR3I-05 | Caducidad, renovación, cierre y revocación efectiva **con estado vigente** (servidor y capa de datos); D-2 sin excepción ni medición | Cumple: §30.7, §30.8; SI-07, SI-08 |
+| CR3I-06 | Invitaciones y roles solo por mecanismos autorizados; separación de autenticación, autorización y correo | Cumple: §30.10; SI-05, SI-06, SI-18 |
+| CR3I-07 | Enumeración, fuerza bruta, secuestro de sesión y escalada con evidencia separada de la inferencia | Cumple: §30.11 |
+| CR3I-08 | Frontera navegador–servidor–base de datos, rol de servicio y RLS | Cumple: §30.7; SI-19 |
+| CR3I-09 | Restricciones sin conexión y aislamiento local | Cumple: SI-16, SI-17 |
+| CR3I-10 | Auditoría de accesos sin dar por resueltas las brechas de ADR-09.I | Cumple: §30.12; SI-20 |
+| CR3I-11 | Configuraciones CFG-C1/C2/C3 y límites gratuitos sin seleccionar proveedores | Cumple: §30.5, §30.13 |
+| CR3I-12 | Puntuación solo con evidencia leída; regla uniforme de rangos; mismo criterio de mantenimiento para A y B; gratuito, de pago y desarrollo propio distinguidos; aritmética comprobada | Cumple: §30.4, §30.14 (comprobado al generar) |
+| CR3I-13 | Identificadores nuevos únicos, definidos y sin colisión | Cumple (comprobado al generar) |
+| CR3I-14 | Dependencias que impiden la aprobación definitiva identificadas | Cumple: §30.15 |
+| CR3I-15 | Nota posterior de trazabilidad de ADR-09.I sin reescribir lo histórico | Cumple: §30.0 |
+| CR3I-16 | Sin código, cuentas, servicios ni gastos; sin otros ADR `.I`, R3-F ni R4 | Cumple |
+| CR3I-17 | Sesiones anteriores, dispositivo perdido y bloqueo malicioso: requisitos [REC] o condicionados, sin recuperación seleccionada ni borrado remoto prometido | Cumple como propuesta: SI-23, SI-24, SI-10 |
+| CR3I-18 | Inferencias rotuladas [INF] y celdas «Por diseño» solo cuando la alternativa lo define; asimetría de lectura sobre R sin ventaja técnica; OC-170 vinculado | Cumple: §30.4–§30.6, §30.16 |
+
+### 30.18 Estado y preguntas para el responsable
+
+**Estado:** R3-E / ADR-03.I **v0.2-R3E-03I: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL** (corrige M-1…M-6 y las observaciones de la revisión focalizada; ver §30.19 y el metadato de §30.0); **R3-E continúa como bloque parcial en curso.** **No versionado.** Autoevaluación del autor, no auditoría independiente. **N-C, S-A y S-B son candidatas no admitidas; N-B condicionada, no rechazada; R y V bloqueadas.** Los otros ADR `.I`, R3-F y R4: **NO INICIADOS.** Siguen abiertas todas las decisiones y condiciones heredadas de R1, R2 y R3-A…D y ADR-09.I.
+
+**Preguntas:** DR3I-1 a DR3I-11 y las condiciones OC-154 a OC-184 (§30.15); en particular, la decisión 7 y la lectura de «nueva autenticación» (DR3I-2, DR3I-5), y quién hace cumplir en el servidor los plazos de sesión y los límites por cuenta (DR3I-6).
+
+### 30.19 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| M-1 | SI-07 y la frontera de datos: comprobación del estado vigente de cuenta, roles, sesión y nivel; ninguna operación privilegiada ni RLS depende solo de afirmaciones obsoletas; la renovación no restituye lo revocado; mecanismo [PEND] y D-2 sin excepción (OC-179, RR3I-20) | §30.3, §30.4, §30.6, §30.7, §30.8 |
+| M-2 | SI-02 con diez vías de omisión enumeradas ([PROP]); dispositivos recordados o de confianza no admitidos para dueño y organizador; baja del último factor, restablecimiento administrativo y suplantación; dependencia del enrolamiento con contraseña en SI-03 (OC-180, OC-181, RR3I-19) | §30.3, §30.4, §30.5, §30.6, §30.9, §30.10 |
+| M-3 | SI-23 [REC, decisión 7]: invalidación de sesiones anteriores tras recuperación, cambio de factor o pérdida de dispositivo; cola local sin borrado remoto (OFF-12, IN-03-20); sin seleccionar recuperación (OC-183, RR3I-21) | §30.3, §30.6, §30.9, §30.11 |
+| M-4 | Mantenimiento con el mismo criterio para A y B (y C); funciones gratuitas, de pago y desarrollo propio distinguidas en una tabla; Costo solo de planes y servicios; puntuaciones recalculadas; sin preferencia | §30.4, §30.14 |
+| M-5 | SI-10 reforzado (temporalidad, notificación, recuperación segura) y SI-24 (continuidad del último dueño sin vía de omisión); umbrales y mecanismos [PEND] (OC-184, DR3I-11) | §30.3, §30.9, §30.11 |
+| M-6 | El límite de verificación del segundo factor sin encabezado leído pasa a [INF]; celdas «Por diseño» basadas en inferencias pasan a «Condicionado»; la asimetría de documentación sobre R no es ventaja técnica | §30.4–§30.6, §30.11, §30.16 |
+| Obs. | Sesiones y cookies en CFG-C3 pendientes (OC-182); OC-170 vinculado a SI-04 y §30.4; se preservan las brechas RX-04 y RX-05 de ADR-09.I y la nota de trazabilidad de `dfacd85` | §30.0, §30.4, §30.13, §30.15 |
