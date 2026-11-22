@@ -6506,3 +6506,264 @@ Escala 1–5; **juicio del autor [PROP]**, no vinculante. Se puntúan solo confi
 | Obs. 7 | OC-64 pasa a regla de §25.3 (identificador conservado) | §25.3, §25.13 |
 | Obs. 8 | CFG-C2: riesgo de solicitudes forzadas (AM-07) como diseño propio | §25.9 |
 
+---
+
+# PARTE XII — BLOQUE R3-B (v0.2-R3B, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, 2026-11-22 inferida)
+
+## 26. R3-B — ADR-15 (correo transaccional): evaluación y borrador
+
+### 26.0 Alcance, autorización, puerta de entrada y reglas
+
+- **Autorización (2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — INICIO DE R3-B (ADR-15)»: «AUTORIZO EXPRESAMENTE INICIAR R3-B, LIMITADO A LA EVALUACIÓN Y REDACCIÓN DEL BORRADOR DE ADR-15.» Solo se modifica este documento, con esta Parte nueva. Esta autorización satisface DR3-8 en cuanto a **iniciar** R3-B; no resuelve otras decisiones.
+- **Puerta de entrada (verificada).** R2 tiene cierre documental condicionado y R3-A v0.2 está aprobado condicionalmente como entregable documental. R1 §8.2 indica que ADR-15 **requiere** ADR-03.C y ADR-01/ADR-10. Como ADR-01/10 y los `.C` son **propuestas** y R3-A es documental, **este borrador es posible**, pero ADR-15 **no puede cerrarse de forma definitiva** hasta que ADR-01/10 y ADR-03.C se aprueben; las tres configuraciones de R3-A siguen como candidatas. No hay bloqueo documental para redactar.
+- **Qué es este borrador.** Una evaluación de alternativas de correo transaccional con fuentes oficiales y una **recomendación preliminar no vinculante**. **No selecciona proveedores, no aprueba ADR-15, no crea cuentas, no contrata servicios, no registra métodos de pago y no escribe código.** **El correo no sustituye los mecanismos fuertes de autenticación:** las decisiones de R2 sobre recuperación y segundo factor siguen abiertas.
+- **Convención.** [DOC]: dato leído en la página oficial citada (§26.12). [PROP]: propuesta del autor. [INF]: inferencia del autor. [PEND]: condición pendiente o sin verificar. [CONF]: texto confirmado de `01` o R1. **Regla de lectura:** toda celda de requisito o de arquitectura sin etiqueta propia es [PROP]; toda celda de estado es [PEND] salvo que diga «Cumple».
+- **Identificadores nuevos (sin colisión).** **ALT-15-A, ALT-15-B, ALT-15-C** (alternativas), **RM-01…14** (requisitos del correo), **DR15-1…7** (decisiones del responsable), **OC-71…84** (condiciones abiertas), **RR15-01…12** (riesgos de redacción), **CR3B-01…14** (criterios de verificación).
+- **Exclusiones.** Elegir proveedor, dominio o región; resolver decisiones de R1, R2 o R3-A; aceptar riesgos o conceder excepciones; aprobar R3-B, R3 ni la Fase 2; iniciar R3-C…F, ADR `.I` ni R4; modificar las Partes I–XI ni los registros.
+
+- **Versión 0.2 (correcciones de la revisión focalizada).** Aplica M-1…M-4 y las siete observaciones (§26.16): puntuación sin penalizar la documentación incompleta, distinción entre SMTP, API y Send Email Hook, protección frente a escáneres de correo, procedencia de la invitación por correo, prevención de cargos, custodia de credenciales SMTP y precisión sobre privacidad. **Sin seleccionar proveedores ni mecanismos;** Resend y Brevo quedan **sin preferencia** hasta resolver OC-71…74.
+- **Aprobación (metadato; 2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-B»: «APRUEBO EXCLUSIVAMENTE R3-B v0.2 (ADR-15) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: R3-B (v0.2-R3B): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.** **DR15-1 se registra únicamente como aprobación documental condicionada, no definitiva.** No aprueba definitivamente ADR-15, ni selecciona proveedores, mecanismos, dominio ni región; no acredita entregabilidad, el costo de $0 ni ningún control. Se conservan: **Resend y Brevo sin preferencia ni selección definitiva**; **RM-01…14**, con los **requisitos confirmados** (RM-01, RM-02, RM-08, RM-10 y RM-14 en lo general, de `01` y R1) distinguidos de las **propuestas** (RM-03, RM-04 y RM-05 [REC]; RM-06, RM-09, RM-11 y RM-13) y de las parcialmente confirmadas (RM-07, RM-12); **DR15-2…7 y OC-71…84 abiertas**; **RR15-01…12 sin aceptar**; las diferencias entre **SMTP, API y Send Email Hook** (sin atribuir idempotencia ni reintentos al SMTP); la protección frente a **escáneres de correo, duplicados y abuso**; el **MFA obligatorio y la decisión 7 de R2 abiertos** (el correo no es segundo factor ni resuelve la recuperación); la **prevención de cargos** y el objetivo de **$0 sin cumplimiento demostrado**; **PEND-JUR, el dominio y la privacidad** pendientes; las **dependencias de ADR-03.C y de ADR-01/ADR-10** (propuestas; R3-A aprobado solo de forma documental condicionada); y la limitación de **autoevaluación del autor, sin auditoría independiente**. Trazabilidad: R3-A quedó versionado en el commit `4136066c755acdf95667c5103763b9f5ab8cd377` (`4136066`; 2026-11-22T05:01:29Z). Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+### 26.1 Identificación
+
+| Campo | ADR-15 |
+|---|---|
+| Tema | Correo transaccional |
+| Pregunta (R1 §8.1) | ¿Cómo se envían invitaciones y recuperaciones con costo y privacidad adecuados? |
+| Alternativas mínimas | ≥ 2 |
+| Dependencias | PRV-13, PRV-14; requiere ADR-03.C y ADR-01 / ADR-10 (R1 §8.2) |
+| Componente responsable | CMP-18 es el **único responsable del envío**, a solicitud de CMP-06 y CMP-07 (R1 §5.3) |
+| Frontera de confianza | TB-5: aplicación ↔ correo transaccional; Z4 (auxiliares); la dirección y el contenido mínimo están en tránsito |
+| Bloque / estado | R3 / **BORRADOR** |
+
+### 26.2 Requisitos del correo (RM)
+
+| ID | Requisito | Fuente | Naturaleza |
+|---|---|---|---|
+| RM-01 | **Contenido mínimo:** el mensaje lleva lo necesario (rol, ámbito, enlace o código) y **ningún dato de jugadores ni de menores**; la dirección y el mensaje no se guardan más allá de lo que ADR-15 defina | §5.6, TB-5, PRV-14 | Confirmado |
+| RM-02 | **Invitación:** solo por invitación; un solo uso; vence (propuesto 7 días); se acepta con el correo invitado; nadie se invita a sí mismo | IN-03-05; RF-ACC-01, RF-ACC-02 | Confirmado |
+| RM-03 | **Recuperación:** no más débil que la autenticación que sustituye; para dueño y organizador el correo **por sí solo no basta** | IN-03-15; RF-ACC-09 | Propuesta [REC] (decisión 7 abierta) |
+| RM-04 | **Respuesta uniforme:** ningún mensaje del acceso, la recuperación o las invitaciones revela si una cuenta existe | IN-03-13; OWASP (F-03) | Propuesta [REC] |
+| RM-05 | **Notificación al titular** por un canal independiente cuando exista otro, ante cambios del segundo factor, de contraseña, de correo o recuperación; contenido mínimo | IN-03-21 | Propuesta [REC]; no es requisito de `01` |
+| RM-06 | **Sin duplicados:** cada envío iniciado por la aplicación se asocia a un identificador de operación; los reintentos propios usan espera creciente. **En la ruta SMTP no se atribuye idempotencia ni reintento automático** no demostrados (§26.4) | RNF-06 (por analogía) [INF] | Propuesta; ruta SMTP [PEND] |
+| RM-07 | **Límites de frecuencia** por cuenta y por destinatario, y un tope global que reserva cupo a la recuperación frente a las invitaciones | RNF-05; AM-05, AM-06; OM-03 | Parcialmente confirmado (límites en el acceso e invitaciones) |
+| RM-08 | **Credenciales del correo** solo del lado servidor, con el mínimo alcance y rotación; nunca en el cliente, la cola ni el repositorio público | RT-09; NE-4 (§25.4) | Confirmado |
+| RM-09 | **Dominio remitente de la organización** (preferible un subdominio) con SPF, DKIM y DMARC | RNF-14; RE3-06 | Propuesta |
+| RM-10 | **Privacidad:** DPA, ubicación de los datos y transferencias evaluados antes de tratar direcciones reales; registros del proveedor con retención mínima | PRV-13, PRV-15, PRV-12 | Confirmado (evaluación jurídica pendiente) |
+| RM-11 | **Sustituibilidad:** el envío pasa solo por CMP-18, con un protocolo estándar y plantillas versionadas en el repositorio; cambiar de proveedor no cambia los flujos | R1 §5.3; §25.11 | Propuesta |
+| RM-12 | **Observabilidad sin datos personales** de los fallos de entrega, con alerta al responsable técnico | RNF-09; PRV-12; ADR-13 (R4) | Parcial; mecanismo en R4 |
+| RM-13 | **Enlaces y códigos de un solo uso tolerantes a la precarga:** los escáneres de correo pueden consumir un enlace antes de que lo abra la persona; debe existir una alternativa de confirmación o de código, sin elegir mecanismo aquí | Documentación de Supabase (limitación de precarga) [DOC]; RM-02, RM-03 | Propuesta |
+| RM-14 | **Custodia de credenciales de envío:** el secreto SMTP o de API configurado en el proveedor de datos es un secreto en manos de un tercero; se inventaría dónde reside, tiene el mínimo alcance, se rota y es revocable por la organización | RT-09, NE-4, RNF-14 | Confirmado en lo general (RT-09, RNF-14) |
+
+### 26.3 Alternativas evaluadas (fuentes al 2026-11-22; ver §26.12)
+
+| Criterio | ALT-15-A: Resend | ALT-15-B: Brevo | ALT-15-C: correo integrado del proveedor de datos |
+|---|---|---|---|
+| Costo con $0 | Plan gratuito [DOC]; **no exige datos de facturación** [DOC] | Plan gratuito; no exige tarjeta [DOC] | Incluido en Supabase [DOC] |
+| Límites gratuitos | **100 correos al día y 3.000 al mes**; el día es UTC; cuentan enviados y recibidos y cada destinatario por separado [DOC] | **300 correos al día** [DOC] | **2 por hora** [DOC] |
+| Al exceder la cuota | Error 429 (`daily_quota_exceeded`); **no se encola ni se reintenta** [DOC] | No consultado [PEND] | — |
+| Entrega a destinatarios reales | Sí, con dominio verificado propio [DOC] | Sí, tras la aprobación de la cuenta de envío [DOC] | **No:** solo a miembros del equipo del proyecto; "no es para producción" [DOC] |
+| Protocolo | SMTP (`smtp.resend.com`, puertos 25, 465, 587, 2465 y 2587; usuario fijo y clave de API) y API [DOC] | API y SMTP en todos los planes [DOC]; **host y puertos de SMTP sin leer** [PEND] | SMTP integrado |
+| Idempotencia | **Clave de idempotencia de 24 h** en el envío por API y por lotes [DOC]; no consta para SMTP [PEND] | **No documentada** en las páginas leídas [PEND] | — |
+| Límite de solicitudes | 10 por segundo por equipo [DOC] | POST de envío: 1.000 por segundo [DOC] | — |
+| Webhooks y eventos | Sí, con reintentos y repetición [DOC] | Webhooks transaccionales [DOC] | — |
+| Dominio, SPF, DKIM, DMARC | Dominio propio **obligatorio**; recomienda un subdominio; DKIM, SPF y DMARC [DOC]; hasta 3 dominios gratis [DOC] | Autenticación de dominio: página de ayuda no accesible [PEND] | — |
+| Región y datos | Envío desde N. Virginia, Irlanda, **São Paulo** o Tokio; **los datos de la cuenta y los registros se guardan en EE. UU.** [DOC] | La matriz de Brevo es francesa [DOC]; el tratamiento de datos del cliente lo regula su DPA, cuyo contenido (encargado, subencargados, ubicación) **no se leyó** [PEND: OC-83] | Según el proyecto de datos |
+| DPA y privacidad | DPA con cláusulas contractuales tipo [DOC] | DPA como Apéndice 3 de los términos [DOC] | Según Supabase |
+| Estabilidad del plan gratuito | Puede modificarse, cancelarse o **convertirse a pago si el uso excede los límites**, en cualquier momento y sin aviso [DOC] | La cuenta **puede** cancelarse tras 6 meses sin acceso, con aviso previo; en planes gratuitos pueden restringirse funciones no usadas durante 6 meses; responsabilidad limitada en el plan gratuito [DOC]. Pie «Sent with Brevo» quitable solo en planes de pago; aplicación a lo transaccional [PEND] | — |
+| Compatibilidad con Supabase Auth | Documentado como proveedor de SMTP [DOC] | Documentado como proveedor de SMTP [DOC] | Predeterminado, no para producción [DOC] |
+
+**ALT-15-C queda excluida como solución de producción** por la propia documentación (entrega solo a miembros del equipo; límite de 2 por hora). Se conserva como referencia y para el desarrollo con datos sintéticos.
+
+### 26.4 Compatibilidad con las configuraciones de R3-A y rutas de envío
+
+| Configuración | Cómo se integra el correo [PROP] | Estado |
+|---|---|---|
+| CFG-C1 y CFG-C3 (Supabase Auth) | SMTP propio configurado en Supabase Auth; ambos proveedores figuran como ejemplos documentados [DOC]. **Para invitaciones, la API administrativa `inviteUserByEmail` es solo una opción:** la página leída solo dice que envía un enlace de invitación; que requiera una clave privilegiada del lado servidor es [INF] | Compatible con ambos proveedores [DOC]; uso de la API de invitación [PEND] |
+| CFG-C2 (Better Auth) | Better Auth funciona con cualquier proveedor transaccional; se le pasa una función que envía el mensaje, y su documentación lista Resend como ejemplo [DOC] | Compatible [DOC] |
+| Modelo de invitaciones, permisos y roles | **Una cosa es el envío del correo y otra el modelo de invitaciones de la aplicación** (RF-ACC-02: destinatario, rol, ámbito, quién invita, vencimiento, un solo uso y estado). Ese modelo, los permisos y los roles son **datos y reglas de la aplicación** (ADR-03.I, ADR-02.I); el correo solo entrega el enlace y **no concede el rol** | [PEND] ADR-03.I; no se decide aquí |
+| Vigencias de Supabase [DOC] | Los enlaces mágicos y los códigos caducan a la hora y admiten una solicitud cada 60 s por usuario; **la vigencia de una invitación no se leyó** | Distinto del vencimiento propuesto de 7 días de RF-ACC-02 (OC-75) |
+
+**Rutas de envío y lo que cada una permite [DOC o PEND según la fila].**
+
+| Ruta | Idempotencia | Reintentos | Duplicados y cuotas | Estado |
+|---|---|---|---|---|
+| SMTP (Supabase Auth con SMTP propio) | **No atribuida:** Resend documenta la clave de idempotencia solo para la API; Brevo [PEND] | **No demostrados:** si el servidor SMTP rechaza, el error vuelve a Supabase y la aplicación puede no tener ocasión de reintentar [INF] | Límite de Supabase de una solicitud cada 60 s por usuario [DOC]; control propio de la aplicación solo para lo que ella inicia | [PEND] OC-72, OC-76 |
+| API del proveedor (servidor propio o función de Better Auth) | Resend: clave de 24 h en envío y lote [DOC]; Brevo [PEND] | Reintentos propios con espera creciente [PROP] | Cuota diaria: el error no se encola [DOC: Resend]; la aplicación decide | [PEND] |
+| Send Email Hook de Supabase | La documentación de Supabase lo menciona como alternativa al SMTP propio [DOC]; qué recibe el hook y cómo se comportan sus reintentos [PEND] | [PEND] OC-81 | Permitiría usar la API (y su idempotencia) desde Supabase; no se asume | [PEND] OC-81 |
+
+### 26.5 Flujos: qué hace el correo y qué no
+
+| Flujo | Papel del correo | Límite frente a R2 |
+|---|---|---|
+| Invitación (RF-ACC-01, 02) | Entrega el enlace de un solo uso y con vencimiento al correo invitado; el **modelo de invitaciones, permisos y roles es de la aplicación** | El correo **no concede** el rol: lo concede el servidor al aceptar (IN-03-05); sin auto-registro |
+| Recuperación (RF-ACC-09; IN-03-15) | Uno de los medios; para dueño y organizador **no basta por sí solo** | **No resuelve** CAP-03-R-A / R-C ni la decisión 7; el correo comprometido equivale a toma de cuenta si la recuperación no exige otro medio (RES-01) |
+| Notificación al titular (IN-03-21 [REC]) | Aviso por canal independiente tras cambios de seguridad | Sigue [REC]; adoptar o no es decisión 7 |
+| Segundo factor | **Ninguno:** el código por correo no se acepta como segundo factor fuerte | F-04 recomienda no depender de un único canal; IN-03-14 |
+| Alerta de partido sin editor (N-12) y tareas | Fuera de alcance | ADR-14 (R4) |
+
+### 26.6 Seguridad, abuso y duplicados
+
+| Riesgo | Control propuesto [PROP] | Relación | Estado |
+|---|---|---|---|
+| Enumeración de cuentas | Respuesta y tiempos uniformes; mismo mensaje exista o no la cuenta [DOC: OWASP, recuperación de contraseña] | AM-06, IN-03-13 | [PEND] decisión 7 |
+| Inundación de invitaciones o recuperaciones (agota la cuota de 100 diarios del plan gratuito de Resend) | Límite por cuenta y destinatario; tope global con cupo reservado a la recuperación; invitaciones diferibles | AM-05, OM-03, RES-12 | [PEND] |
+| Duplicados por reintento | Ruta API: identificador de operación e idempotencia donde exista; ruta SMTP: **sin garantía atribuida**, solo los límites de Supabase y el registro propio de lo que la aplicación inicia; espera creciente en reintentos propios | RM-06 | [PEND] Brevo, SMTP y hook (OC-72, OC-81) |
+| Fuga de credenciales del correo | Clave solo en el servidor, con el mínimo alcance, sin registrarla; rotación | RT-09, NE-4, AM-26 | [PEND] alcance de claves |
+| Suplantación del remitente | SPF, DKIM y DMARC con política gradual; subdominio dedicado | AM-20 | [PEND] OC-79 |
+| Enlaces y tokens | Un solo uso, vencimiento, sin datos de jugadores; el token no se registra [DOC: OWASP] | IN-03-05 | [PEND] |
+| Consumo de enlaces por escáneres de correo | Alternativa de confirmación o de código para los enlaces de un solo uso, sin elegir mecanismo; documentada por Supabase como limitación [DOC] | RM-13; RM-02, RM-03 | [PEND] OC-82 |
+| Custodia del secreto SMTP en el proveedor de datos | Inventario del lugar donde reside; mínimo alcance; rotación; revocable por la organización | RM-14; RT-09; NE-4 | [PEND] OC-84 |
+| Cuota agotada | Resend no encola ni reintenta [DOC]; en la ruta SMTP el error vuelve a Supabase y la aplicación puede no poder reintentar [INF]; con API u hook, reintento propio al reiniciarse la cuota y aviso | OC-76 | [PEND] |
+
+### 26.7 Consumo estimado a escala MVP (supuestos explícitos; todo [INF])
+
+**Supuestos (RNF-04).** 6 torneos por temporada; por torneo, un organizador, un delegado por equipo (hasta 16) y hasta 10 editores: ≈ 27 invitaciones; hasta 1.000 cuentas en total; una recuperación por cuenta al año como máximo; 1–2 notificaciones de seguridad por recuperación o cambio de factor; las invitaciones se concentran en la apertura de la temporada.
+
+| Concepto | Estimación | Resend (100/día; 3.000/mes) | Brevo (300/día) |
+|---|---|---|---|
+| Invitaciones por temporada | ≈ 160 (6 × 27) | Holgado por mes; **en un día de alta masiva de ≈ 60–100 invitaciones roza el tope diario** | Holgado |
+| Recuperaciones y notificaciones | decenas al año | Holgado | Holgado |
+| Pico diario realista | 60–100 si se invitan varios torneos el mismo día | **Riesgo** (cuentan por destinatario) | Holgado |
+| Mitigación | Escalonar invitaciones; priorizar recuperación; el tope global de RM-07 | — | — |
+
+**Nota operativa [DOC + cálculo].** El día de la cuota de Resend es un día UTC: se reinicia a las 00:00 UTC, es decir, a las **18:00 en Costa Rica** (UTC−6, RNF-10); conviene planificar las invitaciones masivas con esa hora.
+**Prevención de cargos imprevistos [PROP].**
+
+| Proveedor | Hecho documentado | Medida propuesta |
+|---|---|---|
+| Resend | Plan gratuito sin datos de facturación; los términos permiten **convertir cuentas gratuitas a pago si el uso excede los límites** [DOC] | Ningún método de pago; tope interno de envíos por debajo del 80 % del cupo diario; alerta; abstenerse de invitaciones masivas el mismo día |
+| Brevo | Plan gratuito sin tarjeta; cupo diario de 300 [DOC] | Ningún método de pago; tope interno; aviso de inactividad |
+| Política general | — | **Ninguna cuenta con método de pago sin autorización previa** (DR3-6); revisión del consumo antes de cada temporada |
+
+### 26.8 Dominio, SPF, DKIM y DMARC
+
+- Resend exige un **dominio propio verificado** (no uno compartido) y recomienda un subdominio de envío [DOC]; hasta 3 dominios en el plan gratuito [DOC].
+- El dominio y los registros DNS son de la **organización** (RNF-14); su costo está pendiente (OC-67) y la política de DMARC y la alineación se fijan al elegir el proveedor (OC-79). La página de autenticación de dominio de Brevo no fue accesible [PEND].
+- El remitente no debe contener datos de jugadores; un subdominio dedicado aísla la reputación [DOC].
+
+### 26.9 Privacidad, DPA y región
+
+- Las direcciones de los usuarios son datos personales de Z2/Z3 (PRV-14) y transitan por Z4; los mensajes no llevan datos de jugadores ni de menores (RM-01).
+- **Resend:** DPA con cláusulas contractuales tipo; envío desde São Paulo posible, pero **los datos de la cuenta y los registros se guardan siempre en EE. UU.** [DOC]. **Brevo:** DPA como Apéndice 3 de sus términos [DOC]; su política de privacidad describe al responsable del tratamiento de **sus propios** datos (visitantes y clientes), mientras que los datos de los destinatarios los regula el DPA, **cuyo contenido no se leyó** [PEND: OC-83]. La ubicación de datos de Brevo tampoco [PEND: OC-74].
+- Toda opción implica **transferencia internacional** (PRV-13, Q-25); la evaluación jurídica (PEND-JUR) sigue pendiente y **esto no es asesoría legal**.
+
+### 26.10 Portabilidad y sustitución del proveedor
+
+| Riesgo | Mitigación propuesta [PROP] | Estado |
+|---|---|---|
+| Cambio, retiro o conversión a pago del plan gratuito sin aviso (Resend) o posible cancelación tras 6 meses sin acceso (Brevo) [DOC] | Un único punto de envío (CMP-18); SMTP estándar; segunda configuración preparada pero **no activada**; envío de prueba periódico (efecto sobre la inactividad no verificado) | [PEND] |
+| Cambio de DKIM y SPF al sustituir | Selectores y registros documentados; plantillas versionadas en el repositorio | [PEND] |
+| Pérdida de historial de entrega | No se depende de él; la aplicación guarda solo el identificador de operación | [PEND] |
+| Dependencia de funciones propias (idempotencia de Resend) | La idempotencia de la aplicación es la que manda; la del proveedor, un refuerzo | [PEND] |
+
+### 26.11 Evaluación, puntuación y recomendación preliminar
+
+Eliminatorios aplicables: sin método de pago (RC-18; cumplen ambos [DOC]), entrega a destinatarios reales, compatibilidad con las configuraciones, privacidad evaluable (RM-10) y controles de abuso (RM-07). **Ninguno de los dos queda eliminado; ALT-15-C sí queda excluida** (§26.3). El criterio de funcionamiento sin conexión **no discrimina** (el envío requiere conexión): 3 en ambas.
+**Regla (v0.2).** Se puntúa **solo con evidencia leída**. Lo no leído se marca [PEND] y **no se penaliza**; se presenta como un rango de sensibilidad. Los hechos negativos **documentados** sí cuentan.
+
+| Criterio (peso aprobado) | ALT-15-A Resend | ALT-15-B Brevo | Fundamento (solo evidencia leída) |
+|---|---|---|---|
+| Seguridad (35 %) | 4 | **3–4** | Resend: idempotencia por API, dominio propio obligatorio, DPA y regiones documentados. Brevo: sin hecho negativo leído; **3 solo si lo no leído resultara desfavorable**, 4 si resulta equivalente |
+| Costo (30 %) | 3 | 4 | Resend: cupo diario de 100 que puede agotarse; Brevo: 300 diarios; ambos $0 sin tarjeta; el dominio es aparte |
+| Sin conexión (20 %) | 3 | 3 | No aplica |
+| Mantenimiento (15 %) | 3–4 | 3–4 | Resend: documentación y repetición de eventos, pero el plan gratuito puede cambiar, cancelarse o convertirse a pago sin aviso. Brevo: aprobación de la cuenta y posible cancelación por inactividad; su SMTP no se leyó y no se penaliza |
+| **Total ponderado (rango)** | **3,35–3,50** | **3,30–3,80** | **Los rangos se solapan:** no hay diferencia decisiva |
+
+**Recomendación preliminar no vinculante (v0.2).** **Sin preferencia entre ALT-15-A (Resend) y ALT-15-B (Brevo)** hasta resolver OC-71…74. Ambas son candidatas válidas para CFG-C1, CFG-C2 y CFG-C3; ninguna se selecciona. El correo no sustituye al segundo factor ni resuelve la recuperación.
+
+### 26.12 Condiciones, decisiones y riesgos
+
+**Decisiones del responsable (DR15):**
+
+| ID | Decisión | Relación |
+|---|---|---|
+| DR15-1 | Aprobar, ajustar o rechazar este borrador y su recomendación preliminar (no es una selección) | §26.11 |
+| DR15-2 | Confirmar que el correo es un canal de invitación y aviso, **no** un factor fuerte, y que la recuperación de dueño y organizador seguirá la decisión 7 (CAP-03-R) | RM-03; RES-01 |
+| DR15-3 | Adoptar o no las notificaciones de seguridad al titular [REC] | RM-05; decisión 7 |
+| DR15-4 | Dominio y subdominio remitente y propietario del DNS | RM-09; OC-67; RNF-14 |
+| DR15-5 | Región de envío y de datos, junto con DR3-3 y PEND-JUR | RM-10; OC-74 |
+| DR15-6 | Política ante agotamiento de cuota: prioridad de la recuperación y diferimiento de invitaciones | RM-07; OC-76 |
+| DR15-7 | Autorizar, o no, el siguiente subbloque (R3-C: ADR-06 y ADR-07) | Plan R3 |
+
+**Condiciones abiertas nuevas:**
+
+| ID | Condición | Relación |
+|---|---|---|
+| OC-71 | SMTP de Brevo (host, puertos y autenticación): la página de ayuda no fue accesible | ALT-15-B |
+| OC-72 | Idempotencia en Brevo y en el envío por SMTP de Resend | RM-06 |
+| OC-73 | Si el pie "Sent with Brevo" aplica a los mensajes transaccionales del plan gratuito | ALT-15-B |
+| OC-74 | Ubicación de datos y subencargados de Brevo; retención de registros de entrega de ambos | RM-10; PRV-12 |
+| OC-75 | Vigencia del enlace de invitación (7 días propuestos en RF-ACC-02) frente a la de Supabase o Better Auth | RM-02 |
+| OC-76 | Conducta ante cuota agotada (Resend no encola ni reintenta); reintento propio y aviso | RM-07 |
+| OC-77 | Cambios o conversión a pago del plan gratuito de Resend sin aviso; posible cancelación por inactividad de 6 meses de Brevo; tolerancia o plan de pago (requiere autorización de gasto) | §26.10; prevención de cargos |
+| OC-78 | Aprobación de la cuenta de envío (Brevo) y verificación de dominio (ambos): requieren crear cuentas, no autorizado | RM-09 |
+| OC-79 | Política de SPF, DKIM y DMARC y su alineación | RM-09 |
+| OC-80 | Alcance mínimo de las claves de API o SMTP y su rotación | RM-08 |
+| OC-81 | Comportamiento del Send Email Hook de Supabase: qué recibe, tiempos y reintentos | §26.4; RM-06 |
+| OC-82 | Mecanismo de protección frente a la precarga de enlaces (confirmación o código); no se elige aquí | RM-13 |
+| OC-83 | Contenido del DPA de Brevo: papel de encargado, subencargados y ubicación de los datos | RM-10 |
+| OC-84 | Dónde residen y quién custodia el secreto SMTP configurado en el proveedor de datos; alcance y rotación | RM-14 |
+
+**Riesgos de redacción (RR15):**
+
+| ID | Riesgo | Vínculo |
+|---|---|---|
+| RR15-01 | Leer la recomendación como selección o como aprobación de ADR-15 | §26.0 |
+| RR15-02 | Tratar el correo como segundo factor o como sustituto de la recuperación fuerte | §26.5 |
+| RR15-03 | Revelar la existencia de cuentas por mensajes o tiempos distintos | RM-04 |
+| RR15-04 | Duplicar o inundar mensajes por reintentos o por abuso | RM-06, RM-07 |
+| RR15-05 | Agotar la cuota diaria y dejar sin recuperación a un dueño | §26.7 |
+| RR15-06 | Incluir datos de jugadores o menores en un mensaje | RM-01 |
+| RR15-07 | Exponer claves de correo en el cliente, la cola o los registros | RM-08 |
+| RR15-08 | Dar por demostrado el costo de $0 o la entregabilidad | §26.7 |
+| RR15-09 | Depender de un plan gratuito que el proveedor puede cambiar o cerrar | §26.10 |
+| RR15-10 | Confundir esta autoevaluación del autor con una auditoría independiente | §26.13 |
+| RR15-11 | Atribuir al SMTP idempotencia o reintentos automáticos no demostrados | §26.4 |
+| RR15-12 | Penalizar o favorecer a un proveedor por documentación incompleta, o dar por válida una preferencia | §26.11 |
+
+### 26.13 Verificación del autor (autoevaluación; no es auditoría independiente)
+
+| ID | Criterio | Resultado |
+|---|---|---|
+| CR3B-01 | Las Partes I–XI y los registros anteriores no cambian (prefijo idéntico al HEAD) | Cumple (comprobado) |
+| CR3B-02 | Al menos dos alternativas reales con fuentes oficiales | Cumple: §26.3 |
+| CR3B-03 | Invitaciones, recuperación y notificaciones; el correo no sustituye al segundo factor | Cumple: §26.5 |
+| CR3B-04 | Dominio, SPF, DKIM y DMARC | Cumple: §26.8; pendientes OC-78, OC-79 |
+| CR3B-05 | Privacidad, DPA, región y condiciones jurídicas sin asesoría legal | Cumple: §26.9 |
+| CR3B-06 | Entregabilidad, reintentos y prevención de duplicados, sin atribuir garantías no demostradas al SMTP | Cumple como propuesta: §26.4, §26.6; no demostrado |
+| CR3B-07 | Límites, abuso y exposición de credenciales | Cumple: §26.6 |
+| CR3B-08 | Portabilidad y sustitución | Cumple: §26.10 |
+| CR3B-09 | Consumo con supuestos explícitos | Cumple: §26.7 |
+| CR3B-10 | Compatibilidad con las tres configuraciones de R3-A, sin seleccionar | Cumple: §26.4, §26.11 |
+| CR3B-11 | Sin código, cuentas, contratación, métodos de pago ni dependencias | Cumple |
+| CR3B-12 | Lo no leído se marca [PEND]; sin términos ni precios inventados | Cumple: OC-71…74 |
+| CR3B-13 | SMTP, API y Send Email Hook distinguidos; modelo de invitaciones distinguido del envío del correo | Cumple: §26.4 |
+| CR3B-14 | Sin penalización por documentación incompleta; rangos de sensibilidad; sin preferencia entre proveedores | Cumple: §26.11 |
+
+### 26.14 Fuentes oficiales y límites de lectura
+
+**Consultadas (2026-11-22; páginas descargadas y convertidas a texto):** Resend (precios, cuotas y límites de cuenta, límites de la API, SMTP, claves de idempotencia, dominios, regiones, webhooks, términos, DPA, política de privacidad); Brevo (precios, términos de uso, política de privacidad, límites de la API, envío transaccional y webhooks); Supabase (SMTP propio, plantillas, enlaces y códigos de un solo uso, invitación por correo del administrador); OWASP (recuperación de contraseña); Better Auth (correo electrónico y verificación).
+**Límites.** Las páginas de ayuda de Brevo (SMTP, límite del plan gratuito, autenticación de dominio) devolvieron acceso denegado y no se leyeron; no se verificaron la idempotencia de Brevo, su ubicación de datos ni su política sobre el pie de página; la retención de registros de los proveedores no se leyó; algunas páginas son dinámicas. **Pendiente en v0.2:** el contenido del DPA de Brevo, el comportamiento del Send Email Hook y la vigencia de una invitación de Supabase. **No hubo cuentas, pruebas de entrega ni evaluación jurídica.** La evaluación es del autor, sin contexto nuevo.
+
+### 26.15 Estado y preguntas para el responsable
+
+**Estado:** R3-B **v0.2-R3B: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL** (corrige M-1…M-4 y las siete observaciones de la revisión focalizada; ver §26.16). **No versionado.** Autoevaluación del autor, no auditoría independiente. R3-C…F, los ADR `.I` y R4: **NO INICIADOS**. R3-A conserva su aprobación documental condicionada; la Fase 2 sigue sin aprobación global.
+
+**Preguntas:** DR15-1 a DR15-7 (§26.12) y las condiciones OC-71 a OC-84. Siguen abiertas todas las decisiones y condiciones heredadas de R1, R2 y R3-A.
+
+### 26.16 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| M-1 | Puntuación solo con evidencia leída; lo no leído, [PEND] y rangos de sensibilidad; **sin preferencia** entre Resend y Brevo hasta OC-71…74 | §26.11 |
+| M-2 | Rutas SMTP, API y Send Email Hook distinguidas; sin atribuir idempotencia ni reintentos al SMTP; dependencias en OC-72, OC-76 y OC-81 | §26.4, §26.6, RM-06 |
+| M-3 | Protección frente al consumo de enlaces por escáneres, sin elegir mecanismo (RM-13, OC-82) | §26.2, §26.6 |
+| M-4 | `inviteUserByEmail` como opción [INF]; el envío del correo se distingue del modelo de invitaciones, permisos y roles de la aplicación | §26.4, §26.5 |
+| Obs. 1 | Brevo: cancelación por inactividad como posibilidad, no como hecho | §26.3, §26.10 |
+| Obs. 2 | Resend: conversión a pago si el uso excede los límites; prevención de cargos | §26.3, §26.7, OC-77 |
+| Obs. 3 | Brevo: responsable frente a encargado; DPA sin leer (OC-83) | §26.3, §26.9 |
+| Obs. 4 | Better Auth: etiqueta [DOC] (cualquier proveedor; función de envío) | §26.4 |
+| Obs. 5 | Cuota de Resend: reinicio UTC equivale a las 18:00 en Costa Rica | §26.7 |
+| Obs. 6 | Custodia del secreto SMTP en el proveedor de datos (RM-14, OC-84) | §26.2, §26.6 |
+| Obs. 7 | CR3B-01 comprobado; CR3B-13 y CR3B-14 añadidos | §26.13 |
+

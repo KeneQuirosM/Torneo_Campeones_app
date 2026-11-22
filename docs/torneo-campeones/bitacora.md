@@ -1,5 +1,16 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-22 — Fase 2, R3-B (aprobación condicional como entregable documental)
+
+- **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-B»: «APRUEBO EXCLUSIVAMENTE R3-B v0.2 (ADR-15) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **DR15-1** se registra solo como aprobación documental condicionada, no definitiva. No aprueba definitivamente ADR-15. Archivos: `02-arquitectura-adr.md` (solo metadatos de §26), `aprobaciones.md`, `bitacora.md`.
+- **Versión aprobada:** R3-B **v0.2-R3B** (Parte XII, §26): ALT-15-A Resend, ALT-15-B Brevo, ALT-15-C (excluida como producción), RM-01…14, DR15-1…7, OC-71…84, RR15-01…12, CR3B-01…14. **Resend y Brevo sin preferencia ni selección definitiva.**
+- **Preservado:** requisitos confirmados distinguidos de propuestas; DR15-2…7 y OC-71…84 abiertas; RR15-01…12 sin aceptar; SMTP, API y Send Email Hook distinguidos; protección frente a escáneres, duplicados y abuso; MFA obligatorio y decisión 7 de R2 abiertos; prevención de cargos y objetivo de $0 sin cumplimiento demostrado; PEND-JUR, dominio y privacidad pendientes; dependencias de ADR-03.C y ADR-01/10; autoevaluación del autor, sin auditoría independiente.
+- **Trazabilidad:** R3-A quedó versionado en `4136066c755acdf95667c5103763b9f5ab8cd377` (`4136066`; 2026-11-22T05:01:29Z); nota posterior añadida en su entrada.
+- **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `db0f2794a436c16b7b792a910136b36f20852f4ffd7b55c9df0e763ede907694`; con los metadatos: `5ce55bb176cd8929cc8b434c637fc69364b53a18a868535d7fcc180b187ec03c`. Las diferencias son solo metadatos de §26.
+- **Exclusiones (no implica):** seleccionar proveedores o mecanismos; crear cuentas, enviar correos o autorizar gastos; resolver otras decisiones; aceptar riesgos; iniciar R3-C…F, ADR `.I` o R4; aprobar R3 o la Fase 2.
+- **Estado real:** R3-A y R3-B aprobados condicionalmente (documental); R3-C…F, ADR `.I` y R4 NO INICIADOS; R3 y Fase 2 sin aprobación global. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, R3-C u otro subbloque, resolver decisiones) requiere autorización expresa e independiente.
+
 ## 2026-11-22 — Fase 2, R3-A (aprobación condicional como entregable documental)
 
 - **Decisión del responsable (2026-11-22, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-A»: «APRUEBO EXCLUSIVAMENTE R3-A v0.2 (ADR-01 Y ADR-10) COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **DR3-1** se registra solo como aprobación documental condicionada, no definitiva. No aprueba definitivamente ADR-01 ni ADR-10. Archivos: `02-arquitectura-adr.md` (solo metadatos de §25), `aprobaciones.md`, `bitacora.md`.
@@ -9,7 +20,7 @@
 - **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `b13af5fda3ba9561e9f571b4fd684c4c0688449cf5218fad085dc62d8379ed30`; con los metadatos: `7676ab2f92424a29b08d2fd1c18b3b69babe64597bdbe88057b18a1f8906230a`. Las diferencias son solo metadatos de §25.
 - **Exclusiones (no implica):** seleccionar proveedores, regiones, tecnologías o formulaciones; autorizar gastos, cuentas o métodos de pago; resolver otras decisiones; aceptar riesgos; iniciar R3-B…F, ADR `.I` o R4; aprobar R3 o la Fase 2.
 - **Estado real:** R3-A aprobado condicionalmente (documental); R3-B…F, ADR `.I` y R4 NO INICIADOS; R3 y Fase 2 sin aprobación global; RES-01…13 sin aceptar. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar este registro, R3-B u otro subbloque, resolver decisiones) requiere autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, R3-B u otro subbloque, resolver decisiones) requiere autorización expresa e independiente. *[Nota posterior, 2026-11-22: este registro quedó versionado en el commit `4136066c755acdf95667c5103763b9f5ab8cd377` (`4136066`; verificable por Git; 2026-11-22T05:01:29Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-22 — Fase 2, R2 (cierre documental condicionado)
 
