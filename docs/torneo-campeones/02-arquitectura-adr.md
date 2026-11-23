@@ -9870,3 +9870,313 @@ Los resultados son los **admisibles** según las exigencias; ninguno se resuelve
 | H-12 | CR16I-19 sin el hash; CR16I-18 sin remitir a un informe externo; el commit de ADR-05.I consta solo en §34.0 | §34.0, §34.17 |
 | H-13 | SL-12 y SL-22 vinculadas a SI-23; OC-324 | §34.5, §34.15 |
 | N-1 | **Ajuste de neutralidad (verificación final de v0.2):** SL-20 pasa a «C (RR16I-05, TL-15)» en las tres alternativas; la leyenda explica «E/C»; las diferencias reales de riesgo se conservan en §34.4, TL-15 y RR16I-05; puntuaciones sin cambios; SL-25 sin cambios (OC-49 / T-3) | §34.10, §34.20 |
+
+# PARTE XXI — BLOQUE R3-F (v0.1-R3F, APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE; R3-F, R3-E Y R3 SIN CIERRE; 2026-11-23 inferida)
+
+## 35. R3-F — Consolidación, cierre documental propuesto y trazabilidad de R3
+
+### 35.0 Alcance, autorización, contexto del responsable y reglas
+
+- **Autorización (2026-11-23, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R3-F: INICIO DEL BORRADOR DE CIERRE Y TRAZABILIDAD DE R3»: «AUTORIZO EXCLUSIVAMENTE INICIAR EL BORRADOR DOCUMENTAL DE R3-F — CIERRE Y TRAZABILIDAD DE R3.» Aprobó como **alcance de trabajo** los siete entregables E1…E7 (aquí R3F-E1…R3F-E7) y precisó que **esa autorización no aprueba sus conclusiones, no cierra R3-E ni R3 y no autoriza decisiones arquitectónicas.** Solo se modifica este documento, con esta Parte nueva; `aprobaciones.md` y `bitacora.md` **no se modifican.**
+- **Limitación de la autorización recibida.** El mensaje llegó **cortado** en su apartado 6 («Mantener como pendientes: * Estados históricos»): **no se recibieron** el resto de ese apartado, las restricciones ni el formato de entrega. Se aplican las **restricciones permanentes del proyecto** (sin commit, push, PR ni merge; sin tocar otros archivos; sin código, cuentas ni servicios; sin cerrar R3-E ni R3; sin seleccionar ni admitir; sin resolver decisiones; `main` intacto) y se registran como observaciones preservadas (§35.9, OB3F-01…07): OB3F-01 corresponde al único ítem recibido de ese apartado («Estados históricos»); OB3F-02 lo pidió el responsable en la revisión de transición anterior; OB3F-03…07 las añade el autor. **El responsable debe confirmar si faltaba algo.** *[Aclaración posterior, 2026-11-23: el responsable confirmó que la instrucción llegó truncada y proporcionó expresamente lo omitido (apartados 6, 7 y 8) mediante el mensaje «R3-F: COMPLETAR INSTRUCCIÓN TRUNCADA»; se incorporó en §35.13. Lo anterior se conserva sin reescribir como evidencia de que existió una instrucción truncada. **Esta aclaración no aprueba R3-F ni es una decisión arquitectónica.**]*
+- **Contexto suministrado por el responsable (no es una cita hallada en el repositorio).** Plan original de subbloques acordado en la planificación conversacional, aprobado como plan en el registro de R3-A pero **sin que su texto conste en archivos** (OB3F-04): **R3-A:** ADR-01 y ADR-10. **R3-B:** ADR-15. **R3-C:** ADR-06 y ADR-07. **R3-D:** ADR-08. **R3-E:** ADR-02.I, 03.I, 04.I, 05.I, 09.I y 16.I. **R3-F:** cierre y trazabilidad de R3. **Dependencia de R3-F:** todos los anteriores. No se han proporcionado entregables adicionales de R3-F.
+- **Qué es este borrador.** Una **consolidación documental de trazabilidad** de R3-A…R3-E y una **propuesta** de cierre documental. **No decide, no selecciona, no admite, no resuelve, no acepta riesgos, no concede excepciones, no declara cumplidas garantías técnicas y no cierra nada.** Es **autoevaluación del autor, no auditoría independiente**; la «trazabilidad final» y la «auditoría de cierre por un revisor separado del autor y con contexto nuevo» de R1 §12 **permanecen reservadas a R4** (§35.8).
+- **Compatibilidad.** R1 §12 propone el contenido de R3 y exige que cada bloque lo nombre un mensaje del usuario; R1 §8.1 deja la asignación de bloques como propuesta que confirma el usuario; el skill no define subbloques (regla 2: autorización explícita y nominal). R3-F **no contradice** ninguno y **no sustituye** la trazabilidad final ni la auditoría de R4.
+- **Convención.** [DOC]: dato leído en el repositorio (Git o archivo citado). [CONF]: texto confirmado de `01`, R1, R2 o de un registro de aprobación, con el estado que allí declara. [PROP]: propuesta del autor. [INF]: inferencia del autor. [PEND]: pendiente. **Regla de lectura:** toda celda sin etiqueta propia es [DOC] **cuando cita un identificador, commit o hash verificados** y [PROP] en los demás casos. **Ningún estado se infiere de otro** (§35.2).
+- **Identificadores nuevos (sin colisión; comprobados contra el archivo).** **R3F-E1…R3F-E7** (entregables), **DP3F-01…14** (filas de la matriz de dependencias), **OB3F-01…07** (observaciones preservadas), **DR3F-1…6** (decisiones del responsable, no arquitectónicas), **RR3F-01…12** (riesgos de redacción), **CR3F-01…18** (criterios de revisión documental). **No se crean condiciones OC nuevas** (las OC-54…324 permanecen como están).
+- **Exclusiones.** Cerrar R3-E o R3; aprobar R3, R3-F, R3-E o la Fase 2; admitir, seleccionar o descartar formulaciones o alternativas; resolver decisiones heredadas; aceptar riesgos; conceder excepciones (D-2 sin excepción); declarar cumplido R1 §8.1 o garantía técnica alguna; iniciar R4; modificar las Partes I–XX ni los registros.
+- **Aprobación (metadato; 2026-11-23, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R3-F»: «APRUEBO EXCLUSIVAMENTE R3-F v0.1-R3F COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: R3-F (v0.1-R3F): APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA.** **La aprobación cubre los siete entregables R3F-E1…R3F-E7, la aclaración de la instrucción truncada (§35.13) y las correcciones F-1…F-6 (§35.14), ya incorporadas.** **Esta aprobación NO cierra R3-F como bloque, R3-E ni R3; no aprueba globalmente la Fase 2; no autoriza decisiones arquitectónicas ni implementación.** El evento de aprobación es independiente y no reutiliza identificadores DP3F, OB3F, DR3F, RR3F ni CR3F. Los siete entregables están **documentados sin conferir cumplimiento técnico**. **La aclaración de DR3F-1 y de OB3F-06 permanece trazable** (el texto original y la evidencia del truncamiento se conservan). **Estado:** **R3-E y R3 permanecen SIN CIERRE GLOBAL; R4 permanece NO INICIADO; la Fase 2 continúa EN DESARROLLO.** **La nota de precedencia propuesta (§35.6) se preserva como propuesta:** su aprobación documental como parte del entregable **no la convierte en autorización para cerrar R3 ni para resolver las contradicciones históricas**, que permanecen **identificadas y sin corregir** (estados antiguos que dicen que R3 no había iniciado; sección histórica «Próximo paso» de `aprobaciones.md`; diferencia entre 12 y 11 decisiones abiertas de R2-A; fila histórica de R2-C4 con una columna adicional; nota posterior de `bb9cbb1` en el registro de ADR-16.I, que se registra en `aprobaciones.md` y `bitacora.md` pero no se duplica aquí). Se conservan: **los diez entregables de R3-A…R3-E con aprobación documental condicionada** (sin conjunto de formulaciones admitido ni alternativa seleccionada); **las 16 decisiones sin formulación A bloqueadas para selección**; decisiones, riesgos y condiciones de R2 y R3 abiertos; **DR3F-1 aclarado como asunto de instrucción, no como decisión arquitectónica**, y **DR3F-2…6 abiertos según su estado real**; **RR3F-01…12 sin aceptar**; **R1 §8.1 sin cumplimiento demostrado**; **D-2 sin excepción**; **la trazabilidad final y la auditoría independiente reservadas para R4**; y las limitaciones de la **autoevaluación del autor, sin auditoría independiente y sin pruebas empíricas**. **Precedencia:** CR3F-18, el estado «BORRADOR» de §35.1, §35.3, §35.10, §35.12, §35.13 y §35.14, y las expresiones «borrador», «no aprobado» o «no versionado» de esta Parte describen el momento de redactarse; prevalece este apartado en cuanto al estado de aprobación documental. Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Nota posterior de trazabilidad (2026-11-23, inferida; solo informativa).** ADR-16.I v0.2-R3E-16I (Parte XX) y su registro de aprobación quedaron versionados en el commit `bb9cbb1bff068a6218e828a799fc6771394b6312` (`bb9cbb1`; verificable por Git; 2026-11-23T04:16:33Z). Las expresiones «Estado de versionado: Pendiente» del registro de ADR-16.I y «no versionado» de §34.18 describen el momento de redactarse. **No se reescribe la aprobación histórica;** `aprobaciones.md` y `bitacora.md` **no se modifican en esta entrega** y la nota posterior en ellos queda pendiente (OB3F-03).
+
+### 35.1 Identificación
+
+| Campo | R3-F |
+|---|---|
+| Tema | Consolidación documental, cierre documental propuesto y trazabilidad de R3 (R3-A…R3-E), sin decidir nada |
+| Naturaleza | **Consolidación y registro**, no un ADR: no tiene formulaciones, alternativas ni puntuación |
+| Dependencias (contexto del responsable) | **Todos los anteriores:** R3-A, R3-B, R3-C, R3-D y R3-E |
+| Dependencias de R1 | R1 §8.2 (matriz de dependencias, por referencia), R1 §12 (contenido propuesto de R3 y R4) |
+| Alimenta | R4 (por referencia, §35.8); eventuales cierres documentales condicionados de R3-E y R3 (**no efectuados**) |
+| Estado | **v0.1-R3F: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA como entregable** (ver «Aprobación (metadato)» en §35.0); **sin cierre de R3-F como bloque, de R3-E ni de R3** |
+
+### 35.2 Niveles de estado (para no confundirlos)
+
+Seis niveles **distintos**; **ninguno implica otro**. Se aplican a cada entregable de R3.
+
+| Nivel | Qué significa en este documento | Evidencia que lo respalda |
+|---|---|---|
+| N1 · Entregable documentado | Existe la Parte y su versión en `02` | La Parte en el archivo |
+| N2 · Aprobación documental condicionada | El responsable aprobó **esa versión como entregable documental**, de forma condicionada | Registro en `aprobaciones.md`, mensaje del responsable y metadato en la Parte |
+| N3 · Decisión arquitectónica admitida | El responsable admitió una formulación o decisión como conjunto admitido | Ninguna a la fecha (§35.3, §35.4) |
+| N4 · Selección de alternativa | El responsable seleccionó una alternativa, proveedor o mecanismo | Ninguna a la fecha |
+| N5 · Aprobación global del bloque | El responsable aprobó globalmente el bloque (R3-E, R3 o la Fase 2) | Ninguna a la fecha |
+| N6 · Autorización de implementación | El responsable autorizó construir o configurar | Ninguna a la fecha (la Fase 5 requiere sus propias autorizaciones) |
+
+### 35.3 R3F-E1 — Matriz de trazabilidad de R3-A…R3-E
+
+**Identificación y versionado** (commits verificados con Git: [DOC]).
+
+| Subbloque | ADR | Parte · § | Versión documental | Commit del versionado de su aprobación | Registro de aprobación |
+|---|---|---|---|---|---|
+| R3-A | ADR-01 y ADR-10 | XI · §25 | v0.2-R3A | `4136066c755acdf95667c5103763b9f5ab8cd377` (2026-11-22T05:01:29Z) | «Registro de R3-A» |
+| R3-B | ADR-15 | XII · §26 | v0.2-R3B | `ea9cfd35aedbcdcf8e8a40bdff4191e883efdaf0` (2026-11-22T05:29:42Z) | «Registro de R3-B» |
+| R3-C | ADR-06 y ADR-07 | XIII · §27 | v0.2-R3C | `ed1550b9d0b89bf475b25c4e53bd79e30a3b4aa5` (2026-11-22T05:48:03Z) | «Registro de R3-C» |
+| R3-D | ADR-08 | XIV · §28 | v0.2-R3D | `efee9903e3550224b9c438d2aec487680b44cbaa` (2026-11-22T15:37:58Z) | «Registro de R3-D» |
+| R3-E | ADR-09.I | XV · §29 | v0.2-R3E-09I | `dfacd8590ecc76a7a37edf2f0e331af431948457` (2026-11-22T17:39:05Z) | «Registro de ADR-09.I (R3-E parcial)» |
+| R3-E | ADR-03.I | XVI · §30 | v0.2-R3E-03I | `83b7571c3173d247588807884a990397d7fbed06` (2026-11-22T18:15:35Z) | «Registro de ADR-03.I (R3-E parcial)» |
+| R3-E | ADR-02.I | XVII · §31 | v0.2-R3E-02I | `f4aa2dd5e0b97aa3401d0258adce9674ba66a2d5` (2026-11-22T19:44:19Z) | «Registro de ADR-02.I (R3-E parcial)» |
+| R3-E | ADR-04.I | XVIII · §32 | v0.2-R3E-04I | `323b53ef695f5739c5db2247377923946637588d` (2026-11-22T23:10:59Z) | «Registro de ADR-04.I (R3-E parcial)» |
+| R3-E | ADR-05.I | XIX · §33 | v0.2-R3E-05I | `27d5aaec460a2b2d6d199b34a79187a48ba3e78a` (2026-11-23T02:38:18Z) | «Registro de ADR-05.I (R3-E parcial)» |
+| R3-E | ADR-16.I | XX · §34 | v0.2-R3E-16I | `bb9cbb1bff068a6218e828a799fc6771394b6312` (2026-11-23T04:16:33Z) | «Registro de ADR-16.I (R3-E)» |
+
+**Estado por nivel** (la misma lectura para todas las filas; «Sí» significa **solo** lo definido en §35.2).
+
+| Entregable | N1 documentado | N2 aprobado doc. condicionado | N3 admitido | N4 seleccionado | N5 aprobación global | N6 implementación |
+|---|---|---|---|---|---|---|
+| ADR-01 y ADR-10 (R3-A) | Sí | Sí (DR3-1 solo como aprobación documental condicionada; CFG-C3 es **recomendación preliminar no vinculante**, no selección) | No | No | No | No |
+| ADR-15 (R3-B) | Sí | Sí | No | No | No | No |
+| ADR-06 y ADR-07 (R3-C) | Sí | Sí | No | No | No | No |
+| ADR-08 (R3-D) | Sí | Sí (DR8-1 sigue siendo una decisión deportiva abierta, no la aprobación) | No | No | No | No |
+| ADR-09.I, 03.I, 02.I, 04.I, 05.I y 16.I (R3-E) | Sí (seis) | Sí (seis) | **No (ninguna formulación admitida)** | No | **No (R3-E sin aprobación global y sin cierre)** | No |
+| R3-E como bloque | Sí (seis ADR `.I`) | Sí (cada uno) | No | No | **No** | No |
+| R3 como conjunto | R3-F **en borrador** | — | No | No | **No** | No |
+
+**Identificadores por bloque** (rangos propios; ver unicidad en §35.7).
+
+| Bloque | Requisitos y escenarios | Decisiones | Condiciones abiertas | Riesgos de redacción | Criterios de revisión |
+|---|---|---|---|---|---|
+| R3-A | RE3-01…11, NE-1…6, BK-01…14, CFG-C1…C3 | DR3-1…9 | OC-54…70 | RR3-01…12 | CR3A-01…17 |
+| R3-B | RM-01…14, ALT-15-A…C | DR15-1…7 | OC-71…84 | RR15-01…12 | CR3B-01…14 |
+| R3-C | PU-01…19, ALT-06-A…C, ALT-07-A…C | DR67-1…7 | OC-85…100 | RR67-01…13 | CR3C-01…15 |
+| R3-D | MO-01…28, EC-01…21, ALT-08-A…C | DR8-1…9 | OC-101…125 | RR8-01…18 | CR3D-01…18 |
+| ADR-09.I | SV-01…19, RX-01…06, ALT-09-A…C | DR9I-1…10 | OC-126…153 | RR9I-01…19 | CR9I-01…18 |
+| ADR-03.I | SI-01…24, ALT-03-A…C | DR3I-1…11 | OC-154…184 | RR3I-01…21 | CR3I-01…18 |
+| ADR-02.I | AZ-01…27, GV-01…03, ALT-02-A…C | DR2I-1…11 | OC-185…217 | RR2I-01…22 | CR2I-01…18 |
+| ADR-04.I | VP-01…27, ALT-04-A…C | DR4I-1…11 | OC-218…245 | RR4I-01…22 | CR4I-01…18 |
+| ADR-05.I | SY-01…39, SCN-01…25, ALT-05-A…C | DR5I-1…11 | OC-246…283 | RR5I-01…26 | CR5I-01…19 |
+| ADR-16.I | CD-01…14, SL-01…34, TL-01…20, SCL-01…25, ALT-16-A…C | DR16I-1…11 | OC-284…324 | RR16I-01…28 | CR16I-01…20 |
+
+### 35.4 R3F-E2 — Dependencias exigidas frente a las documentadas
+
+Las dependencias **exigidas** son las de R1 §8.2 ([CONF]); las **documentadas** son las que cada Parte declara en su fila de dependencias ([DOC]). **«Evidencia disponible»** significa solo que existe el texto; **no** que la capacidad esté demostrada. **Ninguna garantía técnica se declara cumplida por existir documentación.**
+
+| ID | Artefacto | Exigida (R1 §8.2) | Documentada en | Evidencia disponible | Cumplimiento técnico | Decisión o condición pendiente |
+|---|---|---|---|---|---|---|
+| DP3F-01 | ADR-01 y ADR-10 (R3-A) | ADR-02.C, 03.C, 04.C, 05.C, 09.C y 16.C; PEND-JUR (PRV-13) | §25 («Dependencias (R1 §8.1, §8.2)») | Seis `.C` como **propuestas** aprobadas documentalmente de forma condicionada (R2, cierre `d833049`) | **No demostrado** | DR3-2…9; OC-54…70; PEND-JUR; Q-07 |
+| DP3F-02 | ADR-15 (R3-B) | ADR-03.C; ADR-01 y ADR-10 | §26 | ADR-03.C propuesta; ADR-01/10 documentado y aprobado documentalmente | **No demostrado** | DR15-1…7; OC-71…84; PRV-13, PRV-14 |
+| DP3F-03 | ADR-06 (R3-C) | ADR-04.C; ADR-01 | §27 | Ídem | **No demostrado** (CL-30 sin cumplimiento demostrado) | DR67-1…7; OC-85…100; Q-40 (d), Q-29, HR1-11 |
+| DP3F-04 | ADR-07 (R3-C) | ADR-06 | §27 | ADR-06 documentado y aprobado documentalmente | **No demostrado** | DR67-1…7; Q-16, RNF-04, RNF-15 |
+| DP3F-05 | ADR-08 (R3-D) | ADR-02.C; ADR-04.C; ADR-05.C; ADR-01 | §28 | Ídem | **No demostrado** (OC-102, OC-121, OC-124 abiertas) | DR8-1…9; OC-101…125; Q-21…Q-33, A-16 |
+| DP3F-06 | ADR-02.I | ADR-02.C; ADR-01 (y, por ADR-02.C, ADR-03.C y ADR-09.C) | §31 | Ídem | **No demostrado** (estado vigente y acceso directo) | DR2I-1…11; OC-185…217 |
+| DP3F-07 | ADR-03.I | ADR-03.C; ADR-01 | §30 | Ídem | **No demostrado** (MFA obligatorio) | DR3I-1…11; OC-154…184 |
+| DP3F-08 | ADR-04.I | ADR-04.C; ADR-01 (y, por ADR-04.C, ADR-02.C) | §32 | Ídem | **No demostrado** (separación de lo no publicado) | DR4I-1…11; OC-218…245 |
+| DP3F-09 | ADR-05.I | ADR-05.C; ADR-01 (y, por ADR-05.C, ADR-02.C, ADR-03.C y ADR-09.C) | §33 | Ídem | **No demostrado** (OC-257) | DR5I-1…11; OC-246…283 |
+| DP3F-10 | ADR-09.I | ADR-09.C; ADR-01 | §29 | Ídem | **No demostrado** (RX-03…05; K-3) | DR9I-1…10; OC-126…153 |
+| DP3F-11 | ADR-16.I | ADR-16.C; ADR-01 (y, por ADR-16.C, ADR-05.C) | §34 | Ídem | **No demostrado** (material de protección; compatibilidad en dispositivos) | DR16I-1…11; OC-284…324 |
+| DP3F-12 | R3-E (conjunto) | Cada `.I` requiere su `.C` y ADR-01 («solo se confirma después de aprobar ADR-01 en R3») | §29…§34 | ADR-01 solo con **aprobación documental condicionada**, no definitiva | **«Confirmación» de los `.I` no demostrada** | DR3-1 solo documental; admisión de formulaciones (OC-126, OC-154, OC-218, OC-246, OC-284) |
+| DP3F-13 | R3 → ADR de R4 | ADR-11, 12, 13, 14 y 17 requieren, entre otros, ADR-01, ADR-01/10, ADR-02.C, ADR-09.C y PEND-JUR | §35.8 | Referencias por identificador (E6) | **No iniciado** | §35.8 |
+| DP3F-14 | Orden de resolución (R1 §8.2) | ADR-03.C y 09.C → 02.C → 04.C y 05.C → 16.C; después ADR-01/10; después `.I` y ADR de R3 (06, 07, 08, 15); por último R4 | §25…§34 | **El orden cronológico de redacción** fue R3-A, R3-B, R3-C, R3-D y R3-E; **no viola** el orden exigido (todo R3 posterior a ADR-01/10) [INF] | **No aplica** (es de procedimiento, no una garantía) | — |
+
+### 35.5 R3F-E3 — Índice de condiciones y decisiones abiertas (solo por referencia)
+
+**Regla.** Este índice **no reproduce ni reformula** el contenido de ninguna decisión, condición o riesgo: remite a su identificador y a la Parte donde consta. **Estar en una categoría no cambia su estado**, y ningún elemento queda resuelto, aceptado, admitido ni descartado por figurar aquí.
+
+| Categoría | Elementos (por identificador) | Dónde consta |
+|---|---|---|
+| **A. Bloqueos de selección y de admisión** | Admisión formal del conjunto de formulaciones: **DR9I-1** (OC-126), **DR3I-1** (OC-154), **DR4I-1** (OC-218), **DR5I-1** (OC-246, OC-253), **DR16I-1** (OC-284); gobierno del acceso del cliente: **DR2I-1** (OC-190, OC-191). Las **16 decisiones sin ninguna formulación A** (ADR-03 R y V; ADR-09 O; ADR-05 D5-1, D5-2, D5-4, D5-6 y D5-7; ADR-04 D4-1, D4-4, D4-5 y D4-8; ADR-16 D16-1, D16-2, D16-3 y D16-5). | §29…§34; matriz de formulaciones de R2 (§24, apartado «C. Conteos recalculados») |
+| **B. Garantías exigidas sin demostrar** | **OC-257** (frontera atómica de la ruta sincronizada); **OC-179, OC-213** (estado vigente de cuenta, rol, sesión y MFA); **OC-190, OC-191** (acceso directo); **OC-224, OC-227** y CL-30 (coherencia y retirada de lo público); **OC-185, OC-187, OC-188** (preservan OC-102, OC-121 y OC-124 de ADR-08); **RX-03, RX-04, RX-05** y K-3 (auditoría); **OC-296, OC-322** (material de protección); **OC-155** (nueva autenticación); R1 §8.1; D-2; DB1-1; RT-14 | §28, §29, §30, §31, §32, §33, §34 y R2 |
+| **C. Riesgos no aceptados** | **RES-01…13** (R2-A) y los riesgos de redacción de cada Parte: **RR3-01…12**, **RR15-01…12**, **RR67-01…13**, **RR8-01…18**, **RR9I-01…19**, **RR3I-01…21**, **RR2I-01…22**, **RR4I-01…22**, **RR5I-01…26**, **RR16I-01…28**. **Ninguno está aceptado.** | Cada Parte; R2-A |
+| **D. Asuntos jurídicos y de verificación** | PEND-JUR (PRV-10, PRV-13, PRV-15); **OC-54** (elegibilidad del plan de alojamiento); Q-20, Q-43, Q-40 (d), A-8; **OC-262, OC-320** (retención y datos locales); **OC-273, OC-310** (verificación empírica y en dispositivos; iOS: HR1-07, IOS-01…08); costos y elegibilidad de proveedores | §25, §33, §34; `01`; R2 |
+| **E. Condiciones abiertas por bloque** | **OC-54…70**, **OC-71…84**, **OC-85…100**, **OC-101…125**, **OC-126…153**, **OC-154…184**, **OC-185…217**, **OC-218…245**, **OC-246…283**, **OC-284…324** (continuas y únicas: §35.7) | §35.3 (rangos por bloque) |
+| **F. Decisiones del responsable abiertas por bloque; no clasificadas automáticamente como bloqueos de selección** | **DR3-1…9**, **DR15-1…7**, **DR67-1…7**, **DR8-1…9**. **Ámbitos:** plataforma, correo, caché y tiempo real, motor deportivo. Son decisiones heterogéneas (incluyen decisiones sobre los borradores de cada bloque, como DR3-1, DR15-1 y DR67-1, y sobre el alcance, como DR8-1): **que estén abiertas no las convierte, por sí mismo, en un bloqueo de selección**. **RR3F-12 permanece como riesgo abierto** | §25, §26, §27, §28 |
+| **G. Heredado de R2** (solo referencias; no se duplican ni se reformulan) | **Decisión 7** ([REC] sin adoptar; condiciona las formulaciones que se apoyan en un [REC]); **decisiones abiertas de R2-A** (conteo registrado como **12** en la sección «Próximo paso» de `aprobaciones.md` y como **11** en el registro de cierre de R2: **diferencia preservada como observación, sin resolverla por suposiciones**; ver OB3F-01); **AM-19** y **AM-34** (sin tratamiento completo ni mitigación); **OM-01…07** (sin evaluación completa); **DB1-1…6, DB2a-1…10, DB2b-1…9, DB2c-1…11, DC1-1…10, DC2-1…11, DC3-1…10** y **OC-01…51** de R2-B y R2-C (DC4-2 figura cerrada por DB2c-11); **K-3**; las preguntas abiertas y las ambigüedades de Fase 1 que el registro de estado indica; **RES-01…13** (categoría C) | `aprobaciones.md` («Registro de R2-A», «Registro del cierre documental condicionado de R2», registros de R2-B y R2-C); §16 y §24 de `02` |
+
+**Lo que este índice distingue y no confunde.** Un **bloqueo de selección** (no hay formulación admitida) no es un **rechazo**; una **garantía sin demostrar** no es una garantía incumplida; un **riesgo no aceptado** no es un riesgo descartado; un asunto **jurídico o de verificación** pendiente no se resuelve con documentación.
+
+### 35.6 R3F-E4 — Precedencia de estados
+
+**Estados históricos que no describen el estado vigente de R3** (a la fecha de `bb9cbb1`). **Los números de línea son aproximados y corresponden a la versión revisada** (pueden desplazarse); **las citas textuales no implican una coincidencia exacta:** hay variantes de puntuación y de redacción entre los registros.
+
+| Ubicación | Texto o estado histórico | Por qué no describe lo vigente | Tratamiento propuesto |
+|---|---|---|---|
+| `02`, encabezado, líneas 4–6 | «R2, R3 y R4: NO INICIADOS Y SIN AUTORIZACIÓN»; estado documentado solo hasta R2-A | Describen R1; ya aclarado por precedencia para R2 en el registro de cierre de R2 (§24) pero **no para R3** | Nota de precedencia de §35.6 |
+| `02`, §12 (tabla «Siguientes bloques (no autorizados)») y la línea final «no autoriza… R2, R3, R4…» | R3 y R4 «Sin autorización»; el documento «no autoriza» R2, R3, R4 | Describen R1; R3 fue autorizado y trabajado por bloques | Ídem |
+| `aprobaciones.md`, fila de la Fase 2 (aprox. línea 19) y «Puertas R1–R4» (aprox. línea 45) | Terminan con una afirmación de redacción equivalente a «R3 y R4: NO INICIADOS Y SIN AUTORIZACIÓN» (con variantes de puntuación) tras enumerar R3-A…R3-E aprobados | **Contradicción interna** en presente: R3 está iniciado | Ídem; corrección por **edición sincronizada** solo con autorización separada (DR3F-4) |
+| `aprobaciones.md`, sección «Próximo paso» (aprox. líneas 830–832) | Afirma, con redacción equivalente, que «R2-C4 está NO INICIADO», que «R2-C no tiene aprobación global» y que «R3 y R4» están «NO INICIADOS Y SIN AUTORIZACIÓN»; no menciona los cierres de R2 ni R3-A…R3-E | **Histórico:** quedó desactualizada tras R2-C4, los cierres posteriores de R2 y el trabajo de R3, aunque se presenta en presente como «Próximo paso» | Ídem; **vinculada con OB3F-01**; **no se modifica ni se reescribe** esa sección; corrección solo con autorización separada (DR3F-4) |
+| `aprobaciones.md`, aprox. líneas 80–482 («Estado real» de los registros de R1 a R2) y `bitacora.md`, aprox. líneas 121–337 | Afirmaciones equivalentes a «R3 y R4: NO INICIADOS Y SIN AUTORIZACIÓN» (con variantes) | **Correctos en su fecha;** históricos | Se conservan sin reescribir; la nota de precedencia los supera |
+| `02`, títulos de las Partes XV a XIX | «R3-E PARCIAL EN CURSO» | Describían el momento de cada aprobación; hoy los seis `.I` están documentados y aprobados documentalmente, y **R3-E no tiene aprobación global ni cierre** | Ídem; la Parte XX ya lo expresa («SIN APROBACIÓN GLOBAL Y SIN CIERRE») |
+| `02`, estados de §29.19, §30.19, §31.19, §32.18, §33.19 y §34.18; y los registros «Estado de versionado: Pendiente» | «no versionado», «Pendiente» | Describen el momento de redactarse; **consta el versionado en Git** (§35.3) | Notas posteriores existentes (09.I…05.I); **la de ADR-16.I está pendiente** (OB3F-03) |
+
+**Nota de precedencia propuesta [PROP; sin efecto hasta su aprobación por el responsable].** *«A la fecha del commit `bb9cbb1bff068a6218e828a799fc6771394b6312`, prevalece sobre los estados históricos de R3 citados arriba lo siguiente: R3-A, R3-B, R3-C y R3-D están documentados y aprobados documentalmente de forma condicionada; los seis ADR `.I` de R3-E (02, 03, 04, 05, 09 y 16) están documentados, aprobados documentalmente de forma condicionada y versionados; **R3-E no tiene aprobación global ni cierre**; R3-F es un borrador en revisión; R4 no está iniciado; ninguna decisión ha sido admitida ni ninguna alternativa seleccionada; la Fase 2 continúa en desarrollo sin aprobación global. Esta nota no reescribe encabezados, §12 ni registros históricos, no cierra R3-E ni R3 y no autoriza R4.»*
+
+### 35.7 R3F-E5 — Integridad
+
+Verificaciones de lectura hechas por el autor durante la redacción. **No son una auditoría independiente.**
+
+| # | Verificación | Resultado al redactar |
+|---|---|---|
+| V-1 | Los diez commits de §35.3 existen en Git, con la fecha indicada y el mensaje «registra aprobacion documental condicionada de …» | Cumple [DOC] |
+| V-2 | **ADR-16.I fue versionado en `bb9cbb1bff068a6218e828a799fc6771394b6312`** (2026-11-23T04:16:33Z); este es el HEAD de la rama a la fecha de redacción | Cumple [DOC]; trazabilidad registrada **únicamente en esta Parte** |
+| V-3 | **OC-54…324** son **271 identificadores continuos**, cada uno definido **una vez** como fila de tabla; **OC-102** aparece, además, como primera celda de una fila de §31 que **cita** varias condiciones heredadas (no es una segunda definición); el identificador histórico OC-64 se conserva | Cumple [DOC] |
+| V-4 | Los rangos de §35.3 (OC, DR, RR, CR y requisitos) coinciden con lo definido en cada Parte | Cumple [DOC] según la comprobación mecánica del autor |
+| V-5 | Los identificadores nuevos de esta Parte (R3F-E, DP3F, OB3F, DR3F, RR3F, CR3F) **no existían** en el archivo antes de redactarla | Cumple [DOC] |
+| V-6 | Todo lo anterior a la Parte XXI es **idéntico** al archivo versionado en `bb9cbb1`; cambió solo el final | Cumple; comprobable con Git (diferencia con `bb9cbb1`) |
+| V-7 | `aprobaciones.md` y `bitacora.md` no cambiaron | Cumple; comprobable con Git |
+| V-8 | Ninguna formulación, alternativa o mecanismo aparece admitido o seleccionado; ningún riesgo, aceptado; D-2, sin excepción; R1 §8.1, sin cumplimiento demostrado | Cumple (lectura del autor) |
+
+**Archivos de referencia a la fecha de `bb9cbb1`** (SHA-256 completos): `02-arquitectura-adr.md`: `7687bbd7b7ff40138602eb54706ccf0e9721d2dff73ea856cf039fdd4aff99ef`; `aprobaciones.md`: `08436beea2911f4df451b1111cb740ebb3c526dff1b649d003790cb0fbba1d78`; `bitacora.md`: `adea6214dae6b9135a908fcd0912bd352e26809279d4eafd78982bbb40c780d6`.
+
+**SHA-256 del contenido técnico aprobado de cada Parte** (el archivo inmediatamente antes de añadir sus metadatos de aprobación; tomados de los registros de `aprobaciones.md`):
+
+| Bloque | SHA-256 del contenido técnico aprobado |
+|---|---|
+| R3-A | `b13af5fda3ba9561e9f571b4fd684c4c0688449cf5218fad085dc62d8379ed30` |
+| R3-B | `db0f2794a436c16b7b792a910136b36f20852f4ffd7b55c9df0e763ede907694` |
+| R3-C | `c7df7c78de6f46d8c57c1c913a520d3f350e2e3aa0b7497dd86b9c1593a98ff0` |
+| R3-D | `989bcc994a6bb2f45105cc694873803d50ffb995a3e8fdba39b00261b4e742a1` |
+| ADR-09.I | `d1a043d67af1ff2cb8c04f7c440ea175fc20217f5be90c24118ab659cdb54c37` |
+| ADR-03.I | `1649280c527acd03cb560785b985b720cad2f4f772f18922fd10342552a9060b` |
+| ADR-02.I | `a986d9b660e31d7ffedb4dd65c15f5ae7c75981546e6d8d7df6b83208e205131` |
+| ADR-04.I | `48adb4012b29c2929005709444886fa7048e608c2d7d2c9f7d8e7179e371cbde` |
+| ADR-05.I | `2c3a4564c83e335f1c4d38fb3d87e3df2cb895fa52c5f913a0c82e2db1da0b4e` |
+| ADR-16.I | `2165b3dfb7b652be23dac0cff5be959c8796d96074d51c32235c567c75518afb` |
+
+### 35.8 R3F-E6 — Traspaso a R4 (por referencia; sin iniciar ni anticipar R4)
+
+R4 comprende ADR-11, ADR-12, ADR-13, ADR-14 y ADR-17 (R1 §8.1 y §12). **Nada de lo siguiente es una decisión de R4 ni la anticipa:** son referencias de R3 que R4 tendrá que consumir.
+
+| ADR de R4 | Requiere (R1 §8.2) | Referencias de R3-A…R3-E por identificador | Estado |
+|---|---|---|---|
+| ADR-11 Entornos y despliegue | ADR-01 | **Ninguna mención de ADR-11** en las Partes XI a XX [DOC]; depende de ADR-01 (R3-A) | **No iniciado** |
+| ADR-12 Respaldo y continuidad | ADR-01 y ADR-10; ADR-11; ADR-17 | BK-02, BK-13 (R3-A); OC-137, DR9I-8 (ADR-09.I) | **No iniciado** |
+| ADR-13 Observabilidad sin datos personales | ADR-01; ADR-11 | BK-08, OC-62 (R3-A); RM-12 (R3-B); RR9I-05 (ADR-09.I) | **No iniciado** |
+| ADR-14 Tareas programadas e identidad de ejecución | ADR-01; ADR-02.C; ADR-17 | OC-136, DR9I-7 (ADR-09.I); OC-204 (ADR-02.I); y, en R3-B (§26), la fila «Alerta de partido sin editor (N-12) y tareas» (**sin identificador propio:** se cita por su texto y ubicación; **no se crea uno ni se adelanta ninguna decisión de ADR-14**) | **No iniciado** |
+| ADR-17 Retención y anonimización | ADR-09.C; PEND-JUR | BK-03, BK-13 (R3-A); OC-133, OC-134, DR9I-6, SV-14 (ADR-09.I); OC-175 (ADR-03.I) | **No iniciado** |
+
+**Reservas para R4 (R1 §12) — preservadas, no cumplidas por R3-F:** (1) la **trazabilidad final**; (2) la **auditoría de cierre por un revisor separado del autor y con contexto nuevo**. **Todas las evaluaciones de R3 son autoevaluaciones del autor.** La aprobación de la Fase 2 sigue siendo un acto separado. **R4 requiere un mensaje del responsable que lo nombre.**
+
+### 35.9 Observaciones preservadas (OB3F)
+
+**Se registran sin corregir.** OB3F-01 corresponde al único ítem recibido del apartado 6 de la autorización («Estados históricos»); OB3F-02 lo pidió el responsable en la revisión de transición anterior; OB3F-03…07 las añade el autor. *[Aclaración posterior: el apartado 6 completo fue luego proporcionado por el responsable y consta en §35.13; esta introducción se conserva como evidencia del estado anterior.]*
+
+| ID | Observación | Estado |
+|---|---|---|
+| OB3F-01 | **Estados históricos de R3 desactualizados** (§35.6): fila de la Fase 2, «Puertas R1–R4» y sección «Próximo paso» de `aprobaciones.md`; encabezado y §12 de `02`; títulos de las Partes XV a XIX; **y la diferencia entre 12 y 11 decisiones abiertas de R2-A** entre registros de fechas distintas (F-2; no se resuelve) | Preservada; nota de precedencia propuesta; corrección sincronizada solo con autorización (DR3F-4) |
+| OB3F-02 | **Fila histórica de R2-C4 con una columna adicional** en `aprobaciones.md` (tabla «Eventos registrados», línea 767: fila «Autorización de inicio de R2-C4…», con 6 columnas frente a las 5 de sus vecinas; preexistente al registro de R3-E) | Preservada **sin corregir** |
+| OB3F-03 | **Nota posterior de `bb9cbb1` pendiente** en el registro de ADR-16.I (`aprobaciones.md`) y en su entrada de `bitacora.md`; consta solo en esta Parte | Pendiente; requiere autorización |
+| OB3F-04 | **El plan de subbloques R3-A…R3-F no consta en archivos;** se registra aquí como contexto del responsable | Preservada; el origen es conversacional |
+| OB3F-05 | **Expresión doble del estado de R3-E** en los títulos de las Partes XV–XIX («parcial en curso») y XX («sin aprobación global y sin cierre») | Preservada; superada por la nota de precedencia propuesta |
+| OB3F-06 | **El mensaje de autorización de R3-F llegó cortado** en su apartado 6 (§35.0) | **Subsanada (2026-11-23):** el responsable confirmó el truncamiento y proporcionó expresamente lo omitido (apartados 6, 7 y 8) mediante el mensaje «R3-F: COMPLETAR INSTRUCCIÓN TRUNCADA» (§35.13). **Se conserva la observación** como evidencia de que existió una instrucción truncada; la subsanación no aprueba R3-F |
+| OB3F-07 | Los resultados de todas las evaluaciones de R3 son **autoevaluaciones del autor** y la lectura fue parcial según se declara en cada Parte | Preservada; ver §35.11 |
+
+### 35.10 Cierres pendientes: lo que este borrador no hace
+
+| Cierre o aprobación | Estado | Qué haría falta |
+|---|---|---|
+| Finalización de los entregables documentales de R3-A…R3-E | **Hecha** (N1 y N2 de cada ADR; §35.3) | — |
+| Aprobación documental condicionada de **R3-F** | **No concedida** | Revisión focalizada, correcciones y mensaje del responsable [PROP] |
+| **Cierre documental condicionado de R3-E** | **No efectuado** | Mensaje nominal e independiente del responsable; **precedente: cierres de R2-B2, R2-C y R2** [INF] |
+| **Cierre documental condicionado de R3** | **No efectuado** | Mensaje nominal e independiente del responsable |
+| **Aprobaciones técnicas definitivas** (ADR, R3-E, R3, Fase 2) | **No concedidas** | Las condiciones del índice de §35.5 y la auditoría independiente de R4 |
+
+**Orden propuesto [PROP; no es un requisito aprobado].** (1) Nota posterior de `bb9cbb1` (OB3F-03); (2) revisión focalizada y correcciones de R3-F; (3) aprobación documental condicionada de R3-F y su versionado; (4) por mensajes nominales posteriores, el eventual cierre documental condicionado de R3-E y luego de R3; (5) R4, la aprobación de R3 y la de la Fase 2 son actos separados. **R3-F consolida y verifica; no cierra.**
+
+### 35.11 R3F-E7 — Revisión, limitaciones, riesgos y decisiones
+
+**Criterios de revisión documental.**
+
+| ID | Criterio | Cumplimiento según el autor (a revisar) |
+|---|---|---|
+| CR3F-01 | El plan R3-A…R3-F consta como **contexto del responsable**, no como cita del repositorio | Cumple: §35.0 |
+| CR3F-02 | Los seis niveles de estado están definidos y se aplican sin equivalencia | Cumple: §35.2, §35.3 |
+| CR3F-03 | E1 cubre R3-A…R3-E (diez entregables) con versión, commit y registro | Cumple: §35.3 |
+| CR3F-04 | Los commits se comprobaron con Git | Cumple: §35.7 (V-1) |
+| CR3F-05 | E2 compara lo exigido (R1 §8.2) con lo documentado sin declarar cumplimiento técnico | Cumple: §35.4 |
+| CR3F-06 | E3 indexa solo por referencia, sin reformular decisiones | Cumple: §35.5 |
+| CR3F-07 | E3 distingue bloqueos de selección, garantías sin demostrar, riesgos no aceptados y asuntos jurídicos | Cumple: §35.5 |
+| CR3F-08 | E4 identifica los estados históricos con ubicación y propone una nota sin editar lo histórico | Cumple: §35.6 |
+| CR3F-09 | **R3-E no se declara cerrado** | Cumple: §35.3, §35.10 |
+| CR3F-10 | E5 verifica unicidad y continuidad de identificadores y conservación del contenido | Cumple según el autor: §35.7; **a revisar** |
+| CR3F-11 | La trazabilidad de `bb9cbb1` consta **solo** en la Parte XXI | Cumple: §35.0, §35.7 |
+| CR3F-12 | E6 remite por referencia a las dependencias de R4 sin anticipar decisiones | Cumple: §35.8 |
+| CR3F-13 | Se preservan para R4 la trazabilidad final y la auditoría independiente | Cumple: §35.0, §35.8 |
+| CR3F-14 | Los cierres pendientes están distinguidos y **ninguno se efectúa** | Cumple: §35.10 |
+| CR3F-15 | Las observaciones preservadas constan, incluida la fila de R2-C4 sin corregir | Cumple: §35.9 |
+| CR3F-16 | Sin selección, admisión, resolución, aceptación de riesgos ni excepciones; D-2 sin excepción; R1 §8.1 sin cumplimiento | Cumple: §35.0, §35.5 |
+| CR3F-17 | Solo se modifica `02-arquitectura-adr.md`; las Partes anteriores quedan idénticas; `aprobaciones.md` y `bitacora.md` intactos | Cumple según el autor, comprobable con Git; **a revisar** |
+| CR3F-18 | Borrador **no aprobado y no versionado**; autoevaluación del autor | Cumple: §35.0, §35.12 |
+
+**Riesgos de redacción (RR3F-01…12).** No se aceptan; se registran.
+
+| ID | Riesgo | Mitigación documental |
+|---|---|---|
+| RR3F-01 | Presentar la consolidación como cierre o aprobación de R3-E o de R3 | §35.3, §35.10 |
+| RR3F-02 | Inferir un nivel de estado a partir de otro (por ejemplo, N2 como N3, N4 o N5) | §35.2 |
+| RR3F-03 | Declarar cumplidas garantías técnicas por existir documentación | §35.4 («cumplimiento técnico») |
+| RR3F-04 | Reformular o duplicar decisiones heredadas en el índice y alterar su sentido | §35.5 (solo referencias) |
+| RR3F-05 | Que la nota de precedencia se lea como reescritura de lo histórico o como autorización | §35.6 (sin efecto hasta su aprobación) |
+| RR3F-06 | Presentar R3-F como auditoría independiente o como la trazabilidad final de R4 | §35.0, §35.8 |
+| RR3F-07 | Tratar el plan R3-A…R3-F como una cita hallada en el repositorio | §35.0; OB3F-04 |
+| RR3F-08 | Errores de transcripción de commits, hashes o rangos | §35.7 (V-1, V-3, V-4) |
+| RR3F-09 | Omitir sin advertirlo el apartado cortado de la autorización | §35.0; OB3F-06; §35.13 (aclarado) |
+| RR3F-10 | Dejar estados contradictorios de R3 sin precedencia y que se propaguen | §35.6 |
+| RR3F-11 | Anticipar decisiones de R4 al señalar dependencias | §35.8 (solo referencias) |
+| RR3F-12 | Cerrar de hecho una decisión al clasificarla (por ejemplo, tratar un bloqueo como rechazo) | §35.5 (aclaración final) |
+
+**Decisiones que corresponden al responsable (DR3F-1…6; no son arquitectónicas).** Ninguna se toma aquí.
+
+| ID | Decisión | Referencias |
+|---|---|---|
+| DR3F-1 | Confirmar si el apartado 6 de la autorización (cortado), sus restricciones y su formato de entrega contenían algo más — **Aclarado el 2026-11-23:** el responsable confirmó el truncamiento y proporcionó expresamente los apartados 6, 7 y 8 (§35.13). **No es una decisión arquitectónica y no aprueba R3-F** | OB3F-06; §35.13 |
+| DR3F-2 | Aprobar, ajustar o rechazar este borrador y su nota de precedencia propuesta (no es una selección) | §35.6 |
+| DR3F-3 | Autorizar o no la nota posterior de `bb9cbb1` en `aprobaciones.md` y `bitacora.md` | OB3F-03 |
+| DR3F-4 | Autorizar o no corregir los estados contradictorios de R3 en `aprobaciones.md` y `bitacora.md` (por nota o por edición sincronizada) y, por separado, la fila de R2-C4 | OB3F-01, OB3F-02 |
+| DR3F-5 | Solicitar o no, por mensajes nominales posteriores, el cierre documental condicionado de R3-E y de R3 | §35.10 |
+| DR3F-6 | Confirmar la delimitación frente a R4 (trazabilidad final y auditoría independiente reservadas) | §35.8 |
+
+**Limitaciones de la autoevaluación.** (1) El borrador lo redactó **el mismo autor** de los bloques que consolida: **no es una auditoría independiente**; (2) **no hay implementación ni pruebas empíricas**; (3) **ninguna decisión arquitectónica está admitida ni seleccionada**; (4) la lectura previa de los bloques consolidados se apoya en sus **registros y en comprobaciones mecánicas** (identificadores, commits, rangos), no en una relectura íntegra de cada Parte; (5) **sin aprobación global de R3-E, R3 ni la Fase 2**; (6) no sustituye la asesoría jurídica (PEND-JUR).
+
+### 35.12 Estado y preguntas para el responsable
+
+**Estado:** R3-F **v0.1-R3F: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §35.0). No es aprobación definitiva ni cierre; no versionado en el momento de redactarse. Autoevaluación del autor, no auditoría independiente. **R3-E y R3 siguen sin aprobación global y sin cierre; R3-F no está cerrado como bloque; la Fase 2 continúa en desarrollo sin aprobación global; R4 no está iniciado.** Siguen abiertas **todas** las decisiones y condiciones heredadas de R1, R2 y R3-A…R3-E; ninguna alternativa está seleccionada ni formulación admitida.
+
+**Preguntas:** DR3F-1 a DR3F-6 (§35.11; **DR3F-1 aclarado**, §35.13) y las observaciones OB3F-01…07 (§35.9; **OB3F-06 subsanada**, §35.13).
+
+**Correcciones focalizadas F-1…F-6:** incorporadas (§35.14); no cambian el estado del borrador. **Aclaración de la instrucción truncada:** incorporada en §35.13; **no cambia el estado del borrador** (sigue siendo v0.1-R3F, pendiente de revisión y aprobación).
+
+### 35.13 Aclaración de la instrucción truncada (apartados 6, 7 y 8)
+
+- **Mensaje (2026-11-23, fecha inferida).** «TORNEO DE CAMPEONES — R3-F: COMPLETAR INSTRUCCIÓN TRUNCADA»: «CONFIRMO QUE LA INSTRUCCIÓN ANTERIOR LLEGÓ TRUNCADA.» «AUTORIZO EXCLUSIVAMENTE COMPLETAR EN §35 LA INFORMACIÓN OMITIDA, SIN REHACER EL BORRADOR NI MODIFICAR LOS ENTREGABLES E1…E7 QUE YA ESTÉN CORRECTOS.» Solo se modifica `02-arquitectura-adr.md`, dentro de §35. **La aclaración no se interpreta como aprobación documental de R3-F, no es una decisión arquitectónica y no cierra R3-E, R3-F ni R3.** El borrador **sigue siendo v0.1-R3F, pendiente de revisión y aprobación**.
+- **Cómo se incorporó.** (1) Se **conserva** el texto original de §35.0, de OB3F-06 y de DR3F-1 como evidencia de que existió una instrucción truncada, con una **aclaración posterior** añadida; (2) las observaciones preservadas del apartado 6 se **mapean** abajo a lo ya registrado en §35, sin corregir nada fuera de este anexo; (3) las restricciones del apartado 7 y la entrega del apartado 8 se **registran** abajo como el alcance y las restricciones originales; (4) Los entregables E1…E7 conservaron su contenido sustantivo, salvo ajustes de estado y referencia en DR3F-1, RR3F-09 y §35.12 *[posterior: las correcciones F-1…F-6 (§35.14) añadieron filas o precisiones en E3, E4 y E6 sin alterar su contenido sustantivo]*; DP3F-01…14, OB3F-01…07, DR3F-1…6, RR3F-01…12 y CR3F-01…18 conservan sus identificadores.
+
+**Apartado 6 — observaciones preservadas** (ninguna se corrige fuera de este anexo).
+
+| # | Elemento que debe permanecer pendiente | Dónde consta en §35 | Estado |
+|---|---|---|---|
+| 1 | Estados históricos contradictorios de R3 | §35.6; OB3F-01; OB3F-05 | Pendiente; sin corregir; nota de precedencia solo propuesta |
+| 2 | Nota posterior del commit `bb9cbb1` en `aprobaciones.md` y `bitacora.md` | §35.0; §35.7 (V-2); OB3F-03 | Pendiente; requiere autorización separada |
+| 3 | Fila histórica de R2-C4 con una columna adicional | OB3F-02 | Pendiente; sin corregir |
+| 4 | Decisiones sin formulación A | §35.5 (categoría A) | Bloqueadas para selección |
+| 5 | Ausencia de conjunto de formulaciones admitidas | §35.3 (N3); DP3F-12; §35.5 (categoría A) | Sin conjunto admitido |
+| 6 | Riesgos y condiciones abiertas | §35.5 (categorías B a G); RR3F-01…12; DR3F-1…6 | Abiertos; **ningún riesgo aceptado** |
+| 7 | R1 §8.1 sin cumplimiento demostrado | §35.0; §35.5 (categoría B); V-8 | Sin cumplimiento demostrado |
+| 8 | D-2 sin excepción | §35.0; §35.5 (categoría B); V-8 | Sin excepción |
+
+**Apartado 7 — restricciones originales** (registradas; todas se respetan): no modificar `aprobaciones.md` ni `bitacora.md`; no modificar Partes anteriores a §35; no seleccionar alternativas, proveedores ni mecanismos; no admitir formulaciones; no resolver decisiones; no aceptar riesgos ni conceder excepciones; no cerrar R3-E, R3-F ni R3; no aprobar la Fase 2; no iniciar R4 ni la Fase 3; no escribir código ni modificar bases de datos; no crear cuentas ni contratar servicios; no modificar `main`; **no commit, push, PR ni merge.**
+
+**Apartado 8 — entrega solicitada** (registrada): resumen del borrador; resultado de E1…E7; diferencias entre requisitos existentes y propuestas; bloqueos para el cierre documental y técnico; identificadores incorporados; SHA-256 completo; `git status` y `git diff --stat`; integridad del contenido anterior; limitaciones de la autoevaluación; y detención para revisión focalizada.
+
+**Estado tras la aclaración.** DR3F-1: **aclarado** (no es una decisión arquitectónica). OB3F-06: **subsanada**, con la observación conservada. **R3-E, R3-F y R3: sin cierre ni aprobación global; Fase 2: sin aprobación global; R4 y la Fase 3: no iniciados.**
+
+### 35.14 Correcciones focalizadas F-1…F-6 (revisión focalizada del borrador v0.1)
+
+Corrigen los hallazgos de la revisión focalizada de R3-F. **No añaden identificadores** (solo las categorías F y G de §35.5). El borrador **sigue siendo v0.1-R3F, pendiente de revisión y aprobación**; las correcciones **no aprueban R3-F** ni cierran nada.
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| F-1 | Fila de la sección «Próximo paso» de `aprobaciones.md` (aprox. líneas 830–832) como estado histórico desactualizado, vinculada con OB3F-01; sin modificar `aprobaciones.md` | §35.6, §35.9 |
+| F-2 | Categoría G «Heredado de R2» (decisión 7, decisiones abiertas de R2-A, AM-19, AM-34, OM-01…07 y los identificadores de R2-B y R2-C), solo por referencia; diferencia 12/11 preservada como observación (OB3F-01) sin resolverla | §35.5, §35.9 |
+| F-3 | DR3-1…9, DR15-1…7, DR67-1…7 y DR8-1…9 pasan a la categoría F («no clasificadas automáticamente como bloqueos de selección»), con ámbitos «plataforma, correo, caché y tiempo real, motor deportivo»; la categoría A conserva solo los bloqueos documentados; RR3F-12 sigue abierto | §35.5 |
+| F-4 | Precisión sobre E1…E7 («conservaron su contenido sustantivo, salvo ajustes de estado y referencia…»); se conserva la evidencia del truncamiento y la aclaración posterior | §35.13 |
+| F-5 | Referencia de R3-B (§26) a ADR-14 («Alerta de partido sin editor (N-12) y tareas») en la fila de ADR-14, indicando que no tiene identificador propio | §35.8 |
+| F-6 | Números de línea aproximados y correspondientes a la versión revisada; citas sin afirmar coincidencia textual exacta | §35.6 |
