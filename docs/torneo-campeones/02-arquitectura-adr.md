@@ -9400,3 +9400,473 @@ Escala: **Por diseño** (la propia definición de la alternativa lo garantiza, *
 | M-7 | SY-39 y SCN-25: el fallo del registro obligatorio de auditoría de una operación aplicada impide aplicarla (IN-09-04); la trazabilidad de los reenvíos de lo ya aplicado sigue limitada por OFF-06 y ADR-09.I (OC-282); **refinado por C-1** | §33.3, §33.8, §33.9 |
 | M-8 | Fecha de la fuente de WebKit (2020-03-24) y vigencia [PEND]; la regla de siete días no se presenta como garantía vigente (OC-283, RR5I-26); CR5I-18 actualizado y CR5I-19 añadido, sin declarar aprobación documental | §33.11, §33.17, §33.18 |
 | C-1 | **Corrección puntual de la verificación final:** SY-39, SCN-25 y la prueba asociada distinguen **(1) transacción revertida** (no se aplicaron efectos ni auditoría; nuevo intento con las validaciones vigentes, sin asumir permisos anteriores) de **(2) resultado remoto desconocido** (la operación **puede estar aplicada**; no se afirma rechazada, revertida ni aplicada; se concilia por el identificador estable y el registro de SY-33); en ambos casos sin duplicar efectos, recálculos ni auditoría y sin confundir deduplicación de transporte con aplicación efectiva única; SCN-25 pasa de «Confirmado» a «Garantía exigida; no demostrada (OC-257)»; el estado local no se fija (D5-6, OC-250); M-1…M-6 y M-8 sin cambios | §33.3 (SY-39), §33.8 (SCN-25), §33.16 |
+
+# PARTE XX — BLOQUE R3-E / ADR-16.I (v0.2-R3E-16I, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, R3-E SIN APROBACIÓN GLOBAL Y SIN CIERRE; 2026-11-23 inferida)
+
+## 34. R3-E — ADR-16.I (implementación del almacenamiento seguro en el dispositivo): evaluación y borrador condicionado
+
+### 34.0 Alcance, autorización, puerta de entrada y reglas
+
+- **Autorización (2026-11-23, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R3-E: INICIO DE ADR-16.I»: «AUTORIZO EXCLUSIVAMENTE INICIAR EL BORRADOR DOCUMENTAL CONDICIONADO DE ADR-16.I — ALMACENAMIENTO SEGURO EN EL DISPOSITIVO.» Solo se modifica este documento, con esta Parte nueva. **No se inicia R3-F ni R4.** `aprobaciones.md` y `bitacora.md` **no se modifican.**
+- **Puerta de entrada (verificada, solo lectura previa).** R1 §8.2: ADR-16.I requiere ADR-16.C y ADR-01; ADR-16.C requiere ADR-05.C. ADR-16.C es **propuesta** (§23); ADR-01, ADR-02.I, ADR-03.I, ADR-04.I, ADR-05.I, ADR-06, ADR-08 y ADR-09.I están aprobados **solo de forma documental condicionada** y **no seleccionan proveedor ni mecanismo**. La matriz de R2 (§24) clasifica como **A** únicamente **D16-4 (CAP-16-C-A)** y **D16-6 (CAP-16-K-A)**; **D16-1, D16-2, D16-3 y D16-5 no tienen formulación A** y quedan **bloqueadas para selección**; **CAP-16-R-B y CAP-16-K-B están clasificadas X**. Esas formulaciones A son candidatas **no admitidas** por el responsable. **No hay bloqueo obligatorio para redactar un borrador condicionado que no selecciona.** Un `.I` solo puede **elegir** entre formulaciones que el responsable haya admitido: no hay conjunto admitido, así que **este borrador no elige nada.**
+- **Qué es este borrador.** Una evaluación de alternativas de implementación del almacenamiento local con una **recomendación preliminar no vinculante** (que, aquí, **no expresa preferencia**). **C-A y K-A se tratan solo como candidatas documentales no admitidas;** las formulaciones C no se consideran rechazadas ni las A aprobadas, y las X no se reabren. **No se seleccionan alternativas, mecanismos de almacenamiento, de protección, de gestión de claves, de biometría ni proveedores.** No resuelve D16-1, D16-2, D16-3, D16-5, OFF-12, Q-20, Q-43, PRV-18, K-3, A-9…A-16, Q-42, OC-48…51, OC-263…265, OC-280, OC-283 ni ninguna decisión heredada; no aprueba ADR; no acepta riesgos ni concede excepciones; **no concede excepción a D-2**; **no declara cumplido R1 §8.1**; no escribe código, no modifica bases de datos ni crea cuentas.
+- **Convención.** [DOC]: dato leído en la página oficial citada (§34.19). [CONF]: texto confirmado de `01`, R1 o R2 con el estado que allí declara. [DER]: derivada por el autor. [REC]: recomendación sin decidir. [PROP]: propuesta del autor. [INF]: inferencia o cálculo del autor. [PEND]: pendiente o sin verificar. [NO VERIF]: afirmación sobre un dispositivo no verificada. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; **lo no leído se marca [PEND] y no se penaliza en la puntuación.** Una **inferencia por ausencia de documentación** se rotula [INF], nunca [DOC]. **«Por diseño» solo se usa cuando la propia definición de la alternativa lo garantiza; nunca para una inferencia.** Los hechos generales de navegadores, sistemas operativos y criptografía no verificados en fuente oficial son [INF].
+- **Versión 0.2 (correcciones de la revisión focalizada H-1…H-13, §34.20).** Ciclo de vida del material de protección ampliado (SL-24; OC-322); puntuación neutral con «sin conexión = 3» en las tres (§34.14); trazabilidad real de lectura (esta sección); aislamiento por cuenta **y por torneo** (SL-09, CD-02; OC-323); notificaciones, precargas y almacenamiento compartido (SL-31, TL-08, OC-302); CD-04 en [PEND]; sesión, MFA y captura sin conexión (SL-04, SL-25, SCL-25); protección en reposo condicionada a la ubicación y disponibilidad del material (ALT-16-B/C, TL-02, TL-03); matriz simétrica (SL-16 «E/C»); evidencia de CSP reclasificada; amenazas XSS, scripts de terceros y dependencias comprometidas diferenciadas (TL-05, TL-19, TL-20); trazabilidad de CR16I-18 y CR16I-19; invalidación de sesiones (SI-23) y datos locales (SL-12, SL-22; OC-324). **Sin seleccionar alternativas ni mecanismos.**
+- **Identificadores nuevos (sin colisión; comprobados contra el archivo).** **ALT-16-A, ALT-16-B, ALT-16-C** (alternativas de implementación), **CD-01…14** (clases de información local), **SL-01…34** (requisitos verificables de almacenamiento local), **TL-01…20** (amenazas del almacenamiento local), **SCL-01…25** (escenarios críticos), **DR16I-1…11** (decisiones del responsable), **OC-284…324** (condiciones abiertas), **RR16I-01…28** (riesgos de redacción), **CR16I-01…20** (criterios de revisión documental).
+- **Exclusiones.** Admitir, seleccionar o descartar formulaciones (A, C o X); elegir alternativa, tecnología o API de almacenamiento, algoritmo, mecanismo de protección, gestión de claves, método de desbloqueo local (incluida la biometría), política de retención, parámetro numérico o proveedor; resolver decisiones heredadas; aceptar riesgos o brechas; aprobar ADR-16.I, R3-E, R3 ni la Fase 2; iniciar R3-F ni R4; modificar las Partes I–XIX ni los registros.
+- **Aprobación (metadato; 2026-11-23, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-16.I»: «APRUEBO EXCLUSIVAMENTE ADR-16.I v0.2-R3E-16I COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: ADR-16.I (v0.2-R3E-16I): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL.** **La aprobación cubre las correcciones H-1…H-13 y el ajuste N-1 de SL-20 (§34.20).** **Esta aprobación NO equivale a seleccionar arquitectura, alternativa, mecanismo de almacenamiento, de protección, de cifrado, de biometría ni proveedor, ni a admitir formulaciones, ni a aprobar R3-E completo ni la Fase 2.** El evento de aprobación es independiente y no reutiliza identificadores DR16I. No aprueba definitivamente ADR-16.I ni acredita la confidencialidad, la protección por cuenta y por torneo, el material de protección, el cifrado, la recuperación, la revocación, el borrado físico ni control alguno. Se conservan: **ALT-16-A, ALT-16-B y ALT-16-C sin selección**; puntuaciones **A: 2,80–4,10; B: 2,65–3,95; C: 2,65–3,95**, que se solapan y **no discriminan**; **SL-20 con la clasificación neutral «C (RR16I-05, TL-15)» en las tres alternativas** (las diferencias reales de riesgo siguen en §34.4, TL-15 y RR16I-05, sin mitigarse) y **SL-25 sin modificación** (OC-49 / T-3); **C-A y K-A como candidatas no admitidas**; **D16-1, D16-2, D16-3 y D16-5 bloqueadas para selección**; **R-B y K-B en estado X**; **DR16I-1…11 y OC-284…324 abiertas**; **RR16I-01…28 sin aceptar**; **OFF-12, Q-20, Q-43, K-3 y OC-48…51 sin resolver**; **D-2 sin excepción**; **R1 §8.1 sin cumplimiento demostrado**; la **protección por cuenta y por torneo como requisito no implementado**; el **material de protección, el cifrado, la recuperación, la revocación y el borrado físico sin garantías demostradas**; los **datos confirmados no publicados como [PEND]** (CD-04; D4-5 y VP-17 abiertas); la **captura sin conexión sin equivalencia a autorización** (SL-04, SL-25, SCL-25); la **compatibilidad entre navegadores y dispositivos pendiente de validación** (iOS 16.4 y OC-49 abiertos); la limitación de **autoevaluación del autor, sin auditoría independiente**; y las dependencias de **ADR-01, ADR-02.I, ADR-03.I, ADR-04.I, ADR-05.I, ADR-06, ADR-08 y ADR-09.I**. **Estado de R3-E:** sus seis ADR `.I` (ADR-02.I, ADR-03.I, ADR-04.I, ADR-05.I, ADR-09.I y ADR-16.I) están documentados y aprobados solo de forma documental condicionada, pero **R3-E continúa SIN aprobación global y sin cierre**; **R3-F y R4 no están iniciados**; la **Fase 2 continúa en desarrollo**. **Precedencia:** CR16I-20, §34.18 en su versión de redacción y las expresiones «borrador», «no aprobado» o «no versionado» de esta Parte describen el momento de redactarse; prevalece este apartado en cuanto al estado de aprobación. Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Nota posterior de trazabilidad (2026-11-23, inferida; solo informativa).** ADR-05.I v0.2-R3E-05I (Parte XIX) y su registro de aprobación quedaron versionados en el commit `27d5aaec460a2b2d6d199b34a79187a48ba3e78a` (`27d5aae`; verificable por Git; 2026-11-23T02:38:18Z). Las expresiones «No versionado» de §33.19 y «Estado de versionado: Pendiente» del registro de ADR-05.I describen el momento de redactarse. **No se reescribe la aprobación histórica;** la Parte XIX, `aprobaciones.md` y `bitacora.md` **no se modifican en esta entrega.**
+- **Lectura previa: trazabilidad real (corregida en v0.2).** **(1) Leído directamente durante la redacción:** ADR-16.C (§23.0 en adelante hasta §23.13, salvo líneas iniciales de §23.0), los cuadros de clasificación de R2 de ADR-16.C y los conteos (§24), y de la Parte XIX (§33) los apartados §33.10, §33.11, §33.12, §33.13, §33.14, parte de §33.15 (OC-246…283, DR5I, RR5I-01…12) y las primeras filas de §33.16; además, páginas de MDN descargadas y convertidas a texto (Cache, IndexedDB, CryptoKey, Web Crypto API, Clear-Site-Data y CSP), leídas por **fragmentos localizados con búsqueda, no íntegras**. **(2) Extractos consultados mediante búsquedas:** filas de SI-01…24 (§30), VP-01…27 (§32), SY-11, SY-23, SY-24, SY-25, SY-36 y SY-37 (§33), OC-155, OC-179, OC-182, OC-185…191, OC-213, OC-214, OC-238 y OC-263…265, la fila de R1 §8.2 del inventario, las filas de CFG-C1/C2/C3 de §26 y §27, y RNF-04, RNF-05, RNF-07 y RNF-11 de `01`. **(3) Consumido de lo registrado en las Partes anteriores, sin releerlo para este borrador:** el skill del proyecto (SKILL.md y puertas), R1 §8.1, ADR-01 (§25), ADR-06 (§27), ADR-08 (§28), ADR-09.I (§29: SV, RX, K-3), ADR-02.I (§31: AZ, GV) y los apartados de `01` y `00` no citados en (2). **No se afirma lectura directa de lo listado en (3);** sus referencias cruzadas se verificaron solo de forma mecánica (que los identificadores citados existan). **Límites:** las fuentes oficiales nuevas se convirtieron a texto y **no se verificó nada en dispositivos reales**.
+
+### 34.1 Identificación
+
+| Campo | ADR-16.I |
+|---|---|
+| Tema | Protección, clasificación, retención, eliminación y recuperación de la información que la PWA conserva en el dispositivo (cola de operaciones, datos preparados, copias públicas y datos de sesión), frente a lectura no autorizada, pérdida, dispositivos compartidos, revocación y código en el mismo origen, **sin seleccionar mecanismos** |
+| Pregunta (R1 §8.1) | ¿Qué protección local se justifica (cifrado local, límites) frente a pérdida o robo? `01` OFF-12: el cifrado local se evalúa en la Fase 2 **y no se promete** |
+| Alternativas mínimas | ≥ 2 (aquí 3: A, B y C; difieren en **qué protege el almacén por sí mismo y de qué depende esa protección**). **D16-1, D16-2, D16-3 y D16-5 no forman parte de ninguna alternativa como decisión tomada** |
+| Dependencias (R1 §8.2) | ADR-16.C (propuesta), ADR-01 (documental condicionado) y, por ADR-16.C, ADR-05.C |
+| Dependencias laterales | ADR-05.I (cola local, SY-23, SY-24, SY-25, SY-36, SY-37; OC-263…265, OC-280, OC-283); ADR-03.I (sesión, S-A/S-B, SI-07, SI-11, SI-16, SI-17, SI-23; OC-179); ADR-04.I (lo local jamás es público, VP-05, VP-15, VP-16, VP-17, VP-23, VP-26; D4-5 y D4-6); ADR-02.I (estado vigente y acceso directo: OC-190, OC-213); ADR-06 (cachés); ADR-08 (recálculo); ADR-09.I (auditoría, RX-03…05, K-3) |
+
+### 34.2 Entradas heredadas de ADR-16.C y de las Partes aprobadas
+
+**Formulaciones de ADR-16.C y su clasificación en R2 (§24).** Ninguna se admite ni se descarta aquí.
+
+| Decisión | A (evidencia positiva) | C (condición) | X |
+|---|---|---|---|
+| D16-1 protección en reposo | — | CAP-16-P-A (se apoya en IN-16-07 [REC]; OFF-12 abierta); CAP-16-P-B (compatibilidad con OFF-23, OC-49) | — |
+| D16-2 aislamiento por cuenta | — | CAP-16-A-A (OC-48); CAP-16-A-B (tensión con IN-03-20) | — |
+| D16-3 retención de pendientes | — | CAP-16-R-A (`01` no fija plazo; PRV-10 PEND-JUR) | CAP-16-R-B (parámetro no fijado; choca con OFF-09) |
+| D16-4 pérdida por desalojo | **CAP-16-C-A** (IN-16-12 [CONF]; iOS no verificado) | CAP-16-C-B (criterio de «tiempo» no fijado, OC-50) | — |
+| D16-5 migración del formato | — | CAP-16-V-A (OFF-16 [REC]); CAP-16-V-B (lectura que `01` no fija) | — |
+| D16-6 constancia | **CAP-16-K-A** (IN-16-11, IN-05-13) | — | CAP-16-K-B (contradice OFF-20) |
+
+**Regla heredada.** Los `.I` solo pueden elegir entre formulaciones **admitidas**; **no hay formulaciones admitidas**; D16-1, D16-2, D16-3 y D16-5 **no tienen formulación A** y están **bloqueadas para selección**. **C-A y K-A son candidatas no admitidas; las C y las X conservan su estado de R2.**
+
+**Exigencias consumidas (sin modificarlas).** IN-16-01…21, ES-45…52, ESC-75…84, OC-48…51, DC3-1…10, RR16-01…10 (§23); **SY-23, SY-24, SY-25, SY-36, SY-37, SY-34, SY-11, SY-16** y OC-263, OC-264, OC-265, OC-280, OC-283 (§33); **SI-07, SI-11, SI-16, SI-17, SI-19, SI-23** y OC-179 (§30); **VP-05, VP-06, VP-15, VP-16, VP-17, VP-23, VP-26** y OC-225, OC-245 (§32); **AZ-03, AZ-25, GV-01…03** y OC-190, OC-213 (§31); **SV, RX-03, RX-04, RX-05, K-3** (§29). Tensiones de §23.2 (T-1…T-8) **se conservan sin resolver**; en particular **T-1** (OFF-12 «no se promete»), **T-3** (OFF-23 frente a una protección ligada a la sesión), **T-4** (dispositivo que nunca se conecta) y **T-7** (iOS 16.4).
+
+### 34.3 Clasificación de la información local (CD) y qué se permite almacenar
+
+Clasificación **documental** (lista cerrada propuesta, SL-01). «Prohibido» significa que **ninguna alternativa lo persiste en recursos accesibles desde JavaScript ni en ningún otro almacén local**; «restringido», que solo puede persistirse bajo las condiciones indicadas. **Cifrar no convierte en permitido lo prohibido (SL-23).**
+
+| ID | Clase de información | Tratamiento local | Tipo y fuente |
+|---|---|---|---|
+| CD-01 | Cola de operaciones capturadas (identificador, secuencia, versión base, dispositivo, usuario y hora local) y su contenido deportivo | **Permitido, restringido:** aislada por cuenta [REC]; confirmación de persistencia antes de presentarla como guardada; sin datos internos de jugadores | [CONF] OFF-03, OFF-09; IN-05-01; IN-16-19; SY-37 |
+| CD-02 | Datos preparados para operar sin conexión (partidos asignados, plantillas con etiqueta y dorsal, resumen del reglamento) | **Permitido, restringido:** solo lo de OFF-02, **separado por cuenta y por torneo (SL-09; OC-323)**; **sin nombres mientras Q-20 esté abierta**; contenido: D4-5 bloqueada | [CONF] OFF-02, PRV-11; IN-04-11, IN-04-12; VP-17, VP-23; IN-02-04; SI-21; VP-13 |
+| CD-03 | Copias de vistas públicas (última versión guardada, con antigüedad visible) | **Permitido, restringido:** solo proyecciones públicas con lista blanca; **sin nombres con Q-20 abierta**; no se purgan a distancia | [CONF] IN-04-13; VP-15, VP-16; HR1-11 |
+| CD-04 | Datos confirmados **no publicados** y datos internos o calculados no públicos | **Prohibido** en cachés compartidas, respuestas sin conexión y copias públicas; **conservarlos en el dispositivo [PEND]: no se da por autorizado** y no se decide si los datos preparados los incluyen (D4-5 bloqueada; VP-17 abierta) | [CONF] VP-05, VP-06; IN-04-05; SY-36; **[PEND]** D4-5, VP-17 |
+| CD-05 | Campos internos de jugadores, nombre interno y indicador de menor | **Prohibido** persistir (solo presentación transitoria a los roles que PRV-09 autoriza) | [CONF] IN-16-02; ES-45; PRV-09, PRV-11 |
+| CD-06 | Nombres personales de jugadores (menores o adultos) | **Prohibido** mientras Q-20 esté abierta (solo etiquetas); el nombre público con autorización vigente es [COND] a Q-20 | [CONF] en la prohibición de publicar; [DER] en su extensión a persistir (IN-16-03; ES-46) |
+| CD-07 | Secreto de portador de la sesión | **Prohibido** en almacenamiento legible por los scripts de la página | [DER] IN-03-12; SI-11 [REC]; IN-16-04 |
+| CD-08 | Secretos de autenticación y del segundo factor; credenciales de servicio y claves administrativas | **Prohibido** en el dispositivo y en la cola | [DER] / [CONF] / [REC] IN-16-04; ES-47; SI-19 |
+| CD-09 | Datos de sesión local mínimos (lo estrictamente necesario para continuar la captura con la sesión vencida) | **Restringido:** **qué se conserva lo decide ADR-03.I** [PEND]; una afirmación firmada obsoleta **no concede permisos**; borrado al cerrar sesión una vez sincronizado o descartado | [CONF] IN-16-05; OFF-12, OFF-23; SI-07, SI-16 |
+| CD-10 | Material de protección local (si la protección adicional en reposo se adopta) | **Restringido y [PEND]:** **no es un secreto privilegiado**, no autentica ni autoriza; su generación, disponibilidad, ubicación, rotación, revocación, reinstalación, recuperación y pérdida **no se deciden** (DR16I-6, DR16I-7; OC-322) | [PROP]; SL-24 |
+| CD-11 | Respuestas de sincronización (resultados, conflictos, versiones, manifiestos, cursores, errores) | **Restringido:** limitadas al ámbito del actor; **no en cachés compartidas ni por Service Worker**; persistencia adicional autorizada y delimitada | [CONF] / [PROP] SY-36 |
+| CD-12 | Exportación limitada (archivo entregado al dispositivo) | **Restringido:** contenido fijado por CMP-17 (Q-43, PRV-18 abiertas); **no se purga a distancia**; no se reimporta | [CONF] IN-16-16; OFF-24; RES-04 sin aceptar |
+| CD-13 | Constancia local de eliminación | **Permitido, restringido:** mínima, **sin datos personales**; la variante con aviso al servidor es X en R2 | [CONF] IN-16-11; CAP-16-K-A (no admitida) |
+| CD-14 | Registros técnicos, errores y monitoreo del cliente | **Restringido:** sin nombres, correos, identificadores de dispositivo ni contenido de operaciones cuando sea posible | [REC] IN-16-17; PRV-12 |
+
+### 34.4 Alternativas de implementación (sin seleccionar)
+
+Las tres alternativas difieren en **qué protege el almacén local por sí mismo y de qué depende esa protección**. **Ninguna** fija D16-1, D16-2, D16-3, D16-5, OFF-12, Q-20 ni un mecanismo. **Todas** comparten la **base común de requisitos eliminatorios** (SL-01…SL-08, SL-17, SL-18, SL-23 y los demás de §34.5 marcados «E»): **la protección adicional, cuando existe, es una capa más y no sustituye a la minimización, a la clasificación (CD) ni a la revalidación del servidor.**
+
+| | **ALT-16-A — Minimización y contención sin protección criptográfica propia del almacén** | **ALT-16-B — Protección adicional en reposo con material de protección independiente de la sesión** | **ALT-16-C — Protección adicional en reposo con material de protección ligado a una acción local reciente de la persona** |
+|---|---|---|---|
+| Idea | El almacén local conserva solo lo clasificado como permitido (CD-01…03, 09, 11, 13); la protección descansa en la minimización, el aislamiento por cuenta, la eliminación controlada y la protección del propio dispositivo y navegador; **no añade una capa de protección propia en reposo** | Además, la cola y los datos preparados se guardan con una protección adicional en reposo; el material de protección **no depende de que la sesión del servidor esté vigente**, de modo que la captura con la sesión vencida (OFF-23) puede continuar | Además, la protección en reposo exige una **acción local reciente de la persona** para acceder al material de protección (**el tipo de acción —código, biometría u otra— no se decide**); sin esa acción la cola no es legible en el dispositivo |
+| Compatible con (sin fijar) | CAP-16-P-A | CAP-16-P-B | CAP-16-P-B |
+| Qué hace por la confidencialidad | Reduce la superficie al mínimo; **no impide la lectura de lo que contiene** por quien acceda al almacén | **Condicionada a la ubicación y disponibilidad del material [PEND]:** solo si el material **no** queda accesible al mismo atacante que obtiene el almacenamiento puede reducir la exposición ante una **copia o lectura fuera de la aplicación** [INF]; **si el material permanece accesible a ese atacante, no se afirma reducción alguna**; **no protege frente a código en el mismo origen ni frente a un dispositivo comprometido y desbloqueado** [INF; §34.7] | Igual que B (misma condición sobre el material [PEND]) y, además, puede acotar el acceso a ratos sin acción reciente [INF]; **la misma limitación frente a código en el mismo origen cuando la aplicación está desbloqueada** [INF] |
+| Riesgo estructural propio | Un dispositivo perdido o prestado, sin la protección del propio sistema, expone lo permitido (AM-08) | **Pérdida o inaccesibilidad del material de protección = pérdida de lo capturado y no sincronizado** (choca con «ninguna captura se pierde en silencio»); gestión del ciclo de vida del material y migración | Lo de B, **más** dependencia de una acción de la persona (no disponible o fallida: captura bloqueada), fricción en la captura durante el partido y posibles vías de recuperación que **no se deciden** |
+| Efecto sobre OFF-23 (sesión vencida) | Ninguno | Compatible **por definición** (no depende de la sesión); el material sigue sujeto a SL-24 | **Tensión [INF]:** depende de la acción local, no de la sesión; si la acción exige conectividad o la sesión, choca con OFF-23 (OC-49) |
+| Dispositivo compartido | Aislamiento por cuenta sin capa criptográfica | El material **puede quedar disponible a quien use el dispositivo desbloqueado** [INF]: no sustituye al aislamiento por cuenta | Acotación parcial por la acción reciente; **no sustituye** al aislamiento por cuenta |
+| Cierre de sesión | Borrado lógico de lo sincronizado o descartado; **sin borrado físico garantizado** | Igual, y destruir el material de protección **puede hacer ilegible** lo que no se haya borrado [INF; no demostrado, no es borrado seguro garantizado] | Igual que B |
+| Compatibilidad CFG-C1/C2/C3 | Neutral: es una decisión del cliente [INF] | Neutral para el servidor [INF]; **no se decide dónde vive el material** | Neutral para el servidor [INF]; la verificación de la acción local es del cliente y **no concede permisos** (SL-04) |
+| Costo y mantenimiento | Menor complejidad [INF] | Más complejidad: ciclo de vida del material, versionado y migración (SL-19, SL-24) [INF] | La mayor: B más experiencia de usuario, recuperación y soporte [INF] |
+
+**Variantes no evaluadas.** (1) No persistir nunca nada local: queda fuera del alcance porque contradice OFF-09 y OFF-17 de `01`, que presuponen captura local; **no se rechaza como opción de producto, solo no se evalúa aquí**. (2) Copias de respaldo del contenido en el servidor antes de enviar: **no hay base en `01`** y contradice OFF-20; no se evalúa. (3) Mecanismos concretos de almacenamiento, cifrado o claves: son del `.I` posterior a la admisión de formulaciones.
+
+**Lo que ninguna alternativa resuelve.** (a) La pérdida de lo nunca sincronizado por eliminación del navegador (SL-15, SL-20); (b) la protección frente a un dispositivo comprometido o frente a código malicioso en el mismo origen (SL-16, TL-04, TL-05, TL-19, TL-20); (c) la revocación del servidor (SL-12); (d) el borrado remoto (X-3 de §23; D-2 sin excepción).
+
+### 34.5 Requisitos verificables de almacenamiento local (SL)
+
+Son **requisitos documentales verificables**: ninguno está implementado ni probado. «E» = requisito **eliminatorio común** (no compensable por puntaje). El tipo conserva la fuente: [CONF] confirmado; [DER] derivado; [REC] recomendación no confirmada; [PROP] propuesta del autor. Se suman a IN-16-01…21 y SY-01…39 y **no los modifican**.
+
+| ID | Requisito | Fuente | Tipo | E |
+|---|---|---|---|---|
+| SL-01 | **Lista cerrada de lo que se persiste.** Toda información local pertenece a una clase de §34.3; **lo no clasificado no se persiste**; cada alternativa declara la clase de cada almacén (cola, datos preparados, copias, sesión, material de protección, constancia) | IN-16-01; PA-08 | [PROP] | E |
+| SL-02 | **Minimización y menores.** Solo lo necesario para operar (OFF-02); **nunca** campos internos de jugadores, nombre interno ni indicador de menor; **sin nombres personales mientras Q-20 esté abierta** | IN-16-01…03; PRV-11; ES-45, ES-46 | [CONF]; [DER] en la extensión a persistir | E |
+| SL-03 | **Secretos.** El secreto de portador de la sesión no reside en almacenamiento legible por scripts; los secretos de autenticación y del segundo factor no se persisten; las credenciales de servicio y claves privilegiadas **nunca** llegan al navegador ni a la cola; **ningún secreto privilegiado se guarda en un recurso accesible desde JavaScript** (IndexedDB, Cache Storage, almacenamiento web, variables de la página) | IN-16-04; SI-11, SI-19; ES-47 | [DER]; [REC]; [CONF] | E |
+| SL-04 | **El almacenamiento local no es fuente de verdad ni concede permisos.** Ningún dato local, protegido o no, **evita las validaciones vigentes al sincronizar** (cuenta, sesión, rol, ámbito, MFA, precondiciones); **capturar sin conexión, incluso con la sesión vencida, no equivale a estar autorizado:** los **permisos vigentes y el nivel de autenticación (MFA) se revalidan antes de aplicar**, y revocaciones, cambios de rol y MFA vencido no pueden omitirse al sincronizar; la acción local de la persona, si existe (ALT-16-C), **no equivale a reautenticación, no acredita MFA y no autentica ni autoriza** | IN-16-06; SY-34; SI-07; OFF-22 | [CONF]; [DER] | E |
+| SL-05 | **Persistencia confirmada antes de presentar como guardado.** Una operación no se presenta como guardada ni como `pendiente` hasta confirmar su persistencia local **incluida la protección adicional, si existe** | SY-37 (a); IN-05-12 | [DER] | E |
+| SL-06 | **Fallos comunicados.** Un fallo de cuota, de escritura, de protección o de acceso al material de protección se comunica explícitamente y la captura **no se da por hecha** | SY-37 (b) | [DER] | E |
+| SL-07 | **Sin promesa de recuperación.** No se promete recuperar lo nunca enviado y posteriormente perdido (expulsión, limpieza, material de protección inaccesible, dispositivo perdido); la interfaz no sugiere lo contrario | SY-37 (c); SY-25; OFF-17 | [DER] | E |
+| SL-08 | **Confidencialidad no garantizada por el mecanismo.** Ningún documento, mensaje ni garantía afirma que IndexedDB, Cache Storage, el almacenamiento web o un cifrado local **garantizan por sí solos** la confidencialidad; se distinguen tres niveles de adversario: (i) **lectura casual** (persona con acceso breve al dispositivo desbloqueado), (ii) **robo o pérdida** con el dispositivo bloqueado y (iii) **dispositivo comprometido o código en el mismo origen**; **la protección contra (i) no equivale a protección contra (iii)** | OFF-12; SL-16 [DOC: §34.19] | [DER] | E |
+| SL-09 | **Aislamiento por cuenta y por torneo.** La cola y los datos preparados de una cuenta no son accesibles ni conocidos (contenido o cantidad) por otra cuenta del mismo dispositivo; **los datos de un torneo no se mezclan ni se exponen en el contexto de otro torneo**, aunque la cuenta tenga roles en varios (la identidad no concede acceso entre torneos); separación estricta frente a cola etiquetada sin fijar (D16-2 bloqueada); **mecanismo sin seleccionar** (OC-323) | IN-16-07; IN-03-20, IN-05-11; IN-02-04; SI-21; VP-13 | [REC]; [CONF] en el aislamiento entre torneos | |
+| SL-10 | **Cierre de sesión.** Con pendientes exige confirmación explícita; borra los datos locales **tras sincronizar o descartar**; invalida los datos de sesión locales; **no se presenta como borrado físico ni como revocación** | OFF-12; IN-16-08; SY-37 (d) | [CONF] | |
+| SL-11 | **Eliminación lógica ≠ borrado físico.** La eliminación local pide al navegador eliminar los datos; **no se garantiza el borrado físico seguro** ni de copias de respaldo o residuos del sistema [INF]; la destrucción del material de protección **no se presenta como borrado garantizado** | SY-37 (d) | [DER]; [INF] | |
+| SL-12 | **Eliminación local ≠ revocación.** Borrar datos locales no revoca nada en el servidor y la revocación en el servidor no borra datos locales de un dispositivo sin conexión; **no hay borrado remoto**; **D-2 sin excepción**; **la invalidación de sesiones tras una recuperación de cuenta, un cambio de factor o la pérdida de un dispositivo (SI-23) no borra los datos locales** de un dispositivo sin conexión ni destruye por sí sola el material de protección: su efecto sobre lo local es **[PEND]** (OC-324) | IN-16-09; SI-07, SI-23; OFF-11 | [CONF] | |
+| SL-13 | **Cambio de permisos o de asignación.** Al saber que sus permisos cambiaron, el cliente deja de usar lo que ya no le corresponde; los datos preparados anteriores pueden persistir hasta que el cliente se conecte (sin plazo prometido); **el servidor decide al sincronizar** | OFF-22; ESC-84; IN-04-13 | [CONF]; [DER] | |
+| SL-14 | **Caducidad y retención.** Se aplican solo los plazos de `01` (30 días para lo en conflicto o rechazado; avisos de 7 y 1 días [REC]); **las operaciones `pendiente` no tienen plazo local fijado** (D16-3, OC-50); toda eliminación es controlada y deja constancia mínima cuando proceda; **ninguna política de retención se decide aquí** (PRV-10, PEND-JUR) | OFF-10; IN-16-11 | [CONF]; [REC] | |
+| SL-15 | **Expulsión y almacenamiento persistente.** Se advierte que el navegador puede eliminar los datos; se solicita almacenamiento persistente y se avisa si no se concede; **la solicitud reduce el riesgo, no lo elimina**; no se supone un desalojo parcial | IN-16-12, IN-16-13; SY-25 | [CONF]; [DER] | |
+| SL-16 | **Código en el mismo origen.** El código que se ejecuta en el origen **puede leer lo que el origen puede leer** [DOC]; por tanto la superficie de ejecución se reduce y acota: sin scripts de terceros no justificados, política de recursos ejecutables permitidos y control de integridad de lo que carga la aplicación; **mecanismo y alcance sin seleccionar** (ADR-01, ADR-06); **no se afirma que esto impida la lectura** del almacenamiento por un script inyectado | AM-34; SI-11; IN-04-01 | [PROP] | |
+| SL-17 | **Service Worker y Cache Storage.** No guardan respuestas autenticadas, datos no publicados, la cola ni operaciones; solo recursos estáticos de la aplicación y copias públicas con lista blanca (CD-03); no se usan como almacén de datos del usuario; una copia sin conexión nunca expone lo no publicado | SY-24; VP-15, VP-16; IN-04-13 | [CONF]; [PROP] | E |
+| SL-18 | **Separación entre lo interno, lo confirmado y lo publicado en el dispositivo.** Los datos preparados autorizados a un actor (internos) **no se mezclan** con las copias públicas; lo confirmado no publicado no llega a copias públicas, cachés compartidas ni respuestas sin conexión; **lo local jamás es público** | VP-05, VP-06; SY-36; MO-25 | [CONF]; [PROP] | E |
+| SL-19 | **Actualizaciones de la PWA.** Una nueva versión no descarta ni corrompe la cola; el formato local —y, si existe, el de la protección y el del material— tiene versión y se migra sin pérdida; la actualización se bloquea o se compatibiliza (D16-5 sin seleccionar); **una versión del cliente con un fallo de seguridad no sigue sirviéndose indefinidamente** [INF] | IN-16-15 [REC]; ES-51; OFF-16 | [REC]; [PROP] | |
+| SL-20 | **Pérdida irreversible.** Lo capturado y nunca sincronizado puede perderse de forma irreversible; la interfaz lo advierte junto al indicador de pendientes; la mitigación es **sincronizar pronto**, no copiar el contenido a otro lugar (CAP-16-C-A/B sin seleccionar) | IN-16-12, IN-16-14; SY-25 | [CONF]; [DER] | |
+| SL-21 | **Capacidades por plataforma.** Android, iOS y escritorio **difieren** (expulsión, persistencia, instalación, cuotas, modo privado); ninguna garantía se asume uniforme; lo de iOS es **no verificado en dispositivo**; el mínimo es iOS 16.4 (RNF-07) | HR1-07; IOS-01…08; OC-51 | [CONF]; [NO VERIF] | |
+| SL-22 | **Dispositivos compartidos y cambio de usuario.** Se asume que otra persona puede usar el dispositivo; el cambio de cuenta no expone lo de la anterior (SL-09); **la protección contra lectura casual no se presenta como protección del contenido frente a quien opere el dispositivo desbloqueado**; una recuperación de acceso o un cambio de credenciales (SI-23) **no se presenta como borrado de lo local** y su efecto es **[PEND]** (OC-324) | OFF-12; IN-03-20; SI-17; SI-23 | [DER] | |
+| SL-23 | **Cifrar no legitima persistir lo prohibido.** Lo que SL-02 y SL-03 prohíben persistir **tampoco se persiste protegido o cifrado**; la protección adicional no amplía el contenido local permitido | IN-16-02, IN-16-03; ES-45…47 | [DER] | E |
+| SL-24 | **Material de protección (si se adopta una protección adicional; todo [PEND] y sin seleccionar mecanismo).** No es un secreto privilegiado ni concede permisos. Cada alternativa B o C debe **declarar, sin decidirlos**: (a) **generación y disponibilidad:** cuándo se obtiene y cuándo está disponible, incluida la captura sin conexión y con la sesión vencida (**un material inaccesible detiene la captura**); (b) **separación por cuenta y por torneo:** el material de una cuenta no sirve para otra y su disponibilidad no depende de quien use el dispositivo después; (c) **rotación y revocación:** qué ocurre con lo protegido con el material anterior y quién puede revocarlo (**revocar o rotar el material no revoca permisos del servidor**); (d) **reinstalación y cambio de dispositivo:** lo protegido en un dispositivo **no se traslada a otro** salvo decisión expresa, y reinstalar, limpiar o actualizar puede destruir el material; (e) **pérdida, recuperación e irrecuperabilidad:** su pérdida implica la pérdida de lo protegido y no sincronizado; **la recuperación no se decide (DR16I-6) y puede no existir**; (f) **cierre de sesión y revocación de acceso:** el cierre de sesión no equivale a destruir el material, destruirlo **no es borrado físico garantizado**, y una cuenta revocada **puede conservar material y datos protegidos** en un dispositivo sin conexión. Su ubicación **no anula la protección sin declararlo** (si está al alcance del mismo código o del mismo atacante que accede al almacén, solo protege frente a quien lo lee **sin** ese código o sin ese acceso); no se custodia en el servidor sin decisión expresa | IN-16-18; RR16-03; SI-23; OC-322 | [PROP] | |
+| SL-25 | **Sesión vencida.** La captura local ya autorizada continúa con la sesión vencida; sincronizar y preparar datos nuevos exigen sesión válida; **esa captura no equivale a una operación autorizada** (SL-04): se revalida al sincronizar; una protección adicional **no puede impedir esa captura** o la tensión se declara (OC-49; T-3) | OFF-23; SI-16; IN-16-05 | [CONF] | |
+| SL-26 | **Datos de sesión y afirmaciones firmadas.** Qué se conserva de la sesión lo decide ADR-03.I; el cliente **no usa una afirmación firmada obsoleta para decidir acceso a datos sensibles** ni para sincronizar; la verificación vigente es del servidor | SI-07; IN-03-11; OC-179 | [CONF]; [DER] | |
+| SL-27 | **Registros técnicos sin datos personales.** Los errores y registros del almacenamiento local omiten nombres, correos, identificadores de dispositivo y contenido de operaciones | IN-16-17; PRV-12 | [REC] | |
+| SL-28 | **Exportación limitada.** El archivo exportado llega al dispositivo y **no se purga a distancia**; su contenido lo fija CMP-17; no concede permisos ni se reimporta | IN-16-16; OFF-24; Q-43 | [CONF] | |
+| SL-29 | **Constancia de eliminación.** Constancia local mínima, sin datos personales; el aviso al servidor **contradice OFF-20 en lo nunca recibido** y **no se concede excepción** | IN-16-11; D16-6 | [CONF] | |
+| SL-30 | **Almacenamiento efímero.** En navegación privada o con cuota llena el almacenamiento puede no persistir [DOC]; se advierte y la captura **no se da por guardada** si no persiste | SY-37; IN-16-12 | [DER] | |
+| SL-31 | **Recursos auxiliares, notificaciones, precargas y almacenamiento compartido.** Ningún recurso auxiliar (manifiesto, iconos, páginas de error sin conexión, vistas previas), **notificación**, **precarga** de páginas o datos, **respuesta almacenada** ni marca de actualización local incluye datos no publicados o personales; lo interno y lo no publicado **no se guarda en almacenamiento que otra pestaña, ventana o perfil del navegador pueda leer sin la misma autorización** [INF]; las notificaciones no contienen datos de jugadores ni de menores | VP-21; VP-26; SY-36 | [CONF]; [PROP]; [INF] | |
+| SL-32 | **Orden y fallo del borrado.** Se elimina **después** de confirmar sincronización o descarte; si la eliminación falla, el estado es detectable y **no se presenta como borrado**; ninguna ruta borra una operación sin acción explícita del usuario o plazo informado | ES-49; IN-16-11 | [CONF] | |
+| SL-33 | **Sin permisos nuevos ni selección.** ADR-16.I no concede facultades, no reduce garantías, no selecciona tecnología, algoritmo, método de desbloqueo ni proveedor | IN-16-21; PA-13; RC-23 | [DER]/[CONF] | |
+| SL-34 | **Pruebas con datos sintéticos.** Las pruebas del almacén local usan exclusivamente cuentas y datos sintéticos; no se procesan datos personales reales antes de cumplir PRV-15 | IN-16-20; PRV-15, PRV-17 | [CONF] | |
+
+### 34.6 Estados, frontera con ADR-05.I y autorización (sin estados nuevos)
+
+- **Estados visibles** (`01` §9.2): `pendiente`, `enviando`, `confirmada`, `en conflicto`, `rechazada`. **ADR-16.I no introduce estados ni los redefine;** los de ADR-05.I (§33.5) **no se modifican**. **«Guardado localmente» no es un estado de negocio:** la confirmación de persistencia (SL-05) es una condición previa a presentar `pendiente`.
+- **Frontera.** ADR-05.I fija **qué** se captura, envía y reconcilia; ADR-16.I trata **dónde y cómo se conserva y se elimina** lo local. **Ninguna decisión de este `.I` cambia el contenido, el orden ni la idempotencia de la cola.**
+- **Autorización.** Un dato local **no concede permisos** (SL-04). Lo que el cliente conserva puede estar **obsoleto** (permisos revocados, asignación retirada, partido cerrado): **la revalidación vigente del servidor al sincronizar es lo que decide** (SY-34; SI-07). Una **protección en reposo no reemplaza la revalidación** y la **eliminación local no equivale a revocación** (SL-12).
+- **Separación interno / confirmado / publicado.** En el dispositivo existen tres clases que **no se mezclan** (SL-18): (1) lo interno del actor (cola y datos preparados autorizados: CD-01, CD-02); (2) lo confirmado visible solo si está publicado (CD-03, **copias públicas**); (3) lo confirmado **no publicado**, que **no** se guarda en copias públicas ni cachés compartidas y **cuya conservación local no se autoriza** (CD-04 [PEND]; D4-5, VP-17). La cola y las copias públicas **no comparten almacén ni caché**.
+
+### 34.7 Modelo de amenazas del almacenamiento local (TL)
+
+**Amplía, sin modificarlo, el tratamiento de AM-08, AM-10, AM-11, AM-28, AM-33 y AM-34** del modelo de R2. «Alcance de las alternativas» resume qué **puede** aportar cada alternativa [INF]; **ninguna lo garantiza** y todo queda [NO VERIF] (OC-310).
+
+| ID | Amenaza | Adversario | Alcance de las alternativas (A / B / C) | Límite |
+|---|---|---|---|---|
+| TL-01 | Lectura casual con el dispositivo en la mano y la aplicación abierta | Persona con acceso breve | A: lo permitido es visible; B: igual si está desbloqueada; C: acotada si exige acción reciente [INF] | **Ninguna protege con la sesión local ya desbloqueada**; SL-22 |
+| TL-02 | Pérdida o robo con el dispositivo bloqueado | Tercero con el dispositivo | A: depende del bloqueo del sistema; B y C: **solo si el material no es accesible al mismo atacante** [PEND: ubicación y disponibilidad, SL-24], capa adicional posible fuera de la aplicación; **si lo es, sin reducción de exposición** [INF] | La protección real depende del sistema operativo y del bloqueo del usuario [INF]; AM-08 sin aceptar |
+| TL-03 | Pérdida o robo con el dispositivo desbloqueado o sin bloqueo | Tercero con acceso total | A: expone lo permitido; B: **expone si el material está disponible al atacante** [PEND]; C: acotada por la acción reciente **solo si el material no queda disponible sin esa acción** [PEND] [INF] | **Sin garantía**; no hay borrado remoto (SL-12) |
+| TL-04 | **Dispositivo comprometido** (software malicioso, acceso privilegiado, depuración) | Atacante con control del dispositivo | **Ninguna alternativa protege** [INF] | Fuera del alcance de una PWA; no se promete (SL-08) |
+| TL-05 | **Inyección de código en el origen (XSS):** el atacante logra ejecutar código propio en la aplicación por un fallo de la propia aplicación | Atacante externo | **Ninguna capa en reposo protege lo que la propia aplicación puede leer** [INF]; solo reducen daño: minimización (A), y para B/C el material de protección, **si no está al alcance del mismo código** [PEND] | SL-16; la mitigación reduce la probabilidad o el daño (restringir los recursos ejecutables permitidos, tratar el contenido como no confiable); **sin afirmar que se impide**; mecanismo sin seleccionar (OC-301) |
+| TL-19 | **Scripts de terceros:** recursos externos que la propia aplicación decide incluir (analítica, fuentes, componentes) | Proveedor del recurso o quien lo compromete | **El script se ejecuta con los privilegios del origen** [INF]: mismo alcance que TL-05; ninguna alternativa lo neutraliza | SL-16; la mitigación principal es **no incluirlos o limitarlos a una lista cerrada con control de integridad**; no hay terceros decididos (ADR-01); sin seleccionar (OC-301) |
+| TL-20 | **Dependencias comprometidas:** bibliotecas y herramientas de construcción empaquetadas en la aplicación | Cadena de suministro | El código llega **como parte de la aplicación**; el navegador **no distingue** su origen [INF]: mismo alcance que TL-05; ninguna alternativa lo neutraliza | SL-16; la mitigación opera **antes de entregar** (inventario, fijación de versiones, revisión y escaneo de dependencias: RNF-05) y **no desde el almacenamiento**; sin seleccionar (OC-301) |
+| TL-06 | Extensión del navegador o perfil compartido del navegador | Software del propio navegador | Igual que TL-05 [INF] | Fuera del control de la aplicación |
+| TL-07 | Service Worker o actualización comprometidos o versión obsoleta con fallo | Atacante de la cadena de entrega | Ninguna lo previene; la versión se acota con SL-19 [INF] | ADR-01, ADR-06; OC-308 |
+| TL-08 | Cachés, respuestas sin conexión, **precargas, notificaciones, recursos auxiliares, respuestas almacenadas y almacenamiento compartido entre pestañas o perfiles** que exponen lo no publicado o autenticado | Usuario no autorizado en el dispositivo; otra pestaña o perfil | Cobertura por SL-17, SL-18 y SL-31 en las tres | VP-15, VP-16, VP-21, VP-26 |
+| TL-09 | Manipulación de la cola local o del reloj (AM-10) | Usuario legítimo malicioso | La protección del almacén **no sustituye** la revalidación del servidor (SL-04) | ADR-05.I (SY-34) |
+| TL-10 | Dispositivo compartido y cambio de usuario (AM-33) | Otra cuenta del mismo dispositivo, o datos de otro torneo de la misma cuenta | D16-2 (A-A / A-B) condiciona las tres; OC-323 | SL-09, SL-22 |
+| TL-11 | **Residuos tras cerrar sesión o borrar:** copias del sistema o de la nube del dispositivo, miniaturas, bloques de disco [INF] | Quien examina el dispositivo o sus copias | **Ninguna garantiza borrado físico** (SL-11) | OC-309; sin afirmar |
+| TL-12 | Revocación o desactivación con el dispositivo sin conexión (D-2) | Usuario revocado | El servidor rechaza al sincronizar; **los datos locales persisten** | RES-02 sin aceptar; D-2 sin excepción |
+| TL-13 | Expulsión o limpieza del navegador (AM-11) | El navegador o el usuario | **Ninguna evita la pérdida** | SL-15, SL-20; RES-07 sin aceptar |
+| TL-14 | Actualización que corrompe o descarta la cola o el formato protegido | Fallo del propio sistema | B y C añaden riesgo de migración del material | SL-19; ES-51 |
+| TL-15 | **Pérdida o inaccesibilidad del material de protección** | Fallo propio, cambio de dispositivo o del navegador | Solo B y C: **pérdida de lo capturado y no sincronizado** | SL-24; RR16I-05 |
+| TL-16 | Archivo exportado o descargado que queda en el dispositivo | Quien accede a los archivos | Fuera de la capa del almacén | SL-28; RES-04 sin aceptar |
+| TL-17 | Errores, registros y monitoreo que filtran datos personales | Operadores o terceros de monitoreo | Las tres, por SL-27 | PRV-12 [REC] |
+| TL-18 | Almacenamiento efímero (modo privado) o cuota llena | Condiciones del navegador | Las tres: SL-06, SL-30 | MDN [DOC] |
+
+### 34.8 Escenarios críticos (SCL)
+
+Los resultados son los **admisibles** según las exigencias; ninguno se resuelve aquí por un mecanismo.
+
+| ID | Escenario | Resultado admisible | Prohibido | Requisitos |
+|---|---|---|---|---|
+| SCL-01 | Dispositivo perdido y bloqueado, con la cola y los datos preparados | Solo lo permitido (CD) en el almacén; el servidor deja de aceptar la cuenta; **datos locales no purgables a distancia** | Secretos o campos internos locales; promesa de borrado remoto | SL-02, SL-03, SL-12; TL-02 |
+| SCL-02 | Dispositivo perdido y desbloqueado o prestado con la aplicación abierta | La protección adicional (B/C) **no se presenta como suficiente**; riesgo residual declarado | Presentar B o C como protección frente a quien opera el dispositivo desbloqueado | SL-08, SL-22; TL-01, TL-03 |
+| SCL-03 | Un script inyectado en el origen intenta leer IndexedDB y Cache Storage | Se reduce la superficie (SL-16); **el contenido local permitido puede ser legible por ese script**; no se afirma lo contrario | Afirmar que el cifrado local impide esa lectura; secretos privilegiados accesibles | SL-03, SL-08, SL-16; TL-05, TL-19, TL-20 |
+| SCL-04 | Cierre de sesión con pendientes | Confirmación explícita; borrado tras sincronizar o descartar; no se presenta como borrado físico | Borrar pendientes sin acción; prometer borrado físico | SL-10, SL-11, SL-32 |
+| SCL-05 | Cierre de sesión sin pendientes | Borrado lógico de los datos locales de la cuenta | Dejar datos de la cuenta accesibles a la siguiente | SL-09, SL-10 |
+| SCL-06 | Cambio de cuenta en un dispositivo compartido con pendientes de la primera | Sin elegir (D16-2): separación estricta o cola etiquetada con acceso restringido | La segunda cuenta accede o conoce el contenido | SL-09, SL-22; TL-10 |
+| SCL-07 | Cuenta revocada o desactivada con el dispositivo sin conexión | El servidor rechaza al sincronizar; los datos locales persisten hasta el primer contacto; después se aplica OFF-11 | Prometer borrado remoto; borrar antes de avisar o exportar | SL-12, SL-32; OC-48; D-2 |
+| SCL-08 | Permisos reducidos o asignación retirada con datos preparados en el dispositivo | El cliente deja de usarlos al saberlo; **el servidor decide al sincronizar** | Tratar lo local como permiso vigente | SL-04, SL-13 |
+| SCL-09 | El navegador elimina el almacenamiento con pendientes | Se pierden las capturas no sincronizadas; **sin promesa de recuperación**; lo confirmado en el servidor se conserva | Prometer conservación o recuperación | SL-07, SL-15, SL-20; TL-13 |
+| SCL-10 | Cuota llena o fallo de escritura durante la captura | Se comunica; la captura **no se da por hecha** | Presentar la operación como guardada | SL-05, SL-06, SL-30 |
+| SCL-11 | Sesión vencida con captura en curso y protección adicional (B/C) | La captura continúa; sincronizar exige sesión válida; la tensión de C con OFF-23 se declara | Impedir la captura local autorizada | SL-25; OC-49 |
+| SCL-12 | El material de protección queda inaccesible (B/C) | Pérdida de lo protegido y no sincronizado; se informa; sin promesa de recuperación | Prometer recuperar; ocultar la pérdida | SL-07, SL-24; TL-15 |
+| SCL-13 | Actualización de la PWA con la cola pendiente y el formato local protegido | No se descarta ni corrompe; se bloquea o se compatibiliza (D16-5 sin elegir) | Cola o material descartados | SL-19; ES-51 |
+| SCL-14 | Respuesta sin conexión o caché con un resultado confirmado no publicado | No se sirve ni se guarda en copias públicas | Exponer lo no publicado | SL-17, SL-18; VP-05, VP-26 |
+| SCL-15 | Datos preparados con cambios posteriores de privacidad (oculto, anonimizado) | Aviso de antigüedad; la copia puede quedar desactualizada sin plazo prometido | Promesa de purga a distancia; nombres con Q-20 abierta | SL-02, SL-13; ESC-84; OC-47 |
+| SCL-16 | Menor en datos locales | No se persiste el nombre interno ni el indicador; solo etiqueta | Persistirlo cifrado | SL-02, SL-23 |
+| SCL-17 | Vence el plazo de 30 días de una operación en conflicto o rechazada con el dispositivo desconectado | Eliminación controlada al ejecutarse la aplicación; sin garantía de avisos | Borrar sin plazo informado o sin constancia | SL-14, SL-29, SL-32 |
+| SCL-18 | Falla la eliminación local (error o interrupción) | Estado detectable; no se presenta como borrado | Declarar eliminado lo que no lo está | SL-32; SL-11 |
+| SCL-19 | Navegación privada o modo de ahorro del navegador | Se advierte; la captura no se da por guardada si no persiste | Prometer persistencia | SL-30; MDN [DOC] |
+| SCL-20 | iOS con la PWA no instalada o con mínimos de iOS 16.4 | Comportamiento **no verificado en dispositivo**; se advierte; sin promesa | Basar una garantía en iOS 17 para 16.4 | SL-15, SL-21; OC-51 |
+| SCL-21 | Exportación limitada al desactivar la cuenta | Se ofrece una sola vez; el archivo no se purga | Exportar más de lo autorizado | SL-28; Q-43 |
+| SCL-22 | Un error del almacenamiento local se registra con contenido de la operación | Solo se registra sin datos personales | Nombres, correos o identificadores | SL-27 |
+| SCL-23 | Se solicita almacenamiento persistente y el navegador lo deniega | Se avisa; no se promete conservación | Dar por garantizada la persistencia | SL-15; MDN [DOC] |
+| SCL-24 | Una versión antigua del cliente con un fallo de seguridad sigue en el dispositivo | El servidor rechaza lo que no valida; el riesgo local residual se declara | Suponer que el fallo desaparece al instante | SL-19; TL-07; OC-308 |
+| SCL-25 | **MFA vencido o cambio de rol durante la desconexión** con operaciones capturadas | Al sincronizar se revalidan el nivel de autenticación y el rol vigentes **antes de aplicar**; si ya no se cumplen, rechazo con motivo y sin publicar; la acción local de ALT-16-C **no acredita MFA**; el tratamiento de lo capturado sigue ADR-05.I | Aplicar por haberse capturado con el rol o el nivel anteriores; tratar la acción local como reautenticación | SL-04, SL-25, SL-26; SY-34; SI-07, SI-16 |
+
+### 34.9 Facetas pedidas (síntesis por alternativa)
+
+| # | Faceta | ALT-16-A | ALT-16-B | ALT-16-C |
+|---|---|---|---|---|
+| 1 | Clasificación de lo que puede o no almacenarse | Idéntica en las tres (CD-01…14; SL-01); **sin añadir contenido por proteger** | Idéntica; **la protección no amplía lo permitido** (SL-23) | Idéntica |
+| 2 | Operaciones offline pendientes y datos asociados | Sin capa adicional | Con protección adicional en reposo [INF] | Con protección ligada a acción local [INF] |
+| 3 | Minimización y menores | Es su principal defensa | Igual; **cifrar no legitima persistir lo prohibido** | Igual |
+| 4 | Sesión, credenciales, tokens, secretos | CD-07…09 prohibidos o restringidos; sin secretos privilegiados | Igual; el material de protección **no es secreto privilegiado** (SL-24) | Igual; la acción local **no autentica** (SL-04) |
+| 5 | IndexedDB, Cache Storage, Service Worker y otros | Mismos usos y límites (SL-17); el origen **puede leer lo suyo** [DOC] | Igual; la protección añadida no cambia quién ejecuta código en el origen | Igual |
+| 6 | Cifrado, claves, recuperación, dispositivo comprometido | **No hay** protección propia; no se decide ninguna | Sí; material independiente de la sesión; recuperación **sin decidir**; **no protege con dispositivo comprometido** (TL-04) | Sí; ligada a acción local; recuperación **sin decidir**; **no protege con dispositivo comprometido** |
+| 7 | Dispositivos compartidos y cambio de usuario | Aislamiento por cuenta | Aislamiento por cuenta; el material **no sustituye** el aislamiento | Aislamiento por cuenta + acotación parcial |
+| 8 | Cierre de sesión, revocación, cambio de permisos | SL-10, SL-12, SL-13 | Igual; destruir el material **no es borrado garantizado** | Igual |
+| 9 | Eliminación lógica, caducidad, expulsión, borrado físico | SL-11, SL-14, SL-15; **sin borrado físico garantizado** | Igual | Igual |
+| 10 | XSS, scripts de terceros, mismo origen | Superficie mínima; **sin protección propia** | Igual; el material puede quedar **al alcance del mismo código** [PEND] | Igual; acotación solo si el material no está al alcance [PEND] |
+| 11 | Interno, confirmado y publicado | SL-18 | SL-18 | SL-18 |
+| 12 | Actualizaciones de la PWA | SL-19: versionado de la cola | SL-19 más versionado y migración del material | Igual que B |
+| 13 | Pérdida irreversible de lo nunca sincronizado | Por expulsión o limpieza | **Además** por material inaccesible (TL-15) | **Además** por material o acción local inaccesibles |
+| 14 | Android, iOS y navegadores distintos | Sin dependencias de capacidades especiales [INF] | Depende de capacidades de protección del navegador [PEND] | Depende además de capacidades de desbloqueo local [PEND] |
+| 15 | CFG-C1/C2/C3 | Neutral | Neutral para el servidor | Neutral para el servidor |
+| 16 | Costos, complejidad, rendimiento y experiencia | Menor complejidad y fricción [INF] | Complejidad media; efecto en rendimiento **no medido** | Mayor complejidad y fricción en la captura **durante el partido** [INF]; no medido |
+| 17 | **Ciclo de vida del material de protección** (generación, disponibilidad, separación por cuenta y torneo, rotación, revocación, reinstalación, cambio de dispositivo, pérdida, cierre de sesión y revocación de acceso) | No aplica (no hay material) | **[PEND]**, sin mecanismo: SL-24 y OC-322; disponible sin acción de la persona; pérdida = pérdida de lo capturado | **[PEND]**, sin mecanismo: SL-24 y OC-322; más dependencia de la acción local y de su recuperación |
+
+### 34.10 Matriz de conformidad con los requisitos (uniforme; autoevaluación del autor)
+
+**Leyenda** (la misma para las tres alternativas): **E** = requisito eliminatorio común que **toda** alternativa debe cumplir y **ninguna demuestra** hoy; **E/C** = exigencia eliminatoria común a toda alternativa cuya satisfacción depende de una condición abierta (aquí, SL-16 y OC-301) y que **no discrimina** entre alternativas; **S** = la alternativa **lo soporta** sin demostrarlo; **C** = condicionado a una decisión del responsable o a una condición abierta; **T** = tensión señalada; **—** = no aplica. **«Por diseño» no se usa** salvo cuando la definición de la alternativa lo implique.
+
+| Requisito | ALT-16-A | ALT-16-B | ALT-16-C | Observación |
+|---|---|---|---|---|
+| SL-01, SL-02, SL-03, SL-23 (clasificación, minimización, secretos, cifrar no legitima) | E | E | E | Idénticos; la definición de las tres exige que la protección adicional no amplíe lo permitido (SL-23) |
+| SL-04 (no fuente de verdad) | E | E | E | La acción local de C no autentica ni acredita MFA |
+| SL-05, SL-06, SL-07 (persistencia, fallos, sin promesa) | E | E, y SL-05 incluye la protección | E, y SL-05 incluye la protección | |
+| SL-08 (confidencialidad no garantizada) | E | E | E | Los tres niveles de adversario se declaran en las tres |
+| SL-09, SL-22 (aislamiento por cuenta y por torneo, dispositivos compartidos) | C (D16-2) | C (D16-2) | C (D16-2) | D16-2 bloqueada |
+| SL-16 (mismo origen) | E/C | E/C | E/C | Exigencia común: ninguna alternativa impide la lectura por código en el origen; depende de OC-301; la ubicación del material en B y C se trata en SL-24 |
+| SL-17, SL-18 (SW, caché; separación) | E | E | E | |
+| SL-24 (material de protección) | — | C (DR16I-6; OC-322) | C (DR16I-6, DR16I-7; OC-322) | Generación, rotación, reinstalación, cambio de dispositivo y pérdida: [PEND] |
+| SL-25 (sesión vencida) | S | S (no depende de la sesión **por diseño**) | T (depende de la acción local; OC-49) | |
+| SL-19 (actualizaciones) | C (D16-5) | C (D16-5; material) | C (D16-5; material) | |
+| SL-20 (pérdida irreversible) | C (RR16I-05, TL-15) | C (RR16I-05, TL-15) | C (RR16I-05, TL-15) | Clasificación uniforme: **no significa que los riesgos sean idénticos ni que estén mitigados**; las diferencias reales siguen en §34.4 (riesgo estructural propio), TL-15 y RR16I-05: en B y C la pérdida o inaccesibilidad del material (y, en C, de la acción local) añade una vía de pérdida que A no tiene |
+| SL-11, SL-12, SL-14, SL-15 (borrado, revocación, retención, expulsión) | C | C | C | D16-3, D16-4 y D-2 abiertos |
+| SL-21 (plataformas) | C | C | C | iOS no verificado; B y C dependen de capacidades [PEND] |
+
+**Lectura.** La matriz **no** declara cumplimiento: «E», «E/C» y «S» son **exigencias o apoyos documentales**, no garantías demostradas. **El puntaje (§34.14) no sustituye a los requisitos eliminatorios.**
+
+### 34.11 Android, iOS y navegadores con capacidades distintas
+
+| Plataforma | Qué se sabe | Estado | Consecuencia documental |
+|---|---|---|---|
+| Navegadores basados en Chromium (Android y escritorio) | El almacenamiento es por defecto «best-effort» y puede solicitarse como persistente; la solicitud puede aprobarse o denegarse automáticamente según el historial de interacción [DOC: MDN, §33.11]; la API de Cache puede eliminar **todos o ninguno** de los datos de un origen [DOC: MDN] | [DOC] | SL-15 y SL-20: no se promete conservación; no se supone un desalojo parcial |
+| Safari en iOS | Regla de siete días de WebKit (artículo del 24 de marzo de 2020; vigencia actual [PEND]); las aplicaciones añadidas a la pantalla de inicio cuentan sus propios días de uso [DOC: WebKit]; comportamiento real de iOS 16.4 **no documentado en las fuentes leídas** | [DOC] / [NO VERIF] | SL-21; OC-51; OC-319; **nada se verificó en dispositivo** |
+| Modo de navegación privada | Los datos suelen eliminarse al cerrarlo [DOC: MDN] | [DOC] | SL-30 |
+| Capacidades de protección y desbloqueo local | La disponibilidad, el nivel y la interfaz de la protección local **varían entre sistemas y navegadores** y **no se leyeron** | [PEND] | B y C **dependen** de capacidades **no evaluadas** (OC-306, OC-313); **no se decide biometría ni otro método** (DR16I-7) |
+
+**Inferencias [INF].** (1) Una alternativa que **depende** de una capacidad del navegador solo es verificable en esa plataforma; (2) la degradación (qué ocurre sin la capacidad) **no se define** y es decisión del responsable (DR16I-10); (3) las diferencias entre sistemas **no permiten una garantía uniforme**.
+
+### 34.12 Costos, complejidad, rendimiento y experiencia del usuario
+
+- **Costo de planes.** Ninguna alternativa introduce un servicio nuevo por sí misma [INF]; **los planes y las reglas de cabeceras del entorno elegido** (por ejemplo, política de recursos ejecutables o señal de borrado de datos del sitio) **no se evaluaron** [PEND] (OC-312). **Una función gratuita o de pago ni favorece ni penaliza.**
+- **Complejidad [INF].** A: la menor; B: ciclo de vida del material de protección, versionado, migración y recuperación; C: lo de B más la interacción con la persona y su recuperación.
+- **Rendimiento [PEND].** El efecto de la protección adicional en el arranque, en la escritura de cada operación y en dispositivos de gama baja **no se midió** (OC-313).
+- **Experiencia durante el partido [INF].** Una acción local reciente (ALT-16-C) añade fricción justo cuando se captura; **no se midió** (OC-314). Un fallo de acceso al material de protección **interrumpe la captura** en B y C (SL-06).
+- **Soporte [INF].** Perder el acceso al material genera casos que A no tiene; qué se le dice a la persona **no se decide** (DR16I-6).
+
+### 34.13 Compatibilidad con CFG-C1/C2/C3 y con los demás ADR (sin seleccionar)
+
+| Configuración o bloque | Observación | Estado |
+|---|---|---|
+| CFG-C1 (Vercel + Supabase) | Las tres alternativas son del cliente [INF]; las cabeceras de seguridad y de borrado de datos del sitio dependen del alojamiento (**no evaluadas**, OC-312); sin sincronización en segundo plano garantizada [DOC] | Condicionado; no se selecciona |
+| CFG-C2 (Vercel + Neon + Better Auth) | Igual; la sesión y los datos de sesión locales dependen de la biblioteca (ADR-03.I; OC-298) | Condicionado; no se selecciona |
+| CFG-C3 (Cloudflare + Supabase) | Entorno de Cloudflare (sesiones, reglas de caché y cabeceras) **no evaluado** (OC-182, OC-238) | Condicionado; no se selecciona |
+| ADR-05.I | Cola local, SY-23, SY-24, SY-25, SY-36, SY-37; OC-263…265, OC-280, OC-283 | Dependencia abierta |
+| ADR-03.I | Qué datos de sesión se conservan, S-A/S-B, SI-07, SI-11, SI-16, SI-17, SI-23; OC-179 | Dependencia abierta |
+| ADR-04.I | Lo local jamás es público; VP-05, VP-15, VP-16, VP-17, VP-23, VP-26; D4-5 bloqueada; D4-6 | Dependencia abierta |
+| ADR-02.I | Estado vigente al sincronizar y acceso directo (OC-190, OC-191, OC-213) | Dependencia abierta |
+| ADR-06 y ADR-08 | Cachés compartidas y señales de cambio; recálculo (OC-102, OC-121, OC-124) | Dependencia abierta |
+| ADR-09.I | Auditoría, RX-03…05, K-3; constancia frente a auditoría | Dependencia abierta |
+| ADR-01 | **Aprobado solo documentalmente;** no selecciona proveedor ni mecanismo | Dependencia abierta |
+
+### 34.14 Evaluación, puntuación y recomendación preliminar
+
+**Regla.** Pesos aprobados (R1 §2.4 y R3-A): seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %. Escala 1–5; juicio del autor [PROP], no vinculante; solo evidencia leída, lo no leído es [PEND] y no se penaliza. **Regla uniforme de rangos** (la de §33.14): (i) **Seguridad y mantenimiento:** juicios [PROP] no verificados con rango ±1 para las tres; valor central **igual (3)** cuando no hay evidencia diferenciadora y **menor (2) solo cuando la propia definición implica un hecho estructural** (aquí: ciclo de vida del material de protección en B y C); (ii) **Costo** puntúa solo planes y servicios: techo 5 y el límite inferior baja **1 punto por cada aspecto de costo no evaluado** (aquí, para las tres: cabeceras y reglas de seguridad del plan elegido, OC-312); (iii) **funcionamiento sin conexión = 3 para las tres:** el criterio **no discrimina**, porque las tres implementan la misma captura local; **los riesgos propios de cada alternativa** (por ejemplo, la inaccesibilidad del material de protección, TL-15) **se registran como condiciones y riesgos (RR16I-05), no como puntaje**, conforme al criterio de §33.14; **no se otorga ventaja ni desventaja a ninguna** por promesas no demostradas.
+
+| Criterio (peso) | ALT-16-A | ALT-16-B | ALT-16-C |
+|---|---|---|---|
+| Seguridad (35 %) [PROP, no verificado; central 3 en las tres] | 2–4 | 2–4 | 2–4 |
+| Costo (30 %) [1 aspecto no evaluado en las tres] | 4–5 | 4–5 | 4–5 |
+| Funcionamiento sin conexión (20 %) [no discrimina] | 3 | 3 | 3 |
+| Mantenimiento (15 %) [PROP; central A 3, B 2, C 2] | 2–4 | 1–3 | 1–3 |
+| **Total (rango)** | **2,80–4,10** | **2,65–3,95** | **2,65–3,95** |
+
+**Fundamento.** *Seguridad:* los tres juicios son [PROP] no verificados y de igual valor central: la protección adicional de B y C **no está demostrada frente a código en el origen ni a un dispositivo comprometido** (TL-04, TL-05) y A reduce al mínimo lo expuesto; **no se confunde protección contra lectura casual con protección frente a un dispositivo comprometido.** *Costo:* sin servicio nuevo evidente [INF]. *Sin conexión:* no discrimina (3 en las tres); el riesgo de inaccesibilidad del material (TL-15, RR16I-05) **no se convierte en puntaje**. *Mantenimiento:* B y C (2) por el ciclo de vida del material.
+**Sensibilidad.** Los rangos de B y C son **idénticos** (2,65–3,95) y se **solapan** con el de A (2,80–4,10) en 2,80–3,95; la diferencia de 0,15 en cada extremo proviene **solo** del criterio de mantenimiento (centro 3 frente a 2, por el hecho estructural del ciclo de vida del material). **El puntaje no discrimina** y las diferencias provienen de supuestos [PROP] no verificados.
+**Recomendación preliminar NO vinculante [PROP].** (1) **Los requisitos eliminatorios son los SL marcados «E»** (SL-01…08, SL-17, SL-18 y SL-23); ninguna alternativa fija D16-1, D16-2, D16-3, D16-5, OFF-12 ni Q-20. (2) La evidencia documentada **no discrimina**: **no se expresa preferencia.** (3) **La minimización, la clasificación, el aislamiento y la revalidación del servidor pesan más** que la elección de la protección adicional. (4) **No se selecciona nada;** la decisión es del responsable y **posterior** a ADR-01, a la admisión de formulaciones, a la verificación en dispositivos y a PEND-JUR. Los puntajes no sustituyen a los requisitos obligatorios, que son eliminatorios y no compensables.
+
+### 34.15 Condiciones, decisiones, riesgos y dependencias
+
+**Condiciones abiertas (OC-284…324).** Ninguna se resuelve aquí.
+
+| ID | Condición | Origen | Bloquea |
+|---|---|---|---|
+| OC-284 | Admisión formal por el responsable de C-A (D16-4) y K-A (D16-6) como conjunto admitido; D16-1, D16-2, D16-3 y D16-5 sin A; R-B y K-B (X) | Regla del cierre de R2; matriz | ADR-16.I definitivo |
+| OC-285 | **D16-1:** protección en reposo del almacén (P-A / P-B); OFF-12 «se evalúa y no se promete»; HR1-03 | OFF-12; T-1 | ADR-16.I definitivo |
+| OC-286 | **D16-2:** aislamiento por cuenta (A-A / A-B); tensión con IN-03-20 | IN-16-07 [REC]; DC3-2 | SL-09, SL-22 |
+| OC-287 | **D16-3:** retención de las operaciones pendientes; sin plazo en `01`; PRV-10 PEND-JUR | T-6; OC-50 | SL-14 |
+| OC-288 | **D16-5:** migración del formato de la cola (V-A / V-B); coordinación con IN-05-16 | OFF-16 [REC] | SL-19 |
+| OC-289 | **OC-48 (preservada):** ubicación de la conducta del cliente ante la pérdida de autorización y estado de los datos de la cuenta A con otra cuenta en uso | OFF-11; IN-05-21; T-8 | SL-12, SL-22 |
+| OC-290 | **OC-49 (preservada):** coexistencia de una protección adicional con la captura con sesión vencida | OFF-23; T-3 | SL-25 |
+| OC-291 | **OC-50 (preservada):** plazo máximo local de pendientes y criterio de «tiempo sin sincronizar» (C-B) | T-6 | SL-14, SL-20 |
+| OC-292 | **OC-51 (preservada):** comportamiento de iOS 16.4 | T-7; IOS-07 | SL-21 |
+| OC-293 | Q-20, PRV-18, OC-47, D4-5 y D4-6: nombres y datos preparados o copias en el dispositivo | IN-16-03; ES-46 | SL-02 |
+| OC-294 | Q-43, HR1-14, RES-04: contenido y purga de la exportación | IN-16-16 | SL-28 |
+| OC-295 | RES-02, RES-07, RES-08 sin aceptar; AM-08 no cubierto por ningún RES | R2-A | Cualquier aprobación |
+| OC-296 | **Material de protección:** ubicación, recuperación, pérdida, versionado y custodia; **referenciada en SL-24, DR16I-6 y RR16I-05** | SL-24; RR16-03 | B y C |
+| OC-297 | **Acción local de la persona** (código, biometría u otra): no decidida; accesibilidad, privacidad y recuperación | DR16I-7 | C |
+| OC-298 | **Datos de sesión que se conservan** (CD-09); S-A/S-B y OC-179 de ADR-03.I | SI-07, SI-16, SI-23 | SL-26 |
+| OC-299 | Estado vigente de cuenta, rol, sesión y nivel MFA al sincronizar; afirmaciones obsoletas no bastan | SY-34; OC-213; OC-179 | SL-04 |
+| OC-300 | Acceso directo del cliente a la capa de datos (GV-01…03) y datos locales: que un dato local no sirva para eludir al servidor | OC-190, OC-191 | SL-04 |
+| OC-301 | **Código en el mismo origen:** política de recursos ejecutables, integridad de lo que carga la aplicación y scripts de terceros; sin seleccionar; **no se afirma que impida la lectura del almacenamiento** | AM-34; RNF-05 (cabeceras de seguridad); ADR-01; ADR-06 | SL-16 |
+| OC-302 | **Service Worker, Cache Storage, precargas, notificaciones, recursos auxiliares, respuestas almacenadas y almacenamiento compartido entre pestañas y perfiles:** qué se guarda, lista blanca, contenido de las notificaciones, versiones y limpieza | VP-15, VP-16, VP-21, VP-26; SY-24 | SL-17, SL-31 |
+| OC-303 | Separación de almacenes y cachés entre lo interno, lo confirmado y lo publicado en el dispositivo; D4-5 | VP-05, VP-06, VP-17 | SL-18 |
+| OC-304 | **Señal de borrado de datos del sitio enviada por el servidor** al cerrar sesión: capacidad descrita en la documentación [DOC]; **no se selecciona**; solo actúa **con conexión y sobre el origen** (no sobre dispositivos que nunca se conectan) | SL-10; [DOC: MDN] | SL-10 |
+| OC-305 | Cambio de usuario en un dispositivo compartido: qué se conserva, para quién y durante cuánto | D16-2; OFF-12 | SL-22 |
+| OC-306 | Plataformas y navegadores mínimos, degradación y modo privado | RNF-07; SL-21; SL-30 | SL-21 |
+| OC-307 | Almacenamiento persistente y cuotas efectivas por plataforma [PEND] | MDN [DOC]; OC-263 | SL-15 |
+| OC-308 | **Versiones obsoletas del cliente y actualización del Service Worker:** cuánto tiempo sigue sirviéndose una versión | SL-19; TL-07 | SL-19 |
+| OC-309 | **Residuos tras el borrado** (copias del sistema, miniaturas, bloques de disco): [INF]; sin garantía de borrado físico | SL-11; TL-11 | SL-11 |
+| OC-310 | **Verificación empírica y en dispositivos reales** (incluido iOS) antes de cualquier aprobación; el modelo de amenazas es [INF] | RNF-11; HR1-07 | Fase 3 |
+| OC-311 | Hechos generales de navegadores, sistemas operativos y criptografía no verificados en fuente oficial | §34.0 [INF] | ADR-16.I definitivo |
+| OC-312 | Entorno de los tres CFG: reglas de cabeceras (política de recursos ejecutables, señal de borrado de datos del sitio) y caché: **no evaluado** | OC-182; OC-238; RNF-05 | ADR-01 |
+| OC-313 | Rendimiento y consumo de la protección adicional en dispositivos de gama baja: **no medido** | RNF-04 | B y C |
+| OC-314 | Fricción durante el partido de una acción local (ALT-16-C): **no medida** | ALT-16-C; OFF-23 | C |
+| OC-315 | Registros técnicos y monitoreo sin datos personales | PRV-12 [REC]; SL-27 | SL-27 |
+| OC-316 | Constancia local frente a aviso al servidor (K-B contradice OFF-20); **sin excepción** | D16-6; OFF-20 | SL-29 |
+| OC-317 | Retención y purga de copias públicas y datos preparados al cerrar sesión | D4-6; HR1-11; IN-04-13 | SL-13 |
+| OC-318 | Dependencias: ADR-01; ADR-02.I, ADR-03.I, ADR-04.I, ADR-05.I, ADR-09.I; ADR-06 y ADR-08 (OC-102, OC-121, OC-124); K-3 y RX-03…05 | R1 §8.2 | ADR-16.I definitivo |
+| OC-319 | **Vigencia de las fuentes:** WebKit (2020), MDN; la regla de siete días [PEND] | §34.19; OC-283 | SL-15 |
+| OC-320 | **Asesoría jurídica (PEND-JUR):** retención, datos de menores y datos en dispositivos; PRV-10, PRV-15 | PRV-10, PRV-15 | SL-14 |
+| OC-321 | D-2 sin excepción; R1 §8.1 sin cumplimiento demostrado | R1; DB2c-10 | Cualquier aprobación |
+| OC-322 | **Ciclo de vida del material de protección:** generación y disponibilidad, separación por cuenta y por torneo, rotación y revocación, reinstalación y cambio de dispositivo, pérdida, recuperación e irrecuperabilidad, y efectos del cierre de sesión y de la revocación de acceso; **todo [PEND]; sin seleccionar mecanismo** | SL-24; CD-10; DR16I-6 | B y C |
+| OC-323 | **Aislamiento por torneo en el dispositivo** (cola, datos preparados, copias y material de protección): una cuenta con roles en varios torneos no mezcla ni expone datos de un torneo en otro; **mecanismo sin seleccionar** | IN-02-04; SI-21; VP-13; SL-09 | SL-09 |
+| OC-324 | **Efecto de la invalidación de sesiones** (recuperación de cuenta, cambio de factor o pérdida de dispositivo: SI-23) sobre los datos locales, la cola y el material de protección; **[PEND]** | SI-23; IN-16-09; SL-12, SL-22 | SL-12, SL-22 |
+
+**Decisiones que corresponden al responsable (DR16I-1…11).** Ninguna se toma aquí.
+
+| ID | Decisión | Condiciones |
+|---|---|---|
+| DR16I-1 | Admitir, ajustar o rechazar C-A y K-A como conjunto admitido; qué hacer con las formulaciones C y X; **no se admite aquí** | OC-284 |
+| DR16I-2 | **D16-1:** si se exige una protección adicional en reposo (heredada, bloqueada) | OC-285, OC-290 |
+| DR16I-3 | **D16-2:** aislamiento por cuenta y por torneo (heredada, bloqueada) | OC-286, OC-289, OC-305, OC-323 |
+| DR16I-4 | **D16-3:** retención de pendientes (heredada, bloqueada; PEND-JUR) | OC-287, OC-291, OC-320 |
+| DR16I-5 | **D16-5:** migración del formato (heredada, bloqueada) | OC-288, OC-308 |
+| DR16I-6 | Gestión del **material de protección** y de su pérdida: ubicación, recuperación, custodia y qué se informa a la persona; generación, rotación, revocación y reinstalación del material | OC-296, OC-322 |
+| DR16I-7 | Si se admite una **acción local de la persona** (y de qué tipo, incluida la biometría) como parte de la protección | OC-297, OC-314 |
+| DR16I-8 | Qué datos de sesión se conservan, su relación con S-A/S-B y el efecto de la invalidación de sesiones sobre lo local | OC-298, OC-299, OC-324 |
+| DR16I-9 | Alcance de los controles exigidos al cliente frente a código en el origen y de la señal de borrado de datos del sitio | OC-301, OC-304, OC-312 |
+| DR16I-10 | Plataformas mínimas y degradación; verificación en dispositivos | OC-306, OC-307, OC-310 |
+| DR16I-11 | Retención de copias públicas y datos preparados tras cerrar sesión y su relación con Q-20 y D4-5 | OC-293, OC-317 |
+
+**Riesgos de redacción (RR16I-01…28).** No se aceptan; se registran.
+
+| ID | Riesgo | Mitigación documental |
+|---|---|---|
+| RR16I-01 | Elegir de hecho una alternativa, un mecanismo o un método de desbloqueo al describir ventajas | §34.4; SL-33; DR16I-2, DR16I-6, DR16I-7 |
+| RR16I-02 | Presentar IndexedDB, Cache Storage o el cifrado local como garantía de confidencialidad | SL-08; §34.19 |
+| RR16I-03 | Confundir protección frente a lectura casual con protección frente a dispositivo comprometido o código en el origen | SL-08; TL-01…05 |
+| RR16I-04 | Guardar secretos de sesión o privilegiados en recursos accesibles desde JavaScript | SL-03; CD-07, CD-08 |
+| RR16I-05 | **Pérdida o inaccesibilidad del material de protección** y pérdida de capturas (B y C) | SL-24; SL-07; OC-296 |
+| RR16I-06 | Fricción de una acción local durante el partido y captura bloqueada (C) | SL-06; OC-314 |
+| RR16I-07 | Material de protección al alcance del mismo código que lee el almacén: protección aparente | SL-24; TL-05 |
+| RR16I-08 | Presentar el cierre de sesión o el borrado lógico como borrado físico o como revocación | SL-10…12; OC-309 |
+| RR16I-09 | Dispositivo que nunca se conecta tras una revocación (D-2) | SL-12; SCL-07; sin aceptar |
+| RR16I-10 | Persistir datos de menores o nombres con Q-20 abierta, aun protegidos | SL-02, SL-23 |
+| RR16I-11 | Cachés o respuestas sin conexión que exponen lo no publicado | SL-17, SL-18; SCL-14 |
+| RR16I-12 | Versión obsoleta del cliente o Service Worker con un fallo de seguridad | SL-19; OC-308 |
+| RR16I-13 | Actualización que descarta o corrompe la cola o el material | SL-19; SCL-13 |
+| RR16I-14 | Prometer recuperación de lo nunca sincronizado | SL-07; SL-20 |
+| RR16I-15 | Presentar una operación como guardada sin confirmar persistencia (incluida la protección) | SL-05; SL-06 |
+| RR16I-16 | Apoyarse en comportamientos de iOS no verificados o en iOS 17 para 16.4 | SL-21; OC-292 |
+| RR16I-17 | Usar el estado o la afirmación local obsoleta para eludir validaciones vigentes | SL-04; SL-26 |
+| RR16I-18 | Exposición entre cuentas en dispositivos compartidos | SL-09; SL-22 |
+| RR16I-19 | Fijar de hecho un plazo de retención no aprobado | SL-14; OC-287, OC-291 |
+| RR16I-20 | Invadir ADR-03.I, ADR-04.I, ADR-05.I, ADR-06 u otras decisiones al describir | §34.6 |
+| RR16I-21 | Resolver en silencio OFF-12, Q-20, K-3, OC-48…51 o D16-x | §34.0; DR16I-1…11 |
+| RR16I-22 | Registros técnicos que filtran datos personales | SL-27 |
+| RR16I-23 | Exportación fuera del control (archivo no purgable) | SL-28; OC-294 |
+| RR16I-24 | Tratar los puntajes o la matriz como preferencia o como cumplimiento | §34.10; §34.14 |
+| RR16I-25 | Presentar el borrador como verificación en dispositivo, auditoría o cumplimiento legal | §34.0; OC-310; OC-320 |
+| RR16I-26 | Presentar la señal de borrado de datos del sitio como garantía en dispositivos sin conexión | OC-304; SL-12 |
+| RR16I-27 | Asumir que el comportamiento de un navegador hoy rige en todas las versiones y dispositivos | OC-319; SL-21 |
+| RR16I-28 | Ampliar lo permitido localmente por existir una protección adicional | SL-23; CD |
+
+### 34.16 Pruebas negativas y de recuperación (documentales; no ejecutadas)
+
+| Prueba | Qué demuestra | Requisito | Tipo |
+|---|---|---|---|
+| Inspeccionar el almacén local, los cachés y el almacenamiento web con datos sintéticos tras capturar, sincronizar y cerrar sesión | Solo hay clases permitidas (CD); sin campos internos, nombres con Q-20 abierta ni secretos | SL-01…03, SL-23 | I, E2E |
+| Ejecutar un script de prueba en el origen (entorno sintético) que lee almacenes y cachés | Se documenta **qué es legible**; **no** se afirma protección frente a código en el origen | SL-08, SL-16 | Seguridad |
+| Provocar cuota llena, fallo de escritura y modo privado durante la captura | Nunca se presenta como guardado sin confirmar; mensaje explícito | SL-05, SL-06, SL-30 | E2E |
+| Cerrar sesión con y sin pendientes; cambiar de cuenta en el mismo dispositivo | Confirmación; sin acceso cruzado; el borrado se presenta como lógico | SL-09, SL-10, SL-11, SL-22 | E2E |
+| Revocar o desactivar la cuenta y sincronizar después de la desconexión | El servidor rechaza; los datos locales persisten hasta el contacto; sin promesa de borrado remoto | SL-12, SL-13 | I, E2E |
+| Respuesta sin conexión con un resultado confirmado no publicado | No se guarda ni se sirve en copias públicas | SL-17, SL-18, SL-31 | I |
+| Notificaciones, precargas y almacenamiento compartido entre pestañas y perfiles, con datos sintéticos | Sin datos no publicados ni personales en ellos | SL-17, SL-31 | I, E2E |
+| Actualizar la PWA con la cola (y, si existe, el formato protegido) pendiente | Cola y material intactos o actualización bloqueada | SL-19 | E2E |
+| (B, C) Simular material de protección inaccesible | Pérdida informada; sin promesa de recuperación | SL-07, SL-24 | E2E |
+| (C) Sesión vencida con acción local requerida | La captura continúa o la tensión se declara | SL-25 | E2E |
+| MFA vencido o rol cambiado durante la desconexión, y acción local de ALT-16-C | Se revalida antes de aplicar; rechazo con motivo; la acción local no acredita MFA | SL-04, SL-25; SCL-25 | I, E2E |
+| Eliminar el almacenamiento del navegador con pendientes | Pérdida informada; lo confirmado no se pierde | SL-07, SL-15, SL-20 | E2E |
+| Registrar errores del almacén con datos sintéticos | Sin datos personales | SL-27 | I |
+| Verificar en dispositivos Android e iOS reales (incluido iOS 16.4) | Comportamiento real de persistencia, expulsión y protección; **hoy [NO VERIF]** | SL-15, SL-21 | Dispositivo (Fase 3) |
+
+### 34.17 Criterios para la revisión focalizada y de revisión documental
+
+| ID | Criterio | Cumplimiento según el autor (a revisar) |
+|---|---|---|
+| CR16I-01 | ≥ 3 alternativas distinguibles, ninguna seleccionada | Cumple: §34.4 |
+| CR16I-02 | Las 16 facetas pedidas (y la 17, de ciclo de vida del material) están cubiertas | Cumple: §34.9 y §34.5 |
+| CR16I-03 | Clasificación de lo permitido, restringido y prohibido, con fuente y tipo | Cumple: §34.3 |
+| CR16I-04 | Sin secretos privilegiados en recursos accesibles desde JavaScript | Cumple como requisito: SL-03; no demostrado |
+| CR16I-05 | Ninguna afirmación de que IndexedDB, Cache Storage o el cifrado garantizan por sí solos la confidencialidad | Cumple: SL-08, §34.19 |
+| CR16I-06 | Distinción entre lectura casual, robo con bloqueo y dispositivo comprometido o código en el origen | Cumple: SL-08, §34.7 |
+| CR16I-07 | Cierre de sesión y eliminación local no se presentan como borrado físico ni como revocación | Cumple: SL-10…12 |
+| CR16I-08 | El almacenamiento local no evita las validaciones vigentes | Cumple: SL-04, SL-26 |
+| CR16I-09 | Ninguna operación se presenta como guardada sin confirmar persistencia | Cumple: SL-05, SL-06 |
+| CR16I-10 | Sin promesa de recuperar lo nunca enviado y perdido | Cumple: SL-07, SL-20 |
+| CR16I-11 | Ninguna exposición de lo no publicado por cachés, respuestas sin conexión o recursos auxiliares | Cumple: SL-17, SL-18, SL-31 |
+| CR16I-12 | Sin decisiones sobre biometría, cifrado, claves ni retención | Cumple: DR16I-2…7, DR16I-9; §34.0 |
+| CR16I-13 | Matriz de conformidad y puntuación uniformes, con aritmética verificable | Cumple según el autor: §34.10, §34.14; **a revisar** |
+| CR16I-14 | Evidencia [DOC], [INF] y [PEND] distinguidas; sin «por diseño» para inferencias | Cumple según el autor: §34.19; **a revisar** |
+| CR16I-15 | Modelo de amenazas con límites explícitos | Cumple: §34.7 |
+| CR16I-16 | Requisitos, decisiones, condiciones y riesgos sin resolver ni aceptar | Cumple: §34.15 |
+| CR16I-17 | Dependencias de ADR-01, 02.I, 03.I, 04.I, 05.I, 06, 08 y 09.I identificadas | Cumple: §34.13 |
+| CR16I-18 | Solo se modifica `02-arquitectura-adr.md`; las Partes anteriores quedan idénticas; `aprobaciones.md` y `bitacora.md` intactos | Cumple según el autor, comprobable con Git (diferencia con el HEAD y sumas SHA-256 de los tres archivos); **a revisar** |
+| CR16I-19 | La trazabilidad del versionado de ADR-05.I consta solo como nota posterior en §34.0 | Cumple: §34.0 |
+| CR16I-20 | Borrador **no aprobado y no versionado**; autoevaluación del autor, **no auditoría independiente** | Cumple: §34.0, §34.18 |
+
+### 34.18 Estado y preguntas para el responsable
+
+**Estado:** R3-E / ADR-16.I **v0.2-R3E-16I: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (ver «Aprobación (metadato)» en §34.0).** No es aprobación definitiva; no versionado en el momento de redactarse. Autoevaluación del autor, no auditoría independiente. **C-A y K-A son candidatas A no admitidas; las formulaciones C y X conservan su estado de R2; D16-1, D16-2, D16-3 y D16-5 están bloqueadas.** R3-F y R4: **NO INICIADOS.** Siguen abiertas todas las decisiones y condiciones heredadas de R1, R2, R3-A…D y de ADR-09.I, ADR-03.I, ADR-02.I, ADR-04.I y ADR-05.I; **R3-E tiene sus seis ADR `.I` documentados, pero continúa SIN aprobación global y sin cierre.**
+
+**Preguntas:** DR16I-1 a DR16I-11 y las condiciones OC-284 a OC-324 (§34.15); en particular, si se exige una protección adicional en reposo (DR16I-2), la gestión del material de protección y de su pérdida (DR16I-6), si se admite una acción local de la persona (DR16I-7) y las plataformas mínimas (DR16I-10).
+
+### 34.19 Evidencia documentada frente a inferencias
+
+**Fuentes oficiales leídas (MDN, páginas descargadas y convertidas a texto; sin acceso a las especificaciones originales ni a las páginas de cada navegador).**
+
+| Hecho | Fuente | Etiqueta |
+|---|---|---|
+| IndexedDB aplica el principio de **mismo origen**: ata el almacén al origen que lo crea y otros orígenes no pueden acceder; el contenido de terceros (iframes) puede no acceder si el navegador bloquea cookies de terceros | MDN, «Using IndexedDB» (Security) | [DOC] |
+| La API de **Cache** es un almacenamiento persistente para pares petición-respuesta; **no expiran salvo que se eliminen**; el navegador **puede eliminar el almacenamiento de un origen** y, por lo general, **elimina todos o ninguno** de sus datos; hay un límite por origen; solo en contexto seguro | MDN, «Cache» | [DOC] |
+| Almacenamiento «best-effort», solicitud de almacenamiento persistente aprobada o denegada automáticamente, expulsión por presión de almacenamiento y eliminación proactiva en Safari para orígenes poco usados; en modo privado los datos suelen eliminarse al cerrarlo | MDN (cuotas y expulsión), leída para §33.11 | [DOC] |
+| Regla de siete días de WebKit (24 de marzo de 2020; vigencia actual no verificada) | WebKit, ITP | [DOC] / [PEND] |
+| `CryptoKey.extractable` indica si la clave puede extraerse con `exportKey()` o `wrapKey()`; la Web Crypto API solo está disponible en contexto seguro y **advierte que es muy fácil usarla mal y que la gestión segura de claves y el diseño general de seguridad son difíciles** | MDN, «CryptoKey» y «Web Crypto API» | [DOC] |
+| La **política de seguridad de contenido (CSP)** se usa principalmente como defensa frente a XSS y proporciona una **defensa en profundidad incluso cuando falla la sanitización** | MDN, «Content Security Policy (CSP)» | [DOC] |
+| La cabecera de respuesta `Clear-Site-Data` indica al cliente que elimine datos de navegación del **sitio** (cookies, almacenamiento DOM —incluidos IndexedDB, almacenamiento web—, cachés); **es una cabecera de respuesta** (requiere que el navegador reciba una respuesta del origen) y su disponibilidad tiene partes con distinto soporte | MDN, «Clear-Site-Data» | [DOC]; la dependencia de la conexión es [INF] |
+
+**Inferencias [INF].** (1) **Cualquier código que se ejecute en el origen puede leer lo que la aplicación puede leer**, incluido el material de protección si es accesible a la aplicación; por tanto **una protección en reposo no protege frente a XSS o scripts de terceros** y reduce el daño solo si el material no está al alcance de ese código [PEND]; (2) la protección adicional puede reducir la exposición **fuera de la aplicación** (copia o lectura del disco) **solo si el material no es accesible al mismo atacante [PEND]**, y no frente a quien opera el dispositivo desbloqueado ni frente a un dispositivo comprometido; (3) **un cierre de sesión local no equivale a un borrado físico** ni a una revocación del servidor; (4) los **residuos** (copias del sistema, miniaturas, bloques de disco) no se controlan desde la PWA; (5) la señal de borrado de datos del sitio **solo actúa si el dispositivo se conecta y recibe la respuesta**; (6) una pérdida del material de protección es irreversible [INF] y su recuperación depende de decisiones no tomadas; (7) la protección y el desbloqueo locales **varían** entre plataformas; (8) una política de recursos ejecutables **no sustituye evitar la inyección** ni impide por sí sola que el código ya ejecutado lea el almacenamiento [INF].
+**Pendiente [PEND].** Cualquier comportamiento en dispositivos reales (Android, iOS 16.4 y posteriores); cuotas y persistencia efectivas; capacidades de protección y desbloqueo local del navegador y del sistema; ubicación posible del material respecto del código del origen; rendimiento; vigencia de las fuentes; asesoría jurídica; estado del entorno de los tres CFG. **PostgreSQL y los hechos de los proveedores no se leyeron para este borrador** (no se necesitan para el almacenamiento local).
+**Limitaciones de la autoevaluación.** (1) El borrador lo redactó y revisó **el mismo autor**: **no es una auditoría independiente**; (2) las clasificaciones, los alcances de §34.7 y las puntuaciones son juicios [PROP]/[INF] **no verificados empíricamente**; (3) **no se probó nada en dispositivos**; (4) no se leyeron las especificaciones originales ni las páginas de cada navegador; (5) la matriz de conformidad **no declara cumplimiento**; (6) no sustituye la asesoría jurídica (PEND-JUR).
+
+### 34.20 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| H-1 | SL-24 ampliado (generación y disponibilidad, separación por cuenta y torneo, rotación y revocación, reinstalación y cambio de dispositivo, pérdida e irrecuperabilidad, cierre de sesión y revocación de acceso); faceta 17; OC-322; todo [PEND], sin mecanismo | §34.5, §34.9, §34.10, §34.15 |
+| H-2 | «Funcionamiento sin conexión = 3» en las tres; totales A 2,80–4,10, B y C 2,65–3,95; regla, fundamento y sensibilidad reformulados; el riesgo del material queda en RR16I-05 y TL-15 | §34.14 |
+| H-3 | Lectura previa reescrita: directa, por búsquedas y consumida de lo registrado | §34.0 |
+| H-4 | SL-09 y CD-02 por cuenta y por torneo; IN-02-04, SI-21 y VP-13; OC-323 | §34.3, §34.5, §34.7, §34.15 |
+| H-5 | SL-31, TL-08 y OC-302 ampliados a notificaciones, precargas, almacenamiento compartido, pestañas y perfiles; VP-21 y VP-26; fila de prueba | §34.5, §34.7, §34.15, §34.16 |
+| H-6 | CD-04 y §34.6 en [PEND]: no se autoriza conservar lo confirmado no publicado; D4-5 y VP-17 abiertas | §34.3, §34.6 |
+| H-7 | SL-04 y SL-25: capturar sin conexión no equivale a autorización; revalidación de permisos y MFA antes de aplicar; la acción local de C no acredita MFA; SCL-25 y fila de prueba | §34.5, §34.8, §34.16 |
+| H-8 | ALT-16-B/C, TL-02, TL-03 y la inferencia (2) condicionadas a la ubicación y disponibilidad del material [PEND] | §34.4, §34.7, §34.19 |
+| H-9 | SL-16 «E/C» uniforme en las tres; leyenda de la matriz ampliada | §34.10 |
+| H-10 | Afirmación por ausencia sobre CSP retirada de la tabla [DOC] y reclasificada como inferencia (8) | §34.19 |
+| H-11 | TL-05 limitada a XSS; TL-19 (scripts de terceros) y TL-20 (dependencias comprometidas) con sus límites | §34.7 |
+| H-12 | CR16I-19 sin el hash; CR16I-18 sin remitir a un informe externo; el commit de ADR-05.I consta solo en §34.0 | §34.0, §34.17 |
+| H-13 | SL-12 y SL-22 vinculadas a SI-23; OC-324 | §34.5, §34.15 |
+| N-1 | **Ajuste de neutralidad (verificación final de v0.2):** SL-20 pasa a «C (RR16I-05, TL-15)» en las tres alternativas; la leyenda explica «E/C»; las diferencias reales de riesgo se conservan en §34.4, TL-15 y RR16I-05; puntuaciones sin cambios; SL-25 sin cambios (OC-49 / T-3) | §34.10, §34.20 |
