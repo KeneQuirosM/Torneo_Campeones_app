@@ -10205,3 +10205,39 @@ Corrigen los hallazgos de la revisión focalizada de R3-F. **No añaden identifi
 - **Exclusiones (el cierre NO implica):** admitir formulaciones; seleccionar alternativas, proveedores o mecanismos; resolver decisiones técnicas o aceptar riesgos; conceder excepciones; declarar satisfechos requisitos técnicos pendientes; cerrar R3-F o R3; aprobar R3 o la Fase 2; iniciar R4 o la Fase 3; escribir código o modificar infraestructura o bases de datos.
 - **Integridad.** SHA-256 de `02-arquitectura-adr.md` **inmediatamente antes de este registro** (archivo versionado en `5cc75acf019cf9578d281d61b069608295046e28`): `7be8a6648a7901aa0f8a0ca66d74eef604f62bd02bdeb6322d17d929dffb8ea6`. La diferencia con la versión posterior es exclusivamente la adición de esta sección 35.15; el hash del archivo resultante se registra en `aprobaciones.md` y `bitacora.md`.
 - **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
+
+### 35.16 Registro de cierre documental condicionado de R3 como conjunto (posterior a la aprobación de R3-F y al cierre de R3-E; separado de E1…E7)
+
+**Este registro no forma parte de los entregables R3F-E1…E7 ni de su contenido sustantivo.** Se añade al final de §35 como **evidencia posterior**; no reescribe las Partes anteriores, el encabezado histórico ni §12, y no corrige estados históricos ni la fila histórica de R2-C4.
+
+- **Decisión del responsable (2026-11-23, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — CIERRE DOCUMENTAL CONDICIONADO DE R3 COMO CONJUNTO»: «AUTORIZO EXPRESAMENTE EL CIERRE DOCUMENTAL CONDICIONADO DE R3 COMO CONJUNTO, QUE COMPRENDE R3-A, R3-B, R3-C, R3-D, R3-E Y R3-F.» **Estado: R3: CIERRE DOCUMENTAL CONDICIONADO APROBADO.** Reconoce **exclusivamente la suficiencia y trazabilidad documental del alcance trabajado.** **No constituye** aprobación arquitectónica definitiva, confirmación de decisiones condicionadas a ADR-01, aprobación global de la Fase 2 ni autorización de implementación.
+- **Alcance exacto** (entregables documentados y aprobados condicionalmente de R3-A…R3-F):
+
+| Subbloque | Alcance | Parte · § | Versión | Commit (aprobación o cierre versionado) | Estado documental |
+|---|---|---|---|---|---|
+| R3-A | ADR-01 y ADR-10 | Parte XI · §25 | v0.2-R3A | `4136066c755acdf95667c5103763b9f5ab8cd377` | aprobación documental condicionada |
+| R3-B | ADR-15 | Parte XII · §26 | v0.2-R3B | `ea9cfd35aedbcdcf8e8a40bdff4191e883efdaf0` | aprobación documental condicionada |
+| R3-C | ADR-06 y ADR-07 | Parte XIII · §27 | v0.2-R3C | `ed1550b9d0b89bf475b25c4e53bd79e30a3b4aa5` | aprobación documental condicionada |
+| R3-D | ADR-08 | Parte XIV · §28 | v0.2-R3D | `efee9903e3550224b9c438d2aec487680b44cbaa` | aprobación documental condicionada |
+| R3-E | ADR-09.I, 03.I, 02.I, 04.I, 05.I y 16.I | Partes XV–XX · §29–§34 | seis versiones v0.2-R3E-02I…16I | `bd453ce917429fdc01fd6296b9fbab04bd734c65` | cierre documental condicionado propio (seis aprobaciones documentales condicionadas versionadas en dfacd85, 83b7571, f4aa2dd, 323b53e, 27d5aae y bb9cbb1) |
+| R3-F | Cierre y trazabilidad de R3 | Parte XXI · §35 | v0.1-R3F | `5cc75acf019cf9578d281d61b069608295046e28` | aprobación documental condicionada del entregable; comprendido en el cierre del conjunto, sin registro de cierre independiente |
+
+  **R3-E conserva su cierre documental condicionado separado**, versionado en `bd453ce917429fdc01fd6296b9fbab04bd734c65` (`bd453ce`; verificable por Git; 2026-11-23T05:46:43Z). **R3-F queda comprendido dentro del cierre del conjunto R3**, sin un registro independiente de cierre como subbloque. **No se afirma que R3-A…R3-D tengan cierres individuales: no existen;** solo tienen aprobación documental condicionada.
+- **Tratamiento de DR3F-1…6** (evidencia posterior; **§35.11 no se reescribe**; si alguna formulación no coincidiera con este alcance, el punto queda abierto):
+
+| ID | Evidencia posterior |
+|---|---|
+| DR3F-1 | **Aclarado** por la instrucción complementaria anterior (§35.13); no es una decisión arquitectónica |
+| DR3F-2 | Este mensaje **adopta expresamente la nota de precedencia de §35.6, solo para interpretar el estado documental vigente**, sin seleccionar, aprobar ni confirmar decisiones técnicas; el borrador ya estaba aprobado como entregable documental condicionado (`5cc75acf019cf9578d281d61b069608295046e28`) |
+| DR3F-3 | La nota posterior de `bb9cbb1` **ya consta** en los registros de ADR-16.I; se conserva la evidencia |
+| DR3F-4 | **Sigue abierto.** Este mensaje **no autoriza** corregir estados históricos ni la fila de R2-C4 |
+| DR3F-5 | Este mensaje autoriza el cierre documental condicionado de **R3 como conjunto** y el de R3-E consta por separado (`bd453ce917429fdc01fd6296b9fbab04bd734c65`): **ambos actos nominales** existen; **no se extiende a aprobación técnica** |
+| DR3F-6 | **Confirmado:** R3-F consolida **únicamente la trazabilidad de R3**; **la trazabilidad final y la auditoría independiente están reservadas para R4** |
+
+- **Nota de precedencia adoptada y sus límites.** El responsable **adopta expresamente** la nota propuesta en §35.6, **exclusivamente para interpretar el estado documental vigente de R3.** **Este registro prevalece, solo en materia de estado documental,** sobre referencias históricas como «R3 y R4 NO INICIADOS», «R3-E PARCIAL EN CURSO», «R3-F en borrador» y la sección histórica «Próximo paso» de `aprobaciones.md`, y sobre las menciones equivalentes de §35 que describen cierres pendientes (§35.0, §35.3, §35.10 y §35.12). **No se modifican, borran ni reinterpretan** esas referencias. **Límites:** la nota no satisface R1 §8.1, no confirma decisiones condicionadas a ADR-01 (R1 §8.2) y no es una selección ni una aprobación técnica.
+- **Condiciones preservadas.** **Ninguna formulación admitida; ninguna alternativa seleccionada;** las **16 decisiones sin formulación A bloqueadas**; **DR y OC pendientes según su estado real**; **RR y RES sin aceptar**; **R1 §8.1 sin cumplimiento demostrado**; **R1 §8.2 sin confirmación definitiva de los ADR `.I` dependientes de ADR-01**; **D-2 sin excepción**; **DB1-1 y K-3 pendientes**; **AM-19 y AM-34 pendientes**; cuestiones jurídicas (PEND-JUR) y verificación empírica pendientes; **sin garantías técnicas demostradas, sin auditoría independiente y sin implementación**.
+- **Traslado a R4 (por referencia, sin iniciarlo).** Las referencias de §35.8 (ADR-11, ADR-12, ADR-13, ADR-14 y ADR-17); la **trazabilidad final** y la **auditoría de cierre por un revisor separado del autor y con contexto nuevo**; y el requisito de que esos ADR de R4 dependen de ADR-01, hoy solo con aprobación documental condicionada. **El cierre de R3 no autoriza comenzar R4 ni la Fase 3.**
+- **Estado.** **R3: cierre documental condicionado aprobado** (sin aprobación arquitectónica definitiva). **R3-E:** cierre documental condicionado separado. **R3-F:** comprendido en el cierre del conjunto. **R4: NO INICIADO. Fase 2: EN DESARROLLO, SIN APROBACIÓN GLOBAL. Fase 3: NO INICIADA.**
+- **Exclusiones (el cierre NO implica):** admitir formulaciones o seleccionar alternativas; resolver decisiones técnicas; aceptar riesgos o conceder excepciones; declarar cumplidas garantías técnicas; corregir estados históricos o la fila de R2-C4; aprobar definitivamente los ADR; aprobar la Fase 2; iniciar R4 o la Fase 3; escribir código o modificar infraestructura o bases de datos.
+- **Integridad.** SHA-256 de `02-arquitectura-adr.md` **inmediatamente antes de este registro** (archivo versionado en `bd453ce917429fdc01fd6296b9fbab04bd734c65`): `de8f06fe15c3a0ad87ce787b40beafb8c84b0fe107ae49ddb6aa3918c8b78c1d`. La diferencia con la versión posterior es exclusivamente la adición de esta sección 35.16; el hash del archivo resultante se registra en `aprobaciones.md` y `bitacora.md`. **Autoevaluación del autor, no auditoría independiente.**
+- **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
