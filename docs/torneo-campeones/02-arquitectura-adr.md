@@ -8956,3 +8956,447 @@ Las tres alternativas difieren en **dónde se aplica la frontera pública** (lis
 | M-4 | VP-27 [PROP]: mínimo privilegio para todas las rutas de lectura pública del servidor (renderizado, feeds, vistas previas, recursos auxiliares); alternativa y mecanismo pendientes (OC-245, DR4I-11, RR4I-21) | §32.3, §32.4, §32.15 |
 | M-5 | Tabla de tres niveles (origen, caché compartida, copias descargadas) con garantías demostrables y límites; VP-07 precisa que agrupar datos no demuestra atomicidad ni coherencia transaccional ni cumple RT-14; CL-30 sin cumplimiento demostrado | §32.3 (VP-07, VP-09), §32.8 |
 | M-6 | VP-14 vinculado con SI-07 y AZ-03 (autorización vigente al publicar); OC-228, OC-233 y OC-235 referenciadas en VP-09, VP-13, VP-18 y VP-25; «GV-01-compatible» reformulado como «compatible con GV-01, condicionada a OC-190, sin seleccionarla» | §32.3, §32.4, §32.15 |
+
+---
+
+# PARTE XIX — BLOQUE R3-E / ADR-05.I (v0.2-R3E-05I, APROBADO CONDICIONALMENTE COMO ENTREGABLE DOCUMENTAL, R3-E PARCIAL EN CURSO; 2026-11-23 inferida)
+
+## 33. R3-E — ADR-05.I (implementación de la sincronización sin conexión): evaluación y borrador condicionado
+
+### 33.0 Alcance, autorización, puerta de entrada y reglas
+
+- **Autorización (2026-11-22, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R3-E: INICIO DE ADR-05.I»: «AUTORIZO EXCLUSIVAMENTE INICIAR EL BORRADOR DOCUMENTAL CONDICIONADO DE ADR-05.I — SINCRONIZACIÓN SIN CONEXIÓN.» Solo se modifica este documento, con esta Parte nueva. **No se redacta ADR-16.I; no se inicia R3-F ni R4.**
+- **Puerta de entrada (verificada, solo lectura previa).** R1 §8.2: ADR-05.I requiere ADR-05.C y ADR-01; ADR-05.C requiere ADR-02.C, ADR-03.C y ADR-09.C. ADR-05.C es **propuesta** (§21); ADR-01, ADR-02.I, ADR-03.I, ADR-04.I, ADR-06, ADR-08 y ADR-09.I están aprobados solo de forma documental condicionada y **no seleccionan proveedor ni mecanismo**. La matriz de R2 clasifica como **A** únicamente **D5-3 (CAP-05-F-A, equivalente a F-2)** y **D5-5 (CAP-05-B-B)**, candidatas **no admitidas** por el responsable; **D5-1, D5-2, D5-4, D5-6 y D5-7 no tienen formulación A** y quedan **bloqueadas para selección**. **No hay bloqueo obligatorio para redactar un borrador condicionado que no selecciona.** Un `.I` solo puede **elegir** entre formulaciones que el responsable haya admitido: no hay conjunto admitido, así que **este borrador no elige nada.**
+- **Qué es este borrador.** Una evaluación de alternativas de implementación con una **recomendación preliminar no vinculante**. **F-A y B-B se tratan solo como candidatas documentales no admitidas;** las formulaciones C no se consideran rechazadas ni las A aprobadas. **No se seleccionan alternativas, proveedores ni mecanismos.** No resuelve D5-1, D5-2, D5-4, D5-6, D5-7, K-3, OFF-06 sobre lo rechazado, OFF-07, A-9…A-16, Q-42 ni Q-43; no aprueba ADR; no acepta riesgos ni concede excepciones; **no concede excepción a D-2**; **no declara cumplido R1 §8.1**; no escribe código, no modifica bases de datos ni crea cuentas.
+- **Convención.** [DOC]: dato leído en la página oficial citada (§33.18). [CONF]: texto confirmado de `01`, R1 o R2 con el estado que allí declara. [REC]: recomendación sin decidir. [PROP]: propuesta del autor. [INF]: inferencia o cálculo del autor. [PEND]: pendiente o sin verificar. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; **lo no leído se marca [PEND] y no se penaliza en la puntuación.** Una **inferencia por ausencia de documentación** se rotula [INF], nunca [DOC]. **«Por diseño» solo se usa cuando la propia definición de la alternativa lo garantiza; nunca para una inferencia.** Los hechos generales de protocolos, de PostgreSQL y de navegadores no verificados en fuente oficial son [INF].
+- **Identificadores nuevos (sin colisión).** **ALT-05-A, ALT-05-B, ALT-05-C** (alternativas de implementación), **SY-01…39** (requisitos de sincronización verificables), **SCN-01…25** (escenarios críticos de conflicto y recuperación), **DR5I-1…11** (decisiones del responsable), **OC-246…283** (condiciones abiertas), **RR5I-01…26** (riesgos de redacción), **CR5I-01…19** (criterios de revisión documental).
+- **Versión 0.2 (correcciones de la revisión focalizada).** Aplica M-1…M-8 (§33.20): **aplicación efectiva única** distinguida de la deduplicación de transporte y registro de idempotencia persistente en la misma unidad, con horizonte de aceptación opcional (SY-33); **precondiciones vigentes por operación** dentro de su propia unidad, sin instantáneas del lote o de la sesión (SY-34); **dependencias** (hueco, pendiente, rechazada, conflicto) distinguidas (SY-35); **privacidad de todas las respuestas de sincronización** (SY-36); **fallos de persistencia local** (SY-37); **recuperación y reintentos controlados sin Background Sync** (SY-38); **auditoría de lo aplicado y de los reenvíos** (SY-39, con la **corrección puntual C-1** que distingue transacción revertida de resultado remoto desconocido, §33.20); fecha de la fuente de WebKit y vigencia [PEND]. **Sin seleccionar alternativas ni mecanismos; sin fijar plazos; D5-1, D5-2, D5-4, D5-6, D5-7, K-3, OFF-06, OFF-07, A-9…A-16, Q-42, Q-43 y RT-14 sin resolver; D-2 sin excepción; R1 §8.1 sin declarar cumplido.**
+- **Exclusiones.** Admitir, seleccionar o descartar formulaciones (A, C o X); elegir alternativa, protocolo, mecanismo de idempotencia, de almacenamiento local, de sincronización en segundo plano, de caché o proveedor; resolver D5-1, D5-2, D5-4, D5-6, D5-7, K-3, A-9…A-16, Q-42, Q-43, OC-35…44, OC-102, OC-121, OC-124, OC-147, D-2 ni otra decisión heredada; aceptar riesgos o brechas; aprobar ADR-05.I, R3-E, R3 ni la Fase 2; redactar ADR-16.I; iniciar R3-F ni R4; modificar las Partes I–XVIII ni los registros.
+- **Aprobación (metadato; 2026-11-23, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-05.I»: «APRUEBO EXCLUSIVAMENTE ADR-05.I v0.2-R3E-05I COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: ADR-05.I (v0.2-R3E-05I): APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL; R3-E sigue como bloque parcial en curso.** **La aprobación cubre la versión v0.2-R3E-05I, incluidas las correcciones M-1…M-8 y la corrección focalizada C-1 (§33.20).** **Esta aprobación NO equivale a aprobar R3-E completo ni a seleccionar alternativa, mecanismo, protocolo, almacenamiento local ni proveedor, ni a admitir formulaciones.** El evento de aprobación es independiente y no reutiliza identificadores DR5I. No aprueba definitivamente ADR-05.I ni resuelve decisiones, ni acepta riesgos, ni concede excepciones; no acredita la aplicación efectiva única, la idempotencia, el orden, la conservación local, la auditoría de lo aplicado ni control alguno. Se conservan: **ALT-05-A, ALT-05-B y ALT-05-C sin selección**; rangos **ALT-05-A y ALT-05-B: 2,80–4,10; ALT-05-C: 2,35–3,95**, que se solapan y **no discriminan**; **SY-01…39 y SCN-01…25 como requisitos y escenarios documentales, sin afirmar implementación**; **DR5I-1…11 y OC-246…283 abiertas**; **RR5I-01…26 sin aceptar**; **D5-3 (F-A) y D5-5 (B-B) como candidatas no admitidas**; **F-B y B-A sin descartar**; **D5-1, D5-2, D5-4, D5-6 y D5-7 bloqueadas para selección**; **K-3, OFF-06, OFF-07, A-9…A-16, Q-42, Q-43 y RT-14 sin resolver**; **OC-257 y las limitaciones transaccionales sin cumplimiento demostrado**; **D-2 sin excepción**; **R1 §8.1 sin cumplimiento demostrado**; la **distinción de C-1**: transacción revertida y demostrada (efectos no aplicados) frente a resultado remoto desconocido (la operación podría estar aplicada), con conciliación por identificador estable y registro persistente de SY-33 antes de decidir el reintento, **sin seleccionar ningún estado local** (D5-6, OC-250) y con la garantía **exigida, todavía no demostrada (OC-257)**; las dependencias de **ADR-01, ADR-02.I, ADR-03.I, ADR-04.I y ADR-09.I**; la limitación de **autoevaluación del autor, sin auditoría independiente**; y **R3-E como bloque parcial en curso, con ADR-16.I, R3-F y R4 sin iniciar**. Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Nota posterior de trazabilidad (2026-11-22, inferida; solo informativa).** ADR-04.I v0.2-R3E-04I (Parte XVIII) y su registro de aprobación quedaron versionados en el commit `323b53ef695f5739c5db2247377923946637588d` (`323b53e`; verificable por Git; 2026-11-22T23:10:59Z). Las expresiones «No versionado» de §32.18 y «Estado de versionado: Pendiente» del registro de ADR-04.I describen el momento de redactarse. **No se reescribe la aprobación histórica;** `aprobaciones.md` y `bitacora.md` **no se modifican en esta entrega.**
+
+### 33.1 Identificación
+
+| Campo | ADR-05.I |
+|---|---|
+| Tema | Implementación de la captura local, el envío, la idempotencia, el orden, los conflictos, la revalidación y la recuperación de las operaciones capturadas sin conexión, sin seleccionar mecanismos |
+| Pregunta (R1 §8.1) | ¿Cómo se implementan, de modo verificable y **sin** seleccionar tecnología hasta ADR-01, las capacidades de ADR-05.C (IN-05-01…21): cola local, identificación única, idempotencia, orden por partido, conflictos sin sobrescritura ni pérdida silenciosa, revalidación al sincronizar con el estado vigente, atomicidad por operación y recuperación tras interrupciones? |
+| Alternativas mínimas | ≥ 2 (aquí 3: A, B y C; difieren en la **unidad de envío y reconciliación**). **D5-1, D5-2, D5-4, D5-6 y D5-7 no forman parte de ninguna alternativa** |
+| Dependencias (R1 §8.2) | ADR-05.C (propuesta); ADR-01 (documental condicionado); y, por ADR-05.C, ADR-02.C, ADR-03.C y ADR-09.C |
+| Dependencias laterales | ADR-02.I (frontera atómica, acceso directo, estado vigente, RT-14: OC-185…188, OC-190, OC-191, OC-213); ADR-03.I (sesión, MFA, SI-07, SI-16, S-A/S-B: OC-179, OC-155); ADR-04.I (lo local jamás es público; proyecciones y copias); ADR-06 (caché, señal de cambio); ADR-08 (recálculo: OC-102, OC-121, OC-124); ADR-09.I (auditoría y brechas RX-03…05, K-3); ADR-16.I (no redactado) |
+| Componentes | CMP-04 (cola local), CMP-05 (cliente de sincronización), CMP-13 (ingesta de sincronización), CMP-08 (decisor), CMP-11 y CMP-12 (aplicación y recálculo), CMP-16 (auditoría), CMP-17 (exportación) |
+| Fronteras de confianza | TB-1 (dispositivo ↔ aplicación), TB-2 (dispositivo ↔ almacén local) y TB-4 (aplicación ↔ datos) |
+| Bloque / estado | R3-E (parcial) / **BORRADOR** |
+
+### 33.2 Entradas heredadas: candidatas A, lo bloqueado y lo que no se resuelve
+
+| Decisión de ADR-05.C | Formulaciones (clasificación de la matriz de R2) | Tratamiento en este borrador |
+|---|---|---|
+| **D5-3** fallo del registro de un rechazo exigido | **F-A** (error recuperable y operación sin resolver; = F-2 de R2-A): **A**. **F-B** (intención durable previa y conciliación; = F-3): **C** | F-A es candidata A **no admitida**; **F-B sigue en juego** (no rechazada). **No se fija** |
+| **D5-5** bloqueo tras una operación fallida | **B-B** (bloquear solo por hueco y dependencia de la reanudación): **A**, con reserva de A-9, A-11 y A-14. **B-A** (adoptar OFF-07 [REC]): **C** | B-B es candidata A **no admitida**; **B-A sigue en juego**. **No se fija** |
+| **D5-1** idempotencia de lo rechazado | **I-A** (resultado conservado por identificador) y **I-B** (solo lo aplicado; lo rechazado se reevalúa): **C**; sin conformidad establecida (OC-35) | **BLOQUEADA** (ninguna A). No se elige ni se prefiere; solo se señala qué no debe impedirse |
+| **D5-2** metadatos de rechazadas o en conflicto (R-4) | **M-A** (persistencia independiente): **C**. **M-B**: X (posible no conformidad con OFF-20) | **BLOQUEADA**. Preserva la partición ADR-05.C/ADR-09.C (decisión 3, DB2c-3) |
+| **D5-4** contigüidad entre dos dispositivos del mismo editor | **S-A** y **S-B**: **C** (OC-41; §9.4 fila 10) | **BLOQUEADA** |
+| **D5-6** estado local tras un aborto técnico | **E-A** (permanece `pendiente`): **C**. **E-B**: X (puede exigir modificar OFF-04 y §9.2) | **BLOQUEADA**; la transición `enviando` → `pendiente` no está definida en `01` (OC-44) |
+| **D5-7** reconciliación tras una interrupción | **C-A** (reenvío idempotente) y **C-B** (consulta explícita del estado): **C**; OC-43 | **BLOQUEADA**. Las tres alternativas son compatibles con ambas; no se elige |
+
+**Condiciones heredadas que no se resuelven:** decisión 3 y decisión 10 de R2-A; OC-35…44, DB2c-1…11; K-3 y las brechas RX-03, RX-04 y RX-05 de ADR-09.I; OFF-06 sobre lo rechazado y OFF-07 [REC]; **A-9, A-10, A-11, A-13, A-14 y A-15; Q-29, Q-30, Q-42 y Q-43**; HR1-07 (iOS) y RES-07; DC1-1…; **OC-102, OC-121 y OC-124 de ADR-08; OC-185…188, OC-190, OC-191, OC-213 de ADR-02.I; OC-155, OC-179 de ADR-03.I; OC-85…100 de ADR-06/07**; D-2 y DB2c-10 (sin excepción).
+
+### 33.3 Requisitos verificables de sincronización (SY)
+
+| ID | Requisito verificable | Fuente | Naturaleza |
+|---|---|---|---|
+| SY-01 | **Captura local sin conectividad:** la cola persistente sobrevive a cerrar la app, a un reinicio y a perder la pestaña; se pueden capturar marcador, eventos, iniciar, suspender, reanudar y finalizar un partido; la lista de operaciones capturables sin conexión es **cerrada** | IN-05-01; OFF-01, OFF-03 | Confirmado |
+| SY-02 | **Identificación única:** cada operación lleva un identificador único generado en el cliente, número de secuencia por partido, tipo, datos, versión base conocida, dispositivo, usuario y hora local | IN-05-01; OFF-03 | Confirmado |
+| SY-03 | **Idempotencia de lo aplicado:** cada operación se aplica como máximo una vez; un reenvío del mismo identificador, también concurrente, devuelve el resultado original sin repetir efectos ni registros de auditoría; **la deduplicación de transporte no basta** (SY-33) | IN-05-04; OFF-06; §9.4 fila 9 | Confirmado |
+| SY-04 | **Idempotencia de lo rechazado:** su alcance **no está fijado por `01`**; no se elige ni se prefiere I-A ni I-B | IN-05-05; D5-1; OC-35 | [ABIERTO]; bloqueada (OC-247) |
+| SY-05 | **Resultado desconocido:** tras un corte durante el envío, un cierre forzado o una pérdida de respuesta, cada operación queda en **un único estado coherente** y puede reconciliarse sin duplicar efectos ni perderse; el mecanismo (reenvío o consulta) **no se fija** | IN-05-19; OFF-05, 06, 08, 09; D5-7 | [DER]; mecanismo [PEND] (OC-251) |
+| SY-06 | **Orden y contigüidad:** las operaciones de un partido se validan en orden de secuencia contra el estado resultante de las anteriores **aceptadas**, partiendo del estado oficial; un hueco bloquea las posteriores de ese partido y se registra; el orden no depende del reloj | IN-05-06, 15; OFF-25, OFF-13 | Confirmado; reloj [REC] |
+| SY-07 | **Dependencia de la reanudación:** si la reanudación se rechaza o queda en conflicto, ningún evento posterior de la secuencia se aplica ni se publica; **A-9, A-11 y A-14 quedan como lecturas provisionales abiertas** | IN-05-08; OFF-25; RD-EVT-12 | Confirmado; lecturas abiertas (OC-254) |
+| SY-08 | **Conflictos:** lo confirmado por el servidor nunca se sobrescribe en silencio y ninguna captura local se pierde en silencio por la aplicación ni por el servidor; las **doce filas de §9.4** conservan sus resultados; **lo que requiere intervención no se declara resuelto automáticamente** | IN-05-12; OFF-09; §9.4 | Confirmado |
+| SY-09 | **Revalidación completa al sincronizar:** identidad, sesión vigente, nivel de autenticación (segundo factor), cuenta, roles, permisos y **ámbito del torneo**, con el **estado vigente** y no con afirmaciones obsoletas; mismo camino lógico que su equivalente en línea; CMP-13 no decide permisos; **se evalúa dentro de la unidad de cada operación** (SY-34) | IN-05-10; OFF-22; AZ-03, AZ-18, AZ-25 (ADR-02.I); SI-07 (ADR-03.I) | Confirmado / garantía exigida; mecanismo [PEND] (OC-256) |
+| SY-10 | **La cuenta que sincroniza es la que capturó;** una sesión de otra cuenta nunca sincroniza ni se apropia de operaciones ajenas; la cola se aísla por cuenta en el dispositivo | IN-05-11; IN-03-19, 20; SI-16; OFF-03, OFF-12 | [REC] (IN-03-19); aislamiento [DER] |
+| SY-11 | **Revocación durante el período sin conexión:** al sincronizar se rechaza toda operación cuya autorización fue revocada aunque se capturara legítimamente (§9.4 filas 4 y 5), con motivo y sin publicar ni sobrescribir; con la cuenta desactivada: cierre de sesión, bloqueo de datos locales, exportación limitada ofrecida una sola vez y eliminación controlada; **no se promete borrado remoto en un dispositivo que nunca se conecta; D-2 sin excepción** | IN-05-21; OFF-11, OFF-22; D-2 | Confirmado; riesgo residual |
+| SY-12 | **Ninguna operación capturada sin conexión adquiere autorización definitiva antes de validarse en el servidor;** el contexto local no autentica ni autoriza; lo local jamás es público ni oficial; finalizar sin conexión es «finalización pendiente» | IN-05-14; IN-03-11; OFF-15, OFF-21 | Confirmado |
+| SY-13 | **Distinción de estados:** pendiente, enviando, recibida, aceptada, aplicada, rechazada, en conflicto y publicada **no se confunden:** enviar o recibir **no** es aplicar; aceptar y aplicar ocurren en la misma unidad (`confirmada`); aplicar **no** es publicar; **no se crean estados nuevos de `01`** (§33.5) | IN-05-02, 14; OFF-04; §9.2; §9.6 | Confirmado; estados nuevos [PEND] (OC-250) |
+| SY-14 | **Atomicidad por operación** (completa o no se aplica) y **unidad única** de autorización, aplicación, recálculo (UI-10 dentro de UI-06), registro de idempotencia y auditoría; **un lote no es atómico**; **no demostrada** | IN-05-09; GT-19; IF-32; GT-11 (ADR-02.C) | [REC] OFF-08; [DER] en la unidad; no demostrada (OC-257) |
+| SY-15 | **RT-14 por efecto al sincronizar:** las operaciones heredan la situación del actor y se evalúan sobre el conjunto de partidos afectados antes de aplicar; el efecto indirecto sobre la clasificación **sigue abierto** (OC-121) | IN-02-12; AZ-12 (ADR-02.I); OFF-22 | Confirmado el efecto directo; indirecto abierto (OC-258) |
+| SY-16 | **Integridad deportiva:** las reglas de negocio (transiciones, integridad de eventos, marcador–eventos según Q-30) se aplican **solo en el servidor**; una validación del cliente no es oficial | RD-RES-01; RD-EVT-03, 04; MO-24 (ADR-08) | Confirmado |
+| SY-17 | **La sincronización no publica ni gobierna:** no habilita visibilidad, no cambia roles ni reglamento; las operaciones de gobierno no se capturan sin conexión; **A-10 y Q-42 siguen abiertas** | OFF-01; A-10; Q-42; ADR-04.I VP-14 | Confirmado; alcance [PEND] (OC-266) |
+| SY-18 | **Duplicados de contenido con otro identificador** se aceptan con aviso previo (posible duplicado legítimo) y se anulan después (RD-EVT-05); protección de doble toque y «Deshacer» antes de enviar | §9.4 fila 12; OFF-14; RD-EVT-05; OC-275 | Confirmado |
+| SY-19 | **Registro de rechazos y metadatos:** persistencia según ADR-09.I; R-2 (RF-AUD-06) [CONF]; **R-4 (OFF-20) y R-5 abiertos**; K-3 y las brechas RX-03, RX-04 y RX-05 **no se resuelven** | IN-05-18; IN-09-05; OFF-20; D5-2 | [CONF] R-2; [ABIERTO] R-4 y R-5 |
+| SY-20 | **Fallo del registro de un rechazo exigido:** **(a) operaciones sincronizadas:** la operación sigue `pendiente` y se reintenta; **(b) operaciones en línea:** error recuperable con resultado incierto; corresponde a la candidata **F-A** (o a la condicionada **F-B**), **sin fijar**; sin rechazo definitivo sin registro | D5-3; IN-09-05; SV-05 (ADR-09.I) | Formulación sin admitir |
+| SY-21 | **Bloqueo tras una operación fallida:** por hueco y por dependencia de la reanudación (candidata **B-B**); la adopción de OFF-07 (**B-A**, [REC]) **no se descarta**; **no se fija** | D5-5; OFF-07; OFF-25 | Formulación sin admitir |
+| SY-22 | **Recuperación tras un cierre inesperado:** al reabrir, las operaciones `enviando` quedan en un estado coherente; la transición no definida por `01` (OC-44) **no se resuelve** y **no se crea un estado nuevo** | IN-05-19; D5-6; OC-42, OC-44 | [PEND] |
+| SY-23 | **Datos de menores y dispositivos compartidos:** los datos locales son los mínimos de OFF-02, sin datos internos de jugadores ni nombres mientras Q-20 esté abierta; la cola se aísla por cuenta; cerrar sesión con pendientes exige confirmación y borra los datos tras sincronizar o descartar; **la protección en reposo del almacén (cifrado) no se decide aquí (ADR-16.I)** | OFF-02, OFF-12; PRV-09, PRV-11; IN-04-11; IN-03-20 | Confirmado; protección en reposo [PEND] |
+| SY-24 | **Service Worker, caché y proyecciones públicas:** la cola y las operaciones locales **no se guardan en la caché de lo público** ni se sirven como públicas; el Service Worker no promete sincronización en segundo plano (IN-05-03) | IN-05-03, 14; ADR-04.I VP-15, VP-16; PU-18 | Confirmado / propuesta |
+| SY-25 | **Almacenamiento no garantizado:** la interfaz advierte que el navegador puede eliminar los datos locales; **no se promete conservación indefinida ni la recuperación de operaciones nunca enviadas cuya copia local se perdió**; la expulsión por presión de almacenamiento y la eliminación proactiva de Safari son riesgos residuales (**la regla de siete días de WebKit es un comportamiento documentado en 2020 cuya vigencia actual es [PEND]**; OC-283); los fallos de escritura se tratan en SY-37 | OFF-17; IN-05-12; [DOC: MDN, WebKit 2020] | Confirmado |
+| SY-26 | **Vencimiento y eliminación de operaciones locales:** lo en conflicto o rechazado se conserva hasta que el usuario lo reintente, lo descarte con confirmación o use la exportación limitada, **máximo 30 días**, con plazo informado, avisos previos «cuando sea técnicamente posible» y constancia mínima; **sujeto a PRV-10 (PEND-JUR)**; no se fija una política nueva | IN-05-13; OFF-10; §9.5 (3); PRV-10 | Confirmado; retención [PEND-JUR] |
+| SY-27 | **Actualización de la app con cola pendiente:** una nueva versión no descarta la cola; el formato tiene versión y se migra; si no es compatible, se bloquea la actualización hasta sincronizar | IN-05-16; OFF-16 | [REC] |
+| SY-28 | **Relojes:** el servidor registra su hora de recepción; si el reloj difiere más de 5 minutos al sincronizar, se avisa y se registra; las horas del dispositivo son informativas | IN-05-15; OFF-13; AM-10 | [REC] |
+| SY-29 | **Rendimiento:** 50 operaciones pendientes se sincronizan en ≤ 15 s con perfil de red 3G lenta (propuesto); **no medido** | OFF-19; RNF-04 | [REC] |
+| SY-30 | **Exportación limitada:** solo identificador del partido, abreviaturas de equipos y marcador por defecto; no concede permisos, no se reimporta ni se aplica como resultado oficial; Q-43 abierta | IN-05-17; OFF-24; Q-43 | Confirmado; contenido [PEND] |
+| SY-31 | **Sin permisos nuevos, sin reducción de garantías y sin selección tecnológica;** ninguna lectura de A-9…A-16 ni D5-x se adopta para hacer viable una alternativa | IN-05-20; IN-02-18; PA-13 | [DER] / [CONF] |
+| SY-32 | **Pruebas negativas y de recuperación** contra PostgreSQL real, sin conexión y con cortes, por escenario de §33.8, con datos sintéticos | RNF-11; HR1-13; OFF-19 | Confirmado |
+| SY-33 | **Aplicación efectiva única, distinta de la deduplicación de transporte.** Se distinguen: (a) la **deduplicación de la solicitud de transporte** (que evita procesar dos veces el mismo envío) y (b) la **aplicación efectiva única de la operación de negocio**, que solo se garantiza si (c) **el registro persistente del resultado de aplicación** (identificador de operación y resultado) **y sus efectos** (cambios deportivos, recálculo, auditoría) se **confirman en la misma unidad transaccional** requerida. **Los registros de idempotencia no se eliminan mientras pueda reaparecer válidamente una operación con el mismo identificador;** si se establece un **horizonte de aceptación**, toda operación anterior a él se **rechaza como obsoleta, sin volver a aplicarse**. **No se fijan plazos ni mecanismos;** la retención se somete a PRV-10 y PEND-JUR | IN-05-04; OFF-06; IN-09-04; PRV-10; OC-262 | Garantía exigida; plazos y mecanismo [PEND] (OC-276) |
+| SY-34 | **Precondiciones vigentes por operación.** **Dentro de la unidad de aplicación de cada operación** se verifican, con el **estado confirmado vigente en ese instante** y **no con una instantánea** obtenida al iniciar el lote o la sesión: estado y versión del partido; estado de la cuenta; sesión y nivel MFA; rol, permisos y ámbito del torneo; dependencias y precondiciones deportivas. El **estado base de ALT-05-C es informativo** y no sustituye esta verificación. **No se afirma que esté demostrado** | IN-05-06, 10; AZ-03, AZ-25 (ADR-02.I); SI-07 (ADR-03.I); RD-RES-04 | Garantía exigida; mecanismo [PEND] (OC-277) |
+| SY-35 | **Dependencias entre operaciones.** Se distinguen: **hueco de secuencia** (falta un número), **dependencia pendiente** (la predecesora aún no se evalúa), **dependencia rechazada** (la predecesora fue rechazada) y **conflicto que requiere intervención**. **Una operación posterior no se aplica sobre una precondición invalidada** por una predecesora rechazada, pendiente o en conflicto. **B-B no garantiza por sí sola este comportamiento** (bloquea por hueco y por la dependencia de la reanudación; **una operación rechazada no es un hueco**); la comparación **B-A frente a B-B** y A-9, A-11 y A-14 **siguen abiertas** | IN-05-06, 07, 08; OFF-07, OFF-25; D5-5 | Garantía exigida; abierta (OC-278) |
+| SY-36 | **Privacidad de las respuestas de sincronización.** Toda respuesta (**resultado por operación, conflictos, versiones, estado base, manifiestos y cursores, errores y mensajes auxiliares**) se limita al **ámbito y a los permisos vigentes del actor autenticado**; no expone **datos confirmados no publicados** a quien no esté autorizado; **no se almacena en cachés compartidas ni mediante Service Worker**, y toda persistencia local adicional está **explícitamente autorizada y delimitada**; **no se selecciona mecanismo de almacenamiento ni de filtrado** | IN-05-14; VP-01, VP-05, VP-15 (ADR-04.I); AZ-03, AZ-06 (ADR-02.I); IN-04-01 | Garantía exigida; mecanismo [PEND] (OC-279) |
+| SY-37 | **Fallos de persistencia local.** (a) Una operación **no se presenta como guardada ni como `pendiente` antes de confirmar su persistencia local**; (b) un **fallo de cuota o de escritura se comunica explícitamente** y la captura no se da por hecha; (c) **no se promete la recuperación de operaciones nunca enviadas cuya copia local se perdió**; (d) la **eliminación lógica no equivale a un borrado físico seguro garantizado por el navegador** [INF] | IN-05-12; OFF-11, OFF-17; PRV-11 | Garantía exigida; límites [PEND] (OC-280) |
+| SY-38 | **Recuperación y reintentos controlados, sin Background Sync.** La sincronización se reanuda por: **apertura de la aplicación**, **recuperación de la conexión con la app abierta**, la acción manual **«Sincronizar ahora»** y la **reconciliación tras interrupciones**; los reintentos usan **espera creciente y variación aleatoria**, con **límite de concurrencia** y **protección contra reenvíos masivos**; **ninguna alternativa depende de la sincronización en segundo plano**; **no se fijan parámetros técnicos ni mecanismos** | IN-05-03, 19; OFF-05; OC-270; RR5I-15 | [DER]; parámetros [PEND] (OC-281) |
+| SY-39 | **Auditoría de lo aplicado y de los reenvíos.** El registro de auditoría obligatorio de una operación aplicada forma parte de la **misma unidad** que sus efectos (IN-09-04): si **no puede registrarse, la operación no se aplica**. Ante un fallo se distinguen **dos situaciones que no se confunden:** **(1) Transacción revertida:** cuando se **demuestra** que la unidad transaccional fue revertida, **no se aplicaron los efectos de negocio ni el registro obligatorio de auditoría**; un nuevo intento puede procesarse **bajo las validaciones vigentes, sin asumir permisos anteriores**. **(2) Resultado remoto desconocido:** si se pierde la respuesta o se desconoce el resultado del compromiso, **la operación puede estar aplicada**; **no se afirma que fue rechazada, revertida ni aplicada**, y antes de determinar el tratamiento del reintento se **concilia por el identificador estable de operación y el registro persistente de aplicación efectiva única de SY-33**. **En ambos casos** se preservan la idempotencia y las validaciones vigentes y **se prohíbe duplicar efectos deportivos, recálculos o auditoría**; **la deduplicación de transporte no equivale a la aplicación efectiva única** (SY-33). **No se fija cómo se representa localmente** (D5-6, OC-250) **ni se introducen estados nuevos.** La **trazabilidad propia de los reenvíos de operaciones ya aplicadas permanece limitada** por OFF-06 y por las decisiones pendientes de ADR-09.I (O); **no se afirma cobertura de auditoría no demostrada** | IN-09-04, 05; OFF-06; SV-03 (ADR-09.I); OC-147; SY-33 | Garantía exigida; **no demostrada (OC-257)**; reenvíos [ABIERTO] (OC-282); representación local [PEND] (OC-250) |
+
+### 33.4 Alternativas de implementación
+
+Las tres alternativas difieren en la **unidad de envío y de reconciliación**. **Ninguna fija** D5-1, D5-2, D5-4, D5-6 ni D5-7, ni los mecanismos de almacenamiento local, de sincronización en segundo plano o de caché. Todas implementan la misma **cola local de operaciones** de OFF-03 y la **misma frontera lógica** de ADR-05.C: la operación recorre revalidación, aplicación y auditoría **como su equivalente en línea**; **no existe una segunda ruta de negocio** (IF-32).
+
+| Criterio | ALT-05-A: envío operación por operación, en orden | ALT-05-B: envío por lote contiguo por partido | ALT-05-C: sesión de sincronización con manifiesto y cursor |
+|---|---|---|---|
+| Idea | Cada operación se envía como **una solicitud**, en orden de secuencia; el servidor la evalúa, aplica y responde; el cliente continúa con la siguiente al recibir la respuesta | El cliente envía **todas las operaciones contiguas de un partido en una solicitud**; el servidor las evalúa **una a una, en orden** y devuelve el resultado **por operación**; **el lote no es una unidad atómica** | El cliente inicia una **sesión de sincronización**: envía un **manifiesto** (identificadores y secuencias pendientes) y recibe del servidor el **estado oficial base**, las versiones y un **cursor**; luego envía las operaciones y recibe resultados; permite **reanudar** tras una interrupción |
+| Atomicidad y unidad (SY-14) | La unidad es la operación (UI-06 con UI-10 dentro); **no demostrada** (OC-257) | La unidad sigue siendo **cada operación**; el lote no es atómico; un fallo a mitad de lote deja operaciones aceptadas y otras pendientes | Igual: la unidad es cada operación; la sesión no es atómica |
+| Idempotencia y respuestas perdidas (SY-03, SY-05) | Reenvío del mismo identificador; el servidor deduplica por identificador [INF: restricción de unicidad] | Reenvío del lote; el servidor deduplica **por identificador dentro del lote** | El manifiesto permite al servidor **reconocer lo ya recibido** sin reenviar datos; depende de qué conserve el servidor (D5-7, OC-261) |
+| Orden y contigüidad (SY-06) | Natural: una a la vez; un hueco o un fallo detiene el avance de ese partido | Se valida **cada operación en su propia unidad, en orden y contra el estado vigente al aplicar** (no contra una instantánea del lote); el hueco se detecta en el servidor | El servidor puede **detectar huecos antes** de recibir las operaciones (por el manifiesto); **el estado base es informativo** y no sustituye la validación por operación (SY-34) |
+| Revalidación y revocación (SY-09, SY-11) | En cada operación; una revocación se detecta en el primer rechazo | En cada operación del lote; **un lote puede contener operaciones válidas e inválidas** | **Al iniciar la sesión** se puede detectar una revocación o un nivel insuficiente sin enviar datos; **sigue revalidándose por operación** (no se confía en el inicio) |
+| Conflictos (SY-08) | Se detectan por operación (versión base) | Se detectan por operación; **varios conflictos en un lote** exigen presentar resultados por operación; **un cambio concurrente entre dos operaciones del lote** se evalúa en cada unidad (SCN-21) | El **estado base** devuelto es **informativo** y puede quedar obsoleto durante la sesión; **no sustituye** la detección por operación (SCN-21) |
+| Carga y límites (SY-29) | **Más solicitudes** (una por operación); consumo de la capa gratuita **sin medir** | **Menos solicitudes**; mayor tamaño y tiempo por solicitud: **límites de ejecución sin evaluar** (OC-260) | Más solicitudes de control; estado de sesión en el servidor (OC-261) |
+| Complejidad y mantenimiento | La menor [INF] | Media: semántica de resultados parciales | **Mayor:** estado de sesión, cursor y reanudación en el servidor [INF] |
+| Riesgo principal | Muchas solicitudes; reintentos masivos (RR5I-15) | Lotes parcialmente aplicados mal interpretados como atómicos (RR5I-09) | Estado de sesión obsoleto, fuga de información en el manifiesto o en el estado base (RR5I-12) |
+| Dependencias adicionales | ADR-01; ADR-02.I/03.I; ADR-09.I | Las de A; límites de tiempo por solicitud | Las de A; ADR-16.I (estado local de la sesión); privacidad del estado base |
+
+**Compatibilidad con las formulaciones de ADR-05.C (cómo podría implementarse cada una; no selecciona).**
+
+| Formulación | Qué exige a la implementación | ALT-05-A / B / C |
+|---|---|---|
+| **F-A** (candidata A) / **F-B** (C, no rechazada) | Si falla el registro exigido de un rechazo: error recuperable y operación pendiente (F-A), o intención durable previa (F-B) | Las tres; en B, un fallo a mitad de lote deja pendientes las posteriores; **no se fija** |
+| **B-B** (candidata A) / **B-A** (C, no rechazada) | Bloquear solo por hueco y por dependencia de la reanudación (B-B), o también tras cualquier fallo (B-A, OFF-07 [REC]) | Las tres; A y B lo aplican por partido; C puede decidirlo antes de enviar [INF]; **no se fija** |
+| **I-A / I-B** (D5-1, bloqueada) | Conservar el resultado de lo rechazado o reevaluarlo | **Compatible con las tres;** no se elige (OC-247) |
+| **M-A** (D5-2, bloqueada; **M-B** X) | Persistencia independiente de R-4 | Depende de ADR-09.I; **no se elige** (OC-248) |
+| **S-A / S-B** (D5-4, bloqueada) | Secuencia por partido y editor, o por dispositivo | C facilita ver la secuencia del servidor; **no se elige** (OC-249) |
+| **E-A** (D5-6, bloqueada; **E-B** X) | Estado tras un aborto técnico | **No se decide;** la transición no está definida (OC-250) |
+| **C-A / C-B** (D5-7, bloqueada) | Reenvío idempotente o consulta explícita del estado de lo enviado | A y B se apoyan en el **reenvío**; C se apoya en el **manifiesto** (una forma de consulta). **Ninguna equivale a seleccionar** C-A o C-B (OC-251) |
+
+### 33.5 Estados de la operación: recepción, aceptación, aplicación y publicación
+
+`01` define **cinco estados visibles** (§9.2): `pendiente`, `enviando`, `confirmada`, `en conflicto` y `rechazada`. **No se crean estados nuevos** (OC-250). Las etapas siguientes son **internas** y no se confunden con ellos:
+
+| Etapa | Dónde ocurre | Estado visible (§9.2) | Qué afirma y qué no | Público |
+|---|---|---|---|---|
+| **Pendiente** | Dispositivo | `pendiente` | Guardada localmente; **sin autorización definitiva** | No |
+| **Enviada** | Dispositivo → servidor | `enviando` | En tránsito; **no implica recepción ni aplicación**; el resultado puede ser desconocido (SY-05) | No |
+| **Recibida** | Servidor (CMP-13) | `enviando` hasta responder | El servidor la recibió; **no se ha evaluado ni aplicado**; es una etapa interna | No |
+| **Aceptada y aplicada** | Servidor (revalidación, aplicación, recálculo, auditoría en una unidad) | `confirmada` | **Aceptar y aplicar son inseparables** en la unidad: es parte del estado oficial; **no implica publicación** | Solo si el partido es visible (§9.6) |
+| **Rechazada** | Servidor | `rechazada` | Denegada por permiso, asignación o validación; **no se aplica ni se publica**; su registro sigue ADR-09.I | No |
+| **En conflicto** | Servidor | `en conflicto` | No se pudo aplicar sin pisar un cambio posterior; **requiere decisión humana**; **no se resuelve automáticamente** | No |
+| **Publicada** | Entrega pública (ADR-04.I, ADR-06) | `confirmada` **y** visible | Resultado confirmado **y** jornada y torneo visibles; **la sincronización no publica por sí misma** | Sí |
+
+### 33.6 Sincronización, ADR-02.I, ADR-03.I y ADR-04.I (frontera de autorización)
+
+| Tema | Qué debe cumplirse | Alternativas | Estado |
+|---|---|---|---|
+| Mismo camino que lo equivalente en línea | La operación recorre revalidación, aplicación y auditoría **como en línea**; sin segunda ruta de negocio (IF-32) | Las tres | Garantía exigida; no demostrada |
+| Acceso directo del cliente a la capa de datos | **Si el cliente pudiera aplicar operaciones por una vía directa, se eludiría la revalidación y la auditoría del servidor** (OC-190, OC-191, OC-147 de ADR-09.I); la ruta sincronizada debe pasar por el servidor | Las tres; condicionadas a GV (ADR-02.I) | **Condicionado;** DR2I-1 abierta |
+| Estado vigente y MFA al sincronizar | Las afirmaciones firmadas **no bastan**: estado vigente de cuenta, sesión, roles y nivel de autenticación (AZ-25; SI-07); nivel al sincronizar (S-A o S-B) **sin fijar** | Las tres; C puede anticiparlo al iniciar la sesión, **sin sustituir** la revalidación por operación | Condicionado (OC-255, OC-256) |
+| RT-14 por efecto | Se evalúa antes de aplicar, sobre todos los partidos afectados; efecto indirecto: **OC-121 abierta** | Las tres | Condicionado (OC-258) |
+| Cambio de reglamento permitido durante la sincronización | Una sola versión del reglamento en el cálculo (**OC-124 abierta**) | Las tres | Condicionado (OC-259) |
+| Proyecciones públicas y copias | Lo local jamás es público; solo `confirmada` y visible puede serlo (ADR-04.I VP-04, VP-05); la sincronización **no** actualiza lo público por sí misma | Las tres | Confirmado |
+
+### 33.7 Facetas pedidas (síntesis por alternativa)
+
+| Faceta | ALT-05-A | ALT-05-B | ALT-05-C |
+|---|---|---|---|
+| 1. Captura local sin conectividad | Cola persistente (OFF-03); idéntica en las tres | Igual | Igual |
+| 2. Identificación única | Identificador del cliente; deduplicación por identificador [INF] | Igual, dentro del lote | Igual; el manifiesto lista identificadores |
+| 3. Idempotencia y resultado desconocido | Reenvío del mismo identificador (SY-03, SY-05) | Reenvío del lote | Reenvío o reanudación con cursor; depende de lo que conserve el servidor |
+| 4. Orden causal y dependencias | Una a una; los fallos detienen el partido | Dentro del lote, en orden | Hueco detectable antes; dependencia de reanudación (SY-07) |
+| 5. Cambios en el servidor mientras offline | Conflicto por operación (§9.4) | Conflicto por operación; varios por lote | Estado base facilita detectar desactualización |
+| 6. Revalidación (identidad, sesión, MFA, roles, ámbito) | En cada operación | En cada operación del lote | Al iniciar y en cada operación |
+| 7. Revocación durante el período sin conexión | Primer rechazo; OFF-11 | Rechazos dentro del lote | Detección al inicio; rechazos por operación |
+| 8. Prevención de cambios no autorizados | Solo operaciones capturables (SY-17); sin gobierno ni publicación | Igual | Igual |
+| 9. Atomicidad de efectos deportivos, recálculo y auditoría | Por operación; no demostrada | Por operación; **lote no atómico** | Por operación; **sesión no atómica** |
+| 10. Pendiente, recibida, aceptada, rechazada, aplicada, publicada | §33.5 | §33.5 | §33.5 |
+| 11. Errores, conflictos, reintentos y cierres inesperados | Reintento por operación | Reintento del lote; resultados parciales | Reanudación con cursor; estado de sesión |
+| 12. Menores y dispositivos compartidos | Datos mínimos; aislamiento por cuenta (SY-23) | Igual | Igual; el estado base **no debe** contener datos internos de jugadores |
+| 13. Service Worker, caché y proyecciones públicas | La cola no usa la caché de lo público (SY-24) | Igual | Igual |
+| 14. Límites de almacenamiento, vencimiento y eliminación | Best-effort; 30 días en conflicto o rechazado (SY-25, SY-26) | Igual | Igual; el estado local de la sesión suma almacenamiento |
+| 15. Rendimiento, costo y CFG-C1/C2/C3 | Más solicitudes | Menos solicitudes; lotes grandes | Más control; estado de sesión; **sin medir** |
+
+### 33.8 Escenarios críticos de conflicto y recuperación
+
+| ID | Escenario | Qué debe ocurrir (sin elegir mecanismo) | Estado |
+|---|---|---|---|
+| SCN-01 | Respuesta perdida **después de aplicar** | El reenvío devuelve el resultado original; **sin repetir efectos ni auditoría** (OFF-06) | Confirmado |
+| SCN-02 | Respuesta perdida **después de rechazar** | Alcance de OFF-06 sobre lo rechazado: **conservar o reevaluar sin fijar** (D5-1) | **Bloqueado** (OC-247) |
+| SCN-03 | Cierre inesperado durante `enviando` | Estado coherente al reabrir; transición no definida (OC-44); sin pérdida ni duplicado | [PEND] (OC-250) |
+| SCN-04 | Hueco en la secuencia de un partido | Bloquea las posteriores de ese partido y se registra (OFF-25) | Confirmado |
+| SCN-05 | Reanudación rechazada o en conflicto con eventos posteriores | Ningún evento posterior se aplica ni se publica (IN-05-08); A-9, A-11, A-14 abiertas | Confirmado; lecturas abiertas |
+| SCN-06 | El partido fue finalizado o corregido por otro mientras offline (fila 3) | `en conflicto`; no se aplica nada; decisión humana | Confirmado |
+| SCN-07 | Editor desasignado, rol revocado o cuenta desactivada (filas 4 y 5) | `rechazada`; sin publicar; OFF-11; exportación limitada | Confirmado |
+| SCN-08 | Revocación **entre** la validación y la aplicación | «Aplicada antes y válida» o «rechazada», nunca a medias (UI-11, CL-45) | Garantía exigida; no demostrada |
+| SCN-09 | Dispositivo desconectado indefinidamente tras una revocación | Sin garantía de borrado ni de reflejo; D-2 sin excepción | Riesgo residual sin aceptar (RR5I-06) |
+| SCN-10 | Mismo editor, dos dispositivos (fila 10) | Fusión por identificador y secuencia; contigüidad entre dispositivos: D5-4 | **Bloqueado** (OC-249) |
+| SCN-11 | Jugador dado de baja o anonimizado mientras offline (fila 6) | `en conflicto`; elegir otro jugador o «sin autor» si se aprobó (Q-30) | Confirmado / `COND:Q-30` |
+| SCN-12 | Cambio de reglamento permitido simultáneo con un evento sincronizado | Una sola versión del reglamento en el cálculo | OC-124 abierta (OC-259) |
+| SCN-13 | Sesión vencida con operaciones pendientes | La captura local continúa; sincronizar exige sesión válida y permisos vigentes; S-A o S-B sin fijar | Confirmado; nivel [PEND] (OC-255) |
+| SCN-14 | Dispositivo compartido: otra cuenta inicia sesión | La cola se aísla por cuenta; nunca sincroniza ni apropia lo ajeno | [REC] IN-05-11 |
+| SCN-15 | El navegador elimina el almacenamiento local (presión de almacenamiento o eliminación proactiva de Safari) | Sin garantía; advertencia previa; nada se promete (OFF-17) | Riesgo residual (RR5I-13) |
+| SCN-16 | Actualización de la app con cola pendiente | La cola se conserva y migra; si no es compatible, se bloquea la actualización | [REC] OFF-16 |
+| SCN-17 | Finalización sin conexión rechazada por el servidor | Vuelve a un estado coherente con motivo; sin publicar (OFF-21) | Confirmado |
+| SCN-18 | Operación que afecta a un partido del propio equipo del actor (RT-14) | Se rechaza por completo; el efecto indirecto sobre la clasificación **sigue abierto** (OC-121) | Confirmado el directo |
+| SCN-19 | Fallo del registro de un rechazo exigido (F-A / F-B) | Operación pendiente y reintento (sincronizada) o error recuperable (en línea); sin rechazo definitivo sin registro; **sin fijar** | Candidata no admitida |
+| SCN-20 | Inundación de reenvíos o de duplicados (CAB-14) | Límites verificables sin perder trazabilidad; depende de D5-1 y ADR-09.I | **Bloqueado** (OC-247, OC-270) |
+| SCN-21 | **Modificación concurrente entre dos operaciones del mismo lote o sesión** (otro actor finaliza, corrige o revoca entre ambas) | La segunda operación se evalúa **en su propia unidad con el estado confirmado vigente** y puede quedar `en conflicto` o `rechazada`; **nunca se valida contra una instantánea del inicio** (SY-34) | Garantía exigida; no demostrada (OC-277) |
+| SCN-22 | **Una operación deportiva depende de otra previamente rechazada** (por ejemplo, finalizar tras un gol rechazado) | La posterior **no se aplica sobre una precondición invalidada** (SY-35); **no es un hueco de secuencia**; **B-B no lo garantiza por sí sola**; B-A frente a B-B y A-9, A-11 y A-14 abiertas | **Abierto** (OC-278) |
+| SCN-23 | **Reenvío de una operación más antigua que el horizonte de aceptación** o cuyo registro de idempotencia podría haberse eliminado | Si existe un horizonte, **se rechaza como obsoleta sin volver a aplicarse**; **el registro no se elimina mientras la operación pueda reaparecer válidamente** (SY-33); plazos sin fijar | Garantía exigida; plazos [PEND] (OC-276) |
+| SCN-24 | **Fallo de cuota o de escritura local al capturar** | No se presenta como guardada; se comunica explícitamente; sin pérdida silenciosa (SY-37) | Garantía exigida (OC-280) |
+| SCN-25 | **Falla el registro de auditoría de una operación aplicada** (dos casos que **no se confunden**: transacción revertida y resultado remoto desconocido) | **(a) Transacción revertida, demostrada:** no se aplicaron efectos de negocio ni auditoría; un nuevo intento se procesa con las validaciones vigentes, **sin asumir permisos anteriores**. **(b) Resultado remoto desconocido** (respuesta perdida o compromiso incierto): **la operación puede estar aplicada**; no se afirma rechazada, revertida ni aplicada; se **concilia por el identificador estable y el registro de aplicación efectiva única de SY-33** antes de decidir el reintento. **En ambos:** sin duplicar efectos deportivos, recálculos ni auditoría; la deduplicación de transporte no basta; **la representación local no se fija** (D5-6, OC-250) | **Garantía exigida; no demostrada (OC-257)**; reenvíos [ABIERTO] (OC-282) |
+
+### 33.9 Matriz de conformidad con los invariantes de ADR-05.C
+
+Escala: **Por diseño** (la propia definición de la alternativa lo garantiza, **sin demostrar**), **Condicionada** (depende de una decisión o verificación [PEND]), **Bloqueada**. Autoevaluación del autor, no auditoría independiente. **Ninguna celda declara cumplimiento demostrado.**
+
+| Invariante o requisito | ALT-05-A | ALT-05-B | ALT-05-C |
+|---|---|---|---|
+| IN-05-01, 02 (cola, estados) — SY-01, SY-02, SY-13 | **Por diseño** en la cola; estados sin crear nuevos | Igual | Igual |
+| IN-05-04 (idempotencia de lo aplicado) — SY-03, SY-33 | **Condicionada** a la aplicación efectiva única, a la persistencia del registro en la misma unidad y al horizonte de aceptación (OC-276, OC-257) | **Condicionada** | **Condicionada** |
+| IN-05-05 (idempotencia de lo rechazado) — SY-04 | **Bloqueada** (D5-1) | **Bloqueada** | **Bloqueada** |
+| IN-05-06, 08 (orden, contigüidad, reanudación y dependencias) — SY-06, SY-07, SY-35 | **Condicionada** (D5-4, A-9, A-11, A-14); **la dependencia rechazada no la garantiza B-B por sí sola** (OC-278) | **Condicionada** | **Condicionada** |
+| IN-05-09 (atomicidad por operación) — SY-14 | **Condicionada** (OC-257); sin atomicidad de lote | **Condicionada;** el lote **no** es atómico | **Condicionada;** la sesión **no** es atómica |
+| IN-05-10 (revalidación) — SY-09, SY-15 | **Condicionada** a OC-256 y a los controles de ADR-02.I y ADR-03.I | **Condicionada** | **Condicionada;** la revalidación inicial **no sustituye** la de cada operación |
+| Precondiciones vigentes por operación — SY-34 | **Condicionada** a la evaluación en la unidad de cada operación (OC-277) | **Condicionada;** sin instantánea del lote | **Condicionada;** el estado base es informativo |
+| Privacidad de las respuestas de sincronización — SY-36 | **Condicionada** (OC-279) | **Condicionada** | **Condicionada;** el estado base y el manifiesto son los de mayor exposición |
+| Fallos de persistencia local y borrado — SY-37 | **Condicionada** (OC-280; ADR-16.I) | Igual | Igual |
+| Recuperación y reintentos sin Background Sync — SY-38 | **Condicionada** (OC-281) | Igual | Igual |
+| Auditoría de lo aplicado y de los reenvíos — SY-39 | **Condicionada** (OC-282; ADR-09.I) | Igual | Igual |
+| IN-05-11 (cuenta que sincroniza) — SY-10 | **Condicionada** (aislamiento local, ADR-16.I) | Igual | Igual |
+| IN-05-12, 13 (conflictos, conservación) — SY-08, SY-26 | **Condicionada** (OC-263, PEND-JUR) | Igual | Igual |
+| IN-05-14 (lo local no es público) — SY-12, SY-24 | **Por diseño** (la ruta sincronizada no publica) | Igual | Igual |
+| IN-05-18 (rechazos y metadatos) — SY-19, SY-20 | **Condicionada** (K-3; RX-03…05; D5-2) | Igual | Igual |
+| IN-05-19 (recuperación) — SY-05, SY-22 | **Condicionada** a D5-6 y D5-7 (bloqueadas) | Igual | Igual; la reanudación con cursor no fija D5-7 |
+| IN-05-21 (pérdida de autorización) — SY-11 | **Condicionada;** sin borrado remoto | Igual | Igual |
+| Acceso directo (ADR-02.I) — §33.6 | **Condicionada** (DR2I-1) | Igual | Igual |
+| D5-1, D5-2, D5-4, D5-6, D5-7 | **Bloqueadas** | **Bloqueadas** | **Bloqueadas** |
+
+### 33.10 Protección de datos de menores y almacenamiento temporal en dispositivos compartidos
+
+- **Mínimos locales (SY-23).** Los datos preparados son los de OFF-02 (partidos asignados, plantillas con etiqueta y dorsal, resumen del reglamento), sin datos internos de jugadores (PRV-11) y, **mientras Q-20 esté abierta, sin nombres** (IN-04-11). La cola contiene operaciones con identificadores internos.
+- **Aislamiento por cuenta y cierre de sesión.** La cola y los datos preparados se aíslan por cuenta (IN-03-20 [REC]); cerrar sesión con pendientes exige confirmación y borra los datos locales tras sincronizar o descartar (OFF-12). Un dispositivo compartido **no concede acceso** a la cola de otra cuenta (SCN-14).
+- **Protección en reposo.** Si el almacén se cifra o cómo se aísla es de **ADR-16.C/I** (D16-1, D16-2 sin formulación A; **no redactado**): **no se decide aquí.**
+- **Exportación limitada (OFF-24).** Solo identificador del partido, abreviaturas de equipos y marcador por defecto; **Q-43 y PRV-18 abiertas**; no se reimporta ni se aplica como resultado oficial.
+### 33.11 Almacenamiento local, expulsión, Service Worker y sincronización en segundo plano (evidencia)
+
+**Hechos [DOC] (MDN y WebKit).** Los datos de un origen se guardan por defecto de forma **«best-effort»**: persisten mientras el origen esté bajo su cuota, el dispositivo tenga espacio y la persona no los borre; un origen puede **solicitar almacenamiento persistente** con `navigator.storage.persist()`; en Safari y en la mayoría de los navegadores basados en Chromium la solicitud se **aprueba o deniega automáticamente** según el historial de interacción, sin aviso al usuario; la expulsión ocurre con **presión de almacenamiento** (política de uso menos reciente por origen) y **de forma proactiva en Safari para orígenes poco usados**; en el modo privado los datos suelen eliminarse al cerrarlo. WebKit (**artículo del 24 de marzo de 2020; es un comportamiento documentado entonces y su vigencia actual no se re-verificó [PEND]**): Safari **eliminaba todo el almacenamiento escribible por scripts** (incluidos IndexedDB, LocalStorage y los registros y cachés de Service Workers) tras **siete días de uso de Safari sin interacción con el sitio**; **las aplicaciones web añadidas a la pantalla de inicio cuentan sus propios días de uso** y WebKit no preveía borrar sus datos por esta regla. **La regla de siete días no se presenta como garantía universal vigente** (OC-283). La **API de sincronización en segundo plano** está marcada como **disponibilidad limitada** (no funciona en algunos de los navegadores más usados), exige contexto seguro y Service Worker.
+**Inferencias [INF].** (1) Una cola local **no es un almacén durable** y su pérdida no es detectable por el servidor (SCN-15); (2) ninguna alternativa puede **depender** de sincronización en segundo plano (IN-05-03 ya lo establece); (3) en iOS la conservación depende de si la PWA está instalada [INF a partir de lo [DOC]]; (4) pedir almacenamiento persistente **reduce el riesgo, no lo elimina** y su resultado no es controlable por la aplicación. **Pendiente [PEND]:** comportamiento en dispositivos iOS reales (HR1-07), cuotas efectivas, y la decisión de ADR-16.I (OC-263, OC-264).
+### 33.12 Costos, rendimiento y límites de la capa gratuita
+
+- **Hechos [DOC] ya leídos (R3-A, R3-D, ADR-02.I):** Supabase: 500 MB de base de datos; pausa por inactividad; funciones de borde (2 s de CPU, 256 MB, 150 s de espera); Neon: 1 GB; el controlador solo HTTP admite transacciones **no interactivas** y las interactivas requieren otra conexión; límites de plan de Vercel y Cloudflare para solicitudes (R3-A). **Los límites de solicitudes y de ejecución del plan elegido no se evaluaron** [PEND] (OC-260, OC-270).
+- **Estimación [INF; supuestos explícitos].** A escala RNF-04 (hasta 6 torneos × 240 partidos) y **25 operaciones por partido** → **36,000 operaciones** al año de torneo. Con un registro de idempotencia o recibo de **≈ 200 bytes** por operación, el almacenamiento del servidor sería **≈ 7.2 MB** [INF], sin contar auditoría ni metadatos de rechazos; con ALT-05-A hay **una solicitud por operación** y con ALT-05-B **una por partido y sincronización**; **no se midió** el consumo de solicitudes de la capa gratuita ni de la ejecución por solicitud.
+- **Retención de recibos o resultados en el servidor** (si D5-1 o D5-7 lo exigieran): su plazo **no se fija** y se somete a PRV-10 y PEND-JUR (OC-262).
+### 33.13 Compatibilidad con las configuraciones de R3-A y con R3-B…D, ADR-02.I, ADR-03.I, ADR-04.I y ADR-09.I (sin seleccionar)
+
+| Configuración o bloque | Observación | Estado |
+|---|---|---|
+| CFG-C1 (Vercel + Supabase) | La aplicación atómica de cada operación puede hacerse en la capa de datos o en una función de servidor conectada a PostgreSQL [DOC: R3-D]; límites de las funciones de borde [DOC]; sin sincronización en segundo plano garantizada [DOC] | Condicionado; no se selecciona |
+| CFG-C2 (Vercel + Neon + Better Auth) | El controlador HTTP admite transacciones **no interactivas**; las interactivas requieren otra conexión [DOC: Neon]; **afecta a cómo se aplica una operación completa con lectura previa** (OC-257); sesión y segundo factor de la biblioteca (ADR-03.I) | Condicionado; no se selecciona |
+| CFG-C3 (Cloudflare + Supabase) | El entorno de Cloudflare para solicitudes, tiempo de ejecución, sesiones y reglas de caché **no se evaluó** (OC-182, OC-238) | Condicionado; no se selecciona |
+| ADR-02.I | Frontera atómica, acceso directo (GV), estado vigente y RT-14 **sin seleccionar**; OC-185…188, OC-190, OC-191, OC-213 | Dependencia abierta |
+| ADR-03.I | S-A/S-B y MFA al sincronizar **sin seleccionar**; SI-07, SI-16; OC-155, OC-179 | Dependencia abierta |
+| ADR-04.I | Lo local jamás es público; VP-04, VP-05, VP-15, VP-16; D4-5 (preparación) bloqueada | Dependencia abierta |
+| ADR-06 y ADR-08 | Señal de cambio y caché; recálculo, versión del reglamento y RT-14 por efecto (OC-102, OC-121, OC-124) **abiertas** | Dependencia abierta |
+| ADR-09.I | Auditoría de lo aplicado y de los rechazos; K-3; brechas RX-03, RX-04 y RX-05; OC-147, OC-127 | Dependencia abierta |
+| ADR-16.I | **No redactado;** el almacén local y su protección dependen de él | Dependencia abierta |
+
+### 33.14 Evaluación, puntuación y recomendación preliminar
+
+**Regla.** Pesos aprobados (R1 §2.4 y R3-A): seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %. Se puntúa **solo con evidencia leída**; lo no leído es [PEND] y se trata con rangos de sensibilidad, sin penalizar documentación incompleta. Escala 1–5; juicio del autor [PROP], no vinculante. El criterio **funcionamiento sin conexión no discrimina** entre alternativas (3): las tres implementan la misma cola local y la misma frontera; **no se otorga ventaja a ninguna** por promesas no demostradas. **Regla uniforme de rangos:** (i) **Seguridad y mantenimiento** son juicios [PROP] no verificados: **valor central y rango ±1 para las tres**; el valor central es **el mismo (3) cuando no existe evidencia diferenciadora** y **menor (2) solo cuando la propia definición implica un hecho estructural** (aquí, estado de sesión de sincronización en el servidor); (ii) **Costo** puntúa solo **planes y servicios:** techo 5 y el límite inferior baja **1 punto por cada aspecto de costo no evaluado**; el desarrollo propio se pondera en Mantenimiento; **que una función sea gratuita o de pago ni favorece ni penaliza.** **Aspectos de costo no evaluados:** A: solicitudes de la capa gratuita por operación (1); B: límites de ejecución y de tamaño por solicitud (1); C: solicitudes de control y estado de sesión del servidor (2).
+
+| Criterio (peso) | ALT-05-A | ALT-05-B | ALT-05-C |
+|---|---|---|---|
+| Seguridad (35 %) [PROP, no verificado; central 3 en las tres] | 2–4 | 2–4 | 2–4 |
+| Costo (30 %) [aspectos no evaluados: A 1, B 1, C 2] | 4–5 | 4–5 | 3–5 |
+| Funcionamiento sin conexión (20 %) | 3 | 3 | 3 |
+| Mantenimiento (15 %) [PROP; central A 3, B 3, C 2] | 2–4 | 2–4 | 1–3 |
+| **Total (rango)** | **2,80–4,10** | **2,80–4,10** | **2,35–3,95** |
+
+**Fundamento.** *Seguridad:* los tres juicios son **[PROP] no verificados** y de igual valor central porque ninguna ventaja está demostrada; los riesgos propios (muchas solicitudes en A; lotes parciales en B; estado de sesión y manifiesto en C) se registran como condiciones. *Costo:* sin servicio nuevo evidente [INF]; los límites inferiores reflejan solo aspectos no evaluados. *Sin conexión:* no discrimina. *Mantenimiento:* A y B (3) sin evidencia diferenciadora; **C (2)** por el estado de sesión de sincronización que el servidor debe mantener.
+**Sensibilidad.** Los rangos de A y B son **idénticos** (2,80–4,10) y el de C (2,35–3,95) está **contenido** en ellos: **el puntaje no discrimina.**
+**Recomendación preliminar NO vinculante [PROP].** (1) **Los requisitos eliminatorios son los SY confirmados** (SY-01, SY-02, SY-03, SY-08, SY-09, SY-10, SY-11, SY-12, SY-13 y SY-23); **ninguna alternativa fija F-A, B-B ni D5-1, D5-2, D5-4, D5-6 o D5-7.** (2) La evidencia documentada **no discrimina** entre ALT-05-A, B y C: **no se expresa preferencia.** (3) **La unidad atómica, el acceso directo y el estado vigente** (ADR-02.I y ADR-03.I) **pesan más** que la elección de la unidad de envío. (4) **No se selecciona nada;** la decisión es del responsable y **posterior** a ADR-01, ADR-02.I, ADR-03.I, ADR-04.I, ADR-09.I, ADR-16.I y la admisión de las formulaciones. Los puntajes no sustituyen a los requisitos obligatorios, que son eliminatorios y no compensables.
+
+### 33.15 Condiciones, decisiones, riesgos y dependencias
+
+**Condiciones abiertas (OC-246…283).** Ninguna se resuelve aquí.
+
+| ID | Condición | Origen | Bloquea |
+|---|---|---|---|
+| OC-246 | Admisión formal por el responsable de F-A y B-B como conjunto admitido; D5-1, D5-2, D5-4, D5-6 y D5-7 sin A | Regla del cierre de R2; matriz | ADR-05.I definitivo |
+| OC-247 | **D5-1 / OC-35:** idempotencia de lo rechazado (conservar o reevaluar); bloqueada | D5-1; OFF-06 | SY-04; SCN-02, SCN-20 |
+| OC-248 | **D5-2:** persistencia independiente de los metadatos de rechazadas (R-4); decisión 3 y DB2c-3; bloqueada | D5-2; OFF-20 | SY-19 |
+| OC-249 | **D5-4 / OC-41:** contigüidad entre dos dispositivos del mismo editor; bloqueada | D5-4; §9.4 fila 10 | SCN-10 |
+| OC-250 | **D5-6 / OC-42 / OC-44:** estado tras un aborto técnico y transición `enviando` → `pendiente`; estados nuevos pueden exigir modificar `01`; bloqueada | D5-6; §9.2; OFF-04 | SY-13, SY-22 |
+| OC-251 | **D5-7 / OC-43:** reconciliación tras una interrupción (reenvío o consulta); qué conserva el servidor; bloqueada | D5-7; IN-05-19 | SY-05 |
+| OC-252 | **K-3 y decisión 10;** brechas RX-03, RX-04 y RX-05 de ADR-09.I; OC-127 y OC-147 | K-3; ADR-09.I | SY-19, SY-20 |
+| OC-253 | OFF-07 [REC] (B-A) no excluida; DB2c-9; OC-37 | OFF-07; D5-5 | SY-21 |
+| OC-254 | A-9, A-10, A-11, A-13 y A-14 (parámetros); Q-29, Q-30 y Q-42 | R1 §8.1; §13 | SY-07, SY-17 |
+| OC-255 | Nivel de autenticación al sincronizar (S-A o S-B; DB2c-8; OC-39) y MFA; sin fijar | ADR-03.I; DR3I-1 | SY-09 |
+| OC-256 | Estado vigente de cuenta, sesión, roles y nivel en la ruta sincronizada; mecanismo sin seleccionar (OC-179 y OC-213) | AZ-25; SI-07 | SY-09 |
+| OC-257 | **Frontera atómica UI-06 con UI-10:** mecanismo de atomicidad por operación, serialización y deduplicación; **OC-102, OC-185 y OC-186** abiertas | ADR-02.I; ADR-08 | SY-03, SY-14 |
+| OC-258 | RT-14 por efecto en la ruta sincronizada y **OC-121** (efecto sobre la clasificación del equipo del actor) | ADR-08; A-15; A-16 | SY-15 |
+| OC-259 | **OC-124:** versión del reglamento en la unidad ante un cambio permitido simultáneo | ADR-08 | SY-14; SCN-12 |
+| OC-260 | Límites de solicitudes y de ejecución por solicitud del plan elegido (tamaño de lote, tiempo); transacciones interactivas frente a no interactivas | [DOC]; CFG | ALT-05-B; SY-29 |
+| OC-261 | Estado de la sesión de sincronización (ALT-05-C): qué conserva el servidor, por cuánto tiempo y con qué privacidad | ALT-05-C; D5-7 | ALT-05-C |
+| OC-262 | Retención de recibos o resultados en el servidor; PRV-10 y PEND-JUR | D5-1; D5-7; PRV-10 | SY-26 |
+| OC-263 | Almacenamiento local: expulsión, almacenamiento persistente, iOS; ADR-16.I no redactado; HR1-07; RES-07 | [DOC]; ADR-16.C | SY-25 |
+| OC-264 | Sincronización en segundo plano: no depender de ella; disponibilidad limitada [DOC]; iOS no verificado | IN-05-03; [DOC] | SY-24 |
+| OC-265 | Protección en reposo y datos de menores en dispositivos compartidos (ADR-16.I); Q-20 | OFF-12; PRV-11; D16-1, D16-2 | SY-23 |
+| OC-266 | Qué operaciones son capturables sin conexión (A-10, Q-42) y que ninguna publica ni gobierna | OFF-01; A-10; Q-42 | SY-17 |
+| OC-267 | Service Worker y caché: interacción con la cola y las proyecciones públicas; ADR-06 (OC-85…100) y ADR-04.I (VP-15, VP-16) | IN-05-14; PU-18 | SY-24 |
+| OC-268 | Relojes: aviso con diferencia mayor de 5 minutos ([REC] IN-05-15) y su registro | OFF-13 | SY-28 |
+| OC-269 | Actualización de la app con cola pendiente ([REC] OFF-16) | OFF-16 | SY-27 |
+| OC-270 | Medición de rendimiento (OFF-19) y consumo de solicitudes por alternativa; inundación de reenvíos (CAB-14) | OFF-19; CAB-14 | SY-29 |
+| OC-271 | Entorno de Cloudflare (CFG-C3): solicitudes, ejecución, sesiones y reglas de caché | OC-182; OC-238 | ADR-01 |
+| OC-272 | Hechos generales de protocolos, de PostgreSQL y de navegadores no verificados en fuente oficial | §33.0 [INF] | ADR-05.I definitivo |
+| OC-273 | Verificación empírica (pruebas de §33.16) y en dispositivos iOS antes de cualquier aprobación | RNF-11; HR1-07 | Fase 3 |
+| OC-274 | Dependencias: ADR-01; ADR-02.I; ADR-03.I; ADR-04.I; ADR-09.I; ADR-16.I no redactado | R1 §8.2 | ADR-05.I definitivo |
+| OC-275 | Duplicados con otro identificador (§9.4 fila 12) y protección de doble toque | OFF-14; RD-EVT-05 | SY-18 |
+| OC-276 | **Registros de idempotencia:** persistencia, no eliminación mientras pueda reaparecer la operación, horizonte de aceptación opcional y rechazo como obsoleta; plazos sin fijar; PRV-10 y PEND-JUR; referenciada en SY-33, SCN-23 y DR5I-11 | SY-33; OC-262; PRV-10 | SY-33 |
+| OC-277 | **Precondiciones vigentes por operación** en la unidad de aplicación (estado y versión del partido, cuenta, sesión, MFA, rol, ámbito, dependencias); sin instantáneas; mecanismo sin seleccionar; OC-256 y OC-257 | SY-34; AZ-03, AZ-25; SI-07 | SY-34 |
+| OC-278 | **Dependencia rechazada:** B-A frente a B-B; A-9, A-11 y A-14; hueco, dependencia pendiente, dependencia rechazada y conflicto | SY-35; D5-5; OFF-07, OFF-25 | SY-35 |
+| OC-279 | **Privacidad de las respuestas de sincronización:** contenido limitado al ámbito del actor, sin datos confirmados no publicados ni cachés compartidas ni Service Worker; ADR-04.I (VP-01, VP-05, VP-15) y ADR-02.I | SY-36 | SY-36 |
+| OC-280 | **Persistencia local:** fallo de cuota o escritura, confirmación de persistencia, pérdida de lo nunca enviado y borrado físico no garantizado; ADR-16.I no redactado | SY-37; IN-05-12; OFF-11 | SY-37 |
+| OC-281 | **Disparadores y reintentos:** parámetros de espera creciente, variación aleatoria y límite de concurrencia; sin Background Sync; OC-270 | SY-38; IN-05-03 | SY-38 |
+| OC-282 | **Auditoría de lo aplicado y de los reenvíos:** fallo del registro de auditoría y limitación de OFF-06; O de ADR-09.I | SY-39; IN-09-04; OFF-06 | SY-39 |
+| OC-283 | **Vigencia de las fuentes:** el comportamiento de WebKit documentado en 2020 y la regla de siete días no se re-verificaron; cuotas y expulsión por navegador | §33.11; [DOC] | SY-25 |
+
+**Decisiones que corresponden al responsable (DR5I-1…11).** Ninguna se toma aquí.
+
+| ID | Decisión | Condiciones |
+|---|---|---|
+| DR5I-1 | Admitir, ajustar o rechazar F-A y B-B como conjunto admitido; qué hacer con F-B y B-A (condicionadas); **no se admite aquí** | OC-246, OC-253 |
+| DR5I-2 | D5-1: idempotencia de lo rechazado (heredada, bloqueada) | OC-247 |
+| DR5I-3 | D5-2, decisión 3 y DB2c-3: persistencia de R-4 (heredada, bloqueada) | OC-248, OC-252 |
+| DR5I-4 | D5-4: contigüidad entre dispositivos del mismo editor (heredada, bloqueada) | OC-249 |
+| DR5I-5 | D5-6: estado tras un aborto técnico y eventual modificación de `01` (heredada, bloqueada) | OC-250 |
+| DR5I-6 | D5-7: reconciliación tras una interrupción (reenvío o consulta) (heredada, bloqueada) | OC-251, OC-261, OC-262 |
+| DR5I-7 | Unidad de envío y reconciliación (operación, lote o sesión de sincronización), **después** de ADR-01 y de las decisiones previas | OC-260, OC-261, OC-274 |
+| DR5I-8 | Nivel de autenticación y MFA al sincronizar (S-A o S-B) (con DR3I) | OC-255, OC-256 |
+| DR5I-9 | Conservación local: retención, expulsión, almacenamiento persistente y protección en reposo (con ADR-16.I y PEND-JUR) | OC-262, OC-263, OC-265 |
+| DR5I-10 | Qué operaciones se capturan sin conexión (A-10, Q-42) y cuáles nunca (gobierno y publicación) | OC-254, OC-266 |
+| DR5I-11 | **Horizonte de aceptación de operaciones antiguas** y retención de los registros de idempotencia (sin fijar plazos; con PRV-10 y PEND-JUR) | OC-276, OC-262 |
+
+**Riesgos de redacción (RR5I-01…26).** No se aceptan; se registran.
+
+| ID | Riesgo | Mitigación documental |
+|---|---|---|
+| RR5I-01 | **Duplicados** tras reintentos y respuestas perdidas | SY-03, SY-05; SCN-01; no se afirma demostrado |
+| RR5I-02 | Considerar **aplicado** un cambio por haber sido enviado o recibido | SY-13; §33.5 |
+| RR5I-03 | Confundir aceptación, aplicación y publicación | §33.5; SY-12, SY-13; ADR-04.I |
+| RR5I-04 | Una ruta de sincronización que **eluda** los controles de ADR-02.I o ADR-03.I (acceso directo, estado obsoleto) | §33.6; SY-09; OC-256; DR2I-1 |
+| RR5I-05 | Una operación capturada sin conexión que adquiere **autorización definitiva** antes de validarse | SY-12; IN-03-11 |
+| RR5I-06 | Dispositivo que nunca se conecta tras una revocación (sin borrado remoto; D-2) | SY-11; SCN-09; sin aceptar |
+| RR5I-07 | Sobrescritura silenciosa de lo confirmado o pérdida silenciosa de capturas | SY-08; SY-25; §9.4 |
+| RR5I-08 | Prometer que un conflicto se resuelve automáticamente cuando requiere intervención | SY-08; §33.5 |
+| RR5I-09 | Presentar un **lote** o una **sesión** como atómicos | SY-14; §33.4 |
+| RR5I-10 | Resolver en silencio el efecto de RT-14 sobre la clasificación (OC-121) o la versión del reglamento (OC-124) | SY-15; OC-258, OC-259 |
+| RR5I-11 | Dar por resueltas las brechas de auditoría (RX-03, RX-04, RX-05) y K-3 | SY-19; OC-252 |
+| RR5I-12 | Datos de menores o internos en el almacenamiento local, en el manifiesto o en dispositivos compartidos | SY-23; OC-265; Q-20 |
+| RR5I-13 | Pérdida del almacenamiento local (expulsión, eliminación de Safari) sin que el servidor lo detecte | SY-25; SCN-15; [DOC] |
+| RR5I-14 | Depender de la sincronización en segundo plano (disponibilidad limitada) | IN-05-03; OC-264 |
+| RR5I-15 | Denegación inducida por el error recuperable (F-A) y reintentos masivos o inundación de reenvíos (CAB-14) | SY-20; OC-270 |
+| RR5I-16 | Bloqueo tras un fallo que frena operaciones legítimas y presiona la retención de 30 días | SY-21; OC-253; DR5I-1 |
+| RR5I-17 | El Service Worker o la caché sirviendo lo local como público o mezclando proyecciones | SY-24; OC-267 |
+| RR5I-18 | Relojes del dispositivo manipulados que alteren el orden | SY-06, SY-28; OC-268 |
+| RR5I-19 | Una actualización de la app que descarta o corrompe la cola pendiente | SY-27; OC-269 |
+| RR5I-20 | Hechos [INF] o límites de la capa gratuita no evaluados tratados como definitivos | OC-260, OC-272; rotulado [INF] |
+| RR5I-21 | **Aplicación doble** por un registro de idempotencia eliminado antes de un reenvío tardío, o por tratar la deduplicación de transporte como aplicación única | SY-33; OC-276; DR5I-11 |
+| RR5I-22 | **Validación contra una instantánea obsoleta** del lote o de la sesión | SY-34; SCN-21; OC-277 |
+| RR5I-23 | Una operación **aplicada sobre una precondición invalidada** por una predecesora rechazada (no es un hueco) | SY-35; SCN-22; OC-278 |
+| RR5I-24 | **Exposición de datos confirmados no publicados o de otro ámbito** en respuestas de sincronización, estado base, manifiestos o cachés | SY-36; OC-279 |
+| RR5I-25 | **Pérdida silenciosa** por fallo de escritura local, o promesa de borrado físico seguro | SY-37; SCN-24; OC-280 |
+| RR5I-26 | Presentar la **regla de siete días de WebKit (2020)** o cualquier límite de navegador como garantía vigente | SY-25; OC-283 |
+
+**Dependencias que impiden la aprobación definitiva.** 1. **ADR-01** (selección de configuración). 2. **Admisión de formulaciones** (F-A y B-B) y las **cinco decisiones sin A** (D5-1, D5-2, D5-4, D5-6, D5-7). 3. **K-3, decisión 3 y decisión 10;** brechas RX-03…05 de ADR-09.I. 4. **ADR-02.I:** frontera atómica, acceso directo (GV), estado vigente, RT-14; OC-102, OC-121, OC-124. 5. **ADR-03.I:** S-A o S-B, MFA y estado vigente. 6. **ADR-04.I y ADR-06:** proyecciones, caché y señal. 7. **ADR-16.I (no redactado):** almacén local, protección en reposo y expulsión. 8. **A-9…A-16, Q-29, Q-30, Q-42 y Q-43.** 9. Verificación empírica y en dispositivos iOS (OC-273). 10. D-2 sin excepción; RES-01…13, HR1-07 y RES-07 sin aceptar; R1 §8.1 sin cumplimiento demostrado.
+
+### 33.16 Pruebas negativas y de recuperación
+
+| Prueba | Qué demuestra | Requisito | Tipo |
+|---|---|---|---|
+| Cortar la red a mitad de envío, cerrar la app y reabrirla; repetir con respuesta perdida tras aplicar y tras rechazar | Un único estado coherente; sin duplicar efectos ni auditoría; sin pérdida | SY-03, SY-05, SY-22 | I, E2E |
+| Reenviar la misma operación 1, 2 y 10 veces, en secuencia y de forma concurrente | Un efecto, un registro de auditoría, la misma respuesta (D5-1 para lo rechazado: sin fijar) | SY-03 | I (concurrencia) |
+| Operaciones con hueco de secuencia; con reanudación rechazada y eventos posteriores | Bloqueo por hueco; ningún evento posterior se aplica ni se publica | SY-06, SY-07 | I |
+| Partido finalizado o corregido por otro; jugador anonimizado; partido reprogramado o a W.O. durante la desconexión | Resultados de §9.4; sin sobrescritura silenciosa | SY-08 | I |
+| Revocar el rol, desasignar al editor o desactivar la cuenta; sincronizar después | `rechazada` con motivo; sin publicar; cuenta desactivada: OFF-11 | SY-09, SY-11 | I, E2E |
+| Revocar entre la validación y la aplicación | «Aplicada antes y válida» o «rechazada», nunca a medias | SY-14 | I (concurrencia) |
+| Sincronizar con la sesión de otra cuenta; con sesión vencida; con el segundo factor insuficiente | Rechazo; captura local sin sincronizar | SY-09, SY-10, SY-12 | I |
+| Operación que afecta a un partido del propio equipo del actor (efecto directo y en cascada) | Rechazo completo antes de aplicar | SY-15 | I |
+| Intentar por una vía directa del cliente aplicar la misma operación sin pasar por el servidor (según GV) | No elude la revalidación ni la auditoría; o la brecha queda declarada | §33.6 | DB, I |
+| Lote con operaciones válidas e inválidas; sesión interrumpida y reanudada (ALT-05-B y C) | Resultados por operación; sin atomicidad de lote o de sesión | SY-14 | I |
+| Fallo inyectado en el registro de un rechazo exigido | Operación pendiente o error recuperable; sin rechazo definitivo sin registro | SY-20 | I |
+| Reenviar una operación aplicada tras eliminar o caducar su registro de idempotencia en un entorno de prueba | Se rechaza como obsoleta o se devuelve el resultado original; **nunca se aplica dos veces** | SY-33 | I |
+| Modificar el partido entre dos operaciones del mismo lote | La segunda se evalúa con el estado vigente; conflicto o rechazo, sin validar contra instantánea | SY-34; SCN-21 | I (concurrencia) |
+| Enviar una operación que depende de otra rechazada | No se aplica sobre una precondición invalidada | SY-35; SCN-22 | I |
+| Inspeccionar respuestas de sincronización (resultados, conflictos, estado base, manifiestos, errores) con actores de distinto ámbito; revisar cachés y Service Worker | Sin datos fuera del ámbito ni confirmados no publicados; sin almacenamiento compartido | SY-36 | I, E2E |
+| Agotar la cuota local o forzar un error de escritura al capturar | No se presenta como guardada; aviso explícito | SY-37; SCN-24 | E2E |
+| Recuperar la conexión, abrir la app, pulsar «Sincronizar ahora» y simular reintentos masivos | Espera creciente, concurrencia limitada, sin depender de Background Sync | SY-38 | I, E2E |
+| Fallar el registro de auditoría de una operación aplicada: (a) con transacción revertida demostrada; (b) con respuesta perdida o resultado del compromiso desconocido | (a) Sin efectos ni auditoría; reintento con las validaciones vigentes; (b) conciliación por el identificador y el registro de SY-33 antes de decidir; **en ambos, sin duplicar** | SY-39; SY-33; SCN-25 | I |
+| Inspeccionar el almacén local, la caché del Service Worker y los datos de un dispositivo compartido | Sin datos internos ni nombres; aislamiento por cuenta; la cola no está en la caché pública | SY-23, SY-24 | E2E |
+| Simular eliminación del almacenamiento y cola de más de 30 días | Advertencia; sin promesa de conservación; vencimiento informado | SY-25, SY-26 | E2E |
+| Actualizar la app con la cola pendiente; reloj del dispositivo adelantado más de 5 minutos | Cola migrada o actualización bloqueada; aviso y registro | SY-27, SY-28 | E2E |
+| Sincronizar 50 operaciones con red lenta | Tiempo medido frente a la propuesta de OFF-19 (no medido aquí) | SY-29 | L |
+
+### 33.17 Criterios para la revisión focalizada y de revisión documental
+
+| ID | Criterio (autoevaluación del autor; no es auditoría independiente) | Resultado |
+|---|---|---|
+| CR5I-01 | Las Partes I–XVIII y los registros anteriores no cambian (prefijo idéntico al HEAD) | Cumple (comprobado al generar) |
+| CR5I-02 | Al menos tres alternativas distinguibles con matriz de conformidad, sin seleccionar; R1 §8.1 sin declarar cumplido | Cumple: §33.4, §33.9 |
+| CR5I-03 | F-A y B-B solo como candidatas; F-B y B-A no rechazadas; D5-1, D5-2, D5-4, D5-6 y D5-7 bloqueadas | Cumple: §33.2, §33.4 |
+| CR5I-04 | Captura, identificación, idempotencia, orden y dependencias, sin afirmar demostrado | Cumple: SY-01…07 |
+| CR5I-05 | Conflictos y revalidación (identidad, sesión, MFA, roles, ámbito); revocación sin conexión; D-2 sin excepción | Cumple: SY-08…12; §33.6 |
+| CR5I-06 | Distinción entre pendiente, recibida, aceptada, aplicada, rechazada y publicada, sin crear estados nuevos | Cumple: §33.5; SY-13 |
+| CR5I-07 | Atomicidad por operación sin atomicidad de lote ni de sesión; RT-14 por efecto y OC-121 abierta | Cumple: SY-14, SY-15 |
+| CR5I-08 | Escenarios críticos de conflicto y recuperación | Cumple: §33.8 |
+| CR5I-09 | Menores, dispositivos compartidos, Service Worker, caché y proyecciones públicas | Cumple: §33.10; SY-23, SY-24 |
+| CR5I-10 | Almacenamiento, expulsión, vencimiento y sincronización en segundo plano con evidencia separada de inferencia | Cumple: §33.11; SY-25, SY-26 |
+| CR5I-11 | Costos, rendimiento y CFG-C1/C2/C3 sin seleccionar proveedor | Cumple: §33.12, §33.13 |
+| CR5I-12 | Puntuación solo con evidencia leída; regla uniforme de rangos; aritmética comprobada | Cumple: §33.14 (comprobado al generar) |
+| CR5I-13 | Brechas de ADR-09.I, K-3, OC-102, OC-121, OC-124 y las condiciones de ADR-02.I y ADR-03.I preservadas | Cumple: §33.2, §33.6 |
+| CR5I-14 | Identificadores nuevos únicos, definidos y sin colisión | Cumple (comprobado al generar) |
+| CR5I-15 | Nota posterior de trazabilidad de ADR-04.I sin reescribir lo histórico | Cumple: §33.0 |
+| CR5I-16 | Sin código, cuentas, servicios ni gastos; sin ADR-16.I, R3-F ni R4 | Cumple |
+| CR5I-17 | Pruebas negativas y de recuperación por escenario | Cumple: §33.16 |
+| CR5I-18 | **Revisión focalizada realizada** (hallazgos M-1…M-8) **y correcciones incorporadas en v0.2:** aplicación efectiva única, precondiciones vigentes por operación, dependencias rechazadas, privacidad de respuestas, fallos de persistencia local, recuperación y reintentos, auditoría de lo aplicado y fecha de la fuente de WebKit; **sin declarar aprobación documental** | Cumple: §33.20; SY-33…39 |
+| CR5I-19 | Alternativas y puntuaciones sin cambio; ninguna selección ni preferencia; D5-3 y D5-5 candidatas no admitidas, F-B y B-A no descartadas, D5-1, D5-2, D5-4, D5-6 y D5-7 bloqueadas; K-3, OFF-06, OFF-07, A-9…A-16, Q-42, Q-43 y RT-14 abiertos | Cumple: §33.2, §33.14 |
+
+### 33.18 Evidencia documentada frente a inferencias
+
+| Afirmación | Etiqueta | Fuente |
+|---|---|---|
+| IN-05-01…21, D5-1…7, §9.2, §9.4 (12 escenarios), §9.5, OFF-01…25, A-9…A-16, la clasificación A, C y X | [CONF] / [DOC] interno | §21; matriz de R2 (§B); `01` §9 |
+| Frontera atómica, acceso directo, estado vigente, RT-14; separación interno/público; auditoría y brechas | [CONF] / [PROP] internos | §28 a §32 (R3-D, R3-E) |
+| Almacenamiento «best-effort» por defecto; solicitud de almacenamiento persistente sin aviso en Safari y Chromium; expulsión por presión y proactiva en Safari; modo privado | [DOC] | MDN: cuotas y criterios de expulsión |
+| WebKit (artículo del 24 de marzo de 2020): Safari eliminaba el almacenamiento escribible por scripts (IndexedDB, LocalStorage, Service Workers) tras siete días de uso sin interacción; las aplicaciones de pantalla de inicio cuentan sus propios días; **vigencia actual no verificada** | [DOC] histórico; vigencia [PEND] | WebKit: Intelligent Tracking Prevention (2020-03-24) |
+| La sincronización en segundo plano tiene disponibilidad limitada y exige Service Worker y contexto seguro | [DOC] | MDN: Background Synchronization API |
+| Límites de Supabase y Neon; transacciones no interactivas del controlador solo HTTP de Neon | [DOC] | Leídos en R3-A, R3-D y ADR-02.I |
+| Que la deduplicación por identificador funcione con una restricción de unicidad; que el lote o la sesión no sean atómicos; diferencias de carga entre alternativas; que la conservación en iOS dependa de la instalación de la PWA | **[INF]** | Razonamiento del autor; no verificado |
+| Cuotas efectivas, comportamiento real en iOS, límites de solicitudes del plan elegido, entorno de Cloudflare | **[PEND]** | No leído (OC-263, OC-260, OC-271) |
+| Juicios de seguridad, costo y mantenimiento de la puntuación | [PROP] / [INF] | Autor; no verificados |
+
+**Fuentes oficiales consultadas (2026-11-22; páginas descargadas y convertidas a texto):** MDN (cuotas y criterios de expulsión de almacenamiento, `StorageManager.persist()`, API de sincronización en segundo plano, API de sincronización periódica, Service Worker, IndexedDB); WebKit (Intelligent Tracking Prevention); además de las ya leídas en R3-A, R3-D y ADR-02.I (Supabase, Neon, Vercel, Cloudflare). **No se obtuvo** la documentación de claves de idempotencia de un proveedor de pagos (inaccesible). **Límites.** No se verificó empíricamente ningún comportamiento en dispositivos reales (iOS, Android, escritorio) ni con cortes de red; los hechos de protocolos y de PostgreSQL son [INF].
+### 33.19 Estado y preguntas para el responsable
+
+**Estado:** R3-E / ADR-05.I **v0.2-R3E-05I: APROBADO CONDICIONALMENTE COMO ENTREGABLE EXCLUSIVAMENTE DOCUMENTAL (ver «Aprobación (metadato)» en §33.0); R3-E sigue como bloque parcial en curso.** No es aprobación definitiva; no versionado en el momento de redactarse. Autoevaluación del autor, no auditoría independiente. **F-A y B-B son candidatas A no admitidas; F-B y B-A condicionadas, no rechazadas; D5-1, D5-2, D5-4, D5-6 y D5-7 bloqueadas.** ADR-16.I, R3-F y R4: **NO INICIADOS.** Siguen abiertas todas las decisiones y condiciones heredadas de R1, R2, R3-A…D y de ADR-09.I, ADR-03.I, ADR-02.I y ADR-04.I.
+
+**Preguntas:** DR5I-1 a DR5I-11 y las condiciones OC-246 a OC-283 (§33.15); en particular, la unidad de envío y reconciliación (DR5I-7), el nivel de autenticación al sincronizar (DR5I-8) y la conservación local (DR5I-9).
+
+### 33.20 Correcciones de v0.1 a v0.2
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| M-1 | SY-33: deduplicación de transporte distinguida de la aplicación efectiva única; registro persistente del resultado y sus efectos en la misma unidad; no se eliminan los registros de idempotencia mientras pueda reaparecer la operación; horizonte de aceptación opcional con rechazo como obsoleta; sin plazos ni mecanismos; PRV-10 y PEND-JUR (OC-276, DR5I-11, SCN-23, RR5I-21) | §33.3, §33.8, §33.9, §33.15 |
+| M-2 | SY-34: precondiciones vigentes (partido, cuenta, sesión, MFA, rol, ámbito, dependencias) verificadas dentro de la unidad de cada operación con el estado confirmado vigente y no con una instantánea; estado base de ALT-05-C informativo; SCN-21; sin afirmar demostrado (OC-277, RR5I-22) | §33.3, §33.4, §33.8, §33.9 |
+| M-3 | SY-35 y SCN-22: dependencias distinguidas (hueco, pendiente, rechazada, conflicto); ninguna operación sobre una precondición invalidada; B-B no lo garantiza por sí sola; B-A frente a B-B y A-9, A-11 y A-14 abiertas (OC-278, RR5I-23) | §33.3, §33.8, §33.9 |
+| M-4 | SY-36: todas las respuestas de sincronización limitadas al ámbito y permisos del actor, sin datos confirmados no publicados, sin cachés compartidas ni Service Worker, persistencia local adicional autorizada y delimitada; vínculos a VP-01, VP-05, VP-15 y ADR-02.I (OC-279, RR5I-24) | §33.3, §33.9, §33.15 |
+| M-5 | SY-37 y SCN-24: persistencia local confirmada antes de presentar la captura, fallo de cuota o escritura comunicado, sin promesa de recuperar lo nunca enviado y sin garantizar borrado físico seguro (OC-280, RR5I-25) | §33.3, §33.8, §33.9 |
+| M-6 | SY-38: recuperación por apertura, recuperación de conexión, «Sincronizar ahora» y reconciliación; espera creciente, variación aleatoria, límite de concurrencia y protección contra reenvíos masivos; sin Background Sync; sin fijar parámetros (OC-281) | §33.3, §33.9, §33.16 |
+| M-7 | SY-39 y SCN-25: el fallo del registro obligatorio de auditoría de una operación aplicada impide aplicarla (IN-09-04); la trazabilidad de los reenvíos de lo ya aplicado sigue limitada por OFF-06 y ADR-09.I (OC-282); **refinado por C-1** | §33.3, §33.8, §33.9 |
+| M-8 | Fecha de la fuente de WebKit (2020-03-24) y vigencia [PEND]; la regla de siete días no se presenta como garantía vigente (OC-283, RR5I-26); CR5I-18 actualizado y CR5I-19 añadido, sin declarar aprobación documental | §33.11, §33.17, §33.18 |
+| C-1 | **Corrección puntual de la verificación final:** SY-39, SCN-25 y la prueba asociada distinguen **(1) transacción revertida** (no se aplicaron efectos ni auditoría; nuevo intento con las validaciones vigentes, sin asumir permisos anteriores) de **(2) resultado remoto desconocido** (la operación **puede estar aplicada**; no se afirma rechazada, revertida ni aplicada; se concilia por el identificador estable y el registro de SY-33); en ambos casos sin duplicar efectos, recálculos ni auditoría y sin confundir deduplicación de transporte con aplicación efectiva única; SCN-25 pasa de «Confirmado» a «Garantía exigida; no demostrada (OC-257)»; el estado local no se fija (D5-6, OC-250); M-1…M-6 y M-8 sin cambios | §33.3 (SY-39), §33.8 (SCN-25), §33.16 |
