@@ -1,5 +1,16 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-23 — Fase 2, R4: plan de subbloques aprobado para planificación y transición R4-0
+
+- **Decisión del responsable (2026-11-23, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DEL PLAN DE R4 Y TRANSICIÓN R4-0»: «APRUEBO EXCLUSIVAMENTE LA ESTRUCTURA PROPUESTA PARA PLANIFICAR R4 Y AUTORIZO EL REGISTRO DOCUMENTAL DE LA TRANSICIÓN R4-0.» **PLAN DE SUBBLOQUES R4: APROBADO PARA PLANIFICACIÓN.** No inicia R4-A…R4-G ni redacta ADR. Archivos: `aprobaciones.md` y `bitacora.md` (**`02-arquitectura-adr.md` no se modifica**).
+- **Plan (orden de trabajo, no aprobación de entregables):** R4-A ADR-11 Entornos y despliegue; R4-B ADR-13 Observabilidad sin datos personales; R4-C ADR-17 Retención y anonimización; R4-D ADR-14 Tareas programadas e identidad de ejecución; R4-E ADR-12 Respaldo y continuidad; R4-F Trazabilidad final de la Fase 2; R4-G Auditoría de cierre por revisor separado del autor y con contexto nuevo. Dependencias de R1 §8.2 conservadas; cada subbloque requiere autorización nominal posterior.
+- **R4-0 (transición administrativa):** nota posterior del versionado del cierre documental condicionado de R3 en `f8e4283c6cc3d0b71243649738f4e540bb050058` (`f8e4283`; 2026-11-23T05:53:23Z), registrada en `aprobaciones.md` (registro del cierre de R3) y en la entrada del cierre de R3 de esta bitácora. No es un ADR ni la aprobación de inicio de R4. R3 sigue cerrado documentalmente de forma condicionada, sin aprobación arquitectónica definitiva y sin satisfacer R1 §8.1 ni §8.2.
+- **Estados:** R4-A…R4-G NO INICIADOS; R4 como conjunto SIN APROBACIÓN NI CIERRE; Fase 2 EN DESARROLLO; Fase 3 NO INICIADA.
+- **Abiertas (sin resolver por inferencia):** identidad y tipo del revisor de R4-G; alcance de su independencia; corrección de estados históricos (DR3F-4); fila histórica de R2-C4; ubicación del entregable R4-F; eventual cierre documental de R4 como conjunto.
+- **Preservado:** ninguna formulación admitida; alternativas sin seleccionar; 16 decisiones sin formulación A; DR y OC pendientes; RR y RES sin aceptar; R1 §8.1 sin cumplimiento demostrado; R1 §8.2 sin satisfacción definitiva; D-2 sin excepción; PEND-JUR; garantías y verificaciones empíricas pendientes; auditoría independiente de cierre aún no realizada.
+- **Exclusiones (no implica):** iniciar R4-A…R4-G; redactar ADR; seleccionar; admitir; resolver; aceptar riesgos; conceder excepciones; aprobar R4 o la Fase 2; iniciar la Fase 3. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, autorizar nominalmente un subbloque de R4, designar el revisor de R4-G, corregir estados históricos) requiere autorización expresa e independiente.
+
 ## 2026-11-23 — Fase 2, R3: cierre documental condicionado como conjunto
 
 - **Decisión del responsable (2026-11-23, fecha inferida):** mensaje «TORNEO DE CAMPEONES — CIERRE DOCUMENTAL CONDICIONADO DE R3 COMO CONJUNTO»: «AUTORIZO EXPRESAMENTE EL CIERRE DOCUMENTAL CONDICIONADO DE R3 COMO CONJUNTO, QUE COMPRENDE R3-A, R3-B, R3-C, R3-D, R3-E Y R3-F.» Reconoce **exclusivamente la suficiencia y trazabilidad documental del alcance trabajado.** **No es aprobación arquitectónica definitiva, ni confirma decisiones condicionadas a ADR-01, ni aprueba la Fase 2, ni autoriza implementación.** Archivos: `02-arquitectura-adr.md` (§35.16), `aprobaciones.md`, `bitacora.md`.
@@ -11,7 +22,7 @@
 - **Hash:** `02-arquitectura-adr.md` antes del registro: `de8f06fe15c3a0ad87ce787b40beafb8c84b0fe107ae49ddb6aa3918c8b78c1d`; con el registro: `56fe4c57ff29663cc7ff0fa29a1db7cae4343489981bf2b910c649b56052ac68`. La diferencia es solo la sección 35.16.
 - **Exclusiones (no implica):** admitir o seleccionar; resolver decisiones técnicas; aceptar riesgos; conceder excepciones; declarar cumplidas garantías; corregir estados históricos o la fila de R2-C4; aprobar definitivamente los ADR o la Fase 2; iniciar R4 o la Fase 3.
 - **Estado real:** **R3: cierre documental condicionado aprobado** (sin aprobación arquitectónica definitiva); R3-E: cierre separado; R3-F: comprendido en el cierre del conjunto; **R4 NO INICIADO**; **Fase 2 EN DESARROLLO, sin aprobación global**; **Fase 3 NO INICIADA**. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar este registro, corregir los estados históricos, R4, aprobación de la Fase 2) requiere autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, corregir los estados históricos, R4, aprobación de la Fase 2) requiere autorización expresa e independiente. *[Nota posterior, 2026-11-23: este registro y el cierre documental condicionado de R3 como conjunto quedaron versionados en el commit `f8e4283c6cc3d0b71243649738f4e540bb050058` (`f8e4283`; verificable por Git; 2026-11-23T05:53:23Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-23 — Fase 2, R3-E: cierre documental condicionado
 
