@@ -10241,3 +10241,398 @@ Corrigen los hallazgos de la revisión focalizada de R3-F. **No añaden identifi
 - **Exclusiones (el cierre NO implica):** admitir formulaciones o seleccionar alternativas; resolver decisiones técnicas; aceptar riesgos o conceder excepciones; declarar cumplidas garantías técnicas; corregir estados históricos o la fila de R2-C4; aprobar definitivamente los ADR; aprobar la Fase 2; iniciar R4 o la Fase 3; escribir código o modificar infraestructura o bases de datos.
 - **Integridad.** SHA-256 de `02-arquitectura-adr.md` **inmediatamente antes de este registro** (archivo versionado en `bd453ce917429fdc01fd6296b9fbab04bd734c65`): `de8f06fe15c3a0ad87ce787b40beafb8c84b0fe107ae49ddb6aa3918c8b78c1d`. La diferencia con la versión posterior es exclusivamente la adición de esta sección 35.16; el hash del archivo resultante se registra en `aprobaciones.md` y `bitacora.md`. **Autoevaluación del autor, no auditoría independiente.**
 - **Estado de versionado.** **Pendiente:** sin commit, push, PR ni merge.
+
+# PARTE XXII — BLOQUE R4-A (v0.1-R4A, APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE; ADR-11 SIN APROBACIÓN ARQUITECTÓNICA DEFINITIVA; 2026-11-24 inferida)
+
+## 36. R4-A — ADR-11: Entornos y despliegue (evaluación y borrador condicionado)
+
+### 36.0 Alcance, autorización, reglas y observaciones preservadas
+
+- **Autorización (2026-11-24, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R4-A: INICIO DEL BORRADOR DOCUMENTAL DE ADR-11»: «AUTORIZO EXCLUSIVAMENTE INICIAR R4-A PARA REDACTAR EL BORRADOR DOCUMENTAL DE ADR-11: ENTORNOS Y DESPLIEGUE.» Solo se modifica este documento, con esta Parte nueva; `aprobaciones.md` y `bitacora.md` **no se modifican.** **No aprueba ADR-11, no selecciona alternativas y no permite realizar despliegues.** **No se inician R4-B…R4-G.**
+- **Estructura de trabajo.** R4-A es el primer subbloque del plan de R4 aprobado **solo para planificación** (registro en `aprobaciones.md` y `bitacora.md`); ese plan define un orden de trabajo, no aprueba entregables, alternativas, decisiones ni garantías.
+- **Qué es este borrador.** Una evaluación documental de alternativas de arquitectura de entornos y despliegue, con una **recomendación preliminar no vinculante que no expresa preferencia.** **No selecciona alternativas, plataformas, proveedores ni mecanismos;** no admite formulaciones; no resuelve decisiones; no acepta riesgos; no concede excepciones (**D-2 sin excepción**); **no declara cumplidos RNF-16, RE3-09 ni R1 §8.1**; no realiza despliegues; no crea ni modifica cuentas, secretos ni servicios; no escribe código ni modifica configuraciones o bases de datos.
+- **Convención.** [DOC]: dato leído en una página oficial ya consultada para R3-A (§25.15; **fuentes del 2026-11-22; no se hicieron consultas nuevas para este borrador**). [CONF]: texto confirmado de `01`, R1, R2 o R3 con el estado que allí declara. [PROP]: propuesta del autor. [INF]: inferencia técnica del autor. [PEND]: pendiente de verificación o de decisión. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; lo no leído es [PEND] y no se penaliza en la puntuación; una inferencia por ausencia de documentación se rotula [INF], nunca [DOC]; «por diseño» solo se usa cuando la propia definición de la alternativa lo garantiza. **No se inventan precios, cuotas, disponibilidad regional ni características de proveedores:** lo que §25 no documenta es [PEND].
+- **Identificadores nuevos (sin colisión; comprobados contra el archivo).** **ALT-11-A, ALT-11-B, ALT-11-C** (alternativas), **EN-01…26** (requisitos verificables de entornos y despliegue), **TD-01…14** (amenazas de despliegue), **DR11-1…9** (decisiones del responsable), **OC-325…348** (condiciones abiertas), **RR11-01…17** (riesgos de redacción), **CR4A-01…18** (criterios de revisión documental).
+- **Exclusiones.** Seleccionar alternativa, plataforma, proveedor, región o mecanismo; admitir formulaciones; resolver decisiones heredadas de R1, R2 o R3; aceptar riesgos; conceder excepciones; aprobar ADR-11, R4-A, R4 ni la Fase 2; iniciar R4-B…R4-G; realizar despliegues o migraciones; crear cuentas, claves o servicios; modificar las Partes I–XXI ni los registros.
+- **Aprobación (metadato; 2026-11-24, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R4-A / ADR-11»: «APRUEBO EXCLUSIVAMENTE ADR-11 v0.1-R4A COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: R4-A / ADR-11 (v0.1-R4A): APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA.** **La aprobación cubre el borrador de R4-A, las correcciones G-1…G-9 (§36.16), R-1…R-4 (§36.17) y los ajustes L-1…L-3 (§36.18).** **Esta aprobación NO aprueba definitivamente ADR-11, no selecciona alternativas, no admite formulaciones, no resuelve DR11-2 ni autoriza despliegues.** El evento de aprobación es independiente y no reutiliza identificadores EN, TD, DR11, OC, RR11 ni CR4A. Se conservan: **ALT-11-A, ALT-11-B y ALT-11-C sin selección**; puntuaciones **A: 2,80–4,10; B: 2,80–4,10; C: 2,45–3,75** (pesos 35/30/20/15), que se solapan y **no discriminan**, con la diferencia de seguridad de C sustentada **solo** en la infraestructura de datos y el dominio de fallo compartidos con producción como **inferencia [INF]**; **DR11-1…9 según su estado real, con DR11-2 abierta**; **OC-325…348 abiertas** (OC-54…56, OC-63, OC-66 y OC-67 heredadas como fuente autoritativa); **RR11-01…17 sin aceptar**; **ninguna formulación admitida**; la dependencia de **ADR-01 sin satisfacción definitiva** y **ADR-10 sin región seleccionada**; **RNF-16 y RE3-09 sin conformidad técnica demostrada**; **R1 §8.1 sin cumplimiento demostrado**; **D-2 sin excepción**; **PEND-JUR abierta**; elegibilidad, cuotas, costos y condiciones de proveedores pendientes; **sin pruebas empíricas ni despliegues**; la limitación de **autoevaluación del autor, sin auditoría independiente**. **Estado:** **R3 cerrado documentalmente de forma condicionada; R4-B…R4-G NO INICIADOS; R4 como conjunto SIN APROBACIÓN NI CIERRE; Fase 2 EN DESARROLLO, sin aprobación global; Fase 3 NO INICIADA.** **Precedencia:** las menciones «borrador», «no aprobado» o «no versionado» de esta Parte (§36.0, §36.1, §36.13 —CR4A-18—, §36.15, §36.16, §36.17 y §36.18) describen el momento de redactarse y **no se reescriben**; prevalece este apartado en cuanto al estado de aprobación documental. La nota posterior de §36.0 sobre `ab7dc66` describe el momento de redactarse: **la nota posterior ya consta en `aprobaciones.md` y `bitacora.md`** (registro de esta aprobación). Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Nota posterior de trazabilidad (2026-11-24, inferida; solo informativa).** El plan de R4 y la transición R4-0 quedaron versionados en el commit `ab7dc6624cb063be6a3aa4bb6f1f5caa9e603872` (`ab7dc66`; verificable por Git). **La nota posterior correspondiente en el registro del plan de R4 de `aprobaciones.md` y en la entrada de `bitacora.md` está pendiente** (se conserva como observación).
+- **Observaciones preservadas (sin corregir fuera de este anexo).** DR3F-4 y los **estados históricos contradictorios** (encabezado y §12 de `02`, líneas generales y «Próximo paso» de `aprobaciones.md`); la **fila histórica de R2-C4 con una columna adicional**; la **diferencia entre 12 y 11 decisiones abiertas de R2-A**; las **decisiones técnicas de R2 y R3 abiertas**; las **16 decisiones sin formulación A**; la **ausencia de formulaciones admitidas**; **R1 §8.1 sin cumplimiento demostrado**; **R1 §8.2 sin satisfacción definitiva** (ADR-01 solo con aprobación documental condicionada); **D-2 sin excepción**; PEND-JUR; condiciones económicas, de elegibilidad y verificaciones empíricas pendientes.
+
+### 36.1 Identificación y decisiones relacionadas (A)
+
+| Campo | ADR-11 |
+|---|---|
+| Tema | Entornos (local, staging y producción) y flujo de despliegue: separación, promoción, migraciones, secretos, permisos, reversión y costos, **sin seleccionar plataforma ni proveedor** |
+| Pregunta (R1 §8.1) | «¿Qué entornos y qué flujo de despliegue se justifican por costo y riesgo?» |
+| Alternativas mínimas | ≥ 2 (aquí 3: A, B y C; difieren en **cómo se separan y se obtienen los entornos de pruebas**) |
+| Insumos de R1 §8.1 | Q-07 (cuentas y dominio de la organización; costos asumidos por ella; prioridad a planes gratuitos adecuados) [CONF] |
+| Requiere (R1 §8.2) | **ADR-01** (documental condicionado; sin selección definitiva) |
+| Insumos de R3 | ADR-01 y ADR-10 (§25): RE3-09, RE3-05, RE3-06, RE3-07, RE3-08; NE-1…6; BK-09, BK-11, BK-13, BK-14; §25.8; OC-54…56, OC-63 y OC-66 |
+| Requisitos de `01` | RNF-16 (entornos local, staging y producción; migraciones versionadas y reversibles según el caso; despliegues solo con autorización específica) [REC / CONF (skill)]; RNF-12; RNF-14; PRV-15 y PRV-17 |
+| Alimenta (sin iniciarlos) | R4-B (ADR-13) y R4-E (ADR-12) (§36.12); también ADR-14 y ADR-17 por referencia |
+| Estado | **v0.1-R4A: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA como entregable** (ver «Aprobación (metadato)» en §36.0); **ADR-11 sin aprobación arquitectónica definitiva** |
+
+**Qué decide y qué no decide este ADR.**
+
+| Asunto | ¿Lo trata ADR-11? | Observación |
+|---|---|---|
+| Qué entornos existen y cómo se separan sus datos, secretos y permisos | **Propone alternativas** (decide el responsable) | RNF-16; RE3-09 |
+| Cómo se promueven los cambios entre entornos, con qué autorización y reversión | **Propone alternativas** | Skill, regla 5; RNF-16 |
+| Qué plataforma, proveedor, región o plan aloja cada entorno | **No** | ADR-01 y ADR-10 (R3-A, sin selección definitiva) |
+| Cómo se hacen respaldos y restauraciones; entorno aislado de restauración | **No** (dependencia posterior) | ADR-12 (R4-E) |
+| Qué se monitorea y con qué herramienta | **No** (dependencia posterior) | ADR-13 (R4-B) |
+| Ejecución de tareas programadas y su identidad | **No** | ADR-14 |
+| Retención y anonimización de datos | **No** | ADR-17 |
+| Autorización y frontera atómica; caché; sincronización | **No** (se consumen) | ADR-02.I…; ADR-06; ADR-05.I |
+
+### 36.2 Entradas heredadas y límites de la lectura
+
+**Fuentes (corregido en v0.1b; G-8).** **(1) Leídas directamente durante la redacción:** R1 §8.1 (fila de ADR-11), §8.2 (matriz de dependencias) y §12 (fila de R4); y de la Parte XI (R3-A, §25) los apartados **§25.1 a §25.5 y §25.7 a §25.13**, y §25.15 (**de §25.6, solo el párrafo de supuestos y las dos primeras filas de su primera tabla**; configuraciones, requisitos eliminatorios RE3-01…11, condiciones de no evasión NE-1…6, matriz técnica, respaldos BK-01…14, prevención de cargos, MFA, región, portabilidad, puntuación, DR3, OC-54…70, RR3 y fuentes oficiales citadas). **(2) Consultadas mediante búsqueda (filas o líneas coincidentes, no lectura íntegra):** en `01`, RNF-08, RNF-09, RNF-12, RNF-14, RNF-16, RNF-17, Q-07, Q-10 y PRV-17; en `02`, las filas de AM-23, AM-26, AM-29, AM-30, AM-32, OM-06, RES-03, RES-11, RT-09 y PA-13; `references/arquitectura.md`, `references/seguridad.md` y `references/puertas-de-aprobacion.md` del skill (líneas coincidentes sobre despliegue, entornos, migraciones y secretos). **(3) Consumidas mediante referencias documentales, sin releer para este borrador:** RNF-11, RC-14 y RC-18 (según su cita en §25 y en el inventario de R1); la regla 5 del skill, que se **consultó directamente en una consulta anterior de la misma sesión** (verificación de transición R3-E → R3-F) y **no durante esta redacción**; los ADR de R3-B…R3-E y de R2 (por identificador); el plan de R4 registrado en `aprobaciones.md` y `bitacora.md` (redactado en este mismo trabajo). **No se atribuye lectura directa a lo listado en (2) y (3).** **Límites:** no hay cuentas, mediciones ni acceso a infraestructura real; las páginas oficiales no se volvieron a leer.
+
+**Estado heredado de ADR-01 y ADR-10.** ADR-01 y ADR-10 están **documentados y aprobados documentalmente de forma condicionada** (R3-A); **no seleccionan** proveedor, región ni configuración: CFG-C3 es una **recomendación preliminar no vinculante**, CFG-C1 una alternativa condicionada y CFG-C2 una alternativa secundaria. DR3-2…9 y OC-54…70 siguen abiertas.
+
+**Hechos [DOC] de §25 que condicionan los entornos** (fuentes del 2026-11-22; los precios y límites cambian y deben reconfirmarse, RNF-12):
+
+| Hecho | Origen | Relevancia |
+|---|---|---|
+| Supabase Free: **2 proyectos activos**; pausa tras 7 días de baja actividad; sin respaldos automáticos en Free | §25.5, §25.7 (BK-09) | El plan «staging + producción» ocupa los dos cupos; no queda un tercer proyecto gratuito para restauración |
+| Neon Free: 1 GB por proyecto; suspende a los 5 min; restauración instantánea de hasta 6 h | §25.5 | Límites de un entorno de pruebas |
+| Vercel Hobby: «personal or non-commercial use»; 100 GB de transferencia; límites de invocaciones | §25.5 | Elegibilidad aplicable a todos los entornos (OC-54) |
+| Cloudflare Workers Free: 100.000 solicitudes/día; estáticos gratuitos e ilimitados; las operaciones fallan al exceder | §25.5, §25.8 | Cuota diaria compartida por todos los entornos de ese plan [INF] |
+| GitHub Actions: cómputo mensual incluido; presupuestos y alertas; programaciones desactivadas a los 60 días sin actividad en repositorios públicos | §25.7, §25.8 (BK-10) | Posible ejecutor del flujo de despliegue [PEND]; no se selecciona |
+| Cuentas, dominio, base de datos y hosting a nombre de la organización; credenciales individuales y revocables | RE3-06, RNF-14, RC-18 | Aplica a cada entorno |
+| Datos sintéticos hasta cumplir PRV-15; sin seudonimización superficial como sustituto | RE3-08, PRV-17, RC-14, BK-12 | Aplica a local y staging |
+
+**No documentado en §25 [PEND]:** si cada proveedor ofrece **entornos efímeros o vistas previas** y en qué condiciones, su exposición pública, sus cupos y sus precios; el comportamiento de los planes ante varios entornos; y los términos aplicables a entornos de pruebas. **No se asumen.**
+
+### 36.3 Requisitos verificables de entornos y despliegue (EN) (B)
+
+Son **requisitos documentales verificables**: ninguno está implementado ni demostrado. «E» = **eliminatorio común**, heredado de un requisito eliminatorio confirmado (RE3-xx), de una regla confirmada del skill o de una instrucción del responsable (la fuente consta en cada fila); **solo la parte confirmada de un requisito es eliminatoria:** las partes [DER] o [PROP] no se elevan a confirmadas por inferencia; y no es compensable por puntaje. El tipo conserva la fuente: [CONF], [REC], [DER] (derivado por el autor) o [PROP].
+
+| ID | Requisito | Fuente | Tipo | E |
+|---|---|---|---|---|
+| EN-01 | **Entornos local, staging y producción:** tres entornos funcionales y nombrados, cada uno con su propósito; **la conformidad de cada alternativa con este requisito no se declara** y, para B y C, depende de una lectura de «staging» que corresponde al responsable (DR11-2) | RE3-09; RNF-16 | [CONF] (RE3-09); [REC] (RNF-16) | E |
+| EN-02 | **Autorización específica de cada despliegue:** todo despliegue, migración o cambio de secretos o de configuración de un entorno con datos compartidos o de producción requiere autorización explícita con destino, impacto y reversión; el flujo no se activa por una aprobación de otra etapa | Skill, regla 5; RNF-16 | [CONF] (regla 5 del skill); RNF-16 [REC] respecto del flujo | E (regla confirmada del skill) |
+| EN-03 | **Nada se modifica a mano en producción:** los cambios llegan desde el repositorio versionado; los cambios manuales de emergencia, si se admitieran, serían una excepción documentada, no una vía normal (**no se concede excepción aquí**) | RE3-09; BK-11 | [CONF] | E |
+| EN-04 | **Migraciones versionadas y reversibles según el caso:** se aplican primero en un entorno distinto de producción; se propone el plan antes de tocar esquema o permisos; **este ADR no aplica ninguna** | RNF-16; skill (`arquitectura.md`) | [REC]; [CONF] | |
+| EN-05 | **Datos en cada entorno:** local y staging usan **exclusivamente datos y cuentas sintéticos**; **sin copias de producción** ni seudonimización superficial hasta cumplir PRV-15 | RE3-08; PRV-17; RC-14; BK-12 | [CONF] | E |
+| EN-06 | **Secretos separados por entorno y destino explícito:** **[CONF]** los secretos de producción no están al alcance de local ni de staging; las credenciales privilegiadas solo del lado servidor, nunca en el repositorio, el cliente, la cola ni los registros; **[INF]** los valores expuestos al cliente se tratan como públicos; **[PROP]** cada operación sensible se dirige a un **destino explícito** y se **verifica el entorno destino antes de ejecutarla**, y se previene que local o staging se conecten a producción por error (conexiones accidentales); sin seleccionar herramientas ni mecanismos | RE3-05; NE-4; RNF-05 | [CONF]; [INF]; [PROP] | E (parte confirmada) |
+| EN-07 | **Permisos de despliegue separados:** **[CONF]** credenciales individuales y revocables, sin credenciales compartidas; **[DER]** quien puede desplegar en un entorno no obtiene por ello permiso sobre producción; **[PROP]** mínimo privilegio por entorno y credenciales de local y staging que **no sirvan** para producción (ni a la inversa), de modo que una conexión accidental falle; sin seleccionar mecanismos | RE3-06; RNF-14; NE-5 | [CONF]; [DER]; [PROP] | E (parte confirmada) |
+| EN-08 | **Seguridad en todos los entornos:** **[CONF]** ningún entorno omite la autorización en dos capas ni abre una vía de evasión; **[DER]** las políticas de la capa de datos existen en staging **como en producción** (paridad de seguridad, no de datos) | RE3-02; RE3-11; NE-1…6 | [CONF]; [DER] | E (parte confirmada) |
+| EN-09 | **Paridad de configuración declarada:** las diferencias entre staging y producción (plan, límites, región, servicios) se enumeran y se evalúan; **no se asume equivalencia** | RNF-16 | [DER] | |
+| EN-10 | **Sin pago sin autorización previa:** ningún entorno adicional ni plan de pago se contrata, y no se registra un método de pago, sin autorización; alertas al 80 % de cada cuota | RE3-07; §25.8; DR3-6 | [CONF]; [PROP] | E |
+| EN-11 | **Costos y límites por entorno verificados con fuentes oficiales antes de contratar:** elegibilidad, cuotas, pausas y excedentes | RNF-12; RE3-07 | [CONF] | |
+| EN-12 | **Interrupciones previstas:** el comportamiento de un entorno ante pausa, suspensión, exceso de cuota o terminación del plan gratuito está descrito y su efecto en el flujo de promoción es conocido | BK-09; OC-63; §25.5 | [DER] | |
+| EN-13 | **Reversión:** cada despliegue y cada migración tienen un procedimiento de retroceso documentado y, si no es posible revertir, esa limitación se declara antes de autorizar | RNF-16; Fase 8 | [REC]; [PROP] | |
+| EN-14 | **Trazabilidad del despliegue:** se registra quién despliega, qué versión, cuándo y en qué entorno, **sin datos personales** innecesarios; el registro no depende del entorno que se despliega | NE-5; PRV-12 | [DER] | |
+| EN-15 | **Compatibilidad con la PWA:** un despliegue no descarta ni corrompe la cola local ni deja versiones del cliente con fallos de seguridad sirviéndose indefinidamente; el formato local se versiona | IN-16-15; SL-19; OC-308 | [REC]; [DER] | |
+| EN-16 | **Red de entrega y caché al desplegar:** un despliegue no expone contenido no publicado ni deja proyecciones obsoletas en lo sensible a privacidad; la purga y las rutas se coordinan con ADR-06 | VP-15; ADR-06 | [DER] | |
+| EN-17 | **Configuración como código:** políticas, funciones, migraciones y configuración de autenticación y de entornos se versionan y son la fuente para reconstruir | BK-11; RNF-11 | [PROP] | |
+| EN-18 | **Entorno aislado para restauraciones:** ninguna restauración integral se hace sobre producción ni sobre datos reales; **se identifica un entorno aislado** para ello sin asumir un proyecto gratuito adicional | BK-09; BK-14; AM-29 | [CONF] (AM-29); [PROP] | |
+| EN-19 | **Observabilidad por entorno sin datos personales:** los registros y alertas de cada entorno omiten datos personales; el mecanismo es de ADR-13 | RNF-09; PRV-12 | [REC] | |
+| EN-20 | **Región:** ningún entorno fija una región; la región de cada entorno con datos reales depende de ADR-10 y de PEND-JUR; los entornos con datos sintéticos no autorizan tratar datos reales | RE3-08; PRV-13; PRV-15 | [CONF] | E |
+| EN-21 | **Pruebas con PostgreSQL real y con datos sintéticos** en un entorno distinto de producción; pruebas de autorización por rol | RE3-01; RNF-11 | [CONF] | E |
+| EN-22 | **Cadena de suministro del despliegue:** se despliega desde una versión identificada; las dependencias y las herramientas del flujo se inventarían y se revisan; **sin acciones o componentes de terceros no justificados** | RNF-05 | [CONF]; [PROP] | |
+| EN-23 | **Sucesión y recuperación de accesos:** cuentas a nombre de la organización, inventario de accesos y custodios; ningún entorno depende de una cuenta individual no recuperable | RNF-14; RNF-17; DR3-9 | [CONF] | |
+| EN-24 | **Sin relajación de invariantes ni permisos nuevos:** el despliegue no concede facultades, no reduce garantías de R2 o R3 y no evade la autorización en dos capas | RE3-10; RE3-11; PA-13 | [CONF]; [DER] | E |
+| EN-25 | **Procedimiento escrito:** el despliegue, el retroceso y el cambio de entorno se documentan en un procedimiento (checklist de la Fase 8) | RNF-16; RNF-17 | [REC] | |
+| EN-26 | **Sin selección:** ADR-11 no selecciona plataforma, proveedor, región, herramienta de despliegue ni mecanismo de secretos | R1 §8.2; ADR-01; instrucción del responsable para R4-A | [DER] | E (instrucción) |
+
+#### 36.3.1 Definición propuesta de los tres entornos [PROP] (G-1)
+
+**No son decisiones aprobadas.** Aclaran qué se entiende por local, staging y producción para que las alternativas sean comparables. **DR11-2 permanece abierta:** la interpretación definitiva de «staging» y su relación con RNF-16 y RE3-09 corresponde al responsable; el grado de independencia de infraestructura del staging es justamente lo que distingue a ALT-11-A, B y C.
+
+| Aspecto | Local | Staging | Producción |
+|---|---|---|---|
+| Propósito | Desarrollo y verificación aislada de cambios | Validación previa a producción: migraciones, políticas de autorización, pruebas por rol, comportamiento de la PWA y de la caché | Operación real de la aplicación para sus usuarios |
+| Datos permitidos | **Exclusivamente sintéticos** (EN-05) | **Exclusivamente sintéticos**; sin copias de producción ni seudonimización superficial (PRV-17) | Reales solo tras cumplir PRV-15; hasta entonces, sintéticos (RC-14) |
+| Usuarios o actores autorizados | Personas de desarrollo autorizadas por la organización, con credenciales individuales y revocables (RNF-14) | Personas autorizadas por el responsable, con permisos propios de staging; no heredan permisos de producción (EN-07) | Usuarios finales según su rol; operación técnica mínima con credenciales individuales y revocables |
+| Secretos y credenciales | De desarrollo o ficticios; valores de ejemplo vacíos en el repositorio; **nunca** los de producción (EN-06) | Propios de staging y distintos de los de producción; ninguno sirve para producción (EN-06, EN-07) | Exclusivos de producción; custodia de la organización; nunca en el repositorio, el cliente ni la cola (RE3-05) |
+| Restricciones de acceso | Sin acceso a servicios, secretos ni datos de producción | Acceso individual y revocable; vistas previas no públicas si contuvieran contenido no publicado (TD-08); sin permiso de despliegue a producción derivado | Despliegues y migraciones solo con autorización específica (EN-02); sin cambios manuales (EN-03); acceso técnico mínimo |
+| Independencia exigida frente a producción | **Total:** ninguna ruta de local hacia producción (EN-06, EN-07) | **Mínima propuesta:** sin datos ni secretos de producción y con destino verificado (EN-05, EN-06). **El grado de independencia de infraestructura y de dominio de fallo es el objeto de DR11-2** (A: separada; B: efímera; C: lógica) y no se decide aquí | Es la referencia: ningún otro entorno lee sus datos ni sus secretos |
+
+### 36.4 Alternativas de arquitectura de entornos y despliegue (sin seleccionar) (C)
+
+Las tres difieren en **cómo se separan y cómo se obtienen los entornos de pruebas**. **Ninguna selecciona plataforma, proveedor, región ni herramienta;** todas comparten la **base de requisitos eliminatorios** (EN marcados «E») y el **flujo de promoción común** de §36.5. **Ninguna está implementada ni demostrada.**
+
+| | **ALT-11-A — Tres entornos permanentes y separados** | **ALT-11-B — Producción y local permanentes; staging efímero creado bajo demanda desde el repositorio** | **ALT-11-C — Staging lógico dentro de la misma infraestructura de datos de producción** |
+|---|---|---|---|
+| Idea | Local, staging y producción son tres entornos **independientes**, cada uno con su propia infraestructura de datos y su propia configuración de secretos y permisos; los cambios se **promueven** de staging a producción | Existen de forma permanente local y producción; el entorno de verificación (staging) **se crea cuando se necesita**, a partir de la configuración versionada, con datos sintéticos, y se **elimina** al terminar | Local y producción separados; el staging **reutiliza** la misma infraestructura de datos de producción, separado **lógicamente** dentro de esa infraestructura (**el mecanismo de separación no se selecciona**) y con datos sintéticos |
+| Separación de datos | Infraestructura de datos **propia** de cada entorno permanente [INF] | Infraestructura de datos **propia mientras existe** el entorno efímero [INF]; **si compartiera la de producción, equivaldría a C** | **Separación lógica de datos** posible, sin demostrar, sobre infraestructura de datos **compartida:** mismo **dominio de fallo de la capa de datos** [INF]. **Compartir infraestructura no equivale a compartir los datos de producción** [INF] |
+| Separación de secretos y permisos | Secretos y credenciales **por entorno** (EN-06, EN-07); **el nivel administrativo y los privilegios de cada cuenta son condición abierta** (OC-334, OC-335) [INF] | Credenciales de creación y destrucción de entornos con **privilegios elevados** que hay que proteger (TD-04); **nivel administrativo y privilegios: condición abierta** (OC-334, OC-335) [INF] | **Propiedad inherente:** infraestructura de datos **compartida** y, por tanto, **dominio de fallo de la capa de datos** común [INF]. **Posible, sin demostrar:** credenciales y roles internos distintos entre staging y producción, **sin independencia de fallas** [INF]. **El nivel administrativo y sus privilegios** son **riesgo derivado o condición abierta** (OC-334, OC-335), **como en las otras dos alternativas** [INF] |
+| Paridad de configuración (EN-08, EN-09) | Más fácil de **declarar y comparar**; deriva posible con el tiempo [INF] | **Se reconstruye desde la configuración versionada** cada vez (paridad por reconstrucción, EN-17) [INF] | Paridad parcial: comparte infraestructura de datos; las diferencias de configuración se limitan a lo lógico |
+| Costo y cupos [PEND] | Dos entornos con infraestructura propia: ocupan **dos cupos** de proyectos de datos donde el plan gratuito los limite (Supabase Free: 2 activos [DOC]); **sin cupo sobrante para restauración** (BK-09) | Posible ahorro en cupos permanentes [INF]; **el costo, los cupos y las condiciones de entornos efímeros no se leyeron** (OC-329) | Menor número de recursos [INF]; **menor independencia de la infraestructura de datos [INF]** |
+| Reversión y migraciones (EN-04, EN-13) | Se ensayan en staging **independiente** antes de producción [INF] | Se ensayan en un entorno recién creado; **reproducir el estado de producción sin copiar datos reales** exige datos sintéticos representativos (OC-340) [INF] | Se ensayan en el **mismo dominio de fallo de la capa de datos** que producción: **un error puede afectar a producción** [INF] |
+| Entorno aislado para restauración (EN-18) | **No resuelto:** ocupa un cupo adicional o debe usar staging | El entorno efímero **podría** servir si se crea aislado [INF; ADR-12] | **No cumple por sí sola:** su staging **no es independiente de la infraestructura de datos de producción** [INF]; la separación lógica de los datos no equivale a independencia de infraestructura ni de dominio de fallo [INF] |
+| Riesgo estructural propio | Costo y cupos; deriva de configuración; secretos de dos entornos | Automatización con privilegios elevados; exposición pública de entornos efímeros (TD-08); dependencia de funciones del proveedor no leídas | Contaminación entre entornos (TD-03); dominio de fallo común de la capa de datos; concentración de privilegios como **riesgo derivado**, común a las tres (TD-04) |
+| Lectura de RNF-16 y RE3-09 | **Lectura directa, sin demostrar** (tres entornos funcionales) | **Condicionada** a que un staging efímero cuente como staging (**DR11-2**) | **Condicionada** a que un staging lógico cuente como staging (**DR11-2**) |
+
+**Variantes no evaluadas.** (1) Dos entornos sin staging (solo local y producción): **contradice RE3-09 y no se evalúa**, sin que se rechace como opción de producto. (2) Un entorno de producción compartido entre proyectos: fuera de alcance. (3) Elección de herramientas de despliegue, de secretos, de plataforma o de región: corresponde a ADR-01 y a ADR-10 y a los `.I` y ADR posteriores.
+
+**Lo que ninguna alternativa resuelve.** (a) Elegibilidad y términos de los planes gratuitos (OC-325); (b) región y evaluación jurídica (EN-20); (c) la ejecución real y las pruebas (no hay acceso a infraestructura); (d) el respaldo y la restauración integral (R4-E).
+
+### 36.5 Flujo de promoción común a las alternativas [PROP]
+
+Capacidades del flujo; **no seleccionan herramienta ni plataforma.** Cada etapa **requiere autorización específica** cuando afecta a datos compartidos o a producción (EN-02).
+
+| Etapa | Qué debe ocurrir | Requisitos |
+|---|---|---|
+| 1. Cambio versionado | El cambio (código, migración, políticas, configuración) está en el repositorio, identificado y revisado | EN-03, EN-17, EN-22 |
+| 2. Verificación en un entorno de pruebas | Se despliega y se prueba en local y en staging con datos sintéticos; se ejecutan las pruebas de autorización por rol y las de PostgreSQL real | EN-05, EN-08, EN-21 |
+| 3. Plan de migración y de reversión | Se documenta el plan de migración y el de retroceso antes de tocar esquema o permisos | EN-04, EN-13 |
+| 4. Autorización específica | El responsable autoriza el destino, el impacto y la reversión **antes** de tocar un entorno compartido o de producción | EN-02, EN-10 |
+| 5. Aplicación | Se aplica desde el repositorio con credenciales dedicadas de mínimo privilegio; sin cambios manuales | EN-03, EN-06, EN-07 |
+| 6. Verificación posterior | Se comprueban salud, políticas, caché y compatibilidad con la PWA y la cola local | EN-15, EN-16, EN-19 |
+| 7. Registro | Se registra quién, qué versión, cuándo y dónde, sin datos personales | EN-14 |
+| 8. Retroceso, si procede | Se ejecuta el procedimiento documentado; las migraciones irreversibles se declaran antes de la etapa 4 | EN-13 |
+
+### 36.6 Matriz de conformidad con los requisitos (uniforme; autoevaluación del autor)
+
+**Leyenda** (la misma para las tres alternativas): **E** = requisito eliminatorio común que toda alternativa debe cumplir y que **ninguna demuestra** hoy; **E/C** = exigencia común cuya satisfacción depende de una condición abierta; **S** = compatibilidad o **lectura documental favorable**, **no conformidad técnica demostrada**; **C** = **condición abierta** cuyo cumplimiento no está demostrado; **T** = **riesgo estructural o inherente** identificado por la definición de la alternativa, no necesariamente mitigado; **—** = no aplica. **No se declara conformidad con RNF-16 ni con RE3-09.** **Una clasificación uniforme no significa que los riesgos sean idénticos ni que estén mitigados.** «E» y «E/C» conservan su significado eliminatorio o condicionado y **no equivalen a cumplimiento.** **Ninguna alternativa cuenta con mitigaciones técnicas demostradas.**
+
+| Requisito | ALT-11-A | ALT-11-B | ALT-11-C | Observación |
+|---|---|---|---|---|
+| EN-01 (tres entornos; RE3-09) | S | C (DR11-2) | C (DR11-2) | La lectura de «staging» es del responsable |
+| EN-02, EN-03, EN-10 (autorización, sin cambios manuales, sin pago) | E | E | E | Comunes; dependen del procedimiento |
+| EN-05 (datos sintéticos; sin copias de producción) | E | E | E | B exige datos representativos sintéticos (OC-340); C depende de la separación lógica |
+| EN-06, EN-07 (secretos y permisos separados) | E | E | E | **Riesgo estructural distinto:** ver §36.4 y TD-03, TD-04 |
+| EN-08 (seguridad en todos los entornos) | E | E | E | Las políticas deben estar presentes en cada entorno |
+| EN-09 (paridad declarada) | C | C | C | A por comparación; B por reconstrucción; C parcial |
+| EN-12 (interrupciones previstas) | C (OC-328) | C (OC-328, OC-329) | C (OC-328) | Pausa y cupos no verificados |
+| EN-13 (reversión) | C | C | C | Procedimiento no definido (OC-338, OC-339) |
+| EN-15, EN-16 (PWA y caché) | C | C | C | ADR-06 y OC-341, OC-342 |
+| EN-18 (entorno aislado de restauración) | C (OC-343) | C (OC-343) | **T** (su staging **no es independiente de la infraestructura de datos de producción**, por definición [INF]; la separación lógica de los datos es posible) | R4-E; ver §36.12 |
+| EN-20 (región) | E/C | E/C | E/C | Común; depende de ADR-10 y de PEND-JUR |
+| EN-24, EN-26 (sin relajación de invariantes; sin selección) | E | E | E | Fuentes confirmadas (RE3-10, RE3-11; instrucción del responsable); **no equivale a cumplimiento demostrado** |
+| EN-21 (PostgreSQL real y datos sintéticos) | E | E | E | |
+
+**Lectura.** La matriz **no** declara cumplimiento. **El puntaje (§36.7) no sustituye a los requisitos eliminatorios.**
+
+### 36.7 Evaluación, puntuación y recomendación preliminar (D)
+
+**Regla.** Pesos aprobados (R1 §2.4 y R3-A): seguridad **35 %**, costo **30 %**, funcionamiento sin conexión **20 %**, mantenimiento **15 %**. Escala 1–5; juicio del autor [PROP], **sujeto a verificación documental y no vinculante**; solo evidencia leída, lo no leído es [PEND] y **no se penaliza.**
+
+**Qué se distingue al evaluar (G-2).** Cuatro categorías que **no se mezclan**: (1) **propiedad inherente a la alternativa:** se sigue de su definición, con independencia de cómo se opere o configure; (2) **riesgo derivado de su operación o configuración:** depende de cómo se implemente u opere y **no** se sigue de la definición; (3) **condición abierta:** información o decisión pendiente (OC); no es una debilidad demostrada ni una ventaja; (4) **mitigación demostrada:** **ninguna alternativa tiene ninguna.**
+
+| Categoría | ALT-11-A | ALT-11-B | ALT-11-C |
+|---|---|---|---|
+| Propiedad inherente | Infraestructura de datos propia por entorno permanente, **independiente de la de producción** [INF] | Staging que se crea y se elimina bajo demanda desde la configuración versionada, con infraestructura de datos propia mientras existe, **independiente de la de producción** [INF; si compartiera la de producción, equivaldría a C] | Staging **sobre la infraestructura de datos de producción:** **dominio de fallo de la capa de datos común**; **su staging no es independiente de la infraestructura de datos de producción** [INF]; la **separación lógica de los datos es posible** |
+| Riesgo derivado de operación o configuración (**incluye, en las tres,** el nivel administrativo y los privilegios de las cuentas: OC-334, OC-335) | Deriva de configuración entre entornos (TD-06); secretos de dos entornos (TD-02); privilegios de despliegue (TD-04) | Privilegios de la capacidad de creación y destrucción (TD-04); exposición pública de entornos efímeros (TD-08); datos sintéticos representativos (OC-340) | Credenciales y roles internos distintos **posibles, sin demostrar**; ensayo de migraciones en el mismo dominio de fallo de la capa de datos que producción (TD-05; **consecuencia de la infraestructura compartida de C**, ya considerada en su propiedad inherente: **no es una penalización adicional ni modifica el centro de seguridad**); privilegios sobre la infraestructura compartida (TD-04) |
+| Condición abierta | OC-326, OC-327, OC-328, OC-343 | OC-326, OC-327, OC-328, **OC-329**, OC-343 | OC-336, OC-337, OC-343 |
+| Mitigación demostrada | Ninguna | Ninguna | Ninguna |
+
+**Regla única de puntuación (idéntica para A, B y C).** (i) **Seguridad:** valor central 3 para las tres; **2 solo si la definición de la alternativa implica la pérdida de independencia de la infraestructura de datos y de su dominio de fallo respecto de producción**, que las otras alternativas tienen **por definición**. **No se consideran** el nivel administrativo ni los privilegios de las cuentas (riesgo derivado o condición abierta **en las tres**: OC-334, OC-335), ni la separación de credenciales y roles internos (posible en las tres, sin demostrar), ni la separación lógica de los datos. Esa independencia es relevante para EN-18, TD-03, TD-05 y TD-14 [INF]. **Los riesgos derivados y las condiciones abiertas no cambian el centro.** (ii) **Mantenimiento:** valor central 3 para las tres; **2 solo si** la definición implica una carga permanente adicional **comparable y verificable** respecto de las otras. **No se aplicó a ninguna:** A implica dos infraestructuras permanentes, B una capacidad de creación automatizada y C una separación lógica que configurar, y esas cargas **no son comparables ni verificables entre sí** (la reconstrucción desde la configuración puede reducir la deriva y la automatización añadir componentes: incertidumbre comparable). (iii) **Costo:** puntúa solo planes y servicios, techo 5; el límite inferior baja **1 punto por cada aspecto de costo no evaluado común a las tres** (límites y cuotas por entorno del plan elegido, OC-327); **la información no leída** (por ejemplo, entornos efímeros, OC-329) **no se cuenta como aspecto y se conserva como condición abierta.** (iv) **Funcionamiento sin conexión = 3 para las tres:** el despliegue no discrimina este criterio (solo interviene en la entrega de versiones del cliente, EN-15).
+
+| Criterio (peso) | ALT-11-A | ALT-11-B | ALT-11-C |
+|---|---|---|---|
+| Seguridad (35 %) [PROP, no verificado] | 2–4 (central 3) | 2–4 (central 3) | **1–3 (central 2: infraestructura de datos y dominio de fallo compartidos con producción)** |
+| Costo (30 %) [1 aspecto común no evaluado en las tres] | 4–5 | 4–5 | 4–5 |
+| Funcionamiento sin conexión (20 %) [no discrimina] | 3 | 3 | 3 |
+| Mantenimiento (15 %) [PROP] | 2–4 (central 3) | 2–4 (central 3) | 2–4 (central 3) |
+| **Total (rango)** | **2,80–4,10** | **2,80–4,10** | **2,45–3,75** |
+
+**Cambios respecto de v0.1 (G-2, G-3).** B pasa de seguridad/mantenimiento/costo (2–4 / **1–3** / **3–5**) a (2–4 / 2–4 / 4–5): se **retiran** la penalización de mantenimiento (carga no comparable ni verificable) y la de costo (**basada solo en información no leída**); sus riesgos y condiciones se conservan (TD-04, TD-08, OC-329). C conserva el único centro menor (seguridad), sustentado **únicamente** en la propiedad **inherente** de su definición de compartir la infraestructura de datos y su dominio de fallo con producción (R-1, R-2).
+
+**Control de neutralidad.** (1) **Aritmética** (pesos 35/30/20/15): A = 0,35·(2…4) + 0,30·(4…5) + 0,20·3 + 0,15·(2…4) = 2,80–4,10; B = 2,80–4,10; C = 0,35·(1…3) + 0,30·(4…5) + 0,20·3 + 0,15·(2…4) = 2,45–3,75. (2) **Diferencia de centros:** solo el de seguridad de C (2), por la **infraestructura de datos y el dominio de fallo compartidos con producción**, que A y B no tienen por definición, **sin apoyarse en separación administrativa ni de credenciales**; A y B tienen la **misma** puntuación porque sus diferencias (separación permanente frente a efímera) no son comparables ni verificables como ventaja o desventaja. (3) **Ninguna penalización proviene solo de información no verificada.** (4) **El resultado no se usa para seleccionar ni recomendar.**
+
+**Control tras R-1 y R-2.** Se **reevaluó** si la diferencia de seguridad de C sigue sustentada: la propiedad que la sostiene se limita ahora a la infraestructura de datos y su dominio de fallo (verificable por definición: A y B tienen infraestructura de datos propia y C comparte la de producción), **sin** apoyarse en el nivel administrativo, los privilegios, la separación de credenciales ni la separación lógica de los datos. **La justificación permanece consistente con la regla uniforme** y **las puntuaciones no cambian** (no se forzó el resultado). **Si en DR11-2 el responsable entendiera que ALT-11-C puede implementarse con infraestructura de datos independiente, dejaría de ser C tal como se define y la diferencia desaparecería.** El efecto sobre la seguridad sigue siendo una **inferencia [INF]**.
+
+**Sensibilidad.** Los rangos de A y B **coinciden** y el de C **se solapa** con ellos en 2,80–3,75; la única diferencia (seguridad de C) descansa en una **inferencia [INF]** sobre el efecto de un dominio de fallo compartido **de la capa de datos**. **El puntaje no discrimina para seleccionar.**
+
+**Recomendación preliminar NO vinculante [PROP].** (1) **Los requisitos eliminatorios son los EN marcados «E»;** ninguna alternativa fija plataforma, proveedor ni mecanismo. (2) **No se expresa preferencia:** la evidencia documentada no discrimina y la conformidad con RNF-16 de B y C depende de DR11-2, que **permanece abierta**. (3) **La separación de datos y de secretos y la autorización de cada despliegue pesan más** que la elección del número de entornos permanentes. (4) **No se selecciona nada;** la decisión es del responsable y **posterior** a la aprobación definitiva de ADR-01, a la evaluación jurídica y a la verificación en infraestructura. Los puntajes no sustituyen a los requisitos obligatorios, que son eliminatorios y no compensables.
+
+### 36.8 Compatibilidad condicionada con CFG-C1, CFG-C2 y CFG-C3 (sin elegir) (E)
+
+| Configuración | Hechos [DOC] de §25 | Lo que **no** está documentado [PEND] | Estado |
+|---|---|---|---|
+| CFG-C1 (Vercel + Supabase) | Supabase Free: 2 proyectos activos, pausa a los 7 días, sin respaldos en Free; Vercel Hobby: uso no comercial, 100 GB, 1 M de invocaciones | Entornos efímeros o vistas previas, su exposición y cuotas; elegibilidad de Hobby (OC-54); términos por entorno | Condicionado; **A** ocuparía los dos cupos gratuitos; **no se selecciona** |
+| CFG-C2 (Vercel + Neon + Better Auth) | Neon Free: 1 GB por proyecto, suspensión a los 5 min, restauración de hasta 6 h; autenticación propia a mantener | Cupos de proyectos y de ramas; entornos efímeros; cuotas por entorno | Condicionado; **no se selecciona** |
+| CFG-C3 (Cloudflare + Supabase) | Workers Free: 100.000 solicitudes/día compartidas por todos los entornos de ese plan [INF], estáticos gratuitos; Supabase Free como C1 | Regiones de Workers, entornos efímeros, términos por entorno (OC-55) | Condicionado (recomendación preliminar de R3-A **no vinculante**); **no se selecciona** |
+
+**Lectura.** Ninguna de las tres alternativas **ata** ADR-11 a una configuración: la compatibilidad concreta de cada alternativa con cada configuración es [PEND] hasta leer las condiciones de entornos de cada proveedor (OC-329) y hasta que ADR-01 se apruebe definitivamente.
+
+### 36.9 Dependencias con ADR-01 y ADR-10 y con otros bloques (F)
+
+| Dependencia | Exigida por | Documentada | No definitivamente resuelta |
+|---|---|---|---|
+| **ADR-01** (plataforma, hosting y datos) | R1 §8.2 | §25 (R3-A): aprobada **solo documentalmente**; CFG-C1/C2/C3 sin selección; RE3-09 y NE-1…6 | Selección de configuración; DR3-2…9; OC-54…70; R1 §8.2 («solo se confirma tras aprobar ADR-01») sin satisfacción definitiva |
+| **ADR-10** (región y transferencia) | Decisión conjunta con ADR-01 | §25.10: R-1…R-4 sin selección | Región; PEND-JUR (PRV-13, PRV-15); latencia sin medir (OC-60, OC-61) |
+| ADR-06 (caché y entrega pública) | Lateral | §27 (R3-C) | Purga y obsolescencia al desplegar (OC-342; OC-85…100) |
+| ADR-16.I y ADR-05.I (PWA y cola local) | Lateral | §33, §34 | Versionado del cliente (OC-341; SL-19; OC-308) |
+| ADR-02.I (autorización en dos capas) | Lateral | §31 | Paridad de seguridad en staging (OC-337; OC-65) |
+| ADR-13 (R4-B) y ADR-12 (R4-E) | **Posteriores**, requieren ADR-11 | **No iniciados** (§36.12) | Todo |
+| ADR-14 y ADR-17 | Referencias | **No iniciados** | Todo |
+
+**Ninguna dependencia se considera resuelta por existir un ADR documental.**
+
+### 36.10 Riesgos y amenazas relacionados con el despliegue (TD) (G)
+
+**No se amplía el modelo de amenazas de R2:** esta sección registra amenazas del despliegue y su relación con AM-23, AM-26, AM-29, AM-30, AM-32, OM-06 y RES-03 y RES-11 (sin aceptar). «Alcance» indica qué **puede** aportar cada alternativa [INF]; **ninguna lo garantiza.**
+
+| ID | Amenaza | Relación | Alcance de las alternativas (A / B / C) |
+|---|---|---|---|
+| TD-01 | **Despliegue no autorizado a producción** (cuenta o pipeline comprometidos; despliegue sin autorización específica) | AM-23; RES-11; EN-02 | Control común (EN-02); A y C comparten el mismo riesgo de proceso; B añade credenciales de creación de entornos |
+| TD-02 | **Fuga de secretos** (repositorio, registros de despliegue, variables expuestas al cliente) | AM-26; EN-06 | Común; A reduce el radio al tener secretos independientes; C comparte dominio |
+| TD-03 | **Contaminación entre entornos y conexión accidental:** datos reales o secretos de producción en local o staging, o conexión de local o staging al destino equivocado (por ejemplo, hacia producción) por una configuración errónea | PRV-17; EN-05, EN-06, EN-07 | **La conexión accidental aplica a las tres** y se previene con EN-06 y EN-07 (destino explícito y verificación del entorno destino); en **C**, la infraestructura de datos compartida **aumenta la superficie** de la contaminación [INF]; A y B la reducen si se cumple EN-05 |
+| TD-04 | **Permisos excesivos del flujo** (token con alcance total; ejecutor compartido; credenciales de creación de entornos; privilegios sobre infraestructura compartida) | AM-23; EN-07 | **Riesgo derivado de la operación o la configuración, común a las tres** y no propiedad inherente demostrada: en A, por las credenciales de despliegue de cada entorno; en B, por las credenciales de creación y destrucción de entornos; en C, por los privilegios sobre la infraestructura de datos compartida [INF]. **El nivel administrativo** (misma organización o cuentas distintas) **es condición abierta** (OC-334, OC-335) |
+| TD-05 | **Migración defectuosa o irreversible en producción** | EN-04, EN-13 | Común; A y B permiten ensayar fuera de producción; C ensaya en el mismo dominio de fallo de la capa de datos |
+| TD-06 | **Divergencia entre staging y producción** que oculta debilidades (por ejemplo, políticas ausentes en staging) | EN-08, EN-09 | Común; B reduce la deriva por reconstrucción; A la declara |
+| TD-07 | **Cadena de suministro del despliegue** (componentes de terceros comprometidos) | EN-22; RNF-05 | Común; ninguna lo neutraliza |
+| TD-08 | **Entornos o vistas previas efímeros expuestos públicamente** con contenido no publicado [INF; condiciones no leídas] | VP-26; OC-329 | **B**; también aplica a cualquier vista previa de A o C si existiera |
+| TD-09 | **Despliegue que rompe la PWA sin conexión o la caché** (cola local, Service Worker) | EN-15, EN-16; SL-19 | Común; ADR-06, ADR-16.I |
+| TD-10 | **Retroceso imposible o recuperación lenta** tras un despliegue fallido | EN-13; RNF-08 | Común; depende de la migración |
+| TD-11 | **Pausa, exceso de cuota o terminación** de un entorno gratuito que detiene el flujo | BK-09; OC-63; EN-12 | Común; A depende de dos cupos; B de condiciones no leídas |
+| TD-12 | **Pérdida de acceso o de sucesión** de cuentas que despliegan | AM-32; RES-11; RNF-14; EN-23 | Común |
+| TD-13 | **Cargos imprevistos** por entornos o servicios adicionales | OC-66; §25.8; EN-10 | Mayor en B si los entornos efímeros se facturan [PEND] |
+| TD-14 | **Restauración en un entorno no protegido** o sobre producción | AM-29; OM-06; BK-14; EN-18 | **C:** su staging **no es independiente de la infraestructura de datos de producción** por definición [INF] (la separación lógica de los datos no equivale a independencia de infraestructura ni de dominio de fallo); A y B dependen de OC-343 |
+
+### 36.11 Condiciones abiertas, decisiones del responsable y riesgos de redacción (H, I)
+
+**Condiciones abiertas nuevas (OC-325…348).** Ninguna se resuelve aquí. Se **conservan abiertas** las heredadas OC-54…70 y las demás de R2 y R3.
+
+| ID | Condición | Origen | Bloquea |
+|---|---|---|---|
+| OC-325 | **Elegibilidad y términos de uso gratuito aplicables a staging y vistas previas** de cada proveedor (uso no comercial; términos de Cloudflare y Netlify); **aplica** al contexto de entornos las condiciones heredadas OC-54, OC-55 y OC-56, que **siguen siendo la fuente autoritativa** y no se sustituyen ni se reformulan | DR3-2, DR3-7 | EN-11 |
+| OC-326 | **Cupos de proyectos de datos y de entornos por plan** y su efecto en A, B y C; sin cupo sobrante para un entorno aislado de restauración (Supabase Free: 2 activos [DOC]) | BK-09; §25.5 | EN-01, EN-18 |
+| OC-327 | **Cuotas y límites por entorno** (solicitudes, transferencia, compilaciones, invocaciones) y consumo compartido entre entornos | RNF-12; §25.5 | EN-11 |
+| OC-328 | **Pausa, suspensión o terminación** de un entorno gratuito (pausa a los 7 días [DOC]; excedentes de Supabase Free [PEND]) y su efecto en el flujo de promoción; **aplica** al contexto de entornos la condición heredada OC-63, que **sigue siendo la fuente autoritativa** | BK-09; OC-63 | EN-12 |
+| OC-329 | **Existencia, condiciones, cupos, precio y exposición pública de entornos efímeros o vistas previas** por proveedor: **no leído en §25** | TD-08; ALT-11-B | EN-01, EN-16 |
+| OC-330 | **Región de cada entorno** y su relación con ADR-10 (DR3-3; OC-60, OC-61); PEND-JUR | PRV-13; PRV-15 | EN-20 |
+| OC-331 | **Costo de dominios o subdominios por entorno** y de entornos adicionales; **aplica** al contexto de entornos la condición heredada OC-67, que **sigue siendo la fuente autoritativa** | RE3-06; RE3-07 | EN-10, EN-11 |
+| OC-332 | **Método de pago y cargos imprevistos** por entornos o servicios adicionales; **aplica** al contexto de entornos la condición heredada OC-66 y DR3-6, que **siguen siendo la fuente autoritativa** | §25.8 | EN-10 |
+| OC-333 | **Secretos por entorno:** dónde residen, quién los custodia y cómo rotan; mecanismo **sin seleccionar** (relaciona OC-70, OC-80, OC-84) | RE3-05; NE-4 | EN-06 |
+| OC-334 | **Credenciales del flujo de despliegue** y su mínimo privilegio por entorno; mecanismo **sin seleccionar** | EN-07; AM-23 | EN-07 |
+| OC-335 | **Cuentas y accesos por entorno a nombre de la organización;** inventario, custodios y sucesión (RES-11; DR3-9; RNF-14) | AM-32 | EN-23 |
+| OC-336 | **Paridad de configuración:** qué diferencias entre staging y producción son admisibles y cómo se declaran | EN-09 | EN-09 |
+| OC-337 | **Reproducción en staging** de la autorización en dos capas y de las políticas de la capa de datos (OC-65; ADR-02.I; pruebas en fases posteriores) | RE3-02; RE3-11 | EN-08 |
+| OC-338 | **Migraciones:** orden, reversibilidad, aprobación y plan previo; **no definidos** | RNF-16; skill | EN-04 |
+| OC-339 | **Reversión:** alcance del retroceso y tratamiento de migraciones irreversibles | EN-13 | EN-13 |
+| OC-340 | **Datos sintéticos de pruebas:** fuente, generación y representatividad; **sin seudonimización superficial** de datos reales (PRV-17); relación con ADR-17 | PRV-17; RC-14 | EN-05, EN-21 |
+| OC-341 | **Actualización de la PWA al desplegar:** versionado del cliente y compatibilidad con la cola local y el Service Worker; relación con SL-19, OC-308 y IN-16-15 | EN-15 | EN-15 |
+| OC-342 | **Caché y red de entrega al desplegar:** purga, rutas y obsolescencia; relación con ADR-06 y OC-85…100 | EN-16 | EN-16 |
+| OC-343 | **Entorno aislado de restauración:** si es staging u otro, y cómo se obtiene sin un proyecto gratuito adicional; **dependencia de R4-E (ADR-12)** | BK-09; BK-14; AM-29 | EN-18 |
+| OC-344 | **Observabilidad por entorno y alertas de despliegue** sin datos personales; **dependencia de R4-B (ADR-13)**; relación con OC-62 | RNF-09; PRV-12 | EN-19 |
+| OC-345 | **Registro y retención de la trazabilidad de despliegues;** relación con ADR-09.I y ADR-17 | EN-14 | EN-14 |
+| OC-346 | **Verificación empírica en infraestructura real:** no hay cuentas ni pruebas autorizadas; ningún despliegue se realiza | RNF-11 | Fases posteriores |
+| OC-347 | **Vigencia de las fuentes de R3-A (2026-11-22):** precios, límites y términos cambian; reverificar antes de contratar | RNF-12 | EN-11 |
+| OC-348 | **Dependencias de R1 §8.2:** ADR-01 sin aprobación definitiva; ADR-10 sin región; PEND-JUR | R1 §8.2 | ADR-11 definitivo |
+
+**Aclaración sobre condiciones heredadas (G-9).** OC-325, OC-328, OC-331 y OC-332 **aplican** al contexto de entornos condiciones heredadas, pero **no sustituyen ni reformulan** OC-54…56, OC-63, OC-66 y OC-67, **que permanecen como fuente autoritativa y abiertas** (R3-A, §25.13).
+
+**Decisiones que corresponden al responsable (DR11-1…9).** Ninguna se toma aquí.
+
+| ID | Decisión | Condiciones |
+|---|---|---|
+| DR11-1 | Aprobar, ajustar o rechazar este borrador y su recomendación preliminar (**no es una selección**) | §36.7 |
+| DR11-2 | **Qué cuenta como «staging» frente a RE3-09 y RNF-16:** tres entornos permanentes y separados, un staging efímero o un staging lógico | OC-326, OC-329, OC-336 |
+| DR11-3 | Confirmar que local y staging usan **solo datos sintéticos**, y cómo se generan | OC-340 |
+| DR11-4 | **Quién autoriza** los despliegues y las migraciones, con qué evidencia y con qué plan de reversión (skill, regla 5) | OC-334, OC-338, OC-339 |
+| DR11-5 | **Secretos, credenciales y custodia por entorno** (con ADR-01 y DR3-9) | OC-333, OC-335 |
+| DR11-6 | **Tolerar o no** pausas y límites de entornos gratuitos y **autorizar o no** costos de entornos adicionales (con DR3-5 y DR3-6) | OC-327, OC-328, OC-331, OC-332 |
+| DR11-7 | **Relación con ADR-12, ADR-13, ADR-14 y ADR-17** (entorno aislado de restauración, observabilidad, tareas, retención) | OC-343, OC-344, OC-345 |
+| DR11-8 | **Región de los entornos** (con DR3-3 y ADR-10) | OC-330 |
+| DR11-9 | Autorizar, o no, el siguiente subbloque del plan de R4 (R4-B: ADR-13) | Plan de R4 |
+
+**Riesgos de redacción (RR11-01…17).** No se aceptan; se registran.
+
+| ID | Riesgo | Mitigación documental |
+|---|---|---|
+| RR11-01 | Elegir de hecho una alternativa, plataforma o proveedor al describir ventajas | §36.4; EN-26 |
+| RR11-02 | Leer la puntuación o la recomendación como preferencia o como selección | §36.7 |
+| RR11-03 | Declarar conformes RNF-16 o RE3-09 sin evidencia | §36.6; DR11-2 |
+| RR11-04 | Presentar como hechos características de proveedores no leídas (vistas previas, cupos, precios) | §36.2; OC-329 |
+| RR11-05 | Tratar datos de staging como equivalentes a producción (copias reales o seudonimización superficial) | EN-05; OC-340 |
+| RR11-06 | Secretos compartidos entre entornos o expuestos al cliente | EN-06; TD-02 |
+| RR11-07 | Permisos de despliegue excesivos, compartidos o de creación de entornos | EN-07; TD-04 |
+| RR11-08 | Divergencia staging/producción que oculte debilidades (políticas ausentes) | EN-08, EN-09; TD-06 |
+| RR11-09 | Migración irreversible sin plan de retroceso | EN-04, EN-13; TD-05 |
+| RR11-10 | Entornos o vistas previas efímeros expuestos públicamente | TD-08; OC-329 |
+| RR11-11 | Cargos imprevistos o dependencia de un método de pago | EN-10; TD-13; OC-332 |
+| RR11-12 | Pausa o terminación de un entorno gratuito que detenga el flujo | EN-12; TD-11 |
+| RR11-13 | Despliegue que rompa la PWA sin conexión o la caché | EN-15, EN-16; TD-09 |
+| RR11-14 | Pérdida de acceso o de sucesión de las cuentas que despliegan | EN-23; TD-12 |
+| RR11-15 | Dar por resueltas las dependencias de ADR-01 o ADR-10 por existir un ADR documental | §36.9 |
+| RR11-16 | Invadir R4-B…R4-G o decidir aspectos de ADR-12, ADR-13, ADR-14 o ADR-17 al nombrar dependencias | §36.12 |
+| RR11-17 | Presentar este borrador como verificación en infraestructura real, como auditoría independiente o como evaluación jurídica | §36.14 |
+
+### 36.12 Relación con R4-B y R4-E (solo dependencias posteriores; no se inician)
+
+| Bloque posterior | Qué requiere de ADR-11 | Qué NO hace este borrador |
+|---|---|---|
+| **R4-B (ADR-13, observabilidad sin datos personales)** | Requiere ADR-01 y **ADR-11** (R1 §8.2); necesita saber **qué entornos existen** para definir qué se observa en cada uno (EN-19; OC-344) | No define qué se monitorea, con qué herramienta ni con qué alertas |
+| **R4-E (ADR-12, respaldo y continuidad)** | Requiere ADR-01/10, **ADR-11** y ADR-17; necesita un **entorno aislado para restauraciones** (EN-18; OC-343; BK-09, BK-14, AM-29) | No define estrategia de respaldo, RPO/RTO ni procedimientos de restauración |
+
+**R4-B…R4-G no se inician**, no se redacta ningún otro ADR, y cada subbloque requiere una autorización nominal posterior.
+
+### 36.13 Criterios para la revisión focalizada y de revisión documental
+
+| ID | Criterio | Cumplimiento según el autor (a revisar) |
+|---|---|---|
+| CR4A-01 | Alcance, fuentes y dependencias identificados; R4-A como primer subbloque del plan | Cumple: §36.0–§36.2 |
+| CR4A-02 | Al menos dos alternativas diferenciadas y comparables; ninguna seleccionada | Cumple: §36.4 (tres) |
+| CR4A-03 | Requisitos verificables de entornos local, staging y producción con fuente y tipo | Cumple: §36.3 |
+| CR4A-04 | Flujo de promoción con autorización específica, reversión y trazabilidad | Cumple: §36.5 |
+| CR4A-05 | Matriz de conformidad uniforme que **no** declara conformidad con RNF-16 ni RE3-09 | Cumple: §36.6; **a revisar** |
+| CR4A-06 | Puntuación con pesos 35/30/20/15 y regla uniforme; no se selecciona por puntaje; aritmética verificable | Cumple según el autor: §36.7; **a revisar** |
+| CR4A-07 | Compatibilidad con CFG-C1, CFG-C2 y CFG-C3 sin elegir ninguna | Cumple: §36.8 |
+| CR4A-08 | Dependencias con ADR-01 y ADR-10 distinguidas entre documentadas y no definitivamente resueltas | Cumple: §36.9 |
+| CR4A-09 | Amenazas y riesgos de despliegue, secretos, permisos, separación y recuperación | Cumple: §36.10 |
+| CR4A-10 | Condiciones abiertas sobre elegibilidad, planes, cuotas, región y costos | Cumple: §36.11 |
+| CR4A-11 | Identificadores únicos y sin colisiones; referencias a identificadores existentes | Cumple según el autor, comprobable con el archivo; **a revisar** |
+| CR4A-12 | Evidencia [DOC], [INF] y [PEND] distinguidas; sin inventar precios, cuotas, regiones ni características de proveedores | Cumple según el autor: §36.2, §36.14; **a revisar** |
+| CR4A-13 | R4-B y R4-E mencionados solo como dependencias posteriores | Cumple: §36.12 |
+| CR4A-14 | Observaciones preservadas (nota de `ab7dc66`, DR3F-4, fila de R2-C4, estados históricos) sin corregir | Cumple: §36.0 |
+| CR4A-15 | Sin selección, admisión, resolución, aceptación de riesgos ni excepciones; D-2 sin excepción; R1 §8.1 y §8.2 sin cumplimiento | Cumple: §36.0, §36.9 |
+| CR4A-16 | Sin despliegues, cuentas, secretos, código ni cambios de infraestructura | Cumple: §36.0 |
+| CR4A-17 | Solo se modifica `02-arquitectura-adr.md`; el contenido anterior (incluido §35) queda idéntico; `aprobaciones.md` y `bitacora.md` intactos | Cumple según el autor, comprobable con Git; **a revisar** |
+| CR4A-18 | Borrador **no aprobado y no versionado**; autoevaluación del autor, **no auditoría independiente** | Cumple: §36.0, §36.15 |
+
+### 36.14 Evidencia y limitaciones
+
+**Evidencia.** [DOC]: solo los hechos de §25 (páginas oficiales leídas el 2026-11-22) citados en §36.2 y §36.8. [INF]: la separación física frente a lógica, la deriva de configuración, los privilegios del flujo, la exposición de entornos efímeros y el consumo compartido de cuotas. [PEND]: existencia y condiciones de entornos efímeros o vistas previas, cupos y precios de entornos adicionales, comportamiento de excedentes, regiones de ejecución, términos por entorno, y toda ejecución real.
+
+**Limitaciones de la autoevaluación.** (1) El borrador lo redactó **el mismo autor** de los bloques que consume: **es una autoevaluación del autor, no una auditoría independiente**; (2) **no hay pruebas empíricas ni acceso a infraestructura real**, cuentas, mediciones ni despliegues; (3) **no se consultaron fuentes nuevas;** los precios, cuotas y términos son los de R3-A y deben reverificarse (OC-347); (4) las puntuaciones y la matriz son juicios [PROP] no verificados; (5) no sustituye la asesoría jurídica (PEND-JUR); (6) **sin decisiones arquitectónicas admitidas ni seleccionadas** y sin aprobación de ADR-11, R4-A, R4 ni la Fase 2.
+
+### 36.15 Estado y preguntas para el responsable
+
+**Estado:** R4-A / ADR-11 **v0.1-R4A: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §36.0). No es aprobación definitiva; no versionado en el momento de redactarse. Autoevaluación del autor, no auditoría independiente. **Ninguna alternativa está seleccionada ni formulación admitida.** **R4-B…R4-G: NO INICIADOS.** **R4 como conjunto: sin aprobación ni cierre.** **Fase 2: en desarrollo, sin aprobación global.** **Fase 3: no iniciada.** Siguen abiertas todas las decisiones y condiciones heredadas de R1, R2 y R3.
+
+**Preguntas:** DR11-1 a DR11-9 y las condiciones OC-325 a OC-348 (§36.11); en particular, qué cuenta como «staging» (DR11-2), la política de datos de pruebas (DR11-3) y quién autoriza los despliegues (DR11-4).
+
+### 36.16 Correcciones focalizadas G-1…G-9 (revisión focalizada del borrador v0.1)
+
+Corrigen los hallazgos de la revisión focalizada de ADR-11. **No añaden identificadores** (solo la subsección 36.3.1 y esta §36.16). El borrador **sigue siendo v0.1-R4A, pendiente de revisión y aprobación**; las correcciones **no aprueban ADR-11**, no seleccionan alternativas y **no resuelven DR11-2**.
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| G-1 | Tabla [PROP] que define local, staging y producción (propósito, datos, actores, secretos, restricciones, independencia frente a producción); DR11-2 abierta | §36.3.1 |
+| G-2 | Cuatro categorías (inherente, derivado, condición abierta, mitigación) y regla única para A, B y C; centros neutrales salvo la pérdida inherente de independencia de la infraestructura de datos de C; control de neutralidad | §36.7 |
+| G-3 | Se retira de B la penalización basada solo en información no leída; costo uniforme (1 aspecto común); OC-329 abierta | §36.7 |
+| G-4 | Leyenda de la matriz precisada (S, C, T, E, E/C); «ninguna alternativa cuenta con mitigaciones técnicas demostradas»; «Directa» sustituido por «lectura directa, sin demostrar» | §36.4, §36.6 |
+| G-5 | ALT-11-C: infraestructura compartida, dominio de fallo y nivel administrativo comunes (*Esta redacción no representa una afirmación técnica vigente; fue precisada posteriormente por R-1 en §36.17: el nivel administrativo pasó a riesgo derivado o condición abierta*); credenciales y roles internos distintos posibles sin independencia de fallas; [INF]; sin mecanismo de separación | §36.4, §36.7, §36.10 |
+| G-6 | Definición de «E» ampliada; EN-02, EN-06, EN-07, EN-08 y EN-26 con partes confirmadas, derivadas y propuestas distinguidas | §36.3 |
+| G-7 | Destino explícito, verificación del entorno destino y prevención de conexiones accidentales (EN-06, EN-07, TD-03), sin herramientas | §36.3, §36.10 |
+| G-8 | Fuentes separadas en leídas directamente, consultadas por búsqueda y consumidas por referencia | §36.2 |
+| G-9 | OC-325, OC-328, OC-331 y OC-332 aplican, sin sustituir ni reformular, las condiciones heredadas (fuente autoritativa) | §36.11 |
+
+### 36.17 Correcciones residuales R-1…R-4 (verificación puntual de G-1…G-9)
+
+Corrigen los hallazgos residuales de la verificación puntual. **No añaden identificadores.** El borrador **sigue siendo v0.1-R4A, pendiente de revisión y aprobación**; las correcciones **no aprueban ADR-11**, no seleccionan alternativas y **no resuelven DR11-2**.
+
+| ID | Corrección | Dónde |
+|---|---|---|
+| R-1 | La propiedad inherente de ALT-11-C se limita a la infraestructura de datos compartida y a su dominio de fallo; el nivel administrativo y los privilegios pasan a riesgo derivado o condición abierta (OC-334, OC-335) en las tres alternativas; no se afirma que A y B tengan niveles administrativos separados | §36.4, §36.7, §36.10 (TD-04) |
+| R-2 | «No es independiente de la infraestructura de datos de producción» sustituye a «no es un entorno aislado de los datos de producción»; se distingue separación lógica de datos frente a infraestructura y dominio de fallo compartidos; no se afirma que C comparta necesariamente los datos de producción | §36.4, §36.6, §36.7, §36.10 (TD-14) |
+| R-3 | EN-20 se mantiene como E/C; EN-24 y EN-26 pasan a E en la matriz, sin declarar cumplimiento | §36.6 |
+| R-4 | Alcance de lectura de §25 corregido (§25.1…§25.5 y §25.7…§25.13; de §25.6, solo la primera tabla; *precisado por L-1 en §36.18: solo el párrafo de supuestos y las dos primeras filas de su primera tabla*) y procedencia de la regla 5 del skill precisada | §36.2 |
+| Control | Reevaluación de la diferencia de seguridad de C: se conserva, sustentada solo en la infraestructura de datos y el dominio de fallo compartidos; puntuaciones sin cambios | §36.7 |
+
+### 36.18 Ajustes finales L-1…L-3 (verificación final de R-1…R-4)
+
+Corrigen solo redacción; **no modifican puntuaciones, identificadores ni alternativas.** El borrador **sigue siendo v0.1-R4A, pendiente de revisión y aprobación**; los ajustes **no aprueban ADR-11** ni resuelven DR11-2.
+
+| ID | Ajuste | Dónde |
+|---|---|---|
+| L-1 | Alcance de lectura de §25.6 precisado: solo el párrafo de supuestos y las dos primeras filas de su primera tabla | §36.2 (y registro R-4 de §36.17) |
+| L-2 | La fila G-5 de §36.16 declara que su redacción histórica no representa una afirmación técnica vigente y que R-1 la precisó en §36.17 | §36.16 |
+| L-3 | «Menor aislamiento» sustituido por «menor independencia de la infraestructura de datos [INF]»; las referencias a ensayar migraciones «en el mismo dominio» pasan a «mismo dominio de fallo de la capa de datos»; precisión de clasificación: el ensayo de migraciones en el mismo dominio de fallo es consecuencia de la infraestructura compartida de C, sin penalización adicional | §36.4, §36.7, §36.10, §36.16 |

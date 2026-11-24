@@ -1,5 +1,16 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-24 — Fase 2, R4-A: aprobación documental condicionada de ADR-11
+
+- **Decisión del responsable (2026-11-24, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R4-A / ADR-11»: «APRUEBO EXCLUSIVAMENTE ADR-11 v0.1-R4A COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **No aprueba definitivamente ADR-11, no selecciona alternativas, no admite formulaciones ni autoriza despliegues; no cierra R4 ni aprueba la Fase 2.** Archivos: `02-arquitectura-adr.md` (solo metadatos de §36), `aprobaciones.md`, `bitacora.md`.
+- **Versión aprobada:** ADR-11 **v0.1-R4A** (Parte XXII, §36), **incluidas las correcciones G-1…G-9, R-1…R-4 y L-1…L-3**: ALT-11-A, B y C **sin selección**; puntuaciones A 2,80–4,10, B 2,80–4,10, C 2,45–3,75 (35/30/20/15); EN-01…26, TD-01…14, DR11-1…9, OC-325…348, RR11-01…17, CR4A-01…18.
+- **Preservado:** DR11-2 abierta; OC y RR sin resolver ni aceptar; ninguna formulación admitida; ADR-01 sin satisfacción definitiva y ADR-10 sin región; RNF-16 y RE3-09 sin conformidad demostrada; R1 §8.1 sin cumplimiento demostrado; D-2 sin excepción; PEND-JUR; elegibilidad, cuotas y costos pendientes; sin pruebas ni despliegues; sin auditoría independiente.
+- **Trazabilidad:** el plan de R4 y R4-0 quedaron versionados en `ab7dc6624cb063be6a3aa4bb6f1f5caa9e603872` (`ab7dc66`; 2026-11-24T04:46:19Z); nota posterior añadida en su entrada.
+- **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `f0fe16b86bb88a7de348e21cb517e9ee00c59ac10cd00b7c4c098496f231138b`; con los metadatos: `afc7a0eeb556b07a6941a9e5e1d55f082f09b5a4770dc1f7c4bda688ce0458f8`. Las diferencias son solo metadatos de §36.
+- **Exclusiones (no implica):** aprobar definitivamente ADR-11; seleccionar; admitir; resolver decisiones; aceptar riesgos; conceder excepciones; declarar cumplidos requisitos o garantías; cerrar R4; aprobar la Fase 2; iniciar R4-B…R4-G o la Fase 3; despliegues, cuentas o secretos.
+- **Estado real:** R3 cerrado documentalmente de forma condicionada; **R4-A aprobado documentalmente de forma condicionada** (sin aprobación arquitectónica definitiva); **R4-B…R4-G NO INICIADOS**; **R4 como conjunto SIN APROBACIÓN NI CIERRE**; **Fase 2 EN DESARROLLO**; **Fase 3 NO INICIADA**. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, autorizar nominalmente R4-B, corregir estados históricos, designar el revisor de R4-G) requiere autorización expresa e independiente.
+
 ## 2026-11-23 — Fase 2, R4: plan de subbloques aprobado para planificación y transición R4-0
 
 - **Decisión del responsable (2026-11-23, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DEL PLAN DE R4 Y TRANSICIÓN R4-0»: «APRUEBO EXCLUSIVAMENTE LA ESTRUCTURA PROPUESTA PARA PLANIFICAR R4 Y AUTORIZO EL REGISTRO DOCUMENTAL DE LA TRANSICIÓN R4-0.» **PLAN DE SUBBLOQUES R4: APROBADO PARA PLANIFICACIÓN.** No inicia R4-A…R4-G ni redacta ADR. Archivos: `aprobaciones.md` y `bitacora.md` (**`02-arquitectura-adr.md` no se modifica**).
@@ -9,7 +20,7 @@
 - **Abiertas (sin resolver por inferencia):** identidad y tipo del revisor de R4-G; alcance de su independencia; corrección de estados históricos (DR3F-4); fila histórica de R2-C4; ubicación del entregable R4-F; eventual cierre documental de R4 como conjunto.
 - **Preservado:** ninguna formulación admitida; alternativas sin seleccionar; 16 decisiones sin formulación A; DR y OC pendientes; RR y RES sin aceptar; R1 §8.1 sin cumplimiento demostrado; R1 §8.2 sin satisfacción definitiva; D-2 sin excepción; PEND-JUR; garantías y verificaciones empíricas pendientes; auditoría independiente de cierre aún no realizada.
 - **Exclusiones (no implica):** iniciar R4-A…R4-G; redactar ADR; seleccionar; admitir; resolver; aceptar riesgos; conceder excepciones; aprobar R4 o la Fase 2; iniciar la Fase 3. Sin commit, push, PR ni merge; `main` sin cambios.
-- **Siguiente paso:** cualquier paso posterior (versionar este registro, autorizar nominalmente un subbloque de R4, designar el revisor de R4-G, corregir estados históricos) requiere autorización expresa e independiente.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, autorizar nominalmente un subbloque de R4, designar el revisor de R4-G, corregir estados históricos) requiere autorización expresa e independiente. *[Nota posterior, 2026-11-24: este registro y el plan de R4 y la transición R4-0 quedaron versionados en el commit `ab7dc6624cb063be6a3aa4bb6f1f5caa9e603872` (`ab7dc66`; verificable por Git; 2026-11-24T04:46:19Z). Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-23 — Fase 2, R3: cierre documental condicionado como conjunto
 
