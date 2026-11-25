@@ -1,5 +1,16 @@
 # Bitácora del desarrollo — Torneo de Campeones
 
+## 2026-11-25 — Fase 2, R4-B: aprobación documental condicionada de ADR-13
+
+- **Decisión del responsable (2026-11-25, fecha inferida):** mensaje «TORNEO DE CAMPEONES — REGISTRO DE APROBACIÓN DOCUMENTAL CONDICIONADA DE R4-B / ADR-13»: «APRUEBO EXCLUSIVAMENTE ADR-13 v0.1-R4B COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **No es aprobación arquitectónica definitiva ni autorización de implementación; no selecciona alternativas, proveedores ni herramientas, no admite formulaciones; no cierra R4 ni aprueba la Fase 2.** Archivos: `02-arquitectura-adr.md` (solo metadatos de §37), `aprobaciones.md`, `bitacora.md`.
+- **Versión aprobada:** ADR-13 **v0.1-R4B** (Parte XXIII, §37), **incluidas las correcciones F-1…F-9 y R-1** (verificadas por autoevaluación del autor): ALT-13-A, B y C **sin selección**; puntuaciones centrales 3,00 y rangos 1,95–4,05 para las tres (35/30/20/15); OB13-01…17, MIN13-01…10, EVO-01…09, MTO-01…08, ALO-01…08, TO-01…12, DR13-1…8, OC-349…368, RR13-01…14, CR4B-01…16.
+- **Preservado:** DR13-1 aclarado y DR13-2…8 abiertas; OC-349…368 abiertas; RR13 sin aceptar; sin proveedores ni herramientas seleccionados; ninguna formulación admitida; RNF-09 y PRV-12 sin cumplimiento demostrado; riesgos de correlación, reidentificación y exposición de menores pendientes de validación; retención y eliminación dependientes de ADR-17; ADR-01 y ADR-11 solo con aprobación documental condicionada, ADR-10 sin región; R1 §8.1 sin cumplimiento demostrado; R1 §8.2 sin satisfacción definitiva; D-2 sin excepción; PEND-JUR; sin pruebas ni infraestructura; sin anonimato ni mitigaciones demostrados; sin auditoría independiente.
+- **Trazabilidad:** R4-A / ADR-11 quedó versionado en `b57d3d2df3ffa1c9fb86a207d85674936fe10bc3` (`b57d3d2`; 2026-11-24T05:39:28Z); nota posterior añadida en su entrada y en `aprobaciones.md`; no es aprobación arquitectónica definitiva.
+- **Hash:** `02-arquitectura-adr.md` antes de los metadatos de aprobación: `0c6321aa333d21f4912f4434fc6458d528dbb275a2a5a7b8ca1ff8187b391a67`; con los metadatos: `d1a7828247c93bb9e8909419d6c4148f5f6015d01f8740c023127bcbf7e3650e`. Las diferencias son solo metadatos de §37.
+- **Exclusiones (no implica):** aprobar arquitectónicamente ADR-13; seleccionar; admitir; resolver decisiones; aceptar riesgos; conceder excepciones; declarar cumplidos RNF-09, PRV-12 o R1 §8.1; declarar anonimato o mitigaciones demostrados; cerrar R4; aprobar la Fase 2; iniciar R4-C…R4-G o la Fase 3; implementar telemetría; despliegues, cuentas o secretos.
+- **Estado real:** R3 cerrado documentalmente de forma condicionada; **R4-A aprobado documentalmente de forma condicionada y versionado**; **R4-B aprobado documentalmente de forma condicionada** (sin aprobación arquitectónica definitiva); **R4-C…R4-G NO INICIADOS**; **R4 como conjunto SIN APROBACIÓN NI CIERRE**; **Fase 2 EN DESARROLLO**; **Fase 3 NO INICIADA**. Sin commit, push, PR ni merge; `main` sin cambios.
+- **Siguiente paso:** cualquier paso posterior (versionar este registro, autorizar nominalmente R4-C, corregir estados históricos, designar el revisor de R4-G) requiere autorización expresa e independiente.
+
 ## 2026-11-24 — Fase 2, R4-A: aprobación documental condicionada de ADR-11
 
 - **Decisión del responsable (2026-11-24, fecha inferida):** mensaje «TORNEO DE CAMPEONES — APROBACIÓN DOCUMENTAL CONDICIONADA DE R4-A / ADR-11»: «APRUEBO EXCLUSIVAMENTE ADR-11 v0.1-R4A COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **No aprueba definitivamente ADR-11, no selecciona alternativas, no admite formulaciones ni autoriza despliegues; no cierra R4 ni aprueba la Fase 2.** Archivos: `02-arquitectura-adr.md` (solo metadatos de §36), `aprobaciones.md`, `bitacora.md`.
@@ -10,6 +21,8 @@
 - **Exclusiones (no implica):** aprobar definitivamente ADR-11; seleccionar; admitir; resolver decisiones; aceptar riesgos; conceder excepciones; declarar cumplidos requisitos o garantías; cerrar R4; aprobar la Fase 2; iniciar R4-B…R4-G o la Fase 3; despliegues, cuentas o secretos.
 - **Estado real:** R3 cerrado documentalmente de forma condicionada; **R4-A aprobado documentalmente de forma condicionada** (sin aprobación arquitectónica definitiva); **R4-B…R4-G NO INICIADOS**; **R4 como conjunto SIN APROBACIÓN NI CIERRE**; **Fase 2 EN DESARROLLO**; **Fase 3 NO INICIADA**. Sin commit, push, PR ni merge; `main` sin cambios.
 - **Siguiente paso:** cualquier paso posterior (versionar este registro, autorizar nominalmente R4-B, corregir estados históricos, designar el revisor de R4-G) requiere autorización expresa e independiente.
+
+*[Nota posterior, 2026-11-25: este registro y ADR-11 v0.1-R4A quedaron versionados en el commit `b57d3d2df3ffa1c9fb86a207d85674936fe10bc3` (`b57d3d2`; verificable por Git; 2026-11-24T05:39:28Z). No es aprobación arquitectónica definitiva. Lo anterior se conserva sin reescribir.]*
 
 ## 2026-11-23 — Fase 2, R4: plan de subbloques aprobado para planificación y transición R4-0
 

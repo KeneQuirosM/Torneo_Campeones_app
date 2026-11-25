@@ -10636,3 +10636,448 @@ Corrigen solo redacción; **no modifican puntuaciones, identificadores ni altern
 | L-1 | Alcance de lectura de §25.6 precisado: solo el párrafo de supuestos y las dos primeras filas de su primera tabla | §36.2 (y registro R-4 de §36.17) |
 | L-2 | La fila G-5 de §36.16 declara que su redacción histórica no representa una afirmación técnica vigente y que R-1 la precisó en §36.17 | §36.16 |
 | L-3 | «Menor aislamiento» sustituido por «menor independencia de la infraestructura de datos [INF]»; las referencias a ensayar migraciones «en el mismo dominio» pasan a «mismo dominio de fallo de la capa de datos»; precisión de clasificación: el ensayo de migraciones en el mismo dominio de fallo es consecuencia de la infraestructura compartida de C, sin penalización adicional | §36.4, §36.7, §36.10, §36.16 |
+
+# PARTE XXIII — BLOQUE R4-B (v0.1-R4B, APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE; ADR-13 SIN APROBACIÓN ARQUITECTÓNICA DEFINITIVA; 2026-11-25 inferida)
+
+## 37. R4-B — ADR-13: Observabilidad sin datos personales (evaluación y borrador condicionado)
+
+**Estado: v0.1-R4B — APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §37.0). **No es aprobación arquitectónica definitiva ni autorización de implementación.** Autoevaluación del autor, no auditoría independiente.
+
+### 37.0 Alcance, autorización, reglas y observaciones preservadas
+
+- **Autorización (2026-11-24, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R4-B: INICIO DEL BORRADOR DOCUMENTAL DE ADR-13»: autoriza **exclusivamente** iniciar R4-B para redactar el borrador documental de ADR-13 «Observabilidad sin datos personales». **«Esta autorización no aprueba ADR-13 ni autoriza implementación.»** Solo se modifica este documento, con esta Parte nueva al final; `aprobaciones.md` y `bitacora.md` **no se modifican**; todo el contenido anterior a §37 se conserva sin cambios. **No se inician R4-C…R4-G ni la Fase 3.**
+- **Mensaje truncado y reenviado completo (registro obligatorio).** La primera copia de la autorización **llegó cortada** en «No declarar satisfechas RNF-09 ni PRV-12 sin…»; el borrador se redactó entonces con el criterio más restrictivo [INF]. **El responsable reenvió el mensaje completo en la misma fecha**: la regla cortada dice **«No declarar satisfechas RNF-09 ni PRV-12 sin evidencia»**, coherente con lo aplicado, y el resto aporta: la verificación previa, la **nota posterior pendiente de R4-A** (`b57d3d2df3ffa1c9fb86a207d85674936fe10bc3`, solo como referencia), las **condiciones preservadas** (R3 cerrado documentalmente de forma condicionada; R4-A aprobado solo documentalmente; R4-B sin aprobación; R4-C…R4-G no iniciados; Fase 2 en desarrollo; sin formulaciones admitidas; alternativas sin seleccionar; riesgos sin aceptar; R1 §8.1 sin cumplimiento demostrado; R1 §8.2 sin satisfacción definitiva; **D-2 sin excepción**; **PEND-JUR abierta**; **auditoría independiente pendiente**), la regla **«No modificar políticas heredadas de auditoría o retención»** (este borrador no las modifica: la retención es de ADR-17 y la auditoría de ADR-09) y el formato de entrega. **Se confrontó el borrador con el mensaje completo y no se halló contradicción;** se añadió únicamente este registro y la referencia de trazabilidad.
+- **Qué es este borrador.** Una evaluación documental de alternativas de arquitectura de observabilidad, con una **recomendación preliminar no vinculante que no expresa preferencia.** **No selecciona alternativas, proveedores, servicios ni herramientas;** no admite formulaciones; no resuelve decisiones; no acepta riesgos; no concede excepciones (**D-2 sin excepción**); **no declara satisfechas RNF-09, PRV-12 ni R1 §8.1**; no implementa; no crea cuentas, secretos ni servicios; no escribe código ni modifica infraestructura o bases de datos.
+- **Convención.** [DOC]: dato leído en una fuente ya consultada para R3-A (fuentes del 2026-11-22; **no se hicieron consultas nuevas**). [CONF]: texto confirmado de `01`, R1, R2, R3 o R4-A con el estado que allí declara. [REC]: recomendación heredada, **no requisito confirmado**; su clasificación no se cambia. [PROP]: propuesta del autor. [INF]: inferencia técnica del autor. [PEND]: pendiente de verificación o decisión. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; lo no leído es [PEND] y no se penaliza; una inferencia por ausencia de documentación se rotula [INF], nunca [DOC]; **no se inventan costos, precios, cuotas ni compatibilidades:** lo no documentado es [PEND]. **«Por diseño»** solo se usa cuando la definición de la alternativa lo garantiza.
+- **Principios de redacción de este borrador.** (1) **La ausencia de identificadores directos no es anonimato automático:** metadatos, correlación entre eventos, marcas de tiempo, direcciones de red, versiones y volúmenes pueden permitir la reidentificación (ver OB13-16 y TO-05). (2) **Observabilidad sin datos personales no equivale a ausencia total de registros:** existen registros técnicos con contenido restringido (SL-27, CD-14). (3) **Observabilidad no es auditoría:** la auditoría (RF-AUD) identifica al actor y su finalidad es otra; no se mezclan. (4) **Las recomendaciones heredadas [REC] no se presentan como requisitos confirmados.** (5) **ADR-01 y ADR-11 solo tienen aprobación documental condicionada:** que exista su documentación **no satisface** la dependencia de R1 §8.2.
+- **Identificadores nuevos (sin colisión; comprobados contra el archivo).** **ALT-13-A, ALT-13-B, ALT-13-C** (alternativas), **MIN13-01…10** (reglas de minimización de §37.4; antes rotuladas «M-1…M-10», renombradas por F-1 para no colisionar con el prefijo `M-` de Partes anteriores), **T-A, T-B, T-C** (limitaciones estructurales de ALT-13-A, B y C, definidas en §37.5; T-C tiene dos manifestaciones, T-C(i) y T-C(ii), que son **subdivisiones descriptivas, no identificadores nuevos**), **OB13-01…17** (objetivos y requisitos verificables), **EVO-01…09, MTO-01…08, ALO-01…08** (clases conceptuales de eventos, métricas y alertas), **TO-01…12** (amenazas), **DR13-1…8** (decisiones del responsable), **OC-349…368** (condiciones abiertas), **RR13-01…14** (riesgos de redacción), **CR4B-01…16** (criterios de revisión documental).
+- **Exclusiones.** Seleccionar alternativa, proveedor, servicio, herramienta, canal de alerta o mecanismo; admitir formulaciones; resolver decisiones heredadas; aceptar riesgos; conceder excepciones; aprobar ADR-13, R4-B, R4 ni la Fase 2; iniciar R4-C…R4-G; implementar, desplegar o crear cuentas; fijar plazos de retención o políticas jurídicas (ADR-17, PEND-JUR); modificar las Partes I–XXII ni los registros.
+- **Aprobación (metadato; 2026-11-25, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — REGISTRO DE APROBACIÓN DOCUMENTAL CONDICIONADA DE R4-B / ADR-13»: «APRUEBO EXCLUSIVAMENTE ADR-13 v0.1-R4B COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: R4-B / ADR-13 (v0.1-R4B): APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA.** **La aprobación cubre el borrador de R4-B, las correcciones F-1…F-9 (§37.16) y la corrección R-1 (§37.17), verificadas mediante autoevaluación del autor.** **Esta aprobación NO es aprobación arquitectónica definitiva de ADR-13, no autoriza implementación, no selecciona alternativas, proveedores, servicios ni herramientas, no admite formulaciones y no resuelve decisiones.** El evento de aprobación es independiente y no reutiliza identificadores OB13, EVO, MTO, ALO, TO, MIN13, DR13, OC, RR13 ni CR4B. Se conservan: **ALT-13-A, ALT-13-B y ALT-13-C sin selección**; puntuaciones centrales **3,00** y rangos **1,95–4,05** para las tres (pesos 35/30/20/15); **MIN13-01…10 y T-A/T-B/T-C** intactos; **DR13-1 aclarado y DR13-2…8 abiertas**; **OC-349…368 abiertas**; **RR13-01…14 sin aceptar**; **sin proveedores ni herramientas seleccionados**; **ninguna formulación admitida**; **RNF-09 y PRV-12 sin cumplimiento demostrado**; **riesgos de correlación, reidentificación y exposición de menores pendientes de validación**; **retención y eliminación dependientes de ADR-17**; **dependencias de ADR-01 y ADR-11 con aprobación solo documental condicionada y ADR-10 sin región**; **R1 §8.1 sin cumplimiento demostrado**; **R1 §8.2 sin satisfacción definitiva**; **D-2 sin excepción**; **PEND-JUR abierta**; **sin pruebas empíricas ni infraestructura desplegada**; **sin anonimato ni mitigaciones demostrados**; limitación de **autoevaluación del autor, sin auditoría independiente**. **Estado:** **R3 cerrado documentalmente de forma condicionada; R4-A aprobado documentalmente de forma condicionada y versionado (`b57d3d2df3ffa1c9fb86a207d85674936fe10bc3`); R4-C…R4-G NO INICIADOS; R4 como conjunto SIN APROBACIÓN NI CIERRE; Fase 2 EN DESARROLLO, sin aprobación global; Fase 3 NO INICIADA.** **Precedencia:** las menciones «borrador», «pendiente de revisión y aprobación», «sin aprobación» o «ADR-13 sin aprobación» de esta Parte (§37.0, §37.1, §37.13 —CR4B-02—, §37.14, §37.15, §37.16 y §37.17) describen el momento de redactarse y **no se reescriben**; prevalece este apartado en cuanto al estado de aprobación documental, **sin que ello sea aprobación arquitectónica definitiva**. La observación siguiente sobre la nota posterior de `b57d3d2` describe el momento de redactarse: **la nota posterior ya consta en `aprobaciones.md` y `bitacora.md`** (registro de esta aprobación). Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Observaciones preservadas (sin corregir fuera de este anexo).** La **nota posterior de trazabilidad del commit `b57d3d2df3ffa1c9fb86a207d85674936fe10bc3`** (R4-A / ADR-11) en `aprobaciones.md` y `bitacora.md` **sigue pendiente**; **DR3F-4** y los **estados históricos contradictorios**; la **fila histórica de R2-C4 con una columna adicional**; la **diferencia entre 12 y 11 decisiones abiertas de R2-A**; las **decisiones técnicas de R2, R3 y R4-A abiertas**; las **16 decisiones sin formulación A**; la **ausencia de formulaciones admitidas**; **R1 §8.1 sin cumplimiento demostrado**; **R1 §8.2 sin satisfacción definitiva** (ADR-01 y ADR-11 solo con aprobación documental condicionada; ADR-10 sin región); **D-2 sin excepción**; PEND-JUR; el **revisor de R4-G**, la **ubicación de la trazabilidad final de R4-F** y el **cierre de R4** siguen abiertos.
+
+### 37.1 Identificación y decisiones relacionadas (A)
+
+| Campo | Contenido |
+|---|---|
+| Decisión | ADR-13 · Observabilidad sin datos personales |
+| Subbloque | R4-B del plan de R4 (aprobado solo para planificación); orden de R1 §8.2: ADR-11, **ADR-13**, ADR-17, ADR-14, ADR-12 |
+| Depende de | ADR-01 (aprobación documental condicionada) y ADR-11 (aprobación documental condicionada), R1 §8.2 [CONF] |
+| Requisitos de origen | RNF-09 [REC]; PRV-12 [REC]; RM-12; BK-08 y OC-62; RR9I-05; SL-27 y OC-315; EN-19 y OC-344; TB-7; CD-14; CAB-11 y AM-25 (menores, tokens y secretos en trazas, capturas y registros); AM-21 (Z4 no recibe datos de jugadores ni de menores); AM-13 (solo como antecedente de la protección de menores en la proyección pública, no de observabilidad) |
+| Componentes | CMP-19 (observabilidad y operación; recibe solo telemetría, zona Z4); orígenes posibles de señales: CMP-13 (ingesta de sincronización) y CMP-05 (sincronizador del cliente, **solo** respecto de los fallos de sincronización; los demás errores del cliente se originan en la PWA (Z0), sin componente específico asignado [PEND]). **CMP-17 es la política de privacidad y retención, no un origen de señales;** su relación con los registros técnicos es con ADR-17 |
+| Fronteras | TB-7 (dispositivo ↔ observabilidad), definida para R4 [CONF] |
+| Fuera de ADR-13 | Auditoría (RF-AUD, ADR-09); retención y anonimización jurídicas (ADR-17); tareas programadas y alerta N-12 (ADR-14); mecanismo de respaldo (ADR-12); entornos (ADR-11) |
+| Estado | **v0.1-R4B: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §37.0; no es aprobación definitiva); **ninguna alternativa seleccionada**; ninguna formulación admitida |
+
+**Alcance de la observabilidad (A) [PROP].** La observabilidad cubre **señales técnicas** sobre el comportamiento del sistema, **no sobre las personas**. Para cada capa se define **qué se observa** y **qué queda fuera**, sin decidir mecanismos:
+
+| Capa | Se observa (señal técnica) | No se observa / queda fuera |
+|---|---|---|
+| Frontend (PWA, Z0; incluye cola local y almacenamiento local) | Errores de ejecución de la aplicación por clase y versión; fallos de sincronización y de almacenamiento local por código; estado de conexión como categoría | Contenido de operaciones, nombres, correos, identificadores de dispositivo, datos de jugadores o menores, capturas de pantalla, contenido de formularios (SL-27, CD-14, PRV-12) |
+| Backend (Z2: API, CMP-13 y reglas) | Errores por clase y componente; códigos de rechazo como categoría; latencias y tasas agregadas; fallos de entrega de notificaciones (RM-12) | Cuerpos de solicitud, tokens, credenciales, datos personales en trazas de error (AM-26, RT-09) |
+| Base de datos (Z3) | Disponibilidad, errores de conexión, fallos de migración y de respaldo como estado; saturación como categoría | Contenido de filas, consultas con valores literales, datos de jugadores |
+| Procesos y tareas programadas (ADR-14, ADR-12, ADR-11) | Ejecución, fallo o ausencia de ejecución (control de antigüedad, BK-08); fallos de despliegue (EN-19) | La programación y su identidad de ejecución (ADR-14); el mecanismo de respaldo (ADR-12) |
+
+**Nota.** Esta tabla fija **el alcance de las señales, no los mecanismos** ni dónde viven; lo que no cabe en la columna izquierda no se observa por defecto [PROP].
+
+### 37.2 Entradas heredadas y límites de la lectura
+
+| Entrada | Qué aporta | Estado y límite |
+|---|---|---|
+| RNF-09 | Errores del cliente y del servidor y disponibilidad externa, con alerta al responsable técnico y sin datos personales (PRV-12); métricas de OFF-20 | **[REC]**; no es requisito confirmado; **no se declara satisfecho** |
+| PRV-12 | Registros sin datos personales **cuando sea posible**; prueba heredada: muestra de 100 registros con 0 datos personales | **[REC]**; «cuando sea posible» **se conserva**; la prueba **no se ha ejecutado** |
+| R1 §8.1 y §8.2 | Puertas y orden de dependencias; ADR-13 requiere ADR-01 y ADR-11 | §8.1 sin cumplimiento demostrado; §8.2 sin satisfacción definitiva |
+| R1 §12 | Auditoría independiente de cierre (R4-G) | Fuera de R4-B |
+| ADR-01 / ADR-11 | Plataforma de datos y entornos | Solo aprobación documental condicionada; **no se declara satisfecha la dependencia** |
+| RM-12 | Observabilidad de fallos de entrega con alerta al responsable técnico | Parcial; mecanismo en R4 (este borrador no lo selecciona) |
+| BK-08, OC-62 | Alertas de respaldo y control de antigüedad en un componente distinto del ejecutor | Mecanismo [PEND] (ADR-13, ADR-12) |
+| RR9I-05 | Denegación inducida por el fallo del registro de rechazos: **alerta (ADR-13)** | Sin aceptar |
+| SL-27, OC-315, CD-14 | Registros técnicos del almacenamiento local sin nombres, correos, identificadores de dispositivo ni contenido de operaciones | **[REC]** «cuando sea posible» |
+| EN-19, OC-344 | Observabilidad y alertas de despliegue por entorno sin datos personales | Dependencia de R4-B; relación con OC-62 |
+| TB-7, CMP-19, Z4, AM-26, RT-09 | Frontera dispositivo ↔ observabilidad; Z4 recibe métricas sin datos personales; los secretos no deben aparecer en cliente, cola ni telemetría | Confirmados como texto; **su cumplimiento no está demostrado** |
+| OC-345 | Registro y retención de la trazabilidad de despliegues | **Fuera de ADR-13** (ADR-17, ADR-09.I) |
+
+**Límites de la lectura.** Se tomaron los textos ya consignados en este documento (R1, R2, R3 y R4-A); **no se consultaron fuentes nuevas ni documentación de productos**. Lo que habría que leer para evaluar proveedores o servicios (cuotas, retención, ubicación de datos, filtros de datos personales, canales de alerta) es **[PEND]** y no se penaliza. **No se leyó documentación de ningún proveedor para este borrador.**
+
+### 37.3 Objetivos y requisitos verificables (B)
+
+La columna «Origen» indica si el objetivo es [CONF] (texto confirmado), [REC] (recomendación heredada) o [PROP] (propuesta de este borrador). **Un objetivo [PROP] no es requisito confirmado;** un [REC] **no se promueve a requisito**. La columna «Verificación propuesta» describe cómo se podría comprobar **cuando exista un mecanismo**; **hoy nada está verificado**.
+
+| Id | Objetivo | Origen | Verificación propuesta (no ejecutada) |
+|---|---|---|---|
+| OB13-01 | **Detectar** errores del servidor por clase y componente | RNF-09 [REC] | Provocar un error de prueba conocido y comprobar su detección y clasificación |
+| OB13-02 | **Detectar** errores del cliente por clase y versión, sin contenido de operaciones | RNF-09 [REC]; TB-7; SL-27 [REC] | Provocar un error de cliente de prueba y comprobar la señal recibida y su contenido |
+| OB13-03 | **Detectar** indisponibilidad desde el exterior | RNF-09 [REC] | Interrumpir el servicio de prueba y medir el tiempo hasta la señal; la precisión de tiempo necesaria sigue la tensión con MIN13-05 registrada en OB13-04 (DR13-3) |
+| OB13-04 | **Alertar** al responsable técnico por los fallos de OB13-01 a 03 | RNF-09 [REC]; RM-12 | Medir el tiempo entre fallo y alerta recibida; objetivos de tiempo [PEND] (DR13-3). **Tensión (F-9):** MIN13-05 pide marcas de tiempo gruesas, mientras medir detección y alerta exige una precisión mínima; **esa precisión mínima necesaria queda pendiente en DR13-3** y no se fija aquí |
+| OB13-05 | **Registros técnicos sin datos personales** *cuando sea posible* | PRV-12 [REC] | Revisar una muestra de 100 registros: 0 datos personales; **más** análisis de correlación (OB13-16). **No ejecutada** |
+| OB13-06 | **Sin secretos, tokens ni credenciales** en señales, colas, trazas ni alertas | AM-26 y RT-09 [CONF como texto] | Inspección de señales de prueba con valores de prueba que parezcan secretos |
+| OB13-07 | **Clasificar** cada fallo (tipo, componente, severidad, origen cliente/servidor/proceso) con un vocabulario cerrado | [PROP] | Revisar que toda señal de prueba cae en una clase sin texto libre |
+| OB13-08 | **Seguimiento**: cada fallo operativo tiene un identificador de incidencia, estado y resolución, **sin datos personales** | [PROP] | Seguir un fallo de prueba de la alerta al cierre |
+| OB13-09 | Observar los **fallos de entrega** de notificaciones | RM-12 | Provocar un fallo de entrega de prueba y comprobar la señal |
+| OB13-10 | Alertar los **fallos del respaldo y la antigüedad del último respaldo** desde un componente distinto del ejecutor | BK-08; OC-62 | Retrasar un respaldo de prueba y comprobar la alerta externa; **el mecanismo es de ADR-12 y ADR-13** |
+| OB13-11 | Alertar los **fallos de despliegue** por entorno | EN-19; OC-344 | Provocar un despliegue fallido de prueba en el entorno de pruebas |
+| OB13-12 | Alertar el **fallo del registro de rechazos** | RR9I-05 | Provocar la indisponibilidad del almacén de auditoría de prueba |
+| OB13-13 | **Distinguir** la señal local del dispositivo del reporte remoto recibido, también tras desconexión y reconexión | [PROP] derivado de OFF-20 y SL-27 | Generar errores sin conexión; reconectar; comprobar su estado local y remoto (§37.7) |
+| OB13-14 | **Acceso a los registros técnicos limitado** a roles autorizados y, en el propio acceso, **sin datos personales nuevos** | [PROP]; CD-14 | Revisar roles con acceso; la política de acceso es de decisión del responsable (DR13-5) |
+| OB13-15 | **Separación entre observabilidad y auditoría** | RF-AUD («la auditoría no es telemetría») [CONF] | Comprobar que ninguna señal sustituye a un registro de auditoría ni lo contiene |
+| OB13-16 | **Evaluar el riesgo de reidentificación** por correlación, metadatos y volumen antes de admitir un campo en una señal | [PROP] | Revisión campo por campo con la tabla de §37.6 |
+| OB13-17 | **Sin cargos imprevistos ni método de pago** y **sin superar** cuotas de los servicios utilizados | [PROP]; cf. EN-10 (propuesta documentada de ADR-11) | Revisar plan, cuota y alerta de consumo cuando existan; hoy [PEND] |
+
+**Definiciones.** *Detección*: la señal llega al lugar donde puede verse. *Alerta*: aviso activo al responsable técnico. *Clasificación*: asignación a una clase del vocabulario cerrado. *Seguimiento*: ciclo de vida de un fallo desde su detección hasta su cierre. *Señal local*: hecho registrado en el dispositivo. *Reporte remoto*: señal recibida por el lado servidor de observabilidad.
+
+**Clasificación honesta.** RNF-09 y PRV-12 siguen siendo **[REC]**: sus objetivos (OB13-01 a 05) **no se promueven** a requisitos confirmados. **No se declaran satisfechas** (§37.9).
+
+### 37.4 Política de minimización propuesta para registros, métricas y alertas (C) [PROP]
+
+**Principio.** *Se registra lo mínimo necesario para detectar y clasificar un fallo; lo que no está en la lista permitida no se registra.* Es una **lista permitida**, no una lista de prohibiciones: lo no previsto no se admite.
+
+| Regla | Contenido | Origen |
+|---|---|---|
+| MIN13-01 | **Vocabulario cerrado**: las señales usan campos de una lista permitida (clase, componente, versión, código, categoría de estado, marca de tiempo gruesa, contador). **Sin texto libre** ni mensajes de excepción sin depurar | [PROP] |
+| MIN13-02 | **Prohibido**: nombres, correos, teléfonos, identificadores de dispositivo, identificadores de jugadores o menores, contenido de operaciones, cuerpos de solicitudes, tokens, credenciales, capturas; **URLs completas, rutas con identificadores, parámetros de consulta y referrer** (salvo una **ruta normalizada sin identificadores** que OB13-16 admita); **direcciones IP y agentes de usuario completos**; **identificadores de torneo, equipo o partido** que permitan aislar cohortes pequeñas o menores, salvo que OB13-16 los admita | PRV-12; SL-27; AM-26; AM-25 (datos de menores, tokens y secretos en trazas, capturas y registros); CAB-11 |
+| MIN13-03 | **Saneamiento en el origen**: el contenido se filtra **antes** de salir del dispositivo o del componente, no después de llegar a la observabilidad (**TB-7**). Un filtro posterior al envío no deshace la exposición | [PROP] |
+| MIN13-04 | **Identificadores técnicos separados**: cualquier identificador de correlación es **efímero y no derivable** de una persona o dispositivo; no se reutiliza entre señales no relacionadas | [PROP]; reidentificación |
+| MIN13-05 | **Granularidad de la marca de tiempo y de ubicación**: gruesa; sin direcciones de red completas, ubicación ni huella del navegador [INF: pueden permitir reidentificación] | [INF] |
+| MIN13-06 | **Agregación preferente**: cuando el objetivo se cumple con un contador, no se guarda un evento | [PROP] |
+| MIN13-07 | **Límite de volumen**: cada tipo de señal tiene un tope por intervalo (limita la inundación, CAB-14, y el consumo de cuota) | [PROP] |
+| MIN13-08 | **Retención, eliminación y acceso**: plazos, procedimientos de eliminación y acceso a registros técnicos **no se fijan aquí**; ADR-17 fija la retención, PEND-JUR la jurídica; ADR-13 solo exige que **exista** un plazo, una forma de eliminación y un acceso restringido; **no se fijan plazos legales** | OB13-14; DR13-5 |
+| MIN13-09 | **Sin reuso como auditoría**: una señal técnica no se usa para atribuir acciones a personas | RF-AUD |
+| MIN13-10 | **Revisión de campos nuevos**: añadir un campo requiere pasar la revisión de OB13-16 | [PROP] |
+
+**Alcance de la política.** Aplica por igual a **registros, métricas y alertas** (incluido el texto de una alerta y su canal), a la cola local de señales y a cualquier copia. **Esta política es una propuesta documental no admitida; no se promueve a requisito.**
+
+### 37.5 Alternativas de arquitectura de observabilidad (sin seleccionar) (D)
+
+Las tres alternativas son **conceptuales**: describen **qué se observa y desde dónde**, **no qué servicio o herramienta lo hace** (**no se seleccionan proveedores, servicios ni herramientas**). Todas deben cumplir la política de §37.4 y los objetivos eliminatorios comunes. Los trade-offs «por diseño» se indican solo cuando la propia definición los garantiza.
+
+| Aspecto | ALT-13-A · Observabilidad del lado servidor y disponibilidad externa | ALT-13-B · Eventos tipados de cliente y servidor, saneados en el origen, con cola local y reporte diferido | ALT-13-C · Contadores agregados y modo de diagnóstico acotado y autorizado |
+|---|---|---|---|
+| Idea | Solo se observan señales **generadas en el servidor y en los procesos**, más una comprobación **externa** de disponibilidad. **El cliente no envía telemetría** | El cliente y el servidor emiten **eventos de vocabulario cerrado** (MIN13-01), **saneados en el origen** (MIN13-03). El cliente guarda los eventos en una **cola local** y los **reporta de forma diferida** al reconectar | El sistema emite **solo contadores y métricas agregadas** (por clase, componente y versión). Un **modo de diagnóstico** de detalle, **acotado en tiempo y alcance y autorizado**, se activa solo ante un incidente |
+| Qué ve | Errores de servidor, procesos, base de datos, disponibilidad; **los fallos que el cliente sufre sin llegar al servidor no se ven** [por diseño] | Errores del cliente y del servidor por evento; fallos ocurridos sin conexión llegan después | Tendencias, tasas y umbrales; el detalle de un evento aislado **solo** existe en el modo de diagnóstico |
+| Superficie de datos | La menor: sin datos del cliente [por diseño] | **Mayor:** eventos individuales del cliente; cola local con contenido que debe ser inocuo [por diseño] | Intermedia: agregados; el modo de diagnóstico amplía la superficie de forma temporal [por diseño] |
+| Frontera TB-7 | **No se cruza con telemetría del cliente** (queda sin uso por definición) | Se cruza con eventos saneados en el origen | Se cruza con contadores; el modo de diagnóstico cruza detalle limitado |
+| Dependencias propias | Una comprobación externa independiente del sistema [PEND: mecanismo] | Una cola de señales en el dispositivo; **relación con ADR-05.I** [PEND] | Un mecanismo de autorización y caducidad del diagnóstico [PEND]; acceso a detalle (DR13-5) |
+| Trade-off estructural | **Brecha de visibilidad del cliente (T-A):** un cliente que falla en silencio no se detecta [por diseño] | **Eventos individuales con riesgo de correlación (T-B)** y una **cola local adicional** que hay que proteger [por diseño] | **T-C, con dos manifestaciones (R-1): (i)** sin detalle por evento en régimen normal: la causa de un fallo raro puede no ser reconstruible; **(ii)** exposición temporal y acotada asociada a la activación del modo de diagnóstico [por diseño] |
+
+**T-C: dos manifestaciones de una misma alternativa (R-1).** **T-C(i)** es la ausencia de detalle por evento durante la operación normal: es una **pérdida de capacidad de diagnóstico** (TO-10) que, por definición, no impide por sí sola clasificar por clase ni dar seguimiento a incidentes. **T-C(ii)** es la **exposición temporal y acotada** que aparece cuando se activa el modo de diagnóstico: es un **riesgo de privacidad** (OB13-16; TO-05). **Tienen consecuencias distintas** y **no constituyen automáticamente dos penalizaciones:** ninguna se convierte en puntaje (§37.8.2), y cada una se clasifica solo en el objetivo al que afecta (T-C(ii) en OB13-16; T-C(i) no se asigna a una celda T porque ningún objetivo OB13 la mide).
+
+**Modo de diagnóstico de ALT-13-C (F-3).** El modo de diagnóstico permanece sujeto a **la misma política de minimización (MIN13-01…10) y a la misma lista permitida de campos**: **solo aporta mayor detalle dentro de esa lista** (por ejemplo, eventos individuales de clase y código en lugar de agregados), **no campos adicionales.** **Su activación requiere una autorización específica,** cuya **identidad, condiciones y duración están pendientes de decisión del responsable** (DR13-4, DR13-5; OC-354); su activación y cierre son una señal propia (EVO-09, ALO-08). **No se admiten ampliaciones implícitas de los datos recogidos:** si fuese necesario ampliar campos, **es una decisión pendiente del responsable (DR13-4), no aprobada ni resuelta aquí.** Se **conservan** los riesgos de reidentificación y de correlación del detalle (TO-05, OB13-16).
+
+**Elementos comunes a las tres.** Vocabulario cerrado, lista permitida, límite de volumen, saneamiento en el origen para lo que se emite, alertas de BK-08, EN-19 y RR9I-05 desde el servidor y los procesos, separación de la auditoría, retención por ADR-17. **Ninguna alternativa admite datos personales en señales.** Las alternativas **no son excluyentes** a futuro (una combinación sería una decisión del responsable), pero **este borrador no propone combinarlas**.
+
+**No se selecciona ninguna.** Esta tabla describe estructuras, no preferencia.
+
+### 37.6 Modelo conceptual de eventos, métricas y alertas (sin identificadores personales) (F) [PROP]
+
+El modelo es **independiente de la alternativa**: define **qué clases de señal pueden existir** y **qué campos permitidos tienen**. **No define formato, protocolo, almacenamiento ni herramienta.** Una clase solo es aplicable a una alternativa cuando su definición lo permite (ver columna «Alternativas»).
+
+**Campos permitidos (lista permitida; todo lo demás está excluido).**
+
+| Campo | Contenido admitido | Restricción |
+|---|---|---|
+| clase | Elemento de un vocabulario cerrado | Sin texto libre |
+| componente | Categoría de componente (CMP-xx) | Sin nombres de usuario |
+| versión | Versión de la aplicación o del proceso | Sin huella ni número de compilación que identifique a un dispositivo |
+| código | Código de error de un conjunto cerrado | Sin mensajes de excepción en bruto |
+| estado | Categoría (ok, degradado, fallo) | |
+| intervalo | Marca de tiempo **gruesa** (por intervalo) | Sin segundos exactos cuando bastan minutos [INF] |
+| contador | Número entero agregado | Con umbral de agrupación mínimo [PEND] |
+| correlación | Identificador **efímero y aleatorio** (MIN13-04) | Solo si OB13-16 lo admite; no derivable ni persistente |
+| entorno | local, pruebas o producción (EN-xx de ADR-11) | |
+
+**Eventos conceptuales.**
+
+| Id | Evento | Alternativas | Notas |
+|---|---|---|---|
+| EVO-01 | Error de ejecución del servidor (clase, componente, código) | A, B, C | Sin cuerpos ni trazas con valores |
+| EVO-02 | Error de ejecución del cliente (clase, versión, código) | B, C (agregado) | No existe en A [por diseño] |
+| EVO-03 | Fallo de sincronización (código de rechazo como categoría) | B, C | Sin contenido de operaciones (OFF-20 solo metadatos) |
+| EVO-04 | Fallo de entrega de notificación (RM-12) | A, B, C | Sin destinatario ni dirección |
+| EVO-05 | Fallo o retraso de tarea programada o de respaldo (BK-08) | A, B, C | La identidad de ejecución y el mecanismo son de ADR-14 y ADR-12 |
+| EVO-06 | Fallo de despliegue por entorno (EN-19) | A, B, C | Sin secretos ni rutas internas |
+| EVO-07 | Fallo del registro de rechazos (RR9I-05) | A, B, C | La señal **no** sustituye al registro de auditoría |
+| EVO-08 | Indisponibilidad detectada desde el exterior | A, B, C | Sin datos de usuarios |
+| EVO-09 | Activación y cierre del modo de diagnóstico | C | **Solo C**; el propio evento es un registro de acceso (DR13-5) |
+
+**Métricas conceptuales.**
+
+| Id | Métrica | Notas |
+|---|---|---|
+| MTO-01 | Tasa de errores del servidor por clase | |
+| MTO-02 | Tasa de errores del cliente por clase y versión | No existe en A [por diseño] |
+| MTO-03 | Disponibilidad medida externamente | |
+| MTO-04 | Latencia por clase de operación (percentiles) | Sin valores de contenido |
+| MTO-05 | Tamaño y antigüedad de la cola local reportada | Solo B y C. **Es un agregado** (valores por intervalo y versión, no por dispositivo); **no requiere identificadores persistentes por dispositivo**. Cualquier mecanismo de medición que pudiera permitir reidentificar un dispositivo queda [PEND] y sin admitir (OB13-16) |
+| MTO-06 | Antigüedad del último respaldo (BK-08) | Calculada en un componente distinto del ejecutor |
+| MTO-07 | Fallos de entrega de notificaciones por categoría (RM-12) | |
+| MTO-08 | Consumo de cuota de los servicios de observabilidad (OB13-17) | [PEND] hasta que existan servicios |
+
+**Alertas conceptuales.**
+
+| Id | Alerta | Destinatario | Notas |
+|---|---|---|---|
+| ALO-01 | Fallo o indisponibilidad (OB13-03, OB13-04) | Responsable técnico | Umbral y tiempo [PEND] (DR13-3) |
+| ALO-02 | Tasa de errores sobre el umbral (servidor) | Responsable técnico | |
+| ALO-03 | Tasa de errores sobre el umbral (cliente) | Responsable técnico | No existe en A [por diseño] |
+| ALO-04 | Respaldo fallido o fuera de RPO (BK-08, OC-62) | Organización y responsable técnico | Evaluado en un componente distinto del ejecutor |
+| ALO-05 | Despliegue fallido (EN-19) | Responsable técnico | |
+| ALO-06 | Fallo del registro de rechazos (RR9I-05) | Responsable técnico | |
+| ALO-07 | Consumo de cuota cercano al límite | Responsable técnico | [PEND] |
+| ALO-08 | Modo de diagnóstico activo fuera de plazo | Responsable técnico | Solo C |
+
+**Reglas del modelo.** (1) El texto de una alerta usa la **misma lista permitida**. (2) Una alerta **no contiene** datos personales **ni** secretos (OB13-06). (3) **El canal de alerta es un destino de datos:** su elección es [PEND] y debe someterse a la política de §37.4 (TO-08). (4) Ninguna clase usa **identificadores de persona, dispositivo, correo, token ni contenido**.
+
+**Reidentificación (OB13-16).** La ausencia de identificadores directos **no garantiza anonimato**. Para cada campo se debe valorar:
+
+| Vector | Riesgo | Mitigación **propuesta** (no demostrada) |
+|---|---|---|
+| Combinación de campos (versión, minuto, clase, componente) | Un evento raro puede identificar a un usuario único en una ventana corta | Umbral mínimo de agrupación; agregación (MIN13-06); marca gruesa |
+| Marca de tiempo | Correlación con eventos externos (un partido, un envío) | Granularidad gruesa (MIN13-05) |
+| Direcciones de red, agente de usuario | Identifican un dispositivo o a una persona | **No se registran en las señales** (MIN13-02); los registros que la infraestructura o el servidor generan **por defecto** (accesos, direcciones IP, rutas) **se desconoce si existen o si pueden desactivarse: [PEND]** y no se asume que se eliminen |
+| Identificador de correlación persistente | Vinculación entre sesiones | Efímero y aleatorio (MIN13-04) |
+| Volumen y orden | Patrones de uso | Límites de volumen (MIN13-07) |
+| URLs, rutas, parámetros de consulta y referrer | Pueden contener identificadores de jugadores, menores, torneos o tokens | Prohibidos en las señales (MIN13-02); ruta normalizada solo si OB13-16 la admite |
+| Registros generados por defecto por la infraestructura o el servidor | Retienen IP, rutas y agentes sin que la política de las señales los alcance | [PEND]: inventariar qué se genera (OC-349); no se asume anonimato ni que puedan desactivarse |
+| Cohortes pequeñas y menores (CAB-11; AM-21; AM-25) | Con pocos participantes, un evento o contador agrupado por torneo o equipo puede identificar indirectamente a una persona o a un menor | Umbral mínimo de agrupación; sin identificadores de torneo, equipo o partido (MIN13-02); **no se demuestra** |
+| Correlación de eventos entre señales y con fuentes externas | Unir señales no relacionadas permite reconstruir un recorrido | Identificadores efímeros (MIN13-04); sin reuso entre señales |
+| Eliminación de registros | Un registro conservado más allá de lo necesario aumenta la ventana de reidentificación | Debe existir procedimiento de eliminación (MIN13-08; ADR-17); **no se fijan plazos** |
+| Mensajes de error con texto | Fugas de valores | Vocabulario cerrado (MIN13-01) |
+
+**Estas mitigaciones son propuestas.** Nada se verificó.
+
+### 37.7 Fallos sin conexión, reconexión y sincronización posterior (G)
+
+**Problema.** La PWA opera sin conexión (OFF-20 y requisitos relacionados): un fallo ocurrido en el dispositivo **no llega** a la observabilidad hasta que haya conexión, y puede **no llegar nunca** (dispositivo perdido, almacenamiento borrado, aplicación desinstalada). **La ausencia de una señal no prueba que no hubo fallo** [INF].
+
+**Estados de una señal (modelo conceptual, aplicable solo a B y a C cuando el cliente reporta).**
+
+| Estado | Dónde existe | Qué prueba |
+|---|---|---|
+| Generada localmente | Solo en el dispositivo | Que el cliente detectó el fallo |
+| En cola local | Dispositivo (almacenamiento local) | Que está pendiente de reporte; **puede perderse** |
+| Enviada | En tránsito | Nada sobre la recepción |
+| Recibida | Observabilidad | Que el fallo es **visible** para el responsable técnico |
+| Descartada o caducada | — | Que la señal fue eliminada por tope de volumen o plazo (**debe contarse, no perderse en silencio**) [PROP] |
+
+**Reglas propuestas [PROP].**
+
+1. **Distinguir siempre** «señal local» de «reporte remoto»: un panel o una alerta **no debe presentar** un fallo local no reportado como si se conociera. **Una métrica de «errores del cliente» describe solo lo recibido** (OB13-13).
+2. **El tiempo del dispositivo no es fiable** [INF]: la marca de tiempo del cliente puede ser incorrecta; el reporte registra el **instante de recepción** y, cuando exista, el del dispositivo como dato **no confiable** y grueso.
+3. **Reintentos sin duplicar:** un reporte reenviado **no debe contarse dos veces**; esto requiere un identificador de señal **efímero** (MIN13-04) y **no es** la idempotencia de operaciones (OFF-06), que es de ADR-05 y ADR-09; **no se mezclan ni se resuelve aquí cómo se relacionan** [PEND].
+4. **Cola de señales separada de la cola de operaciones** [INF]: mezclar telemetría y operaciones **ampliaría la superficie de datos** y acoplaría el descarte; la decisión es de ADR-05.I y del responsable (DR13-6). **No se decide aquí.**
+5. **Tope de cola y de reconexión:** una reconexión masiva (muchos dispositivos al recuperarse una caída) puede generar una **inundación de señales** (CAB-14); requiere MIN13-07 y descarte contado.
+6. **La cola local guarda solo señales saneadas** (MIN13-03): su contenido no debe ser **una fuente nueva de datos personales en el dispositivo** (SL-27, CD-14).
+7. **Prioridad:** bajo consumo de recursos del dispositivo (batería, datos móviles) [PEND: umbrales].
+8. **Mientras no hay conexión, la alerta al responsable no existe:** una caída que impide la conexión solo la detecta la comprobación externa (OB13-03; ALO-01).
+
+**Qué cubre cada alternativa [por diseño].** **A** no tiene señal local (el cliente no reporta): la brecha de visibilidad es su trade-off (T-A). **B** tiene el ciclo completo, con cola local y reporte diferido. **C** reporta agregados: la cola local contiene contadores, no eventos; el detalle solo existe con el modo de diagnóstico.
+
+**Nada se probó:** no se verificó el comportamiento real de ninguna cola sin conexión ni la pérdida o el volumen en reconexión.
+
+### 37.8 Evaluación, puntuación y matriz de conformidad (E)
+
+#### 37.8.1 Matriz de conformidad (uniforme; autoevaluación del autor)
+
+**Leyenda** (igual para las tres alternativas, la de R4-A): **E** = requisito eliminatorio común que toda alternativa debe cumplir y que **ninguna demuestra**; **E/C** = exigencia común que depende de una condición abierta; **S** = lectura documental favorable, **no conformidad demostrada**; **C** = condición abierta; **T** = riesgo estructural inherente por la definición. **No se demuestran mitigaciones.**
+
+| Objetivo | ALT-13-A | ALT-13-B | ALT-13-C | Observación |
+|---|---|---|---|---|
+| OB13-01 (errores del servidor) | S | S | S | |
+| OB13-02 (errores del cliente) | **T** | S | C | A no recoge señales del cliente [por diseño]; C solo agregados |
+| OB13-03 (disponibilidad externa) | E/C | E/C | E/C | Común; mecanismo [PEND] |
+| OB13-04 (alerta al responsable) | E/C | E/C | E/C | Canal y tiempos [PEND] (DR13-3, TO-08) |
+| OB13-05 (sin datos personales) | E | E | E | Ninguna lo demuestra; [REC] |
+| OB13-06 (sin secretos) | E | E | E | |
+| OB13-07 (clasificación) | S | S | C | C clasifica por clase mediante contadores (la definición no lo impide); la reconstrucción de la causa de un fallo raro depende del modo de diagnóstico y de DR13-4 |
+| OB13-08 (seguimiento) | S | S | C | |
+| OB13-09 a 12 (RM-12, BK-08, EN-19, RR9I-05) | E/C | E/C | E/C | Comunes; la alerta y el mecanismo dependen de ADR-12, ADR-14 y del servicio |
+| OB13-13 (local vs remoto) | **T** | S | C | A no tiene señal local; C solo agregados |
+| OB13-14 (acceso y retención) | E/C | E/C | E/C | ADR-17; DR13-5 |
+| OB13-15 (separación de auditoría) | E | E | E | |
+| OB13-16 (reidentificación) | C | **T** | **T** | B incluye eventos individuales de cliente en toda implementación (T-B); C incluye, por definición (**T-C(ii)**), un modo de diagnóstico con detalle (acotado en el tiempo y sujeto a la misma lista permitida, §37.5); A no tiene datos del cliente, pero conserva la condición abierta de las trazas del servidor |
+| OB13-17 (cuota y cargos) | C | C | C | [PEND] |
+
+**Regla uniforme de clasificación (F-2).** Se aplica la misma regla a las tres alternativas: **T** solo si **la propia definición** de la alternativa impide el objetivo, o crea —en **toda** implementación posible de esa alternativa— la exposición que el objetivo busca limitar, sin que dependa de una decisión posterior. **C** si el cumplimiento depende de una decisión del responsable, de una verificación o de un mecanismo aún sin definir. **S** si la definición es compatible con el objetivo (lectura documental, no demostración). **E, E/C** como en la leyenda.
+
+| Celda | Fundamento (regla uniforme) |
+|---|---|
+| ALT-13-A, OB13-02 y OB13-13: **T** | Sin señales del cliente por definición (T-A): la definición impide detectar errores del cliente y distinguir señal local de reporte remoto. Ambas celdas tienen la **misma causa** y cuentan como **una** limitación |
+| ALT-13-B, OB13-16: **T** | Los eventos individuales del cliente y su cola local existen en toda implementación de B (T-B): la exposición que OB13-16 busca limitar es inherente |
+| ALT-13-C, OB13-16: **T** (**T-C(ii)**) | El modo de diagnóstico con detalle forma parte de la definición de C: la exposición existe cuando está activo, **de forma acotada en el tiempo** y sin ampliar la lista permitida salvo decisión del responsable. Se mantiene el mismo criterio aplicado a B; **no implica penalización de puntuación** |
+| ALT-13-C, OB13-07 y OB13-08: **C** | La definición **no impide** clasificar por clase (contadores) ni dar seguimiento a incidentes (se abren a partir de alertas); lo que se pierde es el detalle por evento (**T-C(i)**), que **no impide necesariamente** la clasificación ni el seguimiento de incidentes y que ningún objetivo OB13 mide: se recoge en §37.5 y TO-10, y la reconstrucción de causas raras depende del modo de diagnóstico y de DR13-4. Por eso es **condición abierta**, no riesgo estructural de estos objetivos; **T-C(i) y T-C(ii) no se acumulan como doble penalización** |
+| ALT-13-A, OB13-16: **C** | A no incluye datos del cliente por definición, pero las trazas del servidor y los registros por defecto de la infraestructura siguen pendientes (OC-349, OC-353) |
+
+**Las clasificaciones T no se convierten en penalizaciones de puntuación;** el puntaje no cambia (§37.8.2). **T-A, T-B y T-C describen perfiles distintos, no un orden de preferencia.**
+
+**Lectura.** La matriz **no declara cumplimiento**. **El puntaje no sustituye a los requisitos eliminatorios.**
+
+#### 37.8.2 Puntuación
+
+**Criterios y pesos (uniformes):** seguridad y privacidad **35 %**; mantenibilidad y operación **30 %**; costo **20 %**; compatibilidad sin conexión **15 %**. **Regla de puntuación (la de R4-A):** seguridad y mantenibilidad ±1 alrededor del centro 3; **2 solo si la definición implica una pérdida estructural verificable y comparable que las demás alternativas no tienen por definición**; costo solo puntúa **planes o servicios concretos** (techo 5, −1 por aspecto de costo no evaluado común a todas): al no haber proveedor, se reparte **[PEND]**; lo no leído **no se penaliza**; sin conexión fijo **3** cuando no discrimina; **riesgos y condiciones no se convierten en puntaje**; **el puntaje no selecciona.**
+
+| Criterio (peso) | A | B | C | Fundamento |
+|---|---|---|---|---|
+| Seguridad y privacidad (35) | 3 (2–4) | 3 (2–4) | 3 (2–4) | **Centro neutral.** A reduce la superficie pero deja una brecha de visibilidad; B amplía la superficie con eventos individuales; C difiere según el modo de diagnóstico. **No existe una comparación verificable entre «menos superficie» y «menos visibilidad»** entre estas ventajas y pérdidas; se tratan como diferencias de perfil en la matriz y en TO-01…12, **sin convertirse en puntaje** |
+| Mantenibilidad y operación (30) | 3 (2–4) | 3 (2–4) | 3 (2–4) | Neutral: A simple pero con menos señales; B más componentes; C exige gestionar el modo de diagnóstico. **No comparable sin mecanismos** |
+| Costo (20) | 3 (1–5) | 3 (1–5) | 3 (1–5) | **No puntuable con evidencia actual; valor neutro convencional de cálculo** (no se evaluó ningún servicio ni plan). **El 3 no es evidencia de costo real;** se usa la misma convención para A, B y C, con la banda máxima de la regla (1–5) |
+| Sin conexión (15) | 3 | 3 | 3 | **Fijo 3**: lo que difiere (A sin señal local; B con cola; C con agregados) ya consta en la matriz (OB13-13) y no es comparable aquí |
+| **Total (central)** | **3,00** | **3,00** | **3,00** | |
+| **Rango** | **1,95–4,05** | **1,95–4,05** | **1,95–4,05** | Mínimo: 0,35·2 + 0,30·2 + 0,20·1 + 0,15·3 = 1,95. Máximo: 0,35·4 + 0,30·4 + 0,20·5 + 0,15·3 = 4,05 |
+
+**Recomendación preliminar no vinculante.** **Ninguna.** Las tres alternativas obtienen **el mismo puntaje central y el mismo rango**: el puntaje **no discrimina** y no expresa preferencia. Las diferencias reales están en la **matriz** (T-A, T-B, T-C), en las **amenazas** (§37.10) y en las **condiciones** (§37.11), y **requieren decisión del responsable**. **Los rangos no son comparables con los de ADR-11** (criterios de costo distintos).
+
+### 37.9 Dependencias con ADR-01 y ADR-11 y con otros bloques (I)
+
+| Dependencia | Qué toma ADR-13 | Estado y límite |
+|---|---|---|
+| **ADR-01** (plataforma de datos y despliegue) | Dónde pueden residir los datos de observabilidad (Z4), el servidor y la base de datos que se observan | **Solo aprobación documental condicionada.** R1 §8.2 **no se declara satisfecho**; que exista el ADR **no cumple la dependencia** |
+| **ADR-11** (entornos y despliegue) | Entornos sobre los que se observa (EN-19), fallos de despliegue (OB13-11), políticas presentes en cada entorno | **Solo aprobación documental condicionada; ninguna alternativa seleccionada (ALT-11-A/B/C).** La observabilidad por entorno **depende** de DR11-2 y OC-344 |
+| ADR-10 (región) | Ubicación de los datos de observabilidad | **Sin región decidida;** transferencia y ubicación [PEND] (TO-12, PEND-JUR) |
+| ADR-05.I (almacenamiento local) | Cola local de señales (OB13-13) | Aprobado documentalmente condicionado; DR13-6 |
+| ADR-06 / PWA | Comportamiento del cliente sin conexión y actualización de versiones | **R3-C (ADR-06 y ADR-07):** aprobación documental condicionada (DR67-1; **no definitiva**) |
+| ADR-09 (auditoría) | Separación de auditoría; fallo del registro (RR9I-05) | **ADR-09.I:** aprobación documental condicionada (R3-E; no definitiva). **ADR-09.C:** `aprobaciones.md` la mantiene como **PROPUESTA** en los registros de R2-B2; **no se confirma aprobación** [PEND] |
+| ADR-12 (respaldos) | Alertas BK-08 y control de antigüedad (OC-62) | **Reservado para R4-E;** no iniciado |
+| ADR-14 (tareas y N-12) | Ejecución y alerta de tareas programadas | **Reservado para R4-D;** no iniciado |
+| ADR-17 (retención) | Plazos de retención y anonimización | **Reservado para R4-C;** no iniciado; PEND-JUR |
+
+**Declaraciones expresas.** (1) **RNF-09 no se declara satisfecho:** sus objetivos son [REC] y ningún mecanismo existe ni se ha probado. (2) **PRV-12 no se declara satisfecho:** es [REC] con «cuando sea posible»; la muestra de 100 registros no se ha ejecutado y **no hay registros reales que muestrear**. (3) **R1 §8.1 no se declara satisfecho** ni se le atribuye cumplimiento. (4) **R1 §8.2 no se da por satisfecho** por la existencia de ADR-01 o ADR-11. (5) Las dependencias son **condicionales**: si cambia ADR-01 o ADR-11, este borrador debe revisarse. (6) Ninguna decisión de ADR-12, ADR-14 ni ADR-17 se toma aquí.
+
+### 37.10 Riesgos y amenazas de privacidad, exposición, costo, cuota, retención y acceso (H)
+
+Las amenazas no se aceptan ni se mitigan en este borrador; **las mitigaciones propuestas no están demostradas**.
+
+| Id | Amenaza | Alternativas más afectadas [por diseño] | Mitigación propuesta (no demostrada) | Condición |
+|---|---|---|---|---|
+| TO-01 | **Datos personales o de menores en trazas de error del servidor** (valores en excepciones, consultas, cuerpos) | Las tres | MIN13-01, MIN13-02, MIN13-03; revisión de campos | OC-349 |
+| TO-02 | **Datos personales o contenido de operaciones en eventos del cliente** (capturas, formularios) | B (mayor); C en diagnóstico | Saneamiento en el origen; lista permitida | OC-350 |
+| TO-03 | **Secretos, tokens o credenciales en señales, colas, alertas o configuración de observabilidad** | Las tres | MIN13-02; revisión; no en el cliente (AM-26, RT-09) | OC-351 |
+| TO-04 | **Telemetría falsa, inundación o abuso del canal del cliente** (envenenamiento, alertas falsas, costo) | B; C | Límites de volumen (MIN13-07); validación de esquema; alertas por tasa | OC-352 |
+| TO-05 | **Reidentificación por correlación, metadatos, volumen o cohortes pequeñas (incluidos menores)** | B (mayor); C en diagnóstico | Agregación, umbral mínimo, marca gruesa, identificadores efímeros; **no demostrada** | OC-353 |
+| TO-06 | **Acceso indebido a registros técnicos** (roles amplios, cuentas compartidas) | Las tres | Acceso mínimo; registro del propio acceso | OC-354; DR13-5 |
+| TO-07 | **Retención indefinida, sin plazo o sin eliminación** de registros técnicos | Las tres | Plazo y eliminación obligatorios (ADR-17); **no se fijan plazos** | OC-355 |
+| TO-08 | **Canal de alerta como destino de datos** (correo o mensajería de terceros que reciben el texto de la alerta) | Las tres | El texto de la alerta usa la lista permitida | OC-356 |
+| TO-09 | **Fatiga o saturación de alertas y agotamiento de cuota** que dejan al sistema sin observabilidad o con cargos | Las tres | Umbrales, agrupación, alerta de consumo [PEND] | OC-357 |
+| TO-10 | **Brecha de visibilidad (falso negativo):** sin señal no se concluye que no hubo fallo; el propio observador puede fallar | **A (por diseño);** C fuera del diagnóstico | Comprobación externa; alerta por ausencia de señales | OC-358 |
+| TO-11 | **La cola local de señales como nueva fuente de datos** en el dispositivo (robo, dispositivo compartido) | B; C | Saneamiento; caducidad de la cola | OC-359 |
+| TO-12 | **Ubicación y transferencia de los datos de observabilidad** (Z4 externo, otra jurisdicción) | Las tres | Depende de ADR-10 y PEND-JUR | OC-360 |
+
+**Costo y cuota [INF].** No se leyó ningún plan ni cuota; **no se inventan cifras**. Se identifican como riesgo estructural: el volumen de señales puede superar cuotas gratuitas; cada alternativa tiene un perfil de volumen distinto (B, el mayor [por diseño]; A, el menor), sin que eso sea cuantificable hoy.
+
+### 37.11 Condiciones abiertas, decisiones del responsable y riesgos de redacción (J)
+
+**Decisiones del responsable (DR13).**
+
+| Id | Decisión | Relacionado |
+|---|---|---|
+| DR13-1 | **Aclarado** por el reenvío completo del mensaje de autorización («…sin evidencia»); no es una decisión arquitectónica | §37.0 |
+| DR13-2 | ¿Qué clases de fallo y qué alcance cubre la observabilidad? (cliente, servidor, base de datos, procesos) | §37.1; OB13-01 a 12 |
+| DR13-3 | **Objetivos de tiempo** de detección y alerta; quién es «el responsable técnico»; canal de alerta | OB13-04; TO-08; **precisión mínima de tiempo necesaria** para medir detección y alerta, frente a las marcas gruesas de MIN13-05 (F-9) |
+| DR13-4 | ¿Se admite telemetría del cliente, y con qué límites? (relación con A, B y C) | §37.5; OB13-02; TO-02; **para ALT-13-C:** quién autoriza activar el modo de diagnóstico, en qué condiciones y por cuánto tiempo, y **cualquier ampliación de campos** (pendiente, no aprobada) (F-3) |
+| DR13-5 | **Acceso, retención y política de acceso a los registros técnicos** (con ADR-17 y PEND-JUR) | OB13-14; TO-06, TO-07; incluye la **eliminación** de los registros técnicos, además de su retención (F-4) |
+| DR13-6 | **Cola local de señales:** ¿propia o compartida con la de operaciones? | §37.7; ADR-05.I |
+| DR13-7 | ¿Qué política de **reidentificación** se aplica (umbral de agrupación, granularidad)? | OB13-16; TO-05 |
+| DR13-8 | **Qué se hace cuando la observabilidad falla** (¿alerta externa, sin señal, degradación?) | TO-10; OB13-03 |
+
+**Condiciones abiertas (OC).**
+
+| Id | Condición | Relacionado |
+|---|---|---|
+| OC-349 | Definir los campos permitidos y comprobar que las trazas del servidor no contienen datos personales | TO-01; MIN13-01; **inventariar los registros que la infraestructura o el servidor generan por defecto** (IP, rutas, agentes, URLs) y comprobar que las URLs, rutas, parámetros y referrer no llegan a las señales (F-4) |
+| OC-350 | Comprobar el saneamiento en el origen en el cliente | TO-02; MIN13-03 |
+| OC-351 | Comprobar que no hay secretos en señales, colas y alertas | TO-03; AM-26 |
+| OC-352 | Definir validación, límites y tope de volumen de la telemetría | TO-04; MIN13-07 |
+| OC-353 | Definir el análisis de reidentificación y el umbral de agrupación | TO-05; DR13-7; **incluye cohortes pequeñas y menores** (CAB-11; AM-21; AM-25) y el riesgo de identificación indirecta (F-4) |
+| OC-354 | Definir los roles con acceso a los registros técnicos y el registro de su acceso | TO-06; DR13-5; **identidad y condiciones de la autorización específica** para activar el modo de diagnóstico de ALT-13-C (F-3) |
+| OC-355 | Definir el plazo de retención de registros técnicos (con ADR-17 y PEND-JUR) | TO-07; **incluye la eliminación de los registros técnicos y su coordinación con ADR-17;** sin fijar plazos legales (F-4) |
+| OC-356 | Definir el canal de alerta y verificar que su contenido cumple la política | TO-08; DR13-3 |
+| OC-357 | Leer cuotas y planes de los servicios candidatos (**no hecho**) y definir alerta de consumo | OB13-17; TO-09 |
+| OC-358 | Definir la comprobación externa y la alerta por ausencia de señales | TO-10; DR13-8 |
+| OC-359 | Definir caducidad y límites de la cola local de señales | TO-11; DR13-6 |
+| OC-360 | Verificar ubicación y transferencia de los datos de observabilidad | TO-12; ADR-10 |
+| OC-361 | **Ejecutar la muestra de 100 registros** (PRV-12) cuando existan registros reales y el análisis de correlación | OB13-05; OB13-16 |
+| OC-362 | Relación con el mecanismo de alertas de respaldo (BK-08, OC-62) en R4-E | OB13-10 |
+| OC-363 | Relación con las alertas de tareas programadas y N-12 en R4-D | OB13-10; ADR-14 |
+| OC-364 | Relación con la retención de ADR-17 (R4-C) | OB13-14 |
+| OC-365 | Alertas de despliegue por entorno según la alternativa de ADR-11 que se decida (DR11-2) | OB13-11; OC-344 |
+| OC-366 | Relación entre el identificador de señal (§37.7) y la idempotencia de ADR-05/ADR-09 | §37.7 |
+| OC-367 | Confirmación de ADR-01 y ADR-11 (R1 §8.2) y reevaluar este borrador si cambian | §37.9 |
+| OC-368 | Qué muestra y qué no muestra el panel de observabilidad al responsable técnico respecto de la señal local no reportada | OB13-13 |
+
+**Riesgos de redacción (RR13).**
+
+| Id | Riesgo | Control |
+|---|---|---|
+| RR13-01 | Declarar satisfechas RNF-09 o PRV-12 por tener un ADR | §37.9 |
+| RR13-02 | Tratar [REC] como requisitos confirmados | §37.2, §37.3 |
+| RR13-03 | Presentar la ausencia de identificadores directos como anonimato | §37.0; OB13-16 |
+| RR13-04 | Confundir observabilidad sin datos personales con ausencia de registros | §37.0 |
+| RR13-05 | Mezclar observabilidad y auditoría | OB13-15 |
+| RR13-06 | Seleccionar proveedores, servicios o herramientas por mención | §37.5; no se nombran |
+| RR13-07 | Inventar costos, cuotas o compatibilidades | §37.10; OC-357 |
+| RR13-08 | Convertir riesgos en puntaje o usar el puntaje para seleccionar | §37.8.2 |
+| RR13-09 | Dar por satisfecho R1 §8.2 por la existencia de ADR-01 y ADR-11 | §37.9 |
+| RR13-10 | Invadir R4-C, R4-D o R4-E al nombrar dependencias | §37.12 |
+| RR13-11 | Presentar la brecha de visibilidad como «ausencia de fallos» | TO-10; §37.7 |
+| RR13-12 | Tratar las mitigaciones propuestas como demostradas | §37.10 |
+| RR13-13 | Atribuir al responsable instrucciones que no emitió, o tratar el reenvío como aprobación | §37.0; DR13-1 |
+| RR13-14 | Presentar este borrador como verificación en infraestructura, auditoría independiente o evaluación jurídica | §37.14 |
+
+### 37.12 Relación con R4-C, R4-D y R4-E (solo dependencias; no se inician)
+
+ADR-13 **nombra** dependencias con ADR-17 (retención y anonimización de registros técnicos), ADR-14 (tareas programadas y N-12) y ADR-12 (alertas de respaldo, control de antigüedad). **No decide** nada de ellos: R4-C, R4-D y R4-E **no están iniciados** y la **trazabilidad final (R4-F)** y la **auditoría de cierre (R4-G)** siguen reservadas, con la auditoría a cargo de un revisor separado del autor y con contexto nuevo.
+
+### 37.13 Criterios para la revisión focalizada (CR4B)
+
+| Id | Criterio |
+|---|---|
+| CR4B-01 | Solo se modificó `02-arquitectura-adr.md`; todo lo anterior a §37 permanece idéntico |
+| CR4B-02 | Estado «BORRADOR v0.1-R4B — PENDIENTE DE REVISIÓN Y APROBACIÓN» y registro del mensaje truncado y reenviado |
+| CR4B-03 | Los apartados A a K están cubiertos y la trazabilidad es verificable |
+| CR4B-04 | Ninguna alternativa, proveedor, servicio o herramienta se selecciona ni se nombra |
+| CR4B-05 | Hay al menos dos alternativas diferenciadas; el puntaje es uniforme, aritméticamente correcto y no selecciona |
+| CR4B-06 | [REC] no se presentan como requisitos confirmados; RNF-09 y PRV-12 conservan su clasificación y **no se declaran satisfechos** |
+| CR4B-07 | La ausencia de identificadores directos no se presenta como anonimato; hay análisis de reidentificación |
+| CR4B-08 | Observabilidad separada de auditoría y de ADR-12, ADR-14 y ADR-17 |
+| CR4B-09 | El modelo conceptual no contiene identificadores personales, tokens, secretos ni contenido sensible |
+| CR4B-10 | El tratamiento sin conexión distingue señal local de reporte remoto |
+| CR4B-11 | Las dependencias con ADR-01 y ADR-11 se tratan como condicionales; R1 §8.1 y §8.2 sin declarar satisfechos |
+| CR4B-12 | Se separan [DOC], [INF], [PEND]; no se inventan costos, cuotas ni compatibilidades |
+| CR4B-13 | Los identificadores nuevos son únicos y no colisionan |
+| CR4B-14 | Las tablas están bien formadas |
+| CR4B-15 | R4-C…R4-G y la Fase 3 no se inician; sin commit, push, PR ni merge |
+| CR4B-16 | Las observaciones preservadas siguen intactas y `main` no se modifica |
+
+### 37.14 Evidencia y limitaciones (K)
+
+(1) Es **una autoevaluación del autor**, no una auditoría independiente; el autor redactó los bloques que consume. (2) **No se ejecutaron pruebas:** no hay muestra de 100 registros, ni detección, ni alertas, ni mediciones. (3) **No se seleccionaron ni se leyeron proveedores, servicios o herramientas:** no hay costos, cuotas ni compatibilidades verificadas; todo eso es [PEND]. (4) **No hay infraestructura desplegada** ni código. (5) Las puntuaciones son **neutrales y no discriminan**; no son medidas. (6) Las mitigaciones son propuestas. (7) **No es evaluación jurídica** (PEND-JUR). (8) **La primera copia del mensaje de autorización estaba truncada;** se confrontó con la copia completa (§37.0). (9) ADR-01 y ADR-11 **no tienen aprobación arquitectónica definitiva**. (10) **No satisface R1 §8.1** ni declara cumplidos RNF-09 o PRV-12.
+
+### 37.15 Estado y preguntas para el responsable
+
+**Estado:** R4-B / ADR-13 **v0.1-R4B: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §37.0). No es aprobación definitiva; no versionado en el momento de redactarse. **Ninguna alternativa seleccionada ni formulación admitida.** **ADR-13 sin aprobación arquitectónica definitiva.** **R4-C…R4-G: NO INICIADOS.** **R4 como conjunto: sin aprobación ni cierre.** **Fase 2: en desarrollo, sin aprobación global.** **Fase 3: no iniciada.** **Sin commit, push, PR ni merge.** Siguen abiertas todas las decisiones y condiciones heredadas.
+
+**Preguntas:** DR13-2 a DR13-8 (DR13-1 queda aclarado) y las condiciones OC-349 a OC-368; en particular, si se admite telemetría del cliente (DR13-4), quién y por qué canal recibe las alertas (DR13-3) y el acceso y la retención de los registros técnicos (DR13-5).
+
+### 37.16 Correcciones focalizadas F-1…F-9 (revisión focalizada del borrador v0.1)
+
+Corrigen los hallazgos de la revisión focalizada (autoevaluación del autor). **No modifican puntuaciones (central 3,00; rango 1,95–4,05 para A, B y C), alternativas, ni identificadores existentes.** El borrador **sigue siendo v0.1-R4B, pendiente de revisión y aprobación.**
+
+| Id | Corrección | Dónde |
+|---|---|---|
+| F-1 | Reglas «M-1…M-10» renombradas **MIN13-01…10** y todas sus referencias actualizadas en §37; **MIN13-01…10 y T-A/T-B/T-C** declarados en §37.0. No se tocan identificadores de Partes anteriores | §37.0, §37.4, §37.6, §37.7, §37.10 |
+| F-2 | Regla uniforme T/C/S con fundamento por celda; OB13-16 de ALT-13-C pasa de C a **T** (mismo criterio que B); OB13-07/08 de ALT-13-C se mantienen **C** con su fundamento; sin efecto en la puntuación | §37.8.1 |
+| F-3 | El modo de diagnóstico de ALT-13-C queda sujeto a MIN13-01…10 y a la lista permitida; la activación exige autorización específica (identidad y condiciones pendientes); la ampliación de campos es una decisión pendiente (DR13-4); riesgos preservados | §37.5; DR13-4, DR13-5; OC-354 |
+| F-4 | Cobertura de URLs, rutas, parámetros, referrer, IP y agentes, registros por defecto de la infraestructura, cohortes pequeñas y menores (CAB-11; AM-21; AM-25; AM-13 solo como antecedente), correlación y eliminación; MIN13-02, MIN13-08, tabla de reidentificación, TO-05, TO-07, OC-349, OC-353, OC-355 y DR13-5 ampliados. Sin plazos legales ni garantías de anonimato | §37.1, §37.4, §37.6, §37.10, §37.11 |
+| F-5 | CMP-17 deja de figurar como origen de señales (es política de privacidad y retención); CMP-05 solo para fallos de sincronización | §37.1 |
+| F-6 | Estados de ADR-06 (R3-C, condicionada) y de ADR-09.I (condicionada) y ADR-09.C (PROPUESTA; [PEND]) según `aprobaciones.md` | §37.9 |
+| F-7 | OB13-17: «[PROP]; cf. EN-10 (propuesta documentada de ADR-11)» | §37.3 |
+| F-8 | Costo: «No puntuable con evidencia actual; valor neutro convencional de cálculo»; misma regla para A, B y C | §37.8.2 |
+| F-9 | Tensión entre marcas gruesas y medición de tiempos (OB13-03/04; DR13-3); MTO-05 como agregado sin identificadores persistentes por dispositivo | §37.3, §37.6, §37.11 |
+
+**Condiciones preservadas.** ADR-13 sin aprobación; ninguna alternativa, proveedor ni herramienta seleccionados; ninguna formulación admitida; riesgos sin aceptar; D-2 sin excepción; R1 §8.1 sin cumplimiento demostrado; **sin anonimato demostrado**; R4-C…R4-G no iniciados; sin implementación; sin commit, push, PR ni merge.
+
+### 37.17 Corrección residual R-1 (verificación puntual de F-1…F-9)
+
+| Id | Corrección | Dónde |
+|---|---|---|
+| R-1 | T-C se precisa en dos manifestaciones de ALT-13-C: **T-C(i)** (sin detalle por evento en régimen normal) y **T-C(ii)** (exposición temporal y acotada del modo de diagnóstico). La celda T de ALT-13-C en OB13-16 se sustenta en T-C(ii); las celdas C de OB13-07 y OB13-08 explican que T-C(i) no impide necesariamente clasificar ni dar seguimiento a incidentes. T-A y T-B, la matriz y las puntuaciones no cambian; no hay doble penalización | §37.0, §37.5, §37.8.1 |
+
+**Sin cambios:** ALT-13-A/B/C sin selección; pesos 35/30/20/15; central 3,00 y rango 1,95–4,05 para las tres; BORRADOR v0.1-R4B pendiente de revisión y aprobación; sin commit, push, PR ni merge.
