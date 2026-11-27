@@ -11082,3 +11082,417 @@ Corrigen los hallazgos de la revisión focalizada (autoevaluación del autor). *
 | R-1 | T-C se precisa en dos manifestaciones de ALT-13-C: **T-C(i)** (sin detalle por evento en régimen normal) y **T-C(ii)** (exposición temporal y acotada del modo de diagnóstico). La celda T de ALT-13-C en OB13-16 se sustenta en T-C(ii); las celdas C de OB13-07 y OB13-08 explican que T-C(i) no impide necesariamente clasificar ni dar seguimiento a incidentes. T-A y T-B, la matriz y las puntuaciones no cambian; no hay doble penalización | §37.0, §37.5, §37.8.1 |
 
 **Sin cambios:** ALT-13-A/B/C sin selección; pesos 35/30/20/15; central 3,00 y rango 1,95–4,05 para las tres; BORRADOR v0.1-R4B pendiente de revisión y aprobación; sin commit, push, PR ni merge.
+
+# PARTE XXIV — BLOQUE R4-C (v0.1-R4C, APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE; ADR-17 SIN APROBACIÓN ARQUITECTÓNICA DEFINITIVA; 2026-11-27 inferida)
+
+## 38. R4-C — ADR-17: Retención y anonimización (evaluación y borrador condicionado)
+
+**Estado: v0.1-R4C — APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §38.0). **No es aprobación arquitectónica definitiva, resolución jurídica ni autorización de implementación.** Autoevaluación del autor, no auditoría independiente.
+
+### 38.0 Alcance, autorización, reglas y observaciones preservadas
+
+- **Autorización (2026-11-25, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R4-C: INICIO DEL BORRADOR DOCUMENTAL DE ADR-17»: «AUTORIZO EXCLUSIVAMENTE INICIAR R4-C PARA ELABORAR EL BORRADOR DOCUMENTAL DE ADR-17: RETENCIÓN Y ANONIMIZACIÓN.» **«Esta autorización NO aprueba ADR-17, NO resuelve decisiones jurídicas y NO permite implementar mecanismos técnicos.»** Solo se modifica este documento, con esta Parte nueva al final; `aprobaciones.md` y `bitacora.md` **no se modifican**; todo el contenido anterior a §38 se conserva sin cambios. **No se inician R4-D…R4-G ni la Fase 3.**
+- **Qué es este borrador.** Una evaluación documental de alternativas de gestión del ciclo de vida de los datos (qué se conserva, cuándo se revisa o elimina, y qué operaciones distintas existen), con una **comparación neutral que no expresa preferencia**. **No fija plazos de retención como obligaciones jurídicas, no resuelve PEND-JUR, no selecciona alternativas, proveedores, servicios, bases de datos ni mecanismos;** no admite formulaciones; no resuelve decisiones; no acepta riesgos; no concede excepciones (**D-2 sin excepción**); **no declara cumplido R1 §8.1**; no implementa; no crea cuentas, secretos ni servicios; no escribe código; no modifica infraestructura ni bases de datos; no hace pruebas sobre datos reales.
+- **Convención.** [CONF]: requisito o texto confirmado de `01`, R1, R2, R3, R4-A o R4-B con el estado que allí declara. [DOC]: contenido ya documentado en este archivo (no una decisión). [REC]: recomendación heredada, **no requisito confirmado**; su clasificación no se cambia. [PROP]: propuesta no aprobada, de este borrador o heredada como propuesta. [INF]: inferencia técnica del autor. [PEND]: información o decisión pendiente. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; lo no leído es [PEND] y no se penaliza; no se presenta una propuesta heredada como decisión confirmada. **«Por diseño»** solo se usa cuando la definición de la alternativa lo garantiza.
+- **Reglas críticas de este borrador.** (1) **No hay plazos jurídicos.** Los únicos valores numéricos que aparecen son los **heredados con su estado** (OFF-10: 30 días como máximo local [CONF], sujeto a PRV-10; avisos de 7 y 1 días [REC]; BK-03: 30 diarios y 12 mensuales como punto de partida [PROP]) y **no se proponen plazos nuevos**; si algún plazo ilustrativo apareciera, sería una **hipótesis no aprobada**. (2) **PEND-JUR permanece abierta:** no se inventan leyes, autoridades, plazos, sanciones ni excepciones de Costa Rica; `01` cita normativa solo como «conocimiento general no verificado» y **no se usa aquí como fundamento**. (3) **No se promete eliminación absoluta:** existen respaldos (RES-03), registros de auditoría de solo anexado, copias en dispositivos y dependencias sin resolver. (4) **No se declara irreversible ninguna anonimización sin validación.** (5) **Retirar un nombre no elimina todos los datos personales;** los resultados deportivos **no se suponen libres de información personal** (PRV-18). (6) **El conflicto entre conservación de evidencia y solicitudes de eliminación se documenta como decisión pendiente, sin resolverlo.** (7) **No se decide quién autoriza tratamientos o excepciones.**
+- **Identificadores nuevos (sin colisión; comprobados contra el archivo).** **ALT-17-A, ALT-17-B, ALT-17-C** (alternativas), **OB17-01…15** (objetivos y requisitos verificables), **OP17-01…06** (operaciones sobre los datos), **CD17-01…16** (categorías de datos), **CV17-01…10** (etapas del ciclo de vida), **TR17-01…12** (amenazas y riesgos), **DR17-1…10** (DR17-1…9, decisiones del responsable; DR17-10, incidencia documental heredada corregida y versionada, ver §38.14), **OC-369…388** (condiciones abiertas; continúan la secuencia que termina en OC-368), **RR17-01…14** (riesgos de redacción), **CR4C-01…16** (criterios de revisión documental). **T-A, T-B y T-C no se reutilizan** (pertenecen a §37); las limitaciones estructurales de esta Parte se identifican como **TS17-A, TS17-B y TS17-C** (definidas en §38.9).
+- **Exclusiones.** Seleccionar alternativa, plazo, base legal, mecanismo, proveedor, servicio o base de datos; resolver PEND-JUR, DR17 u otras decisiones heredadas; admitir formulaciones; aceptar riesgos o conceder excepciones; aprobar ADR-17, R4-C, R4 ni la Fase 2; iniciar R4-D…R4-G; implementar retención, borrado, anonimización o tareas; crear cuentas, claves o servicios; modificar las Partes I–XXIII ni los registros; modificar políticas heredadas de auditoría, tratamiento, respaldo o eliminación.
+- **Aprobación (metadato; 2026-11-27, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R4-C: REGISTRO DE APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-17»: «APRUEBO EXCLUSIVAMENTE ADR-17 v0.1-R4C COMO ENTREGABLE DOCUMENTAL CONDICIONADO.» **Estado: R4-C / ADR-17 (v0.1-R4C): APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA.** **La aprobación comprende el borrador de R4-C, las correcciones H-1…H-7 (§38.18), la actualización documental de DR17-10 (incidencia documental heredada, corregida y versionada en `46ef9375a16cd64026c8af86e830d3b2d70da9df`), la precisión editorial R-1 y la revisión focalizada y las verificaciones puntuales, todas por autoevaluación del autor.** **Esta aprobación NO es aprobación arquitectónica definitiva, no resuelve PEND-JUR ni ninguna cuestión jurídica, no autoriza implementación, no selecciona alternativas, no admite formulaciones, no resuelve DR17-1…9, no fija plazos jurídicos, no acepta riesgos ni concede excepciones.** El evento de aprobación es independiente y no reutiliza identificadores ALT-17, TS17, OB17, OP17, CD17, CV17, TR17, DR17, OC, RR17 ni CR4C. Se conservan: **ALT-17-A, ALT-17-B y ALT-17-C sin selección; TS17-A/B/C intactos**; pesos **seguridad 35 %, costo 30 %, sin conexión 20 %, mantenimiento 15 %**; puntuación **central 3,00** y **rango 1,90–4,10** para las tres (el histórico 1,95–4,05 de ADR-13 permanece como evidencia; la coincidencia de rangos no implica comparabilidad); **DR17-1…9 pendientes; DR17-10 como incidencia documental heredada corregida y versionada, no como decisión arquitectónica**; **OC-369…388 abiertas**; **RR17-01…14 sin aceptar**; **sin formulaciones admitidas**; **sin plazos jurídicos definitivos aprobados**; **sin garantía de eliminación absoluta ni anonimización demostrada**; **protección de menores y autorizaciones pendientes de validación**; **ADR-09.C todavía PROPUESTA**; **ADR-01, ADR-11 y ADR-13 con aprobación únicamente documental condicionada**; **ADR-10 sin región seleccionada**; **ADR-12 y ADR-14 no iniciados**; **R1 §8.1 sin cumplimiento demostrado**; **R1 §8.2 sin satisfacción definitiva**; **D-2 sin excepción**; **PEND-JUR abierta**; **sin pruebas empíricas**; **sin auditoría independiente**. **Estado:** **R3 cerrado documentalmente de forma condicionada; R4-A y R4-B aprobados documentalmente de forma condicionada y versionados; R4-D…R4-G NO INICIADOS; R4 como conjunto SIN CIERRE NI APROBACIÓN GLOBAL; Fase 2 EN DESARROLLO, sin aprobación global; Fase 3 NO INICIADA.** **Precedencia:** las menciones «borrador», «sin aprobación», «no aprobado» o «pendiente de revisión» de esta Parte (§38.0, §38.1, §38.14 —CR4C-02—, §38.17, §38.18 y el registro de la precisión editorial R-1) **se conservan como antecedentes de elaboración y no representan el estado documental vigente;** prevalece este apartado en cuanto al estado de aprobación documental, **sin que ello sea aprobación arquitectónica definitiva**. Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Observaciones preservadas (sin corregir fuera de este anexo).** (a) **Actualizado (2026-11-27, fecha inferida):** **la nota posterior del versionado de R4-B / ADR-13** (commit `0367d961995ed27b81ecf132a8ab65a3dee8140d`) **ya consta** en `aprobaciones.md` y `bitacora.md`, junto con la nota de corrección documental de las ponderaciones de ADR-13, **registrada y versionada** en el commit `46ef9375a16cd64026c8af86e830d3b2d70da9df`; las notas de `b57d3d2` y `ab7dc66` también constan. **La formulación anterior («no consta aún») se conserva como antecedente histórico, no como estado vigente.** (b) **Incidencia de ADR-13 (§37.8.2): corregida documentalmente y versionada (actualización de 2026-11-27, fecha inferida).** §37.8.2 había asignado los pesos 35/30/20/15 a criterios equivocados (mantenibilidad 30 %, costo 20 %, sin conexión 15 %). **Pesos vigentes** (R1 §2.4 define **los criterios, no los pesos**; los pesos constan en `aprobaciones.md`, registro de R3-A, y en §25.2): **seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 % y mantenimiento 15 %.** **Rango vigente: 1,90–4,10; central: 3,00, sin cambios;** **el rango histórico 1,95–4,05 permanece como evidencia documental.** La corrección consta como nota posterior en §37.0, `aprobaciones.md` y `bitacora.md`, y **está versionada en el commit `46ef9375a16cd64026c8af86e830d3b2d70da9df`**. Esta observación se conserva por trazabilidad; **la corrección documental no demuestra cumplimiento técnico** y **DR17-10 queda reclasificada** (ver §38.14). (c) DR3F-4 y los estados históricos contradictorios; la fila histórica de R2-C4 con una columna adicional; la diferencia entre 12 y 11 decisiones abiertas de R2-A; las decisiones técnicas de R2, R3, R4-A y R4-B abiertas; las 16 decisiones sin formulación A; la ausencia de formulaciones admitidas; **R1 §8.1 sin cumplimiento demostrado**; **R1 §8.2 sin satisfacción definitiva** (ADR-01, ADR-11 y ADR-13 solo con aprobación documental condicionada; ADR-10 sin región; ADR-09.C como **PROPUESTA**); **D-2 sin excepción**; **PEND-JUR abierta**; el revisor de R4-G, la ubicación de la trazabilidad final de R4-F y el cierre de R4 siguen abiertos; la **auditoría independiente de cierre sigue pendiente**.
+
+### 38.1 Identificación, alcance, objetivos y dependencias (A)
+
+| Campo | Contenido |
+|---|---|
+| Decisión | ADR-17 · Retención y anonimización |
+| Subbloque | R4-C del plan de R4 (aprobado solo para planificación); orden de R1 §8.2: ADR-11, ADR-13, **ADR-17**, ADR-14, ADR-12 |
+| Pregunta (R1 §8.1) | «¿Qué se conserva y por cuánto tiempo (incluidos los respaldos, que `01` no fija), y cómo se anonimiza sin romper el historial necesario para RT-14?» (la identidad de ejecución de la retención sin actor disparador es de **ADR-14**) |
+| Depende de (R1 §8.2) | **ADR-09.C** (hoy **PROPUESTA**) y **PEND-JUR** [CONF]; consume además ADR-01, ADR-10, ADR-11 y ADR-13 por dependencias verificables (§38.13) |
+| Requisitos de origen | PRV-02, 03, 04, 05, 06, 08, 09, 10, 11, 12, 13, 15, 18; RF-ACC-11; RF-AUD-01…06; OFF-06, 10, 20, 24; RT-14; Q-20, Q-24, Q-25 |
+| Condiciones heredadas | HR1-12; RES-03 y AM-30; CAB-17; TB-9; BK-03 y BK-13; IF-31; SV-14; OC-26, OC-28, OC-133, OC-134, OC-175; DR9I-6; OC-340 y OC-345 (R4-A); OC-355, DR13-5 y TO-07 (R4-B) |
+| Componente | CMP-17 (política de privacidad y retención): define el contenido de las políticas y ejecuta en el servidor autorizaciones, anonimización y retención de datos del servidor [DOC] |
+| Fuera de ADR-17 | Identidad de ejecución sin actor y tareas programadas (ADR-14); estrategia, RPO/RTO y restauración de respaldos (ADR-12); observabilidad (ADR-13); plazos jurídicos y conclusión sobre la normativa (PEND-JUR); texto del aviso y de la autorización (PRV-07, con asesoría jurídica) |
+| Estado | **v0.1-R4C: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §38.0; no es aprobación definitiva); **ninguna alternativa seleccionada**; ninguna formulación admitida |
+
+**Alcance.** ADR-17 describe **qué categorías de datos existen, con qué finalidad se conservan, qué condiciones inician su retención y activan su revisión o eliminación, qué operaciones distintas se aplican (§38.4) y qué decisiones quedan pendientes.** Cubre datos del servidor, del dispositivo y de los respaldos **en cuanto a su retención y anonimización**, no a su implementación.
+
+**Exclusiones de alcance.** No fija plazos ni resuelve la normativa; no define cómo se ejecuta (ADR-14), cómo se respalda (ADR-12) ni cómo se observa (ADR-13); no decide quién puede autorizar excepciones.
+
+### 38.2 Entradas heredadas y límites de la lectura
+
+| Entrada | Qué aporta | Estado y límite |
+|---|---|---|
+| PRV-10 | Se definirán plazos para jugadores dados de baja, invitaciones vencidas, operaciones locales (OFF-10: máximo 30 días), metadatos OFF-20, bitácora de seguridad y auditoría; la auditoría se conserva mientras exista el torneo más el plazo jurídico; los identificadores técnicos están sujetos a privacidad y retención | [CONF]; **valores PEND-JUR**; el historial de delegaciones (RT-14) se conserva mientras exista el torneo y su conservación y la anonimización de cuentas están pendientes de validación jurídica |
+| PRV-06 | Dos acciones distintas: **ocultar** (reversible) y **anonimizar** (borra irreversiblemente nombre y datos personales; conserva identificador interno, dorsal, estadísticas y resultados); la auditoría solo guarda identificadores internos | [CONF] (Q-05); **la irreversibilidad la fija `01` como requisito; su validación técnica y jurídica no existe** |
+| PRV-02, PRV-03, PRV-04, PRV-09 | Nombre público condicionado de menores; datos nunca públicos; indicador «es menor» (sin fecha de nacimiento); acceso restringido | PRV-03 [CONF]; PRV-02 [COND:Q-20]; PRV-04 [REC]; corte de 18 años **[PEND-JUR]** |
+| PRV-05, PRV-08 | Registro de autorización (solo metadatos; la evidencia original la conserva la organización); persona responsable designada que atiende solicitudes; exportar y anonimizar un jugador | [CONF] (Q-24); la persona **por designar**; plazos de respuesta **PEND-JUR**; facultades del organizador COND:Q-42 |
+| PRV-11, PRV-12, PRV-18 | Minimización; registros sin datos personales («cuando sea posible», [REC]); evaluación de identificación indirecta | PRV-11 [CONF]; PRV-12 [REC]; PRV-18 [CONF] con resultado PEND-JUR |
+| PRV-13, PRV-15, Q-25 | Evaluar infraestructura internacional sin contratar; puerta de lanzamiento: antes de procesar datos reales se completa la evaluación jurídica (incluye **retención**) | [CONF]; **la aprobación documental no autoriza tratar datos reales** |
+| RF-ACC-11, RF-AUD-01…06, SV-01, SV-14 | Historial de roles de solo anexado; desactivación de cuenta conserva el vínculo técnico mientras exista el torneo; auditoría inmutable; ninguna purga salvo la que defina ADR-17 | [CONF] / [DOC]; conservación y anonimización PEND-JUR |
+| OFF-06, OFF-10, OFF-20, OFF-24; IN-16-11 | Idempotencia; retención local máxima de 30 días con avisos; metadatos de incidencias del servidor; exportación limitada | [CONF] (OFF-10 sujeta a PRV-10); avisos de 7 y 1 días [REC] |
+| HR1-12, RES-03, AM-30, CAB-17, TB-9, BK-03, BK-13 | Los respaldos conservan datos anteriores a una anonimización; retención de respaldos **no fijada en `01`**; reaplicación de revocaciones y anonimizaciones antes de reabrir el acceso | Riesgo **sin aceptar**, «no eliminable por diseño»; BK-03 valores [PROP]; BK-13 sujeto a ADR-17 y ADR-12 |
+| IF-31, OC-133, OC-134, OC-175, DR9I-6 (ADR-09.I) | Minimización desde el origen en la auditoría; purga controlada por periodo; convivencia con la detección de alteración; cuentas inactivas | [DOC] condicionado; ADR-09.C **PROPUESTA**; todo pendiente de ADR-17 y PEND-JUR |
+| MIN13-08, OC-355, DR13-5, TO-07 (ADR-13) | Retención, eliminación y acceso a registros técnicos: «no se fijan aquí» | [DOC] aprobado solo documentalmente de forma condicionada; **ADR-17 los recibe** |
+| OC-340, OC-345 (ADR-11) | Datos sintéticos de pruebas; retención de la trazabilidad de despliegues | [DOC] aprobado solo documentalmente de forma condicionada |
+
+**Límites de la lectura.** Se tomaron los textos consignados en `01-requisitos.md` y en este archivo (R1 a R4-B); **no se consultaron fuentes externas, normativa ni documentación de productos.** Lo que requeriría lectura de normativa o de proveedores (plazos, bases legales, autoridades, retención de proveedores, ubicación de datos) es **[PEND]** y no se supone. **No se hicieron pruebas ni se usaron datos reales.**
+
+### 38.3 Objetivos verificables (A)
+
+La columna «Origen» indica si el objetivo es [CONF], [DOC], [REC] o [PROP]. **Un objetivo [PROP] no es un requisito confirmado.** La columna «Verificación propuesta» describe cómo podría comprobarse **cuando exista un mecanismo y datos sintéticos**; **hoy nada está verificado.**
+
+| Id | Objetivo | Origen | Verificación propuesta (no ejecutada) |
+|---|---|---|---|
+| OB17-01 | **Cada categoría de datos** tiene finalidad, responsable de la decisión, condición de inicio de retención y condición de revisión o eliminación, o consta como [PEND] | [PROP] | Revisar la matriz de §38.6: ninguna celda vacía sin [PEND] |
+| OB17-02 | **Distinguir y no equiparar** conservación, eliminación, anonimización, seudonimización, agregación y restricción de acceso | [PROP] derivado de PRV-06 | Revisar que cada categoría declare qué operación aplica y cuál **no** |
+| OB17-03 | **No fijar plazos de retención** hasta contar con la evaluación jurídica | PRV-10 [CONF] (valores PEND-JUR); PRV-15 | Ninguna celda de plazo sin [PEND-JUR] o sin etiqueta de hipótesis |
+| OB17-04 | **La auditoría se conserva mientras exista el torneo más el plazo jurídico**; ninguna purga salvo la que defina ADR-17 como acción privilegiada, auditada y fuera de los roles de la aplicación | PRV-10 [CONF]; RF-AUD-03; SV-01, SV-14 [DOC] | Intento de borrado de auditoría por los actores de prueba de §7.3 → denegado |
+| OB17-05 | **Anonimizar un jugador conserva estadísticas y resultados** y no deja campo personal en base de datos ni en auditoría | PRV-06 [CONF] | Anonimizar un jugador sintético con goles: tabla y goleadores iguales; sin campo personal |
+| OB17-06 | **Menores:** sin exposición pública y con evaluación de identificación indirecta | PRV-02, 03, 09, 18 [CONF] | Revisión de campos públicos frente al informe de PRV-18 (PEND-JUR) |
+| OB17-07 | **Autorizaciones y revocación:** solo metadatos; la evidencia original queda con la organización; la revocación vuelve a etiqueta y se audita | PRV-05, PRV-06 [CONF] | Alta y revocación de una autorización sintética con auditoría |
+| OB17-08 | **Solicitudes de ejercicio de derechos** atendidas por la persona responsable designada, con exportar y anonimizar; plazos de respuesta por fijar | PRV-08 [CONF]; plazos PEND-JUR | Exportar y anonimizar un jugador sintético en un entorno de pruebas, con auditoría |
+| OB17-09 | **Coherencia con los respaldos:** tras una restauración se reaplican revocaciones y anonimizaciones posteriores al respaldo antes de reabrir el acceso; **no se promete eliminación absoluta** | BK-13; HR1-12; RES-03 [DOC] | Restaurar un respaldo sintético y comprobar la reaplicación; **mecanismo y plazos son de ADR-12 y ADR-17** |
+| OB17-10 | **Datos sin conexión y pendientes de sincronización:** máximo de 30 días, plazo informado, avisos «cuando sea técnicamente posible» y constancia mínima; sin garantía si el navegador borra el almacenamiento | OFF-10, IN-16-11 [CONF]; avisos 7 y 1 días [REC] | Conflicto sintético: plazo informado y eliminación controlada |
+| OB17-11 | **Registros técnicos, metadatos y señales:** retención y eliminación definidas por categoría, sin datos personales cuando sea posible | PRV-10, PRV-12 [REC]; MIN13-08; OC-355 | Revisar el plazo y la forma de eliminación por tipo de señal |
+| OB17-12 | **Conflicto entre conservación de evidencia y solicitudes de eliminación:** se documenta como decisión pendiente; no se resuelve | [PROP] | Revisar que el conflicto conste en DR17 y OC |
+| OB17-13 | **Ejecución de la retención sin actor disparador:** su identidad es de ADR-14; ADR-17 solo exige que exista y esté auditada | NUEVO-11, ADR-14 [DOC] | Revisar que ninguna regla de ADR-17 suponga una identidad concreta |
+| OB17-14 | **No prometer eliminación absoluta** ni anonimización irreversible sin validación | [PROP] | Revisar el texto del aviso y de los avisos al usuario (PRV-07: con asesoría jurídica) |
+| OB17-15 | **Limitar la conservación a lo necesario** (minimización en el tiempo) | PRV-11, PRV-10 [CONF] | Revisar que cada categoría tenga una condición de revisión o eliminación |
+
+**Definiciones.** *Retención*: periodo durante el cual un dato se guarda. *Condición de inicio*: hecho que empieza a contar la retención. *Condición de revisión o eliminación*: hecho o fecha que obliga a decidir qué se hace con el dato. *Responsable de la decisión*: quien decide la operación; **esta Parte no lo asigna** salvo lo que `01` ya confirma (organización como responsable del tratamiento, PRV-01; persona designada, PRV-08).
+
+### 38.4 Operaciones sobre los datos: no equivalentes (D)
+
+**Las seis operaciones son distintas y no se consideran equivalentes.** Ninguna se declara irreversible, completa ni eficaz sin validación.
+
+| Id | Operación | Qué hace | Qué **no** hace | Riesgos propios | Dependencias |
+|---|---|---|---|---|---|
+| OP17-01 | **Conservación** | Mantiene el dato tal como está durante un periodo o mientras exista una condición | No lo protege por sí sola; **prolongar la conservación amplía la exposición** | Conservación excesiva; acceso indebido | PRV-10; PEND-JUR |
+| OP17-02 | **Eliminación** | Retira el dato del almacenamiento activo | **No elimina copias** en respaldos, dispositivos, exportaciones, registros ya emitidos ni la huella en la auditoría de solo anexado | Eliminación incompleta; reaparición tras restaurar un respaldo (BK-13) | ADR-12; ADR-09; RES-03 |
+| OP17-03 | **Anonimización** | Desvincula el dato de una persona **de forma que, si se validara, no pueda reidentificarse** (en `01`, PRV-06: borra nombre y datos personales y conserva identificador interno, dorsal, estadísticas y resultados) | **No es automática por retirar un nombre;** conservar identificador interno, dorsal, equipo y estadísticas **puede permitir identificación indirecta** (PRV-18); **la irreversibilidad no está validada** | Reidentificación; pérdida de capacidad de corregir o atribuir; resultado no demostrado | PRV-06; PRV-18; PEND-JUR |
+| OP17-04 | **Seudonimización** | Sustituye identificadores directos por otros, manteniendo la posibilidad de reasociar con información adicional | **No es anonimización;** el dato sigue siendo personal mientras exista la información de reasociación (PRV-17: sin seudonimización superficial como sustituto de datos sintéticos) | Falsa sensación de protección; la tabla de reasociación se convierte en dato sensible | PRV-17; PRV-18 |
+| OP17-05 | **Agregación** | Sustituye datos individuales por totales o contadores | **No garantiza anonimato:** grupos pequeños (un equipo, un menor, un partido) pueden permitir identificar (TR17-03) | Cohortes pequeñas; pérdida de detalle | PRV-18; ADR-13 (umbral mínimo de agrupación) |
+| OP17-06 | **Restricción de acceso** (incluye ocultar, PRV-06) | Reduce quién puede ver o usar el dato sin eliminarlo ni transformarlo | **No reduce la conservación ni la exposición ante quien conserva acceso** (administrador, respaldo) | Acceso indebido por privilegios amplios; reversible | PRV-09; ADR-02.I; AM-24 |
+
+**Reglas de uso.** (1) Una categoría declara qué operación aplica, **por qué** y qué operación **no** aplica. (2) **Ocultar** (OP17-06) y **anonimizar** (OP17-03) son acciones distintas en `01` y no se mezclan. (3) La **agregación** y la **restricción de acceso** no sustituyen a la eliminación cuando esta es exigible. (4) **Ninguna operación se declara completa** mientras existan copias o respaldos fuera de su alcance. (5) **Seudonimizar no es anonimizar** y no se usa para declarar cumplida una solicitud de eliminación.
+
+### 38.5 Inventario conceptual de categorías de datos (B)
+
+El inventario es **conceptual**: agrupa los datos por la **necesidad de retención**, no define esquemas ni tablas. La columna «Datos personales» indica solo si la categoría **puede** contenerlos según la fuente; **no se supone que una categoría deportiva carezca de ellos** (PRV-18).
+
+| Id | Categoría | Contenido (según la fuente) | Zona | Datos personales | Fuente |
+|---|---|---|---|---|---|
+| CD17-01 | Cuentas de usuario del sistema | Correo, rol, estado (activa o desactivada); la desactivación conserva el vínculo técnico (cuenta, equipo, torneo, fechas) mientras exista el torneo | Z2/Z3 | Sí (correo) | PRV-14; RF-ACC-11 |
+| CD17-02 | Participantes (jugadores) | Nombre interno, dorsal, equipo, indicador «es menor» (sin fecha de nacimiento); estado de alta o baja | Z3 | Sí | PRV-02, 04; PRV-10 |
+| CD17-03 | Menores | Subconjunto de CD17-02 con indicador de menor; acceso restringido; nombre público condicionado | Z3 | Sí (**protección reforzada**) | PRV-02, 03, 09, 18 |
+| CD17-04 | Autorizaciones y consentimientos | **Solo metadatos** (tipo, otorgante como relación, fecha, versión, quién la registró, referencia a la evidencia, estado, revocación); **la evidencia original la conserva la organización** | Z3 (metadatos); fuera del sistema (evidencia) | Sí (metadatos) | PRV-05, 06; Q-24 |
+| CD17-05 | Equipos, delegados y asignaciones | Equipos, delegados, **historial de asignaciones y levantamientos (RT-14)** de solo anexado | Z3 | Sí (vínculo con cuentas) | RF-ACC-11; PRV-10 |
+| CD17-06 | Competiciones | Torneos, reglamento, calendario, inscripciones | Z3 | Indirecta | RF-AUD-02 |
+| CD17-07 | Resultados y eventos de partido | Marcador, goles, tarjetas, minutos, dorsales; estadísticas que se conservan al anonimizar | Z3 y proyecciones públicas | **Puede** (PRV-18: equipo + dorsal + minuto) | PRV-06, 18 |
+| CD17-08 | Eventos de auditoría | Registro de solo anexado: actor, hora del servidor, torneo, entidad, acción, valores minimizados; solo identificadores internos de jugadores (IF-31) | Z3 (y copia externa si ADR-09 la define) | Sí (actor) | RF-AUD-01…04; IF-31 |
+| CD17-09 | Bitácora de seguridad | Intentos denegados de escalada o acceso cruzado; separada de la auditoría, para el dueño | Z3 | Sí (actor) | RF-AUD-05 |
+| CD17-10 | Registros operativos y técnicos | Señales de observabilidad (ADR-13), errores, métricas; **sin datos personales cuando sea posible** | Z2 / Z4 | Mínima (no demostrada) | PRV-12; MIN13-08; OC-355 |
+| CD17-11 | Metadatos de incidencias del servidor | Identificador de operación, usuario, partido, tipo, motivo y hora de operaciones rechazadas o en conflicto | Z2/Z3 | Sí (usuario) | OFF-20; PRV-10 |
+| CD17-12 | Información sincronizada y operaciones locales | Operaciones pendientes, en conflicto o rechazadas en el dispositivo (máximo 30 días); registros de idempotencia; datos descargados para trabajar sin conexión | Z0 / Z2 | Sí (identificadores; contenido de operaciones) | OFF-06, 10, 12; IN-16-11; PRV-11 |
+| CD17-13 | Invitaciones, sesiones y accesos | Invitaciones vencidas, sesiones, cuentas inactivas, auditoría de accesos | Z2/Z3 | Sí | PRV-10; OC-175 |
+| CD17-14 | Exportaciones | Exportación limitada (partido, abreviaturas, marcador) y exportación de datos de un jugador (PRV-08) | Dispositivo / organización | Sí (la de PRV-08) | OFF-24; PRV-08; HR1-14 |
+| CD17-15 | Respaldos | Copias completas, incluidas las de menores; retención **no fijada en `01`** | Z3 (externo, TB-9) | Sí (todo lo anterior) | BK-03, BK-13; HR1-12; RES-03 |
+| CD17-16 | Trazabilidad de despliegues | Quién, qué versión y cuándo | Z2 | Sí (actor) | EN-14; OC-345 |
+
+### 38.6 Matriz propuesta por categoría de datos (C) [PROP]
+
+**Toda la matriz es propuesta no aprobada.** **«Responsable de la decisión»:** salvo lo que `01` ya confirma (la organización es responsable del tratamiento, PRV-01; la persona designada atiende solicitudes y custodia evidencias, PRV-08 [CONF], **aún por designar**), **no se asigna** y consta como [PEND] (DR17-2). **«Restricciones jurídicas posibles»** son hipótesis de **PEND-JUR**: no se afirma ninguna norma ni plazo. **«Evidencia pendiente»:** lo que habría que contar para decidir.
+
+| Categoría | Finalidad | Responsable de la decisión | Inicio de la retención | Revisión o eliminación | Restricciones jurídicas posibles (PEND-JUR) | Dependencias | Evidencia pendiente |
+|---|---|---|---|---|---|---|---|
+| CD17-01 Cuentas | Acceso y roles | [PEND] (DR17-2) | Alta de la cuenta | Desactivación; inactividad (OC-175) [PEND]; el vínculo técnico se conserva mientras exista el torneo | Conservación y anonimización de cuentas (PRV-10) | ADR-03.I; ADR-09.I | Plazo de inactividad; conclusión jurídica |
+| CD17-02 Participantes | Operar el torneo | [PEND] (DR17-2); solicitudes: persona designada (PRV-08) | Alta del jugador | Baja del jugador; fin del torneo; solicitud; revocación | Plazo para jugadores dados de baja (PRV-10) | CMP-17; ADR-09 | Plazo; quién autoriza excepciones |
+| CD17-03 Menores | Operar con protección reforzada | [PEND] (DR17-2) | Alta con indicador de menor | Al cumplir la mayoría de edad (indicador manual, PRV-04); baja; revocación | Edad de corte (18) **[PEND-JUR]**; protección de menores | PRV-18; ADR-13 | Informe de PRV-18; criterio jurídico |
+| CD17-04 Autorizaciones | Acreditar publicación y tratamiento | Evidencia: organización (PRV-05); metadatos: [PEND] | Registro de la autorización | Revocación; fin de la finalidad; solicitud | Conservación de la evidencia (organización) y del metadato | PRV-05; ADR-09 | Cuánto se conserva evidencia y metadato tras revocar |
+| CD17-05 Asignaciones | Evaluar RT-14 | [PEND] (DR17-2) | Alta de la asignación | **Se conserva mientras exista el torneo** (PRV-10); luego [PEND] | Conservación y anonimización del historial (PEND-JUR) | RF-ACC-11; ADR-09 | Conclusión jurídica |
+| CD17-06 Competiciones | Historial deportivo | [PEND] | Creación del torneo | Fin del torneo; archivo [PEND] | Ninguna identificada [PEND] | ADR-14 | Política de archivo |
+| CD17-07 Resultados | Historial deportivo y estadísticas | [PEND] | Cierre del partido | Se conservan al anonimizar (PRV-06); revisión por PRV-18 | **No se supone que carezcan de datos personales** | PRV-18; ADR-13 | Informe de identificación indirecta |
+| CD17-08 Auditoría | Evidencia y rendición de cuentas | [PEND] (DR17-2); conflicto: DR17-1 | Registro del evento | **Mientras exista el torneo más el plazo jurídico** (PRV-10); purga solo como acción privilegiada que defina ADR-17 | Plazo jurídico (PEND-JUR) | ADR-09; SV-14; OC-133, OC-134 | Plazo; compatibilidad de la purga |
+| CD17-09 Bitácora de seguridad | Detectar abusos | [PEND] | Registro del evento | [PEND] (PRV-10 la menciona) | [PEND] | RF-AUD-05; ADR-09 | Plazo |
+| CD17-10 Registros técnicos | Diagnóstico | [PEND] (DR13-5) | Emisión de la señal | Vencimiento; eliminación (OC-355) | Retención de registros técnicos [PEND-JUR] | ADR-13; PRV-12 | Plazo; forma de eliminación |
+| CD17-11 Incidencias | Resolver rechazos y conflictos | [PEND] | Recepción de la operación | Resolución; vencimiento [PEND] | Retención de metadatos OFF-20 (PRV-10) | OFF-20; ADR-09 | Plazo |
+| CD17-12 Sincronización y locales | Evitar pérdida de datos | Fijado por OFF-10 [CONF]; ninguna persona asignada [PEND] (DR17-2) | Detección del conflicto o rechazo | **Máximo 30 días**; reintento, descarte con confirmación o exportación | Sujeta a PRV-10 | ADR-05.I; ADR-16 | Comportamiento real de los navegadores; la app **no puede garantizar** el borrado local |
+| CD17-13 Invitaciones y accesos | Acceso y trazabilidad | [PEND] | Emisión o inicio de sesión | Vencimiento; inactividad (OC-175) | Conservación de cuentas inactivas y de auditoría de accesos | ADR-03.I | Plazo |
+| CD17-14 Exportaciones | Atender solicitudes y rechazos | Persona designada (PRV-08) | Generación del archivo | Entrega; **el archivo en el dispositivo escapa al control** (HR1-14) | Entrega al titular (plazos PEND-JUR) | OFF-24; PRV-08 | Límites de control |
+| CD17-15 Respaldos | Continuidad | [PEND] (ADR-12 y ADR-17) | Creación de la copia | Caducidad (BK-03: 30 diarios y 12 mensuales como punto de partida [PROP]); **reaplicación** tras restaurar (BK-13) | **Retención de respaldos y borrado en copias [PEND-JUR]** | ADR-12; ADR-10; RES-03 | Plazos; capacidad de borrado selectivo en copias |
+| CD17-16 Despliegues | Trazabilidad técnica | [PEND] | Registro del despliegue | [PEND] (OC-345) | [PEND] | ADR-11; ADR-09.I | Plazo |
+
+**Lectura.** La matriz **no fija plazos ni asigna responsables**; solo muestra **qué hay que decidir por categoría**. **Una celda con plazo sin [PEND-JUR] o sin etiqueta de hipótesis sería un error de redacción** (RR17-03).
+
+### 38.7 Datos de menores, autorizaciones y exposición pública (E)
+
+**Fuentes.** PRV-02 (nombre público condicionado de un menor: «Jugador n.º {dorsal} ({equipo})» mientras no conste una autorización vigente), PRV-03 (nunca públicos: fecha de nacimiento o edad exacta, documento, teléfono, correo, dirección, fotografías, datos y evidencia de consentimiento, identidad del editor, nombre completo interno sin autorización), PRV-04 (indicador de menor sin fecha de nacimiento; **debe actualizarse manualmente** al cumplir la mayoría de edad), PRV-05 (solo metadatos de autorización; la evidencia original la custodia la organización), PRV-06 (ocultar y anonimizar), PRV-09 (acceso), PRV-18 (identificación indirecta). **La edad de corte de 18 años y las bases legales son [PEND-JUR].**
+
+**Tratamiento propuesto [PROP] (no aprobado).**
+
+1. **Dos eventos con efectos distintos:** una **revocación** devuelve el nombre público a la etiqueta (ocultar, reversible, PRV-06) y **no equivale** a eliminar ni a anonimizar; **anonimizar** es una acción distinta, irreversible según `01`, **cuya irreversibilidad real no está validada** (OP17-03).
+2. **La combinación equipo + dorsal + minuto + estadísticas puede identificar** a un menor aunque no haya nombre (PRV-18, PRV-02): **anonimizar no basta** si los datos deportivos quedan accesibles públicamente con esa combinación. **No se resuelve aquí:** consta como TR17-03 y OC-371.
+3. **El indicador «es menor» es manual** y puede quedar desactualizado (PRV-04): una retención o una exposición que dependa de él **hereda su limitación** (TR17-08).
+4. **La evidencia original de la autorización está fuera del sistema** (PRV-05): ADR-17 **no puede** gobernar su conservación ni su eliminación; solo puede **nombrar** que la organización la custodia y que su retención es [PEND-JUR] (DR17-4).
+5. **Exposición pública:** una proyección pública derivada (PA-04, TB-8) puede conservar copias en cachés o en el borde; **la eliminación o anonimización en origen no garantiza la eliminación en esas copias** [INF] (TR17-05; relación con ADR-06). **Q-20 sigue abierta**: mientras lo esté, no se publica ningún dato personal.
+6. **Menores y respaldos:** los respaldos contienen datos de menores (TB-9) y **conservan datos anteriores a una anonimización** (RES-03, sin aceptar).
+7. **Solicitudes de eliminación sobre menores** involucran al representante legal (PRV-05, solo la relación): **quién puede solicitarlas y autorizarlas es una decisión pendiente** (DR17-4; **no se decide aquí**).
+
+**Qué NO se afirma.** No se afirma que anonimizar proteja a un menor; no se afirma que ocultar elimine el dato; no se afirma que la evidencia en poder de la organización siga el mismo ciclo que el sistema.
+
+### 38.8 Ciclo de vida de los datos (F) [PROP]
+
+El ciclo es **conceptual y común a las alternativas**; cada alternativa lo gestiona de modo distinto (§38.9). Para cada etapa se indica qué ocurre, qué conflicto plantea y qué queda pendiente. **Ninguna etapa fija plazos.**
+
+| Id | Etapa | Qué ocurre [PROP] | Conflictos y límites | Pendiente |
+|---|---|---|---|---|
+| CV17-01 | Registro | El dato entra con su finalidad y se minimiza en el origen (IF-31; PRV-11); se registra la categoría y el inicio de retención | No se pueden reescribir los registros de auditoría; **lo que entra en la auditoría de solo anexado no se puede retirar** | OC-369 |
+| CV17-02 | Uso activo | Acceso restringido por rol (PRV-09); sin exposición pública de lo restringido | Privilegios de administración (AM-24) | OC-372 |
+| CV17-03 | Finalización de torneos | El torneo cierra; algunos datos pasan a archivo o se revisan; el historial deportivo **puede** conservarse (PRV-06) | **No se sabe cuánto tiempo** (PEND-JUR); riesgo de conservación excesiva | DR17-3; OC-373 |
+| CV17-04 | Solicitudes de eliminación | La persona designada recibe la solicitud (PRV-08); se evalúa por categoría; se exporta o anonimiza el jugador | **Conflicto con la conservación de evidencia** (auditoría, historial RT-14): **no se resuelve**; plazos de respuesta PEND-JUR; **no se promete eliminación absoluta** | DR17-1; DR17-4 |
+| CV17-05 | Revocación de autorizaciones | El nombre público vuelve a etiqueta; se audita; se registra revocación (PRV-05, 06) | Copias públicas cacheadas; **ocultar no elimina** | OC-371 |
+| CV17-06 | Desactivación de cuentas | La cuenta se desactiva; **el vínculo técnico se conserva mientras exista el torneo** (RF-ACC-11) | La anonimización de cuentas está **PEND-JUR** (PRV-10) | OC-375 |
+| CV17-07 | Correcciones de resultados | Un resultado se corrige conservando el historial necesario (auditoría) | **Si se anonimizó a alguien, no se puede re-atribuir una corrección**; conflicto entre corrección y anonimización | DR17-5 |
+| CV17-08 | Auditoría histórica | Se conserva «mientras exista el torneo más el plazo jurídico» (PRV-10); purga solo por acción privilegiada de ADR-17 (SV-14) | Compatibilidad de la purga con la detección de alteración (OC-134) | OC-133, OC-134 |
+| CV17-09 | Datos pendientes de sincronización | Operaciones locales hasta 30 días con aviso (OFF-10); **un dato eliminado en el servidor puede reaparecer si un dispositivo sincroniza una operación antigua** [INF] | **La app no controla el almacenamiento local** (OFF-17); conflicto entre eliminación y sincronización | OC-376 |
+| CV17-10 | Respaldos y recuperación | Los respaldos caducan (BK-03 [PROP]); tras restaurar se reaplican revocaciones y anonimizaciones (BK-13) | **Reaparición de datos eliminados tras restaurar** (TR17-07); retención de respaldos no fijada | ADR-12; OC-377 |
+
+**Reglas del ciclo.** (1) **Eliminar en el servidor no es eliminar en todas partes** (dispositivos, respaldos, copias públicas, exportaciones). (2) **Un evento del ciclo no se considera cumplido por haberse definido.** (3) **La conservación de la auditoría y el derecho de eliminación se concilian por decisión del responsable**, no por este borrador.
+
+### 38.9 Alternativas documentales de gestión del ciclo de vida (G)
+
+Las tres alternativas son **conceptuales y documentales**: describen **qué dispara la revisión o eliminación y quién la ejecuta**, **no qué mecanismo, servicio o base de datos lo hace** (**no se seleccionan** mecanismos). Todas deben cumplir los objetivos eliminatorios comunes y las reglas de §38.4. Los trade-offs «por diseño» se indican solo cuando la definición los garantiza.
+
+| Aspecto | ALT-17-A · Ciclo por plazos de categoría | ALT-17-B · Desvinculación temprana por eventos del ciclo | ALT-17-C · Ciclo por solicitud y revisión periódica |
+|---|---|---|---|
+| Idea | Cada categoría tiene un **plazo** que empieza en una condición definida; al vencer, la categoría se **elimina o anonimiza** según su regla. Las solicitudes y revocaciones **acortan** el plazo de los datos personales afectados | La **identidad se separa o anonimiza** en eventos del ciclo (fin del torneo, desactivación, revocación, baja, inactividad sostenida); se conservan **solo identificadores internos y datos deportivos**; lo residual se elimina por vencimiento | **No hay vencimiento automático general:** la persona designada (PRV-08) **revisa periódicamente y ante solicitudes** y ejecuta procedimientos por categoría. **Solo lo que `01` ya fija** (por ejemplo OFF-10, 30 días locales) vence por sí mismo |
+| Qué dispara la operación | El **tiempo** desde la condición de inicio | **Eventos** del ciclo | **Solicitudes y revisiones** |
+| Quién ejecuta | Un proceso programado: **identidad pendiente (ADR-14)** | Un proceso por evento: **identidad pendiente (ADR-14)** | Una **persona** designada: **por designar** (PRV-08; Q-24) |
+| Exposición por conservación | Datos identificables **hasta el vencimiento** | Ventana identificable **más corta** por diseño; el residual queda tras anonimizar | Conservación **por defecto** hasta que alguien revise |
+| Evidencia y auditoría | El vencimiento puede alcanzar evidencia necesaria si no hay **suspensión por caso** | La desvinculación **no se puede deshacer** si se declara irreversible | La revisión caso por caso **protege evidencia** pero depende de la persona |
+| Sin conexión | **[INF]:** el dato eliminado podría **reaparecer** vía una operación antigua (CV17-09); **no es un comportamiento demostrado** | Ídem; además, anonimizar en servidor **no alcanza** datos locales | Ídem |
+| Dependencias propias | ADR-14 (ejecución), PEND-JUR (plazos), ADR-12 (respaldos), SV-14 | ADR-14; validación de la anonimización (OC-374); PRV-18; ADR-12 | Persona designada (OC-386); capacidad operativa; ADR-12 |
+| Limitación estructural | **TS17-A:** un vencimiento automático puede **eliminar o anonimizar evidencia necesaria sin revisión del caso** [por diseño] | **TS17-B:** la desvinculación temprana **limita la capacidad de corregir, atribuir o atender disputas** después del evento, y **depende de una anonimización no validada** [por diseño] | **TS17-C:** sin vencimiento automático general, **la conservación por defecto es más prolongada** hasta que se revise, y **depende de la capacidad humana** [por diseño] |
+
+**Elementos comunes a las tres.** Las seis operaciones de §38.4 no equivalentes; el inventario de §38.5; la política de minimización de ADR-13 (MIN13-01…10) para registros; plazos **no fijados** (PEND-JUR); respaldos con retención no fijada y riesgo sin aceptar (RES-03); la auditoría solo se purga por una acción privilegiada que ADR-17 defina (SV-14); **no se promete eliminación absoluta**. Ninguna alternativa admite plazos como obligación jurídica.
+
+**No se selecciona ninguna.** Esta tabla describe estructuras, no preferencia. **Una combinación** (por ejemplo, plazos para unas categorías y revisión por solicitud para otras) **sería una decisión del responsable** (DR17-7); **este borrador no la propone**.
+
+### 38.10 Comparación, matriz de conformidad y puntuación (H)
+
+#### 38.10.1 Marco y criterios
+
+**Fuente del marco.** R1 §2.4 fija los criterios **costos bajos, seguridad, funcionamiento sin conexión y mantenimiento** para los ADR; R3-A §25.2 recoge los **pesos aprobados por el responsable: seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %**, con requisitos obligatorios eliminatorios y no compensables. **No se trasladan los pesos de ADR-11 o ADR-13 como tales;** se usan los de esta fuente, con la asignación aprobada (ver la incidencia de §37.8.2, corregida y registrada en §38.0 (b)). **Adecuación [INF]:** los cuatro criterios aplican a una política de ciclo de vida solo con matices: *seguridad* se lee como **seguridad y privacidad**; *costo* es el de operar la política (personal, tareas, almacenamiento) y **no es evaluable sin mecanismos**; *sin conexión* se refiere a datos locales y pendientes de sincronización; *mantenimiento* es el esfuerzo de operar y revisar la política. **Si el responsable considera que este marco no es adecuado para alternativas de política, la tabla numérica es solo informativa** (DR17-9).
+
+#### 38.10.2 Matriz de conformidad (uniforme; autoevaluación del autor)
+
+**Leyenda** (la de R4-A y R4-B): **E** = requisito eliminatorio común que toda alternativa debe cumplir y que **ninguna demuestra**; **E/C** = exigencia común que depende de una condición abierta; **S** = lectura documental favorable, **no conformidad demostrada**; **C** = condición abierta; **T** = limitación estructural por la definición. **Regla uniforme:** **T** solo si la propia definición de la alternativa impide el objetivo, o crea —en toda implementación posible de esa alternativa— la exposición que el objetivo busca limitar, sin depender de una decisión posterior; **C** si depende de una decisión, una verificación o un mecanismo aún sin definir; **S** si la definición es compatible. **No se demuestran mitigaciones.**
+
+| Objetivo | ALT-17-A | ALT-17-B | ALT-17-C | Observación |
+|---|---|---|---|---|
+| OB17-01 (inventario y finalidad por categoría) | S | S | S | Común: §38.5 y §38.6 |
+| OB17-02 (operaciones no equivalentes) | E | E | E | §38.4 |
+| OB17-03 (sin plazos hasta PEND-JUR) | E/C | E/C | E/C | Común |
+| OB17-04 (auditoría y purga) | E/C | E/C | E/C | SV-14; ADR-09.C PROPUESTA |
+| OB17-05 (anonimizar conserva estadísticas) | C | C | C | Validación pendiente (OC-374) |
+| OB17-06 (menores e identificación indirecta) | C | C | C | PRV-18 PEND-JUR |
+| OB17-07 (autorizaciones y revocación) | E | E | E | PRV-05, PRV-06 |
+| OB17-08 (solicitudes de derechos) | S | S | S | La definición de cada una prevé la solicitud; plazos PEND-JUR |
+| OB17-09 (coherencia con respaldos) | E/C | E/C | E/C | RES-03; ADR-12 |
+| OB17-10 (sin conexión) | E/C | E/C | E/C | OFF-10 común |
+| OB17-11 (registros técnicos) | E/C | E/C | E/C | ADR-13 |
+| OB17-12 (conflicto evidencia vs eliminación) | **T** | **T** | C | A: el vencimiento automático puede alcanzar evidencia (TS17-A); B: la desvinculación temprana limita la re-atribución (TS17-B); C: depende de la revisión caso por caso |
+| OB17-13 (identidad de ejecución) | C | C | C | ADR-14 para A y B; la persona designada por designar para C |
+| OB17-14 (sin promesa de eliminación absoluta) | E | E | E | |
+| OB17-15 (minimización en el tiempo) | S | S | **T** | C: sin vencimiento automático general la conservación por defecto es más prolongada (TS17-C) |
+
+**Fundamento de las T (regla uniforme).**
+
+| Celda | Fundamento |
+|---|---|
+| ALT-17-A, OB17-12: **T** (TS17-A) | El vencimiento es **automático por definición** y **no incluye revisión del caso**: en toda implementación puede alcanzar evidencia necesaria. Una **suspensión por caso** sería un mecanismo adicional aún no definido (DR17-1) |
+| ALT-17-B, OB17-12: **T** (TS17-B) | La desvinculación **por eventos** y su carácter irreversible según `01` limitan, **en toda implementación**, la capacidad de corregir o atribuir después del evento |
+| ALT-17-C, OB17-15: **T** (TS17-C) | **La conservación por defecto es inherente a la definición de ALT-17-C:** sin vencimiento automático general, el dato permanece hasta que alguien actúe. **La T se fundamenta en esa propiedad.** **La revisión humana es una posible mitigación operativa, ni inherente a la definición ni demostrada,** y no modifica la clasificación |
+| ALT-17-C, OB17-12: **C** | La revisión caso por caso **no impide** conciliar evidencia y eliminación; depende de la persona y de DR17-1 |
+
+**Las clasificaciones T no se convierten en penalizaciones de puntuación.** **TS17-A, TS17-B y TS17-C describen perfiles distintos, no un orden de preferencia.**
+
+#### 38.10.3 Puntuación
+
+**Regla única (idéntica para A, B y C).** Escala 1–5; juicio del autor [PROP], no vinculante. **Seguridad y mantenimiento:** centro 3 con banda ±1; **2 solo si la definición implica una pérdida estructural verificable y comparable que las demás alternativas no tienen por definición**; **costo:** solo puntúa **planes o servicios concretos** (techo 5): al no haber ninguno, **no es puntuable con evidencia actual** y se usa un **valor neutro convencional de cálculo (3, banda 1–5)**; **sin conexión:** fijo 3 cuando no discrimina; **lo no leído es [PEND] y no se penaliza;** **riesgos y condiciones no se convierten en puntaje; el puntaje no selecciona.**
+
+| Criterio (peso) | A | B | C | Fundamento |
+|---|---|---|---|---|
+| Seguridad y privacidad (35) | 3 (2–4) | 3 (2–4) | 3 (2–4) | **Centro neutral.** TS17-A, TS17-B y TS17-C son pérdidas de **naturaleza distinta** (evidencia, re-atribución, exposición por conservación); **no existe una comparación verificable** entre ellas; se recogen en la matriz y en TR17-01…12 **sin convertirse en puntaje**. Parte de lo que diferencia a las alternativas depende de PEND-JUR |
+| Costo (30) | 3 (1–5) | 3 (1–5) | 3 (1–5) | **No puntuable con evidencia actual; valor neutro convencional de cálculo.** El 3 **no es evidencia de costo real**; no se evaluó ningún servicio, plan ni costo de personal |
+| Sin conexión (20) | 3 | 3 | 3 | **Fijo 3:** el riesgo de reaparición vía sincronización afecta a las tres por igual (CV17-09; OB17-10 común) |
+| Mantenimiento (15) | 3 (2–4) | 3 (2–4) | 3 (2–4) | Neutral: A y B exigen ejecución programada y reglas por categoría; C exige capacidad humana sostenida; **no comparable sin mecanismos** |
+| **Total (central)** | **3,00** | **3,00** | **3,00** | 0,35·3 + 0,30·3 + 0,20·3 + 0,15·3 = 3,00 |
+| **Rango** | **1,90–4,10** | **1,90–4,10** | **1,90–4,10** | Mínimo: 0,35·2 + 0,30·1 + 0,20·3 + 0,15·2 = 0,70 + 0,30 + 0,60 + 0,30 = 1,90. Máximo: 0,35·4 + 0,30·5 + 0,20·3 + 0,15·4 = 1,40 + 1,50 + 0,60 + 0,60 = 4,10 |
+
+**Recomendación preliminar no vinculante.** **Ninguna.** Las tres alternativas obtienen **el mismo puntaje central y el mismo rango:** el puntaje **no discrimina** y no expresa preferencia. Las diferencias reales están en la **matriz**, en las **amenazas** (§38.11) y en las **condiciones** (§38.14), y **requieren decisión del responsable** (DR17-7). **El rango de esta Parte (1,90–4,10) coincide en su asignación de pesos con el rango vigente de §37** (corregido por la nota posterior de §37.0; el histórico 1,95–4,05 permanece como evidencia), **y no es comparable con los de §36** (criterios de costo distintos). **Se distinguen cuatro cosas:** (1) **la igualdad de pesos** (35/30/20/15 asignados a los mismos criterios), que es un dato del marco aprobado; (2) **la coincidencia numérica de los rangos** (1,90–4,10), que resulta de aplicar los mismos pesos y las mismas bandas neutrales y **no es una medida de las alternativas**; (3) **las diferencias de naturaleza entre las alternativas** de distintos ADR (observabilidad en ADR-13, ciclo de vida de los datos en ADR-17), que responden a decisiones distintas; y (4) **la ausencia de una comparación transversal aprobada** entre ADR. **La coincidencia de rangos no implica comparabilidad entre las alternativas de ADR-13 y ADR-17, que no debe presumirse.**
+
+### 38.11 Análisis de amenazas y riesgos (I)
+
+Las amenazas **no se aceptan ni se mitigan** en este borrador; **las mitigaciones propuestas no están demostradas.**
+
+| Id | Amenaza o riesgo | Alternativas más afectadas [por diseño] | Mitigación propuesta (no demostrada) | Condición |
+|---|---|---|---|---|
+| TR17-01 | **Conservación excesiva:** datos conservados más de lo necesario o sin condición de revisión | C (TS17-C); A hasta el vencimiento | Condición de revisión por categoría (OB17-15); plazos tras PEND-JUR | OC-370, OC-373 |
+| TR17-02 | **Eliminación incompleta:** el dato sigue en copias, dispositivos, exportaciones, caché o la auditoría de solo anexado | Las tres | No prometer eliminación absoluta; inventario de copias | OC-383 |
+| TR17-03 | **Reidentificación,** también por **cohortes pequeñas y menores** (equipo + dorsal + minuto + estadísticas), tras anonimizar o agregar | Las tres, en el momento en que anonimizan o agregan; **[INF]: B podría quedar más expuesta** por anonimizar antes, pero esa mayor exposición **depende de condiciones no demostradas** (qué se conserva, qué es público, cuánto tarda la validación) y **no se sigue de su definición** (OB17-05 y OB17-06 son C para las tres) | Validación de la anonimización; umbral de agrupación; PRV-18 | OC-371, OC-374, OC-380 |
+| TR17-04 | **Exposición de menores** por conservación, acceso, publicación o evidencia en poder de terceros | Las tres | Acceso restringido (PRV-09); ocultar por defecto (PRV-02) | OC-371, OC-387 |
+| TR17-05 | **Copias derivadas** (proyecciones públicas, cachés, exportaciones, copias externas de auditoría) que no se eliminan con el dato en origen [INF] | Las tres | Inventario de copias; coordinación con ADR-06 y ADR-09 | OC-383 |
+| TR17-06 | **Inconsistencia entre datos activos y respaldos:** los respaldos conservan datos anteriores a una anonimización (RES-03) | Las tres | BK-13; caducidad de respaldos | OC-377 |
+| TR17-07 | **Reaparición de datos eliminados tras restaurar** un respaldo | Las tres | BK-13: reaplicar revocaciones y anonimizaciones antes de reabrir el acceso (el registro de reaplicación es **también un dato retenido**) | OC-377 |
+| TR17-08 | **Clasificación errónea o desactualizada** (indicador «es menor» manual, PRV-04) que gobierna retención o exposición | Las tres | Revisión del indicador; no basar una eliminación solo en él | OC-371 |
+| TR17-09 | **Conflictos de sincronización sin conexión:** una operación antigua reintroduce o referencia un dato eliminado o anonimizado | Las tres | Tratamiento de operaciones sobre datos eliminados (coordinar con ADR-05.I y OFF-10) | OC-376 |
+| TR17-10 | **Pérdida de evidencia de auditoría** por vencimiento, anonimización o purga | A y B (TS17-A, TS17-B); C por omisión | Suspensión por caso (DR17-1); purga solo como acción privilegiada y auditada (SV-14) | OC-378, OC-381 |
+| TR17-11 | **Acceso indebido** a datos retenidos (administradores, copias, exportaciones, personas con privilegios) | Las tres | Mínimo privilegio; registro de accesos (OC-175; DR13-5) | OC-372 |
+| TR17-12 | **Transferencias o ubicaciones no verificadas** de datos retenidos o de sus copias | Las tres | ADR-10; PRV-13; Q-25; evaluación jurídica | OC-385 |
+
+### 38.12 Relación con auditoría, trazabilidad, respaldo, continuidad, observabilidad y operación sin conexión (J)
+
+| Elemento | Relación | Qué hace ADR-17 / qué no |
+|---|---|---|
+| Auditoría (ADR-09; RF-AUD) | La auditoría es de solo anexado y solo guarda identificadores internos de jugadores (IF-31); **no hay purga salvo la que defina ADR-17** (SV-14) | **Propone** qué conservar y por cuánto tiempo (PEND-JUR); **no modifica** la inmutabilidad ni la política heredada de auditoría |
+| Trazabilidad (RT-14; RF-ACC-11; EN-14) | El historial de asignaciones se conserva mientras exista el torneo; la trazabilidad de despliegues es una categoría propia | **Nombra** el conflicto entre conservar y anonimizar cuentas; **no lo resuelve** (OC-375) |
+| Respaldo y continuidad (ADR-12; BK-03, BK-13) | Retención de respaldos no fijada; reaplicación tras restaurar; RES-03 sin aceptar | **Aporta** qué datos deben poder eliminarse o reaplicarse; **no define** estrategia, RPO/RTO ni restauración (R4-E, no iniciado) |
+| Observabilidad (ADR-13; MIN13-08; OC-355) | Las señales y registros tienen retención y eliminación «no fijadas aquí» | **Recibe** esas condiciones; **no cambia** la política de minimización de ADR-13 |
+| Operación sin conexión (ADR-05.I; OFF-10; IN-16-11) | Datos locales con máximo de 30 días; la app no controla el almacenamiento | **Nombra** la reaparición vía sincronización (CV17-09); **no define** el protocolo de sincronización |
+| Tareas programadas (ADR-14; NUEVO-11) | La identidad de ejecución sin actor disparador es de ADR-14 | **Exige** que exista y esté auditada; **no la define** |
+
+### 38.13 Dependencias con ADR-09.C, ADR-01, ADR-10, ADR-11, ADR-13 y otros bloques
+
+| Dependencia | Qué toma ADR-17 | Estado y límite |
+|---|---|---|
+| **ADR-09.C** (R1 §8.2: requisito) | Auditoría de solo anexado, historial y registros | **PROPUESTA** (`aprobaciones.md` la mantiene como tal); **no se declara satisfecha** la dependencia; ADR-09.I solo con aprobación documental condicionada |
+| **PEND-JUR** (R1 §8.2) | Plazos, bases legales, edad de corte, ubicación | **Abierta.** **ADR-17 no puede cerrarla ni aproximarla** |
+| **ADR-01** | Plataforma de datos y respaldos | Solo aprobación documental condicionada; sin proveedor seleccionado |
+| **ADR-10** | Región y ubicación de datos retenidos y copias | **Sin región seleccionada** (TR17-12) |
+| **ADR-11** | Entornos (datos sintéticos, PRV-17), trazabilidad de despliegues (OC-345) | Solo aprobación documental condicionada; ninguna alternativa seleccionada |
+| **ADR-13** | Retención y eliminación de registros técnicos; MIN13-08, OC-355, DR13-5, TO-07 | Aprobado solo documentalmente de forma condicionada; versionado en `0367d96`; ninguna alternativa seleccionada |
+| ADR-03.I, ADR-02.I, ADR-05.I, ADR-06, ADR-16 | Cuentas e inactividad (OC-175), privilegios, sincronización, proyecciones públicas, almacenamiento local | Aprobados solo documentalmente de forma condicionada según su registro; no se confirma conformidad técnica |
+| ADR-12 (R4-E), ADR-14 (R4-D) | Respaldos y ejecución sin actor disparador | **No iniciados;** ADR-17 solo **nombra** dependencias |
+
+**Declaraciones expresas.** (1) **R1 §8.1 no se declara cumplido** ni se le atribuye cumplimiento. (2) **R1 §8.2 no se da por satisfecho** por la existencia de documentación de ADR-09.C, ADR-01, ADR-10, ADR-11 o ADR-13. (3) **PEND-JUR sigue abierta.** (4) Si alguna de esas dependencias cambia, este borrador debe revisarse. (5) Ninguna decisión de ADR-12 ni ADR-14 se toma aquí.
+
+### 38.14 Decisiones del responsable, condiciones abiertas, riesgos de redacción y criterios de revisión (K)
+
+**Decisiones del responsable (DR17).**
+
+| Id | Decisión | Relacionado |
+|---|---|---|
+| DR17-1 | **Conflicto entre conservación de evidencia y solicitudes de eliminación:** criterio, jerarquía y existencia de una suspensión por caso (**no se resuelve**) | OB17-12; TS17-A, TS17-B; OC-378 |
+| DR17-2 | **Quién decide la retención y eliminación de cada categoría y quién autoriza excepciones** (incluida la persona designada de PRV-08) | §38.6; OC-386 |
+| DR17-3 | **Qué ocurre al finalizar un torneo** (archivo, revisión, eliminación) y con qué criterio de revisión por categoría, sin plazos hasta PEND-JUR | CV17-03; OC-373 |
+| DR17-4 | **Menores y autorizaciones:** quién puede solicitar o autorizar la eliminación de datos de un menor; retención de la evidencia original en poder de la organización | §38.7; OC-387 |
+| DR17-5 | **Correcciones de resultados sobre datos ya anonimizados:** qué es posible y con qué límites | CV17-07 |
+| DR17-6 | **Respaldos:** retención, borrado selectivo y tolerancia a la reaparición tras restaurar (con ADR-12) | CV17-10; OC-377 |
+| DR17-7 | **Alternativa de gestión del ciclo de vida** (A, B, C o una combinación): **no se toma ni se recomienda aquí** | §38.9 |
+| DR17-8 | **Criterio de validación de la anonimización** y umbrales de agrupación (con DR13-7) | OP17-03, OP17-05; OC-374, OC-380 |
+| DR17-9 | **Uso del marco de puntuación** (R1 §2.4 y R3-A) para alternativas de política, o comparación solo cualitativa | §38.10 |
+| DR17-10 | **INCIDENCIA DOCUMENTAL HEREDADA — CORREGIDA Y VERSIONADA** (identificador histórico conservado). Surgió de un **error documental del autor** en §37.8.2 (R4-B), **no de una decisión arquitectónica del responsable.** La corrección consta en §37.0, `aprobaciones.md` y `bitacora.md` y está **versionada en el commit `46ef9375a16cd64026c8af86e830d3b2d70da9df`:** pesos vigentes seguridad 35 %, costo 30 %, sin conexión 20 %, mantenimiento 15 %; rango vigente 1,90–4,10; central 3,00; rango histórico 1,95–4,05 como evidencia. **No es una decisión arquitectónica aprobada, no constituye una formulación admitida, no concede una excepción, no modifica DR17-1…9 y la corrección documental no demuestra cumplimiento técnico.** No se crea una decisión nueva en su lugar | §38.0 (b); §38.18 |
+
+**Condiciones abiertas (OC; continúan la secuencia OC-369…388).**
+
+| Id | Condición | Relacionado |
+|---|---|---|
+| OC-369 | Inventario real de datos y finalidades por categoría (CD17-01…16) cuando exista el modelo de datos | OB17-01; §38.5 |
+| OC-370 | Definir plazos e inicio de retención por categoría **tras PEND-JUR** (no se fijan) | OB17-03; PRV-10 |
+| OC-371 | Identificación indirecta de menores y publicación tras anonimizar; copias públicas; indicador de menor desactualizado | PRV-18; PRV-04; Q-20 |
+| OC-372 | Privilegios de administración y acceso a datos retenidos | TR17-11; AM-24 |
+| OC-373 | Criterios de fin de torneo, archivo y revisión | DR17-3; CV17-03 |
+| OC-374 | Validación de la anonimización: qué cuenta, cómo se prueba y qué se conserva (relación con OC-26, OC-28) | PRV-06; OP17-03 |
+| OC-375 | Anonimización de cuentas y conservación del historial de delegaciones | PRV-10; RF-ACC-11; PEND-JUR |
+| OC-376 | Reaparición de datos eliminados vía sincronización sin conexión | TR17-09; OFF-10 |
+| OC-377 | Reaparición tras restaurar y retención de respaldos (con ADR-12) | BK-13; RES-03 |
+| OC-378 | Conflicto evidencia vs eliminación | DR17-1 |
+| OC-379 | Si se admite la seudonimización como paso intermedio y cómo se custodia la tabla de reasociación | OP17-04 |
+| OC-380 | Umbral mínimo de agrupación para agregados | OP17-05; OC-353 (ADR-13) |
+| OC-381 | Compatibilidad de la purga de auditoría con la detección de alteración | OC-133, OC-134 |
+| OC-382 | Plazo y forma de eliminación de registros técnicos | OC-355; DR13-5 |
+| OC-383 | Eliminación en copias externas, proyecciones públicas y cachés | TR17-02, TR17-05; ADR-06; ADR-09 |
+| OC-384 | Identidad de ejecución sin actor disparador para la retención | ADR-14; OB17-13 |
+| OC-385 | Ubicación y transferencia de datos retenidos y copias | ADR-10; PRV-13; Q-25 |
+| OC-386 | Persona designada, capacidad operativa y plazos de respuesta a solicitudes | PRV-08; Q-24 |
+| OC-387 | Evidencia original de autorizaciones en poder de la organización: retención y eliminación | PRV-05; DR17-4 |
+| OC-388 | Confirmación de ADR-01, ADR-09.C, ADR-10, ADR-11 y ADR-13 (R1 §8.2) y reevaluación de este borrador | §38.13 |
+
+**Riesgos de redacción (RR17).**
+
+| Id | Riesgo | Control |
+|---|---|---|
+| RR17-01 | Presentar plazos como obligaciones jurídicas | OB17-03; §38.0 |
+| RR17-02 | Inventar leyes, autoridades, sanciones o excepciones de Costa Rica | §38.2 |
+| RR17-03 | Incluir un plazo sin [PEND-JUR] o sin etiqueta de hipótesis | §38.6 |
+| RR17-04 | Prometer eliminación absoluta | OB17-14; §38.4 |
+| RR17-05 | Declarar irreversible o validada una anonimización | OP17-03; OC-374 |
+| RR17-06 | Asumir que retirar un nombre elimina todos los datos personales o que los datos deportivos carecen de información personal | §38.4; PRV-18 |
+| RR17-07 | Equiparar las seis operaciones | §38.4 |
+| RR17-08 | Resolver el conflicto evidencia vs eliminación o decidir quién autoriza excepciones | DR17-1, DR17-2 |
+| RR17-09 | Seleccionar alternativas, mecanismos, proveedores o bases de datos | §38.9 |
+| RR17-10 | Trasladar automáticamente los pesos de ADR-11 o ADR-13 | §38.10.1 |
+| RR17-11 | Convertir riesgos o clasificaciones T en puntaje | §38.10 |
+| RR17-12 | Dar por satisfecha una dependencia por existir documentación | §38.13 |
+| RR17-13 | Invadir R4-D o R4-E o modificar políticas heredadas | §38.12 |
+| RR17-14 | Presentar este borrador como evaluación jurídica o auditoría independiente | §38.16 |
+
+**Criterios de revisión (CR4C).**
+
+| Id | Criterio |
+|---|---|
+| CR4C-01 | Solo se modificó `02-arquitectura-adr.md`; todo lo anterior a §38 permanece idéntico |
+| CR4C-02 | Estado «BORRADOR v0.1-R4C — PENDIENTE DE REVISIÓN Y APROBACIÓN» |
+| CR4C-03 | Los apartados A a L están cubiertos con trazabilidad verificable |
+| CR4C-04 | Ningún plazo se presenta como obligación jurídica; no se inventan leyes, autoridades, sanciones ni excepciones |
+| CR4C-05 | PEND-JUR permanece abierta; no se resuelve |
+| CR4C-06 | Se distinguen las seis operaciones; no se asumen equivalentes ni irreversibles |
+| CR4C-07 | No se promete eliminación absoluta; se tratan respaldos, auditoría, copias y dispositivos |
+| CR4C-08 | El conflicto evidencia vs eliminación consta como decisión pendiente |
+| CR4C-09 | Menores, autorizaciones e identificación indirecta están tratados sin afirmar anonimato |
+| CR4C-10 | Hay al menos dos alternativas diferenciadas, sin selección ni preferencia encubierta |
+| CR4C-11 | El marco de comparación procede de R1 §2.4 y R3-A; no se trasladan pesos de ADR-11 ni ADR-13; la aritmética es correcta |
+| CR4C-12 | Las dependencias se tratan como condicionales; R1 §8.1 y §8.2 sin declarar satisfechos |
+| CR4C-13 | Se separan [CONF], [DOC], [INF], [PROP] y [PEND] |
+| CR4C-14 | Identificadores únicos, sin colisiones y OC en secuencia |
+| CR4C-15 | Las tablas están bien formadas |
+| CR4C-16 | R4-D…R4-G y la Fase 3 no se inician; sin commit, push, PR ni merge; `main` intacto |
+
+### 38.15 Relación con R4-D y R4-E (solo dependencias; no se inician)
+
+ADR-17 **nombra** dependencias con ADR-14 (identidad de ejecución sin actor disparador y tareas programadas) y ADR-12 (retención de respaldos, borrado selectivo, reaplicación tras restaurar). **No decide** nada de ellos: R4-D y R4-E **no están iniciados;** la **trazabilidad final (R4-F)** y la **auditoría de cierre (R4-G)** siguen reservadas, con la auditoría a cargo de un revisor separado del autor y con contexto nuevo.
+
+### 38.16 Limitaciones documentales y evidencias necesarias (L)
+
+**Limitaciones.** (1) **Autoevaluación del autor,** no auditoría independiente. (2) **No es evaluación jurídica:** PEND-JUR sigue abierta; **no se verificó normativa de Costa Rica ni se fijaron plazos.** (3) **No se ejecutaron pruebas** ni se usaron datos reales; los objetivos de verificación están sin ejecutar. (4) **No se seleccionaron ni leyeron proveedores, servicios ni bases de datos:** no hay costos, cuotas, ubicaciones ni capacidades verificadas. (5) **Las puntuaciones son neutrales y no discriminan;** el costo es un valor convencional. (6) **Las mitigaciones son propuestas.** (7) ADR-09.C es PROPUESTA; ADR-01, ADR-11 y ADR-13 solo tienen aprobación documental condicionada; ADR-10 no tiene región. (8) No satisface R1 §8.1 ni declara cumplidos RNF-08, PRV-06, PRV-10 ni PRV-15.
+
+**Evidencias necesarias para futuras aprobaciones.** Resolución válida de PEND-JUR; designación de la persona responsable (PRV-08); informe de PRV-18; criterio de validación de la anonimización; decisión sobre DR17-1…10; mecanismos de ADR-14 y ADR-12; modelo de datos real para el inventario; pruebas con datos sintéticos en entorno de pruebas (PRV-17); **auditoría independiente de cierre.**
+
+### 38.17 Estado y preguntas para el responsable
+
+**Estado:** R4-C / ADR-17 **v0.1-R4C: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §38.0). No es aprobación definitiva; no versionado en el momento de redactarse. **Ninguna alternativa seleccionada ni formulación admitida.** **ADR-17 sin aprobación arquitectónica definitiva.** **PEND-JUR abierta.** **R4-D…R4-G: NO INICIADOS.** **R4 como conjunto: sin aprobación ni cierre.** **Fase 2: en desarrollo, sin aprobación global.** **Fase 3: no iniciada.** **Sin commit, push, PR ni merge.** Siguen abiertas todas las decisiones y condiciones heredadas.
+
+**Preguntas:** DR17-1 a DR17-9 y las condiciones OC-369 a OC-388; en particular, cómo conciliar conservación de evidencia y solicitudes de eliminación (DR17-1), quién decide y autoriza excepciones (DR17-2), qué se hace al finalizar un torneo (DR17-3), el tratamiento de menores y autorizaciones (DR17-4). **DR17-10 ya no es una pregunta abierta:** es una incidencia documental heredada corregida y versionada (§38.14).
+
+### 38.18 Correcciones focalizadas H-1…H-7 (revisión focalizada del borrador v0.1)
+
+Corrigen los hallazgos de la revisión focalizada (autoevaluación del autor). **No modifican puntuaciones (central 3,00; rango 1,90–4,10 para A, B y C; pesos 35/30/20/15), alternativas, clasificaciones T/C/S ni identificadores.** El borrador **sigue siendo v0.1-R4C, pendiente de revisión y aprobación.**
+
+| Id | Corrección | Dónde |
+|---|---|---|
+| H-1 | CD17-12: «App» sustituida por «Fijado por OFF-10 [CONF]; ninguna persona asignada [PEND] (DR17-2)»; un requisito del sistema no es una autoridad responsable | §38.6 |
+| H-2 | TR17-03: la mayor afectación de B pasa de «por diseño» a inferencia [INF] que depende de condiciones no demostradas; OB17-05 y OB17-06 siguen C para las tres; sin penalizaciones nuevas | §38.11 |
+| H-3 | Procedencia de los pesos: R1 §2.4 define los criterios, no los pesos; los pesos constan en `aprobaciones.md` (R3-A) y §25.2; 35/30/20/15 sin cambios | §38.0 (b) |
+| H-4 | «(BK, PA-04, TB-8)» sustituido por «(PA-04, TB-8)» | §38.7, punto 5 |
+| H-5 | La reaparición de información eliminada por operaciones antiguas se marca [INF], no demostrada | §38.9 |
+| H-6 | OB17-15 de ALT-17-C: la T se fundamenta en la conservación por defecto, inherente a la definición; la revisión humana es una posible mitigación operativa, ni inherente ni demostrada | §38.10.2 |
+| H-7 | CD17-08: «[PEND] (DR17-2); conflicto: DR17-1»; la responsabilidad y el conflicto entre conservar evidencia y eliminar no se fusionan | §38.6 |
+
+**Incidencia heredada de ADR-13 (estado al momento de H-1…H-7; superado por la actualización siguiente).** La discrepancia de pesos de §37.8.2 queda **confirmada y sin corregir** en esta operación; §37 se preserva intacto. **DR17-10 permanece temporalmente en su estado actual,** pendiente de reclasificación mediante autorización separada; **no es una decisión arquitectónica resuelta.** Sin notas de corrección posteriores de ADR-13 todavía.
+
+**Sin cambios:** ALT-17-A/B/C sin selección; BORRADOR v0.1-R4C pendiente de revisión y aprobación; PEND-JUR abierta; sin commit, push, PR ni merge.
+
+**Actualización posterior de DR17-10 (2026-11-27, fecha inferida; prevalece sobre el párrafo anterior).** Tras la corrección documental de ADR-13, versionada en el commit `46ef9375a16cd64026c8af86e830d3b2d70da9df`, se actualizan las referencias a DR17-10 en §38.0 (b), §38.10.1, §38.10.3, §38.14, §38.17 y este §38.18. **DR17-10 se reclasifica como «INCIDENCIA DOCUMENTAL HEREDADA — CORREGIDA Y VERSIONADA»,** con su identificador histórico conservado: **no es una decisión arquitectónica aprobada, no es una formulación admitida, no concede una excepción, no modifica DR17-1…9 y no demuestra cumplimiento técnico;** no se crea una decisión nueva. **Pesos vigentes:** seguridad 35 %, costo 30 %, sin conexión 20 %, mantenimiento 15 %; **rango vigente 1,90–4,10; central 3,00;** el rango histórico 1,95–4,05 permanece como evidencia. **Sin cambios** en ALT-17-A/B/C, TS17-A/B/C, matrices T/C/S, puntuaciones, CD17, OP17, CV17, OB17, TR17, OC-369…388, RR17 ni CR4C; **DR17-1…9 siguen pendientes;** ADR-17 continúa como BORRADOR v0.1-R4C, pendiente de revisión y aprobación; sin commit, push, PR ni merge de esta actualización.
+
+**Precisión editorial R-1 (2026-11-27, fecha inferida; verificación puntual de DR17-10).** En §38.10.3 se añadió que la coincidencia de rangos de ADR-13 y ADR-17 **no implica comparabilidad entre sus alternativas, que no debe presumirse**, y se distinguió la igualdad de pesos, la coincidencia numérica de los rangos, las diferencias de naturaleza entre alternativas de distintos ADR y la ausencia de una comparación transversal aprobada. **Es una precisión de redacción:** no modifica la matriz, las puntuaciones (central 3,00; rango 1,90–4,10; pesos 35/30/20/15), las alternativas, DR17-1…9 (pendientes) ni DR17-10 («INCIDENCIA DOCUMENTAL HEREDADA — CORREGIDA Y VERSIONADA»), y **no crea identificadores arquitectónicos nuevos.** ADR-17 continúa como BORRADOR v0.1-R4C, pendiente de revisión y aprobación; sin commit, push, PR ni merge.
