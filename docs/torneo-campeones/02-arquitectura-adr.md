@@ -11914,3 +11914,369 @@ Corrigen los hallazgos de la revisión focalizada (**correcciones documentales d
 **Precisión R-1 (2026-11-28, fecha inferida; verificación puntual de H-1…H-7; corrección y comprobación del autor, no auditoría independiente).** **Hallazgo:** ALT-14-C / OB14-02 figuraba como S («casi todo hereda al actor»), pero el mantenimiento manual lo realiza una persona con privilegios efectivos que pueden operar fuera del evaluador de autorización (SV-14: purga como acción privilegiada, fuera de los roles de la aplicación). **Celda corregida:** ALT-14-C / OB14-02, **S → C**. **Fundamento:** el resultado depende del procedimiento y de los privilegios efectivos de la persona que opera; una identidad humana **no demuestra** que todas las operaciones se sometan al evaluador de la aplicación; **no es T,** porque ejecutar fuera del evaluador no es una propiedad estructural obligatoria de ALT-14-C. **Resultado de la comprobación:** solo cambió esa celda; OB14-03 y OB14-04 de ALT-14-C permanecen en C; ALT-14-B / OB14-02 permanece en T (TS14-B); las T estructurales siguen siendo exactamente tres, una por alternativa (OB14-02 de B, OB14-12 de C, OB14-16 de A); las puntuaciones no dependen de T/C/S (§39.10.3: central 3,00; rango 1,90–4,10; pesos 35/30/20/15) y no se recalcularon. **Observación:** §39.1 (3) y §39.5 (principio 1) indican que la persona que opera queda «registrada»; se leen como propuesta [PROP] de registro con origen (OB14-03, condición abierta), **no como garantía** de trazabilidad por usar identidad humana. Verificación: pendiente. **No altera** los registros de H-1…H-7; ADR-14 sigue como BORRADOR v0.1-R4D, pendiente de revisión y aprobación; sin commit, push, PR ni merge.
 
 **Precisiones editoriales sobre trazabilidad (2026-11-28, fecha inferida; autoevaluación del autor, no auditoría independiente).** **Hallazgo:** dos formulaciones («registrada con su origen» en §39.1 (3) y «queda registrada» en §39.5, principio 1) podían leerse como garantía de trazabilidad por usar identidad humana. **Corrección:** ambas se precisaron: la operación se atribuiría a la identidad humana correspondiente; **la trazabilidad es un control propuesto [PROP]** sujeto a mecanismos y procedimientos no implementados ni demostrados; la identidad humana no es, por sí sola, garantía de registro; **OB14-03 sigue siendo una condición abierta;** no existe evidencia empírica de trazabilidad implementada. **Verificación puntual del autor:** ninguna de las dos frases presenta ya el registro como garantía demostrada; ambas son coherentes con OB14-03 y con ALT-14-C / OB14-02, OB14-03 y OB14-04 (C); la matriz no cambió en ninguna otra celda; las puntuaciones permanecen intactas; no hay contradicción con ADR-02 (CMP-08 como único decisor), ADR-03 (actor y sesión) ni ADR-13 (señales sin datos personales). **No se introducen obligaciones, roles ni decisiones nuevos.** ADR-14 sigue como borrador hasta el metadato de aprobación documental condicionada; sin commit, push, PR ni merge.
+
+# PARTE XXVI — BLOQUE R4-E (v0.1-R4E, APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE; ADR-12 SIN APROBACIÓN ARQUITECTÓNICA DEFINITIVA; 2026-11-28 inferida)
+
+## 40. R4-E — ADR-12: Respaldo, restauración y continuidad (evaluación y borrador condicionado)
+
+**Estado: v0.1-R4E — APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §40.0). **No es aprobación arquitectónica definitiva ni autorización de implementación.** Autoevaluación del autor, no auditoría independiente.
+
+### 40.0 Alcance, autorización, reglas y observaciones preservadas
+
+- **Autorización (2026-11-28, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R4-E: INICIO CONTROLADO DEL BORRADOR ADR-12»: «AUTORIZO EXCLUSIVAMENTE INICIAR R4-E Y REDACTAR EL BORRADOR DOCUMENTAL DE ADR-12, RESPETANDO SU ALCANCE REAL EN EL PLAN APROBADO.» **«NO AUTORIZO APROBACIÓN DOCUMENTAL, SELECCIÓN DE ALTERNATIVAS NI IMPLEMENTACIÓN.»** Solo se modifica este documento, con esta Parte nueva al final; `aprobaciones.md` y `bitacora.md` **no se modifican;** todo el contenido anterior a §40 se conserva sin cambios. **No se inician R4-F ni R4-G ni la Fase 3.**
+- **Nombre y alcance de ADR-12 (verificados en las fuentes).** R1 §8.1 lo nombra **«Respaldo, restauración y continuidad»** y le asigna la pregunta *«¿Qué estrategia cumple RNF-08 y RNF-17 con RPO y RTO propuestos?»*, con **≥ 2 alternativas** y el insumo RF-ACC-09 (recuperación). R1 §8.2 y el plan de R4 lo nombran **«Respaldo y continuidad»** (forma abreviada); este borrador usa el nombre completo de R1 §8.1. Dependencias de R1 §8.2: **ADR-01 y ADR-10; ADR-11; ADR-17.** El plan de R4 lo ubica como **R4-E.** **El plan aprobado define suficientemente ADR-12;** no se sustituyó su finalidad ni se imaginó una arquitectura distinta.
+- **Qué es este borrador.** Una evaluación documental de **estrategias de respaldo, restauración y continuidad**, con una **comparación que no expresa preferencia.** **No selecciona alternativas, proveedores, servicios, herramientas ni mecanismos;** no admite formulaciones; no resuelve decisiones; no acepta riesgos; no concede excepciones (**D-2 sin excepción**); **no declara cumplido R1 §8.1, RNF-08 ni RNF-17;** no implementa; no crea cuentas, claves ni secretos; no configura servicios; no escribe código; no modifica infraestructura ni bases de datos; no ejecuta respaldos, restauraciones ni pruebas.
+- **Convención.** [CONF]: requisito o texto confirmado de `01`, R1, R2, R3 o R4-A a R4-D con el estado que allí declara. [DOC]: contenido ya documentado en este archivo (incluidas las fuentes de R3-A del 2026-11-22, **no re-verificadas**). [REC]: recomendación heredada, **no requisito confirmado.** [PROP]: propuesta no aprobada. [INF]: inferencia técnica del autor. [PEND]: pendiente. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; lo no leído es [PEND] y no se penaliza; **una aprobación documental condicionada no demuestra implementación ni cumplimiento técnico;** «por diseño» solo se usa cuando la definición de la alternativa lo garantiza.
+- **Reglas críticas.** (1) **RPO ≤ 24 h y RTO ≤ 8 h son valores propuestos [REC]** de RNF-08 («a confirmar según el plan contratado»): **no están garantizados** (BK-08) y no se convierten en requisito. (2) **No se promete eliminación absoluta en copias:** RES-03 sigue sin aceptar; la retención y el borrado de respaldos son de ADR-17 (DR17-6, OC-377). (3) **No se inventan costos, cuotas ni compatibilidades:** las cifras y los hechos de proveedores provienen de R3-A (2026-11-22), se citan con ese estado y **no se atribuyen a una alternativa** (atribuirlos equivaldría a seleccionar un proveedor). (4) **No se asume que un plan gratuito ofrezca copias, retención ni restauración.** (5) **Ninguna clave, credencial, cuenta ni secreto se crea ni se describe como existente.** (6) **ADR-12 no define la política de retención (ADR-17), la identidad de ejecución (ADR-14), las alertas (ADR-13) ni los entornos (ADR-11):** los consume.
+- **Identificadores nuevos (sin colisión; comprobados contra el archivo).** **ALT-12-A, ALT-12-B, ALT-12-C** (alternativas), **TS12-A, TS12-B, TS12-C** (limitaciones; TS12-B y TS12-C distinguen componentes (i), (ii) y (iii), subdivisiones descriptivas que no son identificadores nuevos), **OB12-01…17** (objetivos), **LM12-01…08** (límites y responsabilidades), **ESC12-01…10** (escenarios), **SG12-01…08** (seguridad, privacidad y autorización), **TR12-01…14** (amenazas), **DR12-1…10** (decisiones del responsable), **OC-409…428** (condiciones abiertas; continúan la secuencia que termina en OC-408), **RR12-01…14** (riesgos de redacción), **CR4E-01…16** (criterios de revisión documental). **Los prefijos de §36 a §39 no se reutilizan.**
+- **Exclusiones.** Seleccionar alternativa, proveedor, servicio, herramienta, almacenamiento o mecanismo; fijar RPO, RTO, frecuencias, retenciones o plazos como decisiones; resolver decisiones heredadas o DR12; admitir formulaciones; aceptar riesgos o conceder excepciones; aprobar ADR-12, R4-E, R4 ni la Fase 2; iniciar R4-F o R4-G; realizar respaldos o restauraciones; crear secretos o claves; modificar las Partes I–XXV ni los registros; modificar ADR-11, ADR-13, ADR-14 ni ADR-17 ni sus decisiones pendientes.
+- **Aprobación (metadato; 2026-11-28, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R4-E: PRECISIÓN EDITORIAL Y APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-12»: autoriza corregir la observación editorial residual del encabezado de §40.8.3, verificarla puntualmente y, si la verificación era satisfactoria, **registrar la APROBACIÓN DOCUMENTAL CONDICIONADA de R4-E / ADR-12.** **Estado: R4-E / ADR-12 (v0.1-R4E): APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA.** **La aprobación comprende el borrador v0.1-R4E, la revisión focalizada, las correcciones H-1…H-6 (§40.15), la verificación puntual y la precisión editorial del encabezado de §40.8.3, todas realizadas por autoevaluación del autor, no por una auditoría independiente.** **Esta aprobación NO es aprobación arquitectónica definitiva de ADR-12, no autoriza implementación, no selecciona alternativas, proveedores ni mecanismos, no admite formulaciones, no resuelve DR12-1…10, no fija RPO, RTO, frecuencias ni retenciones, no acepta riesgos ni concede excepciones.** El evento de aprobación es independiente y no reutiliza identificadores ALT-12, TS12, OB12, LM12, ESC12, SG12, TR12, DR12, OC, RR12 ni CR4E. Se conservan: **ALT-12-A, ALT-12-B y ALT-12-C sin selección; TS12-A/B/C**; **BK-01…14 como capacidades propuestas [PROP]**; **RPO 24 h y RTO 8 h como [REC], sin garantía**; pesos **seguridad 35 %, costo 30 %, sin conexión 20 %, mantenimiento 15 %**; puntuaciones **ALT-12-A: central 3,00 y rango 1,90–4,10; ALT-12-B: central 2,65 y rango 1,55–3,75; ALT-12-C: central 3,00 y rango 1,90–4,10**, con la **penalización de B como aplicación analógica [INF]** que depende de DR12-6 y DR12-8 y se revierte en la sensibilidad (el costo es un valor neutro convencional; la coincidencia numérica de rangos no implica comparabilidad entre alternativas de distintos ADR); **DR12-1…10 abiertas; OC-409…428 abiertas; RR12-01…14 sin aceptar; CR4E-01…16 intactos**; **ADR-01, ADR-11, ADR-13, ADR-14 y ADR-17 con aprobación únicamente documental condicionada; ADR-02.C y ADR-09.C todavía PROPUESTA; ADR-10 sin región seleccionada**; **R1 §8.1 sin cumplimiento demostrado; R1 §8.2 sin satisfacción definitiva; D-2 sin excepción; PEND-JUR abierta**; **sin respaldos ni restauraciones realizados, sin pruebas empíricas y sin auditoría independiente.** **Estado:** **R3 cerrado documentalmente de forma condicionada; R4-A, R4-B, R4-C y R4-D aprobados documentalmente de forma condicionada y versionados; R4-F y R4-G NO INICIADOS; R4 como conjunto SIN CIERRE NI APROBACIÓN GLOBAL; Fase 2 EN DESARROLLO, sin aprobación global; Fase 3 NO INICIADA.** **Precedencia:** las menciones «borrador», «no aprobado», «sin aprobación» o «pendiente de revisión» de esta Parte (§40.0, §40.1, §40.11 —CR4E-02—, §40.14 y los registros de §40.15) **se conservan como antecedentes de elaboración y no representan el estado documental vigente;** prevalece este apartado en cuanto al estado de aprobación documental, **sin que ello sea aprobación arquitectónica definitiva.** La observación (a) siguiente (nota posterior del versionado de R4-C) **sigue pendiente** y es independiente de este registro. Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Observaciones preservadas (sin corregir fuera de este anexo).** (a) **La nota posterior del versionado de R4-C (commit `fea939999b1607485964d40ef111ded58726750f`) sigue pendiente** en los registros históricos de R4-C; es un asunto administrativo separado que **no se mezcla con ADR-12.** (b) ADR-12 aparece con dos nombres en las fuentes (§8.1 y §8.2/plan); se usa el completo. (c) DR3F-4 y los estados históricos contradictorios; la fila histórica de R2-C4 con una columna adicional; la diferencia entre 12 y 11 decisiones abiertas de R2-A; las decisiones técnicas de R2 a R4-D abiertas; las 16 decisiones sin formulación A; la ausencia de formulaciones admitidas; **R1 §8.1 sin cumplimiento demostrado; R1 §8.2 sin satisfacción definitiva** (ADR-01, ADR-11, ADR-13, ADR-14 y ADR-17 solo con aprobación documental condicionada; **ADR-02.C y ADR-09.C como PROPUESTA;** ADR-10 sin región); **D-2 sin excepción; PEND-JUR abierta;** el revisor de R4-G, la ubicación de la trazabilidad final de R4-F y el cierre de R4 siguen abiertos; la **auditoría independiente de cierre sigue pendiente.**
+
+### 40.1 Problema arquitectónico y objetivos (A)
+
+| Campo | Contenido |
+|---|---|
+| Decisión | ADR-12 · **Respaldo, restauración y continuidad** |
+| Subbloque | R4-E del plan de R4 (aprobado solo para planificación); orden de R1 §8.2: ADR-11, ADR-13, ADR-17, ADR-14, **ADR-12** |
+| Pregunta (R1 §8.1) | «¿Qué estrategia cumple RNF-08 y RNF-17 con RPO y RTO propuestos?» (≥ 2 alternativas; insumo RF-ACC-09) |
+| Depende de (R1 §8.2) | **ADR-01 y ADR-10** (decisión conjunta de plataforma y región); **ADR-11** (entornos); **ADR-17** (retención y anonimización) |
+| Problema | Cómo **conservar copias recuperables** de los datos del sistema, **restaurarlas de forma segura y probada,** y **seguir operando** (captura sin conexión y sincronización posterior) si el sistema o el proveedor fallan, **sin ampliar la exposición de datos personales ni de menores** y **sin gasto no autorizado** |
+| Requisitos de origen | RNF-08, RNF-17 (con RNF-14, RNF-12, RNF-16); RE3-04, RE3-07; RF-ACC-09; RC-05; PRV-06, PRV-10, PRV-13, PRV-15, PRV-17; AM-29, AM-30; RES-03; TB-9; BK-01…14 de R3-A |
+| Componente | CMP-19 (observabilidad y operación): **gestión de respaldos** (almacenados en Z3) [DOC] |
+| Fuera de ADR-12 | Política de retención y borrado de respaldos (**ADR-17**); identidad de ejecución de tareas (**ADR-14**); alertas y observabilidad (**ADR-13**); entornos y su separación (**ADR-11**); región y ubicación (**ADR-10**); plataforma (**ADR-01**); texto jurídico (PEND-JUR) |
+| Estado | **v0.1-R4E: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §40.0; no es aprobación definitiva); **ninguna alternativa seleccionada;** ninguna formulación admitida |
+
+**Objetivo.** Documentar **estrategias genuinamente distintas** para respaldo, restauración y continuidad, sus objetivos verificables, límites, escenarios, riesgos y condiciones abiertas, **sin elegir** y sin convertir las propuestas de R3-A en requisitos confirmados.
+
+### 40.2 Entradas heredadas y límites de la lectura (B)
+
+| Entrada | Qué aporta | Estado y límite |
+|---|---|---|
+| RNF-08; RE3-04 | **Respaldos automáticos verificables y restauración probada antes del piloto;** objetivos propuestos RPO 24 h y RTO 8 h, «a confirmar según el plan contratado» | Requisito [CONF] (Q-07); **valores [REC]** |
+| RNF-17; RC-05; RNF-14; RF-ACC-09 | Manual de operación y sucesión de accesos; procedimiento si el sistema cae durante un partido (seguir capturando sin conexión y sincronizar después); accesos individuales y revocables; segundo dueño y recuperación administrativa | [CONF] / [REC] (RNF-17: REC, RP-36) |
+| BK-01…BK-14 (R3-A §25.7) | **Capacidades exigidas [PROP]** para el respaldo: volcado programado con credencial de mínimo privilegio, cifrado con claves separadas, almacenamiento externo con retención acotada, verificación automatizada, restauración integral, RPO/RTO, alertas, recuperación ante pausa, continuidad del mecanismo, configuración como código, datos sintéticos, reaplicación tras restaurar y restauración autorizada | **«Propuesta de capacidades; no está implementada ni demostrada»** (R3-A); **los mecanismos concretos son de ADR-12 y ADR-13 (R4)** |
+| AM-29, AM-30, CAB-17, TB-9, HR1-12, RES-03, OM-06 | Riesgo de restaurar en un entorno no protegido; respaldos con datos anteriores a una anonimización; restauración que revive accesos revocados | **RES-03 sin aceptar;** OM-06 sin resolver; [DOC] |
+| EN-18, OC-343, BK-09, DR11-2 (ADR-11) | Entorno aislado para restauraciones, **sin asumir un proyecto gratuito adicional;** pausa del proveedor | EN-18 [CONF] (AM-29) y [PROP]; **ADR-11 solo aprobación documental condicionada;** DR11-2 abierta |
+| DR17-6, OC-377, OB17-09, TR17-06, TR17-07 (ADR-17) | Retención de respaldos, borrado selectivo y tolerancia a la reaparición tras restaurar; reaplicación de revocaciones y anonimizaciones | **ADR-17 solo aprobación documental condicionada;** DR17-1…9 pendientes |
+| TK14-05, TK14-06, TK14-07, OB14-11, OC-402 (ADR-14) | Respaldo programado, control de antigüedad y verificación periódica como tareas; identidad de ejecución | **ADR-14 solo aprobación documental condicionada;** DR14-1…10 pendientes |
+| OB13-10, EVO-05, ALO-04, MTO-06, OC-62, OC-362 (ADR-13) | Alerta de fallo y antigüedad del respaldo desde un componente distinto del ejecutor | **ADR-13 solo aprobación documental condicionada;** RNF-09 y PRV-12 sin cumplimiento demostrado |
+| SV-10, SV-12, RR9I-17, OC-137, OC-139, DR9I-8 (ADR-09.I) | Recuperación de la auditoría; riesgo de restauración a un estado anterior no detectable; copia externa de la auditoría | **ADR-09.C PROPUESTA;** ADR-09.I solo aprobación documental condicionada |
+| OC-54…OC-70, DR3-6, DR3-9 (R3-A) | Elegibilidad y términos de planes; si el almacenamiento externo exige método de pago; costo de dominio; credencial mínima; custodia de la clave | **Pendientes;** fuentes del 2026-11-22 |
+| PRV-06, PRV-10, PRV-13, PRV-15, PRV-17; Q-25 | Anonimización; retención (PEND-JUR); transferencias; puerta de lanzamiento; datos sintéticos | [CONF]; **PEND-JUR abierta** |
+
+**Límites de la lectura.** Se tomaron los textos consignados en `01-requisitos.md` y en este archivo (R1 a R4-D); **no se consultaron fuentes externas ni documentación de proveedores.** Los hechos de proveedores citados provienen de R3-A (2026-11-22) y **no se re-verificaron.** Lo que requeriría lectura nueva (capacidades de copias gestionadas, retención, cuotas, restauración) es **[PEND].** **No se hicieron respaldos, restauraciones ni pruebas.**
+
+### 40.3 Objetivos y requisitos verificables (B)
+
+La columna «Origen» indica si el objetivo es [CONF], [REC], [DOC] o [PROP]. **Un objetivo [PROP] no es un requisito confirmado.** La columna «Verificación propuesta» describe cómo podría comprobarse **cuando exista un mecanismo y datos sintéticos;** **hoy nada está verificado.**
+
+| Id | Objetivo | Origen | Verificación propuesta (no ejecutada) |
+|---|---|---|---|
+| OB12-01 | **Respaldos automáticos y verificables** | RNF-08, RE3-04 [CONF] | Comprobar que cada respaldo de prueba se genera y se verifica sin intervención manual |
+| OB12-02 | **Capacidad de restaurar de manera controlada y probada antes del piloto,** con medición de tiempos y con las medidas de seguridad de SG12-01…08 y del modelo de autorización. **La disponibilidad de un entorno aislado de ensayo o recuperación se trata en OB12-10,** no aquí | RNF-08 [CONF]; BK-14 [PROP] | Restauración de un respaldo sintético, con medición, bajo los controles de SG12 |
+| OB12-03 | **Pérdida máxima de datos acotada (RPO)** al valor que se confirme (propuesto 24 h) | RNF-08 [REC valor]; BK-06 [PROP] | Medir la antigüedad del último respaldo de prueba |
+| OB12-04 | **Tiempo de recuperación acotado (RTO)** al valor que se confirme (propuesto 8 h), con procedimiento escrito y ensayado | RNF-08 [REC valor]; BK-07 [PROP]; RNF-17 | Ensayo cronometrado de restauración |
+| OB12-05 | **Copia externa independiente del proveedor de datos y del hosting,** con retención acotada condicionada a ADR-17 y PEND-JUR | BK-03 [PROP]; HR1-12 | Comprobar que la copia sobrevive a la pérdida del proveedor de datos de prueba |
+| OB12-06 | **Cifrado antes de salir del ejecutor, claves de cifrado y de descifrado separadas,** custodia fuera de línea con segundo custodio, rotación y recuperación | BK-02 [PROP]; RNF-14, RNF-17; DR3-9 | Revisar que la clave de descifrado no reside en el ejecutor, el repositorio ni el almacenamiento |
+| OB12-07 | **Toda copia con el mismo nivel de protección que Z3.** Se distinguen: **(A) restauración de prueba:** solo en un entorno aislado, sin exposición de datos reales de menores, con controles de acceso y sin interferir con producción; **(B) recuperación real:** solo en un entorno protegido conforme a Z3 y demás controles aplicables, con proceso controlado y validación de permisos e invariantes. **Ninguna restauración en un entorno no protegido** (AM-29) | TB-9; AM-29 [CONF]; EN-18 [CONF/PROP] | Revisión de ubicaciones y accesos de las copias de prueba |
+| OB12-08 | **Reaplicación de revocaciones y anonimizaciones posteriores al respaldo,** con el acceso cerrado hasta completarla | BK-13 [PROP]; OM-06; RES-03 (sin aceptar); OB17-09 | Restaurar un respaldo sintético anterior a una revocación y comprobar la reaplicación |
+| OB12-09 | **Alertas de fallo y de antigüedad** desde un componente distinto del ejecutor | BK-08, OC-62 [DOC]; OB13-10 | Retrasar un respaldo de prueba y comprobar la alerta externa |
+| OB12-10 | **Entorno aislado de restauración** obtenido **sin asumir un proyecto adicional** ni método de pago sin autorización | EN-18, BK-09, OC-343 [PROP]; RE3-07 [CONF] | Revisar cómo se obtiene el entorno de prueba |
+| OB12-11 | **Recuperación ante pausa del proveedor y continuidad del propio mecanismo** (por ejemplo, la inactividad que desactiva programaciones) | BK-09, BK-10 [PROP]; OC-59 | Simular una pausa y comprobar la recuperación |
+| OB12-12 | **Reconstrucción completa:** configuración como código y secretos **fuera** del volcado; recuperación de autenticación, factores, RLS, funciones, permisos y objetos de almacenamiento | BK-05, BK-11 [PROP]; OC-57 | Reconstruir un entorno de prueba a partir de repositorio y respaldo |
+| OB12-13 | **Continuidad operativa:** si el sistema cae durante un partido, la captura sigue sin conexión y se sincroniza después | RNF-17 [REC]; RC-05 [CONF] | Caída simulada durante la captura de un partido de prueba |
+| OB12-14 | **Sucesión de accesos y recuperación administrativa** | RNF-14 [CONF]; RNF-17; RF-ACC-09 [CONF] | Revisar el manual de operación y la designación del segundo dueño |
+| OB12-15 | **Sin datos personales reales en respaldos antes de PRV-15;** sin servicio de pago sin autorización | BK-12 [PROP]; PRV-15, PRV-17 [CONF]; RE3-07, EN-10 | Revisar semillas y copias de prueba |
+| OB12-16 | **Trazabilidad de respaldos y restauraciones** (quién, cuándo, resultado), sin datos personales | [PROP]; IN-09-09 [REC]; MIN13-01…10 | Revisar el registro de una restauración de prueba |
+| OB12-17 | **No prometer eliminación absoluta en copias;** la retención y el borrado de respaldos son de ADR-17 | RES-03; DR17-6 [DOC] | Revisar que ningún texto prometa borrado completo |
+
+**Definiciones.** *Respaldo*: copia recuperable de datos o de configuración. *Restauración*: recrear un entorno a partir de un respaldo. *Continuidad*: capacidad de seguir operando o recuperar la operación ante fallo. *RPO*: máxima pérdida de datos aceptable medida en tiempo. *RTO*: tiempo máximo para recuperar el servicio. *Entorno aislado*: entorno separado de producción para restaurar, sin tocar datos reales ni producción (EN-18).
+
+### 40.4 Límites del sistema y responsabilidades (C)
+
+El cuadro fija **qué decide ADR-12 y qué no.** **No asigna a personas o roles** salvo lo que `01` ya confirma (la organización responsable, PRV-01; los accesos a nombre de la organización, RNF-14; el segundo dueño, RF-ACC-09). **Lo demás es decisión del responsable** (DR12-2, DR12-3).
+
+| Id | Aspecto | Quién o qué lo decide | Estado |
+|---|---|---|---|
+| LM12-01 | **Estrategia de respaldo y restauración** (qué se copia, dónde, cómo se restaura) | **ADR-12** (este borrador solo la evalúa) | [PEND]; DR12-7 |
+| LM12-02 | **Retención de respaldos y borrado en copias** | **ADR-17** (DR17-6) | **Fuera de ADR-12;** PEND-JUR |
+| LM12-03 | **Identidad bajo la que se ejecuta el respaldo y su verificación** | **ADR-14** (TK14-05, TK14-06; DR14-2) | **Fuera de ADR-12** |
+| LM12-04 | **Alertas y observabilidad** del respaldo | **ADR-13** (OB13-10) | **Fuera de ADR-12;** mecanismo [PEND] |
+| LM12-05 | **Entorno aislado de restauración y separación de entornos** | **ADR-11** (EN-18; DR11-2) | **Fuera de ADR-12;** ADR-12 lo **usa** |
+| LM12-06 | **Plataforma y región de los datos y de las copias** | **ADR-01 y ADR-10** (decisión conjunta) | **Sin selección definitiva;** ADR-10 sin región |
+| LM12-07 | **Custodia de claves y sucesión de accesos** | Responsable de la organización; **personas por designar** (DR3-9; RNF-14) | [PEND] (DR12-2) |
+| LM12-08 | **Autorización de una restauración** (de prueba o en producción) y reapertura del acceso | **Decisión del responsable** | [PEND] (DR12-3, DR12-9) |
+
+### 40.5 Flujos y escenarios relevantes (D)
+
+Los escenarios son **conceptuales y comunes a las alternativas;** cada alternativa los resuelve de modo distinto (§40.7). **Ninguno asume mecanismo ni proveedor.**
+
+| Id | Escenario | Qué debe ocurrir [PROP] | Fuente | Condición |
+|---|---|---|---|---|
+| ESC12-01 | **Respaldo periódico normal** | Se genera una copia, se verifica, se cifra antes de salir del ejecutor y se guarda fuera del dominio de fallo de los datos; el resultado queda registrado | BK-01…04 | OC-410, OC-412, OC-417 |
+| ESC12-02 | **Respaldo que falla o se retrasa** | Se detecta desde un componente distinto del ejecutor y se alerta al responsable técnico; el RPO **no está garantizado** | BK-08, OC-62 | OC-417 |
+| ESC12-03 | **Pausa o suspensión del proveedor** | Recuperación desde el panel del proveedor si es posible o desde la última copia en un entorno aislado; la URL del proyecto puede cambiar | BK-09 [DOC] | OC-419 |
+| ESC12-04 | **Restauración de prueba antes del piloto** | **(A)** Se restaura una copia sintética en un entorno aislado, sin datos reales de menores, con controles de acceso y sin interferir con producción; se comprueban datos, esquema, RLS, funciones, permisos, autenticación y factores, y se mide el RTO | BK-14, RNF-08 | OC-414, OC-426 |
+| ESC12-05 | **Pérdida o corrupción de datos en producción (recuperación real)** | **(B)** Se decide recuperar, con autorización, en un entorno protegido conforme a Z3, con un proceso controlado y la **validación de permisos e invariantes** (RT-06: preservación del último dueño; RF-ACC-09: recuperación administrativa); se contemplan los accesos revocados, los datos anonimizados o eliminados, el riesgo de reintroducir información sensible y la sincronización sin conexión y los estados posteriores al respaldo. **Una restauración opera fuera del evaluador de autorización (CMP-08):** por eso exige autorización y validación (DR12-3, DR12-9). El acceso permanece cerrado hasta completar la reaplicación. **No hay procedimiento ni ensayo implementado;** no se promete una restauración segura ni tiempos garantizados | BK-13; RNF-17 | OC-415, OC-421 |
+| ESC12-06 | **Restauración que revive accesos revocados o datos anonimizados** | Se reaplican revocaciones y anonimizaciones posteriores al respaldo a partir de un registro conservado fuera de la base restaurada | BK-13; OM-06; RES-03 | OC-415, OC-416 |
+| ESC12-07 | **Caída del sistema durante un partido** | La captura continúa sin conexión y se sincroniza al volver; tras una restauración se evita la reaparición de datos eliminados | RNF-17; RC-05; TR17-09 | OC-422 |
+| ESC12-08 | **Pérdida de la clave de descifrado o indisponibilidad de los custodios** | La recuperación depende de la copia de recuperación segura y del segundo custodio; sin ellos la copia **no es recuperable** | BK-02; DR3-9 | OC-412 |
+| ESC12-09 | **Cambio de proveedor o de región** | Se repite la restauración integral probada y se revisa la ubicación de las copias | BK-14; ADR-10; PRV-13 | OC-424 |
+| ESC12-10 | **Recuperación del acceso administrativo** | El segundo dueño y el procedimiento de sucesión permiten recuperar el acceso sin eludir la autenticación reforzada | RF-ACC-09; RNF-14; RNF-17 | OC-421 |
+
+### 40.6 Seguridad, privacidad y autorización (E)
+
+| Id | Aspecto | Qué se examina [PROP] | Relación con ADR aprobados documentalmente | Estado |
+|---|---|---|---|---|
+| SG12-01 | **Cifrado y claves** | Cifrado antes de salir del ejecutor; clave de descifrado fuera del ejecutor, del repositorio y del almacenamiento; custodia fuera de línea con segundo custodio | BK-02; DR3-9; RNF-14 | [PROP]; **sin claves ni custodios** |
+| SG12-02 | **Acceso a las copias** | Quién puede leer, copiar o restaurar una copia; mínimo privilegio | ADR-02.C/I; ADR-14 (identidad de ejecución) | [PEND] (DR12-3) |
+| SG12-03 | **Datos de menores y personales en copias** | Las copias contienen datos de menores y personales con el mismo nivel de protección que Z3; **ningún respaldo contiene datos personales reales antes de PRV-15** | TB-9; AM-29; PRV-17; ADR-17 | [CONF] como límite; **no demostrado** |
+| SG12-04 | **Restauración en entorno protegido** | **De prueba (A):** en un entorno aislado, sin datos reales de menores, con controles de acceso y sin interferir con producción, sin asumir un proyecto adicional. **Recuperación real (B):** en un entorno protegido conforme a Z3, con proceso controlado y validación de permisos e invariantes | EN-18; OC-343; DR11-2 | [PEND] |
+| SG12-05 | **Retención y eliminación en copias** | Las copias conservan datos anteriores a una anonimización; **no se promete borrado absoluto** | ADR-17 (DR17-6; OC-377); RES-03 | **Sin aceptar;** PEND-JUR |
+| SG12-06 | **Reaplicación y reapertura del acceso** | El acceso permanece cerrado hasta reaplicar revocaciones y anonimizaciones; el registro de reaplicación es **también un dato retenido** | BK-13; OM-06; ADR-17 | [PEND] (DR12-9) |
+| SG12-07 | **Ubicación y transferencia de las copias** | Región, procesamiento y transferencias del almacenamiento externo | ADR-10; PRV-13; Q-25; PEND-JUR | **Sin región seleccionada** |
+| SG12-08 | **Trazabilidad y observabilidad** | Registro de respaldos y restauraciones sin datos personales ni secretos | ADR-13 (MIN13-01…10); ADR-09; ADR-17 | [PEND] |
+
+**Declaración.** **Ningún control de esta sección está demostrado.** Se proponen como condiciones de revisión (§40.11), no como garantías.
+
+### 40.7 Alternativas arquitectónicas de respaldo, restauración y continuidad (F, G)
+
+Las tres alternativas son **conceptuales:** describen **qué estrategia de recuperación se adopta y de quién depende,** **no qué servicio o herramienta la implementa** (**no se seleccionan** proveedores, almacenamientos ni mecanismos). Todas deben cumplir los objetivos eliminatorios comunes (OB12-01, OB12-02, OB12-13 y OB12-15) y las reglas de §40.0. Los trade-offs «por diseño» se indican solo cuando la propia definición los garantiza.
+
+| Aspecto | ALT-12-A · Copia lógica externa programada, con restauración bajo demanda | ALT-12-B · Copias gestionadas por el proveedor de datos | ALT-12-C · Copia lógica externa más entorno de recuperación en espera |
+|---|---|---|---|
+| **Definición** | Una **copia lógica periódica** de los datos y la configuración se genera, se verifica, se **cifra antes de salir del ejecutor** y se guarda en un **almacenamiento externo** al proveedor de datos y al de hosting; la **restauración se hace bajo demanda** en un entorno aislado | El **mecanismo principal** son las **copias y la recuperación que ofrece el propio proveedor de datos** de la plataforma, según el plan contratado, con la verificación que ese plan permita | Se mantiene la **copia lógica externa** de ALT-12-A **y,** además, un **entorno de recuperación en espera** que se alimenta de forma continua o frecuente desde producción, para **acortar el RTO** |
+| **Alcance** | Datos, roles, esquema, autenticación, RLS, funciones y permisos (BK-05); configuración como código aparte (BK-11) | Lo que cubra el plan del proveedor. **Las exclusiones de objetos de almacenamiento y de configuración se refieren a la plataforma candidata examinada en R3-A** (BK-05 [DOC]); **con otro proveedor o plan el alcance podría variar y requiere verificación** [PEND] (OC-410, OC-420); no se generaliza | Igual que A, más la réplica de recuperación (datos reales) |
+| **Ventajas** | **Independencia del proveedor de datos y del hosting** por definición (BK-03 [PROP]); control de cifrado y claves por la organización; verificación automatizada propuesta (BK-04); **sin entorno adicional permanente** [INF] | **Menos piezas propias** que operar; la recuperación la ofrece quien conoce la plataforma [INF]; sin custodia propia de claves de cifrado de la copia [INF, a verificar] | **RTO potencialmente menor** [INF, no demostrado]; entorno ya preparado para continuar |
+| **Limitaciones inherentes** | **TS12-A (restauración en frío),** clasificada C: el **RTO incluye por definición** la reconstrucción y el ensayo; el **RPO es el intervalo** de la copia; la recuperación **depende de los custodios** de la clave de descifrado y de un ejecutor programado cuya puntualidad no está garantizada (BK-08 [DOC]) | **TS12-B (i), estructural:** las copias dependen **del mismo proveedor y de la misma cuenta** que los datos de producción; por definición **no hay copia administrativamente independiente** del proveedor, y de ahí una **dependencia administrativa y contractual común** [por diseño]. **TS12-B (ii), no demostrado:** que además compartan **infraestructura física** no se afirma; la **separación física dentro del proveedor está pendiente de verificar** [PEND] | **TS12-C (i), estructural:** exige la **existencia de un entorno adicional de recuperación permanentemente activo,** que por definición hay que **obtener y proteger** más allá de los entornos previstos (EN-18: sin asumir un proyecto adicional) [por diseño]. **TS12-C (ii), inferencia [INF]:** la **exposición de datos personales** derivada de su configuración u operación es un riesgo cuya magnitud y mitigación dependen de controles pendientes (OB12-07; OC-423); **no es una pérdida inevitable de seguridad.** **TS12-C (iii):** **no existe evidencia empírica de protección** (ni de que sea suficiente ni de que sea insuficiente) |
+| **Riesgos derivados** (de la operación o configuración) | Ejecutor retrasado o perdido; clave perdida; costo y requisito de pago del almacenamiento externo (OC-66) [INF] | Pausa o suspensión del plan que alcanza datos y copias a la vez (BK-09) [INF]; retención y capacidades dependientes del plan [PEND]; copias con datos anteriores a una anonimización (RES-03) | **Mayor superficie de datos reales** (réplica de menores y personales: TB-9, AM-29), de magnitud dependiente de los controles [INF]; réplica que propaga también errores o datos eliminados [INF]; costo [PEND] |
+| **Dependencias** | ADR-14 (identidad y ejecución programada); ADR-13 (alertas); ADR-17 (retención y reaplicación); ADR-11 (entorno aislado); ADR-10 (ubicación del almacenamiento externo) | ADR-01 (capacidades del plan: **[PEND]**); ADR-10; ADR-17 | Las de A, más ADR-01 y ADR-11 (entorno adicional) |
+| **Consecuencias estructurales** | La continuidad depende de **procedimientos y custodios** (humanos); sin réplica, la recuperación es manual y medida en horas | La continuidad depende **del proveedor y del plan;** la organización cede el control de las copias | La continuidad podría ser **más rápida** [INF, no demostrado]; el **entorno adicional** es estructural, entra en el alcance de protección de Z3 y su exposición y costo dependen de controles y servicios pendientes [INF] |
+| **Condiciones abiertas** | OC-409, OC-411, OC-412, OC-413, OC-414, OC-417, OC-418, OC-426 | OC-409, OC-410, OC-416, OC-419, OC-424, OC-425 | OC-409, OC-411, OC-414, OC-423, OC-425, OC-426 |
+
+**Elementos comunes a las tres.** Los objetivos eliminatorios; la **continuidad operativa** de RNF-17 (la captura sin conexión **no depende** del respaldo: RC-05); la **reaplicación** de revocaciones y anonimizaciones tras restaurar (BK-13); **ninguna promesa de eliminación absoluta;** la política de retención de ADR-17; la identidad de ejecución de ADR-14; las alertas de ADR-13; **ninguna alternativa asume RPO ni RTO como garantía.** **Una combinación** (por ejemplo, copias gestionadas como complemento de la copia lógica externa) **sería una decisión del responsable** (DR12-7); **este borrador no la propone.**
+
+**No se selecciona ninguna.** Esta tabla describe estructuras, no preferencia.
+
+### 40.8 Matriz comparativa y puntuación (H)
+
+#### 40.8.1 Marco y criterios
+
+**Fuente del marco.** R1 §2.4 fija los criterios **costos bajos, seguridad, funcionamiento sin conexión y mantenimiento;** los **pesos aprobados** constan en `aprobaciones.md` (registro de R3-A) y en §25.2: **seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %.** **No se copian los resultados de ADR anteriores:** se aplica la regla vigente a las alternativas de ADR-12 y se recalcula. **Los requisitos obligatorios son eliminatorios y no se compensan con puntuación.**
+
+**Interpretación de cada criterio para respaldo y continuidad [INF].**
+- **Seguridad (35 %):** seguridad, privacidad y **resiliencia de los datos** (confidencialidad, integridad y disponibilidad ante fallos), incluidas la **independencia del dominio de fallo** de las copias y la exposición de datos personales y de menores.
+- **Costo (30 %):** costo de operar el respaldo (almacenamiento, cómputo, entornos, personal). **No es evaluable sin servicios ni planes concretos.**
+- **Sin conexión (20 %):** relación con la captura sin conexión y la sincronización. **Ninguna alternativa altera la captura local** (RC-05); no discrimina.
+- **Mantenimiento (15 %):** esfuerzo de operar, ensayar y vigilar.
+
+**Evidencia, inferencia y convención.** **Evidencia [DOC]:** las capacidades exigidas de BK-01…14 (como propuesta), que las programaciones pueden retrasarse o perderse (BK-08) y que los respaldos de la plataforma candidata no incluyen los objetos de almacenamiento (BK-05, R3-A). **Inferencia [INF]:** la aplicabilidad de lo anterior a cada alternativa. **Valor neutro convencional:** el costo (no puntuable con evidencia actual) y el criterio sin conexión (fijo 3).
+
+#### 40.8.2 Matriz de conformidad (uniforme; autoevaluación del autor)
+
+**Leyenda** (la de R4-A a R4-D): **E** = requisito eliminatorio común que toda alternativa debe cumplir y que **ninguna demuestra;** **E/C** = exigencia común que depende de una condición abierta; **S** = lectura documental favorable, **no conformidad demostrada;** **C** = condición abierta; **T** = limitación estructural por la definición. **Regla uniforme:** **T** solo si la propia definición de la alternativa impide el objetivo, o crea —en toda implementación posible de esa alternativa— la exposición que el objetivo busca limitar, sin depender de una decisión posterior; **C** si depende de una decisión, una verificación o un mecanismo aún sin definir; **S** si la definición es compatible. **No se demuestran mitigaciones.**
+
+| Objetivo | ALT-12-A | ALT-12-B | ALT-12-C | Observación |
+|---|---|---|---|---|
+| OB12-01 (respaldos automáticos y verificables) | S | C | S | B depende de lo que ofrezca el plan (OC-410; OC-137: el plan gratuito de la plataforma candidata no figura con copias automáticas [DOC]) |
+| OB12-02 (capacidad de restaurar de forma controlada y probada) | S | C | S | B: restaurar de forma controlada depende de lo que ofrezca el plan y el proveedor (OC-410); **el entorno aislado se clasifica en OB12-10** |
+| OB12-03 (RPO acotado) | C | C | C | A y C: el RPO es el intervalo de la copia y la programación puede retrasarse (BK-08); B: depende del plan |
+| OB12-04 (RTO acotado) | C | C | C | **TS12-A:** el RTO de A incluye la reconstrucción; C puede acortarlo, **no demostrado** |
+| OB12-05 (copia independiente del proveedor) | S | **T** | S | B: las copias dependen del mismo proveedor y de la misma cuenta por definición (TS12-B (i)) |
+| OB12-06 (cifrado y claves) | C | C | C | Custodios por designar (DR3-9; OC-412); en B, qué cifrado aplica el proveedor es [PEND] |
+| OB12-07 (mismo nivel de protección que Z3) | E/C | E/C | E/C | Común; C amplía las ubicaciones (TR12-10) |
+| OB12-08 (reaplicación tras restaurar) | E/C | E/C | E/C | BK-13; ADR-17 (OC-415, OC-416) |
+| OB12-09 (alertas desde un componente distinto) | C | C | C | ADR-13 (OC-417) |
+| OB12-10 (entorno aislado sin proyecto adicional) | C | C | **T** | C: requiere un entorno adicional permanentemente activo por definición (TS12-C); A y B: se obtiene bajo demanda o depende de DR11-2 (OC-414) |
+| OB12-11 (pausa del proveedor y continuidad del mecanismo) | C | C | C | B: la pausa alcanza datos y copias a la vez [INF] (OC-419) |
+| OB12-12 (reconstrucción completa) | E/C | E/C | E/C | BK-05, BK-11; objetos de almacenamiento aparte (OC-420) |
+| OB12-13 (continuidad operativa sin conexión) | E | E | E | RC-05 [CONF]; común |
+| OB12-14 (sucesión de accesos) | E/C | E/C | E/C | RF-ACC-09; RNF-14 (OC-421) |
+| OB12-15 (sin datos reales antes de PRV-15; sin pago sin autorización) | E | E | E | PRV-15, RE3-07 [CONF] |
+| OB12-16 (trazabilidad) | C | C | C | ADR-09, ADR-13 (OC-427) |
+| OB12-17 (sin promesa de borrado absoluto) | E/C | E/C | E/C | ADR-17 (DR17-6) |
+
+**Fundamento de las T y de la ausencia de T en ALT-12-A (regla uniforme).**
+
+| Celda | Fundamento |
+|---|---|
+| ALT-12-B, OB12-05: **T** (TS12-B (i)) | Si el mecanismo principal son las copias del propio proveedor de datos, **en toda implementación de B** las copias dependen del **mismo proveedor y de la misma cuenta** (dependencia administrativa y contractual común): la definición **impide** una copia administrativamente independiente. **La T se funda solo en esa ausencia de independencia administrativa;** que compartan infraestructura física **no está demostrado** y la separación física dentro del proveedor es [PEND] (TS12-B (ii)). Origen del objetivo: BK-03 **[PROP];** si el responsable no adoptara BK-03 (DR12-6), la T desaparecería |
+| ALT-12-C, OB12-10: **T** (TS12-C (i)) | **Propiedad estructural:** por definición C **mantiene un entorno adicional de recuperación activo,** que **en toda implementación** hay que obtener y proteger más allá del entorno aislado de EN-18 («sin asumir un proyecto adicional»). **Se distinguen tres cosas:** (i) la **existencia** del entorno adicional, estructural (esta T, de viabilidad y costo); (ii) la **exposición de datos personales** derivada de su configuración u operación, **[INF],** cuya magnitud y mitigación dependen de controles pendientes (OB12-07, OC-423) y que **no es una pérdida inevitable de seguridad;** (iii) la **evidencia de protección,** inexistente (**ni demostrada ni refutada**). La exposición se trata como riesgo (TR12-10) y como condición de OB12-07 (C), **no como T de seguridad** |
+| ALT-12-A: **sin T** | Sus limitaciones inherentes (restauración en frío, RPO igual al intervalo, dependencia de custodios y de un ejecutor programado: **TS12-A**) son **compatibles con los objetivos si los valores propuestos se confirman** y dependen de decisiones (DR12-1, DR12-2, DR14-2) y de ensayos: **condiciones abiertas (C),** no limitación de la definición |
+
+**Las clasificaciones T no se convierten automáticamente en puntaje;** su efecto en la puntuación, si lo hay, se rige por la regla de §40.8.3.
+
+#### 40.8.3 Puntuación
+
+**Método de evaluación aplicado uniformemente a A, B y C (documental y provisional: no es una regla arquitectónica general aprobada; la aplicación por analogía [INF] del centro 2 y la banda 1–3 a ALT-12-B no cuenta con aprobación arquitectónica definitiva y depende de DR12-6 y DR12-8, todavía pendientes).** Escala 1–5; juicio del autor [PROP], no vinculante. **Seguridad y mantenimiento:** centro 3 con banda ±1; **centro 2 solo si la definición implica una pérdida estructural verificable y comparable que las demás alternativas no tienen por definición** (precedente: ALT-11-C en §36.7); **costo:** solo puntúa **planes o servicios concretos** (techo 5): al no haber ninguno seleccionado, **no es puntuable con evidencia actual** y se usa un **valor neutro convencional de cálculo (3, banda 1–5);** **sin conexión:** fijo 3 cuando no discrimina; **lo no leído es [PEND] y no se penaliza;** **riesgos y condiciones no se convierten en puntaje; el puntaje no selecciona.**
+
+**Aplicación a ADR-12.** La **única pérdida estructural en la dimensión de seguridad (resiliencia ante fallos)** que una alternativa tiene por definición y las otras no es la de **ALT-12-B:** la falta de una **copia independiente del proveedor** (TS12-B; OB12-05). **Aplicada por analogía [INF] a la formulación documental usada para ALT-11-C, resulta centro 2 para ALT-12-B en seguridad.** **El centro 2 y su banda 1–3 son una aplicación analógica [INF]** de esa formulación (redactada en §36.7 para la independencia de la infraestructura de datos respecto de producción): **no constituyen una regla arquitectónica general aprobada definitivamente;** **BK-03 continúa como capacidad propuesta [PROP];** **DR12-6 y DR12-8 siguen abiertos** y permiten revisar el criterio. **Por qué B y C se tratan de forma distinta con las reglas existentes:** la pérdida de B es **inevitable por definición** (mismo proveedor y misma cuenta: dependencia administrativa y contractual común, TS12-B (i)) y verificable. De C, solo la **existencia** del entorno adicional es estructural (TS12-C (i)) y afecta a la **viabilidad y al costo de obtenerlo,** criterio que **no es puntuable;** su **exposición de datos** es una consecuencia **[INF]** que **no es inevitable:** depende de controles que OB12-07 exige a toda copia y a todo entorno (pendientes), y **tampoco hay evidencia de que la protección sea suficiente.** Por eso no se aplica centro 2 a C y se registra como riesgo (TR12-10) y condición (OB12-07), **sin declarar ni vulneración inevitable ni seguridad demostrada.** Si el responsable considerara estructural esa exposición, sería una **decisión pendiente (DR12-8)** y la regla se reaplicaría a C, sin inventar una regla nueva. **Esta diferencia no es una recomendación ni una selección:** resulta de aplicar el criterio, depende de que BK-03 sea un objetivo (DR12-6) y de que la independencia de las copias cuente como seguridad (DR12-8), y se muestra con su sensibilidad.
+
+| Criterio (peso) | A | B | C | Fundamento |
+|---|---|---|---|---|
+| Seguridad, privacidad y resiliencia (35) | 3 (2–4) | **2 (1–3)** | 3 (2–4) | A y C: centro neutral; **B: centro 2 [INF, por analogía]** por TS12-B (i) (copias del mismo proveedor y cuenta: dependencia administrativa y contractual común, verificable por definición y ausente en A y C). Las limitaciones de A (restauración en frío) y la exposición de C (TS12-C (ii) [INF]) son de naturaleza distinta, dependen de controles o decisiones pendientes y **no se convierten en puntaje** |
+| Costo (30) | 3 (1–5) | 3 (1–5) | 3 (1–5) | **No puntuable con evidencia actual; valor neutro convencional de cálculo.** El 3 **no es evidencia de costo real.** R3-A documenta que la infraestructura **con copias gestionadas del proveedor de datos** cuesta más que la base en las tres configuraciones candidatas y que el respaldo propio consume una fracción del cómputo gratuito incluido [DOC, 2026-11-22; sin re-verificar]: es una **diferencia potencial que no se puntúa hoy,** porque pertenece a **configuraciones candidatas de ADR-01 sin selección** y a proveedores concretos, y **atribuirla a A, B o C equivaldría a seleccionar un proveedor** (OC-425) |
+| Sin conexión (20) | 3 | 3 | 3 | **Fijo 3:** ninguna alternativa altera la captura local (RC-05) |
+| Mantenimiento (15) | 3 (2–4) | 3 (2–4) | 3 (2–4) | Neutral: A exige procedimientos y custodios; B depende del plan; C opera además un entorno en espera; **no comparable sin mecanismos** |
+| **Total (central)** | **3,00** | **2,65** | **3,00** | A y C: 0,35·3 + 0,30·3 + 0,20·3 + 0,15·3 = 1,05 + 0,90 + 0,60 + 0,45 = 3,00. B: 0,35·2 + 0,30·3 + 0,20·3 + 0,15·3 = 0,70 + 0,90 + 0,60 + 0,45 = 2,65 |
+| **Rango** | **1,90–4,10** | **1,55–3,75** | **1,90–4,10** | A y C: mínimo 0,35·2 + 0,30·1 + 0,20·3 + 0,15·2 = 0,70 + 0,30 + 0,60 + 0,30 = 1,90; máximo 0,35·4 + 0,30·5 + 0,20·3 + 0,15·4 = 1,40 + 1,50 + 0,60 + 0,60 = 4,10. B: mínimo 0,35·1 + 0,30·1 + 0,20·3 + 0,15·2 = 0,35 + 0,30 + 0,60 + 0,30 = 1,55; máximo 0,35·3 + 0,30·5 + 0,20·3 + 0,15·4 = 1,05 + 1,50 + 0,60 + 0,60 = 3,75 |
+
+**Sensibilidad.** Si el responsable decidiera que **BK-03 no es un objetivo** o que la independencia de las copias **no cuenta** como seguridad (DR12-6, DR12-8), la seguridad de B volvería a 3 (2–4) y sus resultados serían **3,00 y 1,90–4,10,** iguales a los de A y C. **Los rangos de las tres se solapan** (1,55–3,75 frente a 1,90–4,10): **el puntaje no decide.**
+
+**Recomendación preliminar no vinculante.** **Ninguna.** Las diferencias reales están en la **matriz,** en las **amenazas** (§40.9) y en las **condiciones** (§40.11), y **requieren decisión del responsable** (DR12-7). **Las cifras de esta Parte no se copian de ADR-11, ADR-13, ADR-17 ni ADR-14;** la coincidencia numérica de rangos con alguno de ellos **no implica comparabilidad entre las alternativas de distintos ADR, que no debe presumirse.**
+
+### 40.9 Amenazas, fallos y mitigaciones propuestas (I)
+
+Las amenazas **no se aceptan ni se mitigan** en este borrador; **las mitigaciones propuestas no están demostradas.** Los riesgos ya documentados en R2 a R4-D se **citan** y se **justifica** su aplicación a ADR-12.
+
+| Id | Amenaza o fallo | Alternativas más afectadas [por diseño o inferencia] | Mitigación propuesta (no demostrada) | Origen y aplicación a ADR-12 | Condición |
+|---|---|---|---|---|---|
+| TR12-01 | **Respaldo ausente o desactualizado** (programación perdida o retrasada; fallo silencioso) | A y C **[INF]** (ejecutor programado); B depende del plan [PEND] | Control de antigüedad y alerta desde un componente distinto (OB12-09) | **Heredado:** BK-08, BK-10 [DOC]; TR14-07 | OC-417, OC-419 |
+| TR12-02 | **Copia corrupta o inutilizable** (no verificada) | Las tres | Verificación automatizada y restauración de prueba (OB12-01, OB12-02) | **Nuevo para ADR-12:** BK-04, BK-14 [PROP] | OC-426 |
+| TR12-03 | **Pérdida de la clave de descifrado o indisponibilidad de los custodios:** la copia no es recuperable | A y C (**TS12-A**, por diseño); B según el cifrado del proveedor [PEND] | Copia de recuperación segura y segundo custodio (BK-02) | **Heredado:** BK-02; DR3-9; RNF-17 | OC-412 |
+| TR12-04 | **Compromiso de la clave o del almacenamiento de copias** (divulgación de datos de menores y personales) | Las tres | Cifrado antes de salir del ejecutor; claves separadas; mínimo privilegio | **Heredado:** AM-29, AM-23; TB-9 | OC-412, OC-423 |
+| TR12-05 | **Restauración de prueba que interfiere con producción o expone datos reales, o recuperación real fuera de un entorno protegido** | Las tres | Entorno aislado y restauración autorizada (BK-14; EN-18) | **Heredado:** AM-29, CAB-17 [CONF] | OC-414, OC-421 |
+| TR12-06 | **Restauración que revive accesos revocados, roles o datos anonimizados** | Las tres | Reaplicación antes de reabrir el acceso (BK-13); acceso cerrado hasta completarla | **Heredado:** OM-06, RES-03, AM-30; TR17-07 | OC-415, OC-416 |
+| TR12-07 | **Retención indefinida o eliminación incompleta en copias** | Las tres | Retención acotada y condicionada a ADR-17 (BK-03); **no se promete borrado absoluto** | **Heredado:** HR1-12, RES-03; TR17-02 | OC-416 |
+| TR12-08 | **Pérdida o suspensión del proveedor, de la cuenta o pausa del plan que alcanza datos y copias a la vez** (dependencia administrativa y contractual común; la infraestructura física compartida **no está demostrada**) | **B** (**TS12-B (i)**, por diseño: mismo proveedor y cuenta); A y C lo reducen por la copia externa | Copia externa independiente (OB12-05); recuperación ante pausa (BK-09) | **Heredado:** BK-09; **nuevo:** su efecto en las copias | OC-419, OC-411 |
+| TR12-09 | **Dependencia de cuotas, costos y requisito de método de pago** del almacenamiento o de los entornos | Las tres **[INF]**; C por el entorno adicional | Sin servicio de pago sin autorización; alertas al 80 % | **Heredado:** RE3-07, EN-10, OC-66; **sin evaluar proveedores** | OC-425 |
+| TR12-10 | **Exposición de datos de menores en copias, en entornos de restauración y en la réplica en espera** | **C** (la existencia de la réplica es **TS12-C (i)**, por diseño; la **exposición** de datos es **TS12-C (ii) [INF]**, de magnitud dependiente de los controles); las demás en menor grado **[INF]** | Mismo nivel de protección que Z3; sin datos reales antes de PRV-15 | **Heredado:** TB-9, AM-29, PRV-17 | OC-423 |
+| TR12-11 | **Restauración parcial o incoherente** (autenticación, factores, RLS, funciones, permisos, objetos de almacenamiento) | Las tres; B por lo que no cubre el plan **[INF]** | Restauración integral por componente y verificación (BK-05, BK-14) | **Heredado:** BK-05, OC-57; **nuevo:** su alcance por alternativa | OC-413, OC-420 |
+| TR12-12 | **RTO excedido** por falta de ensayo, de procedimiento o de custodios | Las tres; A por la restauración en frío **[INF]** | Procedimiento escrito y ensayo cronometrado (BK-07; RNF-17) | **Heredado:** RNF-08 [REC valores] | OC-409, OC-426 |
+| TR12-13 | **Incoherencia entre datos restaurados, sincronización sin conexión y tareas** (operaciones antiguas que reintroducen datos eliminados) | Las tres | Coordinación con la sincronización y con la reaplicación | **Heredado:** TR17-09, TR14-13; OC-376, OC-407 | OC-422 |
+| TR12-14 | **Pérdida de trazabilidad de la restauración o de la auditoría** (restauración a un estado anterior no detectable) | Las tres | Registro con origen; ancla externa si existe (SV-12) | **Heredado:** SV-12, RR9I-17; IN-09-09 | OC-427 |
+
+### 40.10 Dependencias con otros ADR (J)
+
+Se distinguen las dependencias **obligatorias** (R1 §8.2) de las **informativas.** **No se modifica ningún documento heredado.**
+
+| ADR | Tipo | Qué toma ADR-12 | Estado y límite |
+|---|---|---|---|
+| **ADR-01 y ADR-10** (plataforma y región; decisión conjunta) | **Obligatoria** (R1 §8.2) | Capacidades de copia y restauración de la plataforma; ubicación del almacenamiento externo y de las copias | ADR-01 solo aprobación documental condicionada, **sin proveedor seleccionado;** **ADR-10 sin región seleccionada** |
+| **ADR-11** (entornos y despliegue) | **Obligatoria** (R1 §8.2) | Entorno aislado de restauración (EN-18; OC-343); separación de secretos por entorno | **Solo aprobación documental condicionada;** DR11-2 abierta; ninguna alternativa seleccionada |
+| **ADR-17** (retención y anonimización) | **Obligatoria** (R1 §8.2) | Retención de copias, borrado selectivo, reaplicación (DR17-6; OC-377; OB17-09) | **Solo aprobación documental condicionada;** DR17-1…9 pendientes; **no se modifica** |
+| ADR-14 (tareas programadas e identidad) | Informativa | Respaldo programado, control de antigüedad e identidad de ejecución (TK14-05, TK14-06; DR14-2) | **Solo aprobación documental condicionada;** DR14-1…10 pendientes |
+| ADR-13 (observabilidad) | Informativa | Alertas de fallo y antigüedad (OB13-10; ALO-04; OC-362) | **Solo aprobación documental condicionada** |
+| ADR-09 (auditoría) | Informativa | Copia externa y recuperación de la auditoría (SV-12; DR9I-8; OC-137, OC-139) | **ADR-09.C PROPUESTA;** ADR-09.I solo aprobación documental condicionada |
+| ADR-02.C / ADR-03 (autorización e identidad) | Informativa | Acceso a las copias y a la restauración; recuperación administrativa (RF-ACC-09) | **ADR-02.C PROPUESTA;** ADR-02.I y ADR-03.I solo aprobación documental condicionada |
+| ADR-05.I; ADR-15 | Informativa | Sincronización sin conexión tras una restauración (RC-05); correo transaccional | Solo aprobación documental condicionada |
+
+**Declaraciones expresas.** (1) **R1 §8.1 no se declara cumplido;** (2) **R1 §8.2 no se da por satisfecho** por la existencia de documentación de ADR-01, ADR-10, ADR-11 o ADR-17; (3) **PEND-JUR sigue abierta;** (4) **RNF-08 y RNF-17 no se declaran satisfechos;** (5) si alguna dependencia cambia, este borrador debe revisarse; (6) ninguna decisión de ADR-11, ADR-13, ADR-14 ni ADR-17 se toma aquí.
+
+### 40.11 Decisiones, riesgos y condiciones abiertas; criterios de revisión (K, L)
+
+**Requisitos eliminatorios aplicables.** Los **requisitos obligatorios son eliminatorios y no se compensan con puntuación** (R3-A §25.2). Los pertinentes a ADR-12 **[INF, selección del autor; no es aprobación del responsable],** **ninguno demostrado:** **RNF-08** (respaldos automáticos verificables y restauración probada antes del piloto) [CONF]; **RNF-17** (continuidad y sucesión de accesos) [REC]; **RC-05** (sin dependencia de segundo plano; captura sin conexión) [CONF]; **RNF-14** (accesos individuales y revocables) [CONF]; **AM-29** (no restaurar en un entorno no protegido) [CONF]; **PRV-15 y PRV-17** (sin datos personales reales antes de la evaluación jurídica) [CONF]; **RE3-07** (sin servicios de pago sin autorización) [CONF]. **Ninguno se declara satisfecho** por estar descrito.
+
+**Decisiones del responsable (DR12).**
+
+| Id | Decisión | Relacionado |
+|---|---|---|
+| DR12-1 | **Confirmar o ajustar RPO y RTO** (24 h y 8 h son propuestos [REC]) y aceptar que no están garantizados | OB12-03, OB12-04; OC-409 |
+| DR12-2 | **Designar a los custodios de la clave de descifrado y al segundo custodio,** y la regla de recuperación (relación con DR3-9; no se resuelve aquí) | OB12-06; OC-412 |
+| DR12-3 | **Quién autoriza y quién ejecuta una restauración** (de prueba y en producción) | LM12-08; SG12-02; OC-421 |
+| DR12-4 | **Qué se considera «entorno aislado» y cómo se obtiene** (con DR11-2) | OB12-10; OC-414 |
+| DR12-5 | **Retención de las copias, borrado selectivo y tolerancia a la reaparición** tras restaurar (con ADR-17: DR17-6) | OB12-17; OC-416 |
+| DR12-6 | **Si BK-03** (copia externa independiente del proveedor de datos y del hosting) **se adopta como objetivo** y con qué destino | OB12-05; TS12-B; OC-411 |
+| DR12-7 | **Estrategia de respaldo y continuidad** (A, B, C o una combinación): **no se toma ni se recomienda aquí** | §40.7 |
+| DR12-8 | **Uso del marco de puntuación,** si la independencia de las copias cuenta como seguridad (afecta a la puntuación de B) y si la exposición adicional de datos de ALT-12-C se trata como pérdida estructural (aplicaría la misma regla a C) | §40.8.3 |
+| DR12-9 | **Criterios para reabrir el acceso tras una restauración** y quién lo autoriza | OB12-08; SG12-06; OC-415 |
+| DR12-10 | **Régimen de ensayos periódicos de restauración** (frecuencia por decidir; no se fija) | OB12-02; OC-426 |
+
+**Condiciones abiertas (OC; continúan la secuencia OC-409…428).**
+
+| Id | Condición | Relacionado |
+|---|---|---|
+| OC-409 | Confirmación de RPO y RTO objetivo y de quién los confirma, según el plan contratado | DR12-1; OB12-03, OB12-04 |
+| OC-410 | Capacidades reales de la plataforma para copias gestionadas, retención y restauración (incluye OC-137); **sin proveedor seleccionado** | OB12-01, OB12-02; ALT-12-B |
+| OC-411 | Almacenamiento externo: destino, régimen, requisito de pago y ubicación (OC-66, OC-68, OC-139; ADR-10) | OB12-05; DR12-6 |
+| OC-412 | Cifrado y custodia de claves: designación de custodios, segundo custodio, rotación y recuperación (DR3-9; OC-70) | OB12-06; DR12-2; TR12-03, TR12-04 |
+| OC-413 | Cobertura del volcado de autenticación y factores MFA (OC-57) y procedimiento de re-enrolamiento | OB12-12; TR12-11 |
+| OC-414 | Entorno aislado de restauración y cómo se obtiene sin proyecto adicional (OC-343; EN-18; DR11-2) | OB12-10; DR12-4 |
+| OC-415 | Reaplicación de revocaciones y anonimizaciones tras restaurar: fuente, formato mínimo y orden (BK-13; OM-06; con ADR-17), y **validación de invariantes y permisos tras una recuperación real** (efectos fuera de CMP-08) | OB12-08; DR12-9; **RT-06; RF-ACC-09** |
+| OC-416 | Retención de respaldos, borrado en copias y tolerancia a la reaparición (DR17-6; OC-377; PEND-JUR) | OB12-17; DR12-5 |
+| OC-417 | Mecanismo de alertas y control de antigüedad desde un componente distinto (BK-08; OC-62; ADR-13; ADR-14) | OB12-09; TR12-01 |
+| OC-418 | Identidad de ejecución del respaldo y de su verificación (ADR-14: DR14-2; OC-392) | LM12-03; SG12-02 |
+| OC-419 | Continuidad del propio mecanismo y recuperación ante pausa o suspensión del proveedor (BK-09, BK-10; OC-59) | OB12-11; TR12-01, TR12-08 |
+| OC-420 | Restauración de objetos de almacenamiento, configuración y secretos fuera del volcado (BK-05, BK-11) | OB12-12; TR12-11 |
+| OC-421 | Procedimiento de operación, sucesión de accesos y recuperación administrativa (RNF-14, RNF-17; RF-ACC-09) | OB12-14; DR12-3 |
+| OC-422 | Continuidad durante un partido y coherencia con la sincronización tras una restauración (RC-05; TR17-09; OC-376, OC-407) | OB12-13; TR12-13 |
+| OC-423 | Datos de menores y personales en copias, entornos de restauración y réplica en espera (AM-29; TB-9; PRV-17; CAB-17) | OB12-07; TR12-04, TR12-10 |
+| OC-424 | Ubicación y transferencia de las copias (ADR-10; PRV-13; Q-25; PEND-JUR) | SG12-07; ESC12-09 |
+| OC-425 | Cuotas, costos y requisito de método de pago de los servicios de respaldo, **sin evaluar proveedores** (RE3-07; EN-10) | TR12-09; §40.8.3 |
+| OC-426 | Ensayo de restauración antes del piloto y medición del RTO (RNF-08; BK-07; BK-14): **no ejecutado** | OB12-02, OB12-04; DR12-10 |
+| OC-427 | Trazabilidad de respaldos y restauraciones y su retención (IN-09-09; ADR-09; ADR-13; ADR-17) | OB12-16; TR12-14 |
+| OC-428 | Confirmación de ADR-01, ADR-10, ADR-11 y ADR-17 (R1 §8.2) y reevaluación de este borrador | §40.10 |
+
+**Riesgos de redacción (RR12).**
+
+| Id | Riesgo | Control |
+|---|---|---|
+| RR12-01 | Presentar RPO y RTO propuestos como garantizados o como requisito confirmado | §40.0 (regla 1); OB12-03, OB12-04 |
+| RR12-02 | Prometer eliminación absoluta en copias o dar por aceptado RES-03 | §40.0 (regla 2); OB12-17 |
+| RR12-03 | Inventar costos, cuotas o capacidades de proveedores, o atribuirlos a una alternativa | §40.0 (regla 3); §40.8.3 |
+| RR12-04 | Asumir que un plan gratuito ofrece copias, retención o restauración | §40.0 (regla 4); OC-410 |
+| RR12-05 | Dar por existentes claves, custodios, credenciales, cuentas o secretos | §40.0 (regla 5) |
+| RR12-06 | Seleccionar alternativas, proveedores, almacenamientos o mecanismos | §40.7 |
+| RR12-07 | Convertir las clasificaciones T/C/S o las condiciones en puntaje, o usar el puntaje como selección | §40.8.3 |
+| RR12-08 | Copiar las cifras de ADR anteriores sin aplicar la regla a ADR-12 | §40.8.3 |
+| RR12-09 | Decidir la retención (ADR-17), la identidad de ejecución (ADR-14), las alertas (ADR-13) o los entornos (ADR-11) | §40.4; §40.10 |
+| RR12-10 | Dar por satisfecha una dependencia por existir documentación | §40.10 |
+| RR12-11 | Presentar propuestas de R3-A (BK-01…14) como requisitos confirmados | §40.2; §40.3 |
+| RR12-12 | Presentar la coincidencia numérica de rangos como comparabilidad entre ADR | §40.8.3 |
+| RR12-13 | Mezclar la nota administrativa pendiente de `fea9399` con ADR-12 | §40.0 (observación a) |
+| RR12-14 | Presentar este borrador como auditoría independiente, evaluación jurídica o verificación técnica | §40.12 |
+
+**Criterios de revisión (CR4E).**
+
+| Id | Criterio |
+|---|---|
+| CR4E-01 | Solo se modificó `02-arquitectura-adr.md`; todo lo anterior a §40 permanece idéntico |
+| CR4E-02 | Estado «BORRADOR v0.1-R4E — PENDIENTE DE REVISIÓN Y APROBACIÓN» |
+| CR4E-03 | Nombre y alcance de ADR-12 según R1 §8.1 y el plan; sin sustituir su finalidad |
+| CR4E-04 | Los objetivos distinguen [CONF], [REC], [DOC] y [PROP]; BK-01…14 no se presentan como requisitos confirmados |
+| CR4E-05 | RPO y RTO propuestos no se presentan como garantizados |
+| CR4E-06 | Hay al menos dos alternativas genuinamente diferenciadas, sin selección ni preferencia encubierta |
+| CR4E-07 | La clasificación T/C/S usa una regla uniforme; la ausencia de T en una alternativa está fundamentada |
+| CR4E-08 | La puntuación aplica los pesos aprobados y la regla vigente; no copia cifras de otros ADR; la aritmética es correcta; el costo es valor convencional |
+| CR4E-09 | No se promete eliminación absoluta; la retención es de ADR-17 |
+| CR4E-10 | Menores y datos personales en copias y entornos de restauración están tratados sin afirmar protección demostrada |
+| CR4E-11 | Las dependencias obligatorias (ADR-01, ADR-10, ADR-11, ADR-17) se distinguen de las informativas y se tratan como condicionales |
+| CR4E-12 | Se separan [CONF], [DOC], [INF], [PROP] y [PEND]; no se inventan costos, cuotas ni compatibilidades |
+| CR4E-13 | Identificadores únicos, sin colisiones y OC en secuencia después de OC-408 |
+| CR4E-14 | Las tablas están bien formadas |
+| CR4E-15 | La nota pendiente de `fea9399` no se incorpora ni se mezcla |
+| CR4E-16 | R4-F, R4-G y la Fase 3 no se inician; sin commit, push, PR ni merge; `main` intacto |
+
+### 40.12 Limitaciones documentales y evidencias necesarias (L)
+
+**Se declara expresamente:** (1) **sin respaldos ni restauraciones realizados;** (2) **sin claves, custodios, cuentas ni secretos creados;** (3) **sin pruebas de ningún tipo:** RPO y RTO no medidos; (4) **sin proveedores seleccionados;** (5) **sin costos, cuotas ni capacidades confirmados** (las cifras y los hechos de proveedores son de R3-A, 2026-11-22, sin re-verificar); (6) **sin infraestructura desplegada;** (7) **sin conformidad técnica demostrada:** ni RNF-08, ni RNF-17, ni AM-29, ni PRV-10 se declaran cumplidos; (8) **sin auditoría independiente:** es una **autoevaluación del autor;** (9) **no es evaluación jurídica** (PEND-JUR sigue abierta); (10) las clasificaciones T/C/S, las puntuaciones y las amenazas son juicios [PROP] e [INF]; las mitigaciones son propuestas; (11) ADR-02.C y ADR-09.C son **PROPUESTA;** ADR-01, ADR-11, ADR-13, ADR-14 y ADR-17 solo tienen aprobación documental condicionada; ADR-10 no tiene región.
+
+**Evidencias necesarias para futuras aprobaciones.** Capacidades reales de la plataforma elegida (ADR-01/10); decisión sobre DR12-1…10; designación de custodios; ensayo de restauración cronometrado en un entorno aislado; políticas de ADR-17 y resolución de PEND-JUR; mecanismos de ADR-13 y ADR-14; verificación de costos y requisitos de pago con fuentes oficiales; **auditoría independiente de cierre.**
+
+### 40.13 Relación con R4-F y R4-G (solo dependencias; no se inician)
+
+ADR-12 es el último ADR del orden de R1 §8.2. **La trazabilidad final de la Fase 2 (R4-F) y la auditoría de cierre (R4-G)** siguen **reservadas y no iniciadas;** la auditoría estará a cargo de un revisor separado del autor y con contexto nuevo. **Este borrador no aprueba ni cierra nada de ello.**
+
+### 40.14 Estado y preguntas para el responsable
+
+**Estado:** R4-E / ADR-12 **v0.1-R4E: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §40.0). No es aprobación definitiva; no versionado en el momento de redactarse. **Ninguna alternativa seleccionada ni formulación admitida.** **ADR-12 sin aprobación arquitectónica definitiva.** **PEND-JUR abierta.** **R4-A, R4-B, R4-C y R4-D aprobados solo documentalmente de forma condicionada y versionados.** **R4-F y R4-G: NO INICIADOS.** **R4 como conjunto: sin aprobación ni cierre.** **Fase 2: en desarrollo, sin aprobación global.** **Fase 3: no iniciada.** **Sin commit, push, PR ni merge.** Siguen abiertas todas las decisiones y condiciones heredadas.
+
+**Preguntas:** DR12-1 a DR12-10 y las condiciones OC-409 a OC-428; en particular, los RPO y RTO objetivo (DR12-1), los custodios de la clave (DR12-2), quién autoriza y ejecuta una restauración (DR12-3), si BK-03 se adopta (DR12-6) y si la independencia de las copias cuenta como seguridad (DR12-8).
+
+### 40.15 Correcciones focalizadas H-1…H-6 (revisión focalizada del borrador v0.1)
+
+Corrigen los hallazgos de la revisión focalizada (**correcciones documentales del autor, no auditoría independiente**). **No modifican puntuaciones** (A y C: central 3,00; rango 1,90–4,10; B: central 2,65; rango 1,55–3,75; pesos 35/30/20/15), clasificaciones T/C/S, alternativas ni identificadores, y **no crean identificadores nuevos.** El borrador **sigue siendo v0.1-R4E, pendiente de revisión y aprobación.**
+
+| Id | Hallazgo | Corrección realizada | Sección | Verificación |
+|---|---|---|---|---|
+| H-1 | Asimetría entre la exposición de ALT-12-C y la de ALT-12-B | Se distinguen la existencia del entorno adicional (TS12-C (i), estructural), la exposición de datos (TS12-C (ii), [INF], dependiente de controles pendientes) y la evidencia de protección (TS12-C (iii), inexistente); la exposición queda en TR12-10 y OB12-07; se explica por qué no modifica la seguridad y se amplía DR12-8 | §40.7, §40.8.2, §40.8.3, §40.9, §40.11 | Pendiente |
+| H-2 | Fundamento de la penalización de ALT-12-B | El centro 2 y la banda 1–3 se declaran aplicación analógica [INF] de la formulación de ALT-11-C, no regla general aprobada; BK-03 sigue [PROP]; DR12-6 y DR12-8 abiertos; se conserva la sensibilidad | §40.8.3 | Pendiente |
+| H-3 | «Mismo dominio de fallo» de ALT-12-B | Se distingue mismo proveedor y cuenta (consecuencia de la definición), dependencia administrativa y contractual común, e infraestructura física compartida (no demostrada; separación física pendiente); la T de OB12-05 se funda solo en la ausencia de independencia administrativa | §40.7, §40.8.2, §40.8.3, §40.9 | Pendiente |
+| H-4 | OB12-02 exigía por duplicado el entorno aislado de OB12-10 | OB12-02 pasa a la capacidad de restaurar de manera controlada y probada; el entorno aislado se trata solo en OB12-10; clasificaciones sin cambio | §40.3, §40.8.2 | Pendiente |
+| H-5 | Restauración de prueba frente a recuperación real | Se distinguen (A) restauración de prueba y (B) recuperación real en OB12-07, ESC12-04, ESC12-05, SG12-04 y TR12-05; se examinan RT-06, RF-ACC-09, accesos revocados, datos anonimizados y la restauración fuera de CMP-08; RT-06 y RF-ACC-09 se añaden a la trazabilidad de OC-415; sin procedimientos ni ensayos implementados | §40.3, §40.5, §40.6, §40.9, §40.11 | Pendiente |
+| H-6 | Alcance de ALT-12-B generalizado | Las exclusiones de objetos de almacenamiento y configuración se refieren a la plataforma candidata de R3-A; con otro proveedor o plan podrían variar y requieren verificación | §40.7 | Pendiente |
+
+**Sin cambios:** ALT-12-A/B/C sin selección; BK-01…14 como capacidades propuestas; RPO 24 h y RTO 8 h como [REC], no garantizados; DR12-1…10 abiertas; OC-409…428 abiertas; RR12-01…14 sin aceptar; CR4E-01…16; la nota posterior de `fea9399` pendiente; sin commit, push, PR ni merge.
+
+**Ajuste editorial del encabezado de §40.8.3 (2026-11-28, fecha inferida; autoevaluación del autor, no auditoría independiente).** **Hallazgo:** el encabezado «Regla única (idéntica para A, B y C)» podía leerse como una regla general definitivamente aprobada. **Corrección:** se sustituyó por «Método de evaluación aplicado uniformemente a A, B y C», que distingue el **método aplicado uniformemente,** su **carácter documental y provisional,** la **aplicación por analogía [INF]** del centro 2 y la banda 1–3 a ALT-12-B, la **ausencia de aprobación arquitectónica definitiva** de esa interpretación y que **DR12-6 y DR12-8 siguen pendientes.** **Verificación del autor:** el cuerpo de §40.8.3 conserva su fundamento; no hay contradicción con BK-03 [PROP] ni con DR12-6/8; los valores de puntuación (A y C: 3,00 y 1,90–4,10; B: 2,65 y 1,55–3,75) y la matriz T/C/S son idénticos al estado de entrada. **Es un ajuste editorial:** no cambia la regla de cálculo, no modifica puntuaciones, no selecciona alternativas y no crea ninguna decisión nueva.
