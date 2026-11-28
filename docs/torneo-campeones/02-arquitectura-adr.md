@@ -11496,3 +11496,421 @@ Corrigen los hallazgos de la revisión focalizada (autoevaluación del autor). *
 **Actualización posterior de DR17-10 (2026-11-27, fecha inferida; prevalece sobre el párrafo anterior).** Tras la corrección documental de ADR-13, versionada en el commit `46ef9375a16cd64026c8af86e830d3b2d70da9df`, se actualizan las referencias a DR17-10 en §38.0 (b), §38.10.1, §38.10.3, §38.14, §38.17 y este §38.18. **DR17-10 se reclasifica como «INCIDENCIA DOCUMENTAL HEREDADA — CORREGIDA Y VERSIONADA»,** con su identificador histórico conservado: **no es una decisión arquitectónica aprobada, no es una formulación admitida, no concede una excepción, no modifica DR17-1…9 y no demuestra cumplimiento técnico;** no se crea una decisión nueva. **Pesos vigentes:** seguridad 35 %, costo 30 %, sin conexión 20 %, mantenimiento 15 %; **rango vigente 1,90–4,10; central 3,00;** el rango histórico 1,95–4,05 permanece como evidencia. **Sin cambios** en ALT-17-A/B/C, TS17-A/B/C, matrices T/C/S, puntuaciones, CD17, OP17, CV17, OB17, TR17, OC-369…388, RR17 ni CR4C; **DR17-1…9 siguen pendientes;** ADR-17 continúa como BORRADOR v0.1-R4C, pendiente de revisión y aprobación; sin commit, push, PR ni merge de esta actualización.
 
 **Precisión editorial R-1 (2026-11-27, fecha inferida; verificación puntual de DR17-10).** En §38.10.3 se añadió que la coincidencia de rangos de ADR-13 y ADR-17 **no implica comparabilidad entre sus alternativas, que no debe presumirse**, y se distinguió la igualdad de pesos, la coincidencia numérica de los rangos, las diferencias de naturaleza entre alternativas de distintos ADR y la ausencia de una comparación transversal aprobada. **Es una precisión de redacción:** no modifica la matriz, las puntuaciones (central 3,00; rango 1,90–4,10; pesos 35/30/20/15), las alternativas, DR17-1…9 (pendientes) ni DR17-10 («INCIDENCIA DOCUMENTAL HEREDADA — CORREGIDA Y VERSIONADA»), y **no crea identificadores arquitectónicos nuevos.** ADR-17 continúa como BORRADOR v0.1-R4C, pendiente de revisión y aprobación; sin commit, push, PR ni merge.
+
+# PARTE XXV — BLOQUE R4-D (v0.1-R4D, APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE; ADR-14 SIN APROBACIÓN ARQUITECTÓNICA DEFINITIVA; 2026-11-28 inferida)
+
+## 39. R4-D — ADR-14: Tareas programadas e identidad de ejecución (evaluación y borrador condicionado)
+
+**Estado: v0.1-R4D — APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §39.0). **No es aprobación arquitectónica definitiva ni autorización de implementación.** Autoevaluación del autor, no auditoría independiente.
+
+### 39.0 Alcance, autorización, reglas y observaciones preservadas
+
+- **Autorización (2026-11-27, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R4-D: INICIO DEL BORRADOR DOCUMENTAL DE ADR-14»: «AUTORIZO EXCLUSIVAMENTE INICIAR R4-D PARA REDACTAR EL BORRADOR DOCUMENTAL DE ADR-14: TAREAS PROGRAMADAS E IDENTIDAD DE EJECUCIÓN.» **«Esta autorización NO aprueba ADR-14, NO selecciona alternativas y NO permite implementación.»** Solo se modifica este documento, con esta Parte nueva al final; `aprobaciones.md` y `bitacora.md` **no se modifican**; todo el contenido anterior a §39 se conserva sin cambios. **No se inician R4-E…R4-G ni la Fase 3.**
+- **Qué es este borrador.** Una evaluación documental de alternativas de ejecución de tareas automáticas y del modelo de identidad con que se ejecutan, con una **comparación neutral que no expresa preferencia.** **No selecciona alternativas, proveedores, servicios, cuentas técnicas ni mecanismos;** no admite formulaciones; no resuelve decisiones; no acepta riesgos; no concede excepciones (**D-2 sin excepción**); **no declara cumplido R1 §8.1**; no implementa; **no crea cuentas, identidades técnicas, secretos, claves, tokens ni usuarios de servicio;** no configura tareas ni servicios; no escribe código; no modifica infraestructura ni bases de datos; no hace pruebas de ejecución.
+- **Convención.** [CONF]: requisito o texto confirmado de `01`, R1, R2, R3, R4-A, R4-B o R4-C con el estado que allí declara. [DOC]: contenido ya documentado en este archivo (no una decisión). [REC]: recomendación heredada, **no requisito confirmado**. [PROP]: propuesta no aprobada, de este borrador o heredada como propuesta. [INF]: inferencia técnica del autor. [PEND]: información o decisión pendiente. **Regla de lectura:** toda celda sin etiqueta propia es [PROP]; lo no leído es [PEND] y no se penaliza; **una aprobación documental condicionada no demuestra implementación ni cumplimiento técnico;** «por diseño» solo se usa cuando la definición de la alternativa lo garantiza.
+- **Reglas críticas de este borrador.** (1) **Ninguna tarea actúa con privilegios de administrador global** ni elude el modelo de autorización heredado. (2) **Una identidad de servicio no concede permisos por sí sola:** lo que una tarea puede hacer se deriva de la autorización de su existencia y del modelo de roles, no de la identidad que la ejecuta. (3) **No se inventan frecuencias, horarios ni plazos de ejecución como decisiones aprobadas:** los únicos valores que aparecen se heredan con su estado (RF-ADM-04 (a): ventana de 48 h y alerta ≤ 1 min [COND:Q-10; RF-ADM-04 (b) es CONF]; vencimiento de invitaciones de 7 días [propuesto en `01`]; respaldo diario [PROP, BK-01]; 30 días locales de OFF-10 [CONF]). (4) **No se establece una política de eliminación:** es de ADR-17, cuyas decisiones pendientes no se modifican. (5) **Idempotencia propuesta no es idempotencia implementada;** no se da por demostrada la entrega de alertas, los reintentos ni la recuperación. (6) **No se asume que un proveedor ofrezca funciones gratuitas ni se evalúan cuotas:** todo costo, cuota o compatibilidad es [PEND].
+- **Nota sobre las fuentes de identidad.** La solicitud de inicio cita «ADR-01: identidad y autorización». **Según los registros, ADR-01 es la decisión conjunta de plataforma de datos y despliegue** (aprobada solo de forma documental condicionada); **la identidad y la sesión son de ADR-03** y **la autorización, de ADR-02.** Este borrador cita cada fuente con su estado real: de ADR-01 toma la plataforma y las credenciales de servicio (RE3-05, BK-01); de ADR-03.C/I, el actor y su sesión; de ADR-02.C/I, el modelo de roles y la herencia de RT-14. **No se reasigna la propiedad de ninguna decisión.**
+- **Identificadores nuevos (sin colisión; comprobados contra el archivo).** **ALT-14-A, ALT-14-B, ALT-14-C** (alternativas), **TS14-A, TS14-B, TS14-C** (limitaciones estructurales; TS14-A distingue (i) una propiedad estructural y (ii) una inferencia [INF], subdivisiones descriptivas que no son identificadores nuevos), **CT14-01…04** (categorías de automatización), **TK14-01…10** (inventario conceptual de tareas), **OB14-01…16** (objetivos), **ID14-01…05** (identidades conceptuales), **AU14-01…06** (autorización y límites), **CE14-01…10** (controles propuestos de ejecución confiable), **TR14-01…14** (amenazas), **DR14-1…10** (decisiones del responsable), **OC-389…408** (condiciones abiertas; continúan la secuencia que termina en OC-388), **RR14-01…14** (riesgos de redacción), **CR4D-01…16** (criterios de revisión documental). **TS17, T-A/B/C y los demás prefijos de §36 a §38 no se reutilizan.**
+- **Exclusiones.** Seleccionar alternativa, proveedor, servicio, mecanismo, identidad o cuenta técnica; fijar frecuencias, horarios o plazos; resolver decisiones heredadas o DR14; admitir formulaciones; aceptar riesgos o conceder excepciones; aprobar ADR-14, R4-D, R4 ni la Fase 2; iniciar R4-E…R4-G; implementar, programar o desplegar tareas; crear secretos, claves o usuarios de servicio; modificar las Partes I–XXIV ni los registros; modificar ADR-17 ni sus decisiones pendientes.
+- **Aprobación (metadato; 2026-11-28, fecha inferida).** Mensaje «TORNEO DE CAMPEONES — R4-D: PRECISIÓN FINAL Y REGISTRO DE APROBACIÓN DOCUMENTAL CONDICIONADA DE ADR-14»: autoriza corregir las dos formulaciones residuales sobre trazabilidad, verificarlas puntualmente y, si la verificación es satisfactoria, **registrar la APROBACIÓN DOCUMENTAL CONDICIONADA de R4-D / ADR-14.** **Estado: R4-D / ADR-14 (v0.1-R4D): APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA.** **La aprobación comprende el borrador de R4-D, la revisión focalizada, las correcciones H-1…H-7 (§39.17), la corrección residual R-1, las precisiones editoriales sobre trazabilidad de §39.1 (3) y §39.5 (principio 1) y la verificación puntual realizada por el autor.** **Esta aprobación NO es aprobación arquitectónica definitiva de ADR-14, no autoriza implementación, no selecciona alternativas, proveedores ni mecanismos, no admite formulaciones, no resuelve DR14-1…10, no fija frecuencias, horarios ni plazos, no acepta riesgos ni concede excepciones.** El evento de aprobación es independiente y no reutiliza identificadores ALT-14, TS14, CT14, TK14, OB14, ID14, AU14, CE14, TR14, DR14, OC, RR14 ni CR4D. Se conservan: **ALT-14-A, ALT-14-B y ALT-14-C sin selección; TS14-A/B/C (con TS14-A (i) estructural y (ii) inferencia [INF])**; pesos **seguridad 35 %, costo 30 %, sin conexión 20 %, mantenimiento 15 %**; **puntuación central 3,00 y rango 1,90–4,10** para las tres (el costo es un valor neutro convencional; la coincidencia de rangos con ADR-13 y ADR-17 no implica comparabilidad entre alternativas); **ningún proveedor elegido; ninguna tarea implementada; ninguna identidad técnica creada; sin frecuencias definitivas; sin pruebas empíricas**; **DR14-1…10 pendientes; OC-389…408 abiertas; RR14-01…14 sin aceptar; CR4D-01…16 intactos**; **ADR-02.C y ADR-09.C todavía PROPUESTA; ADR-01, ADR-11, ADR-13 y ADR-17 con aprobación únicamente documental condicionada; ADR-10 sin región seleccionada; ADR-12 no iniciado**; **R1 §8.1 sin cumplimiento demostrado; R1 §8.2 sin satisfacción definitiva; D-2 sin excepción; PEND-JUR abierta**; **sin auditoría independiente.** **Estado:** **R3 cerrado documentalmente de forma condicionada; R4-A, R4-B y R4-C aprobados documentalmente de forma condicionada y versionados; R4-E…R4-G NO INICIADOS; R4 como conjunto SIN CIERRE NI APROBACIÓN GLOBAL; Fase 2 EN DESARROLLO, sin aprobación global; Fase 3 NO INICIADA.** **Precedencia:** las menciones «borrador», «no aprobado», «sin aprobación» o «pendiente de revisión» de esta Parte (§39.0, §39.13 —CR4D-02—, §39.16, §39.17 y los registros de H-1…H-7, R-1 y de las precisiones editoriales) **se conservan como antecedentes de elaboración y no representan el estado documental vigente;** prevalece este apartado en cuanto al estado de aprobación documental, **sin que ello sea aprobación arquitectónica definitiva.** La observación (a) siguiente (nota posterior del versionado de R4-C) **sigue pendiente** y es independiente de este registro. Registro en `aprobaciones.md` y `bitacora.md`; sin commit, push, PR ni merge.
+- **Observaciones preservadas (sin corregir fuera de este anexo).** (a) **La nota posterior del versionado de R4-C (commit `fea939999b1607485964d40ef111ded58726750f`) no consta aún** en `aprobaciones.md` ni en `bitacora.md` (el registro de R4-C figura como «Pendiente» de versionado); las notas de `46ef937` y de commits anteriores sí constan. (b) La incidencia de ponderaciones de ADR-13 está corregida y versionada (`46ef937`); **los pesos aplicados aquí son los aprobados** (seguridad 35 %, costo 30 %, sin conexión 20 %, mantenimiento 15 %). (c) DR3F-4 y los estados históricos contradictorios; la fila histórica de R2-C4 con una columna adicional; la diferencia entre 12 y 11 decisiones abiertas de R2-A; las decisiones técnicas de R2 a R4-C abiertas; las 16 decisiones sin formulación A; la ausencia de formulaciones admitidas; **R1 §8.1 sin cumplimiento demostrado**; **R1 §8.2 sin satisfacción definitiva** (ADR-01, ADR-11, ADR-13 y ADR-17 solo con aprobación documental condicionada; ADR-02.C y ADR-09.C como **PROPUESTA**; ADR-10 sin región); **D-2 sin excepción**; **PEND-JUR abierta**; el revisor de R4-G, la ubicación de la trazabilidad final de R4-F y el cierre de R4 siguen abiertos; la **auditoría independiente de cierre sigue pendiente.**
+
+### 39.1 Alcance conceptual y objetivos (A)
+
+**Alcance.** ADR-14 trata **qué ejecuta el sistema por sí mismo, sin que un usuario lo pida en ese momento,** y **bajo qué identidad lo hace.** No trata la sincronización de dispositivos (no se depende de segundo plano, RC-05 [CONF]), ni el contenido de las políticas de retención (ADR-17), ni el mecanismo de respaldo (ADR-12), ni la observabilidad (ADR-13). **No todas las tareas necesitan programación periódica:** algunas pueden evaluarse al consultar o al usar un dato [INF]; este borrador lo analiza tarea por tarea (§39.3) y **no asume** la necesidad de un reloj.
+
+**Categorías de automatización (distinciones del alcance).**
+
+| Id | Categoría | Qué es | Quién la origina | Identidad bajo la que opera |
+|---|---|---|---|---|
+| CT14-01 | **Tarea programada** | Se ejecuta porque llega un momento o intervalo definido | El paso del tiempo (un disparador) | **Sin actor humano disparador:** identidad de ejecución **por definir** (pregunta abierta heredada, NUEVO-11) |
+| CT14-02 | **Tarea diferida** | Se ejecuta después de un evento, con un retraso o un reintento | Un evento previo (por ejemplo, un fallo de envío) | Hereda el origen del evento; **si no hay actor, por definir** |
+| CT14-03 | **Proceso de mantenimiento** | Trabajo de conservación del sistema (respaldos, retención, verificaciones) | El calendario operativo o una persona responsable | Identidad técnica **o** humana, **por definir** |
+| CT14-04 | **Operación iniciada por un usuario** | Acción de un actor autenticado, incluidos sus **efectos automáticos o en cascada** | Un usuario | **La del actor** (RT-14 hereda su situación); **no es una tarea programada** (por ejemplo, la asignación inicial del organizador al crear un torneo: RT-04, RF-ACC-12, D-3 [CONF]) |
+
+**Distinción de identidad (H-2).** Se separan tres casos que no se confunden: **(1) tareas automáticas sin actor humano disparador** (CT14-01, CT14-02 sin actor): requieren una identidad de ejecución **no humana, propia y acotada** (OB14-01); **(2) tareas iniciadas directamente por una persona:** operan con **la identidad de esa persona** y heredan su situación (CT14-04, ID14-01); **(3) operaciones de mantenimiento manual** (CT14-03 operada por una persona): **se ejecutarían bajo la identidad humana de quien las realiza** y **no se convierten en una identidad de servicio.** **La trazabilidad de su origen es un control propuesto [PROP]** (OB14-03, condición abierta), **cuyo cumplimiento depende de mecanismos y procedimientos todavía no implementados ni demostrados;** **la identidad humana no constituye, por sí sola, garantía de registro.**
+
+**Regla.** Una operación automática **hereda la situación del actor que la dispara** [DOC: R1 §3.1; IN-02-12; H2B1-07]; **la identidad de las tareas sin actor disparador queda como pregunta abierta de ADR-14** (NUEVO-11; IN-09-09 [REC]). **La única operación automática declarada como autorizada previamente es la asignación inicial del organizador** [CONF]; **las demás tareas automáticas no están declaradas como actor privilegiado** [DOC].
+
+### 39.2 Entradas heredadas y límites de la lectura
+
+| Entrada | Qué aporta | Estado y límite |
+|---|---|---|
+| R1 §8.1 y §8.2; NUEVO-11 | ADR-14: «¿Cómo se ejecutan la alerta N-12, los vencimientos y la retención? ¿Bajo qué identidad se ejecutan las tareas **sin actor disparador**?»; **requiere ADR-01, ADR-02.C y ADR-17** | [CONF]; **R1 §8.1 sin cumplimiento demostrado; R1 §8.2 sin satisfacción definitiva** |
+| RF-ADM-04, N-12, Q-10 | Alerta de partidos sin editor dentro de las próximas 48 h y a la hora de inicio; criterio: aparece en el panel ≤ 1 min después de entrar en la ventana; canal recomendado: indicador en el panel; correo opcional | (a) **COND:Q-10** (el requisito de la alerta N-12 depende de Q-10); (b) [CONF] (D-9); push y WhatsApp posteriores |
+| CMP-18; Z4; TB-5 | CMP-18 envía correo transaccional y la alerta N-12; **Z4 solo dispara** (la ejecución sobre datos de jugadores ocurre en Z2/Z3) y **no recibe datos de jugadores ni de menores** | [CONF] / [DOC] |
+| RT-14; IN-02-12; H2B1-07; CAB-27; AM-22 | Una operación automática hereda la situación del actor; **[REC]** una tarea sin actor no ejecuta operaciones sobre el equipo de un actor en conflicto; riesgo de tarea sin identidad definida con más privilegio | RT-14 [CONF]; CAB-27 [REC]; AM-22 sin tratamiento posterior a R2-A |
+| IN-09-09; EV-06; SV-10; OC-136; DR9I-7; OC-204 | Las acciones sin actor humano se registran **con su origen**; verificación periódica de la auditoría y su identidad | IN-09-09 y EV-06 [REC]; ADR-09.C **PROPUESTA**; ADR-09.I solo aprobación documental condicionada |
+| RF-ACC-02; CL-24; OFF-23 | Invitación con fecha de vencimiento y estado «vencida» (vencimiento propuesto: 7 días); sesión vencida con operaciones pendientes | RF-ACC-02 [CONF] con valor **propuesto**; la evaluación del vencimiento **no exige** un reloj [INF] |
+| PRV-10; SV-14; OB17-13; OC-384; OC-381 (ADR-17) | Retención con plazos PEND-JUR; ninguna purga de auditoría salvo la que defina ADR-17 como acción privilegiada, auditada y fuera de los roles de la aplicación; ADR-17 exige que la identidad de ejecución de la retención exista y esté auditada, **sin definirla** | [CONF] / [DOC]; **ADR-17 aprobado solo documentalmente de forma condicionada; sus decisiones DR17-1…9 siguen pendientes** |
+| BK-01, BK-04, BK-08, OC-62; RNF-08 | Respaldo diario con credencial dedicada de mínimo privilegio [PROP]; verificación; alertas de fallo y control de antigüedad en un componente distinto del ejecutor; **las programaciones pueden retrasarse o perderse con carga alta** [DOC] | [PROP] / [DOC]; mecanismo de **ADR-12 (R4-E, no iniciado)** y ADR-13 |
+| RE3-05; RNF-14; RC-18; AM-23; AM-26; RT-09 | Credenciales de servicio solo en el servidor; secretos fuera del cliente y de la cola; accesos individuales y revocables; riesgo de compromiso de credenciales | [CONF] |
+| EN-06, EN-07, EN-08 (ADR-11) | Secretos y permisos separados por entorno; sin credenciales compartidas; políticas de la capa de datos presentes en cada entorno | **[DOC] aprobado solo documentalmente de forma condicionada**; ninguna alternativa de ADR-11 seleccionada |
+| OB13-10, OB13-11, EVO-05, OC-363 (ADR-13) | Alertas de respaldo, de tareas y de despliegue sin datos personales; el mecanismo es de ADR-13/ADR-12 | **[DOC] aprobado solo documentalmente de forma condicionada**; RNF-09 y PRV-12 [REC] sin cumplimiento demostrado |
+| OC-122; IN-02-14; ADR-02.I | Invocación directa no autorizada de funciones; mínimo privilegio en el alcance de los roles | [DOC]; ADR-02.C **PROPUESTA**; ADR-02.I solo aprobación documental condicionada |
+
+**Límites de la lectura.** Se tomaron los textos consignados en `01-requisitos.md` y en este archivo (R1 a R4-C); **no se consultaron fuentes externas ni documentación de productos.** Lo que requeriría lectura de proveedores (cuotas de planificadores, retrasos, gratuidad, disponibilidad) es **[PEND]** y no se supone. **No se hicieron pruebas ni se usaron datos reales.**
+
+### 39.3 Inventario conceptual de tareas (B)
+
+El inventario recoge **solo lo que los documentos existentes requieren o proponen.** La columna «¿Requiere reloj?» es una **inferencia [INF]:** indica si la tarea, tal como está descrita, necesita ejecutarse por el paso del tiempo o puede evaluarse al consultar o al usar un dato. **Ninguna fila fija una frecuencia ni un horario.**
+
+| Id | Tarea | Categoría | Fuente y estado de la necesidad | ¿Requiere reloj? [INF] | Observación |
+|---|---|---|---|---|---|
+| TK14-01 | **Alerta de partido sin editor (N-12)** | CT14-01 (si hay aviso activo) o cálculo al consultar | RF-ADM-04 (a) **[COND:Q-10]**; CMP-18 | **Depende del canal:** un indicador en el panel puede calcularse al abrir el panel; un aviso por correo sin panel abierto sí necesita disparo | Ventana de 48 h y ≤ 1 min heredadas; **no se fijan valores nuevos** |
+| TK14-02 | **Alerta de operaciones rechazadas o en conflicto** | Disparada por un evento (el servidor las recibe) | RF-ADM-04 (b); OFF-20 [CONF] | **No** [INF] | Solo de las que el servidor efectivamente recibió; solo del torneo del organizador |
+| TK14-03 | **Vencimiento de invitaciones** | Cálculo al usar, o mantenimiento | RF-ACC-02; CL-24 [CONF]; vencimiento de 7 días **propuesto**; PRV-10 (retención de vencidas) | **No para el rechazo** (se evalúa al usarla) [INF]; **la purga de vencidas es de ADR-17** | No convertir la propuesta de 7 días en requisito |
+| TK14-04 | **Retención y eliminación de datos vencidos** | CT14-03 | PRV-10 [CONF, valores PEND-JUR]; ADR-17 (decisiones pendientes); SV-14 | **[PEND]:** depende de la política de ADR-17 | **ADR-14 solo define identidad y control de ejecución;** la política y los plazos son de ADR-17 y PEND-JUR |
+| TK14-05 | **Respaldo programado y su verificación** | CT14-03 | BK-01 (diario [PROP]), BK-04 [PROP]; RNF-08 [CONF] | Sí, según la propuesta [INF] | **El mecanismo es de ADR-12 (R4-E, no iniciado);** ADR-14 solo trata la identidad de ejecución |
+| TK14-06 | **Control de antigüedad del respaldo y alertas de fallo** | CT14-03 | BK-08; OC-62 [DOC] | Sí [INF]; **en un componente distinto del ejecutor del respaldo** (BK-08) | Alerta y mecanismo: ADR-13/ADR-12 |
+| TK14-07 | **Verificación periódica de la integridad de la auditoría** | CT14-03 | SV-10; OC-136; DR9I-7 [DOC, **solo si se adopta M2 o M3**] | [PEND]: condicionada a la decisión de ADR-09 | Su identidad es pregunta abierta (OC-136) |
+| TK14-08 | **Reintentos y envío diferido de correo transaccional** | CT14-02 | CMP-18; ADR-15 [DOC] | [PEND]: **no existe un requisito confirmado de política de reintentos** [INF] | No convertir en requisito |
+| TK14-09 | **Revisión de autorizaciones, invitaciones y sesiones vencidas** | CT14-03 | PRV-05; OFF-23; PRV-10 | **No hay requisito confirmado de revisión periódica** [INF]; las sesiones vencen por validez | Se deja constancia de la **ausencia de requisito**; cualquier revisión sería [PROP] |
+| TK14-10 | **Mantenimiento de estados deportivos** (transiciones por tiempo) | CT14-01 | CMP-11 aplica cambios de estado **solo por operaciones** [DOC]; no se halló un requisito de transición automática por tiempo | **No identificada** [INF] | **No se inventa la obligación** |
+
+**Lectura.** De las diez filas, **solo TK14-01 (según el canal), TK14-05, TK14-06 y TK14-07 (condicionada) muestran, en las fuentes, una necesidad de ejecución por el paso del tiempo;** TK14-04 depende de ADR-17; las demás **no** exigen un programador. **Esto no resuelve** qué tareas existen (DR14-3).
+
+### 39.4 Objetivos verificables (A)
+
+La columna «Origen» indica si el objetivo es [CONF], [DOC], [REC] o [PROP]. **Un objetivo [PROP] no es un requisito confirmado.** La columna «Verificación propuesta» describe cómo podría comprobarse **cuando exista un mecanismo y datos sintéticos;** **hoy nada está verificado.**
+
+| Id | Objetivo | Origen | Verificación propuesta (no ejecutada) |
+|---|---|---|---|
+| OB14-01 | **Cuando no hay actor disparador, la identidad de ejecución es no humana, propia y acotada** (por tarea y por entorno). **No aplica a las tareas iniciadas directamente por una persona ni al mantenimiento manual,** que operan con la identidad humana de esa persona (ID14-01) y **no se convierten en identidad de servicio** | [PROP]; BK-01 (credencial dedicada de mínimo privilegio) [PROP]; RE3-05, RNF-14 [CONF] | Inventario de identidades (sintéticas) por tarea y entorno |
+| OB14-02 | **La tarea no elude el modelo de autorización:** hereda la situación del actor si lo hay; sin actor, **no opera sobre el equipo de un actor en conflicto** | RT-14 [CONF]; IN-02-12 [DOC]; CAB-27 [REC] | Ejecución de prueba de una tarea sin actor sobre un equipo en conflicto sintético → rechazada |
+| OB14-03 | **Trazabilidad con origen:** toda acción de una tarea se registra con su origen y la identidad de ejecución | IN-09-09, EV-06 [REC] | Revisar que cada acción de una tarea de prueba genera un registro con origen |
+| OB14-04 | **Mínimo privilegio y sin privilegio global:** ninguna tarea actúa como administrador global; el alcance es el de su finalidad | [PROP]; AM-22, AM-23 [DOC] | Revisión de privilegios por identidad frente a la finalidad de la tarea |
+| OB14-05 | **Separación por entorno:** ninguna identidad, disparador ni secreto de un entorno actúa sobre otro | EN-06, EN-07 (ADR-11) [DOC, PROP/CONF según su fila] | Intento de ejecutar una tarea de pruebas contra producción → denegado |
+| OB14-06 | **Secretos fuera del cliente y de la cola;** ciclo de vida de credenciales con alta, custodia, rotación, revocación y baja | RE3-05, RT-09, RNF-14 [CONF]; ciclo de vida [PROP] | Inspección de repositorio, cliente y cola con valores de prueba que parezcan secretos |
+| OB14-07 | **No duplicación de efectos:** repetir una ejecución no repite sus efectos ni sus registros | [PROP]; OFF-06 (para operaciones de usuario) [CONF] | Repetir una ejecución de prueba 1, 2 y 10 veces: 1 efecto, 1 registro |
+| OB14-08 | **Ejecuciones simultáneas** de una misma tarea no producen efectos duplicados ni interferentes | [PROP] | Dos ejecuciones simultáneas de prueba sobre el mismo alcance |
+| OB14-09 | **Fallos parciales detectables y reanudación segura** sin repetir lo ya hecho | [PROP] | Interrumpir una ejecución de prueba y reanudarla |
+| OB14-10 | **Operaciones destructivas con controles reforzados:** la purga solo como acción privilegiada, auditada y fuera de los roles de la aplicación; la política es de ADR-17 | SV-14 [DOC]; [PROP] | Intento de borrado de auditoría por los actores de prueba → denegado |
+| OB14-11 | **Detección y alerta de fallo o de ausencia de ejecución,** sin datos personales | BK-08, OC-62 [DOC]; OB13-10; EVO-05 | Retrasar una ejecución de prueba y comprobar la alerta externa |
+| OB14-12 | **Cobertura temporal de lo que requiere hora:** lo que debe ocurrir en un momento (N-12, controles de respaldo) se ejecuta o se detecta su omisión; **sin fijar frecuencias nuevas** | RF-ADM-04 (a) **[COND:Q-10]**; BK-08 [DOC] | Medir el tiempo entre entrada en ventana y aparición de la alerta de prueba |
+| OB14-13 | **Sin datos de jugadores ni de menores en el disparador** (Z4) ni en las señales de las tareas | §5.1, §5.6, AM-21 [CONF]; MIN13-01…10 | Revisión del contenido de mensajes y señales de prueba |
+| OB14-14 | **Consulta, suspensión y resultado de las tareas** por roles autorizados; qué ocurre cuando una tarea falla está definido | [PROP]; RF-ADM-04 (alerta al organizador de sus torneos) | Revisar AU14-01…06 |
+| OB14-15 | **Sin dependencia de la sincronización en segundo plano ni de ejecución en el dispositivo** | RC-05 [CONF] | Revisión: ninguna tarea requiere el dispositivo |
+| OB14-16 | **Invocación solo por quien está autorizado:** el punto de entrada o la función de una tarea no es invocable por quien no corresponde | OC-122 [DOC]; AM-22; IN-02-14 | Intento de invocación directa por un actor sin permiso → denegado |
+
+**Definiciones.** *Identidad de ejecución*: la identidad bajo la cual el sistema realiza las operaciones de una tarea. *Disparador*: lo que inicia una ejecución (el paso del tiempo, un evento o una persona); **no ejecuta lógica de dominio** (Z4 solo dispara). *Ejecutor*: el componente que realiza el trabajo sobre los datos (Z2/Z3). *Actor disparador*: una persona autenticada cuya acción origina la operación.
+
+### 39.5 Identidad de ejecución: modelo conceptual propuesto (C) [PROP]
+
+El modelo es **conceptual e independiente de la alternativa.** **No crea identidades, cuentas técnicas, claves ni tokens, y no selecciona proveedor ni mecanismo.** Distingue **cinco identidades** que no deben confundirse:
+
+| Id | Identidad conceptual | Qué es | Qué puede hacer [PROP] | Qué **no** puede hacer | Fuente y estado |
+|---|---|---|---|---|---|
+| ID14-01 | **Actor humano autenticado** | La persona con cuenta y rol cuya acción origina una operación | Lo que su rol y su ámbito le permiten (CMP-08 es el único decisor); sus **efectos automáticos o en cascada** heredan su situación (RT-14) | Delegar su identidad a una tarea sin actor | CMP-06, CMP-08 [DOC]; RT-14 [CONF] |
+| ID14-02 | **Identidad de servicio de una tarea** (no humana) | La identidad bajo la cual una tarea realiza sus operaciones **cuando no hay actor disparador** | **Solo** lo que su finalidad requiere y que el modelo de autorización admite; cada operación queda registrada con su origen | Actuar como administrador global; **conceder permisos por sí sola;** operar sobre el equipo de un actor en conflicto (CAB-27 [REC]); salir de su entorno | [PROP]; BK-01 (credencial dedicada, mínimo privilegio) [PROP]; AM-22 |
+| ID14-03 | **Identidad del disparador** | Lo que inicia una ejecución a hora definida (Z4) | **Solo iniciar** la ejecución de una tarea; no ejecuta lógica de dominio | Acceder a datos de jugadores o de menores; recibirlos en mensajes; ejecutar operaciones de dominio | Z4, TB-5, AM-21 [CONF] |
+| ID14-04 | **Identidad de administración técnica** | Las cuentas de la organización en la plataforma y del desarrollador (individuales y revocables) | Administrar la plataforma y las identidades; **no** es la identidad de ejecución de tareas | Ejecutar tareas bajo identidades compartidas; que su credencial sea la de una tarea | RNF-14, RC-18, RE3-06 [CONF]; AM-23 |
+| ID14-05 | **Identidad de verificación o monitoreo** | La que comprueba, desde un componente distinto del ejecutor, que una tarea se ejecutó o que el respaldo es reciente | Leer el estado de ejecución y avisar | Modificar datos; ser la misma identidad del ejecutor que verifica | BK-08, OC-62 [DOC]; ADR-13 |
+
+**Principios del modelo [PROP].**
+
+1. **Separación entre identidad humana y de servicio:** una tarea sin actor **no se ejecuta con la identidad de una persona** ni con credenciales compartidas; una persona que lanza manualmente una tarea de mantenimiento actúa con **su** identidad (ID14-01): **la operación se atribuiría a esa identidad humana;** **su registro y trazabilidad están sujetos a controles propuestos [PROP];** **OB14-03 continúa siendo una condición abierta** y **no existe evidencia empírica de trazabilidad implementada.**
+2. **Una identidad de servicio no concede permisos por sí sola.** Se mantienen separados: la **autorización para crear o activar** la tarea (AU14-01), la **autorización para configurarla** (AU14-02), la **identidad de ejecución** (ID14-02) y los **permisos efectivos.** Los permisos efectivos de una operación de tarea resultan de **(a)** la autorización de que la tarea exista (AU14-01), **(b)** el alcance fijado en su configuración (AU14-02), **(c)** el modelo de roles y los invariantes heredados (RT-05, RT-06, RT-08, RT-13, RT-14) y **(d) la situación y los permisos del actor responsable de la operación original, cuando existe.** **La aplicación de (d) depende de la naturaleza de la operación y de las reglas heredadas (RT-14); no se inventa una política general.** **Ninguna identidad de servicio puede ampliar el ámbito de un rol** (IN-02-14).
+3. **Mínimo privilegio y separación por tarea y por entorno:** la granularidad (una identidad por tarea, por categoría o por entorno) **es una decisión pendiente** (DR14-2); este borrador solo exige que **no exista una identidad que ejecute todas las tareas con alcance global.**
+4. **Separación por entorno:** una identidad, un disparador o un secreto de local, staging o producción **no opera sobre otro entorno** (EN-06, EN-07 de ADR-11 [DOC]).
+5. **Ciclo de vida de las credenciales [PROP]:** *alta* (autorizada y registrada), *custodia* (fuera del cliente, de la cola y del repositorio: RE3-05, RT-09), *rotación* periódica o ante sospecha, *revocación* inmediata y verificable, y *baja* al retirar la tarea. **Los plazos de rotación no se fijan;** el mecanismo es [PEND] (OC-396; ADR-01).
+6. **Trazabilidad de acciones ejecutadas:** cada operación de una tarea se registra **con su origen** (IN-09-09 [REC]): identidad de ejecución, tarea, ejecución y torneo afectado, **sin datos personales de menores** (IF-31; RF-AUD-04) y sin secretos; la retención de ese registro es de ADR-17 y ADR-09.
+7. **Revocación:** revocar la autorización de una tarea, o la identidad que la ejecuta, **detiene** las ejecuciones posteriores; **una ejecución en curso al revocar** requiere una regla (DR14-5; TR14-09).
+
+**Qué NO se afirma.** No se afirma que exista una identidad técnica; no se afirma que el mínimo privilegio sea alcanzable con la plataforma elegida (ADR-01 sin selección definitiva; OC-69 sobre la credencial mínima del esquema de autenticación); no se afirma que la revocación sea inmediata.
+
+### 39.6 Autorización y límites (D) [PROP]
+
+**Se diferencian seis aspectos.** **Ninguno asigna a una persona o a un rol concreto** salvo lo que `01` ya confirma (la organización responsable, PRV-01; el dueño y el organizador según la matriz de `01 §7.1`; el organizador consulta solo las alertas de **sus** torneos, RF-ADM-04). **Lo demás es decisión del responsable** (DR14-1, DR14-5).
+
+| Id | Aspecto | Qué se distingue | Estado |
+|---|---|---|---|
+| AU14-01 | **Quién autoriza que exista una tarea** | La decisión de que una automatización exista y con qué finalidad; **no** es quien la ejecuta ni quien la configura | [PEND] (DR14-1); **ninguna tarea está autorizada hoy** salvo la asignación inicial del organizador, que no es una tarea programada |
+| AU14-02 | **Quién configura su ejecución** | Quién fija alcance, entorno, disparador y parámetros; **la configuración no puede ampliar el alcance autorizado** | [PEND] (DR14-1); relación con los permisos de despliegue (EN-07) |
+| AU14-03 | **Qué identidad realiza las operaciones** | ID14-02 (servicio) o ID14-01 (humano) según la categoría; **nunca ID14-03 ni ID14-04** | [PROP] (§39.5) |
+| AU14-04 | **Quién puede consultar sus resultados** | Resultados y estado de ejecución, **sin datos personales** (MIN13-01…10); el organizador ve las incidencias **solo de sus torneos** (RF-ADM-04, OFF-20) | Parcial [CONF] (alertas del organizador); el resto [PEND] (DR14-5) |
+| AU14-05 | **Quién puede suspenderla** | Detener o reanudar una tarea; **qué ocurre con lo pendiente** al suspender; **no se define el rol** | [PEND] (DR14-5); **no confundir con la suspensión de un partido** (CMP-11) |
+| AU14-06 | **Qué ocurre cuando falla** | Detección, alerta, reintento, reanudación o intervención humana; **sin repetir efectos** | [PROP] (CE14-01…10); alertas: ADR-13 (OB13-10, EVO-05); mecanismo de respaldo: ADR-12 |
+
+**Límites que se mantienen de los documentos heredados.**
+- **Las tareas no son actor privilegiado:** solo la asignación inicial del organizador lo es [CONF] (RT-04, RF-ACC-12, D-3).
+- **Roles y matriz:** una tarea **no eleva** un rol ni concede una facultad que la matriz de `01 §7.1` no concede (IN-02-14). **Las facultades del organizador que `01` condiciona (Q-42) no se amplían por medio de una tarea.**
+- **Autorización en dos capas:** ninguna tarea omite la comprobación del servidor ni de la capa de datos (EN-08; RE3-02).
+- **Separación de funciones:** quien autoriza una tarea, quien la configura y quien consulta sus resultados **pueden ser distintos** y la separación es una decisión pendiente (DR14-1).
+
+### 39.7 Ejecución confiable (E)
+
+**Los controles de esta sección son propuestos [PROP]; no hay ninguna garantía demostrada.** **Idempotencia propuesta no es idempotencia implementada.** Se aplican a las tres alternativas (§39.9) y su mecanismo concreto es [PEND].
+
+| Id | Control propuesto | Problema que aborda | Límite |
+|---|---|---|---|
+| CE14-01 | **Identificador de ejecución** por tarea y alcance (por ventana o por unidad de trabajo), para que repetir una ejecución no repita sus efectos | Duplicidad de ejecución (OB14-07) | No se define el formato ni la vigencia del identificador; **no es la idempotencia de operaciones de usuario (OFF-06)** de ADR-05; la relación está abierta (OC-397) |
+| CE14-02 | **Exclusión mutua conceptual:** una sola ejecución activa por tarea y alcance | Ejecuciones simultáneas (OB14-08) | **Bloqueos conceptuales:** no se elige mecanismo; puede dejar una ejecución bloqueada si la anterior falla (TR14-01) |
+| CE14-03 | **Trabajo por lotes acotados con punto de control** | Fallos parciales y reanudación (OB14-09) | El tamaño del lote no se fija |
+| CE14-04 | **Registro de inicio, avance y fin** de cada ejecución, sin datos personales | Trazabilidad y detección de fallos silenciosos (OB14-03, OB14-11) | Retención de ese registro: ADR-13, ADR-17 |
+| CE14-05 | **Reanudación desde el último punto de control** | Reanudación segura (OB14-09) | Una reanudación **no debe repetir** operaciones destructivas ya aplicadas |
+| CE14-06 | **Tratamiento de tareas vencidas** (una ejecución prevista que no se realizó a tiempo): ejecutar, omitir o escalar | Disparadores que se retrasan o se pierden (BK-08 [DOC]) | **El criterio es decisión pendiente** (DR14-6); **no se fijan horarios ni plazos** |
+| CE14-07 | **Previsualización o simulación** previa de toda operación destructiva | Prevención de operaciones destructivas repetidas o erróneas (OB14-10) | Aplica a eliminación, anonimización y purga; la política es de ADR-17 |
+| CE14-08 | **Autorización reforzada** (por ejemplo, doble control) para operaciones destructivas | Eliminación o modificación accidental (TR14-08) | Quién autoriza es decisión pendiente (DR14-7); **no se decide aquí** |
+| CE14-09 | **Verificación posterior** del resultado de la ejecución, con alerta si no coincide | Fallos silenciosos | No demuestra por sí sola que el resultado sea correcto |
+| CE14-10 | **Interruptor de suspensión** de una tarea | Detener una tarea ante un fallo o una revocación | Quién lo activa: DR14-5 |
+
+**Reglas de la ejecución confiable.** (1) **Una operación destructiva no se repite:** una segunda ejecución sobre lo ya eliminado o anonimizado no tiene efecto adicional (CE14-01, CE14-07). (2) **Una ejecución vencida no se ejecuta «para ponerse al día» sin criterio** (DR14-6). (3) **Una ejecución parcial deja un estado conocido** (CE14-03, CE14-04), **no un estado ambiguo.** (4) **Ninguno de estos controles se declara satisfecho** por estar descrito (RR14-05).
+
+### 39.8 Seguridad y privacidad (F)
+
+| Aspecto | Qué se examina | Relación con los ADR aprobados documentalmente | Estado |
+|---|---|---|---|
+| **Exposición de secretos** | Las credenciales de servicio de una tarea y del disparador no llegan al cliente, a la cola local, al repositorio ni a las señales | ADR-01 (credenciales de servicio, RE3-05); ADR-13 (MIN13-02 y OB13-06: sin secretos en señales) | [CONF] como requisito; **no demostrado** |
+| **Elevación indebida de privilegios** | Una identidad de servicio con más alcance del necesario o que evita RT-14 (AM-22) | ADR-02.C/I (IN-02-14; OC-122) | Sin tratamiento posterior a R2-A salvo lo heredado |
+| **Ejecución en el entorno equivocado** | Un disparador o una identidad de un entorno actúa sobre otro | ADR-11 (EN-06, EN-07) | [PEND] (OC-395) |
+| **Acceso indebido a datos personales** | El disparador (Z4) o el mensaje de una tarea reciben datos de jugadores o de menores | Z4, AM-21; ADR-13 (OB13-05, MIN13-01…10) | [CONF] como límite |
+| **Eliminación o modificación accidental** | Una tarea elimina o anonimiza más de lo debido o antes de tiempo | ADR-17 (DR17-1…9 pendientes; OC-381); CE14-07, CE14-08 | **Propuesta no demostrada;** la política es de ADR-17 |
+| **Riesgos específicos para menores** | Una tarea que opera sobre datos de menores (retención, anonimización, exportación) lo hace con los controles reforzados de PRV-02, 03, 09 y 18 | ADR-17 (OB17-06; TR17-03, TR17-04) | **Protección de menores pendiente de validación** |
+| **Registro excesivo de información** | Los registros de ejecución acumulan datos o identificadores que permiten reconstruir quién fue afectado | ADR-13 (MIN13-01…10; OB13-16); ADR-17 (retención y eliminación de registros técnicos) | [PEND] |
+| **Correlación y reidentificación** | Combinar registros de ejecución con eventos de auditoría o con señales para identificar a una persona o a un menor (tamaño de lote, orden, marcas de tiempo) | ADR-13 (TO-05); ADR-17 (TR17-03) | **No se declara anonimato ni mitigación demostrada** |
+| **Acciones sin actor y RT-14** | Una tarea modifica datos evitando el conflicto de interés | CAB-27 [REC]; ADR-09.C **PROPUESTA** (registro con origen) | **[REC]** sin confirmar como requisito (DR14-4) |
+
+**Declaración.** **Ningún control de esta sección está demostrado.** Se proponen como condiciones de revisión (§39.13), no como garantías.
+
+### 39.9 Alternativas arquitectónicas de ejecución programada (G)
+
+Las tres alternativas son **conceptuales:** describen **dónde y cómo se inicia y se ejecuta el trabajo automático**, **no qué servicio o herramienta lo hace** (**no se seleccionan** proveedores, planificadores ni mecanismos). Todas deben cumplir los objetivos eliminatorios comunes y las reglas de §39.5 a §39.7. Los trade-offs «por diseño» se indican solo cuando la propia definición los garantiza.
+
+| Aspecto | ALT-14-A · Disparador auxiliar que inicia y ejecución en el servidor | ALT-14-B · Planificación y ejecución dentro de la capa de datos | ALT-14-C · Automatización mínima: evaluación al consultar y procedimiento operado |
+|---|---|---|---|
+| **Descripción** | Un **disparador auxiliar (Z4)** inicia, a la hora definida, la ejecución de una tarea; la **ejecución ocurre en el servidor** (Z2/Z3) bajo una **identidad de servicio** por tarea y entorno (ID14-02, ID14-03) | La **programación y la ejecución residen en la capa de datos** (rutinas programadas que se ejecutan bajo un rol de la capa de datos), cerca de los datos | **No hay programador autónomo propio de la aplicación:** lo que puede evaluarse al consultar o al usar un dato se evalúa así; el trabajo de mantenimiento lo realiza **una persona responsable bajo su propia identidad** (ID14-01) según un procedimiento; **OB14-01 no aplica a las tareas operadas por una persona.** El respaldo automático que exige RNF-08 **no es de ADR-14** (ADR-12) |
+| **Alcance** | TK14-01 (aviso activo), TK14-05, TK14-06, TK14-07 y las que ADR-17 requiera (TK14-04) | Tareas sobre datos: TK14-03 (purga), TK14-04, TK14-07; **no** el envío de correo (CMP-18) [INF] | TK14-01 (indicador en el panel), TK14-02, TK14-03 (rechazo al usar); mantenimiento manual de TK14-04 y TK14-07 |
+| **Ventajas** | Respeta la separación disparador/ejecutor: **Z4 solo dispara** y no recibe datos de jugadores ni de menores; la ejecución pasa por el servidor, donde el evaluador de autorización (CMP-08) **puede** intervenir [INF] | **No requiere un punto de entrada invocable desde el exterior** para disparar; los datos no salen de Z3 durante la tarea [INF]; menos componentes auxiliares | **Menos identidades de servicio y menor superficie** [INF]; casi todo hereda la situación del actor (RT-14); menor dependencia de cuotas y de disponibilidad de disparadores [INF] |
+| **Limitaciones inherentes** | **TS14-A (i), estructural:** requiere un **punto de entrada invocable por el disparador desde el exterior** (superficie de invocación no autorizada, OC-122) [por diseño]. **TS14-A (ii), inferencia [INF]:** el disparador externo **podría** retrasarse o perderse (BK-08 [DOC] lo documenta para programaciones de ese tipo; su aplicabilidad aquí es [INF]); **no es una limitación estructural demostrada,** se conserva como **condición abierta vinculada a OB14-12** (OC-403) | **TS14-B:** por definición, la ejecución ocurre **fuera del evaluador de autorización de la aplicación (CMP-08, único decisor):** la autorización de la tarea descansa en los controles de la capa de datos (RLS, funciones), y su identidad es **un rol de la capa de datos con acceso directo a los datos** [por diseño] | **TS14-C:** **nada ocurre a una hora por sí mismo:** lo que requiere hora (el aviso de N-12 sin panel abierto, el control de antigüedad) **no se ejecuta ni se detecta su omisión por la propia aplicación;** depende de que alguien consulte u opere [por diseño] |
+| **Riesgos derivados** (de la operación o configuración; no de la definición) | Credencial del disparador comprometida (TR14-04); ejecución duplicada por reintentos del disparador (TR14-01); agotamiento de cuota del disparador (TR14-12) | Rol con privilegios amplios o con RLS exenta (TR14-03); lógica de dominio duplicada entre servidor y capa de datos; capacidad **dependiente de la plataforma** (ADR-01 sin selección) | Fallos silenciosos por omisión humana (TR14-07); carga sobre la persona designada (PRV-08, por designar); conservación excesiva si nadie ejecuta el mantenimiento (ADR-17, TS17-C) |
+| **Dependencias** | ADR-01 (qué disparadores existen, **sin selección**); ADR-02.C/I; ADR-03; ADR-09; ADR-11 (separación por entorno); ADR-13 (alertas) | ADR-01 (si la plataforma ofrece planificación en la capa de datos: **[PEND]**); ADR-02.I (OC-122; RLS); ADR-09 | Persona responsable por designar (PRV-08; OC-386 de ADR-17); procedimientos de operación (RNF-17); ADR-12 para el respaldo |
+| **Condiciones abiertas** | OC-394, OC-395, OC-396, OC-397, OC-398, OC-400, OC-402, OC-403 | OC-393, OC-396, OC-397, OC-398, OC-402, OC-404 | OC-389, OC-390, OC-391, OC-402, OC-406 |
+
+**Elementos comunes a las tres.** Los objetivos OB14-01…16 aplicables; el modelo de identidades de §39.5 (sin identidad de servicio con alcance global); los controles de §39.7 como propuestas; la separación de la política de eliminación (ADR-17) y del mecanismo de respaldo (ADR-12); alertas y señales sin datos personales (ADR-13); **ninguna alternativa asume frecuencias, horarios ni plazos** como decisiones aprobadas. **Una combinación** (por ejemplo, evaluar al consultar lo que se pueda y programar solo lo que lo exija) **sería una decisión del responsable** (DR14-9); **este borrador no la propone.**
+
+**No se selecciona ninguna.** Esta tabla describe estructuras, no preferencia.
+
+### 39.10 Matriz comparativa y puntuación (H)
+
+#### 39.10.1 Marco y criterios
+
+**Fuente del marco.** R1 §2.4 fija los criterios **costos bajos, seguridad, funcionamiento sin conexión y mantenimiento;** los **pesos aprobados** constan en `aprobaciones.md` (registro de R3-A) y en §25.2: **seguridad 35 %, costo 30 %, funcionamiento sin conexión 20 %, mantenimiento 15 %.** **No se trasladan automáticamente los valores de ADR-11, ADR-13 o ADR-17;** se usa el marco aprobado con su asignación. **Los requisitos obligatorios son eliminatorios y no se compensan con puntuación.**
+
+**Interpretación de cada criterio para tareas programadas [INF].**
+- **Seguridad (35 %):** seguridad y privacidad de la ejecución: identidad, mínimo privilegio, superficie de invocación, separación por entorno, trazabilidad y exposición de datos.
+- **Costo (30 %):** costo de operar la ejecución (disparador, planificador, personal). **No es evaluable sin servicios ni planes concretos.**
+- **Sin conexión (20 %):** relación con la captura y la sincronización sin conexión. Las tareas **no se ejecutan en el dispositivo** (RC-05) y **no alteran** la sincronización; **no discrimina** entre alternativas.
+- **Mantenimiento (15 %):** esfuerzo de operar, vigilar, rotar credenciales y atender fallos.
+
+**Distinción entre evidencia, inferencia y convención.**
+- **Evidencia real [DOC]:** la separación de Z4 (solo dispara), el requisito de RT-14, la ausencia de actor privilegiado, que las programaciones pueden retrasarse o perderse con carga alta (BK-08, para ese tipo de programación).
+- **Inferencia [INF]:** la aplicabilidad de lo anterior a cada alternativa y los trade-offs descritos.
+- **Valor neutro convencional:** el costo (**no puntuable con evidencia actual**) y el criterio sin conexión (fijo 3).
+
+#### 39.10.2 Matriz de conformidad (uniforme; autoevaluación del autor)
+
+**Leyenda** (la de R4-A a R4-C): **E** = requisito eliminatorio común que toda alternativa debe cumplir y que **ninguna demuestra**; **E/C** = exigencia común que depende de una condición abierta; **S** = lectura documental favorable, **no conformidad demostrada**; **C** = condición abierta; **T** = limitación estructural por la definición. **Regla uniforme:** **T** solo si la propia definición de la alternativa impide el objetivo, o crea —en toda implementación posible de esa alternativa— la exposición que el objetivo busca limitar, sin depender de una decisión posterior; **C** si depende de una decisión, una verificación o un mecanismo aún sin definir; **S** si la definición es compatible. **No se demuestran mitigaciones.**
+
+| Objetivo | ALT-14-A | ALT-14-B | ALT-14-C | Observación |
+|---|---|---|---|---|
+| OB14-01 (identidad no humana propia, cuando no hay actor disparador) | S | S | S | La definición es compatible; **no se crea ninguna identidad.** **En C el objetivo no aplica a las tareas operadas por una persona** (identidad humana, ID14-01); solo a lo que siga siendo automático sin actor |
+| OB14-02 (no eludir el modelo de autorización) | C | **T** | **C** | B: la ejecución ocurre fuera de CMP-08 por definición (TS14-B); A: depende de que el punto de entrada invoque la autorización; **C: depende del procedimiento y de los privilegios efectivos de la persona que opera (mantenimiento manual, SV-14).** La existencia de una identidad humana **no demuestra** que todas las operaciones se sometan al evaluador de autorización de la aplicación. **No es T:** ejecutar fuera del evaluador no es una propiedad estructural obligatoria de ALT-14-C, depende del procedimiento aplicable |
+| OB14-03 (trazabilidad con origen) | C | C | **C** | **Depende del procedimiento y de los privilegios efectivos de la persona que opera.** La trazabilidad no está garantizada únicamente por utilizar una identidad humana: el registro con origen (IN-09-09 [REC]) debe existir en las tres |
+| OB14-04 (mínimo privilegio) | C | C | **C** | **Depende del procedimiento y de los privilegios efectivos de la persona que opera** (por ejemplo, una purga como acción privilegiada, SV-14). El mínimo privilegio no está garantizado únicamente por utilizar una identidad humana; en A y B depende de la configuración (OC-393) |
+| OB14-05 (separación por entorno) | C | C | C | OC-395 |
+| OB14-06 (secretos y ciclo de vida) | E | E | E | RE3-05, RT-09 [CONF]; ninguna lo demuestra |
+| OB14-07 a OB14-09 (idempotencia, concurrencia, fallos parciales) | E/C | E/C | E/C | Controles propuestos CE14-01…05; mecanismo [PEND] |
+| OB14-10 (operaciones destructivas) | E/C | E/C | E/C | Política de ADR-17 (DR17-1…9 pendientes) |
+| OB14-11 (alerta de fallo o ausencia) | C | C | C | BK-08; ADR-13; C: la ausencia de ejecución no es observable sin disparador (OC-402) |
+| OB14-12 (cobertura temporal) | C | C | **T** | C: sin programador autónomo, lo que requiere hora no ocurre por sí mismo (TS14-C) |
+| OB14-13 (sin datos de jugadores en el disparador) | E | E | E | Z4, AM-21 [CONF] |
+| OB14-14 (consulta, suspensión y fallo) | C | C | C | DR14-5 |
+| OB14-15 (sin segundo plano ni dispositivo) | E | E | E | RC-05 [CONF]; común |
+| OB14-16 (invocación solo por quien corresponde) | **T** | C | S | A: existe un punto de entrada invocable desde el exterior por definición (**TS14-A (i)**) |
+
+**Fundamento de las T (regla uniforme).**
+
+| Celda | Fundamento |
+|---|---|
+| ALT-14-A, OB14-16: **T** (**TS14-A (i)**) | Para que un disparador externo inicie la ejecución, **toda implementación posible de A** expone un punto de entrada invocable desde fuera de la aplicación: la exposición que OB14-16 busca limitar es inherente. **No implica que sea invocable por cualquiera:** su protección es una condición abierta (OC-394) |
+| ALT-14-B, OB14-02: **T** (TS14-B) | Si la ejecución ocurre dentro de la capa de datos, **en toda implementación de B** el evaluador de autorización de la aplicación (CMP-08, único decisor) **no está en el camino;** la autorización la sustituyen los controles de la capa de datos. Que esos controles sean suficientes es una condición abierta (OC-404) |
+| ALT-14-C, OB14-12: **T** (TS14-C) | Sin programador autónomo, **la definición impide** que algo ocurra a una hora por sí mismo; lo que depende de la hora solo ocurre si alguien consulta u opera. Lo que se pueda evaluar al consultar (TK14-01 con indicador en el panel) **no queda impedido** |
+| ALT-14-A y B, OB14-12: **C** | La puntualidad **puede** lograrse con disparadores o planificadores, pero **podría retrasarse o perderse** (**TS14-A (ii) [INF]**; BK-08 [DOC] para programaciones de ese tipo) y depende del mecanismo y de los controles de detección: condición abierta, **no limitación de la definición** |
+
+**Las clasificaciones T no se convierten en penalizaciones de puntuación.** **TS14-A, TS14-B y TS14-C describen perfiles distintos, no un orden de preferencia.**
+
+#### 39.10.3 Puntuación
+
+**Regla única (idéntica para A, B y C).** Escala 1–5; juicio del autor [PROP], no vinculante. **Seguridad y mantenimiento:** centro 3 con banda ±1; **2 solo si la definición implica una pérdida estructural verificable y comparable que las demás alternativas no tienen por definición;** **costo:** solo puntúa **planes o servicios concretos** (techo 5): al no haber ninguno, **no es puntuable con evidencia actual** y se usa un **valor neutro convencional de cálculo (3, banda 1–5);** **sin conexión:** fijo 3 cuando no discrimina; **lo no leído es [PEND] y no se penaliza;** **riesgos y condiciones no se convierten en puntaje; el puntaje no selecciona.**
+
+| Criterio (peso) | A | B | C | Fundamento |
+|---|---|---|---|---|
+| Seguridad y privacidad (35) | 3 (2–4) | 3 (2–4) | 3 (2–4) | **Centro neutral.** TS14-A (superficie de invocación), TS14-B (ejecución fuera del evaluador de autorización) y TS14-C (sin cobertura temporal autónoma) son pérdidas de **naturaleza distinta;** **no existe una comparación verificable** entre ellas; se recogen en la matriz y en TR14-01…14 **sin convertirse en puntaje** |
+| Costo (30) | 3 (1–5) | 3 (1–5) | 3 (1–5) | **No puntuable con evidencia actual; valor neutro convencional de cálculo.** El 3 **no es evidencia de costo real;** no se evaluó ningún servicio, plan ni cuota |
+| Sin conexión (20) | 3 | 3 | 3 | **Fijo 3:** ninguna alternativa se ejecuta en el dispositivo ni altera la sincronización (RC-05) |
+| Mantenimiento (15) | 3 (2–4) | 3 (2–4) | 3 (2–4) | Neutral: A exige operar un disparador y su punto de entrada; B exige operar rutinas en la capa de datos; C exige capacidad humana sostenida; **no comparable sin mecanismos** |
+| **Total (central)** | **3,00** | **3,00** | **3,00** | 0,35·3 + 0,30·3 + 0,20·3 + 0,15·3 = 1,05 + 0,90 + 0,60 + 0,45 = 3,00 |
+| **Rango** | **1,90–4,10** | **1,90–4,10** | **1,90–4,10** | Mínimo: 0,35·2 + 0,30·1 + 0,20·3 + 0,15·2 = 0,70 + 0,30 + 0,60 + 0,30 = 1,90. Máximo: 0,35·4 + 0,30·5 + 0,20·3 + 0,15·4 = 1,40 + 1,50 + 0,60 + 0,60 = 4,10 |
+
+**Recomendación preliminar no vinculante.** **Ninguna.** Las tres alternativas obtienen **el mismo puntaje central y el mismo rango:** el puntaje **no discrimina** y no expresa preferencia. Las diferencias reales están en la **matriz,** en las **amenazas** (§39.11) y en las **condiciones** (§39.13), y **requieren decisión del responsable** (DR14-9). **Se distinguen:** la **igualdad de pesos** con ADR-13 y ADR-17, la **coincidencia numérica de rangos** (1,90–4,10), la **diferencia de naturaleza** entre las alternativas de distintos ADR y la **ausencia de una comparación transversal aprobada: la coincidencia de rangos no implica comparabilidad entre las alternativas de ADR-13, ADR-17 y ADR-14, que no debe presumirse.** **El rango no es comparable con el de §36** (criterios de costo distintos).
+
+### 39.11 Análisis de amenazas y riesgos (I)
+
+Las amenazas **no se aceptan ni se mitigan** en este borrador; **las mitigaciones propuestas no están demostradas.** Los riesgos ya documentados en R2 a R4-C se **citan** y se **justifica** su aplicación a ADR-14.
+
+| Id | Amenaza o riesgo | Alternativas más afectadas [por diseño o inferencia] | Mitigación propuesta (no demostrada) | Aplicación a ADR-14; relación con lo heredado | Condición |
+|---|---|---|---|---|---|
+| TR14-01 | **Ejecución duplicada o concurrente** | Las tres (A por reintentos del disparador **[INF]**) | CE14-01, CE14-02 | Efecto duplicado de una operación destructiva o de un envío; **no es la idempotencia de usuario de OFF-06** | OC-397, OC-398 |
+| TR14-02 | **Ejecución sin autorización** (invocación no autorizada del punto de entrada o de la rutina) | **A** (TS14-A (i), por diseño); B por invocación directa **[INF]** | Autenticación del disparador; OC-122 | AM-22; OC-122 (invocación directa) | OC-394 |
+| TR14-03 | **Privilegios excesivos** de la identidad de servicio o del rol de ejecución | **B** (rol con acceso directo, TS14-B); A y C | Mínimo privilegio por tarea (OB14-04) | AM-22, AM-23; IN-02-14 | OC-393, OC-404 |
+| TR14-04 | **Credenciales comprometidas o expuestas** (del disparador o de la identidad de servicio) | A y B | Custodia, rotación y revocación (§39.5, punto 5) | AM-23, AM-26; RE3-05, RT-09 | OC-396 |
+| TR14-05 | **Ejecución en el entorno incorrecto** | A y B | Identidades y disparadores por entorno (OB14-05) | EN-06, EN-07 (ADR-11) | OC-395 |
+| TR14-06 | **Pérdida de trazabilidad** de quién ejecutó qué | A y B | Registro con origen (CE14-04; IN-09-09) | ADR-09.C **PROPUESTA** | OC-405 |
+| TR14-07 | **Fallos silenciosos** (una ejecución no ocurre y nadie lo advierte) | **C** (TS14-C, por diseño); A y B por retrasos **[INF]** (BK-08 [DOC] para programaciones de ese tipo) | Alerta de ausencia desde un componente distinto (CE14-09; BK-08) | BK-08, OC-62; ADR-13 (OB13-10, EVO-05) | OC-402 |
+| TR14-08 | **Eliminación o modificación prematura o accidental** | A y B (automáticas) | CE14-07 (previsualización), CE14-08 (autorización reforzada) | ADR-17 (DR17-1…9 pendientes; OC-381); SV-14 | OC-401 |
+| TR14-09 | **Ejecución posterior a una revocación** de la tarea, de la identidad o del autorizador | A y B | Interruptor de suspensión (CE14-10); revocación verificable | AM-23; DR14-5 | OC-396 |
+| TR14-10 | **Acceso a datos de menores y datos personales** por una tarea o por sus mensajes | Las tres | Z4 sin datos (OB14-13); controles reforzados de menores | AM-21; PRV-02, 03, 09, 18; ADR-17 (TR17-04) | OC-406 |
+| TR14-11 | **Registro excesivo, correlación y reidentificación** a partir de los registros de ejecución | Las tres | MIN13-01…10; umbral de agrupación | ADR-13 (TO-05); ADR-17 (TR17-03) | OC-405 |
+| TR14-12 | **Dependencia de cuotas, disponibilidad y retrasos** del disparador o del planificador | **A** (depende de un disparador externo, por diseño; sus cuotas, disponibilidad y retrasos son **[INF]**); B (plataforma) **[INF]** | Detección de omisión; tratamiento de ejecuciones vencidas (CE14-06) | BK-08 [DOC]; OC-63 (cuota ante exceso, análogo) | OC-400, OC-403 |
+| TR14-13 | **Inconsistencia entre tareas, sincronización y respaldos** (datos eliminados que reaparecen; tarea sobre datos obsoletos) | Las tres | Reaplicación tras restaurar (BK-13); coordinación con la sincronización | ADR-17 (TR17-07, TR17-09; OC-376, OC-377) | OC-407 |
+| TR14-14 | **Tarea sin actor que evade RT-14** (modifica datos de un equipo en conflicto) | A y B | CAB-27 [REC] como regla | AM-22, CAB-27: **[REC] sin confirmar como requisito** | OC-406 (DR14-4) |
+
+### 39.12 Relación con otros ADR (J)
+
+Se distinguen las dependencias **obligatorias** (R1 §8.2) de las **informativas.** **No se modifica ningún documento heredado.**
+
+| ADR | Tipo | Qué toma ADR-14 | Estado y límite |
+|---|---|---|---|
+| **ADR-01** (plataforma de datos y despliegue) | **Obligatoria** (R1 §8.2) | Qué capacidades de planificación y qué credenciales de servicio ofrece la plataforma | **Solo aprobación documental condicionada; sin proveedor seleccionado;** capacidades de planificación [PEND] |
+| **ADR-02.C** (autorización) | **Obligatoria** (R1 §8.2) | Modelo de roles, evaluador único (CMP-08), herencia de RT-14 | **PROPUESTA;** ADR-02.I (R3-E) solo aprobación documental condicionada |
+| **ADR-17** (retención y anonimización) | **Obligatoria** (R1 §8.2) | Qué tareas de retención existen y sus condiciones; ADR-14 **solo** define identidad y control de ejecución | **Aprobado solo documentalmente de forma condicionada;** DR17-1…9 y OC-369…388 abiertas; **no se modifica** |
+| ADR-03 (identidad y sesión) | Informativa | El actor y su sesión (de ahí sale la situación heredada) | ADR-03.C PROPUESTA; ADR-03.I solo aprobación documental condicionada |
+| ADR-09 (auditoría) | Informativa | Registro con origen (IN-09-09); verificación periódica (SV-10) | **ADR-09.C PROPUESTA;** ADR-09.I solo aprobación documental condicionada |
+| ADR-11 (entornos y despliegue) | Informativa | Separación de secretos y permisos por entorno (EN-06, EN-07) | **Aprobado solo documentalmente de forma condicionada;** ninguna alternativa seleccionada |
+| ADR-13 (observabilidad) | Informativa | Alertas de fallo o de ausencia; señales sin datos personales (OB13-10, EVO-05) | **Aprobado solo documentalmente de forma condicionada,** incluida la corrección de ponderaciones; RNF-09 y PRV-12 sin cumplimiento demostrado |
+| ADR-10 (región) | Informativa | Ubicación de ejecutores y de copias | **Sin región seleccionada** |
+| ADR-05.I; ADR-15 | Informativa | Sincronización (ninguna tarea depende de segundo plano); correo transaccional (CMP-18) | Aprobados solo documentalmente de forma condicionada |
+| ADR-12 (R4-E) | Posterior | Mecanismo de respaldo y control de antigüedad; ADR-14 solo trata la identidad de ejecución | **No iniciado** |
+
+**Declaraciones expresas.** (1) **R1 §8.1 no se declara cumplido;** (2) **R1 §8.2 no se da por satisfecho** por la existencia de documentación de ADR-01, ADR-02.C o ADR-17; (3) **PEND-JUR sigue abierta;** (4) si alguna dependencia cambia, este borrador debe revisarse; (5) ninguna decisión de ADR-12, ADR-13 ni ADR-17 se toma aquí.
+
+### 39.13 Decisiones del responsable, condiciones abiertas, riesgos de redacción y criterios de revisión (K)
+
+**Requisitos obligatorios aplicables (eliminatorios por la regla de R3-A §25.2; selección del autor [INF]).** **Se distinguen tres niveles:** **(1) exigencias documentadas en las fuentes [CONF]:** las que se listan abajo, con el estado que declaran `01`, R1 y los ADR; **(2) requisitos eliminatorios definidos para ADR anteriores:** la regla de R3-A §25.2 («los requisitos obligatorios son eliminatorios y no se compensan con puntuación») y los RE3-xx se definieron para la evaluación de ADR-01 y ADR-10; **(3) inferencia del autor [INF]** sobre su aplicación a ADR-14: **no es una aprobación del responsable** y **no se agregan requisitos nuevos.** Los pertinentes a ADR-14 en esa selección, **ninguno demostrado:** RT-14 (efectos automáticos heredan al actor); RE3-05 (credenciales de servicio solo en el servidor; secretos fuera del cliente y de la cola); RNF-14 (accesos individuales y revocables); RC-05 (sin dependencia de segundo plano); Z4 sin datos de jugadores ni de menores. **Ninguno se declara satisfecho** por estar descrito.
+
+**Decisiones del responsable (DR14).**
+
+| Id | Decisión | Relacionado |
+|---|---|---|
+| DR14-1 | **Quién autoriza que exista una tarea y quién puede configurarla,** y si ambos son distintos | AU14-01, AU14-02; OC-389 |
+| DR14-2 | **Granularidad de la identidad de servicio:** una por tarea, por categoría o por entorno; sin crear identidades | §39.5; OC-392, OC-393 |
+| DR14-3 | **Qué tareas existen realmente** y cuáles se resuelven sin programación (incluido el canal de N-12, Q-10) | §39.3; OC-389, OC-390 |
+| DR14-4 | **Si CAB-27 [REC]** (una tarea sin actor no opera sobre el equipo de un actor en conflicto) **se confirma como requisito** | OB14-02; OC-406; TR14-14 |
+| DR14-5 | **Quién consulta resultados y quién suspende o reanuda una tarea;** qué ocurre con lo pendiente y con una ejecución en curso al revocar | AU14-04, AU14-05; CE14-10; TR14-09 |
+| DR14-6 | **Política ante ejecuciones vencidas** (ejecutar, omitir o escalar), **sin fijar horarios ni plazos** | CE14-06; OC-400 |
+| DR14-7 | **Autorización reforzada** de operaciones destructivas (con ADR-17: DR17-1…9) | CE14-07, CE14-08; OC-401 |
+| DR14-8 | **Gestión del ciclo de vida de las credenciales:** custodia, rotación, revocación y baja (con ADR-01) | §39.5; OC-396 |
+| DR14-9 | **Alternativa de ejecución** (A, B, C o una combinación): **no se toma ni se recomienda aquí** | §39.9 |
+| DR14-10 | **Uso del marco de puntuación** para alternativas de ejecución, o comparación solo cualitativa | §39.10 |
+
+**Condiciones abiertas (OC; continúan la secuencia OC-389…408).**
+
+| Id | Condición | Relacionado |
+|---|---|---|
+| OC-389 | Inventario real de tareas requeridas y de quién las autoriza y configura | TK14-01…10; DR14-1, DR14-3 |
+| OC-390 | Si N-12 se resuelve sin programador (cálculo al consultar) y el canal elegido (Q-10) | TK14-01; RF-ADM-04 |
+| OC-391 | Evaluación del vencimiento de invitaciones: al usar frente a tarea; el valor de 7 días es propuesto | TK14-03; RF-ACC-02 |
+| OC-392 | Identidad(es) de ejecución: granularidad y alcance, **sin crearlas** | ID14-02; DR14-2 |
+| OC-393 | Mínimo privilegio de la identidad de servicio y compatibilidad con el esquema de autenticación (relación con OC-69) | OB14-04; BK-01 |
+| OC-394 | Protección del punto de entrada o rutina invocable (invocación directa no autorizada; relación con OC-122) | OB14-16; TR14-02 |
+| OC-395 | Separación por entorno de identidades, disparadores y secretos | OB14-05; EN-06, EN-07 |
+| OC-396 | Custodia, rotación y revocación de credenciales (RNF-14; ADR-01; AM-23) | OB14-06; DR14-8 |
+| OC-397 | Mecanismo de no duplicación y su relación con la idempotencia de operaciones (OFF-06; ADR-05.I) | CE14-01; OB14-07 |
+| OC-398 | Mecanismo de exclusión mutua y bloqueos conceptuales | CE14-02; OB14-08 |
+| OC-399 | Fallos parciales y reanudación segura | CE14-03, CE14-05; OB14-09 |
+| OC-400 | Política de ejecuciones vencidas (sin horarios ni plazos) | CE14-06; DR14-6 |
+| OC-401 | Operaciones destructivas: controles y relación con ADR-17 (DR17-1…9; OC-381) | CE14-07, CE14-08; OB14-10 |
+| OC-402 | Alertas de fallo y de ausencia de ejecución (BK-08, OC-62; ADR-13; ADR-12) | OB14-11; TR14-07 |
+| OC-403 | Cuotas, disponibilidad y retrasos de disparadores y planificadores (**sin evaluar proveedores**) | TR14-12 |
+| OC-404 | Compatibilidad de la ejecución en la capa de datos con CMP-08 y RLS (OC-122; ADR-02.I) | TS14-B; OB14-02 |
+| OC-405 | Registro con origen de las ejecuciones y su retención y minimización (IN-09-09; ADR-09; ADR-13; ADR-17) | CE14-04; TR14-06, TR14-11 |
+| OC-406 | Tareas sin actor frente a RT-14, menores y datos personales (CAB-27; AM-22; AM-21) | DR14-4; TR14-10, TR14-14 |
+| OC-407 | Coherencia entre tareas, sincronización y respaldos (reaparición de datos eliminados) | TR14-13; OC-376, OC-377 (ADR-17) |
+| OC-408 | Confirmación de ADR-01, ADR-02.C y ADR-17 (R1 §8.2) y reevaluación de este borrador | §39.12 |
+
+**Riesgos de redacción (RR14).**
+
+| Id | Riesgo | Control |
+|---|---|---|
+| RR14-01 | Presentar frecuencias, horarios o plazos como decisiones aprobadas | §39.0 (regla 3); CE14-06 |
+| RR14-02 | Conceder permisos a una identidad de servicio por el hecho de existir | §39.5 (principio 2) |
+| RR14-03 | Suponer que una tarea puede actuar como administrador global o eludir el modelo de autorización | OB14-02, OB14-04 |
+| RR14-04 | Establecer una política de eliminación o modificar ADR-17 | §39.0 (regla 4); §39.12 |
+| RR14-05 | Confundir idempotencia propuesta con implementada, o dar por demostradas alertas, reintentos o recuperación | §39.7; CR4D-08 |
+| RR14-06 | Asumir funciones o cuotas gratuitas de un proveedor, o evaluar costos sin fuente | §39.0 (regla 6); OC-403 |
+| RR14-07 | Dar por existentes identidades técnicas, secretos o usuarios de servicio | §39.5 |
+| RR14-08 | Seleccionar alternativas, proveedores, servicios o mecanismos | §39.9 |
+| RR14-09 | Convertir riesgos o clasificaciones T en puntaje, o trasladar pesos sin fuente | §39.10 |
+| RR14-10 | Dar por satisfecha una dependencia por existir documentación | §39.12 |
+| RR14-11 | Invadir R4-E…R4-G o decidir aspectos de ADR-12, ADR-13 o ADR-17 | §39.12, §39.15 |
+| RR14-12 | Convertir tareas propuestas en obligaciones operativas confirmadas | §39.3 |
+| RR14-13 | Presentar la coincidencia de rangos con ADR-13 y ADR-17 como comparabilidad de alternativas | §39.10.3 |
+| RR14-14 | Presentar este borrador como auditoría independiente, evaluación jurídica o verificación técnica | §39.14 |
+
+**Criterios de revisión (CR4D).**
+
+| Id | Criterio |
+|---|---|
+| CR4D-01 | Solo se modificó `02-arquitectura-adr.md`; todo lo anterior a §39 permanece idéntico |
+| CR4D-02 | Estado «BORRADOR v0.1-R4D — PENDIENTE DE REVISIÓN Y APROBACIÓN» |
+| CR4D-03 | Los apartados A a L están cubiertos con trazabilidad verificable |
+| CR4D-04 | Se distinguen tarea programada, diferida, mantenimiento y operación de usuario; no se asume reloj para todas |
+| CR4D-05 | El inventario recoge solo lo que los documentos requieren o proponen; no inventa obligaciones |
+| CR4D-06 | El modelo de identidad separa humano y servicio y no concede permisos por la identidad |
+| CR4D-07 | Autorización y límites diferencian los seis aspectos sin asignar roles no confirmados |
+| CR4D-08 | Los controles de ejecución son propuestas; ninguna garantía se presenta como demostrada |
+| CR4D-09 | Hay al menos tres alternativas diferenciadas, sin selección ni preferencia encubierta |
+| CR4D-10 | El marco de comparación procede de R1 §2.4 y R3-A (pesos 35/30/20/15); la aritmética es correcta; el costo es valor convencional |
+| CR4D-11 | No se fijan frecuencias, horarios ni plazos; no se establece política de eliminación |
+| CR4D-12 | Las dependencias obligatorias (ADR-01, ADR-02.C, ADR-17) se distinguen de las informativas y se tratan como condicionales |
+| CR4D-13 | Se separan [CONF], [DOC], [INF], [PROP] y [PEND]; no se crean identidades, secretos ni cuentas |
+| CR4D-14 | Identificadores únicos, sin colisiones y OC en secuencia después de OC-388 |
+| CR4D-15 | Las tablas están bien formadas |
+| CR4D-16 | R4-E…R4-G y la Fase 3 no se inician; sin commit, push, PR ni merge; `main` intacto |
+
+### 39.14 Limitaciones (L)
+
+**Se declara expresamente:** (1) **sin tareas implementadas;** (2) **sin identidades técnicas creadas** (ni cuentas, claves, tokens ni usuarios de servicio); (3) **sin pruebas de ejecución;** (4) **sin proveedores seleccionados;** (5) **sin costos ni cuotas confirmados;** (6) **sin infraestructura desplegada;** (7) **sin conformidad técnica demostrada:** ni RT-14, ni RE3-05, ni RNF-14, ni RNF-08, ni PRV-10 se declaran cumplidos; (8) **sin auditoría independiente:** es una **autoevaluación del autor;** (9) **no es evaluación jurídica** (PEND-JUR sigue abierta); (10) las clasificaciones T/C/S y las puntuaciones son juicios [PROP] e [INF]; las mitigaciones son propuestas; (11) ADR-02.C y ADR-09.C son **PROPUESTA;** ADR-01, ADR-11, ADR-13 y ADR-17 solo tienen aprobación documental condicionada; ADR-10 no tiene región.
+
+**Evidencias necesarias para futuras aprobaciones.** Inventario confirmado de tareas; decisión sobre DR14-1…10; capacidades reales de la plataforma (ADR-01); mecanismos de ADR-12; políticas de ADR-17 y resolución de PEND-JUR; pruebas con datos sintéticos en un entorno de pruebas; **auditoría independiente de cierre.**
+
+### 39.15 Relación con R4-E…R4-G (solo dependencias; no se inician)
+
+ADR-14 **nombra** su dependencia posterior con ADR-12 (mecanismo de respaldo, control de antigüedad y reaplicación tras restaurar). **No decide** nada de ADR-12: **R4-E…R4-G no están iniciados;** la **trazabilidad final (R4-F)** y la **auditoría de cierre (R4-G)** siguen reservadas, con la auditoría a cargo de un revisor separado del autor y con contexto nuevo.
+
+### 39.16 Estado y preguntas para el responsable
+
+**Estado:** R4-D / ADR-14 **v0.1-R4D: APROBADO DOCUMENTALMENTE DE FORMA CONDICIONADA COMO ENTREGABLE** (ver «Aprobación (metadato)» en §39.0). No es aprobación definitiva; no versionado en el momento de redactarse. **Ninguna alternativa seleccionada ni formulación admitida.** **ADR-14 sin aprobación arquitectónica definitiva.** **PEND-JUR abierta.** **R4-A, R4-B y R4-C aprobados solo documentalmente de forma condicionada.** **R4-E…R4-G: NO INICIADOS.** **R4 como conjunto: sin aprobación ni cierre.** **Fase 2: en desarrollo, sin aprobación global.** **Fase 3: no iniciada.** **Sin commit, push, PR ni merge.** Siguen abiertas todas las decisiones y condiciones heredadas.
+
+**Preguntas:** DR14-1 a DR14-10 y las condiciones OC-389 a OC-408; en particular, qué tareas existen realmente (DR14-3), quién las autoriza y configura (DR14-1), con qué granularidad de identidad (DR14-2), si CAB-27 se confirma como requisito (DR14-4), y quién las consulta, suspende y qué ocurre al fallar (DR14-5).
+
+### 39.17 Correcciones focalizadas H-1…H-7 (revisión focalizada del borrador v0.1)
+
+Corrigen los hallazgos de la revisión focalizada (**correcciones documentales del autor, no auditoría independiente**). **No modifican puntuaciones** (central 3,00; rango 1,90–4,10; pesos 35/30/20/15), alternativas, identificadores ni decisiones; **no crean decisiones arquitectónicas nuevas.** El borrador **sigue siendo v0.1-R4D, pendiente de revisión y aprobación.**
+
+| Id | Hallazgo | Corrección realizada | Sección afectada | Verificación |
+|---|---|---|---|---|
+| H-1 | Celdas S de ALT-14-C no sustentadas | OB14-03 y OB14-04 de ALT-14-C pasan de S a **C**, con el fundamento «depende del procedimiento y de los privilegios efectivos de la persona que opera» | §39.10.2 | Pendiente |
+| H-2 | OB14-01 frente a las operaciones manuales | OB14-01 reformulado («cuando no hay actor disparador…»); se distinguen tareas automáticas sin actor, tareas iniciadas por personas y mantenimiento manual; aclaración en ALT-14-C | §39.1, §39.4, §39.9, §39.10.2 | Pendiente |
+| H-3 | TS14-A mezclaba propiedad estructural e inferencia | TS14-A separada en (i) estructural [por diseño] y (ii) inferencia [INF], esta última como condición abierta vinculada a OB14-12 | §39.0, §39.9, §39.10.2 | Pendiente |
+| H-4 | Cabecera «[por diseño]» en las amenazas | Cabecera «[por diseño o inferencia]» y [INF] en TR14-01, TR14-02, TR14-07 y TR14-12 | §39.11 | Pendiente |
+| H-5 | ADR-02.I atribuido a R3-D | Corregido a R3-E (R3-D corresponde a ADR-08) | §39.12 | Pendiente |
+| H-6 | Etiqueta «eliminatorios» | Título ajustado y tres niveles distinguidos (fuentes [CONF]; regla de ADR anteriores; inferencia [INF]); sin requisitos nuevos | §39.13 | Pendiente |
+| H-7 | Autorización del actor original solo implícita | Punto (d) añadido al principio 2 de §39.5, con la separación de las cinco autorizaciones e identidades y sin inventar una política general | §39.5 | Pendiente |
+
+**Sin cambios:** ALT-14-A/B/C sin selección; TK14, CT14, ID14, AU14, CE14, TR14-01…14, DR14-1…10 abiertas, OC-389…408 abiertas, RR14-01…14 sin aceptar y CR4D-01…16; sin commit, push, PR ni merge.
+
+**Precisión R-1 (2026-11-28, fecha inferida; verificación puntual de H-1…H-7; corrección y comprobación del autor, no auditoría independiente).** **Hallazgo:** ALT-14-C / OB14-02 figuraba como S («casi todo hereda al actor»), pero el mantenimiento manual lo realiza una persona con privilegios efectivos que pueden operar fuera del evaluador de autorización (SV-14: purga como acción privilegiada, fuera de los roles de la aplicación). **Celda corregida:** ALT-14-C / OB14-02, **S → C**. **Fundamento:** el resultado depende del procedimiento y de los privilegios efectivos de la persona que opera; una identidad humana **no demuestra** que todas las operaciones se sometan al evaluador de la aplicación; **no es T,** porque ejecutar fuera del evaluador no es una propiedad estructural obligatoria de ALT-14-C. **Resultado de la comprobación:** solo cambió esa celda; OB14-03 y OB14-04 de ALT-14-C permanecen en C; ALT-14-B / OB14-02 permanece en T (TS14-B); las T estructurales siguen siendo exactamente tres, una por alternativa (OB14-02 de B, OB14-12 de C, OB14-16 de A); las puntuaciones no dependen de T/C/S (§39.10.3: central 3,00; rango 1,90–4,10; pesos 35/30/20/15) y no se recalcularon. **Observación:** §39.1 (3) y §39.5 (principio 1) indican que la persona que opera queda «registrada»; se leen como propuesta [PROP] de registro con origen (OB14-03, condición abierta), **no como garantía** de trazabilidad por usar identidad humana. Verificación: pendiente. **No altera** los registros de H-1…H-7; ADR-14 sigue como BORRADOR v0.1-R4D, pendiente de revisión y aprobación; sin commit, push, PR ni merge.
+
+**Precisiones editoriales sobre trazabilidad (2026-11-28, fecha inferida; autoevaluación del autor, no auditoría independiente).** **Hallazgo:** dos formulaciones («registrada con su origen» en §39.1 (3) y «queda registrada» en §39.5, principio 1) podían leerse como garantía de trazabilidad por usar identidad humana. **Corrección:** ambas se precisaron: la operación se atribuiría a la identidad humana correspondiente; **la trazabilidad es un control propuesto [PROP]** sujeto a mecanismos y procedimientos no implementados ni demostrados; la identidad humana no es, por sí sola, garantía de registro; **OB14-03 sigue siendo una condición abierta;** no existe evidencia empírica de trazabilidad implementada. **Verificación puntual del autor:** ninguna de las dos frases presenta ya el registro como garantía demostrada; ambas son coherentes con OB14-03 y con ALT-14-C / OB14-02, OB14-03 y OB14-04 (C); la matriz no cambió en ninguna otra celda; las puntuaciones permanecen intactas; no hay contradicción con ADR-02 (CMP-08 como único decisor), ADR-03 (actor y sesión) ni ADR-13 (señales sin datos personales). **No se introducen obligaciones, roles ni decisiones nuevos.** ADR-14 sigue como borrador hasta el metadato de aprobación documental condicionada; sin commit, push, PR ni merge.
